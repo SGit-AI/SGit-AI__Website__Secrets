@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.1 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.2 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -21,7 +21,7 @@ source: /index.md
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -136,7 +136,7 @@ source: /admin/comms.md
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -189,7 +189,7 @@ source: /admin/index.md
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -259,7 +259,7 @@ source: /admin/versions.md
 
 > Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
 
-*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -267,6 +267,7 @@ One row per release. The version increments on every push to `dev`: a minor bump
 
 | Version | Date | Release | What changed |
 |---|---|---|---|
+| `v0.1.2` | 2026-10-05 | the GCP bootstrap, from the command line | Step 3 begins. infra/bootstrap/bootstrap.sh: the one-time, idempotent gcloud bootstrap with --dry-run and --check, creating the state project and bucket, one project per environment with billing and the APIs, the Terraform service account, and the Workload Identity Federation pool and provider, then printing the public values and the gh commands that store them. docs/ops/bootstrap.md maps exactly what a human does, in order, as commands, and names the one part Google keeps in the console (the OAuth consent screen and the two Web clients) and the two organisation settings with no API. The script is dry-run tested against a stand-in gcloud; its first real run is the project lead's. |
 | `v0.1.1` | 2026-10-05 | the content pages and the family chrome | Six content pages: how it works, security, keyring format v1, sharing, environments, and /shipped/ generated from data/features.json with one table per status. Every content page opens with a status line generated from the same file. Every markdown document under docs/ is now rendered to an HTML page beside it (the design documents, the ops notes, reality.md) by a standard-library markdown renderer, with index pages for docs/design/ and docs/ops/; the markdown stays the source and the twin. The homepage links the new pages and carries the three-step demo as proposed. The chrome now has the family nav (grouped menus with dropdowns, the part-of-sgit.ai link, the stage pill, a phone menu) with breadcrumbs, and the admin section gains a comms page with the asks and a tracker of the nine build steps. Versions now bump the third digit per release (brief-corrections C15). v0.1.0 went live at secrets.sgit.ai (DNS, Pages and the re-run done by Dinis), so the live-domain claim is shipped; needs.md items 1 to 3 are closed. |
 | `v0.1.0` | 2026-10-05 | the pipeline, before the site | The repository layout, version.txt as the one source of the version, the chrome generator, markdown twins, llms.txt and llms-full.txt, docs/reality.md generated from data/features.json, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate, tag-release, deploy and verify-live, CNAME, the DNS and branch-protection notes, docs/ops/needs.md, and the five design documents copied in verbatim. A placeholder homepage with the version badge and the status table. Nothing of the app, admin or test pages exists yet; every one of those claims is marked proposed. |
 
@@ -285,7 +286,7 @@ source: /docs/design/index.md
 
 > The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
 
-*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -311,14 +312,14 @@ source: /docs/index.md
 
 > Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
 
-*Source: <https://secrets.sgit.ai/docs/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 The documents this site was built from and the notes it is run by, published whole. Each is a markdown file in the repository, which is the source of truth, and a page rendered from it on every release, which is presentation. The rendered page links the raw file at the top; the raw file is what a reader checks the site against.
 
 - [Design documents](/docs/design/index.md): [the MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md) (the instruction set), [what it got wrong](/docs/design/brief-corrections.md), and the four documents that carry the reasoning.
-- [Operations](/docs/ops/index.md): [how a release works](/docs/ops/release.md), [what only a human can do](/docs/ops/needs.md), [the DNS record](/docs/ops/dns.md), [the repository protections](/docs/ops/branch-protection.md).
+- [Operations](/docs/ops/index.md): [how a release works](/docs/ops/release.md), [what only a human can do](/docs/ops/needs.md), [the GCP bootstrap as commands](/docs/ops/bootstrap.md), [the DNS record](/docs/ops/dns.md), [the repository protections](/docs/ops/branch-protection.md).
 - [Reality](/docs/reality.md): what is built, by status, generated from `data/features.json`. The same data renders [/shipped/](/shipped/index.md).
 
 ## Why publish the brief at all
@@ -342,12 +343,13 @@ source: /docs/ops/index.md
 
 > How a release works, what only a human can do, the DNS record and the repository protections.
 
-*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 How a release works, what only a human can do, the DNS record and the repository protections.
 
+- [GCP bootstrap: exactly what a human does, from the command line](/docs/ops/bootstrap.md): Exactly what a human does on the GCP and GitHub side, in order, as commands; the one console-only part named. [(markdown)](/docs/ops/bootstrap.md)
 - [Repository protections](/docs/ops/branch-protection.md): The settings for dev and main, the organisation, Actions and environments. [(markdown)](/docs/ops/branch-protection.md)
 - [DNS for secrets.sgit.ai](/docs/ops/dns.md): The CNAME record and the Pages settings for secrets.sgit.ai. [(markdown)](/docs/ops/dns.md)
 - [What only a human can do](/docs/ops/needs.md): Exactly what only a human can do, who, and which step waits on it. [(markdown)](/docs/ops/needs.md)
@@ -366,7 +368,7 @@ source: /environments/index.md
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -387,7 +389,7 @@ The project ids are proposed until the bootstrap confirms they are available. No
 
 ## What a project contains
 
-Terraform in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform.
+Terraform in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform. The exact procedure, as commands, is [docs/ops/bootstrap.md](/docs/ops/bootstrap.md).
 
 ## config/environments.json
 
@@ -457,7 +459,7 @@ source: /how-it-works/index.md
 
 > The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 
-*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -563,7 +565,7 @@ source: /keyring/index.md
 
 > The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
 
-*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -681,7 +683,7 @@ source: /security/index.md
 
 > The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
 
-*Source: <https://secrets.sgit.ai/security/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/security/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -758,7 +760,7 @@ source: /sharing/index.md
 
 > The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
 
-*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -807,7 +809,7 @@ source: /shipped/index.md
 
 > Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
-*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -901,7 +903,7 @@ source: /docs/reality.md
 
 # secrets.sgit.ai — reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.1 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.2 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
 50 claims: 23 shipped, 22 proposed, 5 absent.
 
@@ -2373,6 +2375,135 @@ Start by printing the repository layout you intend to create and the contents of
 ---
 
 *Written from the Risk Mandate / sgit design session of 4–5 October 2026. Companion documents: the four design docs in section 2. This brief is itself to be published at `/docs/design/` on the site, with its corrections file beside it.*
+
+
+==============================================================================
+source: /docs/ops/bootstrap.md
+==============================================================================
+
+# GCP bootstrap: exactly what a human does, from the command line
+
+*secrets.sgit.ai · operations · written at v0.1.2 (2026-10-05) · for Dinis · section 4.3 of the brief · CC BY 4.0*
+
+This is the whole list of what the pipeline cannot do for itself on the Google side, in the order to do it, as commands. Everything else in the GCP projects is Terraform, applied by GitHub Actions through Workload Identity Federation, with no key file anywhere. Nothing on this page is secret, and nothing you produce by following it enters the repository except public identifiers.
+
+Status of this page: the script exists and has been dry-run against its own logic; it has **not yet been run against a real billing account**. The first real run is yours, and whatever it gets wrong goes into `docs/design/brief-corrections.md`.
+
+## What you need before starting
+
+| Tool | Check | Install |
+|---|---|---|
+| `gcloud` | `gcloud --version` and `gcloud auth login` as an account that can create projects and link billing | https://cloud.google.com/sdk/docs/install |
+| `gh` | `gh auth status` as an owner of `SGit-AI` | https://cli.github.com |
+| `firebase` (only if step 3 below is needed) | `firebase --version` | `npm i -g firebase-tools` |
+| A billing account | `gcloud billing accounts list` shows it with `OPEN: True` | Google Cloud console, Billing (one-time; there is no CLI to create a billing account) |
+
+Decide two values. The project id prefix: the brief proposes `sgit-secrets`, giving `sgit-secrets-tfstate`, `sgit-secrets-dev`, `sgit-secrets-main`, `sgit-secrets-prod`; project ids are global, so if one is taken choose another prefix and pass it as `SECRETS_PREFIX`. The parent: if your account is in a Google Cloud organisation, `organizations/<id>` or `folders/<id>`; a personal account omits it.
+
+## Step 1: run the bootstrap (gcloud, about five minutes)
+
+```
+# from the repository root, on dev
+export SECRETS_BILLING_ACCOUNT=0X0X0X-0X0X0X-0X0X0X      # from: gcloud billing accounts list
+export SECRETS_PARENT=organizations/<org-id>             # omit for a personal account
+export SECRETS_ENVS=dev                                  # main,prod are added later with the same command
+
+./infra/bootstrap/bootstrap.sh --dry-run                 # prints every command it would run; runs none
+./infra/bootstrap/bootstrap.sh                           # creates what is missing, skips what exists
+./infra/bootstrap/bootstrap.sh --check                   # afterwards, or any time: reports state, changes nothing
+```
+
+What it creates, each guarded by a describe so a re-run is safe:
+
+1. The state project `<prefix>-tfstate` with billing linked, and the bucket `gs://<prefix>-tfstate` in `europe-west2` with uniform access, public-access prevention and versioning on. One prefix per environment inside it is Terraform's.
+2. Per environment: the project `<prefix>-<env>`, billing linked, the ten APIs the design needs enabled.
+3. Per environment: the service account `tf-secrets@<project>.iam.gserviceaccount.com` with Editor plus the IAM, Firebase, Identity Platform and Service Usage roles Editor lacks, and object-admin on the state bucket. Editor is the brief's starting point and is narrowed later.
+4. Per environment: the Workload Identity Federation pool `github` with the OIDC provider `github-actions`, limited by an attribute condition to this repository and to the GitHub environment named `<env>` (or a push to the branch `<env>`), and the binding that lets that identity act as the service account.
+
+It ends by printing, per environment, the four public values GitHub needs and the exact `gh` commands to store them. Nothing it prints is secret.
+
+## Step 2: store the values in GitHub (gh, one minute)
+
+Paste the commands the script printed. They are of this shape:
+
+```
+gh api -X PUT repos/SGit-AI/SGit-AI__Website__Secrets/environments/dev >/dev/null
+gh variable set PROJECT_ID                 --repo SGit-AI/SGit-AI__Website__Secrets --env dev --body 'sgit-secrets-dev'
+gh variable set WORKLOAD_IDENTITY_PROVIDER --repo SGit-AI/SGit-AI__Website__Secrets --env dev --body 'projects/<project-number>/locations/global/workloadIdentityPools/github/providers/github-actions'
+gh variable set SERVICE_ACCOUNT            --repo SGit-AI/SGit-AI__Website__Secrets --env dev --body 'tf-secrets@sgit-secrets-dev.iam.gserviceaccount.com'
+gh variable set TFSTATE_BUCKET             --repo SGit-AI/SGit-AI__Website__Secrets --env dev --body 'sgit-secrets-tfstate'
+```
+
+They are GitHub **environment variables**, not secrets, because they are not secret. `infra.yml` (step 3 of the build) reads them from the `dev` environment.
+
+## Step 3: Firebase, only if Terraform asks for it
+
+Terraform adds Firebase to the project (`google_firebase_project`). The Firebase Management API refuses that call until the Firebase terms of service have been accepted once by a human account. If the first `terraform apply` fails on that resource with a terms-of-service error, run this once, as yourself, and re-run the apply:
+
+```
+firebase login
+firebase projects:addfirebase sgit-secrets-dev
+```
+
+It is still the command line, and it is the only Firebase step that is yours.
+
+## Step 4: the OAuth clients (console, the one part Google keeps there)
+
+Google does not expose the creation of a **Web application** OAuth client, or the consent screen it hangs off, through `gcloud` or a public API for an app that external Google accounts will sign in to. This is the one place you click. Per project, once:
+
+1. Open https://console.cloud.google.com/auth/overview?project=sgit-secrets-dev and configure the consent screen ("Google Auth Platform"): external, app name `secrets.sgit.ai`, your support email, the developer contact; no scopes beyond the defaults.
+2. Create the **sign-in client**: https://console.cloud.google.com/auth/clients?project=sgit-secrets-dev, type Web application, name `secrets.sgit.ai sign-in`, authorised JavaScript origin `https://secrets.sgit.ai` (and `http://localhost:8000` on `dev` only), authorised redirect URI `https://sgit-secrets-dev.firebaseapp.com/__/auth/handler`. Copy the client id and the client secret once.
+3. Create the **admin client**: same page, type Web application, name `secrets.sgit.ai admin`, authorised JavaScript origin `https://secrets.sgit.ai` (plus `http://localhost:8000` on `dev`), authorised redirect URI `https://secrets.sgit.ai/admin/oauth-return.html`. Only its client id is used; its secret stays in the project.
+
+Then, from the command line, store the one secret and tell the session the public ids:
+
+```
+gh secret set GOOGLE_OAUTH_CLIENT_SECRET --repo SGit-AI/SGit-AI__Website__Secrets --env dev      # paste the sign-in client's secret
+```
+
+The sign-in client id and the admin client id are public and go into Terraform variables and `config/environments.json`; put them in a reply or a pull request, never the secret. The secret is used only by Google's own token exchange inside Identity Platform; the app never holds it.
+
+## Step 5: the repository protections (gh, two minutes)
+
+Section 9.5, done from the command line where GitHub allows it:
+
+```
+# branch protection on dev and main: PR required, one review, validate required, linear history, no force-push, no bypass
+for b in dev main; do
+  gh api -X PUT repos/SGit-AI/SGit-AI__Website__Secrets/branches/$b/protection \
+    --input - <<'JSON'
+{ "required_status_checks": { "strict": true, "contexts": ["validate"] },
+  "enforce_admins": true,
+  "required_pull_request_reviews": { "dismiss_stale_reviews": true, "required_approving_review_count": 1 },
+  "restrictions": null,
+  "required_linear_history": true,
+  "allow_force_pushes": false,
+  "allow_deletions": false }
+JSON
+done
+
+# Actions: the default token is read-only and may not approve pull requests
+gh api -X PUT repos/SGit-AI/SGit-AI__Website__Secrets/actions/permissions/workflow \
+  -f default_workflow_permissions=read -F can_approve_pull_request_reviews=false
+```
+
+Two organisation settings have no API and are console-only, once: requiring two-factor authentication with security keys for members (Organisation settings, Authentication security), and verifying `sgit.ai` as an organisation domain (Organisation settings, Verified and approved domains). The `prod` environment's required reviewer is set when `prod` exists.
+
+Note on branch protection and this session: once `dev` requires a pull request, the session opens one per release instead of pushing. Say when you have turned it on.
+
+## What to send back
+
+- The output of `./infra/bootstrap/bootstrap.sh --check` after the run (public values only).
+- The sign-in client id and the admin client id for `dev`.
+- Whether step 3 was needed.
+
+With those, step 3 of the build can be exercised: Terraform applies the module to `dev`, `config/environments.json` gets real `dev` values from the outputs, and `tests/auth.html` and `tests/storage.html` can be run against it.
+
+## What this page does not cover
+
+- `main` and `prod`: the same script with `SECRETS_ENVS=main,prod`, their own OAuth clients, and a required reviewer on the `prod` GitHub environment. Steps 7 and 8 of the build.
+- A customer's own project: `docs/ops/new-environment.md`, step 7, which will be this page with the prefix and the parent as inputs.
+- Narrowing the service account from Editor: after the first apply shows which permissions were actually used.
 
 
 ==============================================================================

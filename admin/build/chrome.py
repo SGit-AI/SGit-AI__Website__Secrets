@@ -61,6 +61,7 @@ NAV_GROUPS        = (('The design'  , '/how-it-works/' , (('/how-it-works/'     
                                                           ('/admin/versions.html'                                  , 'Release history'           ),
                                                           ('/admin/comms.html'                                     , 'Comms: asks and steps'     ),
                                                           ('/docs/ops/needs.html'                                  , 'What needs a human'        ),
+                                                          ('/docs/ops/bootstrap.html'                              , 'GCP bootstrap, as commands'),
                                                           ('/llms.txt'                                             , 'llms.txt, for agents'      ))))
 
 CRUMB_FOLDERS     = {'/docs/'        : ('Docs'            , '/docs/'        ),   # breadcrumb names for folders that have no nav entry of their own

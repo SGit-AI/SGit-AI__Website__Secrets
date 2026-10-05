@@ -2,7 +2,7 @@
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -23,7 +23,7 @@ The project ids are proposed until the bootstrap confirms they are available. No
 
 ## What a project contains
 
-Terraform in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform.
+Terraform in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform. The exact procedure, as commands, is [docs/ops/bootstrap.md](/docs/ops/bootstrap.md).
 
 ## config/environments.json
 

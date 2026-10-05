@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.1 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.2 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -39,6 +39,7 @@ Notes for agents:
 
 ## Operations (what a human must do, and how a release works)
 
+- [GCP bootstrap: exactly what a human does, from the command line](/docs/ops/bootstrap.md)
 - [Repository protections](/docs/ops/branch-protection.md)
 - [DNS for secrets.sgit.ai](/docs/ops/dns.md)
 - [What only a human can do](/docs/ops/needs.md)

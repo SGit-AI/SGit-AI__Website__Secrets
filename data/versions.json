@@ -1,6 +1,12 @@
 {
   "releases": [
     {
+      "version": "0.1.2",
+      "date": "2026-10-05",
+      "title": "the GCP bootstrap, from the command line",
+      "notes": "Step 3 begins. infra/bootstrap/bootstrap.sh: the one-time, idempotent gcloud bootstrap with --dry-run and --check, creating the state project and bucket, one project per environment with billing and the APIs, the Terraform service account, and the Workload Identity Federation pool and provider, then printing the public values and the gh commands that store them. docs/ops/bootstrap.md maps exactly what a human does, in order, as commands, and names the one part Google keeps in the console (the OAuth consent screen and the two Web clients) and the two organisation settings with no API. The script is dry-run tested against a stand-in gcloud; its first real run is the project lead's."
+    },
+    {
       "version": "0.1.1",
       "date": "2026-10-05",
       "title": "the content pages and the family chrome",

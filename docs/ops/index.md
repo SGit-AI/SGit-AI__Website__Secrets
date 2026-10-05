@@ -2,12 +2,13 @@
 
 > How a release works, what only a human can do, the DNS record and the repository protections.
 
-*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 How a release works, what only a human can do, the DNS record and the repository protections.
 
+- [GCP bootstrap: exactly what a human does, from the command line](/docs/ops/bootstrap.md): Exactly what a human does on the GCP and GitHub side, in order, as commands; the one console-only part named. [(markdown)](/docs/ops/bootstrap.md)
 - [Repository protections](/docs/ops/branch-protection.md): The settings for dev and main, the organisation, Actions and environments. [(markdown)](/docs/ops/branch-protection.md)
 - [DNS for secrets.sgit.ai](/docs/ops/dns.md): The CNAME record and the Pages settings for secrets.sgit.ai. [(markdown)](/docs/ops/dns.md)
 - [What only a human can do](/docs/ops/needs.md): Exactly what only a human can do, who, and which step waits on it. [(markdown)](/docs/ops/needs.md)

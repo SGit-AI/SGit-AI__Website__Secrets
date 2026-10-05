@@ -2,14 +2,14 @@
 
 > Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
 
-*Source: <https://secrets.sgit.ai/docs/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 The documents this site was built from and the notes it is run by, published whole. Each is a markdown file in the repository, which is the source of truth, and a page rendered from it on every release, which is presentation. The rendered page links the raw file at the top; the raw file is what a reader checks the site against.
 
 - [Design documents](/docs/design/index.md): [the MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md) (the instruction set), [what it got wrong](/docs/design/brief-corrections.md), and the four documents that carry the reasoning.
-- [Operations](/docs/ops/index.md): [how a release works](/docs/ops/release.md), [what only a human can do](/docs/ops/needs.md), [the DNS record](/docs/ops/dns.md), [the repository protections](/docs/ops/branch-protection.md).
+- [Operations](/docs/ops/index.md): [how a release works](/docs/ops/release.md), [what only a human can do](/docs/ops/needs.md), [the GCP bootstrap as commands](/docs/ops/bootstrap.md), [the DNS record](/docs/ops/dns.md), [the repository protections](/docs/ops/branch-protection.md).
 - [Reality](/docs/reality.md): what is built, by status, generated from `data/features.json`. The same data renders [/shipped/](/shipped/index.md).
 
 ## Why publish the brief at all

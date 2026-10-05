@@ -1,6 +1,6 @@
 # secrets.sgit.ai — reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.1 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.2 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
 50 claims: 23 shipped, 22 proposed, 5 absent.
 

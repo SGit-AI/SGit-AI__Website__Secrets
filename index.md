@@ -2,7 +2,7 @@
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

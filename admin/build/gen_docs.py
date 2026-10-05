@@ -36,6 +36,7 @@ DESCRIPTIONS  = {'secrets-sgit-ai__mvp-build-brief.md'                      : 'T
                  'release.md'                                               : 'The version, the commit subject, the gate, the four CI jobs, and why green does not mean live.',
                  'needs.md'                                                 : 'Exactly what only a human can do, who, and which step waits on it.',
                  'dns.md'                                                   : 'The CNAME record and the Pages settings for secrets.sgit.ai.',
+                 'bootstrap.md'                                             : 'Exactly what a human does on the GCP and GitHub side, in order, as commands; the one console-only part named.',
                  'branch-protection.md'                                     : 'The settings for dev and main, the organisation, Actions and environments.'}
 
 

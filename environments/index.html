@@ -17,7 +17,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/environments/">
   <meta property="og:title" content="Environments — secrets.sgit.ai">
   <meta property="og:description" content="One site, one GCP project per environment: dev, main, prod, and a customer&#x27;s own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.">
-  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:version" content="0.1.2">
   <meta name="sg-secrets:released" content="2026-10-05">
 <!-- sg-secrets:head:end -->
 </head>
@@ -29,7 +29,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.2" title="released 2026-10-05">v0.1.2</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -66,6 +66,7 @@
           <a class="sl" href="/admin/versions.html">Release history</a>
           <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
           <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
           <a class="sl" href="/llms.txt">llms.txt, for agents</a>
           </div>
         </div>
@@ -95,7 +96,7 @@
     <p>The project ids are proposed until the bootstrap confirms they are available. None exists yet.</p>
 
     <h2>What a project contains</h2>
-    <p>Terraform in <code>infra/terraform/</code> will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains <code>secrets.sgit.ai</code> and <code>localhost</code>; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, <code>infra/bootstrap/bootstrap.sh</code>, after which everything is Terraform.</p>
+    <p>Terraform in <code>infra/terraform/</code> will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains <code>secrets.sgit.ai</code> and <code>localhost</code>; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, <code>infra/bootstrap/bootstrap.sh</code>, after which everything is Terraform. The exact procedure, as commands, is <a href="/docs/ops/bootstrap.html">docs/ops/bootstrap.md</a>.</p>
 
     <h2>config/environments.json</h2>
     <p>The site ships one file naming every built-in environment. Every value in it is a <strong>public identifier</strong>: a Firebase web API key is not a secret, it is restricted by HTTP referrer, and the project id, auth domain, bucket name, app id and admin OAuth client id are all visible to any user of the app anyway. The file is generated from Terraform outputs by the pipeline and validated by the gate; a block whose values do not match the Terraform state it came from will fail the build. The leak tripwire allows the <code>AIza…</code> shape in this file only, so a key pasted anywhere else is caught.</p>
@@ -150,7 +151,7 @@
   </main>
   <!-- sg-secrets:footer:start -->
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/environments/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.2" title="released 2026-10-05">v0.1.2</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/environments/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->
