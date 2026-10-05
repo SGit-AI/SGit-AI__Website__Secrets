@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "siteVersion": "0.1.0",
+  "default": "prod",
+  "_comment": "Every value in this file is a public identifier. Firebase web API keys (AIza...) are not secrets: they are restricted by HTTP referrer. The leak tripwire allows the AIza shape in this file only. Real values arrive per environment from Terraform outputs via infra/scripts/export_env_config.py (step 3); until then every environment is a placeholder and _source is null. The gate will refuse a block whose values do not match the Terraform state hash in _source once that exists.",
+  "environments": {
+    "prod": {
+      "label":              "secrets.sgit.ai (production)",
+      "status":             "proposed",
+      "projectId":          "sgit-secrets-prod",
+      "apiKey":             null,
+      "authDomain":         null,
+      "storageBucket":      null,
+      "appId":              null,
+      "adminOauthClientId": null,
+      "tenantId":           null,
+      "region":             "europe-west2",
+      "signInMethod":       "popup",
+      "_source":            null
+    },
+    "main": {
+      "label":              "staging (main branch)",
+      "status":             "proposed",
+      "projectId":          "sgit-secrets-main",
+      "apiKey":             null,
+      "authDomain":         null,
+      "storageBucket":      null,
+      "appId":              null,
+      "adminOauthClientId": null,
+      "tenantId":           null,
+      "region":             "europe-west2",
+      "signInMethod":       "popup",
+      "_source":            null
+    },
+    "dev": {
+      "label":              "development (disposable)",
+      "status":             "proposed",
+      "projectId":          "sgit-secrets-dev",
+      "apiKey":             null,
+      "authDomain":         null,
+      "storageBucket":      null,
+      "appId":              null,
+      "adminOauthClientId": null,
+      "tenantId":           null,
+      "region":             "europe-west2",
+      "signInMethod":       "popup",
+      "_source":            null
+    }
+  }
+}

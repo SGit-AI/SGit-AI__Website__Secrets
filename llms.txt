@@ -1,0 +1,39 @@
+# secrets.sgit.ai
+
+> A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
+
+Site version: v0.1.0 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+
+Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
+
+Notes for agents:
+- Everything in the repository is public and nothing in it is secret; a leak tripwire in the release gate scans every file.
+- The passkey RP ID is secrets.sgit.ai, never the apex sgit.ai.
+- There is no server-side code: the browser does every cryptographic operation.
+- If your tooling cannot follow links, fetch /llms-full.txt: every page and document in one request.
+
+## Pages
+
+- [secrets.sgit.ai — a zero-knowledge secrets manager in the browser](/index.md): A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. This version is the pipeline before the site: nothing of the app is built yet.
+- [Admin — secrets.sgit.ai](/admin/index.md): How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
+- [Release history — secrets.sgit.ai](/admin/versions.md): Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
+
+## Design documents (the reasoning; the brief is the instruction)
+
+- [Brief corrections](/docs/design/brief-corrections.md)
+- [Risk Mandate — AWS Cognito Client-Side Architecture](/docs/design/riskmandate-aws-cognito-architecture.md)
+- [Risk Mandate — GCP Key Vault Architecture & Password Manager MVP](/docs/design/riskmandate-gcp-key-vault-password-manager-mvp.md)
+- [Risk Mandate — User Onboarding & Account Experience](/docs/design/riskmandate-user-onboarding-account-experience.md)
+- [Risk Mandate — Google Workspace as Identity, Storage and Deployment Substrate](/docs/design/riskmandate-workspace-architecture-briefing.md)
+- [secrets.sgit.ai — MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md)
+
+## Operations (what a human must do, and how a release works)
+
+- [Repository protections](/docs/ops/branch-protection.md)
+- [DNS for secrets.sgit.ai](/docs/ops/dns.md)
+- [What only a human can do](/docs/ops/needs.md)
+- [How a release works](/docs/ops/release.md)
+
+## Reality
+
+- [What is built, by status](/docs/reality.md)

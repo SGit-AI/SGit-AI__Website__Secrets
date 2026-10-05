@@ -1,0 +1,19 @@
+# Release history
+
+> Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
+
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+One row per release. The version increments on every push to `dev`: a minor bump for a release, a patch for a same-day fix. Each row's version is also a git tag, pushed by CI from the commit whose subject reads `site vX.Y.Z : what`. The table is generated from `data/versions.json`; the gate fails if the newest row disagrees with `admin/build/version.txt` or a version appears twice.
+
+| Version | Date | Release | What changed |
+|---|---|---|---|
+| `v0.1.0` | 2026-10-05 | the pipeline, before the site | The repository layout, version.txt as the one source of the version, the chrome generator, markdown twins, llms.txt and llms-full.txt, docs/reality.md generated from data/features.json, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate, tag-release, deploy and verify-live, CNAME, the DNS and branch-protection notes, docs/ops/needs.md, and the five design documents copied in verbatim. A placeholder homepage with the version badge and the status table. Nothing of the app, admin or test pages exists yet; every one of those claims is marked proposed. |
+
+How a release works, step by step: [docs/ops/release.md](/docs/ops/release.md).
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/admin/versions.html)*

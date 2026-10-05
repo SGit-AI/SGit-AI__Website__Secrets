@@ -1,0 +1,1833 @@
+# secrets.sgit.ai
+
+> A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
+
+Site version: v0.1.0 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+
+Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
+
+Notes for agents:
+- Everything in the repository is public and nothing in it is secret; a leak tripwire in the release gate scans every file.
+- The passkey RP ID is secrets.sgit.ai, never the apex sgit.ai.
+- There is no server-side code: the browser does every cryptographic operation.
+- If your tooling cannot follow links, fetch /llms-full.txt: every page and document in one request.
+
+
+==============================================================================
+source: /index.md
+==============================================================================
+
+# secrets.sgit.ai
+
+> A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. This version is the pipeline before the site: nothing of the app is built yet.
+
+*Source: <https://secrets.sgit.ai/> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one GCP project per environment, holding Identity Platform for login and a Cloud Storage bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.
+
+**What exists at this version.** Only the pipeline: the version gate, the chrome generator, the markdown twins, the machine indexes, the release tagging and the deploy. No app, no admin, no probe page is built. Every row below marked *proposed* is a design, not a thing. The design is in [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md); what is real is in [docs/reality.md](/docs/reality.md), generated from the same data as the table on this page.
+
+## What it will be
+
+A password-manager-shaped app where the "passwords" can be anything small and secret: passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes. Unlocked by a passkey using the WebAuthn PRF extension, with a recovery code as the second unlock method. Stored as an encrypted keyring in a bucket the user's login can reach. Readable by no one else, including the people who run the bucket.
+
+Three principles are not negotiable: plaintext exists only in the browser, briefly, after a passkey gesture; the login decides which paths you may touch and the passkey decides whether the bytes mean anything; and nothing in the repository is secret, so the whole configuration of every environment is public.
+
+## What a compromised party would get
+
+The design's threat table, from [section 3.4 of the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). It describes the design, not a shipped system; the acceptance test that checks it is listed as proposed below.
+
+| Party compromised | Gets | Does not get |
+|---|---|---|
+| GCP project or Identity Platform admin | User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone | Any plaintext: the PRF output is bound to the origin and the user's authenticator |
+| Bucket reader | Ciphertext | Plaintext |
+| Terraform pipeline | Can change rules, delete the bucket | Plaintext |
+| This repository or the DNS | **Everything, for users who load the malicious page** | Nothing is withheld |
+
+The last row is why the repository protections in [docs/ops/branch-protection.md](/docs/ops/branch-protection.md) exist. The code served to the browser is the boundary.
+
+## Shipped, proposed, absent
+
+Every claim this site makes, with its status, from `data/features.json`. *shipped* exists and runs at the version shown; *proposed* is designed and not built; *absent* is deliberately not in the MVP.
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | shipped v0.1.0 | admin/build/version.txt | Check 1 of the gate fails on any disagreement. |
+| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | shipped v0.1.0 | admin/build/chrome.py | gen_chrome.py --check is part of the gate. |
+| pipeline | Markdown twin of every HTML page, links pointing at markdown | shipped v0.1.0 | admin/build/gen_twins.py | index.html has index.md beside it; the twin carries the site version. |
+| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | shipped v0.1.0 | admin/build/gen_llms.py | llms-full.txt concatenates every twin and every design document. |
+| pipeline | docs/reality.md and the status tables generated from data/features.json | shipped v0.1.0 | admin/build/gen_features.py | If the reality document does not list it, it does not exist. |
+| pipeline | The eight-check release gate, no dependencies | shipped v0.1.0 | admin/build/validate.js | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
+| pipeline | The same gate locally and in CI, one command | shipped v0.1.0 | admin/build/gate.py | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
+| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | shipped v0.1.0 | admin/build/tag_release.py | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
+| pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
+| pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
+| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | proposed | CNAME, docs/ops/dns.md | Needs the DNS CNAME and Pages enablement listed in docs/ops/needs.md. Flips to shipped when verify-live first passes. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments, shipped | proposed | section 6.1 of the brief | Step 2. Every page will carry a status line from this file. |
+| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | Markdown only at this version; rendered pages come with step 2. |
+| site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
+| site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
+| infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
+| infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
+| infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | proposed | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |
+| infra | Storage Security Rules deployed per environment | proposed | infra/rules/storage.rules | The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project. |
+| infra | config/environments.json with real dev values from Terraform outputs | proposed | config/environments.json | Step 3. Today every environment is a placeholder with _source null. |
+| app | Sign in and out with Google and email/password against the chosen environment | proposed | app/index.html | Step 3. Popup sign-in by default; vendored Firebase SDK. |
+| app | Environment page: pick a built-in environment, enter a custom one, import, export, reset | proposed | app/environment.html | Step 3. The active environment is shown in the header at all times. |
+| app | Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai | proposed | app/setup.html, app/unlock.html | Step 4. Not before the dev project exists and the probe pages are green. |
+| app | Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests | proposed | section 8 of the brief | Step 4. Published at /keyring/ as a specification. |
+| app | Recovery code: 26 characters base32, 128 bits, shown once | proposed | app/setup.html | Step 4. Lose every passkey and the code and the data is gone; the site will say so. |
+| app | Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers | proposed | app/vault.html, app/entry.html | Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note. |
+| app | Optimistic concurrency on keyring writes with a three-way merge | proposed | section 8.5 of the brief | Step 5. rev in the AAD so a stale body fails to decrypt. |
+| app | Devices page: add and remove passkeys, regenerate the recovery code | proposed | app/devices.html | Step 6. |
+| app | Account page: export and import the encrypted keyring, sign out, wipe memory | proposed | app/account.html | Step 6. |
+| app | Key pair per user generated at first run; public bundle written to directory/ | proposed | section 8.3 of the brief | Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing. |
+| app | Sharing an entry with another user through their inbox | absent | /sharing/ (step 2 describes it) | Phase 2. The data model ships first so it is not rewritten later. |
+| app | A document kind in the keyring | absent | section 8.4 of the brief | Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring. |
+| app | Browser extension or autofill | absent | section 12 of the brief | A later site or a later version. |
+| app | An API for agents | absent | section 12 of the brief | A later version. |
+| app | Any server-side code: Cloud Functions, proxies, a small API | absent | everywhere | Forbidden by design. A need for one is a proposal in brief-corrections.md, not code. |
+| admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
+| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
+| admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
+| admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
+| tests | Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix | proposed | tests/*.html | Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix. |
+| tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
+| tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
+| tests | Playwright end to end against the real dev project with a virtual authenticator | proposed | tests/e2e/ | Whether the virtual authenticator does PRF is an open question. |
+| tests | Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field | proposed | docs/acceptance.md | Before 1.0. The write-up is published whatever the result. |
+
+## Where to read next
+
+- [The MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md), the instruction set this site is built from, and [what it got wrong](/docs/design/brief-corrections.md).
+- [The primary design](/docs/design/riskmandate-gcp-key-vault-password-manager-mvp.md): the all-GCP stack, the keyring, PRF unlock, the sharing scheme.
+- [How a release works](/docs/ops/release.md): the version gate, the commit subject, the tag, and why green does not mean live.
+- [What only a human can do](/docs/ops/needs.md) before the next step.
+- [Release history](/admin/versions.md) and [llms.txt](/llms.txt) for agents.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/)*
+
+
+==============================================================================
+source: /admin/index.md
+==============================================================================
+
+# Admin
+
+> How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
+
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Two things live under `/admin/`: how this site is built and released, which exists, and the environment admin pages, which are proposed.
+
+## How the site is built
+
+There is no build step and no bundler. The committed tree is the deployed tree. Five generators under `admin/build/` write the parts that must not drift (the chrome, the status tables, the release table, the markdown twins, the machine indexes), each with a `--check` mode, and an eight-check gate in `admin/build/validate.js` refuses a release that disagrees with itself. The same command, `python3 admin/build/gate.py`, runs locally and in CI. Every push to `dev` is a release: the version in `admin/build/version.txt` is repeated in the commit subject as `site vX.Y.Z : what`, CI tags it, deploys it, and then polls the live site until it serves that version. The whole procedure is in [docs/ops/release.md](/docs/ops/release.md).
+
+### The eight checks
+
+1. **Version agreement.** `version.txt` equals every page badge, the newest row of the versions table, `llms.txt`, `llms-full.txt`, `index.md` and `config/environments.json#siteVersion`; no version is listed twice.
+2. **Internal links and fragments** resolve, in every HTML and markdown file.
+3. **Canonical host.** Every page has `rel=canonical` and `og:url` on the host in `CNAME`.
+4. **Leak tripwire** on every file in the tree: sgit vault and read keys, AWS and GitHub tokens, API keys, PEM private key blocks, Slack tokens, Google OAuth client secrets, service-account JSON, bare twelve-digit numbers. The fix for a trip is always a redaction, never a wider pattern.
+5. **Vendor manifest.** Every file under `vendor/` matches its SHA-256; no script is loaded from another origin anywhere under `app/`, `components/`, `admin/` or `tests/`.
+6. **Storage rules in sync.** The hash of `infra/rules/storage.rules` equals the hash recorded in `data/features.json`, so a rules change without a release note fails.
+7. **Reality.** `docs/reality.md` is what `data/features.json` generates.
+8. **No storage of secrets in code.** Every `localStorage.setItem` and `sessionStorage.setItem` uses a key listed in `app/config/storage-keys.js`.
+
+## The admin pages, proposed
+
+The admin pages will work only when the visitor signs in with a Google account that has IAM on the selected environment's GCP project. There will be no admin role in the app: the project's IAM is the role, and the pages are a client for GCP's own APIs, calling them with the visitor's own token held in memory. Every write action will show the exact request before sending it. None of this exists yet.
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
+| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
+| admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
+| admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
+
+## The pipeline, as it stands
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | shipped v0.1.0 | admin/build/version.txt | Check 1 of the gate fails on any disagreement. |
+| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | shipped v0.1.0 | admin/build/chrome.py | gen_chrome.py --check is part of the gate. |
+| pipeline | Markdown twin of every HTML page, links pointing at markdown | shipped v0.1.0 | admin/build/gen_twins.py | index.html has index.md beside it; the twin carries the site version. |
+| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | shipped v0.1.0 | admin/build/gen_llms.py | llms-full.txt concatenates every twin and every design document. |
+| pipeline | docs/reality.md and the status tables generated from data/features.json | shipped v0.1.0 | admin/build/gen_features.py | If the reality document does not list it, it does not exist. |
+| pipeline | The eight-check release gate, no dependencies | shipped v0.1.0 | admin/build/validate.js | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
+| pipeline | The same gate locally and in CI, one command | shipped v0.1.0 | admin/build/gate.py | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
+| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | shipped v0.1.0 | admin/build/tag_release.py | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
+| pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
+| pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
+| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+
+Release history: [versions](/admin/versions.md). What a human still has to do: [needs.md](/docs/ops/needs.md).
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/admin/)*
+
+
+==============================================================================
+source: /admin/versions.md
+==============================================================================
+
+# Release history
+
+> Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
+
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+One row per release. The version increments on every push to `dev`: a minor bump for a release, a patch for a same-day fix. Each row's version is also a git tag, pushed by CI from the commit whose subject reads `site vX.Y.Z : what`. The table is generated from `data/versions.json`; the gate fails if the newest row disagrees with `admin/build/version.txt` or a version appears twice.
+
+| Version | Date | Release | What changed |
+|---|---|---|---|
+| `v0.1.0` | 2026-10-05 | the pipeline, before the site | The repository layout, version.txt as the one source of the version, the chrome generator, markdown twins, llms.txt and llms-full.txt, docs/reality.md generated from data/features.json, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate, tag-release, deploy and verify-live, CNAME, the DNS and branch-protection notes, docs/ops/needs.md, and the five design documents copied in verbatim. A placeholder homepage with the version badge and the status table. Nothing of the app, admin or test pages exists yet; every one of those claims is marked proposed. |
+
+How a release works, step by step: [docs/ops/release.md](/docs/ops/release.md).
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/admin/versions.html)*
+
+
+==============================================================================
+source: /docs/reality.md
+==============================================================================
+
+# secrets.sgit.ai — reality
+
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.0 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+
+45 claims: 17 shipped, 23 proposed, 5 absent.
+
+| Status | Meaning |
+|---|---|
+| shipped | exists in the repository, runs, and was exercised at the version shown |
+| proposed | designed in the brief, not built; described only in the future tense |
+| absent | deliberately not in the MVP; comes as a later version or a later site, or never |
+
+## Shipped (17)
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | shipped v0.1.0 | admin/build/version.txt | Check 1 of the gate fails on any disagreement. |
+| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | shipped v0.1.0 | admin/build/chrome.py | gen_chrome.py --check is part of the gate. |
+| pipeline | Markdown twin of every HTML page, links pointing at markdown | shipped v0.1.0 | admin/build/gen_twins.py | index.html has index.md beside it; the twin carries the site version. |
+| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | shipped v0.1.0 | admin/build/gen_llms.py | llms-full.txt concatenates every twin and every design document. |
+| pipeline | docs/reality.md and the status tables generated from data/features.json | shipped v0.1.0 | admin/build/gen_features.py | If the reality document does not list it, it does not exist. |
+| pipeline | The eight-check release gate, no dependencies | shipped v0.1.0 | admin/build/validate.js | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
+| pipeline | The same gate locally and in CI, one command | shipped v0.1.0 | admin/build/gate.py | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
+| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | shipped v0.1.0 | admin/build/tag_release.py | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
+| pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
+| pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
+| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | Markdown only at this version; rendered pages come with step 2. |
+| site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
+| site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
+| admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
+| tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
+| tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
+
+## Proposed (23)
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | proposed | CNAME, docs/ops/dns.md | Needs the DNS CNAME and Pages enablement listed in docs/ops/needs.md. Flips to shipped when verify-live first passes. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments, shipped | proposed | section 6.1 of the brief | Step 2. Every page will carry a status line from this file. |
+| infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
+| infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
+| infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | proposed | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |
+| infra | Storage Security Rules deployed per environment | proposed | infra/rules/storage.rules | The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project. |
+| infra | config/environments.json with real dev values from Terraform outputs | proposed | config/environments.json | Step 3. Today every environment is a placeholder with _source null. |
+| app | Sign in and out with Google and email/password against the chosen environment | proposed | app/index.html | Step 3. Popup sign-in by default; vendored Firebase SDK. |
+| app | Environment page: pick a built-in environment, enter a custom one, import, export, reset | proposed | app/environment.html | Step 3. The active environment is shown in the header at all times. |
+| app | Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai | proposed | app/setup.html, app/unlock.html | Step 4. Not before the dev project exists and the probe pages are green. |
+| app | Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests | proposed | section 8 of the brief | Step 4. Published at /keyring/ as a specification. |
+| app | Recovery code: 26 characters base32, 128 bits, shown once | proposed | app/setup.html | Step 4. Lose every passkey and the code and the data is gone; the site will say so. |
+| app | Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers | proposed | app/vault.html, app/entry.html | Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note. |
+| app | Optimistic concurrency on keyring writes with a three-way merge | proposed | section 8.5 of the brief | Step 5. rev in the AAD so a stale body fails to decrypt. |
+| app | Devices page: add and remove passkeys, regenerate the recovery code | proposed | app/devices.html | Step 6. |
+| app | Account page: export and import the encrypted keyring, sign out, wipe memory | proposed | app/account.html | Step 6. |
+| app | Key pair per user generated at first run; public bundle written to directory/ | proposed | section 8.3 of the brief | Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing. |
+| admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
+| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
+| admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
+| tests | Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix | proposed | tests/*.html | Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix. |
+| tests | Playwright end to end against the real dev project with a virtual authenticator | proposed | tests/e2e/ | Whether the virtual authenticator does PRF is an open question. |
+| tests | Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field | proposed | docs/acceptance.md | Before 1.0. The write-up is published whatever the result. |
+
+## Absent (5)
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| app | Sharing an entry with another user through their inbox | absent | /sharing/ (step 2 describes it) | Phase 2. The data model ships first so it is not rewritten later. |
+| app | A document kind in the keyring | absent | section 8.4 of the brief | Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring. |
+| app | Browser extension or autofill | absent | section 12 of the brief | A later site or a later version. |
+| app | An API for agents | absent | section 12 of the brief | A later version. |
+| app | Any server-side code: Cloud Functions, proxies, a small API | absent | everywhere | Forbidden by design. A need for one is a proposal in brief-corrections.md, not code. |
+
+Storage Security Rules source: `infra/rules/storage.rules`, `sha256:6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250` (the gate fails when the file and this hash disagree, so a rules change needs a release note).
+
+*Source: [https://github.com/SGit-AI/SGit-AI__Website__Secrets](https://github.com/SGit-AI/SGit-AI__Website__Secrets) · CC BY 4.0*
+
+
+==============================================================================
+source: /docs/design/brief-corrections.md
+==============================================================================
+
+# Brief corrections
+
+*secrets.sgit.ai · what the MVP build brief got wrong or left open, found while building, dated · beside the brief it corrects · CC BY 4.0*
+
+The brief (`secrets-sgit-ai__mvp-build-brief.md`) is the instruction set. Where building it showed a statement to be wrong, incomplete or impossible as written, the finding is recorded here with the date and the version, and the build carried on with the correction. Sections 1 to 4 of the brief hold closed decisions; nothing here reopens one. The design documents beside this file are copied verbatim and are never edited.
+
+## v0.1.0 (2026-10-05): the pipeline before the site
+
+### C1. "Type_Safe style" for the generators, without the library
+
+Section 7.2 asks for Python in Type_Safe style. `Type_Safe` is a runtime type system from `osbot-utils`, a dependency the gate would have to `pip install` before it could run. The brief also requires that "a release that fails the gate locally fails the same way in CI" and that `validate.js` has no dependencies. The generators therefore use the standard library only and keep the shape of the style (one class per file, `═══` banners instead of docstrings, aligned assignments, trailing comments carrying the reasoning, double-underscore class names such as `Site__Pages`, `Gen__Chrome`, `Tag__Release`), without the `Type_Safe` base class. The one Python dependency of the whole gate is `pytest`, which the brief itself names. If the house later publishes a stdlib-only `Type_Safe`, the base class can be added without changing a call site.
+
+### C2. The generator filenames are the brief's, not the house's
+
+The house rule is "filename equals class name". The brief names the files `admin/build/chrome.py` and `admin/build/gen_*.py`, and the CI table runs `gen_*.py --check`. The brief wins on the filenames; the class inside each file follows the house naming. `admin/build/version.txt` sits beside them as the brief says.
+
+### C3. Check 1 cannot mean "every `vX.Y.Z` string in these files"
+
+Section 9.3's first check says the version must equal `llms.txt`, `llms-full.txt` and `index.md`, and "no version listed twice". `llms-full.txt` concatenates every design document, and the brief itself lists `v0.1.0` to `v0.9.0` in its build-order table, so a literal reading fails forever. Check 1 reads each file's declared version at a fixed anchor (`Site version: vX.Y.Z` in the two indexes, `· site vX.Y.Z` in a twin's source line, `data-version="X.Y.Z"` on a badge, `"siteVersion"` in the config, the newest row of `data/versions.json`) and "listed twice" applies to the versions table.
+
+### C4. The leak tripwire's patterns must not trip on the brief
+
+The brief lists its own tripwire shapes in section 9.3 (`sgit_private_vault_`, `GOCSPX-`, `"private_key_id"`, and so on), and it is copied in verbatim. Each pattern therefore requires the shape of a real value, not the bare prefix: a key body after `sgit_private_vault_`, ten or more characters after `GOCSPX-`, a colon after `"private_key_id"` (the JSON shape), and so on. This is a sharper pattern, not a wider one, and the brief's rule stands: the fix for a trip is a redaction. Firebase `AIza…` keys are not in the brief's list; the gate adds them as a shape that may appear only in `config/environments.json`, so a web API key pasted into a page is caught and sent to the one file where it belongs.
+
+### C5. `infra/` is excluded from the deploy but `admin/rules.html` reads `infra/rules/storage.rules`
+
+Section 9.1 excludes `infra` from the Pages artifact. Section 6.3's `rules.html` diffs the deployed rules against "`infra/rules/storage.rules` in the repo". A page served from the site cannot read a file the deploy left out. Open until step 7; the likely resolution is that `gen_features.py` (which already hashes the rules file) also writes the rules text into `data/storage-rules.json` so the page reads a deployed copy whose hash the gate has already checked. Recorded here so the exclude list is not changed silently.
+
+### C6. One Pages site, two deploying branches
+
+Section 9.1 deploys both `dev` and `main` to Pages. A repository has one Pages site, so a push to `main` replaces what `dev` deployed. This is consistent with `main` being a fallback promoted from `dev`, and `docs/ops/release.md` says so; it is not a separate `main` site. The `main` environment in `config/environments.json` is a GCP project the `main` branch is tested against, not a second hostname.
+
+### C7. Branch protection could not precede the first release
+
+Section 9.5 says the protections are set on day one. The required status check is `validate`, which did not exist before the commit that created it, and the brief asks for that commit to be pushed to `dev` as release v0.1.0. v0.1.0 was therefore pushed directly to `dev`; the rules in `docs/ops/branch-protection.md` apply from the next release on, and `docs/ops/needs.md` asks for them.
+
+### C8. `enablement` of Pages is not the workflow's to do
+
+`actions/configure-pages` can try to create the Pages site, but that needs a token with administration rights the workflow does not and should not hold. Enabling Pages with the custom domain is a human step (`docs/ops/needs.md`, item 2). Until it is done the `deploy` job fails at `configure-pages`, which is the intended, visible failure.
+
+### C9. Check 8 covers `sessionStorage` and IndexedDB too
+
+Section 9.3 lists `localStorage.setItem(` only. The rules the session must never break name `sessionStorage` and IndexedDB as well. Check 8 also requires every `sessionStorage.setItem` key to be in `app/config/storage-keys.js` (the admin OAuth `state` is the only one listed, section 6.3) and fails on any use of `indexedDB` under `app/`, `components/` or `admin/`. `tests/leak-check.html` may scan IndexedDB, so `tests/` is exempt from that one rule.
+
+### C10. Pinning actions by SHA from inside a scoped session
+
+The six actions in `deploy-pages.yml` are pinned to the commit SHAs of `actions/checkout@v4.2.2`, `actions/setup-node@v4.1.0`, `actions/setup-python@v5.3.0`, `actions/configure-pages@v5.0.0`, `actions/upload-pages-artifact@v3.0.1` and `actions/deploy-pages@v4.0.5`, resolved with `git ls-remote` against the public repositories on 2026-10-05. A reviewer can re-check each with `git ls-remote https://github.com/<action> refs/tags/<tag>`.
+
+### C11. `node --test tests/unit/` is not a valid Node 22 invocation
+
+Section 9.1's validate job runs `node --test tests/unit/`. Node 22 treats a positional argument as a glob pattern for test files, not a directory, and fails with "Cannot find module .../tests/unit". The gate runs `node --test tests/unit/**/*.test.js`, which is the same intent in the form Node accepts.
+
+## Open questions carried from section 12 (unanswered at this version)
+
+- Does the Playwright virtual authenticator support PRF? (step 4)
+- Does Google still issue implicit-flow tokens for a Web client with our origins? (step 7)
+- Exact Security Rules syntax for the size and null checks; is `request.auth.token.firebase.tenant` available in Storage rules? (step 3)
+- Where does Identity Platform store user records? (step 3, for `/environments/`)
+- Does `sgit pki import` accept a browser-generated bundle? (step 9)
+
+
+==============================================================================
+source: /docs/design/riskmandate-aws-cognito-architecture.md
+==============================================================================
+
+# Risk Mandate — AWS Cognito Client-Side Architecture
+
+2026-10-05 · Dinis Cruz
+
+## Summary
+
+Cognito handles login (Google, other social or OIDC/SAML providers, and Cognito-managed username/password or passkeys). A Cognito identity pool swaps the login token for short-lived AWS credentials in the browser, and the browser talks to S3 directly, limited to its own prefix. SGit vaults are already encrypted client-side, so S3 only ever holds ciphertext.
+
+The one new piece is a per-user **keyring**: an encrypted file in the user's S3 prefix listing the vault keys that user can open, like a password manager's vault. The keyring is unlocked by a key the browser derives from the user's passkey (WebAuthn PRF). That key never exists in Cognito, KMS or any AWS service.
+
+**Answer to the core question:** nothing stored *inside* Cognito or KMS can be kept from someone holding the AWS admin account. But the design doesn't need that. If the key that opens the keyring is derived on the user's authenticator, a full compromise of the Cognito and AWS admin accounts yields ciphertext only. This keeps SGit's existing property: server compromise causes no data disclosure.
+
+**Update:** the primary build will be all-GCP (Identity Platform + Cloud Storage for Firebase, one project per client) so each deployment lives in one cloud and can be created and destroyed as a unit. This Cognito design remains the AWS variant for AWS-native clients. See *Risk Mandate — GCP Key Vault Architecture & Password Manager MVP*.
+
+## Why secrets cannot live in Cognito or KMS
+
+- **Cognito user attributes** (including custom attributes) are readable by any principal with `cognito-idp:AdminGetUser` or `ListUsers`. Encrypting them first just moves the question to where that key lives.
+- **Whoever controls authentication can impersonate.** A Cognito admin can reset a password (`AdminSetUserPassword`), sign in as the user, obtain identity-pool credentials and do anything the user can do. So any secret that is released *because a user logged in* is reachable by the admin.
+- **KMS** decrypts server-side for whoever holds IAM permission. A key policy can try to exclude admins, but the account owner can usually regain control, and an impersonated user's credentials would pass anyway.
+- **AWS Private CA and KMS asymmetric keys** keep private keys inside AWS, usable by IAM principals. Same problem. **CloudHSM** keeps keys behind HSM user credentials that AWS admins don't have, but it's server-side, priced per HSM-hour and not per-user, so it doesn't fit.
+
+Conclusion: the authority to decrypt must come from something the AWS account cannot reach — the user's authenticator, or a passphrase only the user knows.
+
+## Architecture
+
+| Layer | Component | Role | What a compromised admin gets |
+|---|---|---|---|
+| Web app | Static site on GitHub Pages (outside AWS) | All crypto and UI run here | Nothing, if the code host is separate |
+| Login | Cognito user pool: Google federation, other IdPs, native username/password, passkeys | Proves who the user is | Ability to impersonate users and alter config |
+| AWS access | Cognito identity pool, authenticated role with policy variables | Short-lived credentials scoped to `vaults/${cognito-identity.amazonaws.com:sub}/*` | Access to any user's prefix |
+| Storage | S3: user keyring + SGit vault objects | Holds ciphertext only | Ciphertext; ability to delete or roll back |
+| Keys | Passkey PRF on the user's device, synced via iCloud Keychain or personal Google Password Manager | Derives the key that unwraps the keyring | Nothing |
+
+## Login options
+
+- **Google sign-in** through Cognito's federated identity providers. Cognito also supports Apple, Facebook, Amazon, any OIDC provider and SAML (for customer IdPs like Entra or Okta).
+- **Cognito-managed accounts**: username/password with MFA, or passwordless with passkeys or email OTP (passwordless needs the Essentials feature plan).
+- Use the Amplify Auth library or the Cognito API from the custom UI, rather than the Cognito-hosted login pages, so every page the user sees comes from the code host outside AWS.
+
+Login and key unlock are deliberately separate. Login decides *which S3 prefix you may touch*; the passkey PRF decides *whether you can read what's there*. An admin can fake the first, never the second.
+
+## Keyring design
+
+Path: `vaults/{identityId}/keyring.json` (versioned).
+
+Contents, conceptually:
+
+- **Wrapped keyring key (KEK) entries**, one per unlock method: each registered passkey (KEK wrapped with that passkey's PRF output via HKDF + AES-GCM), and one recovery code generated at signup and shown once.
+- **Encrypted body** (AES-GCM under the KEK): a list of vaults the user can open, each with vault id, S3 location, SGit vault key and label.
+
+Unlock flow:
+
+1. User signs in via Cognito; browser gets identity-pool credentials.
+2. Browser downloads `keyring.json`.
+3. Browser runs `navigator.credentials.get` with the PRF extension and the salt stored in the keyring; the authenticator returns a 32-byte secret.
+4. HKDF turns it into a wrapping key; browser unwraps the KEK, decrypts the body, holds vault keys in memory only.
+5. SGit reads and writes vault objects directly in S3.
+
+Adding a device: sign in, unlock with an existing passkey or the recovery code, register the new passkey, add a new wrapped-KEK entry. Losing every passkey and the recovery code means the data is gone; say so in the terms.
+
+## Sharing a vault between users
+
+Each user has an X25519 key pair; the private key lives in their keyring, the public key in a readable directory (`directory/{identityId}.pub`). To share a vault, the owner encrypts the vault key to the recipient's public key and drops it in the recipient's inbox prefix; the recipient's browser moves it into their keyring on next unlock.
+
+Risk: a compromised admin could replace a public key in the directory and receive the next share. Mitigate with key fingerprints users can compare, or signed directory entries, before any sensitive sharing. Revocation means rotating the vault key and re-sharing to remaining members.
+
+## What a full admin compromise can and cannot do
+
+| Attack | Result | Mitigation |
+|---|---|---|
+| Read S3 | Ciphertext only | — |
+| Read Cognito users | Emails, names, login metadata | Keep the user pool minimal; accept metadata exposure |
+| Impersonate a user | Gets their ciphertext, cannot pass the PRF step | Passkey bound to the riskmandate.ai origin |
+| Point Cognito at a phishing site | PRF output is bound to the site's origin, so a phishing site cannot get it | Code host outside AWS |
+| Delete or encrypt-for-ransom S3 data | Availability loss | S3 versioning + Object Lock, replication to a separate AWS account, SGit clones on devices |
+| Roll back a vault to an older version | Stale data | SGit commit hashes; client remembers last-seen head |
+| Swap a public key in the directory | Intercepts future shares | Fingerprint check or signed directory |
+| **Serve malicious JavaScript** | **Full compromise of any user who loads it** | Code hosting outside the AWS account, protected separately; SRI on pinned libraries; reproducible builds |
+
+The last row is the real boundary: client-side crypto is only as trustworthy as the code delivered to the browser. Keeping the site on GitHub Pages, outside the AWS account, means an AWS or Cognito compromise does not reach it.
+
+## Compared with the Google designs
+
+| | Cognito + S3 | Identity Platform + Cloud Storage | Workspace |
+|---|---|---|---|
+| Terms issue for multi-customer use | None | None | Needs Google's written agreement |
+| Native passkeys | Yes | Limited | Yes (Google account) |
+| Multi-tenancy | Pool per customer or tenant attributes | Built in | Tenant per customer |
+| Browser-direct storage | Identity pool + S3 | Firebase Storage rules | Drive/GCS via OAuth |
+| Mail, Drive, Calendar | No | No | Yes |
+| Familiarity | High (already used) | Lower | Medium |
+
+## Open questions and next steps
+
+- Test whether Cognito's own passkey flow can also return a PRF result, so one passkey does login and unlock. If not, register a separate passkey with RP ID riskmandate.ai for unlock only.
+- Decide multi-tenancy: one user pool per customer, or one pool with a tenant attribute and per-tenant S3 prefixes.
+- Check Cognito feature-plan pricing for the passkey and passwordless features.
+- Build a PRF compatibility matrix (older Android, managed Chrome, Firefox).
+- Design the keyring file format and versioning, including concurrent writes from two devices.
+- Decide on the public-key directory trust model before multi-user sharing ships.
+- Set up S3 Object Lock and cross-account replication; test restore.
+- Prototype: sign in with Google via Cognito, get identity-pool credentials, write an encrypted keyring to S3, unlock it on a second device.
+
+
+==============================================================================
+source: /docs/design/riskmandate-gcp-key-vault-password-manager-mvp.md
+==============================================================================
+
+# Risk Mandate — GCP Key Vault Architecture & Password Manager MVP
+
+2026-10-05 · Dinis Cruz
+
+## Summary
+
+Risk Mandate needs two things from a cloud: an **identity** and a **place to store encrypted keys**. Everything else (SGit vault encryption, key unlock, sharing) happens in the browser.
+
+Decision: build it **all in GCP**, one project per client deployment, so a deployment can be created and destroyed as one unit. The stack is Identity Platform for login, Cloud Storage for Firebase for the encrypted keyring and SGit vaults, Storage Security Rules as the per-user guardrail, and a passkey with the WebAuthn PRF extension as the only thing that can decrypt.
+
+The first build is a **password manager**. It contains every risky piece of the vault-management design: login, browser-direct storage, passkey unlock, keyring format, device enrolment, recovery and multi-user sharing. Once it works, vault key management and user preferences are a layer on top: the same keyring holds vault keys instead of passwords.
+
+The server side never holds plaintext. A full compromise of the GCP project, Identity Platform or the admin account yields ciphertext only. This matches SGit's existing principle, and SGit's existing public/private key support and encrypted-data-on-top-of-encrypted-data design already cover most of what's needed.
+
+## Why all-GCP rather than Cognito
+
+The Cognito + S3 design works (see the Cognito architecture doc) and Cognito is familiar. GCP wins on deployment shape:
+
+- **One cloud per deployment.** Google sign-in needs a Google OAuth client, which lives in a GCP project. With Cognito, a client wanting Google sign-in would run AWS *and* a GCP project. All-GCP keeps it to one.
+- **Clean create/destroy.** A GCP project is a complete boundary: identity config, bucket, IAM, billing. Deleting the project wipes the deployment.
+- **Familiarity is no longer a deciding factor.** GCP is well known to the team.
+
+What GCP does not give in this design: mailboxes, Drive or Calendar. Those are Workspace, which carries the resale terms issue documented in the onboarding doc. This design needs none of them.
+
+## Client-owned deployments
+
+In a client deployment the client controls everything. The GCP project sits in the client's own Google Cloud organisation and billing account; Risk Mandate deploys the architecture into it. The client creates (or authorises Risk Mandate to create) the Google OAuth client for Google sign-in, so that credential is theirs too. Risk Mandate holds no standing access it doesn't need.
+
+## The GCP stack
+
+| Layer | GCP component | Role | Cognito equivalent |
+|---|---|---|---|
+| Web app | Static site (GitHub Pages or Firebase Hosting) | All crypto and UI run in the browser | Same |
+| Login | Identity Platform: Google sign-in, email/password, OIDC/SAML federation for a client's own IdP | Proves who the user is | Cognito user pool |
+| Browser-direct storage | Firebase SDK talking to Cloud Storage for Firebase | No server in the data path | Identity pool + temporary AWS credentials |
+| Access guardrail | Storage Security Rules keyed on the user's UID (and tenant if used) | Each user touches only their own paths | IAM policy variables on S3 prefixes |
+| Encrypted data | Keyring files, public-key directory, inboxes, SGit vault objects in the bucket | Ciphertext only | S3 |
+| Unlock | Passkey + WebAuthn PRF, held in the user's Google Password Manager or iCloud Keychain | Derives the key that opens the keyring | Same |
+
+Pricing reference: Identity Platform basic sign-in is free to 50,000 monthly active users, then roughly $0.0055 per MAU; SAML/OIDC federation is free only to 50 MAU.
+
+## Deployment units: project, tenant, region
+
+- **Project per client (recommended).** Own Identity Platform config, own bucket, own IAM, own billing. Destroying the project removes everything. Best fit for create/destroy and client ownership.
+- **Tenants within one project (option).** Identity Platform has built-in multi-tenancy: separate user pools under one project. Useful for a shared Risk Mandate environment hosting several small or pilot clients. Security Rules then key on both UID and tenant.
+- **Region.** Set per client by the bucket location, for data residency. Identity Platform itself is global; check where its user records are held if a client has strict residency needs.
+- **Automation.** Script project creation end to end (Terraform or gcloud): create project, enable Identity Platform, add Firebase, create bucket in the chosen region, deploy Security Rules, configure providers. Watch per-organisation and per-billing-account project quotas if spinning many up.
+
+## Where the passkey lives
+
+The passkey is not stored in Identity Platform, the bucket or anything Risk Mandate administers.
+
+- It lives in the user's **authenticator**: in plain Chrome that is Google Password Manager, on Apple devices iCloud Keychain, or a hardware security key.
+- It syncs through the user's own **personal** account (their personal Google or Apple account), which no Risk Mandate or client admin can reach.
+- It is a WebAuthn credential registered by Risk Mandate's own page against the riskmandate.ai origin. It needs no Google app, no OAuth client and no Identity Platform setting.
+
+The user meets Google in two unrelated roles: once as a **login provider** (Google sign-in through Identity Platform, which needs an OAuth client) and once as the **home of the passkey** (Google Password Manager, which needs no configuration). Neither role creates a lock-in: login can be any provider, and the passkey would sit in the same place under any cloud.
+
+## First-run and returning-user flow
+
+You, in Chrome, at riskmandate.ai:
+
+1. **Sign in.** Click "Sign in with Google" (or email/password). Identity Platform returns an ID token; the Firebase SDK can now reach your paths in the bucket. Everything there is ciphertext, and you have no keyring yet.
+2. **Create a passkey.** The page sees no keyring and calls `navigator.credentials.create` with the PRF extension. Chrome shows its own dialog and offers to save the passkey in Google Password Manager. You approve with fingerprint, PIN or face.
+3. **Create the keyring.** The browser takes the PRF output, derives a wrapping key, generates your key pair and a keyring key, encrypts the keyring and writes it to the bucket. A recovery code is shown once.
+4. **Returning visit** (same Chrome, or any Chrome signed into the same Google account so the passkey has synced): sign in, the page fetches the keyring, calls `navigator.credentials.get` with PRF, you confirm, the keyring unlocks in memory.
+5. **New device without the passkey** (e.g. Safari on an iPhone using iCloud Keychain): sign in, unlock with the passkey from another device via cross-device sign-in, or with the recovery code, then register a new passkey on this device; a new wrapped-key entry is added to the keyring.
+
+## Keyring design
+
+The keyring is an encrypted file in Cloud Storage. Google stores it but cannot read it.
+
+- **Wrapped keyring-key entries**, one per unlock method: each registered passkey (keyring key wrapped with that passkey's PRF output via HKDF + AES-GCM) and one recovery code.
+- **Encrypted body**, holding the user's private key, and the entries they can open: passwords in the MVP; SGit vault keys and preferences later.
+
+One unlock opens everything: passkey unlocks the keyring; the keyring holds the private key and all the keys/secrets. Plaintext exists only in the browser, briefly.
+
+Losing every passkey and the recovery code means the data is unrecoverable. This must be stated in the terms and in onboarding copy.
+
+## Multi-user sharing scheme
+
+**The problem.** Single-user wrapping works until a secret must be readable by a second person. You can't wrap it with their passkey (their PRF secret never leaves their device), and you can't send it through the server in plaintext.
+
+**The solution: a key pair per user.** At setup each user's browser generates a public/private key pair.
+
+- The **private key** goes into the user's keyring, protected by their passkey like everything else.
+- The **public key** is published in a readable directory: "this user, this public key".
+
+**Sharing flow.**
+
+1. Your browser fetches the colleague's public key.
+2. It encrypts the vault key (or password entry key) to that public key.
+3. It drops the result in the colleague's inbox in the bucket.
+4. On their next unlock, their browser decrypts it with their private key and adds it to their own keyring.
+
+The public key shares *keys*, not data. The data stays where it is, encrypted under its vault key; sharing hands over the ability to open it. The server carries the package but can never read it.
+
+**What it drags in (design up front, not later):**
+
+| Concern | Why it matters | Approach |
+|---|---|---|
+| Revocation | A removed member already holds the key | Rotate the vault key, re-encrypt, re-share to remaining members |
+| Directory trust | A compromised admin could swap a public key and intercept the next share | Key fingerprints users can compare, or signed directory entries |
+| Group membership | Who can open what is real metadata | Store membership per vault; update on add/remove |
+
+If the MVP stores only single-user wrapped keys and sharing is added later, the core data model gets rewritten. Build the key pair and inbox in from the start, even if version one only shares with one person.
+
+**Fit with SGit.** SGit already supports public/private keys and is designed to store encrypted data on top of its own encrypted data. The keyring, the per-user key pairs and the inbox are applications of existing SGit capability, not new machinery. Reuse SGit's key formats and primitives rather than introducing a parallel scheme.
+
+## Storage layout
+
+| Path | Contents | Who can read/write (Security Rules) |
+|---|---|---|
+| `users/{uid}/keyring` | Encrypted keyring | Owner only |
+| `directory/{uid}.pub` | Public key (signed) | Owner writes; signed-in users read |
+| `inbox/{uid}/{shareId}` | Keys encrypted to that user | Any signed-in user writes; owner reads and deletes |
+| `vaults/{vaultId}/...` | SGit vault objects | Members, per membership record |
+
+With tenants, prefix every path with `tenants/{tenantId}/` and add the tenant check to every rule.
+
+## Password manager MVP
+
+Why it's the right first build: if an admin with full GCP access cannot read a stored password, the security model holds for vault keys too. It is easy to test, easy to demo, and has every hard piece.
+
+Scope:
+
+- Sign in (Google and email/password via Identity Platform)
+- First-run passkey creation, keyring creation, recovery code
+- Add, view, edit, delete password entries
+- Add a second device; recover with the recovery code
+- Share an entry with another user (key pair + inbox)
+- Revoke a share (rotation)
+- Fingerprint display for verifying another user's public key
+
+Then vault management is the same keyring holding SGit vault keys, and user preferences become more encrypted fields.
+
+## Threat summary
+
+| Attacker | Gets | Cannot get |
+|---|---|---|
+| GCP project or Identity Platform admin | Ciphertext, user emails and login metadata, ability to impersonate a login, delete data | Plaintext; the PRF secret is bound to the riskmandate.ai origin and the user's device |
+| Bucket read access | Ciphertext | Plaintext |
+| Directory tampering | Future shares, unless fingerprints or signatures are checked | Existing keys |
+| Whoever controls the served JavaScript | Everything for users who load it | — |
+
+The served code is the real boundary. Host the site separately from the GCP project and protect that host independently. Use bucket versioning and retention to defend availability against deletion.
+
+## Open questions and next steps
+
+- Confirm Storage Security Rules can check the Identity Platform tenant claim, if tenants are used.
+- Confirm where Identity Platform stores user records, for clients with residency requirements.
+- Map SGit's existing key pair and layered-encryption support onto the keyring, directory and inbox; list any gaps.
+- Choose directory trust: fingerprints, signed entries, or both.
+- Define the keyring format, versioning and conflict handling for two devices writing at once.
+- Build the PRF compatibility matrix (older Android, managed Chrome, Firefox, Safari).
+- Write the project-creation script and test create/destroy end to end.
+- Build the password manager MVP; test by giving someone full GCP admin and asking them to read a password.
+
+
+==============================================================================
+source: /docs/design/riskmandate-user-onboarding-account-experience.md
+==============================================================================
+
+# Risk Mandate — User Onboarding & Account Experience
+
+Oct 4, 2026 · @Dinis Cruz
+
+## Summary
+
+Risk Mandate provisions each user a Google Workspace account and runs the whole product on top of it, while the user sees Google only once: on the sign-in screen. First login is a password the browser generates; the user then enrols a passkey and never types that password again. From then on one biometric gesture both signs them into Google and unlocks their SGit data.
+
+This is the companion to the architecture briefing (tiers, encryption, Cloud substrate). It covers only the user-facing account lifecycle: provisioning, first run, return visits, and how Gmail and Drive are used without ever showing their UI.
+
+**Update after terms research:** Google's terms do not allow one Workspace tenant to hold several customers' staff without Google's written agreement. The shared tier therefore defaults to Google Identity Platform with Cloud Storage, and the Workspace flows in this document apply to tenants the customer owns, or to the shared tier once Google signs off. See *Tier model and options*.
+
+## Decision: password once, then passkey
+
+Google will not let an admin enrol a passkey on a user's behalf, so a Workspace account's first sign-in always needs a password typed once. We accept that and make it painless: the browser's password manager generates and stores it, and the very next screen enrols a passkey.
+
+What this buys:
+
+- No identity provider to run. Google remains the only IdP.
+- 2FA from day one: the passkey is phishing-resistant and bound to the device.
+- One gesture for everything: the same passkey carries the PRF secret that unwraps the SGit data key.
+- Recovery rides on the user's personal Google or Apple keychain, not on Risk Mandate.
+
+| Option | Password ever typed? | Who runs an IdP? | Verdict |
+| --- | --- | --- | --- |
+| Password once, then passkey (chosen) | Once | Google | Simple; accepted |
+| Third-party SSO with passkey-only IdP | Never | Risk Mandate (Keycloak, Authentik, Descope, Auth0) | Rejected: operating an IdP |
+| Personal Google as IdP for the tenant | Never | Nobody | Not possible: Google cannot be a SAML IdP for another Google tenant |
+| Domain-wide delegation | Once | Google | Rejected for the client-side experience: server-side credential |
+
+## Account provisioning
+
+Risk Mandate creates the account; the user never sees the initial password. Two variants, both using the Admin SDK Directory API (`users.insert`).
+
+**Variant A: random password, delivered out of band**
+
+1. Create the user with a random password and `changePasswordAtNextLogin: true`. Discard the random value after delivery.
+2. Send a pre-filled sign-in link carrying `login_hint=<new address>` so Google skips the account picker. Optionally as a QR code for phone onboarding.
+3. Deliver the password separately (SMS, voice, in person).
+
+Google will not accept a one-time code minted by Risk Mandate; the random password is the one-time credential.
+
+**Variant B: Google-sent invite**
+
+1. Create the user with a recovery email set to an address the person already reads.
+2. Trigger Google's password-reset/invite email. Google delivers the link; Risk Mandate never holds a credential.
+
+Variant B needs a reachable external email; Variant A does not. Hand-provision both while proving the model; move to the reseller provisioning APIs once volume justifies it.
+
+No initial password can be avoided entirely with Google as the IdP. See the Rejected alternatives section for what it would take.
+
+## First-run flow
+
+Target: under two minutes, one password screen, one biometric prompt.
+
+1. User opens the onboarding link (or scans the QR) on their phone or laptop. Google shows the password screen for the pre-filled address.
+2. User enters the one-time password (Variant A) or the invite link's set-password screen appears (Variant B).
+3. Google forces a new password. The browser's password manager offers a generated one; the user accepts it and never needs to remember it.
+4. Google's "Protect your account" step offers a passkey. Risk Mandate's onboarding copy tells the user to accept: Face ID, fingerprint or hardware key. This is the 2FA.
+5. Redirect lands on `riskmandate.ai`. OIDC sign-in passes silently against the fresh Google session.
+6. The page requests Drive and Gmail tokens via Google Identity Services; the Marketplace domain install means no consent screen.
+7. The page runs one WebAuthn assertion with PRF on the passkey just enrolled, derives the wrapping key, generates the SGit data key locally, wraps it and stores the wrapped blob in the customer's Cloud project.
+8. Onboarding prompts a second passkey (hardware key or second device) as backup. This is the moment to pitch it; later prompts are ignored.
+
+If Google's own passkey prompt is skipped in step 4, step 7 registers the passkey at `riskmandate.ai` instead and the user is asked to add it to their Google account from the Risk Mandate settings page. Both passkeys can live in the same Google Password Manager or iCloud Keychain.
+
+## Returning-user experience
+
+After first run the user never types a password again.
+
+| Situation | What the user does | Mechanism |
+| --- | --- | --- |
+| Same browser, Google session alive | Opens riskmandate.ai; one biometric tap | OIDC silent sign-in; passkey + PRF assertion unlocks the data key |
+| Same browser, Google session expired | One tap on the One Tap bubble, then one biometric | Sign in with Google One Tap; Workspace passkey-as-primary login skips the password |
+| Clean device, new browser | Picks the account, one biometric, one biometric again | Workspace passkey login (synced via personal keychain); then PRF assertion |
+| Lost device | Recovers personal Google or Apple account on a new device; passkeys sync back | Keychain recovery; no Risk Mandate involvement |
+| All authenticators and personal account lost | Data unrecoverable | Accepted and stated in terms |
+
+Access tokens expire hourly. Google Identity Services re-requests them silently while the Google session lives, so the user is never interrupted mid-session.
+
+For the clean-device case to be passwordless, the tenant must have passkeys enabled as a primary sign-in method (Admin console, Security, Passkeys, "Skip passwords when possible").
+
+## Risk Mandate as the only UI
+
+Once the Marketplace domain install is in place, Gmail, Drive and Calendar are APIs the Risk Mandate page calls in the browser with the user's own permissions. The user can run on the full power of Workspace without opening a single Google page after sign-in.
+
+What the user sees from Google, and only from Google:
+
+- Sign-in, 2FA and passkey prompts
+- Password reset and account recovery
+- Security notifications (new device, suspicious sign-in)
+
+What Risk Mandate renders instead:
+
+- Inbox: `gmail.readonly` to read; a real mailbox exists, so Risk Mandate can receive mail on the user's behalf (evidence, notifications, approvals)
+- Files: `drive.file` plus the Google Picker, or `drive.readonly` if browsing is needed; "Open with Risk Mandate" appears in Drive
+- Calendar: `calendar.readonly` for deadlines and review dates
+
+To keep users inside Risk Mandate, hide the Google apps from the launcher and, if wanted, turn the Gmail and Drive web UIs off for the organisational unit. The services keep working through the API; only the Google front ends disappear. If a user types mail.google.com with the UI still on, they will land in Gmail, so decide this per tier.
+
+All Drive and Gmail reads happen client-side. Tokens stay in the tab; Risk Mandate's servers never see them.
+
+## Admin configuration checklist
+
+One-time setup per tenant. Same list applies on the Private tier, done by the customer's admin.
+
+- [ ] Google Cloud Console: create the OAuth client; set Authorised JavaScript origins to `https://riskmandate.ai`, `https://sgit.ai` and any other Risk Mandate-owned origin. One client with several origins, or one client per site under the same project so each can be revoked alone.
+- [ ] Google Cloud Console: configure the OAuth consent screen with the scopes `openid email profile`, `drive.file`, `gmail.readonly`, `calendar.readonly`. Add `drive.readonly` only if the Picker proves insufficient.
+- [ ] Workspace Marketplace SDK: publish Risk Mandate as a private app for the tenant.
+- [ ] Admin console, Apps, Marketplace apps: domain-install Risk Mandate for the organisational unit. This pre-grants the scopes for every user.
+- [ ] Admin console, Security, API controls, App access control: mark Risk Mandate as Trusted; set unconfigured third-party apps to Restricted.
+- [ ] Admin console, Security, Passkeys: allow users to skip passwords when possible.
+- [ ] Admin console, Security, 2-Step Verification: enforce, with passkeys and security keys permitted; enrolment grace period of 1 day.
+- [ ] Admin console, Apps, Google Workspace: hide Gmail, Drive, Calendar from the app launcher for the OU; decide per tier whether to turn their web UIs off.
+- [ ] Admin console, Account, Recovery: set the recovery email policy (required for Variant B invites).
+- [ ] Admin console, Reporting, Audit: confirm Admin audit log and OAuth token audit log retention; export to the customer's Cloud project on Tier 2 and 3.
+
+## Rejected alternatives
+
+Recorded so the reasoning survives.
+
+**Third-party SSO with a passkey-only IdP.** Point the tenant at an external SAML IdP (Keycloak, Authentik self-hosted; Descope, Auth0 hosted). Google then never shows a password screen; the IdP enrols a passkey on first visit via QR or push. The Google password still exists, random and unknown, but is never used. Rejected because Risk Mandate does not want to operate an identity provider. Revisit if a Tier 3 customer already runs one and wants Risk Mandate behind it.
+
+**Keycloak brokering a personal Google account.** Keycloak accepts the user's personal Google sign-in via OIDC and re-issues it as a SAML assertion the tenant trusts. Elegant, but still an IdP to run. Same verdict.
+
+**Personal Google account as the tenant's IdP.** Not possible: Workspace federates outward only to non-Google SAML providers. The personal account's real role is the recovery chain for the passkey, which already works.
+
+**Domain-wide delegation for data access.** A service account impersonating users removes consent prompts but moves Drive and Gmail access server-side and creates the most powerful credential in the design. Reserved for Tier 2 and 3 features that must run without the user present; never for the client-side experience.
+
+**Google Client-Side Encryption.** The right model, but Enterprise Plus only, not available on the seven-pound tier. SGit's own encryption gives the same guarantee at any tier.
+
+## Tier model and options (updated after terms research)
+
+Two rules now drive the design:
+
+- **The terms decide who owns a Workspace tenant.** A Workspace tenant may only hold one organisation's people, unless Google agrees otherwise in writing. Data sensitivity does not change this.
+- **Sensitivity decides who holds the keys and the infrastructure.** Non-sensitive work can share Risk Mandate infrastructure; sensitive work moves to infrastructure the customer owns.
+
+What stays constant on every tier: SGit encrypts client-side, the data key is wrapped by a passkey PRF secret derived in the browser, and no Risk Mandate server ever holds plaintext or long-lived user tokens. The identity provider and the bucket rules decide *who can touch which path*; SGit decides *whether the bytes mean anything*.
+
+### Tiers
+
+| Tier | Identity | Storage | Who owns what | Terms status | For |
+| --- | --- | --- | --- | --- | --- |
+| **Shared (default)** | Google Identity Platform, one IdP tenant per customer | Cloud Storage for Firebase on Risk Mandate's bucket, Security Rules scoped to user and tenant | Risk Mandate owns the Cloud project; no Workspace involved | Within terms: Identity Platform is Google's customer-identity product, built for an app's own users | Pilots, non-sensitive work |
+| **Shared on Workspace (pending)** | Workspace accounts in Risk Mandate's tenant | Cloud Storage; Gmail and Drive client-side | Risk Mandate owns tenant holding several customers' staff | **Needs Google's written agreement** (ToS §2.6, AUP). Do not launch before it is signed | Same as Shared, plus mailbox and Drive |
+| **Customer Workspace** | Customer's own Workspace tenant; Risk Mandate is a domain-installed Marketplace app | Per-customer Cloud project; Gmail and Drive client-side | Customer owns tenant; buys direct or through Risk Mandate as reseller/distributor; Risk Mandate optionally delegated admin | Within terms. Restricted-scope app verification applies; no CASA while data stays client-side | Sensitive work, customers wanting Gmail/Drive in the product |
+| **Private** | Customer's Workspace or own IdP | Customer's Cloud org and buckets; optional customer KMS or Google CSE | Customer owns everything; Risk Mandate sells setup and managed ops | Within terms | Regulated and enterprise |
+| **Federated (add-on to any tier)** | Customer's existing Workspace, Entra or other SAML/OIDC IdP federated into Identity Platform | As the tier it attaches to | Customer keeps its own accounts | Within terms | Customers who already have an IdP |
+
+Migration path: Shared to Customer Workspace or Private moves the customer's SGit bucket into their own Cloud project. Nothing is re-encrypted, because the keys were never Risk Mandate's.
+
+### Shared tier: zero servers Risk Mandate runs
+
+1. Browser signs in with the Identity Platform (Firebase Auth) JS SDK into the customer's IdP tenant.
+2. Browser runs its own WebAuthn assertion with PRF to unwrap the SGit data key. This works whatever the IdP, so Identity Platform's limited native passkey support does not block the design.
+3. Browser reads and writes Cloud Storage for Firebase directly; Security Rules restrict each user to `tenants/{tenantId}/users/{uid}/` and shared customer paths.
+4. No Risk Mandate backend sits in the data path.
+
+**Cost:** basic sign-in free up to 50,000 MAU, then about $0.0055 per MAU; SAML/OIDC federation free only to 50 MAU. Far below £7 per seat. **Gives up:** mailbox, Drive, Calendar and Google-run account recovery. If the product needs inbound email, add a mail service separately.
+
+### AWS variant
+
+Same architecture for an AWS-hosted private tier: Cognito user pool for sign-in, Cognito identity pool to swap the token for temporary AWS credentials in the browser, S3 with an IAM policy limiting each user to their own identity-ID prefix. Cognito has native passkey support. Multi-tenancy is a pool per customer or tenant attributes. SGit encryption and passkey PRF are unchanged.
+
+### Request to Google for the Shared-on-Workspace tier
+
+The Terms allow the restrictions to be waived if Google specifically agrees in writing. Ask for:
+
+- Permission to provision End User Accounts in Risk Mandate's tenant for staff of multiple customer organisations, embedded in the Risk Mandate product, with Google's UI hidden.
+- Permission for customers to offer the same onward to their own clients, if wanted.
+- Clarity that a risk-workflow interface over Gmail and Drive is not a "substitute or similar service" (ToS §2.6(c)).
+- The commercial vehicle: amendment to Risk Mandate's Workspace agreement, or reseller/ISV partner agreement.
+
+Get it signed by someone with contracting authority, not an email from a contact. Until then the Shared tier runs on Identity Platform, and switches to Workspace only once the agreement lands.
+
+### Decision summary
+
+| Question | Decision |
+| --- | --- |
+| Default substrate for shared, non-sensitive use | Identity Platform + Cloud Storage for Firebase |
+| When Workspace is used | Customer owns the tenant, or Google has signed off on the shared Workspace tier |
+| How Risk Mandate earns on Workspace | Reseller/distributor margin plus setup and managed services |
+| What never changes | Client-side SGit encryption, passkey PRF key wrapping, no server-side plaintext or long-lived tokens |
+| AWS | Cognito + identity pool + S3 as a drop-in private-tier option |
+
+## Research A: Google commercial and terms restrictions
+
+The Shared tier as designed breaks Google's terms. Risk Mandate holding one tenant and handing accounts in it to other companies' staff is exactly what the Acceptable Use Policy forbids. The Delegated and Private tiers are fine, and the compliant way to keep the "we pass on the £7 seat" model is to resell a separate tenant per customer, through Google's reseller programme or a distributor.
+
+| Restriction | Source | Impact on Risk Mandate |
+| --- | --- | --- |
+| Customer may not sell, resell or lease the Services to a third party unless the agreement authorises it | Workspace Terms of Service §2.6(a) | Tier 1 (one Risk Mandate tenant, many customers) is resale without authorisation. Blocking. |
+| May not resell End User Accounts, or parts of them, as part of a commercial product offered to third parties | Workspace / Cloud Acceptable Use Policy | Bundling seats inside the Risk Mandate product from our own tenant is named explicitly. Blocking for Tier 1. |
+| May not "attempt to create a substitute or similar service" using the Services | Workspace ToS §2.6(c) | Building a Gmail-like inbox UI is a grey zone. Keep the UI risk-workflow-shaped, not a general mail client. Ask counsel. |
+| One human per account; no shared accounts outside delegation; no function accounts used to share files | Acceptable Use Policy | Each seat is a real person; agent and service identities must be service accounts, not users. |
+| Admins may access End User data; customer must obtain consents for that | Workspace ToS | Already planned (audit log + DPA). In a per-customer tenant the customer, not Risk Mandate, is the controller. |
+| Reseller must have each customer accept Google's ToS itself; cannot accept on their behalf | Reseller agreements | Onboarding includes a Google ToS click-through per customer tenant. |
+| Reseller cannot resell to someone who will resell onward | Reseller agreements | Customers cannot sub-resell their Risk Mandate seats. |
+| Direct Google partner status: \~100 provisioned seats, business plan, credit check | Google partner programme (as reported by distributors Vendasta, Sherweb) | Not reachable at pilot scale. Use a distributor (Sherweb, Vendasta: no minimums) until volume justifies direct. |
+| Max 2 reseller transfers per calendar year per subscription; licence count cannot drop below commitment on transfer | Workspace transfer rules | Plan the Tier 1-to-Tier 3 move once; prefer Flexible plans. |
+| Gmail read scopes and `drive` / `drive.readonly` are restricted scopes | Google OAuth policy | Internal app in the same org: exempt. Third-party app into customer tenants: needs Google app verification even when domain-installed; annual CASA security assessment if restricted data passes through our servers. Keep reads client-side and prefer `drive.file`. |
+
+**SLA.** Workspace guarantees 99.9% monthly uptime, with credits capped at 15 days of service per month, as extra days or, for monthly billing, an invoice credit. Bought through a reseller, the credit flows through that reseller. There is no money-back remedy, so Risk Mandate should not promise customers an SLA stronger than Google's on Workspace-dependent functions; Cloud Storage has its own SLA.
+
+**What this changes in the design:**
+
+- The shared tier no longer uses a Risk Mandate Workspace tenant; it runs on Identity Platform and Cloud Storage until Google agrees otherwise in writing. See *Tier model and options*.
+- Workspace is used where the customer owns the tenant, bought direct or through Risk Mandate as reseller.
+- The only users in Risk Mandate's own Workspace tenant are Risk Mandate staff.
+- The client-side architecture already minimises the verification burden: no server-side Gmail or Drive data means verification without CASA.
+
+Sources: [Workspace Terms of Service](https://workspace.google.com/terms/standard_terms/) · [Acceptable Use Policy](https://cloud.google.com/cloud/terms/aup) · [Workspace SLA](https://workspace.google.com/terms/sla/?hl=es) · [EDU reseller terms](https://workspace.google.com/terms/reseller/amendment_edu_reselling) · [Transfer to resellers](https://knowledge.workspace.google.com/admin/billing/transfer-subscriptions-between-google-and-resellers) · [Restricted scope verification](https://developers.google.com/identity/protocols/oauth2/production-readiness/restricted-scope-verification) · [Gmail API scopes](https://developers.google.com/gmail/api/auth/scopes?authuser=2) · [Vendasta on partner requirements](https://www.vendasta.com/blog/google-workspace-reseller/) · [Sherweb reseller](https://www.sherweb.com/productivity/google-workspace/resell/)
+
+Not legal advice; confirm the Tier 1 restructuring and the "substitute service" question with counsel before launch.
+
+## Research B: who else has done this
+
+Each half of the design has well-known precedents; the full combination does not show up in public sources. Website builders and payment companies resell a per-customer Workspace tenant bundled with their product, and email startups put their own UI over Gmail. No company surfaced that resells Workspace as the identity, storage and mail substrate for a non-email product with client-side encryption on top. That gap is either Risk Mandate's opening or a sign the economics or terms bite; the absence of results is not proof nobody has.
+
+| Who | What they do | Which half of the pattern | Lesson for Risk Mandate |
+| --- | --- | --- | --- |
+| [Squarespace](https://leadsmonky.com/google-workspace-vs-squarespace/) | Authorised reseller; sells real Workspace inside its accounts, billed by Squarespace, often a free first year of Business Starter | Reseller bundle, per-customer tenant | Proves the bundle model at scale. Only works for new tenants; an existing Workspace cannot be linked. |
+| [Square](https://community.squareup.com/t5/Troubleshooting/Where-do-I-pay-for-Google-Workspace/m-p/754859) | Resells Workspace to merchants; Google tells users to "contact reseller" for billing | Reseller bundle | Support burden lands on the reseller; users get confused about who to pay. Budget for first-line support. |
+| [Google Domains to Squarespace](https://www.searchenginejournal.com/google-domains-agrees-to-be-acquired-by-squarespace/) | Google moved its own domain-plus-Workspace customers to Squarespace billing | Reseller at scale | Google itself relies on resellers for the bundled small-business segment. |
+| [Sherweb](https://www.sherweb.com/productivity/google-workspace/resell/), [Vendasta](https://www.vendasta.com/blog/google-workspace-reseller/), [AppXite](https://www.appxite.com/google) | Distributors and platforms letting smaller firms resell Workspace without Google's direct-partner minimums; provisioning and billing automation | Reseller plumbing | The practical route for Risk Mandate at pilot scale. |
+| [WHMCS Workspace module](https://www.modulesgarden.com/products/whmcs/google-workspace) | Hosting companies provision Workspace seats from their billing system | Automated provisioning | Reseller API provisioning is a solved, off-the-shelf problem. |
+| [Superhuman](https://sacra.com/chat/h/4c327cd9-4a73-4c8e-bdc3-8527575402c0/) | Workflow and UI layer on a user's existing Gmail or Outlook via OAuth; Google keeps storage, spam and deliverability | Own UI over Gmail | Owning the interface but not the rails; exposed to Google's API quotas and policy. |
+| [Shortwave](https://sacra.com/chat/h/5e7868c3-fa5f-4145-a8d9-a8b9f7f15384/) | Gmail-only client that indexes mail server-side for AI search | Own UI over Gmail, server-side | The server-side path means restricted-scope verification and CASA. Risk Mandate's client-side design avoids the heaviest part. |
+| [MailMate](https://lists.freron.com/mailmate/2025-April/018273.html) | Small desktop mail client that had to pass CASA Tier 2 to keep Gmail OAuth | Restricted scope cost | Even small vendors face the audit when acting as a third-party app; plan for it on Tier 2/3. |
+
+**Where Risk Mandate differs from all of them:** the customer does not bring an account or buy email; the account is provisioned as the product's identity and data home, the product's data is encrypted before Google sees it, and the Google UI is hidden. Closest analogy: Squarespace's bundle plus Superhuman's interface plus end-to-end encryption.
+
+One honest risk the precedents show: platform dependence. Superhuman and Shortwave live inside Google's quotas and policy; a reseller relationship adds Google's terms on top. Keep SGit's data portable (it already is, in Cloud Storage) so a Google policy change costs a migration, not the company.
+
+## Open questions and next steps
+
+Open questions:
+
+- Does Google's post-password "add a passkey" prompt appear reliably on Business Starter, or does it need an admin nudge? Test on a fresh tenant.
+- Can the Google-account passkey and the riskmandate.ai passkey be the same credential for PRF purposes, or do users hold two? Two is fine, but the onboarding copy depends on the answer.
+- PRF support on older Android and on managed Chrome with enterprise policies: build the compatibility matrix.
+- Which tiers turn the Gmail and Drive web UIs off entirely versus only hiding them from the launcher?
+- Multi-user customers: how is the customer data key shared across seats and rotated on offboarding? Not yet designed.
+
+Next steps:
+
+- [ ] Stand up a throwaway tenant and run the full first-run flow on a clean phone and a clean laptop; time it.
+- [ ] Implement OIDC sign-in with no refresh tokens and the GIS token client for Drive, Gmail, Calendar.
+- [ ] Implement passkey registration with PRF and data-key wrapping; test recovery by wiping a device.
+- [ ] Write the onboarding copy for the passkey and backup-passkey prompts.
+- [ ] Draft the terms language on unrecoverable data.
+- [ ] Design the multi-user key-sharing scheme before the second seat on any customer.
+
+
+==============================================================================
+source: /docs/design/riskmandate-workspace-architecture-briefing.md
+==============================================================================
+
+# Risk Mandate — Google Workspace as Identity, Storage and Deployment Substrate
+
+**Technical briefing** · Draft v0.1 · 4 October 2026
+**Scope:** Using Google Workspace accounts as the identity provider, per-customer storage home and deployment substrate for Risk Mandate (riskmandate.ai), with SGit (sgit.ai) as the encrypted data layer.
+
+---
+
+## 1. Summary
+
+Risk Mandate will provision each customer a Google Workspace account (≈ £7/user/month, cost passed through to the customer). That account does three jobs at once:
+
+1. **Identity provider** — OIDC/SAML login for Risk Mandate and SGit.
+2. **Data home** — the customer's policies, mandates and evidence live under an account that is recognisably *theirs*.
+3. **Cloud substrate** — every Workspace tenant is also a Google Cloud organisation, so per-customer Cloud projects (storage, KMS, compute) fall out for free.
+
+All customer data is stored **encrypted by SGit before it touches Google**. Google, and any Workspace admin, only ever hold ciphertext. The decryption key is derived from the user's own authenticator (passkey + PRF) and rides on the user's *personal* recovery chain, never on Risk Mandate infrastructure.
+
+The result is a **three-tier ladder** — Shared → Delegated → Private — where the customer moves up as their governance requirements grow, and the move is a Google domain transfer rather than a data migration. This mirrors Risk Mandate's own thesis: a named business owner and a time-bound mandate, applied to our own access.
+
+---
+
+## 2. Design goals and constraints
+
+| Goal | Implication |
+|---|---|
+| Minimise Risk Mandate's contact with user data | Never hold plaintext; avoid holding standing OAuth credentials where possible |
+| Pass infrastructure cost to the customer | Resell Workspace seats; Cloud billing attached per customer |
+| Scale security from "simple" to "enterprise-ready" | Tiered model, same code, different tenancy and key custody |
+| Prove the model before automating | Hand-provision early customers; reseller APIs later |
+| Business model = helping customers deploy at their end | Private tier is the upsell, shared tier is the on-ramp |
+
+**Hard constraint discovered:** standard Workspace storage has *no admin-proof zone*. A super admin can reach any user's Drive via Vault, data transfer, Takeout or domain-wide delegation. Google's Client-Side Encryption (CSE) solves this but is Enterprise Plus / Education only and not available on the £7 tier. Therefore encryption must happen **in SGit, before Google**, not inside Google.
+
+---
+
+## 3. Architecture overview
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  User's PERSONAL identity (own Google / Apple account)         │
+│  └─ Passkey for riskmandate.ai, stored in Google Password      │
+│     Manager or iCloud Keychain → synced, recoverable by user   │
+│     └─ PRF extension → deterministic secret → unwraps data key │
+└───────────────┬──────────────────────────────────────────────┘
+                │ login (WebAuthn + OIDC)
+┌───────────────▼──────────────────────────────────────────────┐
+│  Risk Mandate app (browser / agent)                            │
+│  - Verifies Workspace ID token, discards it                    │
+│  - Holds data key IN MEMORY ONLY for the session               │
+│  - SGit client encrypts/decrypts locally                       │
+└───────────────┬──────────────────────────────────────────────┘
+                │ ciphertext only
+┌───────────────▼──────────────────────────────────────────────┐
+│  Customer's Workspace tenant  +  Google Cloud org node         │
+│  - Workspace user(s): identity, Groups, Drive (light use)      │
+│  - Cloud project(s): Cloud Storage (SGit object store), KMS,   │
+│    Cloud Run (SGit services), audit logs                       │
+└──────────────────────────────────────────────────────────────┘
+```
+
+Key separation: **identity + ciphertext** live in the tenant (which Risk Mandate may administer on the shared tier); **key material** lives on the user's personal recovery chain (which Risk Mandate never touches).
+
+---
+
+## 4. Identity
+
+### 4.1 Workspace as IdP
+
+- Google Workspace supports OIDC and SAML out of the box. Risk Mandate registers once as an OAuth client in Google Cloud.
+- Use **pure OpenID Connect** for login: request only `openid email profile`, verify the ID token, and discard it. No `offline_access`, no refresh token, nothing for Risk Mandate to custody.
+- Groups API drives roles (e.g. `risk-owners@`, `auditors@`), so authorisation can be delegated to the customer's own admins on higher tiers.
+
+### 4.2 Passkeys + PRF for key derivation
+
+- On first login the user registers a **passkey** at `riskmandate.ai`. The passkey is bound to the site, but *stored* wherever the user chooses — Google Password Manager, iCloud Keychain, a hardware key.
+- The **PRF extension** (WebAuthn) returns a deterministic 32-byte secret per credential per site on each assertion. Risk Mandate uses it to derive a wrapping key and unwrap the customer's SGit data key.
+- Nothing key-related is stored server-side in plaintext. A stolen database yields wrapped keys only.
+- **Recovery:** because the passkey syncs via the user's personal Google/Apple account, losing a device is survivable — recover the personal account, the passkey returns, the PRF secret returns. Losing *all* authenticators and the personal account = data gone. This is accepted and should be stated plainly in the terms.
+- Browser support: Chrome and Safari both ship PRF; iCloud Keychain supports it from iOS 18. Test older Android builds before relying on it there.
+
+### 4.3 Why not the alternatives
+
+| Option | Verdict |
+|---|---|
+| Drive appDataFolder | Admin-reachable; stores the key next to the lock. No. |
+| Google CSE | Correct model, but Enterprise Plus only and operationally heavy. Revisit for Private tier if a customer already has it. |
+| Password managers (1Password, LastPass) | 1Password has a usable SDK; LastPass does not. Either way adds a third party. Optional, not default. |
+| Customer KMS (GCP KMS / Azure Key Vault / AWS KMS) | Right answer for Private tier where the customer already audits a KMS. Supported as an alternative wrapping backend. |
+
+---
+
+## 5. Storage
+
+### 5.1 SGit as the encrypted data layer
+
+- SGit encrypts every object client-side before upload. Google only ever sees ciphertext.
+- Google Drive is **not** the primary store — SGit is too chatty for the Drive API. Drive may hold human-readable exports (e.g. a published policy PDF) but the SGit object store is **Google Cloud Storage** in a per-customer project.
+- Each Workspace user can create Cloud projects immediately (Workspace tenant = Cloud Identity org), so no separate account system is needed.
+
+### 5.2 Per-customer Cloud layout
+
+```
+Organisation: <customer-or-riskmandate>.com
+└── Folder: riskmandate-customers (shared tier) / root (private tier)
+    └── Project: rm-<customer>
+        ├── Cloud Storage bucket   – SGit object store (ciphertext)
+        ├── Cloud KMS (optional)   – alternative key wrapping backend
+        ├── Cloud Run              – SGit services, if hosted
+        └── Cloud Audit Logs       – retained, exportable to customer
+```
+
+- Billing: Workspace and Cloud are billed separately. Each project needs a billing account — Risk Mandate's with labels for chargeback (Shared), or the customer's own (Private).
+- IAM: Cloud org admin is a **different role** from Workspace super admin. Split identity administration from infrastructure administration deliberately from day one.
+
+---
+
+## 6. Deployment tiers
+
+| | **Tier 1 — Shared** | **Tier 2 — Delegated** | **Tier 3 — Private** |
+|---|---|---|---|
+| Tenant owner | Risk Mandate | Customer | Customer |
+| Domain | `<customer>.riskmandate.ai` or similar | Customer's own | Customer's own |
+| Workspace admin | Risk Mandate | Customer; Risk Mandate holds a scoped, revocable delegated-admin role | Customer only |
+| Cloud org / billing | Risk Mandate (chargeback) | Customer | Customer |
+| Who could read plaintext | Nobody — ciphertext + user-held keys | Same | Same |
+| Who could *see ciphertext / metadata* | Risk Mandate admins (audit-logged) | Customer + Risk Mandate (scoped) | Customer |
+| Provisioning | Hand-provisioned initially → reseller API | Guided setup, sold as a service | Full setup + managed ops, sold as a service |
+| Target | Startups, pilots, proving the model | Mid-market wanting ownership without ops burden | Regulated / enterprise |
+
+**Trust story on Tier 1:** "We technically can access the tenant, here is the Admin audit log proving we didn't, and all we could see is ciphertext anyway." Back it with a DPA. This is stronger than most SaaS trust claims and should be stated rather than hidden.
+
+**Migration path:** Tier 1 → 2/3 is a Google **domain transfer** of the tenant plus a Cloud project move under the customer's org node. No data export, no re-encryption — keys never belonged to Risk Mandate in the first place.
+
+---
+
+## 7. Federated login (customer brings their own Google)
+
+Both tiers can optionally accept logins from a customer's *existing* Workspace instead of a provisioned account.
+
+| Depth | What's needed on the customer side |
+|---|---|
+| OIDC sign-in only | Nothing, unless the admin has locked third-party apps — then a one-line allow-list of Risk Mandate's OAuth client |
+| Per-user Drive access | User consent at OAuth time; no admin involvement |
+| Domain-wide delegation | Super admin configures it in Admin console; triggers security review. **Avoid unless essential.** |
+| SAML into Risk Mandate's tenant | One-time admin setup on their side; routine for any IT team |
+
+**Credential-custody rule:** Risk Mandate holds no refresh tokens by default. If Drive access is ever needed, keep the token in the browser and call Drive client-side so the grant dies with the session. Anything that must run server-side without the user present is a Tier 2/3 feature, with tokens encrypted under a key the user's PRF secret unwraps and scopes requested incrementally.
+
+---
+
+## 8. Session and unlock flow (end-to-end)
+
+1. User visits `riskmandate.ai`, chooses "Sign in with Google" → OIDC against their Workspace tenant.
+2. ID token verified; session established; token discarded.
+3. App triggers WebAuthn assertion with PRF for the registered passkey.
+4. PRF output → HKDF → wrapping key.
+5. App fetches the user's **wrapped** SGit data key from the Cloud project; unwraps in memory.
+6. SGit client decrypts/encrypts objects locally against the per-customer Cloud Storage bucket.
+7. On logout or tab close the data key is dropped; nothing persists in plaintext.
+
+First-run differs only in step 3–5: generate the data key locally, wrap it with the PRF-derived key, store the wrapped blob. Optionally register a second passkey (hardware key) and a KMS-wrapped copy for Tier 3 customers as recovery.
+
+---
+
+## 9. Open questions and risks
+
+- **PRF on older Android / enterprise-managed Chrome** — needs a compatibility matrix before launch.
+- **Reseller status** — joining Google's partner programme unlocks provisioning/billing APIs; needed before Tier 1 can be self-serve. Not needed for hand-provisioned pilots.
+- **Legal access obligations** — on Tier 1, Risk Mandate is data controller for the tenant and may receive lawful-access requests. Ciphertext-only storage limits what can be produced; document this position with counsel.
+- **Multi-user customers** — sharing a data key across a customer's users needs a key-sharing scheme (per-user wrapped copies of the customer key, rotated on offboarding). Design before Tier 1 onboards its second seat.
+- **Drive quota and API rate limits** — not a concern once Cloud Storage is the store, but confirm Drive isn't accidentally on any hot path.
+- **Cost model** — £7/seat Workspace + Cloud consumption per project; validate margin on the shared tier with real pilot usage.
+
+---
+
+## 10. Next steps
+
+1. Hand-provision a Workspace tenant + Cloud project for one pilot customer (Tier 1).
+2. Implement OIDC login (no refresh tokens) and passkey + PRF key wrapping in the Risk Mandate app.
+3. Point SGit at a per-customer Cloud Storage bucket; confirm Drive is out of the data path.
+4. Write the Tier 1 trust statement (admin audit log + ciphertext + DPA).
+5. Design the multi-user key-sharing scheme.
+6. Prototype a Tier 1 → Tier 3 domain transfer on a throwaway tenant to prove the migration story.
+7. Evaluate Google partner/reseller onboarding once pilot volume justifies automation.
+
+
+---
+
+## 11. Client-side data access — Marketplace domain install
+
+**Goal:** a user signed into their Workspace account opens `riskmandate.ai` (or `sgit.ai`) and the page can read their Drive and Gmail **in the browser**, limited to what they can already access, with no OAuth consent prompts and no tokens ever touching Risk Mandate's servers.
+
+### 11.1 Mechanism
+
+- Risk Mandate is published as a **Google Workspace Marketplace app**, listed privately to the tenant.
+- The tenant admin performs a **domain install**. This pre-grants the app's scopes for every user in the domain — the admin's consent replaces per-user consent.
+- The web page uses **Google Identity Services** (token client) to request an access token silently against the user's existing Google session. Because the grant is already on file, no consent screen appears.
+- The token lives only in the tab. Drive and Gmail enforce the user's own ACLs, so the page can only reach what the user could already open.
+- Tokens expire hourly; a silent re-request renews them without a prompt while the Google session is alive.
+
+This is **not** a browser extension. Nothing is installed in Chrome. The grant is recorded against the tenant.
+
+### 11.2 Scopes
+
+| Need | Scope | Notes |
+|---|---|---|
+| Open specific Drive files | `drive.file` + Google Picker | User picks a file; app sees only that file. Also enables "Open with Risk Mandate" in Drive. |
+| Browse Drive broadly | `drive.readonly` | Only if Picker is insufficient. Broader; prefer `drive.file`. |
+| Read Gmail | `gmail.readonly` | No picker equivalent; filter client-side. |
+
+Keep every scope read-only unless a write path is explicitly designed.
+
+### 11.3 Allow-listing which sites may invoke the app
+
+Two controls, both required:
+
+1. **Google Cloud Console → OAuth client → Authorised JavaScript origins.** List `https://riskmandate.ai`, `https://sgit.ai` and any other Risk Mandate-owned origin. Google issues tokens only to pages served from these origins. Either one client with multiple origins, or one client per site under the same Cloud project.
+2. **Admin console → Security → API controls → App access control.** Mark the Risk Mandate app as *Trusted*; set unconfigured third-party apps to *Restricted* (or *Limited*). No other app can then request Workspace data from users in the tenant, even with user consent.
+
+Together these mean: only Risk Mandate-owned origins can mint tokens, and only Risk Mandate's app is permitted to hold Workspace scopes in the tenant.
+
+### 11.4 Clean-browser login walkthrough
+
+1. User opens a clean Chrome and signs into `accounts.google.com` with their Workspace username, password and 2FA.
+2. Google session established. The domain install is already on file; the app appears in the waffle launcher and in Drive's "Open with" menu.
+3. User navigates to `riskmandate.ai`. The page performs OIDC sign-in — passes silently against the existing Google session.
+4. The page requests a Drive/Gmail access token via Google Identity Services — passes silently because the admin grant covers these scopes. Token held in the tab only.
+5. The page performs one **passkey assertion with PRF** (the only user-visible step on a clean device) to derive the wrapping key and unwrap the SGit data key in memory.
+6. User works. Drive/Gmail reads happen client-side with the user's own permissions; SGit encrypt/decrypt happens client-side; ciphertext goes to the per-customer Cloud Storage bucket.
+7. On tab close, the access token and the data key are gone. Nothing persists in plaintext anywhere.
+
+### 11.5 Why not domain-wide delegation for this
+
+Domain-wide delegation (service account impersonating users) also removes consent prompts, but it moves data access **server-side** and creates the most powerful credential in the design. It is reserved for Tier 2/3 features that must run without the user present, scoped narrowly, run on Cloud Run with Workload Identity (no key file), and with every impersonation logged. For the client-side experience above it is unnecessary.
+
+
+==============================================================================
+source: /docs/design/secrets-sgit-ai__mvp-build-brief.md
+==============================================================================
+
+# secrets.sgit.ai — MVP build brief
+
+Status: **brief, written to be executed** · 5 October 2026 · for the Claude Code session working in `SGit-AI/SGit-AI__Website__Secrets` · CC BY 4.0
+
+> A zero-knowledge secrets manager that runs entirely in the browser. The site is static on GitHub Pages. The only cloud is one GCP project per environment, holding Identity Platform (login) and a Cloud Storage bucket (ciphertext). The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret. Everything in this repository is public, including the configuration of every environment, because nothing in it is secret.
+
+---
+
+## 0. How to use this brief
+
+1. Read sections 1–4 before writing anything. They hold the decisions that are already made; do not reopen them.
+2. The build order in section 11 is the plan. Each step has acceptance criteria. Ship the pipeline first, then the content, then the app, then admin and tests. Every push to `dev` is a release.
+3. Copy the four design documents listed in section 2 into `docs/design/` on your first commit, unchanged. They are the reasoning; this brief is the instruction.
+4. Where this brief says PROPOSED or VERIFY FIRST, test before building on it. Where you find this brief wrong, correct it in `docs/design/brief-corrections.md` with what you found, and carry on.
+5. The house rules are at coding.sgit.ai and nfrs.sgit.ai. Section 7 extracts what applies here. When in doubt, read `https://coding.sgit.ai/llms-full.txt` and `https://nfrs.sgit.ai/llms.txt`.
+
+What exists today: the repository, with README, Apache-2.0 LICENSE and a Python .gitignore, on branches `dev` and `main`. Nothing else.
+
+---
+
+## 1. What this is
+
+**One sentence.** A password-manager-shaped app where the "passwords" can be anything small and secret — passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes — unlocked by a passkey, stored as ciphertext in a GCP bucket the user's login can reach, and readable by no one else, including the people who run the bucket.
+
+**Why it exists.** It is the MVP for the key-vault layer under Risk Mandate and sgit: identity plus key storage, with every hard piece (login, browser-direct storage, passkey PRF unlock, keyring format, device enrolment, recovery, sharing) in one small, testable product. If an admin with full GCP access cannot read a stored password, the same model holds for vault keys. sgit's own docs say sgit is *not* a secrets manager and its partnerships page asks for exactly this: browser first, key kinds kept apart, release only on approval, end-to-end sharing, revocation, keys for agents. This site answers that call from inside the family.
+
+**Principles (non-negotiable).**
+
+| # | Principle | What it forbids |
+|---|---|---|
+| P1 | Plaintext exists only in the browser, briefly, after a passkey gesture | Any server-side decryption; any plaintext in storage, logs or URLs |
+| P2 | The login decides *which paths you may touch*; the passkey decides *whether the bytes mean anything* | Deriving a key from the login; storing a key in Identity Platform |
+| P3 | Nothing in the repo is secret | Any credential, account id or private key in the tree, ever; test fixtures use obviously fake values |
+| P4 | No build step, no bundler, no runtime CDN in the app origin | `npm run build`; `<script src="https://…">` from anyone but Google's own auth endpoints (see 4.6) |
+| P5 | Every release is validated, tagged and deployed by one pipeline, and a release that fails locally fails the same way in CI | Hand deploys; a version that differs between files |
+| P6 | Every figure and every claim on the site is generated or dated; the site says what is built and what is proposed, on every page it applies to | "Coming soon" that reads as shipped |
+
+---
+
+## 2. Design documents (copy into `docs/design/`)
+
+These were written before this brief and carry the reasoning. Copy them in verbatim as the first commit's `docs/design/*.md`.
+
+| File | What it holds |
+|---|---|
+| `riskmandate-gcp-key-vault-password-manager-mvp.md` | **The primary design.** All-GCP stack, keyring, PRF unlock, sharing scheme, storage layout, threat summary, password-manager MVP scope |
+| `riskmandate-aws-cognito-architecture.md` | The AWS variant; why no secret can live inside an identity provider; the attack table |
+| `riskmandate-user-onboarding-account-experience.md` | The Workspace-based onboarding design, the Google terms research, and the five-tier model that led here |
+| `riskmandate-workspace-architecture-briefing.md` | The earlier Workspace architecture briefing |
+
+Decisions carried over from them, so you do not have to re-derive:
+
+- All-GCP, one project per environment and per customer; project is the create/destroy unit.
+- Identity Platform for login (Google sign-in + email/password now; OIDC/SAML federation later), Cloud Storage for Firebase with Security Rules for browser-direct storage.
+- Passkey with WebAuthn PRF derives the keyring-wrapping key. Recovery code as the second unlock method. Lose both and the data is gone; the site says so.
+- Keyring holds the user's private key and every secret; one unlock opens everything.
+- Sharing uses a key pair per user, a public-key directory and an inbox of keys encrypted to the recipient. **Phase 2 for the UI, but the data model ships in phase 1** (the key pair is generated and stored from the first keyring).
+- Name is `secrets`, not `secrets-manager`; short nouns match the family and avoid confusion with AWS Secrets Manager and GCP Secret Manager, which are server-side stores for machine secrets.
+
+---
+
+## 3. Architecture
+
+### 3.1 Components
+
+| Layer | Component | Where it runs | Trust |
+|---|---|---|---|
+| Site + app | Static HTML/JS/CSS from this repo, GitHub Pages, custom domain `secrets.sgit.ai` | Visitor's browser | **The boundary.** Whoever controls this repo or the `sgit.ai` DNS controls the app |
+| Login | Identity Platform (Firebase Auth SDK, vendored) | Google | Can impersonate; cannot decrypt |
+| Storage | Cloud Storage for Firebase bucket + Security Rules | Google | Holds ciphertext; can delete |
+| Unlock | WebAuthn passkey, RP ID `secrets.sgit.ai`, PRF extension | User's authenticator (Google Password Manager, iCloud Keychain, hardware key) | The only thing that can decrypt |
+| Admin | Same static pages, calling GCP REST APIs with the signed-in Google account's own OAuth token | Visitor's browser | Works only if that Google account has IAM on the project |
+| Infra | Terraform in this repo, applied by GitHub Actions via Workload Identity Federation | GitHub Actions | Can reconfigure or delete; cannot read |
+
+### 3.2 Flows
+
+**First run.** Sign in (Identity Platform) → no keyring at `users/{uid}/keyring.json` → create passkey with PRF → generate keyring key (KEK), key pair, recovery code → write encrypted keyring → show recovery code once → done.
+
+**Returning.** Sign in → fetch keyring → `navigator.credentials.get` with PRF eval → HKDF → unwrap KEK → decrypt body into memory → UI. Nothing decrypted is ever written to storage, localStorage, sessionStorage or IndexedDB.
+
+**New device.** Sign in → fetch keyring → unlock via a synced passkey, cross-device passkey (QR) or the recovery code → register a new passkey → add a wrapped-KEK entry → write keyring (with optimistic concurrency, see 8.5).
+
+**Admin.** Open `/admin/` → choose environment → "Sign in with Google for admin" (OAuth implicit flow, scope `cloud-platform`, token in memory only) → each check calls a GCP API; green/red/fix.
+
+### 3.3 Origins and the passkey scope (the single most important decision)
+
+- RP ID is exactly `secrets.sgit.ai`. **Never** `sgit.ai`: a passkey scoped to the apex can be asserted by any of the 27+ sibling sites, and a compromise of any sibling repo would unlock every user's secrets.
+- The app runs on one origin and loads nothing from any other origin except Google's auth endpoints (popup/redirect, no script injection). All libraries are vendored (section 7.3).
+- riskmandate.ai and other consumers will use their own passkey or WebAuthn Related Origin Requests later. Out of scope for the MVP.
+
+### 3.4 What a compromised party gets
+
+| Party compromised | Gets | Does not get |
+|---|---|---|
+| GCP project / Identity Platform admin | user emails, login metadata, ciphertext, ability to delete or roll back, ability to log in as anyone | any plaintext; PRF output is bound to the origin and the user's authenticator |
+| Bucket reader | ciphertext | plaintext |
+| Terraform pipeline | can change rules, delete bucket | plaintext |
+| This repository or DNS | **everything, for users who load the malicious page** | — |
+
+The last row is why section 9.5 exists. Say this on the site's security page in plain words.
+
+---
+
+## 4. GCP environments
+
+### 4.1 Environments and naming
+
+| Env | Purpose | GCP project id (PROPOSED, confirm availability) | Bucket | Who uses |
+|---|---|---|---|---|
+| `dev` | daily development, disposable | `sgit-secrets-dev` | `sgit-secrets-dev.firebasestorage.app` (Firebase default) or `sgit-secrets-dev-vaults` | builders |
+| `main` | staging; what `main` branch is tested against | `sgit-secrets-main` | same pattern | review |
+| `prod` | the public default | `sgit-secrets-prod` | same pattern | everyone |
+| `<customer>` | a customer's own project, in their org and billing | theirs | theirs | them |
+
+One site serves all environments. The environment is chosen at runtime by browser configuration (section 5), with `prod` as the default on `secrets.sgit.ai`. A customer running their own project either uses the public site pointed at their project (config) or forks the repo and changes `config/environments.json`.
+
+### 4.2 Per-project resources (what Terraform creates)
+
+Terraform lives in `infra/terraform/`, one module `modules/secrets-env`, one root per environment in `infra/terraform/envs/{dev,main,prod}/`. State in a GCS bucket in a separate bootstrap project (`sgit-secrets-tfstate`, PROPOSED), one prefix per env.
+
+1. Project services: `identitytoolkit.googleapis.com`, `firebase.googleapis.com`, `firebasestorage.googleapis.com`, `storage.googleapis.com`, `firebaserules.googleapis.com`, `cloudresourcemanager.googleapis.com`, `serviceusage.googleapis.com`, `iam.googleapis.com`.
+2. Firebase project link: `google_firebase_project` (google-beta provider).
+3. Web app registration: `google_firebase_web_app` → yields `appId`; read `google_firebase_web_app_config` for `apiKey`, `authDomain`, `storageBucket`. These are **public identifiers**, written into `config/environments.json` by the pipeline. Restrict the API key by HTTP referrer to `https://secrets.sgit.ai/*` and `http://localhost:*` (dev only).
+4. Identity Platform: `google_identity_platform_config` with `sign_in { email { enabled = true } }`, `authorized_domains = ["secrets.sgit.ai", "localhost"]`, multi-tenancy off for the MVP (on for customers that want several user pools in one project; the app already passes `tenantId` when configured).
+5. Google provider: `google_identity_platform_default_supported_idp_config` with `idp_id = "google.com"`, `client_id`, `client_secret`. The client is a **Web application** OAuth client in the same project, authorised JavaScript origin `https://secrets.sgit.ai`, authorised redirect `https://<authDomain>/__/auth/handler`. The client secret is a GitHub Actions environment secret, passed as a Terraform variable; it never enters the repo. (The secret is only ever used by Google's own token exchange; it is not a secret the app holds.)
+6. Admin OAuth client: a **second** Web application client, used only by `/admin/` and `/tests/` for the `cloud-platform` scope, authorised JavaScript origin `https://secrets.sgit.ai` (plus `http://localhost:8000` on dev), authorised redirect `https://secrets.sgit.ai/admin/oauth-return.html`. Its client id is public and goes into `config/environments.json`. Its secret is unused (implicit flow) and stays in the project.
+7. Bucket: `google_storage_bucket` with uniform bucket-level access, versioning on, a soft-delete retention of 30 days, CORS for `https://secrets.sgit.ai` (methods GET, PUT, POST, DELETE, HEAD; response headers `Content-Type`, `x-goog-meta-*`, `ETag`, `x-goog-generation`), lifecycle: keep 10 noncurrent versions. Link to Firebase with `google_firebase_storage_bucket`.
+8. Security Rules: `google_firebaserules_ruleset` + `google_firebaserules_release` named `firebase.storage/{bucket}` from `infra/rules/storage.rules` (section 8.6).
+9. IAM: the Terraform service account `tf-secrets@…` with Editor on the project (narrow later); a `secrets-admins` Google group (or named accounts) with `roles/owner` on the project, which is what makes the admin pages work for those people; nothing else. No service account keys, anywhere.
+10. Workload Identity Federation: pool `github`, provider `github-actions` restricted to `assertion.repository == "SGit-AI/SGit-AI__Website__Secrets"` and the `dev`/`main` branches or the environment name; binding `roles/iam.workloadIdentityUser` to the Terraform service account.
+
+### 4.3 Bootstrap (done once, by a human, documented in `docs/ops/bootstrap.md`)
+
+The first project and the WIF pool cannot be created by the pipeline that depends on them. The bootstrap is a short `gcloud` script in `infra/bootstrap/bootstrap.sh`, run by Dinis locally, that creates the tfstate project and bucket, the three env projects, enables billing, creates the Terraform service account and the WIF pool, and prints the values that go into GitHub environment variables. The script is idempotent and prints what it would do with `--dry-run`. Everything after bootstrap is Terraform.
+
+### 4.4 What a customer runs
+
+`docs/ops/new-environment.md`: "You have a GCP org and a billing account. Run bootstrap for one project, add your domain to `authorized_domains`, run Terraform, paste the printed config into the site's Environment page (or into your fork's `config/environments.json`)." Target: under thirty minutes with no support. The admin pages' setup checklist (section 6.3) verifies each step.
+
+### 4.5 Identity Platform notes
+
+- Use **popup** sign-in (`signInWithPopup`) by default; redirect sign-in relies on the `authDomain` helper and third-party cookies, which fail on GitHub Pages in Safari and increasingly in Chrome. Offer `signInWithRedirect` only as a fallback switch on the Environment page.
+- Add `secrets.sgit.ai` and `localhost` to Identity Platform authorised domains, or every sign-in fails with `auth/unauthorized-domain`. The admin checklist tests this.
+- Identity Platform's own passkey support is not used. The unlock passkey is a plain WebAuthn credential registered by our page.
+- Pricing reference: free to 50,000 MAU on basic providers; SAML/OIDC free only to 50 MAU.
+
+### 4.6 The one external dependency: Google's auth endpoints
+
+The app contacts `https://<project>.firebaseapp.com/__/auth/*` (the Firebase auth helper, in a popup) and `https://accounts.google.com` (the OAuth consent, in a popup or redirect). Both are separate browsing contexts; neither injects a script into our origin. That is the whole external surface of the app pages. Admin pages add `https://*.googleapis.com` REST calls with the user's own token. No Google Identity Services script, no gapi, no analytics, no fonts from CDNs.
+
+---
+
+## 5. Browser-side environment configuration
+
+The site ships `config/environments.json` (generated by the pipeline from Terraform outputs; validated by the gate):
+
+```json
+{
+  "version": 1,
+  "default": "prod",
+  "environments": {
+    "prod": {
+      "label":              "secrets.sgit.ai (production)",
+      "projectId":          "sgit-secrets-prod",
+      "apiKey":             "AIza…public web api key…",
+      "authDomain":         "sgit-secrets-prod.firebaseapp.com",
+      "storageBucket":      "sgit-secrets-prod.firebasestorage.app",
+      "appId":              "1:…:web:…",
+      "adminOauthClientId": "….apps.googleusercontent.com",
+      "tenantId":           null,
+      "region":             "europe-west2",
+      "signInMethod":       "popup"
+    },
+    "main": { "…": "…" },
+    "dev":  { "…": "…" }
+  }
+}
+```
+
+Rules:
+
+- Every value in this file is a public identifier. The leak tripwire (section 9.3) must **not** flag `AIza…` web API keys from this file; add a line-level allow for `config/environments.json` and document why (Firebase web API keys are not secrets; they are restricted by referrer).
+- The app reads the active config from `localStorage['sgit.secrets.config.v1']` if present, else from the file's `default`. The Environment page (`/app/environment.html`) lets the user pick a built-in environment or enter a custom one (all fields above), export it as JSON, import one, and reset. `?env=dev` in the URL selects a built-in environment for that load and persists it.
+- Nothing secret is ever stored in localStorage. The only other localStorage keys are UI conveniences (`sgit.secrets.ui.theme`, `sgit.secrets.ui.lastEnv`). Every read is wrapped in try/catch and the app works when storage is empty.
+- Changing environment signs the user out and clears every in-memory key.
+- The active environment is shown in the app header at all times (`prod` in neutral, anything else in a coloured badge) so nobody enters a real secret into `dev` by mistake.
+
+---
+
+## 6. The site
+
+### 6.1 Structure
+
+```
+/                         index.html + index.md     what it is, what is shipped, the three-step demo
+/how-it-works/            the flows, drawn; what each party can and cannot see
+/security/                the threat model (3.4), the RP ID decision, the code-is-the-boundary statement, what we ask you to trust
+/keyring/                 the file format (section 8), published as a specification with versions
+/sharing/                 the sharing scheme, marked PROPOSED until the UI ships
+/environments/            how environments and customer deployments work; the setup guide
+/shipped/                 what is built vs proposed vs absent, per feature, generated from data/features.json
+/app/                     the application (6.2)
+/admin/                   admin pages (6.3)
+/tests/                   test and probe pages (6.4)
+/docs/design/             the four design docs, rendered
+/admin/versions.html      release history, generated
+/llms.txt  /llms-full.txt /index.md  /sitemap.xml  /robots.txt  CNAME
+/.well-known/             reserved for sgit-agents.json (agent contact) later; not in MVP
+```
+
+Every HTML page has a `.md` twin generated from the same source. The chrome (nav, footer, version badge, environment badge on app pages) is one definition in `admin/build/chrome.py`.
+
+### 6.2 App pages (`/app/`)
+
+| Page | Does | Needs |
+|---|---|---|
+| `index.html` | Sign in; shows environment; routes to setup or unlock | config |
+| `setup.html` | First-run: create passkey (PRF), generate keyring, show recovery code once with a "I have written it down" gate | signed in, no keyring |
+| `unlock.html` | Passkey assertion with PRF; fallback to recovery code; unlocks into memory | signed in, keyring exists |
+| `vault.html` | The list: search, kinds filter, add, open | unlocked |
+| `entry.html` | One entry: view/copy with reveal, edit, delete; kind-specific fields | unlocked |
+| `devices.html` | Registered passkeys (name, created, last used), add passkey, remove passkey (requires another unlock method to remain), regenerate recovery code | unlocked |
+| `environment.html` | Section 5 | — |
+| `account.html` | Email, uid, env, sign out, wipe memory, export encrypted keyring (download the ciphertext file), import (replace) | signed in |
+
+Entry kinds (the "kinds kept apart" rule): `password`, `api-key`, `sgit-vault-key`, `sgit-read-key`, `pki-private-key`, `note`. Each kind has its own fields and its own reveal behaviour; an `sgit-vault-key` entry displays its prefix (`sgit_private_vault_…`) and refuses to be put in a shareable (phase 2) set without a confirmation. Kinds are a closed list in `app/kinds.js`, frozen.
+
+Lock behaviour: keys cleared from memory on sign-out, environment change, tab hidden for more than 5 minutes (configurable), and on `beforeunload`. Clipboard copies clear after 30 s where the Clipboard API allows.
+
+### 6.3 Admin pages (`/admin/`)
+
+Admin pages work only when the visitor signs in with a Google account that has IAM on the selected environment's GCP project. There is no "admin role" in the app: the GCP project's IAM is the role, and the pages are a client for GCP's own APIs.
+
+**Auth.** `admin/oauth.js` implements the OAuth 2.0 implicit flow by redirect to `https://accounts.google.com/o/oauth2/v2/auth` with `response_type=token`, `scope=https://www.googleapis.com/auth/cloud-platform`, `client_id` from config, `redirect_uri=https://secrets.sgit.ai/admin/oauth-return.html`, a random `state` kept in sessionStorage; the return page reads the fragment, validates `state`, keeps the access token **in memory only** (never storage), and clears the fragment from history. No external script. Token lifetime is about an hour; the pages re-prompt when a call returns 401. VERIFY FIRST: that Google still issues implicit-flow tokens for a Web application client with these origins; if not, switch to Authorization Code with PKCE using a client of type "Desktop" (no secret required) and note the change.
+
+| Page | Checks / actions | APIs |
+|---|---|---|
+| `index.html` | Pick environment, sign in, show who you are and which project | `oauth2/v3/tokeninfo`, `cloudresourcemanager/v1/projects/{id}` |
+| `setup-checklist.html` | Every section-4.2 item as a row: exists / enabled / configured / **Fix** where fixable client-side | `serviceusage/v1/projects/{id}/services`, `identitytoolkit.googleapis.com/admin/v2/projects/{id}/config`, `…/defaultSupportedIdpConfigs`, `storage/v1/b/{bucket}` (+ `?fields=cors,versioning,iamConfiguration`), `firebaserules.googleapis.com/v1/projects/{id}/releases` |
+| `auth-config.html` | Authorised domains (list/add/remove), providers enabled, tenants (list/create) | Identity Toolkit admin v2 |
+| `storage.html` | Bucket CORS (show/apply the canonical set), versioning, object count per prefix, soft-delete status | Storage JSON API |
+| `rules.html` | Show the deployed Security Rules source vs `infra/rules/storage.rules` in the repo (diff), deploy the repo version | Firebase Rules API: create ruleset, update release |
+| `users.html` | Users in Identity Platform (email, uid, providers, created, last sign-in), whether each has a keyring object, disable/enable | `identitytoolkit.googleapis.com/v1/projects/{id}/accounts:batchGet`, Storage list |
+| `environment-export.html` | Produce the `config/environments.json` entry for this project from live values (so a customer can paste it) | Firebase Management API `firebase.googleapis.com/v1beta1/projects/{id}/webApps` + `…/config` |
+
+Every write action shows the exact request it will send before sending it, and logs the response on the page. Admin pages never touch a keyring's contents (they cannot; they are ciphertext) and never store the token.
+
+Hardening noted for later, not MVP: move `/admin/` and `/tests/` to their own origin (`admin.secrets.sgit.ai`, second repo) so that nothing with `cloud-platform` tokens runs in the vault's origin.
+
+### 6.4 Test and probe pages (`/tests/`)
+
+Each page is self-contained, runs in the browser, needs no secrets, and prints a result table with PASS/FAIL/SKIP and the raw values behind each row. They double as the compatibility matrix: a visitor can run them on any device and paste the result into an issue.
+
+| Page | Verifies |
+|---|---|
+| `webauthn-prf.html` | Platform authenticator present; `create` with `prf` extension; `getClientExtensionResults().prf.enabled`; `get` with `prf.eval` returns 32 bytes; same salt → same bytes twice; different salt → different bytes. Registers a throwaway credential under RP ID `secrets.sgit.ai` and tells the user how to delete it |
+| `crypto.html` | WebCrypto: HKDF-SHA256, AES-256-GCM, RSA-OAEP-4096 keygen/wrap/unwrap, ECDSA P-256 sign/verify; known-answer tests for the keyring format (section 8) against fixtures in `tests/fixtures/` |
+| `config.html` | Active environment, which store it came from, every field present, API key restricted (calls a harmless endpoint and reports) |
+| `auth.html` | Sign in to the active environment, report uid/email/tenant, token claims (redacted), sign out |
+| `storage.html` | With a signed-in user: write `users/{uid}/_probe` (random bytes), read it back, overwrite with precondition, delete; attempt to read another uid's path and expect 403 |
+| `keyring-roundtrip.html` | Full first-run and unlock in one page with a throwaway passkey: create → write → fetch → unlock → compare |
+| `offline.html` | What works with the network off (unlock of a cached keyring: no; viewing already-unlocked entries: yes) |
+| `leak-check.html` | Scans the page's own localStorage, sessionStorage and IndexedDB for anything that looks like key material; expects none |
+| `matrix.html` | Runs the above headlessly in sequence and renders a shareable summary (browser, OS, authenticator, results) |
+
+### 6.5 The content pages: what they say
+
+The site publishes its argument before the thing is finished, in the family's manner. Each content page carries a status line (`shipped vX.Y.Z` / `proposed` / `absent`) generated from `data/features.json`. The homepage leads with the three-step demo (sign in, passkey, see your secret) and a one-line statement of the model, then the "what a compromised admin gets" table, then the shipped/proposed table. No feature is described in the present tense until `features.json` says shipped.
+
+---
+
+## 7. House style (from coding.sgit.ai and nfrs.sgit.ai)
+
+### 7.1 JavaScript
+
+- Native web components, no framework, no build step, ESM everywhere (`<script type="module">`).
+- The three-file triplet per component: `sg-secrets-<name>.js/.html/.css` under `components/sg-secrets-<name>/v0/v0.1/v0.1.0/`; `static jsUrl = import.meta.url`; `get resourceName()`; `get sharedCssPaths()`; `onReady()` not `connectedCallback`.
+- 4-space indent, single quotes, no semicolons, trailing commas in multi-line literals, aligned object keys, `_` prefix for private, `Object.freeze` on exported constants, JSDoc banner on components.
+- Events namespaced `sg-secrets:` through `document` with `bubbles: true, composed: true`.
+- Shared state via small modules (`app/state/session.js` holds the unlocked keyring in a closure; nothing exports the raw keys).
+
+### 7.2 HTML / CSS / Python
+
+- HTML fragments 2-space indented; ARIA on controls; `data-*` as the behaviour hook; the chrome is injected by the generator.
+- CSS: design tokens in `assets/sg-tokens.css` (copy the family's tokens, pin the version in a comment); `:host` scoping; per-block value alignment.
+- Python (generators and tests): Type_Safe style, one class per file, banner comments, no docstrings, `__init__.py` empty; test files `test_*.py` with no mocks (the generators are tested by running them on the tree).
+
+### 7.3 Dependencies: vendored, pinned, hashed
+
+`vendor/` holds every third-party file the app loads, with `vendor/MANIFEST.json` listing source URL, version, SHA-256, licence. The gate (9.3) recomputes the hashes. Expected contents:
+
+- `sg-component.js` (the family base class, copied from the CDN path and pinned) and `sg-tokens.css`.
+- Firebase JS SDK modular ESM bundles for `app`, `auth`, `storage` (the `firebase-*.js` files from the pinned gstatic path), referenced by relative import. No runtime fetch from gstatic.
+- Nothing else. No crypto libraries: WebCrypto only. No base32/base64 libraries: write the forty lines.
+
+### 7.4 Documentation rules
+
+- Every page has a `.md` twin; `index.md` and `llms.txt` are generated; `llms-full.txt` concatenates every page and every design doc.
+- "If the reality document doesn't list it, it does not exist": `docs/reality.md` is the list of what is built, regenerated from `data/features.json` on every release. Briefs are aspirations; this brief is an aspiration until `reality.md` says otherwise.
+- Every number on a page comes from a data file or carries an as-of date.
+- Agents never push to `dev` directly from a session branch without the gate passing; branch naming `claude/<description>-<session-id>`.
+
+---
+
+## 8. Keyring and crypto specification (v1)
+
+Publish this at `/keyring/` as the format spec. Known-answer fixtures live in `tests/fixtures/keyring-v1/` and the crypto test page checks them.
+
+### 8.1 Objects in the bucket
+
+```
+users/{uid}/keyring.json          the encrypted keyring (one object, versioned by GCS)
+users/{uid}/meta.json             { "v":1, "createdAt", "keyringRev", "devices":[{"id","name","createdAt","lastUsedAt"}] }   (not secret)
+directory/{uid}.pub.json          the user's public-key bundle, signed (phase 1 writes it; phase 2 reads it)
+inbox/{uid}/{shareId}.json        keys encrypted to this user (phase 2)
+```
+
+### 8.2 Key hierarchy
+
+```
+passkey PRF output (32 bytes, from authenticator, never stored)
+  └─ HKDF-SHA256(ikm=prf, salt=keyring.prfSalt, info="sgit-secrets/v1/wrap/<credentialId>") → WK_passkey (AES-256-GCM key)
+recovery code (26 chars base32, 128 bits, shown once)
+  └─ HKDF-SHA256(ikm=code bytes, salt=keyring.prfSalt, info="sgit-secrets/v1/wrap/recovery") → WK_recovery
+KEK (32 random bytes)             wrapped once per unlock method, under WK_*
+  └─ decrypts body
+body (AES-256-GCM under KEK)     { privateKeys, entries[] }
+```
+
+PRF input salt: `keyring.prfSalt` (32 random bytes, fixed for the keyring's life) is passed as `prf.eval.first`. One salt for all passkeys; the per-credential HKDF `info` keeps the wrapping keys apart. (The authenticator's PRF is already per-credential; the info string is belt and braces.)
+
+Recovery-code KDF: HKDF alone is fast; an attacker holding the keyring can brute-force a weak code. 128 bits of entropy makes that irrelevant, which is why the code is long and machine-generated, never user-chosen. Do not add PBKDF2 "for safety"; it only slows legitimate recovery.
+
+### 8.3 `keyring.json`
+
+```json
+{
+  "v": 1,
+  "keyringId": "uuid",
+  "rev": 7,
+  "prfSalt": "base64(32)",
+  "wraps": [
+    { "id": "pk-<credentialId b64url>", "kind": "passkey",  "name": "MacBook Chrome", "createdAt": "…", "iv": "b64", "ct": "b64" },
+    { "id": "recovery-1",               "kind": "recovery", "createdAt": "…",                            "iv": "b64", "ct": "b64" }
+  ],
+  "body": { "iv": "b64", "ct": "b64", "aad": "keyringId|rev" }
+}
+```
+
+- `wraps[].ct` is AES-256-GCM of the 32-byte KEK under WK_*, AAD = `keyringId|wrap.id`.
+- `body.ct` is AES-256-GCM of the UTF-8 JSON body under KEK, AAD = `keyringId|rev`, so a body cannot be transplanted between keyrings or revisions.
+- Decrypted body:
+
+```json
+{
+  "v": 1,
+  "keys": {
+    "encrypt": { "alg": "RSA-OAEP-4096", "jwk": { "…private…" } },
+    "sign":    { "alg": "ECDSA-P256",    "jwk": { "…private…" } }
+  },
+  "entries": [
+    { "id": "uuid", "kind": "password", "title": "…", "createdAt": "…", "updatedAt": "…", "fields": { "username": "…", "password": "…", "url": "…", "notes": "…" }, "tags": [] }
+  ]
+}
+```
+
+The key pair algorithms match `sgit pki` (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing) so that a phase-2 share envelope can be the sgit hybrid envelope and `sgit pki decrypt` can open what the browser sealed. The public bundle written to `directory/{uid}.pub.json` uses sgit's JSON bundle shape `{v, encrypt, sign, label, fingerprint, signing_fingerprint}` with PEM blocks; VERIFY FIRST against `https://sgit.ai/docs/pki.md` before freezing.
+
+### 8.4 Entry size and documents
+
+Entries are small (soft limit 16 KB each, keyring soft limit 1 MB). Documents are not stored in the keyring: a `document` kind is **absent** in the MVP and, when it comes, will be a pointer to an sgit vault plus that vault's key. Say so on `/shipped/`.
+
+### 8.5 Concurrency
+
+Writes use GCS preconditions: `x-goog-if-generation-match` (via the Firebase SDK's metadata or the JSON API) against the generation read at unlock. On mismatch, re-fetch, re-unlock with the in-memory KEK (no new gesture: the KEK is already in memory), three-way merge entries by `id` and `updatedAt`, bump `rev`, retry once, else surface a conflict page. `rev` is also in the AAD so a stale body fails to decrypt rather than silently winning.
+
+### 8.6 Security Rules (`infra/rules/storage.rules`)
+
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn()        { return request.auth != null; }
+    function isOwner(uid)      { return signedIn() && request.auth.uid == uid; }
+    function sameTenant()      { return true; }   // tenant check added when multi-tenancy is on; see admin checklist
+
+    match /users/{uid}/{file=**}   { allow read, delete: if isOwner(uid) && sameTenant();
+                                     allow write:        if isOwner(uid) && sameTenant() && request.resource.size < 2 * 1024 * 1024; }
+    match /directory/{uid}.pub.json { allow read: if signedIn(); allow write: if isOwner(uid) && request.resource.size < 16 * 1024; }
+    match /inbox/{uid}/{shareId}    { allow create: if signedIn() && request.resource.size < 64 * 1024; allow read, delete: if isOwner(uid); }
+  }
+}
+```
+
+The `tests/storage.html` page asserts the owner path works and a foreign path returns 403; `rules.html` in admin diffs this file against what is deployed. VERIFY FIRST the exact rule syntax for the size and null checks; simplify rather than guess.
+
+### 8.7 Passkey details
+
+- `create`: `rp: { id: 'secrets.sgit.ai', name: 'secrets.sgit.ai' }`, `user.id` = 32 random bytes stored in `meta.json` (not the Firebase uid, which is not a secret but should not be a WebAuthn handle either), `pubKeyCredParams` ES256 then RS256, `authenticatorSelection: { residentKey: 'required', userVerification: 'required' }`, `extensions: { prf: {} }`. Check `prf.enabled`; if false, tell the user this authenticator cannot be used for unlock and offer recovery-code-only or another authenticator.
+- `get`: `rpId`, `allowCredentials` from `meta.json` devices, `userVerification: 'required'`, `extensions: { prf: { eval: { first: prfSalt } } }`. Read `getClientExtensionResults().prf.results.first`.
+- Store the credential id and the public key only in `meta.json` for display and `allowCredentials`; we never verify the assertion signature (there is no server to verify it for; the PRF output is the proof that matters). Say this on `/security/` so nobody assumes a WebAuthn login happened.
+- Known support (dated 2026-10-05, re-check on `/tests/webauthn-prf.html`): Chrome/Edge on macOS, Windows and Android with Google Password Manager; Safari 18+ with iCloud Keychain; hardware keys with hmac-secret. Build the matrix page before promising more.
+
+---
+
+## 9. CI/CD and DevOps pipelines
+
+All workflows in `.github/workflows/`. Branch model: work on `claude/*` or feature branches → PR to `dev` → push to `dev` is a release → `main` is promoted from `dev` and is deploy-only (no tag), used as a fallback and as the branch `main` environment tests against.
+
+### 9.1 `deploy-pages.yml` — validate → tag-release → deploy (the house pipeline)
+
+Triggers: push to `dev` and `main`, PR to either, manual dispatch.
+
+| Job | When | Does | On failure |
+|---|---|---|---|
+| `validate` | always | `python3 admin/build/gen_*.py --check` for every generator; `node admin/build/validate.js`; `python3 -m pytest tests/build/`; `node --test tests/unit/` | nothing tagged or deployed |
+| `tag-release` | push to `dev` only | reads `admin/build/version.txt`; finds the newest commit whose subject matches `site vX.Y.Z : …`; asserts equal; asserts next minor (or deliberate major `.0`); backfills missing historical tags idempotently; `git push origin refs/tags/vX.Y.Z` | no deploy |
+| `deploy` | any push or dispatch, never PR | assembles the tree minus `.git`, `.github`, `infra`, `tests/unit`, `node_modules`; `upload-pages-artifact`; `deploy-pages` | previous version stays live |
+| `verify-live` | after deploy | fetches `https://secrets.sgit.ai/admin/build/version.txt` and the homepage badge until they equal the tag or 10 minutes pass; fails the run otherwise ("green does not mean live") | run is red; site may be stale |
+
+The release commit is not always HEAD (merge commits); anchor on the newest versioned subject. Every push to `dev` is a minor bump; patch versions are for a same-day fix and must still be in the subject.
+
+### 9.2 `infra.yml` — Terraform per environment
+
+Triggers: PR touching `infra/**` (plan only, posted as a PR comment per env), manual dispatch with inputs `environment` ∈ {dev, main, prod, custom} and `action` ∈ {plan, apply}, and push to `dev` for `dev` apply.
+
+- Auth: `google-github-actions/auth@v2` with `workload_identity_provider` and `service_account` from GitHub **environment** variables (`dev`, `main`, `prod` environments; `prod` requires a reviewer).
+- `terraform fmt -check`, `validate`, `plan -out`, `apply` the saved plan only.
+- After apply: run `infra/scripts/export_env_config.py` which reads Terraform outputs and rewrites that env's block in `config/environments.json`; open a PR to `dev` with the change (never commit directly). The validate gate will refuse a config whose values do not match the environment's Terraform state file hash recorded in the file (`_source` field).
+- Secrets: `GOOGLE_OAUTH_CLIENT_SECRET` per GitHub environment. No JSON key files.
+
+### 9.3 The gate: `admin/build/validate.js` (no dependencies)
+
+1. **Version agreement**: `version.txt` == every page badge == versions table row == `llms.txt` == `llms-full.txt` == `index.md` == `config/environments.json#siteVersion`; no version listed twice.
+2. **Internal links and fragments** resolve, in every HTML and MD file.
+3. **Canonical host**: every page has `rel=canonical` and `og:url` on the host in `CNAME`.
+4. **Leak tripwire** on every file in the tree: sgit vault keys (`sgit_private_vault_`, `sgit_private_read_`, passphrase:uuid shape), AWS `AKIA/ASIA`, GitHub `gh[pousr]_`, `sk-`/`sk-ant-`, PEM private key blocks, Slack `xox[bpa]-`, Google OAuth client secrets (`GOCSPX-`), service-account JSON (`"private_key_id"`), bare 12-digit numbers. Allow-list: `validate.js` itself and `config/environments.json` for `AIza` web keys only. The fix for a trip is always a redaction, never a wider pattern.
+5. **Vendor manifest**: every file under `vendor/` matches its SHA-256 in `MANIFEST.json`; no `<script src="http` or `import 'http` anywhere under `app/`, `components/`, `admin/`, `tests/` except the allow-listed Google auth hosts in `app/auth/`.
+6. **Storage rules in sync**: `infra/rules/storage.rules` hash equals the hash recorded in `data/features.json#rulesHash` (so a rules change without a release note fails).
+7. **Reality**: `docs/reality.md` regenerated from `data/features.json` with `--check`.
+8. **No storage of secrets in code**: grep for `localStorage.setItem(` and assert each key is in the allowed list in `app/config/storage-keys.js`.
+
+### 9.4 Other workflows
+
+- `tests-browser.yml`: on PR and nightly, Playwright (Chromium) runs `tests/e2e/` against a local `python3 -m http.server` of the tree with `?env=dev`, using a Firebase email/password test user created by Terraform in `dev` only and a **virtual authenticator** (CDP `WebAuthn.addVirtualAuthenticator` with `hasPrf: true` VERIFY FIRST; if the virtual authenticator cannot do PRF, the e2e covers everything up to the gesture and the PRF path stays on the manual matrix). Credentials for the test user are GitHub environment secrets; they protect nothing but `dev`.
+- `rules.yml`: manual dispatch `deploy rules to <env>`; same WIF auth; `firebase deploy --only storage` or the Rules API; posts the ruleset name.
+- `link-check.yml`: weekly external link check, opens an issue.
+- `dependabot.yml` is **off** (no package.json for the app); `vendor/` updates are a manual, reviewed PR with hash changes.
+
+### 9.5 Repository protections (the boundary, section 3.4)
+
+Set on day one and listed on `/security/`:
+
+- `dev` and `main` protected: PR required, one review, no force-push, linear history; status checks `validate` required.
+- All org members with write: hardware-key 2FA (org setting).
+- Actions: pin every third-party action by commit SHA; `permissions:` minimal per job (`contents: read`, `pages: write`, `id-token: write` only where needed); environment `prod` with required reviewers; `GITHUB_TOKEN` not allowed to approve PRs.
+- Verified domain `sgit.ai` in the GitHub org (subdomain-takeover guard). DNS: registrar lock, DNSSEC and a CAA record are the DNS owner's job; the security page says whether they are in place (dated).
+- `<meta http-equiv="Content-Security-Policy">` on every app/admin/test page: `default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'`. Plus a frame-busting check (`if (top !== self) …`) since `frame-ancestors` cannot be set in a meta tag. Keep the list exact and tested on `tests/config.html`.
+
+---
+
+## 10. Testing
+
+| Layer | Where | Runs | Covers |
+|---|---|---|---|
+| Unit (Node ≥ 22, WebCrypto) | `tests/unit/*.test.js` | gate | keyring encode/decode, KATs, HKDF info strings, merge logic, base32, config loader, kinds |
+| Build | `tests/build/test_*.py` | gate | generators on the real tree, chrome in every page, twins exist, features.json schema |
+| Browser probe pages | `/tests/` | humans and the matrix | PRF, auth, storage, rules, CSP |
+| E2E | `tests/e2e/` Playwright | PR, nightly | sign in → setup → add entry → lock → unlock → see entry → new device via recovery code |
+| Acceptance | `docs/acceptance.md` | before 1.0 | an Owner of the `dev` project is handed a uid and asked to produce one plaintext field; the write-up of the attempt is published |
+
+No mocks: the unit tests run the real WebCrypto; the e2e runs the real `dev` project. The only stand-in is the virtual authenticator, and only if it does PRF.
+
+---
+
+## 11. Build order
+
+Every step ends with a release (`site vX.Y.Z : …`) and an entry in `data/features.json` so `/shipped/` and `docs/reality.md` are true at every version.
+
+| Step | Version | Deliverable | Acceptance |
+|---|---|---|---|
+| 1 | v0.1.0 | **The pipeline before the site**: repo layout, `version.txt`, chrome generator, placeholder index with badge, `validate.js` with all eight checks, `deploy-pages.yml` incl. `verify-live`, CNAME, DNS note for Dinis (`secrets` CNAME → `sgit-ai.github.io`), branch protections, `docs/design/` copied in | A push to `dev` tags v0.1.0 and `verify-live` passes against `secrets.sgit.ai` |
+| 2 | v0.2.0 | Content pages (6.1, 6.5) with everything marked proposed; `/shipped/` generated; `.md` twins; `llms.txt`/`llms-full.txt`; sitemap | Gate green; every claim on the site carries a status |
+| 3 | v0.3.0 | `infra/bootstrap`, Terraform module + `dev` env, `infra.yml`, Security Rules, `config/environments.json` with `dev` real and `main`/`prod` placeholders; environment page; vendored Firebase; sign-in/out with Google and email/password against `dev` | `tests/auth.html` and `tests/storage.html` pass on `dev`; admin checklist exists as read-only and is green for `dev` |
+| 4 | v0.4.0 | PRF probe page; keyring v1 library with unit KATs; setup and unlock flows; recovery code | `tests/keyring-roundtrip.html` passes on Chrome + Safari; e2e passes to "unlock" |
+| 5 | v0.5.0 | Entries: kinds, vault list, entry page, copy/reveal, lock timers, concurrency merge | e2e passes end to end; soft limits enforced |
+| 6 | v0.6.0 | Devices page: add/remove passkey, regenerate recovery; account export/import; `meta.json` | Second-device flow passes manually on a phone; matrix page shipped with the first three rows |
+| 7 | v0.7.0 | Admin pages with fixes: auth-config, storage, rules diff/deploy, users, environment-export; `rules.yml` | A fresh `main` project is brought from bootstrap to green checklist using only the admin pages and Terraform, timed and written up in `docs/ops/new-environment.md` |
+| 8 | v0.8.0 | `prod` environment live; homepage demo real; security page final; acceptance test performed and published | `/shipped/` shows the MVP rows as shipped; acceptance write-up published |
+| 9 | v0.9.0 | Phase 2 data only: public bundle written to `directory/`, inbox rules live, sharing UI still proposed | `sgit pki` can import the published bundle (VERIFY) |
+
+Do not start step 4 until step 3's probe pages are green on a real `dev` project; do not start step 7 before step 6, because the admin users page needs `meta.json`.
+
+---
+
+## 12. Open questions, and what not to do
+
+**Open (test, then record the answer in `docs/design/brief-corrections.md`):**
+
+- Does the Playwright virtual authenticator support PRF? Decides how much of the e2e is automated.
+- Does Google's implicit flow still work for a Web client with our origins? Decides the admin auth implementation (6.3).
+- Exact Security Rules syntax for size/null checks (8.6), and whether `request.auth.token.firebase.tenant` is available in Storage rules.
+- Where Identity Platform stores user records (data residency note for `/environments/`).
+- Does `sgit pki import` accept a browser-generated bundle (8.3)? Decides whether phase-2 envelopes are sgit-native.
+
+**Do not:**
+
+- Do not add a server, a Cloud Function, a proxy or "just a small API". If something needs one, it is out of scope and goes in `docs/design/brief-corrections.md` as a proposal.
+- Do not store anything derived from a key in any browser storage, even "encrypted".
+- Do not load any script from any origin at runtime. Vendor it, hash it, or do without.
+- Do not use the apex domain as RP ID, ever, even on `localhost` testing (use `localhost` as RP ID there).
+- Do not put a `document` kind, a browser extension, autofill, or an agent API in the MVP. Each is a later site or a later version.
+- Do not describe a feature in the present tense before `features.json` says shipped.
+
+---
+
+## 13. The prompt to paste into the Claude Code session
+
+```
+You are working in SGit-AI/SGit-AI__Website__Secrets, the repository for secrets.sgit.ai, a static site on GitHub Pages that is also a zero-knowledge, browser-only secrets manager backed by one GCP project per environment (Identity Platform + Cloud Storage for Firebase). Read docs/design/secrets-sgit-ai__mvp-build-brief.md in full first; it is the instruction set, and sections 1–4 hold decisions that are closed. Then read the four design documents it names in docs/design/. House style is https://coding.sgit.ai/llms-full.txt and https://nfrs.sgit.ai/llms.txt; section 7 of the brief extracts what applies.
+
+Rules you never break: no server-side code of any kind; plaintext only in the browser after a passkey gesture; nothing secret in the repo; no build step and no runtime script from any other origin (vendor and hash instead); the passkey RP ID is exactly secrets.sgit.ai; every push to dev is a release tagged by CI from admin/build/version.txt and a commit subject of the form "site vX.Y.Z : <what>"; a release that fails the gate locally fails the same way in CI; every claim on the site carries a status from data/features.json.
+
+Work through section 11 in order. Step 1 is the pipeline before the site: layout, version file, chrome generator, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate → tag-release → deploy → verify-live, CNAME, branch protection notes, and docs/design/ populated. Do not begin step 4 until the dev GCP project exists and tests/auth.html, tests/storage.html and tests/webauthn-prf.html are green against it. When the brief is wrong, write what you found in docs/design/brief-corrections.md and continue; when something needs a human (DNS, billing, bootstrap, reviewer approval), stop and list exactly what you need in docs/ops/needs.md.
+
+Start by printing the repository layout you intend to create and the contents of version.txt, then create step 1.
+```
+
+---
+
+*Written from the Risk Mandate / sgit design session of 4–5 October 2026. Companion documents: the four design docs in section 2. This brief is itself to be published at `/docs/design/` on the site, with its corrections file beside it.*
+
+
+==============================================================================
+source: /docs/ops/branch-protection.md
+==============================================================================
+
+# Repository protections
+
+*secrets.sgit.ai · operations · written at v0.1.0 (2026-10-05) · section 9.5 of the brief · CC BY 4.0*
+
+Whoever controls this repository controls the code every user's browser runs, and the code is the boundary of the whole design (section 3.4 of the brief). These settings are the guard on that boundary. They are set by an organisation owner, listed here so they can be checked, and repeated on `/security/` once that page exists. None of them is in place yet unless `docs/ops/needs.md` says so.
+
+## Branches `dev` and `main`
+
+Settings, Branches (or Rules, Rulesets), one rule for each of `dev` and `main`:
+
+| Setting | Value | Why |
+|---|---|---|
+| Require a pull request before merging | on, 1 approving review | no direct pushes; work lands from `claude/*` or feature branches |
+| Dismiss stale approvals on new commits | on | an approval covers the diff it saw |
+| Require status checks to pass | on, required check: `validate` | the gate decides, not a person |
+| Require branches to be up to date before merging | on | the gate ran against what will be merged |
+| Require linear history | on | one release, one commit shape; no merge-of-merge |
+| Block force pushes | on | tags and history are the release record |
+| Restrict deletions | on | |
+| Do not allow bypassing the above settings | on, including administrators | the protection is for the admins too |
+
+The first release, `v0.1.0`, was pushed directly to `dev` before any rule existed, because the gate that the rules require did not exist until that commit. From the next release on, every change to `dev` arrives by pull request.
+
+## Organisation
+
+- Two-factor authentication required for every member, with hardware security keys (Settings, Authentication security). Passkeys and security keys only; no SMS.
+- `sgit.ai` verified as an organisation domain (Settings, Verified and approved domains).
+- Actions: allow only actions from GitHub and from this organisation, pinned by commit SHA; `GITHUB_TOKEN` default permission read-only; "Allow GitHub Actions to create and approve pull requests" off.
+
+## Actions and environments
+
+- Every third-party action in `.github/workflows/` is pinned to a commit SHA with its tag in a comment. `deploy-pages.yml` already does this.
+- `permissions:` is minimal per job: `contents: read` by default; `contents: write` only in `tag-release`; `pages: write` and `id-token: write` only in `deploy`.
+- Environments (Settings, Environments): `github-pages` (created by the first deploy); `dev`, `main` and `prod` for Terraform from step 3, each holding `WORKLOAD_IDENTITY_PROVIDER` and `SERVICE_ACCOUNT` as variables and `GOOGLE_OAUTH_CLIENT_SECRET` as a secret. `prod` requires a reviewer.
+- No JSON service-account key, anywhere, ever. Authentication to GCP is Workload Identity Federation.
+
+## What a compromise of this repository would still get
+
+Everything, for the users who load the malicious page while it is served. The protections above lower the odds and raise the number of people who must collude; they do not change the model. The site says so in plain words.
+
+
+==============================================================================
+source: /docs/ops/dns.md
+==============================================================================
+
+# DNS for secrets.sgit.ai
+
+*secrets.sgit.ai · operations · written at v0.1.0 (2026-10-05) · for the owner of the sgit.ai zone · CC BY 4.0*
+
+The site is served by GitHub Pages from the repository `SGit-AI/SGit-AI__Website__Secrets`. The repository already carries `CNAME` with the one line `secrets.sgit.ai`. Two things are needed from the zone owner and the repository admin, in this order.
+
+## 1. The DNS record
+
+In the `sgit.ai` zone add one record:
+
+| Name | Type | Value | TTL |
+|---|---|---|---|
+| `secrets` | `CNAME` | `sgit-ai.github.io` | 3600 or the zone default |
+
+Do not use an `A` record to the Pages IP addresses for this host; the `CNAME` to the organisation's Pages host is what GitHub recommends for a subdomain and what lets GitHub rotate addresses.
+
+## 2. GitHub Pages on the repository
+
+In the repository, Settings, Pages:
+
+1. Source: **GitHub Actions** (not "deploy from a branch"). The workflow `deploy-pages.yml` publishes the artifact.
+2. Custom domain: `secrets.sgit.ai`. Save. GitHub checks the DNS record and then provisions the certificate, which can take up to an hour after the record propagates.
+3. Tick **Enforce HTTPS** once the certificate is issued.
+
+## 3. What then happens by itself
+
+The next run of `deploy-pages.yml` on `dev` (or a manual dispatch of it) deploys, and its `verify-live` job turns green when `https://secrets.sgit.ai/admin/build/version.txt` serves the released version. Until the record and the Pages settings exist, `verify-live` is red by design.
+
+## Guards the security page will list, dated
+
+These are the zone owner's decisions and are listed on `/security/` once it exists, with the date they were checked:
+
+- Registrar lock on `sgit.ai`.
+- DNSSEC on the zone.
+- A `CAA` record limiting certificate issuance (GitHub Pages uses Let's Encrypt: `0 issue "letsencrypt.org"`).
+- The `sgit.ai` domain verified in the GitHub organisation (Settings, Verified and approved domains), which stops another account claiming a dangling `*.sgit.ai` subdomain on Pages.
+
+
+==============================================================================
+source: /docs/ops/needs.md
+==============================================================================
+
+# What only a human can do
+
+*secrets.sgit.ai · operations · maintained by the build session · last updated at v0.1.0 (2026-10-05) · CC BY 4.0*
+
+Everything on this list blocks a step of the brief and cannot be done from inside the repository. Each item says who, what, exactly, and which step waits on it. Items are removed when done and the removal is dated in `docs/design/brief-corrections.md` if anything turned out differently from the brief.
+
+## Blocking step 1's acceptance (v0.1.0 live at secrets.sgit.ai)
+
+1. **DNS (zone owner of sgit.ai).** Add `secrets  CNAME  sgit-ai.github.io`. Details in `docs/ops/dns.md`.
+2. **GitHub Pages (repository admin).** Settings, Pages: source **GitHub Actions**; custom domain `secrets.sgit.ai`; then **Enforce HTTPS** once the certificate exists. The workflow does not enable Pages itself (that needs administration rights it must not hold); if the first `deploy` job fails at `configure-pages` with "Get Pages site failed", this is why.
+3. **Re-run or re-push.** After 1 and 2, re-run the latest `deploy-pages` run on `dev` (Actions, Re-run all jobs) so `verify-live` can turn green. Nothing else about v0.1.0 changes.
+
+## Blocking the protections (section 9.5), to be in place before step 3 lands real configuration
+
+4. **Branch protection (organisation owner).** Apply the rules in `docs/ops/branch-protection.md` to `dev` and `main`, with `validate` as the required status check.
+5. **Organisation 2FA with hardware keys (organisation owner).** Settings, Authentication security.
+6. **Verified domain (organisation owner).** Add and verify `sgit.ai` under Settings, Verified and approved domains.
+7. **Actions policy (organisation owner).** Allow only GitHub-authored and organisation-authored actions; default `GITHUB_TOKEN` read-only; Actions may not create or approve pull requests.
+
+## Blocking step 3 (the dev GCP project)
+
+8. **Billing account (GCP billing admin).** A billing account the three projects can attach to. The build session will write `infra/bootstrap/bootstrap.sh` in step 3 and needs its id passed as a variable, never committed.
+9. **Project ids (GCP org admin).** Confirm `sgit-secrets-tfstate`, `sgit-secrets-dev`, `sgit-secrets-main`, `sgit-secrets-prod` are available, or choose others; the brief marks them PROPOSED.
+10. **Run the bootstrap (a human with org-level IAM).** Once `infra/bootstrap/bootstrap.sh` exists: run it with `--dry-run`, then for real. It prints the values for the GitHub environment variables (`WORKLOAD_IDENTITY_PROVIDER`, `SERVICE_ACCOUNT`) per environment.
+11. **Google OAuth client secret for sign-in (GCP project owner).** Create the Web application OAuth client in the `dev` project (origin `https://secrets.sgit.ai`, redirect `https://<authDomain>/__/auth/handler`) and store its secret as the GitHub environment secret `GOOGLE_OAUTH_CLIENT_SECRET` in the `dev` environment. It never enters the repository.
+
+## Not yet needed
+
+- `main` and `prod` projects, their OAuth clients and their environment secrets: step 7 and step 8.
+- A reviewer for the `prod` environment: step 8.
+- The DNS guards (registrar lock, DNSSEC, CAA): listed on `/security/` when it exists, with dates; not blocking.
+
+
+==============================================================================
+source: /docs/ops/release.md
+==============================================================================
+
+# How a release works
+
+*secrets.sgit.ai · operations · written at v0.1.0 (2026-10-05) · CC BY 4.0*
+
+Every push to `dev` is a release. There is no build step: the committed tree is the deployed tree, and five small generators keep the parts that must agree in agreement. One pipeline validates, tags, deploys and then checks that the live site is serving what was pushed.
+
+## The version
+
+- The version lives in one file, `admin/build/version.txt`, as `X.Y.Z` with no `v`.
+- Every push to `dev` bumps the minor (`0.1.0` to `0.2.0`). A patch (`0.2.1`) is for a same-day fix. A major `.0.0` is deliberate and rare.
+- The release commit's subject is `site vX.Y.Z : <what>`, with the same version. CI anchors on the newest commit whose subject has that shape, not on HEAD, because a merge commit may sit on top.
+- `data/versions.json` gets a new first row: version, date, title, notes. The title is the `<what>` of the subject.
+- The version is repeated by the generators into every page badge, every markdown twin, `llms.txt`, `llms-full.txt`, `sitemap.xml` and the release table. `config/environments.json#siteVersion` is bumped by hand. Check 1 of the gate fails on any disagreement.
+
+## The steps, locally
+
+```
+# 1. edit content, data/features.json and data/versions.json; bump admin/build/version.txt and config/environments.json#siteVersion
+python3 admin/build/gate.py --build      # regenerate everything, then run the whole gate
+git add -A
+git commit -m "site vX.Y.Z : <what>"
+git push -u origin dev                   # or open a PR to dev from claude/<description>-<session-id>
+```
+
+`gate.py --build` runs the generators in order (chrome, features, versions, twins, llms), then runs them again with `--check`, then `node admin/build/validate.js`, then `python3 -m pytest tests/build/ -q`, then `node --test tests/unit/**/*.test.js`. `gate.py` without `--build` runs the same list in check mode only, which is exactly what CI does.
+
+## The steps, in CI (`.github/workflows/deploy-pages.yml`)
+
+| Job | When | Does | On failure |
+|---|---|---|---|
+| `validate` | every push to `dev` or `main`, every PR to either, manual dispatch | `python3 admin/build/gate.py` | nothing is tagged or deployed |
+| `tag-release` | push to `dev` only | `admin/build/tag_release.py`: version.txt equals the newest `site vX.Y.Z` subject; the version is the next minor, a patch or a major `.0.0` after the newest tag; backfills missing historical tags; pushes `refs/tags/vX.Y.Z` | no deploy |
+| `deploy` | any push or dispatch, never a PR | `admin/build/assemble_site.py` copies the tree minus `.git`, `.github`, `infra`, `tests/unit`, `node_modules` into `_site/`; upload and deploy to GitHub Pages | the previous version stays live |
+| `verify-live` | after deploy | `admin/build/verify_live.py` polls `https://secrets.sgit.ai/admin/build/version.txt` and the homepage badge with a cache-buster until both equal the version, for up to ten minutes | the run is red; the site may be stale |
+
+A push to `main` deploys without tagging: `main` is promoted from `dev` and is the fallback. Both branches deploy to the one Pages site of this repository, so whichever pushed last is what `secrets.sgit.ai` serves; `main` is promoted only to a version `dev` already released.
+
+## Green does not mean live
+
+The sibling site sgit.ai once pushed two releases that reported success and never reached anyone, because the Pages deploy job died downloading its own action. The `verify-live` job exists for that reason: the release is not done until the origin answers with the new version. When `verify-live` is red and `deploy` is green, the usual causes are the domain not yet pointing at Pages (see `docs/ops/dns.md`), Pages not yet enabled for the repository, or a transient `429` on an action download, which a re-run fixes.
+
+## The eight checks of the gate
+
+See `/admin/` on the site or the header of `admin/build/validate.js`. The rule for the leak tripwire is worth repeating: the fix for a trip is always a redaction, never a wider pattern.
+
+## Backfilling tags
+
+`tag_release.py` tags every historical release commit that has no tag, oldest first, then pushes all the new tags. A tag that already points at its release commit is left alone. A tag that points elsewhere fails the job: tags are never moved.
+

@@ -1,0 +1,13 @@
+{
+  "_comment": "Every third-party file the site loads, with where it came from and its SHA-256. The gate (check 5) recomputes every hash and fails on any file under vendor/ that is not listed, or any listed file that is missing or changed. Updates are a manual, reviewed PR with the hash change in the diff. No runtime fetch from any other origin, ever.",
+  "files": {
+    "sg-tokens.css": {
+      "source":   "https://dev.tools.sgraph.ai/components/tokens/v1/v1.0/v1.0.0/sg-tokens.css",
+      "version":  "1.0.0",
+      "sha256":   "14509c73b43ecc79dd6080b6530a0860a9c22a06f0c160d7e9862f1bb2614171",
+      "licence":  "Apache-2.0",
+      "fetched":  "2026-10-05",
+      "purpose":  "The family design tokens, :host scoped for shadow-DOM components (step 4). assets/site.css carries a :root copy of the same values for plain pages."
+    }
+  }
+}

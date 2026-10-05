@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin — secrets.sgit.ai</title>
+  <meta name="description" content="How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/admin/">
+  <link rel="alternate" type="text/markdown" href="/admin/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/admin/">
+  <meta property="og:title" content="Admin — secrets.sgit.ai">
+  <meta property="og:description" content="How the site is built and gated, and the admin pages that are proposed: a client for GCP&#x27;s own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.">
+  <meta name="sg-secrets:version" content="0.1.0">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <a class="sg-brand" href="/">secrets<span>.sgit.ai</span></a>
+    <nav class="sg-nav" aria-label="Site">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/docs/reality.md">Reality</a></li>
+      <li><a href="/docs/design/secrets-sgit-ai__mvp-build-brief.md">The brief</a></li>
+      <li><a href="/admin/" aria-current="page">Admin</a></li>
+      <li><a href="/admin/versions.html">Versions</a></li>
+      <li><a href="/llms.txt">llms.txt</a></li>
+    </ul>
+    </nav>
+    <a class="sg-badge sg-badge-version" href="/admin/versions.html" data-version="0.1.0" title="released 2026-10-05">v0.1.0</a>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Admin</h1>
+    <p class="sg-lead">Two things live under <code>/admin/</code>: how this site is built and released, which exists, and the environment admin pages, which are proposed.</p>
+
+    <h2>How the site is built</h2>
+    <p>There is no build step and no bundler. The committed tree is the deployed tree. Five generators under <code>admin/build/</code> write the parts that must not drift (the chrome, the status tables, the release table, the markdown twins, the machine indexes), each with a <code>--check</code> mode, and an eight-check gate in <code>admin/build/validate.js</code> refuses a release that disagrees with itself. The same command, <code>python3 admin/build/gate.py</code>, runs locally and in CI. Every push to <code>dev</code> is a release: the version in <code>admin/build/version.txt</code> is repeated in the commit subject as <code>site vX.Y.Z : what</code>, CI tags it, deploys it, and then polls the live site until it serves that version. The whole procedure is in <a href="/docs/ops/release.md">docs/ops/release.md</a>.</p>
+
+    <h3>The eight checks</h3>
+    <ol>
+      <li><strong>Version agreement.</strong> <code>version.txt</code> equals every page badge, the newest row of the versions table, <code>llms.txt</code>, <code>llms-full.txt</code>, <code>index.md</code> and <code>config/environments.json#siteVersion</code>; no version is listed twice.</li>
+      <li><strong>Internal links and fragments</strong> resolve, in every HTML and markdown file.</li>
+      <li><strong>Canonical host.</strong> Every page has <code>rel=canonical</code> and <code>og:url</code> on the host in <code>CNAME</code>.</li>
+      <li><strong>Leak tripwire</strong> on every file in the tree: sgit vault and read keys, AWS and GitHub tokens, API keys, PEM private key blocks, Slack tokens, Google OAuth client secrets, service-account JSON, bare twelve-digit numbers. The fix for a trip is always a redaction, never a wider pattern.</li>
+      <li><strong>Vendor manifest.</strong> Every file under <code>vendor/</code> matches its SHA-256; no script is loaded from another origin anywhere under <code>app/</code>, <code>components/</code>, <code>admin/</code> or <code>tests/</code>.</li>
+      <li><strong>Storage rules in sync.</strong> The hash of <code>infra/rules/storage.rules</code> equals the hash recorded in <code>data/features.json</code>, so a rules change without a release note fails.</li>
+      <li><strong>Reality.</strong> <code>docs/reality.md</code> is what <code>data/features.json</code> generates.</li>
+      <li><strong>No storage of secrets in code.</strong> Every <code>localStorage.setItem</code> and <code>sessionStorage.setItem</code> uses a key listed in <code>app/config/storage-keys.js</code>.</li>
+    </ol>
+
+    <h2>The admin pages, proposed</h2>
+    <p>The admin pages will work only when the visitor signs in with a Google account that has IAM on the selected environment's GCP project. There will be no admin role in the app: the project's IAM is the role, and the pages are a client for GCP's own APIs, calling them with the visitor's own token held in memory. Every write action will show the exact request before sending it. None of this exists yet.</p>
+    <!-- sg-secrets:features:start area="admin" -->
+  <table class="sg-features" data-area="admin" data-generated-from="data/features.json">
+    <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>admin</td><td>Admin sign-in with the visitor&#x27;s own Google account, token in memory only</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/oauth.js</td><td>Step 7. Implicit flow to verify first; PKCE fallback.</td></tr>
+      <tr><td>admin</td><td>Setup checklist: every per-project resource as a row, with Fix where fixable client-side</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/setup-checklist.html</td><td>Step 3 read-only, step 7 with fixes.</td></tr>
+      <tr><td>admin</td><td>Auth config, storage, rules diff and deploy, users, environment export</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/*.html</td><td>Step 7. GCP IAM is the role; the pages are a client for GCP&#x27;s own APIs.</td></tr>
+      <tr><td>admin</td><td>Release history page generated from data/versions.json</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/versions.html</td><td>One row per release; the newest row must equal version.txt.</td></tr>
+    </tbody>
+  </table>
+<!-- sg-secrets:features:end -->
+
+    <h2>The pipeline, as it stands</h2>
+    <!-- sg-secrets:features:start area="pipeline" -->
+  <table class="sg-features" data-area="pipeline" data-generated-from="data/features.json">
+    <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>pipeline</td><td>One version in admin/build/version.txt, repeated in every badge, twin, index and config</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/version.txt</td><td>Check 1 of the gate fails on any disagreement.</td></tr>
+      <tr><td>pipeline</td><td>Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/chrome.py</td><td>gen_chrome.py --check is part of the gate.</td></tr>
+      <tr><td>pipeline</td><td>Markdown twin of every HTML page, links pointing at markdown</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/gen_twins.py</td><td>index.html has index.md beside it; the twin carries the site version.</td></tr>
+      <tr><td>pipeline</td><td>llms.txt, llms-full.txt and sitemap.xml generated on every release</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/gen_llms.py</td><td>llms-full.txt concatenates every twin and every design document.</td></tr>
+      <tr><td>pipeline</td><td>docs/reality.md and the status tables generated from data/features.json</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/gen_features.py</td><td>If the reality document does not list it, it does not exist.</td></tr>
+      <tr><td>pipeline</td><td>The eight-check release gate, no dependencies</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/validate.js</td><td>Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys.</td></tr>
+      <tr><td>pipeline</td><td>The same gate locally and in CI, one command</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/gate.py</td><td>The CI validate job runs gate.py; a release that fails locally fails the same way in CI.</td></tr>
+      <tr><td>pipeline</td><td>Every push to dev is a release: version.txt and the commit subject agree, CI tags it</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/tag_release.py</td><td>Anchors on the newest commit whose subject is &#x27;site vX.Y.Z : ...&#x27;, asserts the next minor or patch or major .0, backfills missing tags.</td></tr>
+      <tr><td>pipeline</td><td>Deploy to GitHub Pages from the validated tree</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>.github/workflows/deploy-pages.yml</td><td>Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA.</td></tr>
+      <tr><td>pipeline</td><td>verify-live: the run is red until the live site serves the released version</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/verify_live.py</td><td>Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes.</td></tr>
+      <tr><td>pipeline</td><td>Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>vendor/MANIFEST.json</td><td>Check 5 of the gate. Today the only vendored file is the family design tokens.</td></tr>
+    </tbody>
+  </table>
+<!-- sg-secrets:features:end -->
+
+    <p>Release history: <a href="/admin/versions.html">versions</a>. What a human still has to do: <a href="/docs/ops/needs.md">needs.md</a>.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version" href="/admin/versions.html" data-version="0.1.0" title="released 2026-10-05">v0.1.0</a> · released 2026-10-05 · <a href="/admin/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/docs/reality.md">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

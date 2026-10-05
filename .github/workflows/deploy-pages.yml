@@ -1,0 +1,106 @@
+# secrets.sgit.ai — validate → tag-release → deploy → verify-live (section 9.1 of the brief)
+#
+# Every push to dev is a release. `validate` runs admin/build/gate.py, the same
+# command a contributor runs locally. `tag-release` (dev only) asserts that
+# admin/build/version.txt and the newest "site vX.Y.Z : …" commit subject agree
+# and pushes the tag. `deploy` publishes the validated tree to GitHub Pages.
+# `verify-live` polls the live site until it serves the released version, or
+# fails the run: green does not mean live. Every third-party action is pinned
+# to a commit SHA; the tag it corresponds to is in the trailing comment.
+
+name: deploy-pages
+
+on:
+  push:
+    branches: [dev, main]
+  pull_request:
+    branches: [dev, main]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: deploy-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683        # v4.2.2
+      - uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af      # v4.1.0
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b    # v5.3.0
+        with:
+          python-version: '3.12'
+      - name: install pytest (the only Python dependency of the gate)
+        run: python3 -m pip install --quiet pytest
+      - name: the gate, exactly as it runs locally
+        run: python3 admin/build/gate.py
+
+  tag-release:
+    name: tag-release
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683        # v4.2.2
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - name: identify the tagger
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - id: version
+        run: echo "version=$(cat admin/build/version.txt)" >> "$GITHUB_OUTPUT"
+      - name: assert version.txt == commit subject, tag, backfill, push
+        run: python3 admin/build/tag_release.py --remote origin
+
+  deploy:
+    name: deploy
+    needs: [validate, tag-release]
+    if: >-
+      !cancelled()
+      && github.event_name != 'pull_request'
+      && needs.validate.result == 'success'
+      && (needs.tag-release.result == 'success' || needs.tag-release.result == 'skipped')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683        # v4.2.2
+      - name: assemble the tree minus .git, .github, infra, tests/unit, node_modules
+        run: python3 admin/build/assemble_site.py --out _site
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e   # v4.0.5
+
+  verify-live:
+    name: verify-live
+    needs: deploy
+    if: ${{ !cancelled() && needs.deploy.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683        # v4.2.2
+      - name: the live site must serve this version (up to 10 minutes)
+        run: python3 admin/build/verify_live.py --version "$(cat admin/build/version.txt)" --base "https://$(cat CNAME)" --timeout 600

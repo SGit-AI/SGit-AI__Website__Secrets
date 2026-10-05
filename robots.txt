@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://secrets.sgit.ai/sitemap.xml

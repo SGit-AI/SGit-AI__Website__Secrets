@@ -1,0 +1,29 @@
+// secrets.sgit.ai — Cloud Storage for Firebase Security Rules (section 8.6 of the brief)
+// Status: PROPOSED, not deployed. Deployed by Terraform / rules.yml from step 3.
+// VERIFY FIRST: the exact syntax of the size and null checks against a real project.
+// The gate records this file's SHA-256 in data/features.json#rulesHash so that a
+// rules change without a release note fails the build.
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn()        { return request.auth != null; }
+    function isOwner(uid)      { return signedIn() && request.auth.uid == uid; }
+    function sameTenant()      { return true; }   // tenant check added when multi-tenancy is on; see admin checklist
+
+    match /users/{uid}/{file=**} {
+      allow read, delete: if isOwner(uid) && sameTenant();
+      allow write:        if isOwner(uid) && sameTenant() && request.resource.size < 2 * 1024 * 1024;
+    }
+
+    match /directory/{uid}.pub.json {
+      allow read:  if signedIn();
+      allow write: if isOwner(uid) && request.resource.size < 16 * 1024;
+    }
+
+    match /inbox/{uid}/{shareId} {
+      allow create:       if signedIn() && request.resource.size < 64 * 1024;
+      allow read, delete: if isOwner(uid);
+    }
+  }
+}

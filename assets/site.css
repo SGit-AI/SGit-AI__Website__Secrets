@@ -1,0 +1,202 @@
+/* ── site.css — the stylesheet for every plain page on secrets.sgit.ai ─────────
+   Tokens: a :root copy of vendor/sg-tokens.css (SGraph shared design tokens
+   v1.0.0, sha256 14509c73…), because that file is :host scoped for components.
+   Values are aligned per block. No colour literal below this block. */
+
+:root {
+    --sg-color-teal:        #4ECDC4;
+    --sg-color-teal-hover:  #3DB8B0;
+    --sg-color-navy:        #1A1A2E;
+    --sg-color-deep-blue:   #16213E;
+    --sg-color-slate:       #2C3E6B;
+    --sg-color-coral:       #E94560;
+    --sg-color-warm-white:  #F0F0F5;
+    --sg-color-light-grey:  #E0E0E0;
+    --sg-color-mid-grey:    #8892A0;
+
+    --sg-bg:                var(--sg-color-navy);
+    --sg-bg-secondary:      var(--sg-color-deep-blue);
+    --sg-bg-surface:        rgba(44, 62, 107, 0.35);
+    --sg-border:            var(--sg-color-slate);
+    --sg-text:              var(--sg-color-light-grey);
+    --sg-text-heading:      #FFFFFF;
+    --sg-text-muted:        var(--sg-color-mid-grey);
+    --sg-accent:            var(--sg-color-teal);
+    --sg-accent-hover:      var(--sg-color-teal-hover);
+    --sg-accent-subtle:     rgba(78, 205, 196, 0.12);
+    --sg-danger:            var(--sg-color-coral);
+
+    --sg-font-body:         'DM Sans', system-ui, -apple-system, sans-serif;
+    --sg-font-mono:         'JetBrains Mono', ui-monospace, monospace;
+    --sg-fs-body:           1rem;
+    --sg-fs-small:          0.8rem;
+    --sg-fs-xs:             0.75rem;
+
+    --sg-sp-1:    4px;
+    --sg-sp-2:    8px;
+    --sg-sp-3:   12px;
+    --sg-sp-4:   16px;
+    --sg-sp-6:   24px;
+    --sg-sp-8:   32px;
+
+    --sg-radius:            6px;
+    --sg-radius-pill:       9999px;
+    --sg-transition-fast:   150ms ease;
+
+    --sg-status-shipped:    var(--sg-color-teal);
+    --sg-status-proposed:   #E0B84E;
+    --sg-status-absent:     var(--sg-color-mid-grey);
+    --sg-max-width:         72rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden]                { display: none !important; }
+
+html {
+    background:   var(--sg-bg);
+    color:        var(--sg-text);
+    font-family:  var(--sg-font-body);
+    font-size:    var(--sg-fs-body);
+    line-height:  1.55;
+}
+
+body {
+    margin:     0;
+    min-height: 100vh;
+    display:    flex;
+    flex-direction: column;
+}
+
+a {
+    color:                var(--sg-accent);
+    text-decoration:      underline;
+    text-decoration-color: transparent;
+    transition:           text-decoration-color var(--sg-transition-fast);
+}
+a:hover, a:focus-visible { text-decoration-color: currentColor; }
+
+h1, h2, h3, h4 {
+    color:       var(--sg-text-heading);
+    line-height: 1.2;
+    margin:      var(--sg-sp-8) 0 var(--sg-sp-3);
+}
+h1 { font-size: 2rem;    }
+h2 { font-size: 1.4rem;  }
+h3 { font-size: 1.1rem;  }
+
+code, pre {
+    font-family: var(--sg-font-mono);
+    font-size:   0.92em;
+}
+code {
+    background:    var(--sg-bg-surface);
+    border-radius: 3px;
+    padding:       0 var(--sg-sp-1);
+}
+pre {
+    background:    var(--sg-bg-secondary);
+    border:        1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    overflow:      auto;
+    padding:       var(--sg-sp-4);
+}
+pre code { background: transparent; padding: 0; }
+
+/* ── chrome: header ─────────────────────────────────────────────────────────── */
+
+.sg-header {
+    align-items:   center;
+    border-bottom: 1px solid var(--sg-border);
+    display:       flex;
+    flex-wrap:     wrap;
+    gap:           var(--sg-sp-4);
+    margin:        0 auto;
+    max-width:     var(--sg-max-width);
+    padding:       var(--sg-sp-4);
+    width:         100%;
+}
+.sg-brand {
+    color:           var(--sg-text-heading);
+    font-weight:     700;
+    text-decoration: none;
+}
+.sg-brand span { color: var(--sg-accent); }
+.sg-nav ul {
+    display:    flex;
+    flex-wrap:  wrap;
+    gap:        var(--sg-sp-3);
+    list-style: none;
+    margin:     0;
+    padding:    0;
+}
+.sg-nav a                     { color: var(--sg-text); }
+.sg-nav a[aria-current=page]  { color: var(--sg-accent); }
+.sg-badge {
+    border:          1px solid var(--sg-border);
+    border-radius:   var(--sg-radius-pill);
+    font-family:     var(--sg-font-mono);
+    font-size:       var(--sg-fs-xs);
+    margin-left:     auto;
+    padding:         2px var(--sg-sp-3);
+    text-decoration: none;
+}
+.sg-footer .sg-badge { margin-left: 0; }
+
+/* ── main ───────────────────────────────────────────────────────────────────── */
+
+main {
+    flex:      1;
+    margin:    0 auto;
+    max-width: var(--sg-max-width);
+    padding:   var(--sg-sp-4) var(--sg-sp-4) var(--sg-sp-8);
+    width:     100%;
+}
+.sg-lead {
+    color:     var(--sg-text-heading);
+    font-size: 1.15rem;
+}
+.sg-note {
+    background:    var(--sg-accent-subtle);
+    border-left:   3px solid var(--sg-accent);
+    border-radius: var(--sg-radius);
+    padding:       var(--sg-sp-3) var(--sg-sp-4);
+}
+.sg-warn { border-left-color: var(--sg-status-proposed); background: rgba(224, 184, 78, 0.10); }
+
+table {
+    border-collapse: collapse;
+    font-size:       var(--sg-fs-small);
+    margin:          var(--sg-sp-4) 0;
+    width:           100%;
+}
+th, td {
+    border-bottom:  1px solid var(--sg-border);
+    padding:        var(--sg-sp-2) var(--sg-sp-3);
+    text-align:     left;
+    vertical-align: top;
+}
+th { color: var(--sg-text-heading); }
+
+.sg-status {
+    border-radius: var(--sg-radius-pill);
+    font-family:   var(--sg-font-mono);
+    font-size:     var(--sg-fs-xs);
+    padding:       1px var(--sg-sp-2);
+    white-space:   nowrap;
+}
+.sg-status-shipped  { background: var(--sg-status-shipped);  color: var(--sg-color-navy); }
+.sg-status-proposed { background: var(--sg-status-proposed); color: var(--sg-color-navy); }
+.sg-status-absent   { background: var(--sg-status-absent);   color: var(--sg-color-navy); }
+
+/* ── chrome: footer ─────────────────────────────────────────────────────────── */
+
+.sg-footer {
+    border-top: 1px solid var(--sg-border);
+    color:      var(--sg-text-muted);
+    font-size:  var(--sg-fs-small);
+    margin:     0 auto;
+    max-width:  var(--sg-max-width);
+    padding:    var(--sg-sp-4);
+    width:      100%;
+}
+.sg-footer a { color: var(--sg-text); }
