@@ -48,6 +48,8 @@ class Gen__Twins:
         changed = []
         for path in self.pages.html_files():
             page = self.pages.meta(path)
+            if page['source']:                                                    # rendered from markdown: that markdown is the twin
+                continue
             twin = self.pages.twin_file(path)
             if self.pages.write_if_changed(twin, self.render(page), self.check):
                 changed.append(twin.relative_to(self.pages.root).as_posix())

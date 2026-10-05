@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comms: asks and steps — secrets.sgit.ai</title>
+  <meta name="description" content="The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/admin/comms.html">
+  <link rel="alternate" type="text/markdown" href="/admin/comms.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/admin/comms.html">
+  <meta property="og:title" content="Comms: asks and steps — secrets.sgit.ai">
+  <meta property="og:description" content="The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl here" href="/admin/comms.html" aria-current="page">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/admin/">Admin</a> <span class="sep">/</span> <span aria-current="page">Comms: asks and steps</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Comms: asks and steps</h1>
+    <p class="sg-lead">The state of play, kept on the site rather than in a chat message, in the manner of the sibling sites' comms pages. Numbered so a reply can refer to an item without quoting it.</p>
+
+    <h2>Asks back to the project lead</h2>
+    <p>The exact list, with who and which step waits on each, is <a href="/docs/ops/needs.html">docs/ops/needs.md</a>; it is the source and this page points at it rather than copying it. In one line each, as of v0.1.1 (2026-10-05):</p>
+    <table>
+      <thead><tr><th>#</th><th>Ask</th><th>Blocks</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>N1</td><td>Branch protection on <code>dev</code> and <code>main</code> with <code>validate</code> required</td><td>section 9.5; every release from here on arrives by pull request</td><td>Open</td></tr>
+        <tr><td>N2</td><td>Hardware-key 2FA for the organisation; <code>sgit.ai</code> verified as an organisation domain; the Actions policy</td><td>section 9.5; the rows on <a href="/security/">/security/</a> say "unconfirmed"</td><td>Open</td></tr>
+        <tr><td>N3</td><td>A billing account, confirmed project ids, and the bootstrap run once the script exists</td><td>step 3</td><td>Open</td></tr>
+        <tr><td>N4</td><td>The Google OAuth client secret for sign-in, as the GitHub environment secret for <code>dev</code></td><td>step 3</td><td>Open</td></tr>
+        <tr><td>N5</td><td>Confirm the versioning decision: every release bumps the third digit; the second digit is reserved for a milestone you name (brief-corrections C15)</td><td>nothing; recorded as decided on 2026-10-05</td><td>Confirm</td></tr>
+        <tr><td>N6</td><td>Confirm that documents are rendered at build time with the raw markdown one click away, rather than a client-side markdown viewer (C16)</td><td>nothing</td><td>Confirm</td></tr>
+        <tr><td>N0</td><td>DNS, Pages with the custom domain and HTTPS, and the re-run of the v0.1.0 workflow</td><td>step 1</td><td>Done, 2026-10-05</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The build order, as it stands</h2>
+    <p>Section 11 of the brief, one row per step, from <code>data/steps.json</code>. The planned version is what the brief wrote; releases bump the third digit, so the delivered version differs.</p>
+    <!-- sg-secrets:steps:start -->
+  <table class="sg-steps" data-generated-from="data/steps.json">
+    <thead><tr><th>#</th><th>Step</th><th>Planned as</th><th>Delivered as</th><th>Status</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>T1</td><td>The pipeline before the site</td><td><code>v0.1.0</code></td><td><code>v0.1.0</code></td><td><span class="sg-status sg-status-shipped">done</span></td><td>Live at secrets.sgit.ai on 2026-10-05; verify-live green.</td></tr>
+      <tr><td>T2</td><td>Content pages, everything marked proposed; /shipped/; twins; llms.txt; sitemap</td><td><code>v0.2.0</code></td><td><code>v0.1.1</code></td><td><span class="sg-status sg-status-shipped">done</span></td><td>The documents are rendered to HTML as well; the family nav with grouped menus.</td></tr>
+      <tr><td>T3</td><td>Bootstrap, Terraform, infra.yml, rules, environments.json with dev real; sign in against dev</td><td><code>v0.3.0</code></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td>Blocked on the GCP items in needs.md (billing, project ids, bootstrap run, OAuth client secret).</td></tr>
+      <tr><td>T4</td><td>PRF probe page; keyring v1 library with KATs; setup and unlock; recovery code</td><td><code>v0.4.0</code></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td>Not before step 3&#x27;s probe pages are green on a real dev project.</td></tr>
+      <tr><td>T5</td><td>Entries: kinds, vault list, entry page, copy and reveal, lock timers, merge</td><td><code>v0.5.0</code></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td></td></tr>
+      <tr><td>T6</td><td>Devices page; account export and import; meta.json; matrix page</td><td><code>v0.6.0</code></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td></td></tr>
+      <tr><td>T7</td><td>Admin pages with fixes; rules.yml; new-environment.md timed on a fresh main project</td><td><code>v0.7.0</code></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td>Not before step 6: the users page needs meta.json.</td></tr>
+      <tr><td>T8</td><td>prod live; homepage demo real; security page final; acceptance test published</td><td><code>v0.8.0</code></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td></td></tr>
+      <tr><td>T9</td><td>Phase 2 data only: public bundle in directory/, inbox rules live</td><td><code>v0.9.0</code></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td>sgit pki import of the published bundle to verify.</td></tr>
+    </tbody>
+  </table>
+<!-- sg-secrets:steps:end -->
+
+    <h2>Open questions carried from the brief</h2>
+    <p>Listed and dated at the end of <a href="/docs/design/brief-corrections.html">brief-corrections.md</a>: the Playwright virtual authenticator and PRF, Google's implicit flow, the Security Rules syntax, where Identity Platform stores user records, and whether <code>sgit pki import</code> reads a browser-generated bundle.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/admin/comms.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

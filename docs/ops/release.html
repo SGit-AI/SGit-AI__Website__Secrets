@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How a release works — secrets.sgit.ai</title>
+  <meta name="description" content="The version, the commit subject, the gate, the four CI jobs, and why green does not mean live.">
+  <meta name="sg-secrets:source" content="/docs/ops/release.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/ops/release.html">
+  <link rel="alternate" type="text/markdown" href="/docs/ops/release.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/ops/release.html">
+  <meta property="og:title" content="How a release works — secrets.sgit.ai">
+  <meta property="og:description" content="The version, the commit subject, the gate, the four CI jobs, and why green does not mean live.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/ops/">Operations</a> <span class="sep">/</span> <span aria-current="page">How a release works</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/ops/release.md">docs/ops/release.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.1.</p>
+<h1 id="how-a-release-works">How a release works</h1>
+<p><em>secrets.sgit.ai · operations · written at v0.1.0 (2026-10-05) · CC BY 4.0</em></p>
+<p>Every push to <code>dev</code> is a release. There is no build step: the committed tree is the deployed tree, and five small generators keep the parts that must agree in agreement. One pipeline validates, tags, deploys and then checks that the live site is serving what was pushed.</p>
+<h2 id="the-version">The version</h2>
+<ul>
+<li>The version lives in one file, <code>admin/build/version.txt</code>, as <code>X.Y.Z</code> with no <code>v</code>.</li>
+<li>Every push to <code>dev</code> bumps the minor (<code>0.1.0</code> to <code>0.2.0</code>). A patch (<code>0.2.1</code>) is for a same-day fix. A major <code>.0.0</code> is deliberate and rare.</li>
+<li>The release commit&#x27;s subject is <code>site vX.Y.Z : &lt;what&gt;</code>, with the same version. CI anchors on the newest commit whose subject has that shape, not on HEAD, because a merge commit may sit on top.</li>
+<li><code>data/versions.json</code> gets a new first row: version, date, title, notes. The title is the <code>&lt;what&gt;</code> of the subject.</li>
+<li>The version is repeated by the generators into every page badge, every markdown twin, <code>llms.txt</code>, <code>llms-full.txt</code>, <code>sitemap.xml</code> and the release table. <code>config/environments.json#siteVersion</code> is bumped by hand. Check 1 of the gate fails on any disagreement.</li>
+</ul>
+<h2 id="the-steps-locally">The steps, locally</h2>
+<pre><code># 1. edit content, data/features.json and data/versions.json; bump admin/build/version.txt and config/environments.json#siteVersion
+python3 admin/build/gate.py --build      # regenerate everything, then run the whole gate
+git add -A
+git commit -m &quot;site vX.Y.Z : &lt;what&gt;&quot;
+git push -u origin dev                   # or open a PR to dev from claude/&lt;description&gt;-&lt;session-id&gt;</code></pre>
+<p><code>gate.py --build</code> runs the generators in order (chrome, features, versions, twins, llms), then runs them again with <code>--check</code>, then <code>node admin/build/validate.js</code>, then <code>python3 -m pytest tests/build/ -q</code>, then <code>node --test tests/unit/**/*.test.js</code>. <code>gate.py</code> without <code>--build</code> runs the same list in check mode only, which is exactly what CI does.</p>
+<h2 id="the-steps-in-ci-githubworkflowsdeploy-pagesyml">The steps, in CI (<code>.github/workflows/deploy-pages.yml</code>)</h2>
+<table>
+<thead><tr><th>Job</th><th>When</th><th>Does</th><th>On failure</th></tr></thead>
+<tbody>
+<tr><td><code>validate</code></td><td>every push to <code>dev</code> or <code>main</code>, every PR to either, manual dispatch</td><td><code>python3 admin/build/gate.py</code></td><td>nothing is tagged or deployed</td></tr>
+<tr><td><code>tag-release</code></td><td>push to <code>dev</code> only</td><td><code>admin/build/tag_release.py</code>: version.txt equals the newest <code>site vX.Y.Z</code> subject; the version is the next minor, a patch or a major <code>.0.0</code> after the newest tag; backfills missing historical tags; pushes <code>refs/tags/vX.Y.Z</code></td><td>no deploy</td></tr>
+<tr><td><code>deploy</code></td><td>any push or dispatch, never a PR</td><td><code>admin/build/assemble_site.py</code> copies the tree minus <code>.git</code>, <code>.github</code>, <code>infra</code>, <code>tests/unit</code>, <code>node_modules</code> into <code>_site/</code>; upload and deploy to GitHub Pages</td><td>the previous version stays live</td></tr>
+<tr><td><code>verify-live</code></td><td>after deploy</td><td><code>admin/build/verify_live.py</code> polls <code>https://secrets.sgit.ai/admin/build/version.txt</code> and the homepage badge with a cache-buster until both equal the version, for up to ten minutes</td><td>the run is red; the site may be stale</td></tr>
+</tbody>
+</table>
+<p>A push to <code>main</code> deploys without tagging: <code>main</code> is promoted from <code>dev</code> and is the fallback. Both branches deploy to the one Pages site of this repository, so whichever pushed last is what <code>secrets.sgit.ai</code> serves; <code>main</code> is promoted only to a version <code>dev</code> already released.</p>
+<h2 id="green-does-not-mean-live">Green does not mean live</h2>
+<p>The sibling site sgit.ai once pushed two releases that reported success and never reached anyone, because the Pages deploy job died downloading its own action. The <code>verify-live</code> job exists for that reason: the release is not done until the origin answers with the new version. When <code>verify-live</code> is red and <code>deploy</code> is green, the usual causes are the domain not yet pointing at Pages (see <code>docs/ops/dns.md</code>), Pages not yet enabled for the repository, or a transient <code>429</code> on an action download, which a re-run fixes.</p>
+<h2 id="the-eight-checks-of-the-gate">The eight checks of the gate</h2>
+<p>See <code>/admin/</code> on the site or the header of <code>admin/build/validate.js</code>. The rule for the leak tripwire is worth repeating: the fix for a trip is always a redaction, never a wider pattern.</p>
+<h2 id="backfilling-tags">Backfilling tags</h2>
+<p><code>tag_release.py</code> tags every historical release commit that has no tag, oldest first, then pushes all the new tags. A tag that already points at its release commit is left alone. A tag that points elsewhere fails the job: tags are never moved.</p>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/ops/release.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

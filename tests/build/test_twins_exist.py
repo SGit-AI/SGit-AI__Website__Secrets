@@ -26,12 +26,16 @@ class Test__Twins__Exist(TestCase):
     def test_every_page_has_a_twin(self):
         for path in self.pages.html_files():
             twin = self.pages.twin_file(path)
+            if self.pages.meta_source(path):                                      # rendered from markdown: the markdown is beside it and is the twin
+                self.assertEqual('/' + twin.relative_to(ROOT).as_posix(), self.pages.meta_source(path))
             with self.subTest(page=path.relative_to(ROOT).as_posix()):
                 self.assertTrue(twin.exists(), f'{twin.relative_to(ROOT)} is missing')
 
     def test_twin_names_source_and_version(self):
         for path in self.pages.html_files():
             page = self.pages.meta(path)
+            if page['source']:
+                continue
             text = self.pages.twin_file(path).read_text(encoding='utf-8')
             with self.subTest(page=page['url']):
                 self.assertIn(f'*Source: <{self.chrome.canonical_url(page["url"])}>', text)
@@ -40,6 +44,8 @@ class Test__Twins__Exist(TestCase):
 
     def test_internal_links_in_twins_point_at_markdown(self):
         for path in self.pages.html_files():
+            if self.pages.meta_source(path):
+                continue
             text  = self.pages.twin_file(path).read_text(encoding='utf-8')
             links = [href for href in re.findall(r'\]\(([^)\s]+)\)', text) if not href.startswith('http')]
             with self.subTest(page=path.relative_to(ROOT).as_posix()):

@@ -55,7 +55,7 @@ test('leak tripwire: AIza is allowed only in config/environments.json', () => {
 
 test('headingSlug follows GitHub anchors', () => {
     assert.equal(V.headingSlug('## Shipped (12)'.replace(/^#+\s*/, '')), 'shipped-12')
-    assert.equal(V.headingSlug('C1. "Type_Safe style" for the generators'), 'c1-typesafe-style-for-the-generators')
+    assert.equal(V.headingSlug('C1. "Type_Safe style" for the generators'), 'c1-type_safe-style-for-the-generators')
     assert.equal(V.headingSlug('What a human must do'), 'what-a-human-must-do')
 })
 

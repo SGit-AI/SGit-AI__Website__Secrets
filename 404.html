@@ -11,30 +11,68 @@
   <link rel="alternate" type="text/markdown" href="/404.md">
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
   <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="secrets.sgit.ai">
   <meta property="og:url" content="https://secrets.sgit.ai/404.html">
   <meta property="og:title" content="Not found — secrets.sgit.ai">
   <meta property="og:description" content="There is no page at this address. The pages that exist are listed in llms.txt; what is built is listed in docs/reality.md.">
-  <meta name="sg-secrets:version" content="0.1.0">
+  <meta name="sg-secrets:version" content="0.1.1">
   <meta name="sg-secrets:released" content="2026-10-05">
 <!-- sg-secrets:head:end -->
 </head>
 <body>
   <!-- sg-secrets:nav:start -->
   <header class="sg-header">
-    <a class="sg-brand" href="/">secrets<span>.sgit.ai</span></a>
-    <nav class="sg-nav" aria-label="Site">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/docs/reality.md">Reality</a></li>
-      <li><a href="/docs/design/secrets-sgit-ai__mvp-build-brief.md">The brief</a></li>
-      <li><a href="/admin/">Admin</a></li>
-      <li><a href="/admin/versions.html">Versions</a></li>
-      <li><a href="/llms.txt">llms.txt</a></li>
-    </ul>
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
     </nav>
-    <a class="sg-badge sg-badge-version" href="/admin/versions.html" data-version="0.1.0" title="released 2026-10-05">v0.1.0</a>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Not found</span></div>
   </header>
 <!-- sg-secrets:nav:end -->
   <main>
@@ -43,13 +81,13 @@
     <ul>
       <li><a href="/">Home</a>, with the table of what is shipped, proposed and absent.</li>
       <li><a href="/llms.txt">llms.txt</a>, every page that exists, one line each.</li>
-      <li><a href="/docs/reality.md">docs/reality.md</a>, what is real at this version.</li>
+      <li><a href="/shipped/">/shipped/</a>, what is real at this version.</li>
     </ul>
   </main>
   <!-- sg-secrets:footer:start -->
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version" href="/admin/versions.html" data-version="0.1.0" title="released 2026-10-05">v0.1.0</a> · released 2026-10-05 · <a href="/404.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a></p>
-    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/docs/reality.md">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/404.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->
 </body>

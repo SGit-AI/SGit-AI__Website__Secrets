@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risk Mandate — AWS Cognito Client-Side Architecture — secrets.sgit.ai</title>
+  <meta name="description" content="The AWS variant; why no secret can live inside an identity provider; the attack table.">
+  <meta name="sg-secrets:source" content="/docs/design/riskmandate-aws-cognito-architecture.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/design/riskmandate-aws-cognito-architecture.html">
+  <link rel="alternate" type="text/markdown" href="/docs/design/riskmandate-aws-cognito-architecture.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/design/riskmandate-aws-cognito-architecture.html">
+  <meta property="og:title" content="Risk Mandate — AWS Cognito Client-Side Architecture — secrets.sgit.ai">
+  <meta property="og:description" content="The AWS variant; why no secret can live inside an identity provider; the attack table.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/design/">Design documents</a> <span class="sep">/</span> <span aria-current="page">Risk Mandate</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/design/riskmandate-aws-cognito-architecture.md">docs/design/riskmandate-aws-cognito-architecture.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.1.</p>
+<h1 id="risk-mandate-aws-cognito-client-side-architecture">Risk Mandate — AWS Cognito Client-Side Architecture</h1>
+<p>2026-10-05 · Dinis Cruz</p>
+<h2 id="summary">Summary</h2>
+<p>Cognito handles login (Google, other social or OIDC/SAML providers, and Cognito-managed username/password or passkeys). A Cognito identity pool swaps the login token for short-lived AWS credentials in the browser, and the browser talks to S3 directly, limited to its own prefix. SGit vaults are already encrypted client-side, so S3 only ever holds ciphertext.</p>
+<p>The one new piece is a per-user <strong>keyring</strong>: an encrypted file in the user&#x27;s S3 prefix listing the vault keys that user can open, like a password manager&#x27;s vault. The keyring is unlocked by a key the browser derives from the user&#x27;s passkey (WebAuthn PRF). That key never exists in Cognito, KMS or any AWS service.</p>
+<p><strong>Answer to the core question:</strong> nothing stored <em>inside</em> Cognito or KMS can be kept from someone holding the AWS admin account. But the design doesn&#x27;t need that. If the key that opens the keyring is derived on the user&#x27;s authenticator, a full compromise of the Cognito and AWS admin accounts yields ciphertext only. This keeps SGit&#x27;s existing property: server compromise causes no data disclosure.</p>
+<p><strong>Update:</strong> the primary build will be all-GCP (Identity Platform + Cloud Storage for Firebase, one project per client) so each deployment lives in one cloud and can be created and destroyed as a unit. This Cognito design remains the AWS variant for AWS-native clients. See <em>Risk Mandate — GCP Key Vault Architecture &amp; Password Manager MVP</em>.</p>
+<h2 id="why-secrets-cannot-live-in-cognito-or-kms">Why secrets cannot live in Cognito or KMS</h2>
+<ul>
+<li><strong>Cognito user attributes</strong> (including custom attributes) are readable by any principal with <code>cognito-idp:AdminGetUser</code> or <code>ListUsers</code>. Encrypting them first just moves the question to where that key lives.</li>
+<li><strong>Whoever controls authentication can impersonate.</strong> A Cognito admin can reset a password (<code>AdminSetUserPassword</code>), sign in as the user, obtain identity-pool credentials and do anything the user can do. So any secret that is released <em>because a user logged in</em> is reachable by the admin.</li>
+<li><strong>KMS</strong> decrypts server-side for whoever holds IAM permission. A key policy can try to exclude admins, but the account owner can usually regain control, and an impersonated user&#x27;s credentials would pass anyway.</li>
+<li><strong>AWS Private CA and KMS asymmetric keys</strong> keep private keys inside AWS, usable by IAM principals. Same problem. <strong>CloudHSM</strong> keeps keys behind HSM user credentials that AWS admins don&#x27;t have, but it&#x27;s server-side, priced per HSM-hour and not per-user, so it doesn&#x27;t fit.</li>
+</ul>
+<p>Conclusion: the authority to decrypt must come from something the AWS account cannot reach — the user&#x27;s authenticator, or a passphrase only the user knows.</p>
+<h2 id="architecture">Architecture</h2>
+<table>
+<thead><tr><th>Layer</th><th>Component</th><th>Role</th><th>What a compromised admin gets</th></tr></thead>
+<tbody>
+<tr><td>Web app</td><td>Static site on GitHub Pages (outside AWS)</td><td>All crypto and UI run here</td><td>Nothing, if the code host is separate</td></tr>
+<tr><td>Login</td><td>Cognito user pool: Google federation, other IdPs, native username/password, passkeys</td><td>Proves who the user is</td><td>Ability to impersonate users and alter config</td></tr>
+<tr><td>AWS access</td><td>Cognito identity pool, authenticated role with policy variables</td><td>Short-lived credentials scoped to <code>vaults/${cognito-identity.amazonaws.com:sub}/*</code></td><td>Access to any user&#x27;s prefix</td></tr>
+<tr><td>Storage</td><td>S3: user keyring + SGit vault objects</td><td>Holds ciphertext only</td><td>Ciphertext; ability to delete or roll back</td></tr>
+<tr><td>Keys</td><td>Passkey PRF on the user&#x27;s device, synced via iCloud Keychain or personal Google Password Manager</td><td>Derives the key that unwraps the keyring</td><td>Nothing</td></tr>
+</tbody>
+</table>
+<h2 id="login-options">Login options</h2>
+<ul>
+<li><strong>Google sign-in</strong> through Cognito&#x27;s federated identity providers. Cognito also supports Apple, Facebook, Amazon, any OIDC provider and SAML (for customer IdPs like Entra or Okta).</li>
+<li><strong>Cognito-managed accounts</strong>: username/password with MFA, or passwordless with passkeys or email OTP (passwordless needs the Essentials feature plan).</li>
+<li>Use the Amplify Auth library or the Cognito API from the custom UI, rather than the Cognito-hosted login pages, so every page the user sees comes from the code host outside AWS.</li>
+</ul>
+<p>Login and key unlock are deliberately separate. Login decides <em>which S3 prefix you may touch</em>; the passkey PRF decides <em>whether you can read what&#x27;s there</em>. An admin can fake the first, never the second.</p>
+<h2 id="keyring-design">Keyring design</h2>
+<p>Path: <code>vaults/{identityId}/keyring.json</code> (versioned).</p>
+<p>Contents, conceptually:</p>
+<ul>
+<li><strong>Wrapped keyring key (KEK) entries</strong>, one per unlock method: each registered passkey (KEK wrapped with that passkey&#x27;s PRF output via HKDF + AES-GCM), and one recovery code generated at signup and shown once.</li>
+<li><strong>Encrypted body</strong> (AES-GCM under the KEK): a list of vaults the user can open, each with vault id, S3 location, SGit vault key and label.</li>
+</ul>
+<p>Unlock flow:</p>
+<ol>
+<li>User signs in via Cognito; browser gets identity-pool credentials.</li>
+<li>Browser downloads <code>keyring.json</code>.</li>
+<li>Browser runs <code>navigator.credentials.get</code> with the PRF extension and the salt stored in the keyring; the authenticator returns a 32-byte secret.</li>
+<li>HKDF turns it into a wrapping key; browser unwraps the KEK, decrypts the body, holds vault keys in memory only.</li>
+<li>SGit reads and writes vault objects directly in S3.</li>
+</ol>
+<p>Adding a device: sign in, unlock with an existing passkey or the recovery code, register the new passkey, add a new wrapped-KEK entry. Losing every passkey and the recovery code means the data is gone; say so in the terms.</p>
+<h2 id="sharing-a-vault-between-users">Sharing a vault between users</h2>
+<p>Each user has an X25519 key pair; the private key lives in their keyring, the public key in a readable directory (<code>directory/{identityId}.pub</code>). To share a vault, the owner encrypts the vault key to the recipient&#x27;s public key and drops it in the recipient&#x27;s inbox prefix; the recipient&#x27;s browser moves it into their keyring on next unlock.</p>
+<p>Risk: a compromised admin could replace a public key in the directory and receive the next share. Mitigate with key fingerprints users can compare, or signed directory entries, before any sensitive sharing. Revocation means rotating the vault key and re-sharing to remaining members.</p>
+<h2 id="what-a-full-admin-compromise-can-and-cannot-do">What a full admin compromise can and cannot do</h2>
+<table>
+<thead><tr><th>Attack</th><th>Result</th><th>Mitigation</th></tr></thead>
+<tbody>
+<tr><td>Read S3</td><td>Ciphertext only</td><td>—</td></tr>
+<tr><td>Read Cognito users</td><td>Emails, names, login metadata</td><td>Keep the user pool minimal; accept metadata exposure</td></tr>
+<tr><td>Impersonate a user</td><td>Gets their ciphertext, cannot pass the PRF step</td><td>Passkey bound to the riskmandate.ai origin</td></tr>
+<tr><td>Point Cognito at a phishing site</td><td>PRF output is bound to the site&#x27;s origin, so a phishing site cannot get it</td><td>Code host outside AWS</td></tr>
+<tr><td>Delete or encrypt-for-ransom S3 data</td><td>Availability loss</td><td>S3 versioning + Object Lock, replication to a separate AWS account, SGit clones on devices</td></tr>
+<tr><td>Roll back a vault to an older version</td><td>Stale data</td><td>SGit commit hashes; client remembers last-seen head</td></tr>
+<tr><td>Swap a public key in the directory</td><td>Intercepts future shares</td><td>Fingerprint check or signed directory</td></tr>
+<tr><td><strong>Serve malicious JavaScript</strong></td><td><strong>Full compromise of any user who loads it</strong></td><td>Code hosting outside the AWS account, protected separately; SRI on pinned libraries; reproducible builds</td></tr>
+</tbody>
+</table>
+<p>The last row is the real boundary: client-side crypto is only as trustworthy as the code delivered to the browser. Keeping the site on GitHub Pages, outside the AWS account, means an AWS or Cognito compromise does not reach it.</p>
+<h2 id="compared-with-the-google-designs">Compared with the Google designs</h2>
+<table>
+<thead><tr><th></th><th>Cognito + S3</th><th>Identity Platform + Cloud Storage</th><th>Workspace</th></tr></thead>
+<tbody>
+<tr><td>Terms issue for multi-customer use</td><td>None</td><td>None</td><td>Needs Google&#x27;s written agreement</td></tr>
+<tr><td>Native passkeys</td><td>Yes</td><td>Limited</td><td>Yes (Google account)</td></tr>
+<tr><td>Multi-tenancy</td><td>Pool per customer or tenant attributes</td><td>Built in</td><td>Tenant per customer</td></tr>
+<tr><td>Browser-direct storage</td><td>Identity pool + S3</td><td>Firebase Storage rules</td><td>Drive/GCS via OAuth</td></tr>
+<tr><td>Mail, Drive, Calendar</td><td>No</td><td>No</td><td>Yes</td></tr>
+<tr><td>Familiarity</td><td>High (already used)</td><td>Lower</td><td>Medium</td></tr>
+</tbody>
+</table>
+<h2 id="open-questions-and-next-steps">Open questions and next steps</h2>
+<ul>
+<li>Test whether Cognito&#x27;s own passkey flow can also return a PRF result, so one passkey does login and unlock. If not, register a separate passkey with RP ID riskmandate.ai for unlock only.</li>
+<li>Decide multi-tenancy: one user pool per customer, or one pool with a tenant attribute and per-tenant S3 prefixes.</li>
+<li>Check Cognito feature-plan pricing for the passkey and passwordless features.</li>
+<li>Build a PRF compatibility matrix (older Android, managed Chrome, Firefox).</li>
+<li>Design the keyring file format and versioning, including concurrent writes from two devices.</li>
+<li>Decide on the public-key directory trust model before multi-user sharing ships.</li>
+<li>Set up S3 Object Lock and cross-account replication; test restore.</li>
+<li>Prototype: sign in with Google via Cognito, get identity-pool credentials, write an encrypted keyring to S3, unlock it on a second device.</li>
+</ul>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/riskmandate-aws-cognito-architecture.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

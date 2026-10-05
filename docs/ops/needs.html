@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What only a human can do — secrets.sgit.ai</title>
+  <meta name="description" content="Exactly what only a human can do, who, and which step waits on it.">
+  <meta name="sg-secrets:source" content="/docs/ops/needs.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/ops/needs.html">
+  <link rel="alternate" type="text/markdown" href="/docs/ops/needs.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/ops/needs.html">
+  <meta property="og:title" content="What only a human can do — secrets.sgit.ai">
+  <meta property="og:description" content="Exactly what only a human can do, who, and which step waits on it.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl here" href="/docs/ops/needs.html" aria-current="page">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/ops/">Operations</a> <span class="sep">/</span> <span aria-current="page">What needs a human</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/ops/needs.md">docs/ops/needs.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.1.</p>
+<h1 id="what-only-a-human-can-do">What only a human can do</h1>
+<p><em>secrets.sgit.ai · operations · maintained by the build session · last updated at v0.1.1 (2026-10-05) · CC BY 4.0</em></p>
+<p>Everything on this list blocks a step of the brief and cannot be done from inside the repository. Each item says who, what, exactly, and which step waits on it. Items are removed when done and the removal is dated in <code>docs/design/brief-corrections.md</code> if anything turned out differently from the brief.</p>
+<h2 id="done">Done</h2>
+<ul>
+<li><strong>2026-10-05, v0.1.0.</strong> DNS <code>secrets CNAME sgit-ai.github.io</code>, GitHub Pages enabled with the custom domain and HTTPS, and the v0.1.0 workflow run re-run by Dinis. <code>verify-live</code> passed; <code>https://secrets.sgit.ai</code> serves the released version. Nothing about the process turned out differently from the brief.</li>
+</ul>
+<h2 id="blocking-the-protections-section-95-to-be-in-place-before-step-3-lands-real-configuration">Blocking the protections (section 9.5), to be in place before step 3 lands real configuration</h2>
+<ol>
+<li><strong>Branch protection (organisation owner).</strong> Apply the rules in <code>docs/ops/branch-protection.md</code> to <code>dev</code> and <code>main</code>, with <code>validate</code> as the required status check.</li>
+<li><strong>Organisation 2FA with hardware keys (organisation owner).</strong> Settings, Authentication security.</li>
+<li><strong>Verified domain (organisation owner).</strong> Add and verify <code>sgit.ai</code> under Settings, Verified and approved domains.</li>
+<li><strong>Actions policy (organisation owner).</strong> Allow only GitHub-authored and organisation-authored actions; default <code>GITHUB_TOKEN</code> read-only; Actions may not create or approve pull requests.</li>
+</ol>
+<h2 id="blocking-step-3-the-dev-gcp-project">Blocking step 3 (the dev GCP project)</h2>
+<ol start="5">
+<li><strong>Billing account (GCP billing admin).</strong> A billing account the three projects can attach to. The build session will write <code>infra/bootstrap/bootstrap.sh</code> in step 3 and needs its id passed as a variable, never committed.</li>
+<li><strong>Project ids (GCP org admin).</strong> Confirm <code>sgit-secrets-tfstate</code>, <code>sgit-secrets-dev</code>, <code>sgit-secrets-main</code>, <code>sgit-secrets-prod</code> are available, or choose others; the brief marks them PROPOSED.</li>
+<li><strong>Run the bootstrap (a human with org-level IAM).</strong> Once <code>infra/bootstrap/bootstrap.sh</code> exists: run it with <code>--dry-run</code>, then for real. It prints the values for the GitHub environment variables (<code>WORKLOAD_IDENTITY_PROVIDER</code>, <code>SERVICE_ACCOUNT</code>) per environment.</li>
+<li><strong>Google OAuth client secret for sign-in (GCP project owner).</strong> Create the Web application OAuth client in the <code>dev</code> project (origin <code>https://secrets.sgit.ai</code>, redirect <code>https://&lt;authDomain&gt;/__/auth/handler</code>) and store its secret as the GitHub environment secret <code>GOOGLE_OAUTH_CLIENT_SECRET</code> in the <code>dev</code> environment. It never enters the repository.</li>
+</ol>
+<h2 id="not-yet-needed">Not yet needed</h2>
+<ul>
+<li><code>main</code> and <code>prod</code> projects, their OAuth clients and their environment secrets: step 7 and step 8.</li>
+<li>A reviewer for the <code>prod</code> environment: step 8.</li>
+<li>The DNS guards (registrar lock, DNSSEC, CAA): listed on <code>/security/</code> when it exists, with dates; not blocking.</li>
+</ul>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/ops/needs.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

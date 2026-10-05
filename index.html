@@ -4,37 +4,75 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>secrets.sgit.ai — a zero-knowledge secrets manager in the browser</title>
-  <meta name="description" content="A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. This version is the pipeline before the site: nothing of the app is built yet.">
+  <meta name="description" content="A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.">
   <!-- sg-secrets:head:start -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <link rel="canonical" href="https://secrets.sgit.ai/">
   <link rel="alternate" type="text/markdown" href="/index.md">
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
   <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="secrets.sgit.ai">
   <meta property="og:url" content="https://secrets.sgit.ai/">
   <meta property="og:title" content="secrets.sgit.ai — a zero-knowledge secrets manager in the browser">
-  <meta property="og:description" content="A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. This version is the pipeline before the site: nothing of the app is built yet.">
-  <meta name="sg-secrets:version" content="0.1.0">
+  <meta property="og:description" content="A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.">
+  <meta name="sg-secrets:version" content="0.1.1">
   <meta name="sg-secrets:released" content="2026-10-05">
 <!-- sg-secrets:head:end -->
 </head>
 <body>
   <!-- sg-secrets:nav:start -->
   <header class="sg-header">
-    <a class="sg-brand" href="/">secrets<span>.sgit.ai</span></a>
-    <nav class="sg-nav" aria-label="Site">
-    <ul>
-      <li><a href="/" aria-current="page">Home</a></li>
-      <li><a href="/docs/reality.md">Reality</a></li>
-      <li><a href="/docs/design/secrets-sgit-ai__mvp-build-brief.md">The brief</a></li>
-      <li><a href="/admin/">Admin</a></li>
-      <li><a href="/admin/versions.html">Versions</a></li>
-      <li><a href="/llms.txt">llms.txt</a></li>
-    </ul>
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
     </nav>
-    <a class="sg-badge sg-badge-version" href="/admin/versions.html" data-version="0.1.0" title="released 2026-10-05">v0.1.0</a>
+
   </header>
 <!-- sg-secrets:nav:end -->
   <main>
@@ -42,15 +80,26 @@
     <p class="sg-lead">A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one GCP project per environment, holding Identity Platform for login and a Cloud Storage bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.</p>
 
     <div class="sg-note sg-warn">
-      <p><strong>What exists at this version.</strong> Only the pipeline: the version gate, the chrome generator, the markdown twins, the machine indexes, the release tagging and the deploy. No app, no admin, no probe page is built. Every row below marked <em>proposed</em> is a design, not a thing. The design is in <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.md">the brief</a>; what is real is in <a href="/docs/reality.md">docs/reality.md</a>, generated from the same data as the table on this page.</p>
+      <p><strong>What exists at this version.</strong> The pipeline, the live site, and the content pages that describe the design. No app, no admin, no probe page is built. Every row below marked <em>proposed</em> is a design, not a thing. The design is in <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>; what is real is in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>, generated from the same data as the table on this page.</p>
     </div>
+
+    <h2>The three-step demo, when it exists</h2>
+    <!-- sg-secrets:status:start ids="app.sign-in,app.prf-unlock,app.entries" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+<!-- sg-secrets:status:end -->
+    <ol>
+      <li><strong>Sign in</strong> with Google or an email address, against the environment shown in the header.</li>
+      <li><strong>Touch your passkey.</strong> The authenticator returns a secret bound to this origin; the browser derives the key that opens your keyring.</li>
+      <li><strong>See your secret.</strong> It was ciphertext in a bucket a second ago and it is plaintext only in this tab, until you lock, sign out or leave.</li>
+    </ol>
+    <p>None of the three steps is built. <a href="/how-it-works/">How it works</a> draws the flows; <a href="/keyring/">the keyring page</a> is the file format; <a href="/security/">security</a> is what each party gets and what the design cannot withhold.</p>
 
     <h2>What it will be</h2>
     <p>A password-manager-shaped app where the "passwords" can be anything small and secret: passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes. Unlocked by a passkey using the WebAuthn PRF extension, with a recovery code as the second unlock method. Stored as an encrypted keyring in a bucket the user's login can reach. Readable by no one else, including the people who run the bucket.</p>
     <p>Three principles are not negotiable: plaintext exists only in the browser, briefly, after a passkey gesture; the login decides which paths you may touch and the passkey decides whether the bytes mean anything; and nothing in the repository is secret, so the whole configuration of every environment is public.</p>
 
     <h2>What a compromised party would get</h2>
-    <p>The design's threat table, from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.md">section 3.4 of the brief</a>. It describes the design, not a shipped system; the acceptance test that checks it is listed as proposed below.</p>
+    <p>The design's threat table, from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">section 3.4 of the brief</a>, in full on <a href="/security/">the security page</a>. It describes the design, not a shipped system; the acceptance test that checks it is listed as proposed below.</p>
     <table>
       <thead><tr><th>Party compromised</th><th>Gets</th><th>Does not get</th></tr></thead>
       <tbody>
@@ -60,7 +109,7 @@
         <tr><td>This repository or the DNS</td><td><strong>Everything, for users who load the malicious page</strong></td><td>Nothing is withheld</td></tr>
       </tbody>
     </table>
-    <p>The last row is why the repository protections in <a href="/docs/ops/branch-protection.md">docs/ops/branch-protection.md</a> exist. The code served to the browser is the boundary.</p>
+    <p>The last row is why the repository protections in <a href="/docs/ops/branch-protection.html">docs/ops/branch-protection.md</a> exist. The code served to the browser is the boundary.</p>
 
     <h2>Shipped, proposed, absent</h2>
     <p>Every claim this site makes, with its status, from <code>data/features.json</code>. <em>shipped</em> exists and runs at the version shown; <em>proposed</em> is designed and not built; <em>absent</em> is deliberately not in the MVP.</p>
@@ -79,9 +128,14 @@
       <tr><td>pipeline</td><td>Deploy to GitHub Pages from the validated tree</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>.github/workflows/deploy-pages.yml</td><td>Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA.</td></tr>
       <tr><td>pipeline</td><td>verify-live: the run is red until the live site serves the released version</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/verify_live.py</td><td>Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes.</td></tr>
       <tr><td>pipeline</td><td>Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>vendor/MANIFEST.json</td><td>Check 5 of the gate. Today the only vendored file is the family design tokens.</td></tr>
-      <tr><td>site</td><td>secrets.sgit.ai served by GitHub Pages over HTTPS</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>CNAME, docs/ops/dns.md</td><td>Needs the DNS CNAME and Pages enablement listed in docs/ops/needs.md. Flips to shipped when verify-live first passes.</td></tr>
-      <tr><td>site</td><td>Content pages: how it works, security, keyring spec, sharing, environments, shipped</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>section 6.1 of the brief</td><td>Step 2. Every page will carry a status line from this file.</td></tr>
-      <tr><td>site</td><td>The five design documents published verbatim</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>docs/design/</td><td>Markdown only at this version; rendered pages come with step 2.</td></tr>
+      <tr><td>site</td><td>secrets.sgit.ai served by GitHub Pages over HTTPS</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>CNAME, docs/ops/dns.md</td><td>verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made.</td></tr>
+      <tr><td>site</td><td>Content pages: how it works, security, keyring spec, sharing, environments</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>how-it-works/, security/, keyring/, sharing/, environments/</td><td>Every page opens with a status line generated from this file and describes only designs in the future tense.</td></tr>
+      <tr><td>site</td><td>/shipped/ generated from this file, one table per status, beside docs/reality.md</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>shipped/index.html</td><td>The same generator writes both, so the page and the reality document cannot disagree.</td></tr>
+      <tr><td>site</td><td>The five design documents published verbatim</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>docs/design/</td><td>The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it.</td></tr>
+      <tr><td>site</td><td>Every markdown document under docs/ rendered to HTML on each release, with index pages</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>admin/build/gen_docs.py, admin/build/md_to_html.py</td><td>Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate.</td></tr>
+      <tr><td>site</td><td>The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>admin/build/chrome.py, assets/nav.js</td><td>The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link.</td></tr>
+      <tr><td>admin</td><td>Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>admin/comms.html</td><td>gen_versions.py renders the step tracker; a done step must name a release that exists.</td></tr>
+      <tr><td>site</td><td>Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>docs/ops/branch-protection.md</td><td>Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed.</td></tr>
       <tr><td>site</td><td>brief-corrections.md: what the brief got wrong, dated, beside it</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>docs/design/brief-corrections.md</td><td>Appended to as the build finds out.</td></tr>
       <tr><td>site</td><td>docs/ops/needs.md: exactly what only a human can do</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>docs/ops/needs.md</td><td>DNS, Pages, branch protection, GCP bootstrap, OAuth client secret.</td></tr>
       <tr><td>infra</td><td>Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>infra/bootstrap/bootstrap.sh</td><td>Step 3. Run once by a human; idempotent; --dry-run.</td></tr>
@@ -119,17 +173,17 @@
 
     <h2>Where to read next</h2>
     <ul>
-      <li><a href="/docs/design/secrets-sgit-ai__mvp-build-brief.md">The MVP build brief</a>, the instruction set this site is built from, and <a href="/docs/design/brief-corrections.md">what it got wrong</a>.</li>
-      <li><a href="/docs/design/riskmandate-gcp-key-vault-password-manager-mvp.md">The primary design</a>: the all-GCP stack, the keyring, PRF unlock, the sharing scheme.</li>
-      <li><a href="/docs/ops/release.md">How a release works</a>: the version gate, the commit subject, the tag, and why green does not mean live.</li>
-      <li><a href="/docs/ops/needs.md">What only a human can do</a> before the next step.</li>
+      <li><a href="/how-it-works/">How it works</a>, <a href="/security/">Security</a>, <a href="/keyring/">Keyring format</a>, <a href="/sharing/">Sharing</a>, <a href="/environments/">Environments</a>: the design, every page marked with its status.</li>
+      <li><a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>, the instruction set this site is built from, and <a href="/docs/design/brief-corrections.html">what it got wrong</a>; the four design documents are listed at <a href="/docs/design/">docs/design/</a>.</li>
+      <li><a href="/docs/ops/release.html">How a release works</a>: the version gate, the commit subject, the tag, and why green does not mean live.</li>
+      <li><a href="/docs/ops/needs.html">What only a human can do</a> before the next step.</li>
       <li><a href="/admin/versions.html">Release history</a> and <a href="/llms.txt">llms.txt</a> for agents.</li>
     </ul>
   </main>
   <!-- sg-secrets:footer:start -->
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version" href="/admin/versions.html" data-version="0.1.0" title="released 2026-10-05">v0.1.0</a> · released 2026-10-05 · <a href="/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a></p>
-    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/docs/reality.md">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->
 </body>

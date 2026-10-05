@@ -2,7 +2,7 @@
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -29,6 +29,7 @@ The admin pages will work only when the visitor signs in with a Google account t
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
 | admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
 | admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
 | admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
@@ -50,7 +51,13 @@ The admin pages will work only when the visitor signs in with a Google account t
 | pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
 | pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
 
-Release history: [versions](/admin/versions.md). What a human still has to do: [needs.md](/docs/ops/needs.md).
+## The admin section
+
+- [How the site is built](/admin/index.md): this page.
+- [Release history](/admin/versions.md): one row per release, generated from `data/versions.json`.
+- [Comms](/admin/comms.md): the asks back to the project lead and the nine build steps with their status, generated from `data/steps.json`.
+- [What needs a human](/docs/ops/needs.md), exactly, and the rest of the [documents](/docs/index.md), each rendered from its markdown with the raw file one click away.
+- The build itself, served as plain files: [chrome.py](/admin/build/chrome.py) (the nav, footer, badges and CSP), [validate.js](/admin/build/validate.js) (the eight checks), [version.txt](/admin/build/version.txt), [nav.js](/assets/nav.js) (the menu interaction, the only script on the site at this version).
 
 ---
 

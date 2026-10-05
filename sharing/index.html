@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sharing — secrets.sgit.ai</title>
+  <meta name="description" content="The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/sharing/">
+  <link rel="alternate" type="text/markdown" href="/sharing/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/sharing/">
+  <meta property="og:title" content="Sharing — secrets.sgit.ai">
+  <meta property="og:description" content="The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl here" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl here" href="/sharing/" aria-current="page">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Sharing</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Sharing</h1>
+    <!-- sg-secrets:status:start ids="app.sharing-data-model,app.sharing-ui" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-proposed">proposed</span> Key pair per user generated at first run; public bundle written to directory/ · <span class="sg-status sg-status-absent">absent</span> Sharing an entry with another user through their inbox</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their passkey, because their PRF secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is <strong>phase 2 and absent from the MVP</strong>; the data model is phase 1, because adding it later would mean rewriting every keyring.</p>
+
+    <h2>The scheme</h2>
+    <ol>
+      <li>At first run each user's browser generates a key pair (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing). The private keys go into the keyring body, protected by the passkey like everything else.</li>
+      <li>The public keys are published as a signed bundle at <code>directory/{uid}.pub.json</code>, readable by any signed-in user of the same environment.</li>
+      <li>To share, your browser fetches the colleague's bundle, encrypts the entry's key to their public key, and drops the result in <code>inbox/{uid}/{shareId}.json</code>. Any signed-in user may create an inbox object; only the owner may read or delete one.</li>
+      <li>On their next unlock, their browser decrypts the inbox item with their private key and adds it to their own keyring.</li>
+    </ol>
+    <p>The public key shares <em>keys</em>, not data. The server carries the package and can never read it.</p>
+
+    <h2>What it drags in, designed up front</h2>
+    <table>
+      <thead><tr><th>Concern</th><th>Why it matters</th><th>Approach</th></tr></thead>
+      <tbody>
+        <tr><td>Revocation</td><td>A removed member already holds the key</td><td>Rotate the key, re-encrypt, re-share to the remaining members</td></tr>
+        <tr><td>Directory trust</td><td>A compromised admin could swap a public key and intercept the next share</td><td>Signed bundles, and fingerprints users can compare out of band before a sensitive share</td></tr>
+        <tr><td>Group membership</td><td>Who can open what is real metadata, visible to the bucket</td><td>Membership stored per shared set; updated on add and remove; accepted as metadata exposure</td></tr>
+        <tr><td>Kinds kept apart</td><td>A vault key shared by mistake opens a whole vault</td><td>An <code>sgit-vault-key</code> entry refuses to enter a shareable set without a confirmation</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Fit with sgit</h2>
+    <p>sgit already supports public and private keys (<code>sgit pki</code>) and is designed to store encrypted data on top of its own encrypted data. The keyring, the per-user key pairs and the inbox are applications of that capability, not new machinery. The public bundle will use sgit's JSON bundle shape so that <code>sgit pki import</code> can read what a browser published and <code>sgit pki decrypt</code> can open what a browser sealed. Both are marked "verify first" and recorded as open in <a href="/docs/design/brief-corrections.html">brief-corrections.md</a>.</p>
+
+    <h2>What ships when</h2>
+    <ul>
+      <li><strong>Step 4</strong>: the key pair is generated and stored in the first keyring.</li>
+      <li><strong>Step 9</strong>: the public bundle is written to <code>directory/</code> and the inbox rules go live, with the sharing interface still proposed.</li>
+      <li><strong>Phase 2</strong>: the interface, revocation and fingerprints. A later version, not the MVP.</li>
+    </ul>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/sharing/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

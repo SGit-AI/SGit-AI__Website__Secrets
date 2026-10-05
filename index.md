@@ -1,14 +1,24 @@
 # secrets.sgit.ai
 
-> A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. This version is the pipeline before the site: nothing of the app is built yet.
+> A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one GCP project per environment, holding Identity Platform for login and a Cloud Storage bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.
 
-**What exists at this version.** Only the pipeline: the version gate, the chrome generator, the markdown twins, the machine indexes, the release tagging and the deploy. No app, no admin, no probe page is built. Every row below marked *proposed* is a design, not a thing. The design is in [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md); what is real is in [docs/reality.md](/docs/reality.md), generated from the same data as the table on this page.
+**What exists at this version.** The pipeline, the live site, and the content pages that describe the design. No app, no admin, no probe page is built. Every row below marked *proposed* is a design, not a thing. The design is in [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md); what is real is in [/shipped/](/shipped/index.md) and [docs/reality.md](/docs/reality.md), generated from the same data as the table on this page.
+
+## The three-step demo, when it exists
+
+Status, from [/shipped/](/shipped/index.md): proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+
+1. **Sign in** with Google or an email address, against the environment shown in the header.
+2. **Touch your passkey.** The authenticator returns a secret bound to this origin; the browser derives the key that opens your keyring.
+3. **See your secret.** It was ciphertext in a bucket a second ago and it is plaintext only in this tab, until you lock, sign out or leave.
+
+None of the three steps is built. [How it works](/how-it-works/index.md) draws the flows; [the keyring page](/keyring/index.md) is the file format; [security](/security/index.md) is what each party gets and what the design cannot withhold.
 
 ## What it will be
 
@@ -18,7 +28,7 @@ Three principles are not negotiable: plaintext exists only in the browser, brief
 
 ## What a compromised party would get
 
-The design's threat table, from [section 3.4 of the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). It describes the design, not a shipped system; the acceptance test that checks it is listed as proposed below.
+The design's threat table, from [section 3.4 of the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md), in full on [the security page](/security/index.md). It describes the design, not a shipped system; the acceptance test that checks it is listed as proposed below.
 
 | Party compromised | Gets | Does not get |
 |---|---|---|
@@ -46,9 +56,14 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 | pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
 | pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
 | pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
-| site | secrets.sgit.ai served by GitHub Pages over HTTPS | proposed | CNAME, docs/ops/dns.md | Needs the DNS CNAME and Pages enablement listed in docs/ops/needs.md. Flips to shipped when verify-live first passes. |
-| site | Content pages: how it works, security, keyring spec, sharing, environments, shipped | proposed | section 6.1 of the brief | Step 2. Every page will carry a status line from this file. |
-| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | Markdown only at this version; rendered pages come with step 2. |
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | shipped v0.1.0 | CNAME, docs/ops/dns.md | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments | shipped v0.1.1 | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
+| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | shipped v0.1.1 | shipped/index.html | The same generator writes both, so the page and the reality document cannot disagree. |
+| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
+| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
+| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
@@ -83,8 +98,8 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 
 ## Where to read next
 
-- [The MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md), the instruction set this site is built from, and [what it got wrong](/docs/design/brief-corrections.md).
-- [The primary design](/docs/design/riskmandate-gcp-key-vault-password-manager-mvp.md): the all-GCP stack, the keyring, PRF unlock, the sharing scheme.
+- [How it works](/how-it-works/index.md), [Security](/security/index.md), [Keyring format](/keyring/index.md), [Sharing](/sharing/index.md), [Environments](/environments/index.md): the design, every page marked with its status.
+- [The MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md), the instruction set this site is built from, and [what it got wrong](/docs/design/brief-corrections.md); the four design documents are listed at [docs/design/](/docs/design/index.md).
 - [How a release works](/docs/ops/release.md): the version gate, the commit subject, the tag, and why green does not mean live.
 - [What only a human can do](/docs/ops/needs.md) before the next step.
 - [Release history](/admin/versions.md) and [llms.txt](/llms.txt) for agents.

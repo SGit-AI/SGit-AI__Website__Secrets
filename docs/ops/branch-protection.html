@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repository protections — secrets.sgit.ai</title>
+  <meta name="description" content="The settings for dev and main, the organisation, Actions and environments.">
+  <meta name="sg-secrets:source" content="/docs/ops/branch-protection.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/ops/branch-protection.html">
+  <link rel="alternate" type="text/markdown" href="/docs/ops/branch-protection.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/ops/branch-protection.html">
+  <meta property="og:title" content="Repository protections — secrets.sgit.ai">
+  <meta property="og:description" content="The settings for dev and main, the organisation, Actions and environments.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/ops/">Operations</a> <span class="sep">/</span> <span aria-current="page">Repository protections</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/ops/branch-protection.md">docs/ops/branch-protection.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.1.</p>
+<h1 id="repository-protections">Repository protections</h1>
+<p><em>secrets.sgit.ai · operations · written at v0.1.0 (2026-10-05) · section 9.5 of the brief · CC BY 4.0</em></p>
+<p>Whoever controls this repository controls the code every user&#x27;s browser runs, and the code is the boundary of the whole design (section 3.4 of the brief). These settings are the guard on that boundary. They are set by an organisation owner, listed here so they can be checked, and repeated on <code>/security/</code> once that page exists. None of them is in place yet unless <code>docs/ops/needs.md</code> says so.</p>
+<h2 id="branches-dev-and-main">Branches <code>dev</code> and <code>main</code></h2>
+<p>Settings, Branches (or Rules, Rulesets), one rule for each of <code>dev</code> and <code>main</code>:</p>
+<table>
+<thead><tr><th>Setting</th><th>Value</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Require a pull request before merging</td><td>on, 1 approving review</td><td>no direct pushes; work lands from <code>claude/*</code> or feature branches</td></tr>
+<tr><td>Dismiss stale approvals on new commits</td><td>on</td><td>an approval covers the diff it saw</td></tr>
+<tr><td>Require status checks to pass</td><td>on, required check: <code>validate</code></td><td>the gate decides, not a person</td></tr>
+<tr><td>Require branches to be up to date before merging</td><td>on</td><td>the gate ran against what will be merged</td></tr>
+<tr><td>Require linear history</td><td>on</td><td>one release, one commit shape; no merge-of-merge</td></tr>
+<tr><td>Block force pushes</td><td>on</td><td>tags and history are the release record</td></tr>
+<tr><td>Restrict deletions</td><td>on</td><td></td></tr>
+<tr><td>Do not allow bypassing the above settings</td><td>on, including administrators</td><td>the protection is for the admins too</td></tr>
+</tbody>
+</table>
+<p>The first release, <code>v0.1.0</code>, was pushed directly to <code>dev</code> before any rule existed, because the gate that the rules require did not exist until that commit. From the next release on, every change to <code>dev</code> arrives by pull request.</p>
+<h2 id="organisation">Organisation</h2>
+<ul>
+<li>Two-factor authentication required for every member, with hardware security keys (Settings, Authentication security). Passkeys and security keys only; no SMS.</li>
+<li><code>sgit.ai</code> verified as an organisation domain (Settings, Verified and approved domains).</li>
+<li>Actions: allow only actions from GitHub and from this organisation, pinned by commit SHA; <code>GITHUB_TOKEN</code> default permission read-only; &quot;Allow GitHub Actions to create and approve pull requests&quot; off.</li>
+</ul>
+<h2 id="actions-and-environments">Actions and environments</h2>
+<ul>
+<li>Every third-party action in <code>.github/workflows/</code> is pinned to a commit SHA with its tag in a comment. <code>deploy-pages.yml</code> already does this.</li>
+<li><code>permissions:</code> is minimal per job: <code>contents: read</code> by default; <code>contents: write</code> only in <code>tag-release</code>; <code>pages: write</code> and <code>id-token: write</code> only in <code>deploy</code>.</li>
+<li>Environments (Settings, Environments): <code>github-pages</code> (created by the first deploy); <code>dev</code>, <code>main</code> and <code>prod</code> for Terraform from step 3, each holding <code>WORKLOAD_IDENTITY_PROVIDER</code> and <code>SERVICE_ACCOUNT</code> as variables and <code>GOOGLE_OAUTH_CLIENT_SECRET</code> as a secret. <code>prod</code> requires a reviewer.</li>
+<li>No JSON service-account key, anywhere, ever. Authentication to GCP is Workload Identity Federation.</li>
+</ul>
+<h2 id="what-a-compromise-of-this-repository-would-still-get">What a compromise of this repository would still get</h2>
+<p>Everything, for the users who load the malicious page while it is served. The protections above lower the odds and raise the number of people who must collude; they do not change the model. The site says so in plain words.</p>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/ops/branch-protection.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

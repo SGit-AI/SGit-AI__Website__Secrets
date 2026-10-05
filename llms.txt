@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.0 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.1 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -14,9 +14,19 @@ Notes for agents:
 
 ## Pages
 
-- [secrets.sgit.ai — a zero-knowledge secrets manager in the browser](/index.md): A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. This version is the pipeline before the site: nothing of the app is built yet.
+- [secrets.sgit.ai — a zero-knowledge secrets manager in the browser](/index.md): A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
+- [Comms: asks and steps — secrets.sgit.ai](/admin/comms.md): The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 - [Admin — secrets.sgit.ai](/admin/index.md): How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 - [Release history — secrets.sgit.ai](/admin/versions.md): Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
+- [Design documents — secrets.sgit.ai](/docs/design/index.md): The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
+- [Documents — secrets.sgit.ai](/docs/index.md): Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
+- [Operations — secrets.sgit.ai](/docs/ops/index.md): How a release works, what only a human can do, the DNS record and the repository protections.
+- [Environments — secrets.sgit.ai](/environments/index.md): One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
+- [How it works — secrets.sgit.ai](/how-it-works/index.md): The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
+- [Keyring format v1 — secrets.sgit.ai](/keyring/index.md): The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
+- [Security — secrets.sgit.ai](/security/index.md): The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
+- [Sharing — secrets.sgit.ai](/sharing/index.md): The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
+- [Shipped, proposed, absent — secrets.sgit.ai](/shipped/index.md): Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
 ## Design documents (the reasoning; the brief is the instruction)
 

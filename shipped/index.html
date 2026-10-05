@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shipped, proposed, absent — secrets.sgit.ai</title>
+  <meta name="description" content="Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/shipped/">
+  <link rel="alternate" type="text/markdown" href="/shipped/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/shipped/">
+  <meta property="og:title" content="Shipped, proposed, absent — secrets.sgit.ai">
+  <meta property="og:description" content="Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl here" href="/shipped/" aria-current="page">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Shipped, proposed, absent</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Shipped, proposed, absent</h1>
+    <p class="sg-lead">This site publishes its argument before the thing is finished. To keep that honest, every claim it makes carries one of three statuses, and this page is the list. It is generated from <code>data/features.json</code> on every release, and so is <a href="/docs/reality.html">docs/reality.md</a>, so the two cannot disagree. Nothing is described in the present tense anywhere on the site before this page says shipped.</p>
+    <p>A <em>shipped</em> row names the version that shipped it and where in the repository it lives. A <em>proposed</em> row points at the section of the brief that designs it. An <em>absent</em> row says why it is not in the MVP and, where there is one, what comes instead.</p>
+    <!-- sg-secrets:features:start group="status" -->
+  <h2 id="shipped">Shipped (23)</h2>
+  <p>exists in the repository, runs, and was exercised at the version shown.</p>
+  <table class="sg-features" data-area="shipped" data-generated-from="data/features.json">
+    <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>pipeline</td><td>One version in admin/build/version.txt, repeated in every badge, twin, index and config</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/version.txt</td><td>Check 1 of the gate fails on any disagreement.</td></tr>
+      <tr><td>pipeline</td><td>Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/chrome.py</td><td>gen_chrome.py --check is part of the gate.</td></tr>
+      <tr><td>pipeline</td><td>Markdown twin of every HTML page, links pointing at markdown</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/gen_twins.py</td><td>index.html has index.md beside it; the twin carries the site version.</td></tr>
+      <tr><td>pipeline</td><td>llms.txt, llms-full.txt and sitemap.xml generated on every release</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/gen_llms.py</td><td>llms-full.txt concatenates every twin and every design document.</td></tr>
+      <tr><td>pipeline</td><td>docs/reality.md and the status tables generated from data/features.json</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/gen_features.py</td><td>If the reality document does not list it, it does not exist.</td></tr>
+      <tr><td>pipeline</td><td>The eight-check release gate, no dependencies</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/validate.js</td><td>Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys.</td></tr>
+      <tr><td>pipeline</td><td>The same gate locally and in CI, one command</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/gate.py</td><td>The CI validate job runs gate.py; a release that fails locally fails the same way in CI.</td></tr>
+      <tr><td>pipeline</td><td>Every push to dev is a release: version.txt and the commit subject agree, CI tags it</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/tag_release.py</td><td>Anchors on the newest commit whose subject is &#x27;site vX.Y.Z : ...&#x27;, asserts the next minor or patch or major .0, backfills missing tags.</td></tr>
+      <tr><td>pipeline</td><td>Deploy to GitHub Pages from the validated tree</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>.github/workflows/deploy-pages.yml</td><td>Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA.</td></tr>
+      <tr><td>pipeline</td><td>verify-live: the run is red until the live site serves the released version</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/build/verify_live.py</td><td>Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes.</td></tr>
+      <tr><td>pipeline</td><td>Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>vendor/MANIFEST.json</td><td>Check 5 of the gate. Today the only vendored file is the family design tokens.</td></tr>
+      <tr><td>site</td><td>secrets.sgit.ai served by GitHub Pages over HTTPS</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>CNAME, docs/ops/dns.md</td><td>verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made.</td></tr>
+      <tr><td>site</td><td>Content pages: how it works, security, keyring spec, sharing, environments</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>how-it-works/, security/, keyring/, sharing/, environments/</td><td>Every page opens with a status line generated from this file and describes only designs in the future tense.</td></tr>
+      <tr><td>site</td><td>/shipped/ generated from this file, one table per status, beside docs/reality.md</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>shipped/index.html</td><td>The same generator writes both, so the page and the reality document cannot disagree.</td></tr>
+      <tr><td>site</td><td>The five design documents published verbatim</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>docs/design/</td><td>The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it.</td></tr>
+      <tr><td>site</td><td>Every markdown document under docs/ rendered to HTML on each release, with index pages</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>admin/build/gen_docs.py, admin/build/md_to_html.py</td><td>Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate.</td></tr>
+      <tr><td>site</td><td>The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>admin/build/chrome.py, assets/nav.js</td><td>The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link.</td></tr>
+      <tr><td>admin</td><td>Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>admin/comms.html</td><td>gen_versions.py renders the step tracker; a done step must name a release that exists.</td></tr>
+      <tr><td>site</td><td>brief-corrections.md: what the brief got wrong, dated, beside it</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>docs/design/brief-corrections.md</td><td>Appended to as the build finds out.</td></tr>
+      <tr><td>site</td><td>docs/ops/needs.md: exactly what only a human can do</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>docs/ops/needs.md</td><td>DNS, Pages, branch protection, GCP bootstrap, OAuth client secret.</td></tr>
+      <tr><td>admin</td><td>Release history page generated from data/versions.json</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>admin/versions.html</td><td>One row per release; the newest row must equal version.txt.</td></tr>
+      <tr><td>tests</td><td>Unit tests under node --test, real WebCrypto, no mocks</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>tests/unit/</td><td>At this version: the gate&#x27;s own checks against fake fixtures. Keyring tests come with step 4.</td></tr>
+      <tr><td>tests</td><td>Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema</td><td><span class="sg-status sg-status-shipped">shipped v0.1.0</span></td><td>tests/build/</td><td>pytest, TestCase classes, no mocks.</td></tr>
+    </tbody>
+  </table>
+  <h2 id="proposed">Proposed (22)</h2>
+  <p>designed in the brief, not built; described only in the future tense.</p>
+  <table class="sg-features" data-area="proposed" data-generated-from="data/features.json">
+    <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>site</td><td>Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>docs/ops/branch-protection.md</td><td>Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed.</td></tr>
+      <tr><td>infra</td><td>Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>infra/bootstrap/bootstrap.sh</td><td>Step 3. Run once by a human; idempotent; --dry-run.</td></tr>
+      <tr><td>infra</td><td>Terraform module secrets-env and the dev environment root</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>infra/terraform/</td><td>Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF.</td></tr>
+      <tr><td>infra</td><td>infra.yml: plan on PR, apply on dispatch and on push to dev for dev</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>.github/workflows/infra.yml</td><td>Step 3. Workload Identity Federation, no JSON keys.</td></tr>
+      <tr><td>infra</td><td>Storage Security Rules deployed per environment</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>infra/rules/storage.rules</td><td>The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project.</td></tr>
+      <tr><td>infra</td><td>config/environments.json with real dev values from Terraform outputs</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>config/environments.json</td><td>Step 3. Today every environment is a placeholder with _source null.</td></tr>
+      <tr><td>app</td><td>Sign in and out with Google and email/password against the chosen environment</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>app/index.html</td><td>Step 3. Popup sign-in by default; vendored Firebase SDK.</td></tr>
+      <tr><td>app</td><td>Environment page: pick a built-in environment, enter a custom one, import, export, reset</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>app/environment.html</td><td>Step 3. The active environment is shown in the header at all times.</td></tr>
+      <tr><td>app</td><td>Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>app/setup.html, app/unlock.html</td><td>Step 4. Not before the dev project exists and the probe pages are green.</td></tr>
+      <tr><td>app</td><td>Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>section 8 of the brief</td><td>Step 4. Published at /keyring/ as a specification.</td></tr>
+      <tr><td>app</td><td>Recovery code: 26 characters base32, 128 bits, shown once</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>app/setup.html</td><td>Step 4. Lose every passkey and the code and the data is gone; the site will say so.</td></tr>
+      <tr><td>app</td><td>Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>app/vault.html, app/entry.html</td><td>Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note.</td></tr>
+      <tr><td>app</td><td>Optimistic concurrency on keyring writes with a three-way merge</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>section 8.5 of the brief</td><td>Step 5. rev in the AAD so a stale body fails to decrypt.</td></tr>
+      <tr><td>app</td><td>Devices page: add and remove passkeys, regenerate the recovery code</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>app/devices.html</td><td>Step 6.</td></tr>
+      <tr><td>app</td><td>Account page: export and import the encrypted keyring, sign out, wipe memory</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>app/account.html</td><td>Step 6.</td></tr>
+      <tr><td>app</td><td>Key pair per user generated at first run; public bundle written to directory/</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>section 8.3 of the brief</td><td>Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing.</td></tr>
+      <tr><td>admin</td><td>Admin sign-in with the visitor&#x27;s own Google account, token in memory only</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/oauth.js</td><td>Step 7. Implicit flow to verify first; PKCE fallback.</td></tr>
+      <tr><td>admin</td><td>Setup checklist: every per-project resource as a row, with Fix where fixable client-side</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/setup-checklist.html</td><td>Step 3 read-only, step 7 with fixes.</td></tr>
+      <tr><td>admin</td><td>Auth config, storage, rules diff and deploy, users, environment export</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/*.html</td><td>Step 7. GCP IAM is the role; the pages are a client for GCP&#x27;s own APIs.</td></tr>
+      <tr><td>tests</td><td>Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>tests/*.html</td><td>Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix.</td></tr>
+      <tr><td>tests</td><td>Playwright end to end against the real dev project with a virtual authenticator</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>tests/e2e/</td><td>Whether the virtual authenticator does PRF is an open question.</td></tr>
+      <tr><td>tests</td><td>Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>docs/acceptance.md</td><td>Before 1.0. The write-up is published whatever the result.</td></tr>
+    </tbody>
+  </table>
+  <h2 id="absent">Absent (5)</h2>
+  <p>deliberately not in the MVP; comes as a later version or a later site, or never.</p>
+  <table class="sg-features" data-area="absent" data-generated-from="data/features.json">
+    <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>app</td><td>Sharing an entry with another user through their inbox</td><td><span class="sg-status sg-status-absent">absent</span></td><td>/sharing/ (step 2 describes it)</td><td>Phase 2. The data model ships first so it is not rewritten later.</td></tr>
+      <tr><td>app</td><td>A document kind in the keyring</td><td><span class="sg-status sg-status-absent">absent</span></td><td>section 8.4 of the brief</td><td>Documents will be a pointer to an sgit vault plus that vault&#x27;s key, not bytes in the keyring.</td></tr>
+      <tr><td>app</td><td>Browser extension or autofill</td><td><span class="sg-status sg-status-absent">absent</span></td><td>section 12 of the brief</td><td>A later site or a later version.</td></tr>
+      <tr><td>app</td><td>An API for agents</td><td><span class="sg-status sg-status-absent">absent</span></td><td>section 12 of the brief</td><td>A later version.</td></tr>
+      <tr><td>app</td><td>Any server-side code: Cloud Functions, proxies, a small API</td><td><span class="sg-status sg-status-absent">absent</span></td><td>everywhere</td><td>Forbidden by design. A need for one is a proposal in brief-corrections.md, not code.</td></tr>
+    </tbody>
+  </table>
+<!-- sg-secrets:features:end -->
+    <h2>How a row changes status</h2>
+    <p>A feature becomes shipped in the release that makes it true, by editing one row of <code>data/features.json</code> in the same commit as the code. The gate refuses a release whose generated pages disagree with that file, and the build tests check that every shipped row carries a version no newer than the release. There is no other way to change a status.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/shipped/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

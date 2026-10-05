@@ -1,0 +1,14 @@
+{
+  "_comment": "The build order of section 11 of the brief, as a tracker: one row per step with its state and the release that delivered it. Rendered on admin/comms.html by gen_versions.py. plannedVersion is what the brief wrote; releases bump the third digit (brief-corrections C15), so the delivered version differs.",
+  "steps": [
+    { "step": 1, "title": "The pipeline before the site",                                   "plannedVersion": "0.1.0", "status": "done",     "releasedAs": "0.1.0", "note": "Live at secrets.sgit.ai on 2026-10-05; verify-live green." },
+    { "step": 2, "title": "Content pages, everything marked proposed; /shipped/; twins; llms.txt; sitemap", "plannedVersion": "0.2.0", "status": "done",     "releasedAs": "0.1.1", "note": "The documents are rendered to HTML as well; the family nav with grouped menus." },
+    { "step": 3, "title": "Bootstrap, Terraform, infra.yml, rules, environments.json with dev real; sign in against dev", "plannedVersion": "0.3.0", "status": "open", "releasedAs": null, "note": "Blocked on the GCP items in needs.md (billing, project ids, bootstrap run, OAuth client secret)." },
+    { "step": 4, "title": "PRF probe page; keyring v1 library with KATs; setup and unlock; recovery code", "plannedVersion": "0.4.0", "status": "open", "releasedAs": null, "note": "Not before step 3's probe pages are green on a real dev project." },
+    { "step": 5, "title": "Entries: kinds, vault list, entry page, copy and reveal, lock timers, merge", "plannedVersion": "0.5.0", "status": "open", "releasedAs": null, "note": "" },
+    { "step": 6, "title": "Devices page; account export and import; meta.json; matrix page",   "plannedVersion": "0.6.0", "status": "open",     "releasedAs": null,    "note": "" },
+    { "step": 7, "title": "Admin pages with fixes; rules.yml; new-environment.md timed on a fresh main project", "plannedVersion": "0.7.0", "status": "open", "releasedAs": null, "note": "Not before step 6: the users page needs meta.json." },
+    { "step": 8, "title": "prod live; homepage demo real; security page final; acceptance test published", "plannedVersion": "0.8.0", "status": "open", "releasedAs": null, "note": "" },
+    { "step": 9, "title": "Phase 2 data only: public bundle in directory/, inbox rules live",  "plannedVersion": "0.9.0", "status": "open",     "releasedAs": null,    "note": "sgit pki import of the published bundle to verify." }
+  ]
+}

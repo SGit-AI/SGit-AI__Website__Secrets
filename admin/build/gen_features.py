@@ -98,8 +98,9 @@ class Gen__Features:
 
     # ── status tables in pages ─────────────────────────────────────────────────
 
-    def table_html(self, area):
-        features = [f for f in self.features if area in ('', 'all') or f['area'] == area]
+    def table_html(self, area, features=None):
+        if features is None:
+            features = [f for f in self.features if area in ('', 'all') or f['area'] == area]
         if not features:
             raise SystemExit(f'features block: no features in area "{area}"')
         rows = []
@@ -118,15 +119,35 @@ class Gen__Features:
                           '    </tbody>'                                                                                                  ,
                           '  </table>'                                                                                                    ])
 
+    def grouped_html(self):                                                       # /shipped/: one table per status, in the order shipped, proposed, absent
+        groups = self.by_status(self.features)
+        parts  = []
+        for status in STATUSES:
+            parts.append(f'  <h2 id="{status}">{status.capitalize()} ({len(groups[status])})</h2>')
+            parts.append(f'  <p>{html.escape(self.data["statuses"][status])}.</p>')
+            parts.append(self.table_html(status, features=groups[status]))
+        return '\n'.join(parts)
+
+    def status_line_html(self, ids):                                              # a content page's status line, from the features it describes
+        chips = []
+        for feature_id in [i.strip() for i in ids.split(',') if i.strip()]:
+            feature = next((f for f in self.features if f['id'] == feature_id), None)
+            if feature is None:
+                raise SystemExit(f'status block names unknown feature id "{feature_id}"')
+            chips.append(f'<span class="sg-status sg-status-{feature["status"]}">{self.status_label(feature)}</span> {html.escape(feature["title"])}')
+        return ('  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: '
+                + ' · '.join(chips) + '</p>')
+
     def run(self):
         changed = []
         if self.pages.write_if_changed(REALITY_FILE, self.reality_markdown(), self.check):
             changed.append('docs/reality.md')
         for path in self.pages.html_files():
-            text  = path.read_text(encoding='utf-8')
-            if not self.pages.has_block(text, 'features'):
+            text = path.read_text(encoding='utf-8')
+            if not (self.pages.has_block(text, 'features') or self.pages.has_block(text, 'status')):
                 continue
-            text, _ = self.pages.replace_blocks(text, 'features', lambda attrs: self.table_html(attrs.get('area', 'all')))
+            text, _ = self.pages.replace_blocks(text, 'features', lambda attrs: self.grouped_html() if attrs.get('group') == 'status' else self.table_html(attrs.get('area', 'all')))
+            text, _ = self.pages.replace_blocks(text, 'status'  , lambda attrs: self.status_line_html(attrs.get('ids', '')))
             if self.pages.write_if_changed(path, text, self.check):
                 changed.append(path.relative_to(ROOT).as_posix())
         return changed

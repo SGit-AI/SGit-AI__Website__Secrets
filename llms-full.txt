@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.0 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.1 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -19,15 +19,25 @@ source: /index.md
 
 # secrets.sgit.ai
 
-> A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. This version is the pipeline before the site: nothing of the app is built yet.
+> A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one GCP project per environment, holding Identity Platform for login and a Cloud Storage bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.
 
-**What exists at this version.** Only the pipeline: the version gate, the chrome generator, the markdown twins, the machine indexes, the release tagging and the deploy. No app, no admin, no probe page is built. Every row below marked *proposed* is a design, not a thing. The design is in [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md); what is real is in [docs/reality.md](/docs/reality.md), generated from the same data as the table on this page.
+**What exists at this version.** The pipeline, the live site, and the content pages that describe the design. No app, no admin, no probe page is built. Every row below marked *proposed* is a design, not a thing. The design is in [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md); what is real is in [/shipped/](/shipped/index.md) and [docs/reality.md](/docs/reality.md), generated from the same data as the table on this page.
+
+## The three-step demo, when it exists
+
+Status, from [/shipped/](/shipped/index.md): proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+
+1. **Sign in** with Google or an email address, against the environment shown in the header.
+2. **Touch your passkey.** The authenticator returns a secret bound to this origin; the browser derives the key that opens your keyring.
+3. **See your secret.** It was ciphertext in a bucket a second ago and it is plaintext only in this tab, until you lock, sign out or leave.
+
+None of the three steps is built. [How it works](/how-it-works/index.md) draws the flows; [the keyring page](/keyring/index.md) is the file format; [security](/security/index.md) is what each party gets and what the design cannot withhold.
 
 ## What it will be
 
@@ -37,7 +47,7 @@ Three principles are not negotiable: plaintext exists only in the browser, brief
 
 ## What a compromised party would get
 
-The design's threat table, from [section 3.4 of the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). It describes the design, not a shipped system; the acceptance test that checks it is listed as proposed below.
+The design's threat table, from [section 3.4 of the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md), in full on [the security page](/security/index.md). It describes the design, not a shipped system; the acceptance test that checks it is listed as proposed below.
 
 | Party compromised | Gets | Does not get |
 |---|---|---|
@@ -65,9 +75,14 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 | pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
 | pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
 | pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
-| site | secrets.sgit.ai served by GitHub Pages over HTTPS | proposed | CNAME, docs/ops/dns.md | Needs the DNS CNAME and Pages enablement listed in docs/ops/needs.md. Flips to shipped when verify-live first passes. |
-| site | Content pages: how it works, security, keyring spec, sharing, environments, shipped | proposed | section 6.1 of the brief | Step 2. Every page will carry a status line from this file. |
-| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | Markdown only at this version; rendered pages come with step 2. |
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | shipped v0.1.0 | CNAME, docs/ops/dns.md | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments | shipped v0.1.1 | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
+| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | shipped v0.1.1 | shipped/index.html | The same generator writes both, so the page and the reality document cannot disagree. |
+| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
+| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
+| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
@@ -102,8 +117,8 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 
 ## Where to read next
 
-- [The MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md), the instruction set this site is built from, and [what it got wrong](/docs/design/brief-corrections.md).
-- [The primary design](/docs/design/riskmandate-gcp-key-vault-password-manager-mvp.md): the all-GCP stack, the keyring, PRF unlock, the sharing scheme.
+- [How it works](/how-it-works/index.md), [Security](/security/index.md), [Keyring format](/keyring/index.md), [Sharing](/sharing/index.md), [Environments](/environments/index.md): the design, every page marked with its status.
+- [The MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md), the instruction set this site is built from, and [what it got wrong](/docs/design/brief-corrections.md); the four design documents are listed at [docs/design/](/docs/design/index.md).
 - [How a release works](/docs/ops/release.md): the version gate, the commit subject, the tag, and why green does not mean live.
 - [What only a human can do](/docs/ops/needs.md) before the next step.
 - [Release history](/admin/versions.md) and [llms.txt](/llms.txt) for agents.
@@ -114,6 +129,59 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 
 
 ==============================================================================
+source: /admin/comms.md
+==============================================================================
+
+# Comms: asks and steps
+
+> The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
+
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+The state of play, kept on the site rather than in a chat message, in the manner of the sibling sites' comms pages. Numbered so a reply can refer to an item without quoting it.
+
+## Asks back to the project lead
+
+The exact list, with who and which step waits on each, is [docs/ops/needs.md](/docs/ops/needs.md); it is the source and this page points at it rather than copying it. In one line each, as of v0.1.1 (2026-10-05):
+
+| # | Ask | Blocks | Status |
+|---|---|---|---|
+| N1 | Branch protection on `dev` and `main` with `validate` required | section 9.5; every release from here on arrives by pull request | Open |
+| N2 | Hardware-key 2FA for the organisation; `sgit.ai` verified as an organisation domain; the Actions policy | section 9.5; the rows on [/security/](/security/index.md) say "unconfirmed" | Open |
+| N3 | A billing account, confirmed project ids, and the bootstrap run once the script exists | step 3 | Open |
+| N4 | The Google OAuth client secret for sign-in, as the GitHub environment secret for `dev` | step 3 | Open |
+| N5 | Confirm the versioning decision: every release bumps the third digit; the second digit is reserved for a milestone you name (brief-corrections C15) | nothing; recorded as decided on 2026-10-05 | Confirm |
+| N6 | Confirm that documents are rendered at build time with the raw markdown one click away, rather than a client-side markdown viewer (C16) | nothing | Confirm |
+| N0 | DNS, Pages with the custom domain and HTTPS, and the re-run of the v0.1.0 workflow | step 1 | Done, 2026-10-05 |
+
+## The build order, as it stands
+
+Section 11 of the brief, one row per step, from `data/steps.json`. The planned version is what the brief wrote; releases bump the third digit, so the delivered version differs.
+
+| # | Step | Planned as | Delivered as | Status | Note |
+|---|---|---|---|---|---|
+| T1 | The pipeline before the site | `v0.1.0` | `v0.1.0` | done | Live at secrets.sgit.ai on 2026-10-05; verify-live green. |
+| T2 | Content pages, everything marked proposed; /shipped/; twins; llms.txt; sitemap | `v0.2.0` | `v0.1.1` | done | The documents are rendered to HTML as well; the family nav with grouped menus. |
+| T3 | Bootstrap, Terraform, infra.yml, rules, environments.json with dev real; sign in against dev | `v0.3.0` |  | open | Blocked on the GCP items in needs.md (billing, project ids, bootstrap run, OAuth client secret). |
+| T4 | PRF probe page; keyring v1 library with KATs; setup and unlock; recovery code | `v0.4.0` |  | open | Not before step 3's probe pages are green on a real dev project. |
+| T5 | Entries: kinds, vault list, entry page, copy and reveal, lock timers, merge | `v0.5.0` |  | open |  |
+| T6 | Devices page; account export and import; meta.json; matrix page | `v0.6.0` |  | open |  |
+| T7 | Admin pages with fixes; rules.yml; new-environment.md timed on a fresh main project | `v0.7.0` |  | open | Not before step 6: the users page needs meta.json. |
+| T8 | prod live; homepage demo real; security page final; acceptance test published | `v0.8.0` |  | open |  |
+| T9 | Phase 2 data only: public bundle in directory/, inbox rules live | `v0.9.0` |  | open | sgit pki import of the published bundle to verify. |
+
+## Open questions carried from the brief
+
+Listed and dated at the end of [brief-corrections.md](/docs/design/brief-corrections.md): the Playwright virtual authenticator and PRF, Google's implicit flow, the Security Rules syntax, where Identity Platform stores user records, and whether `sgit pki import` reads a browser-generated bundle.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/admin/comms.html)*
+
+
+==============================================================================
 source: /admin/index.md
 ==============================================================================
 
@@ -121,7 +189,7 @@ source: /admin/index.md
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -148,6 +216,7 @@ The admin pages will work only when the visitor signs in with a Google account t
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
 | admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
 | admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
 | admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
@@ -169,7 +238,13 @@ The admin pages will work only when the visitor signs in with a Google account t
 | pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
 | pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
 
-Release history: [versions](/admin/versions.md). What a human still has to do: [needs.md](/docs/ops/needs.md).
+## The admin section
+
+- [How the site is built](/admin/index.md): this page.
+- [Release history](/admin/versions.md): one row per release, generated from `data/versions.json`.
+- [Comms](/admin/comms.md): the asks back to the project lead and the nine build steps with their status, generated from `data/steps.json`.
+- [What needs a human](/docs/ops/needs.md), exactly, and the rest of the [documents](/docs/index.md), each rendered from its markdown with the raw file one click away.
+- The build itself, served as plain files: [chrome.py](/admin/build/chrome.py) (the nav, footer, badges and CSP), [validate.js](/admin/build/validate.js) (the eight checks), [version.txt](/admin/build/version.txt), [nav.js](/assets/nav.js) (the menu interaction, the only script on the site at this version).
 
 ---
 
@@ -184,7 +259,7 @@ source: /admin/versions.md
 
 > Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
 
-*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.0 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -192,6 +267,7 @@ One row per release. The version increments on every push to `dev`: a minor bump
 
 | Version | Date | Release | What changed |
 |---|---|---|---|
+| `v0.1.1` | 2026-10-05 | the content pages and the family chrome | Six content pages: how it works, security, keyring format v1, sharing, environments, and /shipped/ generated from data/features.json with one table per status. Every content page opens with a status line generated from the same file. Every markdown document under docs/ is now rendered to an HTML page beside it (the design documents, the ops notes, reality.md) by a standard-library markdown renderer, with index pages for docs/design/ and docs/ops/; the markdown stays the source and the twin. The homepage links the new pages and carries the three-step demo as proposed. The chrome now has the family nav (grouped menus with dropdowns, the part-of-sgit.ai link, the stage pill, a phone menu) with breadcrumbs, and the admin section gains a comms page with the asks and a tracker of the nine build steps. Versions now bump the third digit per release (brief-corrections C15). v0.1.0 went live at secrets.sgit.ai (DNS, Pages and the re-run done by Dinis), so the live-domain claim is shipped; needs.md items 1 to 3 are closed. |
 | `v0.1.0` | 2026-10-05 | the pipeline, before the site | The repository layout, version.txt as the one source of the version, the chrome generator, markdown twins, llms.txt and llms-full.txt, docs/reality.md generated from data/features.json, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate, tag-release, deploy and verify-live, CNAME, the DNS and branch-protection notes, docs/ops/needs.md, and the five design documents copied in verbatim. A placeholder homepage with the version badge and the status table. Nothing of the app, admin or test pages exists yet; every one of those claims is marked proposed. |
 
 How a release works, step by step: [docs/ops/release.md](/docs/ops/release.md).
@@ -202,22 +278,546 @@ How a release works, step by step: [docs/ops/release.md](/docs/ops/release.md).
 
 
 ==============================================================================
-source: /docs/reality.md
+source: /docs/design/index.md
 ==============================================================================
 
-# secrets.sgit.ai — reality
+# Design documents
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.0 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+> The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
 
-45 claims: 17 shipped, 23 proposed, 5 absent.
+*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
-| Status | Meaning |
+---
+
+The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
+
+- [Brief corrections](/docs/design/brief-corrections.md): What the brief got wrong or left open, found while building, dated, beside it. [(markdown)](/docs/design/brief-corrections.md)
+- [Risk Mandate — AWS Cognito Client-Side Architecture](/docs/design/riskmandate-aws-cognito-architecture.md): The AWS variant; why no secret can live inside an identity provider; the attack table. [(markdown)](/docs/design/riskmandate-aws-cognito-architecture.md)
+- [Risk Mandate — GCP Key Vault Architecture & Password Manager MVP](/docs/design/riskmandate-gcp-key-vault-password-manager-mvp.md): The primary design: all-GCP stack, keyring, PRF unlock, sharing scheme, storage layout, threat summary, password-manager MVP scope. [(markdown)](/docs/design/riskmandate-gcp-key-vault-password-manager-mvp.md)
+- [Risk Mandate — User Onboarding & Account Experience](/docs/design/riskmandate-user-onboarding-account-experience.md): The Workspace-based onboarding design, the Google terms research, and the five-tier model that led here. [(markdown)](/docs/design/riskmandate-user-onboarding-account-experience.md)
+- [Risk Mandate — Google Workspace as Identity, Storage and Deployment Substrate](/docs/design/riskmandate-workspace-architecture-briefing.md): The earlier Workspace architecture briefing. [(markdown)](/docs/design/riskmandate-workspace-architecture-briefing.md)
+- [secrets.sgit.ai — MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md): The instruction set: architecture, environments, the site, the keyring specification, the pipeline, the build order. [(markdown)](/docs/design/secrets-sgit-ai__mvp-build-brief.md)
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/docs/design/)*
+
+
+==============================================================================
+source: /docs/index.md
+==============================================================================
+
+# Documents
+
+> Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
+
+*Source: <https://secrets.sgit.ai/docs/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+The documents this site was built from and the notes it is run by, published whole. Each is a markdown file in the repository, which is the source of truth, and a page rendered from it on every release, which is presentation. The rendered page links the raw file at the top; the raw file is what a reader checks the site against.
+
+- [Design documents](/docs/design/index.md): [the MVP build brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md) (the instruction set), [what it got wrong](/docs/design/brief-corrections.md), and the four documents that carry the reasoning.
+- [Operations](/docs/ops/index.md): [how a release works](/docs/ops/release.md), [what only a human can do](/docs/ops/needs.md), [the DNS record](/docs/ops/dns.md), [the repository protections](/docs/ops/branch-protection.md).
+- [Reality](/docs/reality.md): what is built, by status, generated from `data/features.json`. The same data renders [/shipped/](/shipped/index.md).
+
+## Why publish the brief at all
+
+A reader who wants to check whether this site is faithful to what it was asked to build should not have to reconstruct the brief from the site. Publishing the commission, and the corrections beside it, makes the site checkable against something other than its own claims. That is the same argument the reality document makes, pointed at this site.
+
+## For agents
+
+[llms.txt](/llms.txt) lists every page and document with a one-line description; [llms-full.txt](/llms-full.txt) is all of them in one fetch. Every HTML page has a markdown twin at the same path with the extension swapped, and links inside the markdown point at markdown.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/docs/)*
+
+
+==============================================================================
+source: /docs/ops/index.md
+==============================================================================
+
+# Operations
+
+> How a release works, what only a human can do, the DNS record and the repository protections.
+
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+How a release works, what only a human can do, the DNS record and the repository protections.
+
+- [Repository protections](/docs/ops/branch-protection.md): The settings for dev and main, the organisation, Actions and environments. [(markdown)](/docs/ops/branch-protection.md)
+- [DNS for secrets.sgit.ai](/docs/ops/dns.md): The CNAME record and the Pages settings for secrets.sgit.ai. [(markdown)](/docs/ops/dns.md)
+- [What only a human can do](/docs/ops/needs.md): Exactly what only a human can do, who, and which step waits on it. [(markdown)](/docs/ops/needs.md)
+- [How a release works](/docs/ops/release.md): The version, the commit subject, the gate, the four CI jobs, and why green does not mean live. [(markdown)](/docs/ops/release.md)
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/docs/ops/)*
+
+
+==============================================================================
+source: /environments/index.md
+==============================================================================
+
+# Environments
+
+> One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
+
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): proposed Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool · proposed Terraform module secrets-env and the dev environment root · proposed config/environments.json with real dev values from Terraform outputs · proposed Environment page: pick a built-in environment, enter a custom one, import, export, reset
+
+One site serves every environment. An environment is one GCP project holding an Identity Platform configuration and one bucket; the project is the unit that is created and destroyed. The browser picks the environment at runtime, with `prod` as the default on `secrets.sgit.ai`, and shows which one is active in the app header at all times, so nobody enters a real secret into `dev` by mistake.
+
+## The environments
+
+| Environment | Purpose | GCP project id (proposed) | Who uses it |
+|---|---|---|---|
+| `dev` | Daily development, disposable | `sgit-secrets-dev` | Builders, and the end-to-end tests |
+| `main` | Staging; what the `main` branch is tested against | `sgit-secrets-main` | Review |
+| `prod` | The public default | `sgit-secrets-prod` | Everyone |
+| `<customer>` | A customer's own project, in their organisation and billing | Theirs | Them |
+
+The project ids are proposed until the bootstrap confirms they are available. None exists yet.
+
+## What a project contains
+
+Terraform in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform.
+
+## config/environments.json
+
+The site ships one file naming every built-in environment. Every value in it is a **public identifier**: a Firebase web API key is not a secret, it is restricted by HTTP referrer, and the project id, auth domain, bucket name, app id and admin OAuth client id are all visible to any user of the app anyway. The file is generated from Terraform outputs by the pipeline and validated by the gate; a block whose values do not match the Terraform state it came from will fail the build. The leak tripwire allows the `AIza…` shape in this file only, so a key pasted anywhere else is caught.
+
+```
+
+{
+  "version": 1,
+  "siteVersion": "…",
+  "default": "prod",
+  "environments": {
+    "prod": {
+      "label":              "secrets.sgit.ai (production)",
+      "projectId":          "sgit-secrets-prod",
+      "apiKey":             "AIza… (public web API key, restricted by referrer)",
+      "authDomain":         "sgit-secrets-prod.firebaseapp.com",
+      "storageBucket":      "sgit-secrets-prod.firebasestorage.app",
+      "appId":              "1:…:web:…",
+      "adminOauthClientId": "….apps.googleusercontent.com",
+      "tenantId":           null,
+      "region":             "europe-west2",
+      "signInMethod":       "popup"
+    }
+  }
+}
+
+```
+
+The current file is [live on this site](/config/environments.json); at this version every environment in it is a placeholder.
+
+## How the browser chooses
+
+- The app reads the active configuration from `localStorage['sgit.secrets.config.v1']` if present, else from the file's `default`.
+- `?env=dev` in the URL selects a built-in environment for that load and persists it.
+- The Environment page will let a user pick a built-in environment, enter a custom one (every field above), export it as JSON, import one, and reset.
+- Changing environment signs the user out and clears every key from memory.
+- Nothing secret is ever stored in localStorage; the only other keys are user-interface conveniences, and the gate checks every write against the allow-list in `app/config/storage-keys.js`.
+
+## Running your own
+
+The target, from the brief: a customer with a GCP organisation and a billing account goes from nothing to a green setup checklist in under thirty minutes with no support. The guide, `docs/ops/new-environment.md`, arrives with step 7 and will say:
+
+1. Run the bootstrap for one project.
+2. Add your domain to the authorised domains.
+3. Run Terraform.
+4. Paste the printed configuration into the site's Environment page, or into your fork's `config/environments.json`.
+
+The admin pages' setup checklist will verify each step against the live project. A customer can use the public site pointed at their own project, or fork the repository; either way the site never holds anything of theirs but public identifiers.
+
+## Notes to verify
+
+- Where Identity Platform stores user records, for customers with data-residency requirements. The bucket's location is chosen per project; Identity Platform is global.
+- Whether the tenant claim is available to Storage Security Rules, for projects that turn on multi-tenancy.
+- Pricing reference: Identity Platform basic sign-in is free to 50,000 monthly active users; SAML and OIDC federation are free only to 50.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/environments/)*
+
+
+==============================================================================
+source: /how-it-works/index.md
+==============================================================================
+
+# How it works
+
+> The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
+
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · proposed Devices page: add and remove passkeys, regenerate the recovery code
+
+Two things decide what you can do. The **login** decides which paths in the bucket you may touch. The **passkey** decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.
+
+This page describes the design in section 3 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). Every flow on it is *proposed*. The status line above is generated from `data/features.json` and changes when the code ships.
+
+## The parts
+
+| Layer | Component | Where it runs | What it is trusted with |
+|---|---|---|---|
+| Site and app | Static HTML, JS and CSS from this repository, on GitHub Pages at `secrets.sgit.ai` | Your browser | **The boundary.** Whoever controls this repository or the DNS controls the app |
+| Login | Identity Platform, through the vendored Firebase Auth SDK | Google | Can impersonate; cannot decrypt |
+| Storage | A Cloud Storage for Firebase bucket with Security Rules | Google | Holds ciphertext; can delete |
+| Unlock | A WebAuthn passkey with the PRF extension, RP ID `secrets.sgit.ai` | Your authenticator: Google Password Manager, iCloud Keychain or a hardware key | The only thing that can decrypt |
+| Admin | The same static pages, calling GCP's own REST APIs with your Google account's token | Your browser | Works only if your Google account has IAM on the project |
+| Infrastructure | Terraform in this repository, applied by GitHub Actions through Workload Identity Federation | GitHub Actions | Can reconfigure or delete; cannot read |
+
+## First run
+
+```
+
+sign in ──▶ no keyring at users/{uid}/keyring.json
+        ──▶ create a passkey with the PRF extension       (your authenticator asks for a gesture)
+        ──▶ generate: KEK (32 random bytes), a key pair, a recovery code
+        ──▶ wrap the KEK under the passkey's PRF output and under the recovery code
+        ──▶ encrypt the body under the KEK; write keyring.json and meta.json to the bucket
+        ──▶ show the recovery code once, behind "I have written it down"
+
+```
+
+What leaves the browser: ciphertext, two wrapped copies of the KEK, a 32-byte PRF salt, and `meta.json` with the passkey's credential id and public key. What never leaves: the PRF output, the KEK, the recovery code, the private keys, any entry.
+
+## Returning
+
+```
+
+sign in ──▶ fetch keyring.json (and remember its generation number)
+        ──▶ navigator.credentials.get with prf.eval.first = prfSalt   (one gesture)
+        ──▶ HKDF-SHA256(prf output, salt, "sgit-secrets/v1/wrap/<credentialId>") → wrapping key
+        ──▶ unwrap the KEK; decrypt the body into memory
+        ──▶ the vault list
+
+```
+
+Nothing decrypted is written anywhere: not to localStorage, sessionStorage, IndexedDB, the URL or a log. The gate checks the code for that on every release (check 8 on [the admin page](/admin/index.md)). Keys are cleared from memory on sign-out, on an environment change, when the tab has been hidden for five minutes, and on `beforeunload`.
+
+## New device
+
+```
+
+sign in ──▶ fetch keyring.json
+        ──▶ unlock with a synced passkey, a cross-device passkey (QR), or the recovery code
+        ──▶ register a new passkey on this device
+        ──▶ add a wrapped-KEK entry for it; bump rev; write with an if-generation-match precondition
+
+```
+
+Lose every passkey and the recovery code, and the data is gone. There is no reset, because nothing that could reset it exists anywhere but your authenticator and your note of the code. The site will say this on the setup page in the same words.
+
+## Admin
+
+```
+
+open /admin/ ──▶ choose an environment
+             ──▶ "Sign in with Google for admin" (OAuth, scope cloud-platform, token held in memory only)
+             ──▶ each check calls a GCP API: exists / enabled / configured / Fix
+
+```
+
+There is no admin role in the app. The GCP project's IAM is the role; the pages are a client for GCP's APIs. An admin page can list users, deploy rules and change CORS. It cannot open a keyring, because a keyring is ciphertext and the admin's token unlocks nothing.
+
+## What each party can see
+
+| Step | Google (Identity Platform, bucket) | GitHub (the site) | Your authenticator | Your browser |
+|---|---|---|---|---|
+| Sign in | Your email, the sign-in event, your uid | Nothing (static files) | Nothing | An ID token |
+| Fetch keyring | That uid read that object | Nothing | Nothing | Ciphertext |
+| Passkey gesture | Nothing | Nothing | The PRF secret for this credential and this origin | 32 bytes of PRF output, briefly |
+| Unlock | Nothing | Nothing | Nothing | The KEK and the plaintext body, in memory |
+| Write | New ciphertext, the object's size and time | Nothing | Nothing | Everything it already had |
+
+The one party absent from that table is whoever serves the JavaScript. The code your browser runs is the boundary of the whole design, which is why the [security page](/security/index.md) is mostly about this repository.
+
+## Read next
+
+- [The keyring format](/keyring/index.md): what is in the file, what is encrypted under what, and why the recovery code is long.
+- [Security](/security/index.md): the threat model and the RP ID decision.
+- [Environments](/environments/index.md): one site, one GCP project per environment, and how a customer runs their own.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/how-it-works/)*
+
+
+==============================================================================
+source: /keyring/index.md
+==============================================================================
+
+# Keyring format, version 1
+
+> The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
+
+*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): proposed Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · proposed Recovery code: 26 characters base32, 128 bits, shown once · proposed Optimistic concurrency on keyring writes with a three-way merge · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+
+The keyring is one encrypted file in the user's own prefix of a Cloud Storage bucket. Google stores it and cannot read it. This page is the file format, published as a specification so that a reader can check the code against it and so that another implementation could open the same file. It is version 1 and it is proposed: the known-answer fixtures in `tests/fixtures/keyring-v1/` and the crypto probe page will make it checkable when step 4 ships.
+
+## Objects in the bucket
+
+```
+
+users/{uid}/keyring.json          the encrypted keyring (one object, versioned by GCS)
+users/{uid}/meta.json             { "v":1, "createdAt", "keyringRev", "devices":[{"id","name","createdAt","lastUsedAt"}] }   not secret
+directory/{uid}.pub.json          the user's public-key bundle, signed (phase 1 writes it; phase 2 reads it)
+inbox/{uid}/{shareId}.json        keys encrypted to this user (phase 2)
+
+```
+
+## Key hierarchy
+
+```
+
+passkey PRF output (32 bytes, from the authenticator, never stored)
+  └─ HKDF-SHA256(ikm = prf, salt = keyring.prfSalt, info = "sgit-secrets/v1/wrap/<credentialId>")  →  WK_passkey   (AES-256-GCM key)
+
+recovery code (26 characters of base32, 128 bits, shown once)
+  └─ HKDF-SHA256(ikm = code bytes, salt = keyring.prfSalt, info = "sgit-secrets/v1/wrap/recovery")      →  WK_recovery
+
+KEK (32 random bytes)             wrapped once per unlock method, under a WK_*
+  └─ decrypts the body
+
+body (AES-256-GCM under the KEK)  { keys, entries[] }
+
+```
+
+**The PRF salt.** `keyring.prfSalt` is 32 random bytes, fixed for the keyring's life, passed to every passkey as `prf.eval.first`. One salt serves all passkeys; the per-credential HKDF `info` keeps the wrapping keys apart. The authenticator's PRF is already per-credential, so the info string is belt and braces.
+
+**The recovery code and why it is long.** HKDF alone is fast, so an attacker who holds the keyring could brute-force a weak code. A code of 128 bits of entropy makes that irrelevant, which is why it is long and machine-generated and never chosen by the user. The design deliberately does not add PBKDF2 "for safety": it would only slow a legitimate recovery.
+
+## keyring.json
+
+```
+
+{
+  "v": 1,
+  "keyringId": "uuid",
+  "rev": 7,
+  "prfSalt": "base64(32 bytes)",
+  "wraps": [
+    { "id": "pk-<credentialId base64url>", "kind": "passkey",  "name": "MacBook Chrome", "createdAt": "…", "iv": "b64", "ct": "b64" },
+    { "id": "recovery-1",                    "kind": "recovery", "createdAt": "…",                            "iv": "b64", "ct": "b64" }
+  ],
+  "body": { "iv": "b64", "ct": "b64", "aad": "keyringId|rev" }
+}
+
+```
+
+- `wraps[].ct` is AES-256-GCM of the 32-byte KEK under the wrap's WK, with additional authenticated data `keyringId|wrap.id`.
+- `body.ct` is AES-256-GCM of the UTF-8 JSON body under the KEK, with additional authenticated data `keyringId|rev`, so a body cannot be transplanted between keyrings or revisions: a stale body fails to decrypt rather than silently winning.
+- Every `iv` is 12 random bytes, fresh per encryption.
+
+## The decrypted body
+
+```
+
+{
+  "v": 1,
+  "keys": {
+    "encrypt": { "alg": "RSA-OAEP-4096", "jwk": { "…private…" } },
+    "sign":    { "alg": "ECDSA-P256",    "jwk": { "…private…" } }
+  },
+  "entries": [
+    { "id": "uuid", "kind": "password", "title": "…", "createdAt": "…", "updatedAt": "…",
+      "fields": { "username": "…", "password": "…", "url": "…", "notes": "…" }, "tags": [] }
+  ]
+}
+
+```
+
+The key pair is generated at first run and lives in the body from the first keyring, even though nothing uses it until phase 2. Its algorithms match `sgit pki` (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing) so that a phase-2 share envelope can be the sgit hybrid envelope and `sgit pki decrypt` can open what a browser sealed. Whether `sgit pki import` accepts a browser-generated bundle is an open question recorded in [brief-corrections.md](/docs/design/brief-corrections.md).
+
+## Entry kinds
+
+Six kinds, a closed list, kept apart so that a vault key is never mistaken for a password: `password`, `api-key`, `sgit-vault-key`, `sgit-read-key`, `pki-private-key`, `note`. Each has its own fields and its own reveal behaviour. An `sgit-vault-key` entry shows its prefix (`sgit_private_vault_…`) and will refuse to enter a shareable set without a confirmation.
+
+Entries are small: a soft limit of 16 KB each and 1 MB for the keyring. A `document` kind is **absent**: documents will be a pointer to an sgit vault plus that vault's key, never bytes in the keyring.
+
+## Concurrency
+
+Writes carry a GCS precondition, `x-goog-if-generation-match`, against the generation read at unlock. On a mismatch the page re-fetches, re-unlocks with the KEK already in memory (no new gesture), merges entries three ways by `id` and `updatedAt`, bumps `rev`, and retries once; after that it shows a conflict page rather than guessing.
+
+## Passkey parameters
+
+| Call | Parameters |
 |---|---|
-| shipped | exists in the repository, runs, and was exercised at the version shown |
-| proposed | designed in the brief, not built; described only in the future tense |
-| absent | deliberately not in the MVP; comes as a later version or a later site, or never |
+| `create` | `rp: { id: 'secrets.sgit.ai', name: 'secrets.sgit.ai' }`; `user.id` is 32 random bytes stored in `meta.json`, not the Firebase uid; `pubKeyCredParams` ES256 then RS256; `authenticatorSelection: { residentKey: 'required', userVerification: 'required' }`; `extensions: { prf: {} }`. If `prf.enabled` comes back false, the page says this authenticator cannot unlock and offers the recovery code or another authenticator. |
+| `get` | `rpId`; `allowCredentials` from `meta.json`; `userVerification: 'required'`; `extensions: { prf: { eval: { first: prfSalt } } }`; read `getClientExtensionResults().prf.results.first`. |
 
-## Shipped (17)
+Known support, dated 2026-10-05 and to be re-checked on the probe page: Chrome and Edge on macOS, Windows and Android with Google Password Manager; Safari 18 and later with iCloud Keychain; hardware keys with hmac-secret. The matrix page will be built before anything more is promised.
+
+## Versioning this specification
+
+The format carries `"v": 1` at the top and in the body. A later version will be a new section on this page, and a keyring will say which version it is before any key is derived. Nothing in version 1 is frozen until the known-answer fixtures exist and the crypto probe page checks them; until then this is the brief's section 8, restated.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/keyring/)*
+
+
+==============================================================================
+source: /security/index.md
+==============================================================================
+
+# Security
+
+> The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
+
+*Source: <https://secrets.sgit.ai/security/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): proposed Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ · proposed Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai
+
+This page says what the design withholds from whom, and then says plainly what it cannot withhold. It describes a design. The acceptance test that will check it, an Owner of the GCP project being handed a uid and asked to produce one plaintext field, is listed as proposed above and its write-up will be published whatever the result.
+
+## What a compromised party gets
+
+| Party compromised | Gets | Does not get |
+|---|---|---|
+| GCP project, or the Identity Platform admin | User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone | Any plaintext. The PRF output is bound to the origin and to the user's authenticator; logging in as the user fetches ciphertext and nothing to open it with |
+| Bucket reader | Ciphertext, object sizes and times | Plaintext |
+| Terraform pipeline | Can change the rules, delete the bucket | Plaintext |
+| Public-key directory tamperer (phase 2) | Future shares, unless fingerprints or signatures are checked | Existing keys |
+| **This repository, or the DNS for sgit.ai** | **Everything, for the users who load the malicious page while it is served** | Nothing is withheld |
+
+## The code is the boundary
+
+Client-side cryptography is exactly as trustworthy as the code delivered to the browser. If this repository, the GitHub organisation that owns it, or the DNS zone for `sgit.ai` is compromised, the attacker can serve a page that asks for your passkey gesture and sends the plaintext wherever they like. No amount of cloud hardening changes that, and the design does not pretend otherwise.
+
+What it does instead is keep the site on a host that is separate from the GCP project, so that a cloud compromise does not reach the code, and put every guard it can on the repository:
+
+| Guard | What it stops | In place? |
+|---|---|---|
+| `dev` and `main` protected: pull request required, one review, `validate` required, linear history, no force-push, no bypass for administrators | A single account pushing code to users | Unconfirmed as of 2026-10-05; asked for in [needs.md](/docs/ops/needs.md) |
+| Hardware-key two-factor authentication for every organisation member | A phished password becoming a push | Unconfirmed as of 2026-10-05 |
+| `sgit.ai` verified as an organisation domain | Another account claiming a dangling `*.sgit.ai` subdomain on Pages | Unconfirmed as of 2026-10-05 |
+| Every third-party action pinned by commit SHA; minimal `permissions` per job; Actions may not approve pull requests | A compromised action or token widening its own reach | Pins and permissions: yes, since v0.1.0. Organisation policy: unconfirmed |
+| No build step; every dependency vendored and hashed; the gate refuses any script from another origin | A supply-chain change arriving at runtime without a reviewed diff | Yes, since v0.1.0 (check 5 of the gate) |
+| A leak tripwire over every file on every release | A credential entering the public tree | Yes, since v0.1.0 (check 4) |
+| Registrar lock, DNSSEC and a CAA record on `sgit.ai` | The zone being moved or a rogue certificate issued | The DNS owner's decision; unconfirmed as of 2026-10-05 |
+| A Content-Security-Policy on every page: `script-src 'self'`, `style-src 'self'`, `object-src 'none'`, `base-uri 'none'`, `form-action 'none'` | An injected script or form, if some other flaw let one in | Yes, since v0.1.0, on every page; `frame-ancestors` cannot be set in a meta tag, so app pages will add a frame-busting check |
+
+Each "unconfirmed" row flips to a dated "yes" when the person who can check it has. The repository's own copy of these settings is [docs/ops/branch-protection.md](/docs/ops/branch-protection.md).
+
+## The RP ID is secrets.sgit.ai, never sgit.ai
+
+A WebAuthn passkey is scoped to a relying-party identifier, and the PRF secret it returns is derived per credential and per RP ID. The RP ID for the unlock passkey is exactly `secrets.sgit.ai` (and `localhost` when testing locally).
+
+It is never the apex `sgit.ai`, and this is the single most important decision in the design. A passkey scoped to the apex can be asserted by any page on any subdomain: there are more than twenty-seven sibling sites under `sgit.ai`, each in its own repository, and a compromise of any one of them would then be able to ask for the gesture that unlocks every user's secrets here. Scoping to this host means a sibling's compromise is a sibling's problem.
+
+Consumers such as riskmandate.ai will use their own passkeys, or WebAuthn Related Origin Requests, later. Neither is in the MVP.
+
+## What the passkey is, and is not, used for
+
+The passkey is a plain WebAuthn credential registered by this site's own page. It is **not** an Identity Platform passkey and it is not a login. The page never verifies the assertion signature, because there is no server to verify it for: the proof that matters is that the PRF output unwraps the keyring key, and a wrong authenticator produces bytes that unwrap nothing. Login is a separate step, through Identity Platform, and decides only which bucket paths the browser may read and write.
+
+The credential's id and public key are stored in `meta.json` so the page can list devices and build `allowCredentials`. The WebAuthn user handle is 32 random bytes, not the Firebase uid.
+
+## What we ask you to trust
+
+- **Your authenticator.** Google Password Manager, iCloud Keychain or a hardware key holds the PRF secret and syncs it through your personal account, which no administrator of this service can reach.
+- **Your browser's WebCrypto.** AES-256-GCM, HKDF-SHA256, RSA-OAEP and ECDSA come from the browser; the site vendors no cryptographic library.
+- **This repository, as served.** Everything above this heading is about keeping that trust narrow and visible. You can read every line that will run, and the gate publishes what it checks.
+- **Google, for availability and metadata only.** Google can see who signed in and when, can delete or roll back ciphertext, and can refuse service. Bucket versioning and soft-delete retention are the design's answer to deletion; export of the encrypted keyring from the account page is yours.
+
+## What this page does not claim
+
+- That the system exists. See [/shipped/](/shipped/index.md).
+- That the Security Rules are correct. The rules text is in the repository and hashed; it is deployed to nothing yet, and its syntax is marked "verify first" in the brief.
+- That the compatibility of PRF across authenticators is known. The matrix page (proposed) will say which browsers and authenticators returned PRF output, dated.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/security/)*
+
+
+==============================================================================
+source: /sharing/index.md
+==============================================================================
+
+# Sharing
+
+> The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
+
+*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): proposed Key pair per user generated at first run; public bundle written to directory/ · absent Sharing an entry with another user through their inbox
+
+Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their passkey, because their PRF secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is **phase 2 and absent from the MVP**; the data model is phase 1, because adding it later would mean rewriting every keyring.
+
+## The scheme
+
+1. At first run each user's browser generates a key pair (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing). The private keys go into the keyring body, protected by the passkey like everything else.
+2. The public keys are published as a signed bundle at `directory/{uid}.pub.json`, readable by any signed-in user of the same environment.
+3. To share, your browser fetches the colleague's bundle, encrypts the entry's key to their public key, and drops the result in `inbox/{uid}/{shareId}.json`. Any signed-in user may create an inbox object; only the owner may read or delete one.
+4. On their next unlock, their browser decrypts the inbox item with their private key and adds it to their own keyring.
+
+The public key shares *keys*, not data. The server carries the package and can never read it.
+
+## What it drags in, designed up front
+
+| Concern | Why it matters | Approach |
+|---|---|---|
+| Revocation | A removed member already holds the key | Rotate the key, re-encrypt, re-share to the remaining members |
+| Directory trust | A compromised admin could swap a public key and intercept the next share | Signed bundles, and fingerprints users can compare out of band before a sensitive share |
+| Group membership | Who can open what is real metadata, visible to the bucket | Membership stored per shared set; updated on add and remove; accepted as metadata exposure |
+| Kinds kept apart | A vault key shared by mistake opens a whole vault | An `sgit-vault-key` entry refuses to enter a shareable set without a confirmation |
+
+## Fit with sgit
+
+sgit already supports public and private keys (`sgit pki`) and is designed to store encrypted data on top of its own encrypted data. The keyring, the per-user key pairs and the inbox are applications of that capability, not new machinery. The public bundle will use sgit's JSON bundle shape so that `sgit pki import` can read what a browser published and `sgit pki decrypt` can open what a browser sealed. Both are marked "verify first" and recorded as open in [brief-corrections.md](/docs/design/brief-corrections.md).
+
+## What ships when
+
+- **Step 4**: the key pair is generated and stored in the first keyring.
+- **Step 9**: the public bundle is written to `directory/` and the inbox rules go live, with the sharing interface still proposed.
+- **Phase 2**: the interface, revocation and fingerprints. A later version, not the MVP.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/sharing/)*
+
+
+==============================================================================
+source: /shipped/index.md
+==============================================================================
+
+# Shipped, proposed, absent
+
+> Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
+
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+This site publishes its argument before the thing is finished. To keep that honest, every claim it makes carries one of three statuses, and this page is the list. It is generated from `data/features.json` on every release, and so is [docs/reality.md](/docs/reality.md), so the two cannot disagree. Nothing is described in the present tense anywhere on the site before this page says shipped.
+
+A *shipped* row names the version that shipped it and where in the repository it lives. A *proposed* row points at the section of the brief that designs it. An *absent* row says why it is not in the MVP and, where there is one, what comes instead.
+
+## Shipped (23)
+
+exists in the repository, runs, and was exercised at the version shown.
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -232,19 +832,118 @@ source: /docs/reality.md
 | pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
 | pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
 | pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
-| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | Markdown only at this version; rendered pages come with step 2. |
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | shipped v0.1.0 | CNAME, docs/ops/dns.md | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments | shipped v0.1.1 | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
+| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | shipped v0.1.1 | shipped/index.html | The same generator writes both, so the page and the reality document cannot disagree. |
+| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
+| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
+| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
 | tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
 | tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
 
-## Proposed (23)
+## Proposed (22)
+
+designed in the brief, not built; described only in the future tense.
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| site | secrets.sgit.ai served by GitHub Pages over HTTPS | proposed | CNAME, docs/ops/dns.md | Needs the DNS CNAME and Pages enablement listed in docs/ops/needs.md. Flips to shipped when verify-live first passes. |
-| site | Content pages: how it works, security, keyring spec, sharing, environments, shipped | proposed | section 6.1 of the brief | Step 2. Every page will carry a status line from this file. |
+| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
+| infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
+| infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
+| infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | proposed | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |
+| infra | Storage Security Rules deployed per environment | proposed | infra/rules/storage.rules | The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project. |
+| infra | config/environments.json with real dev values from Terraform outputs | proposed | config/environments.json | Step 3. Today every environment is a placeholder with _source null. |
+| app | Sign in and out with Google and email/password against the chosen environment | proposed | app/index.html | Step 3. Popup sign-in by default; vendored Firebase SDK. |
+| app | Environment page: pick a built-in environment, enter a custom one, import, export, reset | proposed | app/environment.html | Step 3. The active environment is shown in the header at all times. |
+| app | Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai | proposed | app/setup.html, app/unlock.html | Step 4. Not before the dev project exists and the probe pages are green. |
+| app | Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests | proposed | section 8 of the brief | Step 4. Published at /keyring/ as a specification. |
+| app | Recovery code: 26 characters base32, 128 bits, shown once | proposed | app/setup.html | Step 4. Lose every passkey and the code and the data is gone; the site will say so. |
+| app | Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers | proposed | app/vault.html, app/entry.html | Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note. |
+| app | Optimistic concurrency on keyring writes with a three-way merge | proposed | section 8.5 of the brief | Step 5. rev in the AAD so a stale body fails to decrypt. |
+| app | Devices page: add and remove passkeys, regenerate the recovery code | proposed | app/devices.html | Step 6. |
+| app | Account page: export and import the encrypted keyring, sign out, wipe memory | proposed | app/account.html | Step 6. |
+| app | Key pair per user generated at first run; public bundle written to directory/ | proposed | section 8.3 of the brief | Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing. |
+| admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
+| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
+| admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
+| tests | Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix | proposed | tests/*.html | Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix. |
+| tests | Playwright end to end against the real dev project with a virtual authenticator | proposed | tests/e2e/ | Whether the virtual authenticator does PRF is an open question. |
+| tests | Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field | proposed | docs/acceptance.md | Before 1.0. The write-up is published whatever the result. |
+
+## Absent (5)
+
+deliberately not in the MVP; comes as a later version or a later site, or never.
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| app | Sharing an entry with another user through their inbox | absent | /sharing/ (step 2 describes it) | Phase 2. The data model ships first so it is not rewritten later. |
+| app | A document kind in the keyring | absent | section 8.4 of the brief | Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring. |
+| app | Browser extension or autofill | absent | section 12 of the brief | A later site or a later version. |
+| app | An API for agents | absent | section 12 of the brief | A later version. |
+| app | Any server-side code: Cloud Functions, proxies, a small API | absent | everywhere | Forbidden by design. A need for one is a proposal in brief-corrections.md, not code. |
+
+## How a row changes status
+
+A feature becomes shipped in the release that makes it true, by editing one row of `data/features.json` in the same commit as the code. The gate refuses a release whose generated pages disagree with that file, and the build tests check that every shipped row carries a version no newer than the release. There is no other way to change a status.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/shipped/)*
+
+
+==============================================================================
+source: /docs/reality.md
+==============================================================================
+
+# secrets.sgit.ai — reality
+
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.1 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+
+50 claims: 23 shipped, 22 proposed, 5 absent.
+
+| Status | Meaning |
+|---|---|
+| shipped | exists in the repository, runs, and was exercised at the version shown |
+| proposed | designed in the brief, not built; described only in the future tense |
+| absent | deliberately not in the MVP; comes as a later version or a later site, or never |
+
+## Shipped (23)
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | shipped v0.1.0 | admin/build/version.txt | Check 1 of the gate fails on any disagreement. |
+| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | shipped v0.1.0 | admin/build/chrome.py | gen_chrome.py --check is part of the gate. |
+| pipeline | Markdown twin of every HTML page, links pointing at markdown | shipped v0.1.0 | admin/build/gen_twins.py | index.html has index.md beside it; the twin carries the site version. |
+| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | shipped v0.1.0 | admin/build/gen_llms.py | llms-full.txt concatenates every twin and every design document. |
+| pipeline | docs/reality.md and the status tables generated from data/features.json | shipped v0.1.0 | admin/build/gen_features.py | If the reality document does not list it, it does not exist. |
+| pipeline | The eight-check release gate, no dependencies | shipped v0.1.0 | admin/build/validate.js | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
+| pipeline | The same gate locally and in CI, one command | shipped v0.1.0 | admin/build/gate.py | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
+| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | shipped v0.1.0 | admin/build/tag_release.py | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
+| pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
+| pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
+| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | shipped v0.1.0 | CNAME, docs/ops/dns.md | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments | shipped v0.1.1 | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
+| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | shipped v0.1.1 | shipped/index.html | The same generator writes both, so the page and the reality document cannot disagree. |
+| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
+| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
+| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
+| site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
+| admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
+| tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
+| tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
+
+## Proposed (22)
+
+| Area | Feature | Status | Where | Notes |
+|---|---|---|---|---|
+| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
 | infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
 | infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | proposed | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |
@@ -337,6 +1036,28 @@ The six actions in `deploy-pages.yml` are pinned to the commit SHAs of `actions/
 ### C11. `node --test tests/unit/` is not a valid Node 22 invocation
 
 Section 9.1's validate job runs `node --test tests/unit/`. Node 22 treats a positional argument as a glob pattern for test files, not a directory, and fails with "Cannot find module .../tests/unit". The gate runs `node --test tests/unit/**/*.test.js`, which is the same intent in the form Node accepts.
+
+## v0.1.1 (2026-10-05): the content pages and the family chrome
+
+### C12. "The four design docs, rendered" became every document under docs/, rendered
+
+Section 6.1 lists `/docs/design/` as the design documents rendered. Rendering needs a markdown-to-HTML step, and the house has no build step and no dependency the gate could rely on, so `admin/build/md_to_html.py` is a standard-library renderer for the constructs these documents use (headings with GitHub-style ids, nested and task lists, tables with alignment, fenced code, blockquotes, inline emphasis, links). Once it existed, rendering only the design folder would have left the ops notes and `docs/reality.md` as raw markdown on the site, so `gen_docs.py` renders every document under `docs/` and writes an index page for `docs/design/` and `docs/ops/`. The markdown stays the source of truth and is the markdown twin of the rendered page (`<meta name="sg-secrets:source">` names it), so the twin rule holds without a second copy.
+
+### C13. The 404 page is not in the sitemap or llms.txt
+
+Section 6.1 does not mention a not-found page. One exists (`404.html`, which GitHub Pages serves for a missing path) with the full chrome so the version badge and nav are there; it is excluded from `sitemap.xml` and `llms.txt` because it is not a page anyone navigates to.
+
+### C14. The three guard rows on /security/ that this build cannot confirm
+
+Section 9.5 says the protections are "listed on `/security/`". Four of them (branch protection, organisation 2FA, the verified domain, the Actions policy) are organisation settings this session cannot read, so each row says "unconfirmed as of 2026-10-05" rather than yes or no, and `needs.md` asks for them. A reviewer who sets them changes the row to a dated yes in the same pull request.
+
+### C15. Releases bump the third digit, not the second
+
+Section 9.1 says every push to `dev` is a minor bump and section 11 numbers the steps v0.1.0 to v0.9.0. Dinis decided on 2026-10-05 that each release bumps the third digit (v0.1.0, v0.1.1, v0.1.2, …), as the sibling sites do (sgit.ai is at v0.6.59 after hundreds of releases), and that the second digit is reserved for a milestone he names. The step numbers in section 11 therefore name the deliverable, not the release; `data/steps.json` records which release delivered each step. `tag_release.py` already accepted a patch bump, so nothing in the pipeline changed.
+
+### C16. The admin section and the markdown viewer follow the siblings
+
+Section 6.1 names `/admin/index.html` and `/admin/versions.html` only. The sibling sites (sgit.ai, nfrs.sgit.ai, pki.sgit.ai) share one nav shape, grouped dropdown menus with a parent link, a stage pill and the version, and an admin section of three pages: how the site is built, the release history, and a comms page of numbered asks and tasks. This site now follows that shape (`admin/build/chrome.py`, `assets/nav.js`, `admin/comms.html`). For documents, the family's own brief ("Markdown and file viewers in a vault: what not to build") says not to write a client-side viewer, and the sibling websites publish documents as pages rendered at build time with the raw markdown one click away as the source of truth; `gen_docs.py` does exactly that, so no viewer script runs in the browser and the CSP stays at `script-src 'self'` with one small nav script.
 
 ## Open questions carried from section 12 (unanswered at this version)
 
@@ -1747,29 +2468,27 @@ source: /docs/ops/needs.md
 
 # What only a human can do
 
-*secrets.sgit.ai · operations · maintained by the build session · last updated at v0.1.0 (2026-10-05) · CC BY 4.0*
+*secrets.sgit.ai · operations · maintained by the build session · last updated at v0.1.1 (2026-10-05) · CC BY 4.0*
 
 Everything on this list blocks a step of the brief and cannot be done from inside the repository. Each item says who, what, exactly, and which step waits on it. Items are removed when done and the removal is dated in `docs/design/brief-corrections.md` if anything turned out differently from the brief.
 
-## Blocking step 1's acceptance (v0.1.0 live at secrets.sgit.ai)
+## Done
 
-1. **DNS (zone owner of sgit.ai).** Add `secrets  CNAME  sgit-ai.github.io`. Details in `docs/ops/dns.md`.
-2. **GitHub Pages (repository admin).** Settings, Pages: source **GitHub Actions**; custom domain `secrets.sgit.ai`; then **Enforce HTTPS** once the certificate exists. The workflow does not enable Pages itself (that needs administration rights it must not hold); if the first `deploy` job fails at `configure-pages` with "Get Pages site failed", this is why.
-3. **Re-run or re-push.** After 1 and 2, re-run the latest `deploy-pages` run on `dev` (Actions, Re-run all jobs) so `verify-live` can turn green. Nothing else about v0.1.0 changes.
+- **2026-10-05, v0.1.0.** DNS `secrets CNAME sgit-ai.github.io`, GitHub Pages enabled with the custom domain and HTTPS, and the v0.1.0 workflow run re-run by Dinis. `verify-live` passed; `https://secrets.sgit.ai` serves the released version. Nothing about the process turned out differently from the brief.
 
 ## Blocking the protections (section 9.5), to be in place before step 3 lands real configuration
 
-4. **Branch protection (organisation owner).** Apply the rules in `docs/ops/branch-protection.md` to `dev` and `main`, with `validate` as the required status check.
-5. **Organisation 2FA with hardware keys (organisation owner).** Settings, Authentication security.
-6. **Verified domain (organisation owner).** Add and verify `sgit.ai` under Settings, Verified and approved domains.
-7. **Actions policy (organisation owner).** Allow only GitHub-authored and organisation-authored actions; default `GITHUB_TOKEN` read-only; Actions may not create or approve pull requests.
+1. **Branch protection (organisation owner).** Apply the rules in `docs/ops/branch-protection.md` to `dev` and `main`, with `validate` as the required status check.
+2. **Organisation 2FA with hardware keys (organisation owner).** Settings, Authentication security.
+3. **Verified domain (organisation owner).** Add and verify `sgit.ai` under Settings, Verified and approved domains.
+4. **Actions policy (organisation owner).** Allow only GitHub-authored and organisation-authored actions; default `GITHUB_TOKEN` read-only; Actions may not create or approve pull requests.
 
 ## Blocking step 3 (the dev GCP project)
 
-8. **Billing account (GCP billing admin).** A billing account the three projects can attach to. The build session will write `infra/bootstrap/bootstrap.sh` in step 3 and needs its id passed as a variable, never committed.
-9. **Project ids (GCP org admin).** Confirm `sgit-secrets-tfstate`, `sgit-secrets-dev`, `sgit-secrets-main`, `sgit-secrets-prod` are available, or choose others; the brief marks them PROPOSED.
-10. **Run the bootstrap (a human with org-level IAM).** Once `infra/bootstrap/bootstrap.sh` exists: run it with `--dry-run`, then for real. It prints the values for the GitHub environment variables (`WORKLOAD_IDENTITY_PROVIDER`, `SERVICE_ACCOUNT`) per environment.
-11. **Google OAuth client secret for sign-in (GCP project owner).** Create the Web application OAuth client in the `dev` project (origin `https://secrets.sgit.ai`, redirect `https://<authDomain>/__/auth/handler`) and store its secret as the GitHub environment secret `GOOGLE_OAUTH_CLIENT_SECRET` in the `dev` environment. It never enters the repository.
+5. **Billing account (GCP billing admin).** A billing account the three projects can attach to. The build session will write `infra/bootstrap/bootstrap.sh` in step 3 and needs its id passed as a variable, never committed.
+6. **Project ids (GCP org admin).** Confirm `sgit-secrets-tfstate`, `sgit-secrets-dev`, `sgit-secrets-main`, `sgit-secrets-prod` are available, or choose others; the brief marks them PROPOSED.
+7. **Run the bootstrap (a human with org-level IAM).** Once `infra/bootstrap/bootstrap.sh` exists: run it with `--dry-run`, then for real. It prints the values for the GitHub environment variables (`WORKLOAD_IDENTITY_PROVIDER`, `SERVICE_ACCOUNT`) per environment.
+8. **Google OAuth client secret for sign-in (GCP project owner).** Create the Web application OAuth client in the `dev` project (origin `https://secrets.sgit.ai`, redirect `https://<authDomain>/__/auth/handler`) and store its secret as the GitHub environment secret `GOOGLE_OAUTH_CLIENT_SECRET` in the `dev` environment. It never enters the repository.
 
 ## Not yet needed
 

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brief corrections — secrets.sgit.ai</title>
+  <meta name="description" content="What the brief got wrong or left open, found while building, dated, beside it.">
+  <meta name="sg-secrets:source" content="/docs/design/brief-corrections.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/design/brief-corrections.html">
+  <link rel="alternate" type="text/markdown" href="/docs/design/brief-corrections.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/design/brief-corrections.html">
+  <meta property="og:title" content="Brief corrections — secrets.sgit.ai">
+  <meta property="og:description" content="What the brief got wrong or left open, found while building, dated, beside it.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl here" href="/docs/design/brief-corrections.html" aria-current="page">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/design/">Design documents</a> <span class="sep">/</span> <span aria-current="page">Brief corrections</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.1.</p>
+<h1 id="brief-corrections">Brief corrections</h1>
+<p><em>secrets.sgit.ai · what the MVP build brief got wrong or left open, found while building, dated · beside the brief it corrects · CC BY 4.0</em></p>
+<p>The brief (<code>secrets-sgit-ai__mvp-build-brief.md</code>) is the instruction set. Where building it showed a statement to be wrong, incomplete or impossible as written, the finding is recorded here with the date and the version, and the build carried on with the correction. Sections 1 to 4 of the brief hold closed decisions; nothing here reopens one. The design documents beside this file are copied verbatim and are never edited.</p>
+<h2 id="v010-2026-10-05-the-pipeline-before-the-site">v0.1.0 (2026-10-05): the pipeline before the site</h2>
+<h3 id="c1-type_safe-style-for-the-generators-without-the-library">C1. &quot;Type_Safe style&quot; for the generators, without the library</h3>
+<p>Section 7.2 asks for Python in Type<em>Safe style. `Type</em>Safe<code> is a runtime type system from </code>osbot-utils<code>, a dependency the gate would have to </code>pip install<code> before it could run. The brief also requires that &quot;a release that fails the gate locally fails the same way in CI&quot; and that </code>validate.js<code> has no dependencies. The generators therefore use the standard library only and keep the shape of the style (one class per file, </code>═══<code> banners instead of docstrings, aligned assignments, trailing comments carrying the reasoning, double-underscore class names such as </code>Site<strong>Pages<code>, </code>Gen</strong>Chrome<code>, </code>Tag_<em>Release<code>), without the </code>Type</em>Safe<code> base class. The one Python dependency of the whole gate is </code>pytest<code>, which the brief itself names. If the house later publishes a stdlib-only </code>Type_Safe`, the base class can be added without changing a call site.</p>
+<h3 id="c2-the-generator-filenames-are-the-briefs-not-the-houses">C2. The generator filenames are the brief&#x27;s, not the house&#x27;s</h3>
+<p>The house rule is &quot;filename equals class name&quot;. The brief names the files <code>admin/build/chrome.py</code> and <code>admin/build/gen_*.py</code>, and the CI table runs <code>gen_*.py --check</code>. The brief wins on the filenames; the class inside each file follows the house naming. <code>admin/build/version.txt</code> sits beside them as the brief says.</p>
+<h3 id="c3-check-1-cannot-mean-every-vxyz-string-in-these-files">C3. Check 1 cannot mean &quot;every <code>vX.Y.Z</code> string in these files&quot;</h3>
+<p>Section 9.3&#x27;s first check says the version must equal <code>llms.txt</code>, <code>llms-full.txt</code> and <code>index.md</code>, and &quot;no version listed twice&quot;. <code>llms-full.txt</code> concatenates every design document, and the brief itself lists <code>v0.1.0</code> to <code>v0.9.0</code> in its build-order table, so a literal reading fails forever. Check 1 reads each file&#x27;s declared version at a fixed anchor (<code>Site version: vX.Y.Z</code> in the two indexes, <code>· site vX.Y.Z</code> in a twin&#x27;s source line, <code>data-version=&quot;X.Y.Z&quot;</code> on a badge, <code>&quot;siteVersion&quot;</code> in the config, the newest row of <code>data/versions.json</code>) and &quot;listed twice&quot; applies to the versions table.</p>
+<h3 id="c4-the-leak-tripwires-patterns-must-not-trip-on-the-brief">C4. The leak tripwire&#x27;s patterns must not trip on the brief</h3>
+<p>The brief lists its own tripwire shapes in section 9.3 (<code>sgit_private_vault_</code>, <code>GOCSPX-</code>, <code>&quot;private_key_id&quot;</code>, and so on), and it is copied in verbatim. Each pattern therefore requires the shape of a real value, not the bare prefix: a key body after <code>sgit_private_vault_</code>, ten or more characters after <code>GOCSPX-</code>, a colon after <code>&quot;private_key_id&quot;</code> (the JSON shape), and so on. This is a sharper pattern, not a wider one, and the brief&#x27;s rule stands: the fix for a trip is a redaction. Firebase <code>AIza…</code> keys are not in the brief&#x27;s list; the gate adds them as a shape that may appear only in <code>config/environments.json</code>, so a web API key pasted into a page is caught and sent to the one file where it belongs.</p>
+<h3 id="c5-infra-is-excluded-from-the-deploy-but-adminruleshtml-reads-infrarulesstoragerules">C5. <code>infra/</code> is excluded from the deploy but <code>admin/rules.html</code> reads <code>infra/rules/storage.rules</code></h3>
+<p>Section 9.1 excludes <code>infra</code> from the Pages artifact. Section 6.3&#x27;s <code>rules.html</code> diffs the deployed rules against &quot;<code>infra/rules/storage.rules</code> in the repo&quot;. A page served from the site cannot read a file the deploy left out. Open until step 7; the likely resolution is that <code>gen_features.py</code> (which already hashes the rules file) also writes the rules text into <code>data/storage-rules.json</code> so the page reads a deployed copy whose hash the gate has already checked. Recorded here so the exclude list is not changed silently.</p>
+<h3 id="c6-one-pages-site-two-deploying-branches">C6. One Pages site, two deploying branches</h3>
+<p>Section 9.1 deploys both <code>dev</code> and <code>main</code> to Pages. A repository has one Pages site, so a push to <code>main</code> replaces what <code>dev</code> deployed. This is consistent with <code>main</code> being a fallback promoted from <code>dev</code>, and <code>docs/ops/release.md</code> says so; it is not a separate <code>main</code> site. The <code>main</code> environment in <code>config/environments.json</code> is a GCP project the <code>main</code> branch is tested against, not a second hostname.</p>
+<h3 id="c7-branch-protection-could-not-precede-the-first-release">C7. Branch protection could not precede the first release</h3>
+<p>Section 9.5 says the protections are set on day one. The required status check is <code>validate</code>, which did not exist before the commit that created it, and the brief asks for that commit to be pushed to <code>dev</code> as release v0.1.0. v0.1.0 was therefore pushed directly to <code>dev</code>; the rules in <code>docs/ops/branch-protection.md</code> apply from the next release on, and <code>docs/ops/needs.md</code> asks for them.</p>
+<h3 id="c8-enablement-of-pages-is-not-the-workflows-to-do">C8. <code>enablement</code> of Pages is not the workflow&#x27;s to do</h3>
+<p><code>actions/configure-pages</code> can try to create the Pages site, but that needs a token with administration rights the workflow does not and should not hold. Enabling Pages with the custom domain is a human step (<code>docs/ops/needs.md</code>, item 2). Until it is done the <code>deploy</code> job fails at <code>configure-pages</code>, which is the intended, visible failure.</p>
+<h3 id="c9-check-8-covers-sessionstorage-and-indexeddb-too">C9. Check 8 covers <code>sessionStorage</code> and IndexedDB too</h3>
+<p>Section 9.3 lists <code>localStorage.setItem(</code> only. The rules the session must never break name <code>sessionStorage</code> and IndexedDB as well. Check 8 also requires every <code>sessionStorage.setItem</code> key to be in <code>app/config/storage-keys.js</code> (the admin OAuth <code>state</code> is the only one listed, section 6.3) and fails on any use of <code>indexedDB</code> under <code>app/</code>, <code>components/</code> or <code>admin/</code>. <code>tests/leak-check.html</code> may scan IndexedDB, so <code>tests/</code> is exempt from that one rule.</p>
+<h3 id="c10-pinning-actions-by-sha-from-inside-a-scoped-session">C10. Pinning actions by SHA from inside a scoped session</h3>
+<p>The six actions in <code>deploy-pages.yml</code> are pinned to the commit SHAs of <code>actions/checkout@v4.2.2</code>, <code>actions/setup-node@v4.1.0</code>, <code>actions/setup-python@v5.3.0</code>, <code>actions/configure-pages@v5.0.0</code>, <code>actions/upload-pages-artifact@v3.0.1</code> and <code>actions/deploy-pages@v4.0.5</code>, resolved with <code>git ls-remote</code> against the public repositories on 2026-10-05. A reviewer can re-check each with <code>git ls-remote https://github.com/&lt;action&gt; refs/tags/&lt;tag&gt;</code>.</p>
+<h3 id="c11-node---test-testsunit-is-not-a-valid-node-22-invocation">C11. <code>node --test tests/unit/</code> is not a valid Node 22 invocation</h3>
+<p>Section 9.1&#x27;s validate job runs <code>node --test tests/unit/</code>. Node 22 treats a positional argument as a glob pattern for test files, not a directory, and fails with &quot;Cannot find module .../tests/unit&quot;. The gate runs <code>node --test tests/unit/**/*.test.js</code>, which is the same intent in the form Node accepts.</p>
+<h2 id="v011-2026-10-05-the-content-pages-and-the-family-chrome">v0.1.1 (2026-10-05): the content pages and the family chrome</h2>
+<h3 id="c12-the-four-design-docs-rendered-became-every-document-under-docs-rendered">C12. &quot;The four design docs, rendered&quot; became every document under docs/, rendered</h3>
+<p>Section 6.1 lists <code>/docs/design/</code> as the design documents rendered. Rendering needs a markdown-to-HTML step, and the house has no build step and no dependency the gate could rely on, so <code>admin/build/md_to_html.py</code> is a standard-library renderer for the constructs these documents use (headings with GitHub-style ids, nested and task lists, tables with alignment, fenced code, blockquotes, inline emphasis, links). Once it existed, rendering only the design folder would have left the ops notes and <code>docs/reality.md</code> as raw markdown on the site, so <code>gen_docs.py</code> renders every document under <code>docs/</code> and writes an index page for <code>docs/design/</code> and <code>docs/ops/</code>. The markdown stays the source of truth and is the markdown twin of the rendered page (<code>&lt;meta name=&quot;sg-secrets:source&quot;&gt;</code> names it), so the twin rule holds without a second copy.</p>
+<h3 id="c13-the-404-page-is-not-in-the-sitemap-or-llmstxt">C13. The 404 page is not in the sitemap or llms.txt</h3>
+<p>Section 6.1 does not mention a not-found page. One exists (<code>404.html</code>, which GitHub Pages serves for a missing path) with the full chrome so the version badge and nav are there; it is excluded from <code>sitemap.xml</code> and <code>llms.txt</code> because it is not a page anyone navigates to.</p>
+<h3 id="c14-the-three-guard-rows-on-security-that-this-build-cannot-confirm">C14. The three guard rows on /security/ that this build cannot confirm</h3>
+<p>Section 9.5 says the protections are &quot;listed on <code>/security/</code>&quot;. Four of them (branch protection, organisation 2FA, the verified domain, the Actions policy) are organisation settings this session cannot read, so each row says &quot;unconfirmed as of 2026-10-05&quot; rather than yes or no, and <code>needs.md</code> asks for them. A reviewer who sets them changes the row to a dated yes in the same pull request.</p>
+<h3 id="c15-releases-bump-the-third-digit-not-the-second">C15. Releases bump the third digit, not the second</h3>
+<p>Section 9.1 says every push to <code>dev</code> is a minor bump and section 11 numbers the steps v0.1.0 to v0.9.0. Dinis decided on 2026-10-05 that each release bumps the third digit (v0.1.0, v0.1.1, v0.1.2, …), as the sibling sites do (sgit.ai is at v0.6.59 after hundreds of releases), and that the second digit is reserved for a milestone he names. The step numbers in section 11 therefore name the deliverable, not the release; <code>data/steps.json</code> records which release delivered each step. <code>tag_release.py</code> already accepted a patch bump, so nothing in the pipeline changed.</p>
+<h3 id="c16-the-admin-section-and-the-markdown-viewer-follow-the-siblings">C16. The admin section and the markdown viewer follow the siblings</h3>
+<p>Section 6.1 names <code>/admin/index.html</code> and <code>/admin/versions.html</code> only. The sibling sites (sgit.ai, nfrs.sgit.ai, pki.sgit.ai) share one nav shape, grouped dropdown menus with a parent link, a stage pill and the version, and an admin section of three pages: how the site is built, the release history, and a comms page of numbered asks and tasks. This site now follows that shape (<code>admin/build/chrome.py</code>, <code>assets/nav.js</code>, <code>admin/comms.html</code>). For documents, the family&#x27;s own brief (&quot;Markdown and file viewers in a vault: what not to build&quot;) says not to write a client-side viewer, and the sibling websites publish documents as pages rendered at build time with the raw markdown one click away as the source of truth; <code>gen_docs.py</code> does exactly that, so no viewer script runs in the browser and the CSP stays at <code>script-src &#x27;self&#x27;</code> with one small nav script.</p>
+<h2 id="open-questions-carried-from-section-12-unanswered-at-this-version">Open questions carried from section 12 (unanswered at this version)</h2>
+<ul>
+<li>Does the Playwright virtual authenticator support PRF? (step 4)</li>
+<li>Does Google still issue implicit-flow tokens for a Web client with our origins? (step 7)</li>
+<li>Exact Security Rules syntax for the size and null checks; is <code>request.auth.token.firebase.tenant</code> available in Storage rules? (step 3)</li>
+<li>Where does Identity Platform store user records? (step 3, for <code>/environments/</code>)</li>
+<li>Does <code>sgit pki import</code> accept a browser-generated bundle? (step 9)</li>
+</ul>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

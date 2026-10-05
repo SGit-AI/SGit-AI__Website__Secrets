@@ -111,8 +111,8 @@ function lineOf(text, index) {
 function headingSlug(heading) {                                                   // GitHub-style anchors for markdown headings
     return heading.toLowerCase().trim()
         .replace(/<[^>]+>/g, '')
-        .replace(/[`*_~]/g, '')
-        .replace(/[^\p{L}\p{N}\s-]/gu, '')
+        .replace(/[`*~]/g, '')
+        .replace(/[^\p{L}\p{N}\s_-]/gu, '')                                      // GitHub keeps _ and -
         .replace(/\s+/g, '-')
 }
 

@@ -1,0 +1,18 @@
+# Operations
+
+> How a release works, what only a human can do, the DNS record and the repository protections.
+
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.1 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+How a release works, what only a human can do, the DNS record and the repository protections.
+
+- [Repository protections](/docs/ops/branch-protection.md): The settings for dev and main, the organisation, Actions and environments. [(markdown)](/docs/ops/branch-protection.md)
+- [DNS for secrets.sgit.ai](/docs/ops/dns.md): The CNAME record and the Pages settings for secrets.sgit.ai. [(markdown)](/docs/ops/dns.md)
+- [What only a human can do](/docs/ops/needs.md): Exactly what only a human can do, who, and which step waits on it. [(markdown)](/docs/ops/needs.md)
+- [How a release works](/docs/ops/release.md): The version, the commit subject, the gate, the four CI jobs, and why green does not mean live. [(markdown)](/docs/ops/release.md)
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/docs/ops/)*

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DNS for secrets.sgit.ai — secrets.sgit.ai</title>
+  <meta name="description" content="The CNAME record and the Pages settings for secrets.sgit.ai.">
+  <meta name="sg-secrets:source" content="/docs/ops/dns.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/ops/dns.html">
+  <link rel="alternate" type="text/markdown" href="/docs/ops/dns.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/ops/dns.html">
+  <meta property="og:title" content="DNS for secrets.sgit.ai — secrets.sgit.ai">
+  <meta property="og:description" content="The CNAME record and the Pages settings for secrets.sgit.ai.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/ops/">Operations</a> <span class="sep">/</span> <span aria-current="page">DNS for secrets.sgit.ai</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/ops/dns.md">docs/ops/dns.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.1.</p>
+<h1 id="dns-for-secretssgitai">DNS for secrets.sgit.ai</h1>
+<p><em>secrets.sgit.ai · operations · written at v0.1.0 (2026-10-05) · for the owner of the sgit.ai zone · CC BY 4.0</em></p>
+<p>The site is served by GitHub Pages from the repository <code>SGit-AI/SGit-AI__Website__Secrets</code>. The repository already carries <code>CNAME</code> with the one line <code>secrets.sgit.ai</code>. Two things are needed from the zone owner and the repository admin, in this order.</p>
+<h2 id="1-the-dns-record">1. The DNS record</h2>
+<p>In the <code>sgit.ai</code> zone add one record:</p>
+<table>
+<thead><tr><th>Name</th><th>Type</th><th>Value</th><th>TTL</th></tr></thead>
+<tbody>
+<tr><td><code>secrets</code></td><td><code>CNAME</code></td><td><code>sgit-ai.github.io</code></td><td>3600 or the zone default</td></tr>
+</tbody>
+</table>
+<p>Do not use an <code>A</code> record to the Pages IP addresses for this host; the <code>CNAME</code> to the organisation&#x27;s Pages host is what GitHub recommends for a subdomain and what lets GitHub rotate addresses.</p>
+<h2 id="2-github-pages-on-the-repository">2. GitHub Pages on the repository</h2>
+<p>In the repository, Settings, Pages:</p>
+<ol>
+<li>Source: <strong>GitHub Actions</strong> (not &quot;deploy from a branch&quot;). The workflow <code>deploy-pages.yml</code> publishes the artifact.</li>
+<li>Custom domain: <code>secrets.sgit.ai</code>. Save. GitHub checks the DNS record and then provisions the certificate, which can take up to an hour after the record propagates.</li>
+<li>Tick <strong>Enforce HTTPS</strong> once the certificate is issued.</li>
+</ol>
+<h2 id="3-what-then-happens-by-itself">3. What then happens by itself</h2>
+<p>The next run of <code>deploy-pages.yml</code> on <code>dev</code> (or a manual dispatch of it) deploys, and its <code>verify-live</code> job turns green when <code>https://secrets.sgit.ai/admin/build/version.txt</code> serves the released version. Until the record and the Pages settings exist, <code>verify-live</code> is red by design.</p>
+<h2 id="guards-the-security-page-will-list-dated">Guards the security page will list, dated</h2>
+<p>These are the zone owner&#x27;s decisions and are listed on <code>/security/</code> once it exists, with the date they were checked:</p>
+<ul>
+<li>Registrar lock on <code>sgit.ai</code>.</li>
+<li>DNSSEC on the zone.</li>
+<li>A <code>CAA</code> record limiting certificate issuance (GitHub Pages uses Let&#x27;s Encrypt: <code>0 issue &quot;letsencrypt.org&quot;</code>).</li>
+<li>The <code>sgit.ai</code> domain verified in the GitHub organisation (Settings, Verified and approved domains), which stops another account claiming a dangling <code>*.sgit.ai</code> subdomain on Pages.</li>
+</ul>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/ops/dns.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

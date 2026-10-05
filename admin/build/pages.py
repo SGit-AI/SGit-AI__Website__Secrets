@@ -17,6 +17,7 @@ RE_TITLE       = re.compile(r'<title>(.*?)</title>'                             
 RE_DESCRIPTION = re.compile(r'<meta\s+name="description"\s+content="(.*?)"'                , re.S)
 RE_MAIN        = re.compile(r'<main\b[^>]*>(.*?)</main>'                                   , re.S)
 RE_H1          = re.compile(r'<h1\b[^>]*>(.*?)</h1>'                                       , re.S)
+RE_SOURCE      = re.compile(r'<meta\s+name="sg-secrets:source"\s+content="(.*?)"'         , re.S)
 
 
 class Site__Pages:
@@ -54,11 +55,17 @@ class Site__Pages:
         main        = RE_MAIN.search(text)
         if not title or not description or not main:
             raise SystemExit(f'{path.relative_to(self.root)}: needs <title>, <meta name="description"> and <main>')
+        source      = RE_SOURCE.search(text)
         return {'path'        : path                                            ,
                 'url'         : self.url_path(path)                             ,
                 'title'       : html.unescape(title.group(1).strip())           ,
                 'description' : html.unescape(description.group(1).strip())     ,
-                'main'        : main.group(1)                                   }
+                'main'        : main.group(1)                                   ,
+                'source'      : source.group(1) if source else None             }   # the markdown a rendered page came from; it is the twin
+
+    def meta_source(self, path):                                                # the markdown a rendered page came from, or None
+        found = RE_SOURCE.search(path.read_text(encoding='utf-8'))
+        return found.group(1) if found else None
 
     def replace_block(self, text, block, body):                                  # one block, no attributes: returns (new_text, found)
         return self.replace_blocks(text, block, lambda attrs: body)

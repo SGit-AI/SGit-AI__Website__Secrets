@@ -1,8 +1,8 @@
 # secrets.sgit.ai — reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.0 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.1 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
-45 claims: 17 shipped, 23 proposed, 5 absent.
+50 claims: 23 shipped, 22 proposed, 5 absent.
 
 | Status | Meaning |
 |---|---|
@@ -10,7 +10,7 @@
 | proposed | designed in the brief, not built; described only in the future tense |
 | absent | deliberately not in the MVP; comes as a later version or a later site, or never |
 
-## Shipped (17)
+## Shipped (23)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -25,19 +25,24 @@
 | pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
 | pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
 | pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
-| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | Markdown only at this version; rendered pages come with step 2. |
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | shipped v0.1.0 | CNAME, docs/ops/dns.md | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments | shipped v0.1.1 | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
+| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | shipped v0.1.1 | shipped/index.html | The same generator writes both, so the page and the reality document cannot disagree. |
+| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
+| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
+| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
 | tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
 | tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
 
-## Proposed (23)
+## Proposed (22)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| site | secrets.sgit.ai served by GitHub Pages over HTTPS | proposed | CNAME, docs/ops/dns.md | Needs the DNS CNAME and Pages enablement listed in docs/ops/needs.md. Flips to shipped when verify-live first passes. |
-| site | Content pages: how it works, security, keyring spec, sharing, environments, shipped | proposed | section 6.1 of the brief | Step 2. Every page will carry a status line from this file. |
+| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
 | infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
 | infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | proposed | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |

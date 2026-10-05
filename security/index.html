@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security — secrets.sgit.ai</title>
+  <meta name="description" content="The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/security/">
+  <link rel="alternate" type="text/markdown" href="/security/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/security/">
+  <meta property="og:title" content="Security — secrets.sgit.ai">
+  <meta property="og:description" content="The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl here" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl here" href="/security/" aria-current="page">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Security</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Security</h1>
+    <!-- sg-secrets:status:start ids="site.repo-protections,tests.acceptance,app.prf-unlock" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-proposed">proposed</span> Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ · <span class="sg-status sg-status-proposed">proposed</span> Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">This page says what the design withholds from whom, and then says plainly what it cannot withhold. It describes a design. The acceptance test that will check it, an Owner of the GCP project being handed a uid and asked to produce one plaintext field, is listed as proposed above and its write-up will be published whatever the result.</p>
+
+    <h2>What a compromised party gets</h2>
+    <table>
+      <thead><tr><th>Party compromised</th><th>Gets</th><th>Does not get</th></tr></thead>
+      <tbody>
+        <tr><td>GCP project, or the Identity Platform admin</td><td>User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone</td><td>Any plaintext. The PRF output is bound to the origin and to the user's authenticator; logging in as the user fetches ciphertext and nothing to open it with</td></tr>
+        <tr><td>Bucket reader</td><td>Ciphertext, object sizes and times</td><td>Plaintext</td></tr>
+        <tr><td>Terraform pipeline</td><td>Can change the rules, delete the bucket</td><td>Plaintext</td></tr>
+        <tr><td>Public-key directory tamperer (phase 2)</td><td>Future shares, unless fingerprints or signatures are checked</td><td>Existing keys</td></tr>
+        <tr><td><strong>This repository, or the DNS for sgit.ai</strong></td><td><strong>Everything, for the users who load the malicious page while it is served</strong></td><td>Nothing is withheld</td></tr>
+      </tbody>
+    </table>
+
+    <h2>The code is the boundary</h2>
+    <p>Client-side cryptography is exactly as trustworthy as the code delivered to the browser. If this repository, the GitHub organisation that owns it, or the DNS zone for <code>sgit.ai</code> is compromised, the attacker can serve a page that asks for your passkey gesture and sends the plaintext wherever they like. No amount of cloud hardening changes that, and the design does not pretend otherwise.</p>
+    <p>What it does instead is keep the site on a host that is separate from the GCP project, so that a cloud compromise does not reach the code, and put every guard it can on the repository:</p>
+    <table>
+      <thead><tr><th>Guard</th><th>What it stops</th><th>In place?</th></tr></thead>
+      <tbody>
+        <tr><td><code>dev</code> and <code>main</code> protected: pull request required, one review, <code>validate</code> required, linear history, no force-push, no bypass for administrators</td><td>A single account pushing code to users</td><td>Unconfirmed as of 2026-10-05; asked for in <a href="/docs/ops/needs.html">needs.md</a></td></tr>
+        <tr><td>Hardware-key two-factor authentication for every organisation member</td><td>A phished password becoming a push</td><td>Unconfirmed as of 2026-10-05</td></tr>
+        <tr><td><code>sgit.ai</code> verified as an organisation domain</td><td>Another account claiming a dangling <code>*.sgit.ai</code> subdomain on Pages</td><td>Unconfirmed as of 2026-10-05</td></tr>
+        <tr><td>Every third-party action pinned by commit SHA; minimal <code>permissions</code> per job; Actions may not approve pull requests</td><td>A compromised action or token widening its own reach</td><td>Pins and permissions: yes, since v0.1.0. Organisation policy: unconfirmed</td></tr>
+        <tr><td>No build step; every dependency vendored and hashed; the gate refuses any script from another origin</td><td>A supply-chain change arriving at runtime without a reviewed diff</td><td>Yes, since v0.1.0 (check 5 of the gate)</td></tr>
+        <tr><td>A leak tripwire over every file on every release</td><td>A credential entering the public tree</td><td>Yes, since v0.1.0 (check 4)</td></tr>
+        <tr><td>Registrar lock, DNSSEC and a CAA record on <code>sgit.ai</code></td><td>The zone being moved or a rogue certificate issued</td><td>The DNS owner's decision; unconfirmed as of 2026-10-05</td></tr>
+        <tr><td>A Content-Security-Policy on every page: <code>script-src 'self'</code>, <code>style-src 'self'</code>, <code>object-src 'none'</code>, <code>base-uri 'none'</code>, <code>form-action 'none'</code></td><td>An injected script or form, if some other flaw let one in</td><td>Yes, since v0.1.0, on every page; <code>frame-ancestors</code> cannot be set in a meta tag, so app pages will add a frame-busting check</td></tr>
+      </tbody>
+    </table>
+    <p>Each "unconfirmed" row flips to a dated "yes" when the person who can check it has. The repository's own copy of these settings is <a href="/docs/ops/branch-protection.html">docs/ops/branch-protection.md</a>.</p>
+
+    <h2>The RP ID is secrets.sgit.ai, never sgit.ai</h2>
+    <p>A WebAuthn passkey is scoped to a relying-party identifier, and the PRF secret it returns is derived per credential and per RP ID. The RP ID for the unlock passkey is exactly <code>secrets.sgit.ai</code> (and <code>localhost</code> when testing locally).</p>
+    <p>It is never the apex <code>sgit.ai</code>, and this is the single most important decision in the design. A passkey scoped to the apex can be asserted by any page on any subdomain: there are more than twenty-seven sibling sites under <code>sgit.ai</code>, each in its own repository, and a compromise of any one of them would then be able to ask for the gesture that unlocks every user's secrets here. Scoping to this host means a sibling's compromise is a sibling's problem.</p>
+    <p>Consumers such as riskmandate.ai will use their own passkeys, or WebAuthn Related Origin Requests, later. Neither is in the MVP.</p>
+
+    <h2>What the passkey is, and is not, used for</h2>
+    <p>The passkey is a plain WebAuthn credential registered by this site's own page. It is <strong>not</strong> an Identity Platform passkey and it is not a login. The page never verifies the assertion signature, because there is no server to verify it for: the proof that matters is that the PRF output unwraps the keyring key, and a wrong authenticator produces bytes that unwrap nothing. Login is a separate step, through Identity Platform, and decides only which bucket paths the browser may read and write.</p>
+    <p>The credential's id and public key are stored in <code>meta.json</code> so the page can list devices and build <code>allowCredentials</code>. The WebAuthn user handle is 32 random bytes, not the Firebase uid.</p>
+
+    <h2>What we ask you to trust</h2>
+    <ul>
+      <li><strong>Your authenticator.</strong> Google Password Manager, iCloud Keychain or a hardware key holds the PRF secret and syncs it through your personal account, which no administrator of this service can reach.</li>
+      <li><strong>Your browser's WebCrypto.</strong> AES-256-GCM, HKDF-SHA256, RSA-OAEP and ECDSA come from the browser; the site vendors no cryptographic library.</li>
+      <li><strong>This repository, as served.</strong> Everything above this heading is about keeping that trust narrow and visible. You can read every line that will run, and the gate publishes what it checks.</li>
+      <li><strong>Google, for availability and metadata only.</strong> Google can see who signed in and when, can delete or roll back ciphertext, and can refuse service. Bucket versioning and soft-delete retention are the design's answer to deletion; export of the encrypted keyring from the account page is yours.</li>
+    </ul>
+
+    <h2>What this page does not claim</h2>
+    <ul>
+      <li>That the system exists. See <a href="/shipped/">/shipped/</a>.</li>
+      <li>That the Security Rules are correct. The rules text is in the repository and hashed; it is deployed to nothing yet, and its syntax is marked "verify first" in the brief.</li>
+      <li>That the compatibility of PRF across authenticators is known. The matrix page (proposed) will say which browsers and authenticators returned PRF output, dated.</li>
+    </ul>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/security/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

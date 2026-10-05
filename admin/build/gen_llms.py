@@ -18,6 +18,7 @@ LLMS_FULL_FILE = ROOT / 'llms-full.txt'
 SITEMAP_FILE   = ROOT / 'sitemap.xml'
 DOC_SECTIONS   = (('docs/design' , 'Design documents (the reasoning; the brief is the instruction)'),
                   ('docs/ops'    , 'Operations (what a human must do, and how a release works)'    ))
+DOC_SKIP       = ('index.md',)                                                   # the twin of a generated index page
 RE_MD_TITLE    = re.compile(r'^#\s+(.+?)\s*$', re.M)
 
 
@@ -32,7 +33,7 @@ class Gen__Llms:
         entries = []
         for path in self.pages.html_files():
             page = self.pages.meta(path)
-            if page['url'] == '/404.html':
+            if page['url'] == '/404.html' or page['source']:                     # rendered documents are listed under their own sections
                 continue
             entries.append((self.chrome.twin_path(page['url']), page['title'], page['description'], page['url']))
         return sorted(entries, key=lambda e: (e[0] != '/index.md', e[0]))
@@ -40,6 +41,8 @@ class Gen__Llms:
     def doc_entries(self, folder):
         entries = []
         for path in sorted((ROOT / folder).glob('*.md')):
+            if path.name in DOC_SKIP:
+                continue
             text  = path.read_text(encoding='utf-8')
             title = RE_MD_TITLE.search(text)
             entries.append(('/' + path.relative_to(ROOT).as_posix(), title.group(1) if title else path.stem))

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risk Mandate — User Onboarding &amp; Account Experience — secrets.sgit.ai</title>
+  <meta name="description" content="The Workspace-based onboarding design, the Google terms research, and the five-tier model that led here.">
+  <meta name="sg-secrets:source" content="/docs/design/riskmandate-user-onboarding-account-experience.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/design/riskmandate-user-onboarding-account-experience.html">
+  <link rel="alternate" type="text/markdown" href="/docs/design/riskmandate-user-onboarding-account-experience.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/design/riskmandate-user-onboarding-account-experience.html">
+  <meta property="og:title" content="Risk Mandate — User Onboarding &amp; Account Experience — secrets.sgit.ai">
+  <meta property="og:description" content="The Workspace-based onboarding design, the Google terms research, and the five-tier model that led here.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/design/">Design documents</a> <span class="sep">/</span> <span aria-current="page">Risk Mandate</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/design/riskmandate-user-onboarding-account-experience.md">docs/design/riskmandate-user-onboarding-account-experience.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.1.</p>
+<h1 id="risk-mandate-user-onboarding-account-experience">Risk Mandate — User Onboarding &amp; Account Experience</h1>
+<p>Oct 4, 2026 · @Dinis Cruz</p>
+<h2 id="summary">Summary</h2>
+<p>Risk Mandate provisions each user a Google Workspace account and runs the whole product on top of it, while the user sees Google only once: on the sign-in screen. First login is a password the browser generates; the user then enrols a passkey and never types that password again. From then on one biometric gesture both signs them into Google and unlocks their SGit data.</p>
+<p>This is the companion to the architecture briefing (tiers, encryption, Cloud substrate). It covers only the user-facing account lifecycle: provisioning, first run, return visits, and how Gmail and Drive are used without ever showing their UI.</p>
+<p><strong>Update after terms research:</strong> Google&#x27;s terms do not allow one Workspace tenant to hold several customers&#x27; staff without Google&#x27;s written agreement. The shared tier therefore defaults to Google Identity Platform with Cloud Storage, and the Workspace flows in this document apply to tenants the customer owns, or to the shared tier once Google signs off. See <em>Tier model and options</em>.</p>
+<h2 id="decision-password-once-then-passkey">Decision: password once, then passkey</h2>
+<p>Google will not let an admin enrol a passkey on a user&#x27;s behalf, so a Workspace account&#x27;s first sign-in always needs a password typed once. We accept that and make it painless: the browser&#x27;s password manager generates and stores it, and the very next screen enrols a passkey.</p>
+<p>What this buys:</p>
+<ul>
+<li>No identity provider to run. Google remains the only IdP.</li>
+<li>2FA from day one: the passkey is phishing-resistant and bound to the device.</li>
+<li>One gesture for everything: the same passkey carries the PRF secret that unwraps the SGit data key.</li>
+<li>Recovery rides on the user&#x27;s personal Google or Apple keychain, not on Risk Mandate.</li>
+</ul>
+<table>
+<thead><tr><th>Option</th><th>Password ever typed?</th><th>Who runs an IdP?</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>Password once, then passkey (chosen)</td><td>Once</td><td>Google</td><td>Simple; accepted</td></tr>
+<tr><td>Third-party SSO with passkey-only IdP</td><td>Never</td><td>Risk Mandate (Keycloak, Authentik, Descope, Auth0)</td><td>Rejected: operating an IdP</td></tr>
+<tr><td>Personal Google as IdP for the tenant</td><td>Never</td><td>Nobody</td><td>Not possible: Google cannot be a SAML IdP for another Google tenant</td></tr>
+<tr><td>Domain-wide delegation</td><td>Once</td><td>Google</td><td>Rejected for the client-side experience: server-side credential</td></tr>
+</tbody>
+</table>
+<h2 id="account-provisioning">Account provisioning</h2>
+<p>Risk Mandate creates the account; the user never sees the initial password. Two variants, both using the Admin SDK Directory API (<code>users.insert</code>).</p>
+<p><strong>Variant A: random password, delivered out of band</strong></p>
+<ol>
+<li>Create the user with a random password and <code>changePasswordAtNextLogin: true</code>. Discard the random value after delivery.</li>
+<li>Send a pre-filled sign-in link carrying <code>login_hint=&lt;new address&gt;</code> so Google skips the account picker. Optionally as a QR code for phone onboarding.</li>
+<li>Deliver the password separately (SMS, voice, in person).</li>
+</ol>
+<p>Google will not accept a one-time code minted by Risk Mandate; the random password is the one-time credential.</p>
+<p><strong>Variant B: Google-sent invite</strong></p>
+<ol>
+<li>Create the user with a recovery email set to an address the person already reads.</li>
+<li>Trigger Google&#x27;s password-reset/invite email. Google delivers the link; Risk Mandate never holds a credential.</li>
+</ol>
+<p>Variant B needs a reachable external email; Variant A does not. Hand-provision both while proving the model; move to the reseller provisioning APIs once volume justifies it.</p>
+<p>No initial password can be avoided entirely with Google as the IdP. See the Rejected alternatives section for what it would take.</p>
+<h2 id="first-run-flow">First-run flow</h2>
+<p>Target: under two minutes, one password screen, one biometric prompt.</p>
+<ol>
+<li>User opens the onboarding link (or scans the QR) on their phone or laptop. Google shows the password screen for the pre-filled address.</li>
+<li>User enters the one-time password (Variant A) or the invite link&#x27;s set-password screen appears (Variant B).</li>
+<li>Google forces a new password. The browser&#x27;s password manager offers a generated one; the user accepts it and never needs to remember it.</li>
+<li>Google&#x27;s &quot;Protect your account&quot; step offers a passkey. Risk Mandate&#x27;s onboarding copy tells the user to accept: Face ID, fingerprint or hardware key. This is the 2FA.</li>
+<li>Redirect lands on <code>riskmandate.ai</code>. OIDC sign-in passes silently against the fresh Google session.</li>
+<li>The page requests Drive and Gmail tokens via Google Identity Services; the Marketplace domain install means no consent screen.</li>
+<li>The page runs one WebAuthn assertion with PRF on the passkey just enrolled, derives the wrapping key, generates the SGit data key locally, wraps it and stores the wrapped blob in the customer&#x27;s Cloud project.</li>
+<li>Onboarding prompts a second passkey (hardware key or second device) as backup. This is the moment to pitch it; later prompts are ignored.</li>
+</ol>
+<p>If Google&#x27;s own passkey prompt is skipped in step 4, step 7 registers the passkey at <code>riskmandate.ai</code> instead and the user is asked to add it to their Google account from the Risk Mandate settings page. Both passkeys can live in the same Google Password Manager or iCloud Keychain.</p>
+<h2 id="returning-user-experience">Returning-user experience</h2>
+<p>After first run the user never types a password again.</p>
+<table>
+<thead><tr><th>Situation</th><th>What the user does</th><th>Mechanism</th></tr></thead>
+<tbody>
+<tr><td>Same browser, Google session alive</td><td>Opens riskmandate.ai; one biometric tap</td><td>OIDC silent sign-in; passkey + PRF assertion unlocks the data key</td></tr>
+<tr><td>Same browser, Google session expired</td><td>One tap on the One Tap bubble, then one biometric</td><td>Sign in with Google One Tap; Workspace passkey-as-primary login skips the password</td></tr>
+<tr><td>Clean device, new browser</td><td>Picks the account, one biometric, one biometric again</td><td>Workspace passkey login (synced via personal keychain); then PRF assertion</td></tr>
+<tr><td>Lost device</td><td>Recovers personal Google or Apple account on a new device; passkeys sync back</td><td>Keychain recovery; no Risk Mandate involvement</td></tr>
+<tr><td>All authenticators and personal account lost</td><td>Data unrecoverable</td><td>Accepted and stated in terms</td></tr>
+</tbody>
+</table>
+<p>Access tokens expire hourly. Google Identity Services re-requests them silently while the Google session lives, so the user is never interrupted mid-session.</p>
+<p>For the clean-device case to be passwordless, the tenant must have passkeys enabled as a primary sign-in method (Admin console, Security, Passkeys, &quot;Skip passwords when possible&quot;).</p>
+<h2 id="risk-mandate-as-the-only-ui">Risk Mandate as the only UI</h2>
+<p>Once the Marketplace domain install is in place, Gmail, Drive and Calendar are APIs the Risk Mandate page calls in the browser with the user&#x27;s own permissions. The user can run on the full power of Workspace without opening a single Google page after sign-in.</p>
+<p>What the user sees from Google, and only from Google:</p>
+<ul>
+<li>Sign-in, 2FA and passkey prompts</li>
+<li>Password reset and account recovery</li>
+<li>Security notifications (new device, suspicious sign-in)</li>
+</ul>
+<p>What Risk Mandate renders instead:</p>
+<ul>
+<li>Inbox: <code>gmail.readonly</code> to read; a real mailbox exists, so Risk Mandate can receive mail on the user&#x27;s behalf (evidence, notifications, approvals)</li>
+<li>Files: <code>drive.file</code> plus the Google Picker, or <code>drive.readonly</code> if browsing is needed; &quot;Open with Risk Mandate&quot; appears in Drive</li>
+<li>Calendar: <code>calendar.readonly</code> for deadlines and review dates</li>
+</ul>
+<p>To keep users inside Risk Mandate, hide the Google apps from the launcher and, if wanted, turn the Gmail and Drive web UIs off for the organisational unit. The services keep working through the API; only the Google front ends disappear. If a user types mail.google.com with the UI still on, they will land in Gmail, so decide this per tier.</p>
+<p>All Drive and Gmail reads happen client-side. Tokens stay in the tab; Risk Mandate&#x27;s servers never see them.</p>
+<h2 id="admin-configuration-checklist">Admin configuration checklist</h2>
+<p>One-time setup per tenant. Same list applies on the Private tier, done by the customer&#x27;s admin.</p>
+<ul>
+<li>☐ Google Cloud Console: create the OAuth client; set Authorised JavaScript origins to <code>https://riskmandate.ai</code>, <code>https://sgit.ai</code> and any other Risk Mandate-owned origin. One client with several origins, or one client per site under the same project so each can be revoked alone.</li>
+<li>☐ Google Cloud Console: configure the OAuth consent screen with the scopes <code>openid email profile</code>, <code>drive.file</code>, <code>gmail.readonly</code>, <code>calendar.readonly</code>. Add <code>drive.readonly</code> only if the Picker proves insufficient.</li>
+<li>☐ Workspace Marketplace SDK: publish Risk Mandate as a private app for the tenant.</li>
+<li>☐ Admin console, Apps, Marketplace apps: domain-install Risk Mandate for the organisational unit. This pre-grants the scopes for every user.</li>
+<li>☐ Admin console, Security, API controls, App access control: mark Risk Mandate as Trusted; set unconfigured third-party apps to Restricted.</li>
+<li>☐ Admin console, Security, Passkeys: allow users to skip passwords when possible.</li>
+<li>☐ Admin console, Security, 2-Step Verification: enforce, with passkeys and security keys permitted; enrolment grace period of 1 day.</li>
+<li>☐ Admin console, Apps, Google Workspace: hide Gmail, Drive, Calendar from the app launcher for the OU; decide per tier whether to turn their web UIs off.</li>
+<li>☐ Admin console, Account, Recovery: set the recovery email policy (required for Variant B invites).</li>
+<li>☐ Admin console, Reporting, Audit: confirm Admin audit log and OAuth token audit log retention; export to the customer&#x27;s Cloud project on Tier 2 and 3.</li>
+</ul>
+<h2 id="rejected-alternatives">Rejected alternatives</h2>
+<p>Recorded so the reasoning survives.</p>
+<p><strong>Third-party SSO with a passkey-only IdP.</strong> Point the tenant at an external SAML IdP (Keycloak, Authentik self-hosted; Descope, Auth0 hosted). Google then never shows a password screen; the IdP enrols a passkey on first visit via QR or push. The Google password still exists, random and unknown, but is never used. Rejected because Risk Mandate does not want to operate an identity provider. Revisit if a Tier 3 customer already runs one and wants Risk Mandate behind it.</p>
+<p><strong>Keycloak brokering a personal Google account.</strong> Keycloak accepts the user&#x27;s personal Google sign-in via OIDC and re-issues it as a SAML assertion the tenant trusts. Elegant, but still an IdP to run. Same verdict.</p>
+<p><strong>Personal Google account as the tenant&#x27;s IdP.</strong> Not possible: Workspace federates outward only to non-Google SAML providers. The personal account&#x27;s real role is the recovery chain for the passkey, which already works.</p>
+<p><strong>Domain-wide delegation for data access.</strong> A service account impersonating users removes consent prompts but moves Drive and Gmail access server-side and creates the most powerful credential in the design. Reserved for Tier 2 and 3 features that must run without the user present; never for the client-side experience.</p>
+<p><strong>Google Client-Side Encryption.</strong> The right model, but Enterprise Plus only, not available on the seven-pound tier. SGit&#x27;s own encryption gives the same guarantee at any tier.</p>
+<h2 id="tier-model-and-options-updated-after-terms-research">Tier model and options (updated after terms research)</h2>
+<p>Two rules now drive the design:</p>
+<ul>
+<li><strong>The terms decide who owns a Workspace tenant.</strong> A Workspace tenant may only hold one organisation&#x27;s people, unless Google agrees otherwise in writing. Data sensitivity does not change this.</li>
+<li><strong>Sensitivity decides who holds the keys and the infrastructure.</strong> Non-sensitive work can share Risk Mandate infrastructure; sensitive work moves to infrastructure the customer owns.</li>
+</ul>
+<p>What stays constant on every tier: SGit encrypts client-side, the data key is wrapped by a passkey PRF secret derived in the browser, and no Risk Mandate server ever holds plaintext or long-lived user tokens. The identity provider and the bucket rules decide <em>who can touch which path</em>; SGit decides <em>whether the bytes mean anything</em>.</p>
+<h3 id="tiers">Tiers</h3>
+<table>
+<thead><tr><th>Tier</th><th>Identity</th><th>Storage</th><th>Who owns what</th><th>Terms status</th><th>For</th></tr></thead>
+<tbody>
+<tr><td><strong>Shared (default)</strong></td><td>Google Identity Platform, one IdP tenant per customer</td><td>Cloud Storage for Firebase on Risk Mandate&#x27;s bucket, Security Rules scoped to user and tenant</td><td>Risk Mandate owns the Cloud project; no Workspace involved</td><td>Within terms: Identity Platform is Google&#x27;s customer-identity product, built for an app&#x27;s own users</td><td>Pilots, non-sensitive work</td></tr>
+<tr><td><strong>Shared on Workspace (pending)</strong></td><td>Workspace accounts in Risk Mandate&#x27;s tenant</td><td>Cloud Storage; Gmail and Drive client-side</td><td>Risk Mandate owns tenant holding several customers&#x27; staff</td><td><strong>Needs Google&#x27;s written agreement</strong> (ToS §2.6, AUP). Do not launch before it is signed</td><td>Same as Shared, plus mailbox and Drive</td></tr>
+<tr><td><strong>Customer Workspace</strong></td><td>Customer&#x27;s own Workspace tenant; Risk Mandate is a domain-installed Marketplace app</td><td>Per-customer Cloud project; Gmail and Drive client-side</td><td>Customer owns tenant; buys direct or through Risk Mandate as reseller/distributor; Risk Mandate optionally delegated admin</td><td>Within terms. Restricted-scope app verification applies; no CASA while data stays client-side</td><td>Sensitive work, customers wanting Gmail/Drive in the product</td></tr>
+<tr><td><strong>Private</strong></td><td>Customer&#x27;s Workspace or own IdP</td><td>Customer&#x27;s Cloud org and buckets; optional customer KMS or Google CSE</td><td>Customer owns everything; Risk Mandate sells setup and managed ops</td><td>Within terms</td><td>Regulated and enterprise</td></tr>
+<tr><td><strong>Federated (add-on to any tier)</strong></td><td>Customer&#x27;s existing Workspace, Entra or other SAML/OIDC IdP federated into Identity Platform</td><td>As the tier it attaches to</td><td>Customer keeps its own accounts</td><td>Within terms</td><td>Customers who already have an IdP</td></tr>
+</tbody>
+</table>
+<p>Migration path: Shared to Customer Workspace or Private moves the customer&#x27;s SGit bucket into their own Cloud project. Nothing is re-encrypted, because the keys were never Risk Mandate&#x27;s.</p>
+<h3 id="shared-tier-zero-servers-risk-mandate-runs">Shared tier: zero servers Risk Mandate runs</h3>
+<ol>
+<li>Browser signs in with the Identity Platform (Firebase Auth) JS SDK into the customer&#x27;s IdP tenant.</li>
+<li>Browser runs its own WebAuthn assertion with PRF to unwrap the SGit data key. This works whatever the IdP, so Identity Platform&#x27;s limited native passkey support does not block the design.</li>
+<li>Browser reads and writes Cloud Storage for Firebase directly; Security Rules restrict each user to <code>tenants/{tenantId}/users/{uid}/</code> and shared customer paths.</li>
+<li>No Risk Mandate backend sits in the data path.</li>
+</ol>
+<p><strong>Cost:</strong> basic sign-in free up to 50,000 MAU, then about $0.0055 per MAU; SAML/OIDC federation free only to 50 MAU. Far below £7 per seat. <strong>Gives up:</strong> mailbox, Drive, Calendar and Google-run account recovery. If the product needs inbound email, add a mail service separately.</p>
+<h3 id="aws-variant">AWS variant</h3>
+<p>Same architecture for an AWS-hosted private tier: Cognito user pool for sign-in, Cognito identity pool to swap the token for temporary AWS credentials in the browser, S3 with an IAM policy limiting each user to their own identity-ID prefix. Cognito has native passkey support. Multi-tenancy is a pool per customer or tenant attributes. SGit encryption and passkey PRF are unchanged.</p>
+<h3 id="request-to-google-for-the-shared-on-workspace-tier">Request to Google for the Shared-on-Workspace tier</h3>
+<p>The Terms allow the restrictions to be waived if Google specifically agrees in writing. Ask for:</p>
+<ul>
+<li>Permission to provision End User Accounts in Risk Mandate&#x27;s tenant for staff of multiple customer organisations, embedded in the Risk Mandate product, with Google&#x27;s UI hidden.</li>
+<li>Permission for customers to offer the same onward to their own clients, if wanted.</li>
+<li>Clarity that a risk-workflow interface over Gmail and Drive is not a &quot;substitute or similar service&quot; (ToS §2.6(c)).</li>
+<li>The commercial vehicle: amendment to Risk Mandate&#x27;s Workspace agreement, or reseller/ISV partner agreement.</li>
+</ul>
+<p>Get it signed by someone with contracting authority, not an email from a contact. Until then the Shared tier runs on Identity Platform, and switches to Workspace only once the agreement lands.</p>
+<h3 id="decision-summary">Decision summary</h3>
+<table>
+<thead><tr><th>Question</th><th>Decision</th></tr></thead>
+<tbody>
+<tr><td>Default substrate for shared, non-sensitive use</td><td>Identity Platform + Cloud Storage for Firebase</td></tr>
+<tr><td>When Workspace is used</td><td>Customer owns the tenant, or Google has signed off on the shared Workspace tier</td></tr>
+<tr><td>How Risk Mandate earns on Workspace</td><td>Reseller/distributor margin plus setup and managed services</td></tr>
+<tr><td>What never changes</td><td>Client-side SGit encryption, passkey PRF key wrapping, no server-side plaintext or long-lived tokens</td></tr>
+<tr><td>AWS</td><td>Cognito + identity pool + S3 as a drop-in private-tier option</td></tr>
+</tbody>
+</table>
+<h2 id="research-a-google-commercial-and-terms-restrictions">Research A: Google commercial and terms restrictions</h2>
+<p>The Shared tier as designed breaks Google&#x27;s terms. Risk Mandate holding one tenant and handing accounts in it to other companies&#x27; staff is exactly what the Acceptable Use Policy forbids. The Delegated and Private tiers are fine, and the compliant way to keep the &quot;we pass on the £7 seat&quot; model is to resell a separate tenant per customer, through Google&#x27;s reseller programme or a distributor.</p>
+<table>
+<thead><tr><th>Restriction</th><th>Source</th><th>Impact on Risk Mandate</th></tr></thead>
+<tbody>
+<tr><td>Customer may not sell, resell or lease the Services to a third party unless the agreement authorises it</td><td>Workspace Terms of Service §2.6(a)</td><td>Tier 1 (one Risk Mandate tenant, many customers) is resale without authorisation. Blocking.</td></tr>
+<tr><td>May not resell End User Accounts, or parts of them, as part of a commercial product offered to third parties</td><td>Workspace / Cloud Acceptable Use Policy</td><td>Bundling seats inside the Risk Mandate product from our own tenant is named explicitly. Blocking for Tier 1.</td></tr>
+<tr><td>May not &quot;attempt to create a substitute or similar service&quot; using the Services</td><td>Workspace ToS §2.6(c)</td><td>Building a Gmail-like inbox UI is a grey zone. Keep the UI risk-workflow-shaped, not a general mail client. Ask counsel.</td></tr>
+<tr><td>One human per account; no shared accounts outside delegation; no function accounts used to share files</td><td>Acceptable Use Policy</td><td>Each seat is a real person; agent and service identities must be service accounts, not users.</td></tr>
+<tr><td>Admins may access End User data; customer must obtain consents for that</td><td>Workspace ToS</td><td>Already planned (audit log + DPA). In a per-customer tenant the customer, not Risk Mandate, is the controller.</td></tr>
+<tr><td>Reseller must have each customer accept Google&#x27;s ToS itself; cannot accept on their behalf</td><td>Reseller agreements</td><td>Onboarding includes a Google ToS click-through per customer tenant.</td></tr>
+<tr><td>Reseller cannot resell to someone who will resell onward</td><td>Reseller agreements</td><td>Customers cannot sub-resell their Risk Mandate seats.</td></tr>
+<tr><td>Direct Google partner status: \~100 provisioned seats, business plan, credit check</td><td>Google partner programme (as reported by distributors Vendasta, Sherweb)</td><td>Not reachable at pilot scale. Use a distributor (Sherweb, Vendasta: no minimums) until volume justifies direct.</td></tr>
+<tr><td>Max 2 reseller transfers per calendar year per subscription; licence count cannot drop below commitment on transfer</td><td>Workspace transfer rules</td><td>Plan the Tier 1-to-Tier 3 move once; prefer Flexible plans.</td></tr>
+<tr><td>Gmail read scopes and <code>drive</code> / <code>drive.readonly</code> are restricted scopes</td><td>Google OAuth policy</td><td>Internal app in the same org: exempt. Third-party app into customer tenants: needs Google app verification even when domain-installed; annual CASA security assessment if restricted data passes through our servers. Keep reads client-side and prefer <code>drive.file</code>.</td></tr>
+</tbody>
+</table>
+<p><strong>SLA.</strong> Workspace guarantees 99.9% monthly uptime, with credits capped at 15 days of service per month, as extra days or, for monthly billing, an invoice credit. Bought through a reseller, the credit flows through that reseller. There is no money-back remedy, so Risk Mandate should not promise customers an SLA stronger than Google&#x27;s on Workspace-dependent functions; Cloud Storage has its own SLA.</p>
+<p><strong>What this changes in the design:</strong></p>
+<ul>
+<li>The shared tier no longer uses a Risk Mandate Workspace tenant; it runs on Identity Platform and Cloud Storage until Google agrees otherwise in writing. See <em>Tier model and options</em>.</li>
+<li>Workspace is used where the customer owns the tenant, bought direct or through Risk Mandate as reseller.</li>
+<li>The only users in Risk Mandate&#x27;s own Workspace tenant are Risk Mandate staff.</li>
+<li>The client-side architecture already minimises the verification burden: no server-side Gmail or Drive data means verification without CASA.</li>
+</ul>
+<p>Sources: <a href="https://workspace.google.com/terms/standard_terms/">Workspace Terms of Service</a> · <a href="https://cloud.google.com/cloud/terms/aup">Acceptable Use Policy</a> · <a href="https://workspace.google.com/terms/sla/?hl=es">Workspace SLA</a> · <a href="https://workspace.google.com/terms/reseller/amendment_edu_reselling">EDU reseller terms</a> · <a href="https://knowledge.workspace.google.com/admin/billing/transfer-subscriptions-between-google-and-resellers">Transfer to resellers</a> · <a href="https://developers.google.com/identity/protocols/oauth2/production-readiness/restricted-scope-verification">Restricted scope verification</a> · <a href="https://developers.google.com/gmail/api/auth/scopes?authuser=2">Gmail API scopes</a> · <a href="https://www.vendasta.com/blog/google-workspace-reseller/">Vendasta on partner requirements</a> · <a href="https://www.sherweb.com/productivity/google-workspace/resell/">Sherweb reseller</a></p>
+<p>Not legal advice; confirm the Tier 1 restructuring and the &quot;substitute service&quot; question with counsel before launch.</p>
+<h2 id="research-b-who-else-has-done-this">Research B: who else has done this</h2>
+<p>Each half of the design has well-known precedents; the full combination does not show up in public sources. Website builders and payment companies resell a per-customer Workspace tenant bundled with their product, and email startups put their own UI over Gmail. No company surfaced that resells Workspace as the identity, storage and mail substrate for a non-email product with client-side encryption on top. That gap is either Risk Mandate&#x27;s opening or a sign the economics or terms bite; the absence of results is not proof nobody has.</p>
+<table>
+<thead><tr><th>Who</th><th>What they do</th><th>Which half of the pattern</th><th>Lesson for Risk Mandate</th></tr></thead>
+<tbody>
+<tr><td><a href="https://leadsmonky.com/google-workspace-vs-squarespace/">Squarespace</a></td><td>Authorised reseller; sells real Workspace inside its accounts, billed by Squarespace, often a free first year of Business Starter</td><td>Reseller bundle, per-customer tenant</td><td>Proves the bundle model at scale. Only works for new tenants; an existing Workspace cannot be linked.</td></tr>
+<tr><td><a href="https://community.squareup.com/t5/Troubleshooting/Where-do-I-pay-for-Google-Workspace/m-p/754859">Square</a></td><td>Resells Workspace to merchants; Google tells users to &quot;contact reseller&quot; for billing</td><td>Reseller bundle</td><td>Support burden lands on the reseller; users get confused about who to pay. Budget for first-line support.</td></tr>
+<tr><td><a href="https://www.searchenginejournal.com/google-domains-agrees-to-be-acquired-by-squarespace/">Google Domains to Squarespace</a></td><td>Google moved its own domain-plus-Workspace customers to Squarespace billing</td><td>Reseller at scale</td><td>Google itself relies on resellers for the bundled small-business segment.</td></tr>
+<tr><td><a href="https://www.sherweb.com/productivity/google-workspace/resell/">Sherweb</a>, <a href="https://www.vendasta.com/blog/google-workspace-reseller/">Vendasta</a>, <a href="https://www.appxite.com/google">AppXite</a></td><td>Distributors and platforms letting smaller firms resell Workspace without Google&#x27;s direct-partner minimums; provisioning and billing automation</td><td>Reseller plumbing</td><td>The practical route for Risk Mandate at pilot scale.</td></tr>
+<tr><td><a href="https://www.modulesgarden.com/products/whmcs/google-workspace">WHMCS Workspace module</a></td><td>Hosting companies provision Workspace seats from their billing system</td><td>Automated provisioning</td><td>Reseller API provisioning is a solved, off-the-shelf problem.</td></tr>
+<tr><td><a href="https://sacra.com/chat/h/4c327cd9-4a73-4c8e-bdc3-8527575402c0/">Superhuman</a></td><td>Workflow and UI layer on a user&#x27;s existing Gmail or Outlook via OAuth; Google keeps storage, spam and deliverability</td><td>Own UI over Gmail</td><td>Owning the interface but not the rails; exposed to Google&#x27;s API quotas and policy.</td></tr>
+<tr><td><a href="https://sacra.com/chat/h/5e7868c3-fa5f-4145-a8d9-a8b9f7f15384/">Shortwave</a></td><td>Gmail-only client that indexes mail server-side for AI search</td><td>Own UI over Gmail, server-side</td><td>The server-side path means restricted-scope verification and CASA. Risk Mandate&#x27;s client-side design avoids the heaviest part.</td></tr>
+<tr><td><a href="https://lists.freron.com/mailmate/2025-April/018273.html">MailMate</a></td><td>Small desktop mail client that had to pass CASA Tier 2 to keep Gmail OAuth</td><td>Restricted scope cost</td><td>Even small vendors face the audit when acting as a third-party app; plan for it on Tier 2/3.</td></tr>
+</tbody>
+</table>
+<p><strong>Where Risk Mandate differs from all of them:</strong> the customer does not bring an account or buy email; the account is provisioned as the product&#x27;s identity and data home, the product&#x27;s data is encrypted before Google sees it, and the Google UI is hidden. Closest analogy: Squarespace&#x27;s bundle plus Superhuman&#x27;s interface plus end-to-end encryption.</p>
+<p>One honest risk the precedents show: platform dependence. Superhuman and Shortwave live inside Google&#x27;s quotas and policy; a reseller relationship adds Google&#x27;s terms on top. Keep SGit&#x27;s data portable (it already is, in Cloud Storage) so a Google policy change costs a migration, not the company.</p>
+<h2 id="open-questions-and-next-steps">Open questions and next steps</h2>
+<p>Open questions:</p>
+<ul>
+<li>Does Google&#x27;s post-password &quot;add a passkey&quot; prompt appear reliably on Business Starter, or does it need an admin nudge? Test on a fresh tenant.</li>
+<li>Can the Google-account passkey and the riskmandate.ai passkey be the same credential for PRF purposes, or do users hold two? Two is fine, but the onboarding copy depends on the answer.</li>
+<li>PRF support on older Android and on managed Chrome with enterprise policies: build the compatibility matrix.</li>
+<li>Which tiers turn the Gmail and Drive web UIs off entirely versus only hiding them from the launcher?</li>
+<li>Multi-user customers: how is the customer data key shared across seats and rotated on offboarding? Not yet designed.</li>
+</ul>
+<p>Next steps:</p>
+<ul>
+<li>☐ Stand up a throwaway tenant and run the full first-run flow on a clean phone and a clean laptop; time it.</li>
+<li>☐ Implement OIDC sign-in with no refresh tokens and the GIS token client for Drive, Gmail, Calendar.</li>
+<li>☐ Implement passkey registration with PRF and data-key wrapping; test recovery by wiping a device.</li>
+<li>☐ Write the onboarding copy for the passkey and backup-passkey prompts.</li>
+<li>☐ Draft the terms language on unrecoverable data.</li>
+<li>☐ Design the multi-user key-sharing scheme before the second seat on any customer.</li>
+</ul>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/riskmandate-user-onboarding-account-experience.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

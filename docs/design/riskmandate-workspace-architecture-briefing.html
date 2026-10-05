@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Risk Mandate — Google Workspace as Identity, Storage and Deployment Substrate — secrets.sgit.ai</title>
+  <meta name="description" content="The earlier Workspace architecture briefing.">
+  <meta name="sg-secrets:source" content="/docs/design/riskmandate-workspace-architecture-briefing.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/design/riskmandate-workspace-architecture-briefing.html">
+  <link rel="alternate" type="text/markdown" href="/docs/design/riskmandate-workspace-architecture-briefing.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/design/riskmandate-workspace-architecture-briefing.html">
+  <meta property="og:title" content="Risk Mandate — Google Workspace as Identity, Storage and Deployment Substrate — secrets.sgit.ai">
+  <meta property="og:description" content="The earlier Workspace architecture briefing.">
+  <meta name="sg-secrets:version" content="0.1.1">
+  <meta name="sg-secrets:released" content="2026-10-05">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/design/">Design documents</a> <span class="sep">/</span> <span aria-current="page">Risk Mandate</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/design/riskmandate-workspace-architecture-briefing.md">docs/design/riskmandate-workspace-architecture-briefing.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.1.</p>
+<h1 id="risk-mandate-google-workspace-as-identity-storage-and-deployment-substrate">Risk Mandate — Google Workspace as Identity, Storage and Deployment Substrate</h1>
+<p><strong>Technical briefing</strong> · Draft v0.1 · 4 October 2026 <strong>Scope:</strong> Using Google Workspace accounts as the identity provider, per-customer storage home and deployment substrate for Risk Mandate (riskmandate.ai), with SGit (sgit.ai) as the encrypted data layer.</p>
+<hr>
+<h2 id="1-summary">1. Summary</h2>
+<p>Risk Mandate will provision each customer a Google Workspace account (≈ £7/user/month, cost passed through to the customer). That account does three jobs at once:</p>
+<ol>
+<li><strong>Identity provider</strong> — OIDC/SAML login for Risk Mandate and SGit.</li>
+<li><strong>Data home</strong> — the customer&#x27;s policies, mandates and evidence live under an account that is recognisably <em>theirs</em>.</li>
+<li><strong>Cloud substrate</strong> — every Workspace tenant is also a Google Cloud organisation, so per-customer Cloud projects (storage, KMS, compute) fall out for free.</li>
+</ol>
+<p>All customer data is stored <strong>encrypted by SGit before it touches Google</strong>. Google, and any Workspace admin, only ever hold ciphertext. The decryption key is derived from the user&#x27;s own authenticator (passkey + PRF) and rides on the user&#x27;s <em>personal</em> recovery chain, never on Risk Mandate infrastructure.</p>
+<p>The result is a <strong>three-tier ladder</strong> — Shared → Delegated → Private — where the customer moves up as their governance requirements grow, and the move is a Google domain transfer rather than a data migration. This mirrors Risk Mandate&#x27;s own thesis: a named business owner and a time-bound mandate, applied to our own access.</p>
+<hr>
+<h2 id="2-design-goals-and-constraints">2. Design goals and constraints</h2>
+<table>
+<thead><tr><th>Goal</th><th>Implication</th></tr></thead>
+<tbody>
+<tr><td>Minimise Risk Mandate&#x27;s contact with user data</td><td>Never hold plaintext; avoid holding standing OAuth credentials where possible</td></tr>
+<tr><td>Pass infrastructure cost to the customer</td><td>Resell Workspace seats; Cloud billing attached per customer</td></tr>
+<tr><td>Scale security from &quot;simple&quot; to &quot;enterprise-ready&quot;</td><td>Tiered model, same code, different tenancy and key custody</td></tr>
+<tr><td>Prove the model before automating</td><td>Hand-provision early customers; reseller APIs later</td></tr>
+<tr><td>Business model = helping customers deploy at their end</td><td>Private tier is the upsell, shared tier is the on-ramp</td></tr>
+</tbody>
+</table>
+<p><strong>Hard constraint discovered:</strong> standard Workspace storage has <em>no admin-proof zone</em>. A super admin can reach any user&#x27;s Drive via Vault, data transfer, Takeout or domain-wide delegation. Google&#x27;s Client-Side Encryption (CSE) solves this but is Enterprise Plus / Education only and not available on the £7 tier. Therefore encryption must happen <strong>in SGit, before Google</strong>, not inside Google.</p>
+<hr>
+<h2 id="3-architecture-overview">3. Architecture overview</h2>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│  User&#x27;s PERSONAL identity (own Google / Apple account)         │
+│  └─ Passkey for riskmandate.ai, stored in Google Password      │
+│     Manager or iCloud Keychain → synced, recoverable by user   │
+│     └─ PRF extension → deterministic secret → unwraps data key │
+└───────────────┬──────────────────────────────────────────────┘
+                │ login (WebAuthn + OIDC)
+┌───────────────▼──────────────────────────────────────────────┐
+│  Risk Mandate app (browser / agent)                            │
+│  - Verifies Workspace ID token, discards it                    │
+│  - Holds data key IN MEMORY ONLY for the session               │
+│  - SGit client encrypts/decrypts locally                       │
+└───────────────┬──────────────────────────────────────────────┘
+                │ ciphertext only
+┌───────────────▼──────────────────────────────────────────────┐
+│  Customer&#x27;s Workspace tenant  +  Google Cloud org node         │
+│  - Workspace user(s): identity, Groups, Drive (light use)      │
+│  - Cloud project(s): Cloud Storage (SGit object store), KMS,   │
+│    Cloud Run (SGit services), audit logs                       │
+└──────────────────────────────────────────────────────────────┘</code></pre>
+<p>Key separation: <strong>identity + ciphertext</strong> live in the tenant (which Risk Mandate may administer on the shared tier); <strong>key material</strong> lives on the user&#x27;s personal recovery chain (which Risk Mandate never touches).</p>
+<hr>
+<h2 id="4-identity">4. Identity</h2>
+<h3 id="41-workspace-as-idp">4.1 Workspace as IdP</h3>
+<ul>
+<li>Google Workspace supports OIDC and SAML out of the box. Risk Mandate registers once as an OAuth client in Google Cloud.</li>
+<li>Use <strong>pure OpenID Connect</strong> for login: request only <code>openid email profile</code>, verify the ID token, and discard it. No <code>offline_access</code>, no refresh token, nothing for Risk Mandate to custody.</li>
+<li>Groups API drives roles (e.g. <code>risk-owners@</code>, <code>auditors@</code>), so authorisation can be delegated to the customer&#x27;s own admins on higher tiers.</li>
+</ul>
+<h3 id="42-passkeys-prf-for-key-derivation">4.2 Passkeys + PRF for key derivation</h3>
+<ul>
+<li>On first login the user registers a <strong>passkey</strong> at <code>riskmandate.ai</code>. The passkey is bound to the site, but <em>stored</em> wherever the user chooses — Google Password Manager, iCloud Keychain, a hardware key.</li>
+<li>The <strong>PRF extension</strong> (WebAuthn) returns a deterministic 32-byte secret per credential per site on each assertion. Risk Mandate uses it to derive a wrapping key and unwrap the customer&#x27;s SGit data key.</li>
+<li>Nothing key-related is stored server-side in plaintext. A stolen database yields wrapped keys only.</li>
+<li><strong>Recovery:</strong> because the passkey syncs via the user&#x27;s personal Google/Apple account, losing a device is survivable — recover the personal account, the passkey returns, the PRF secret returns. Losing <em>all</em> authenticators and the personal account = data gone. This is accepted and should be stated plainly in the terms.</li>
+<li>Browser support: Chrome and Safari both ship PRF; iCloud Keychain supports it from iOS 18. Test older Android builds before relying on it there.</li>
+</ul>
+<h3 id="43-why-not-the-alternatives">4.3 Why not the alternatives</h3>
+<table>
+<thead><tr><th>Option</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr><td>Drive appDataFolder</td><td>Admin-reachable; stores the key next to the lock. No.</td></tr>
+<tr><td>Google CSE</td><td>Correct model, but Enterprise Plus only and operationally heavy. Revisit for Private tier if a customer already has it.</td></tr>
+<tr><td>Password managers (1Password, LastPass)</td><td>1Password has a usable SDK; LastPass does not. Either way adds a third party. Optional, not default.</td></tr>
+<tr><td>Customer KMS (GCP KMS / Azure Key Vault / AWS KMS)</td><td>Right answer for Private tier where the customer already audits a KMS. Supported as an alternative wrapping backend.</td></tr>
+</tbody>
+</table>
+<hr>
+<h2 id="5-storage">5. Storage</h2>
+<h3 id="51-sgit-as-the-encrypted-data-layer">5.1 SGit as the encrypted data layer</h3>
+<ul>
+<li>SGit encrypts every object client-side before upload. Google only ever sees ciphertext.</li>
+<li>Google Drive is <strong>not</strong> the primary store — SGit is too chatty for the Drive API. Drive may hold human-readable exports (e.g. a published policy PDF) but the SGit object store is <strong>Google Cloud Storage</strong> in a per-customer project.</li>
+<li>Each Workspace user can create Cloud projects immediately (Workspace tenant = Cloud Identity org), so no separate account system is needed.</li>
+</ul>
+<h3 id="52-per-customer-cloud-layout">5.2 Per-customer Cloud layout</h3>
+<pre><code>Organisation: &lt;customer-or-riskmandate&gt;.com
+└── Folder: riskmandate-customers (shared tier) / root (private tier)
+    └── Project: rm-&lt;customer&gt;
+        ├── Cloud Storage bucket   – SGit object store (ciphertext)
+        ├── Cloud KMS (optional)   – alternative key wrapping backend
+        ├── Cloud Run              – SGit services, if hosted
+        └── Cloud Audit Logs       – retained, exportable to customer</code></pre>
+<ul>
+<li>Billing: Workspace and Cloud are billed separately. Each project needs a billing account — Risk Mandate&#x27;s with labels for chargeback (Shared), or the customer&#x27;s own (Private).</li>
+<li>IAM: Cloud org admin is a <strong>different role</strong> from Workspace super admin. Split identity administration from infrastructure administration deliberately from day one.</li>
+</ul>
+<hr>
+<h2 id="6-deployment-tiers">6. Deployment tiers</h2>
+<table>
+<thead><tr><th></th><th><strong>Tier 1 — Shared</strong></th><th><strong>Tier 2 — Delegated</strong></th><th><strong>Tier 3 — Private</strong></th></tr></thead>
+<tbody>
+<tr><td>Tenant owner</td><td>Risk Mandate</td><td>Customer</td><td>Customer</td></tr>
+<tr><td>Domain</td><td><code>&lt;customer&gt;.riskmandate.ai</code> or similar</td><td>Customer&#x27;s own</td><td>Customer&#x27;s own</td></tr>
+<tr><td>Workspace admin</td><td>Risk Mandate</td><td>Customer; Risk Mandate holds a scoped, revocable delegated-admin role</td><td>Customer only</td></tr>
+<tr><td>Cloud org / billing</td><td>Risk Mandate (chargeback)</td><td>Customer</td><td>Customer</td></tr>
+<tr><td>Who could read plaintext</td><td>Nobody — ciphertext + user-held keys</td><td>Same</td><td>Same</td></tr>
+<tr><td>Who could <em>see ciphertext / metadata</em></td><td>Risk Mandate admins (audit-logged)</td><td>Customer + Risk Mandate (scoped)</td><td>Customer</td></tr>
+<tr><td>Provisioning</td><td>Hand-provisioned initially → reseller API</td><td>Guided setup, sold as a service</td><td>Full setup + managed ops, sold as a service</td></tr>
+<tr><td>Target</td><td>Startups, pilots, proving the model</td><td>Mid-market wanting ownership without ops burden</td><td>Regulated / enterprise</td></tr>
+</tbody>
+</table>
+<p><strong>Trust story on Tier 1:</strong> &quot;We technically can access the tenant, here is the Admin audit log proving we didn&#x27;t, and all we could see is ciphertext anyway.&quot; Back it with a DPA. This is stronger than most SaaS trust claims and should be stated rather than hidden.</p>
+<p><strong>Migration path:</strong> Tier 1 → 2/3 is a Google <strong>domain transfer</strong> of the tenant plus a Cloud project move under the customer&#x27;s org node. No data export, no re-encryption — keys never belonged to Risk Mandate in the first place.</p>
+<hr>
+<h2 id="7-federated-login-customer-brings-their-own-google">7. Federated login (customer brings their own Google)</h2>
+<p>Both tiers can optionally accept logins from a customer&#x27;s <em>existing</em> Workspace instead of a provisioned account.</p>
+<table>
+<thead><tr><th>Depth</th><th>What&#x27;s needed on the customer side</th></tr></thead>
+<tbody>
+<tr><td>OIDC sign-in only</td><td>Nothing, unless the admin has locked third-party apps — then a one-line allow-list of Risk Mandate&#x27;s OAuth client</td></tr>
+<tr><td>Per-user Drive access</td><td>User consent at OAuth time; no admin involvement</td></tr>
+<tr><td>Domain-wide delegation</td><td>Super admin configures it in Admin console; triggers security review. <strong>Avoid unless essential.</strong></td></tr>
+<tr><td>SAML into Risk Mandate&#x27;s tenant</td><td>One-time admin setup on their side; routine for any IT team</td></tr>
+</tbody>
+</table>
+<p><strong>Credential-custody rule:</strong> Risk Mandate holds no refresh tokens by default. If Drive access is ever needed, keep the token in the browser and call Drive client-side so the grant dies with the session. Anything that must run server-side without the user present is a Tier 2/3 feature, with tokens encrypted under a key the user&#x27;s PRF secret unwraps and scopes requested incrementally.</p>
+<hr>
+<h2 id="8-session-and-unlock-flow-end-to-end">8. Session and unlock flow (end-to-end)</h2>
+<ol>
+<li>User visits <code>riskmandate.ai</code>, chooses &quot;Sign in with Google&quot; → OIDC against their Workspace tenant.</li>
+<li>ID token verified; session established; token discarded.</li>
+<li>App triggers WebAuthn assertion with PRF for the registered passkey.</li>
+<li>PRF output → HKDF → wrapping key.</li>
+<li>App fetches the user&#x27;s <strong>wrapped</strong> SGit data key from the Cloud project; unwraps in memory.</li>
+<li>SGit client decrypts/encrypts objects locally against the per-customer Cloud Storage bucket.</li>
+<li>On logout or tab close the data key is dropped; nothing persists in plaintext.</li>
+</ol>
+<p>First-run differs only in step 3–5: generate the data key locally, wrap it with the PRF-derived key, store the wrapped blob. Optionally register a second passkey (hardware key) and a KMS-wrapped copy for Tier 3 customers as recovery.</p>
+<hr>
+<h2 id="9-open-questions-and-risks">9. Open questions and risks</h2>
+<ul>
+<li><strong>PRF on older Android / enterprise-managed Chrome</strong> — needs a compatibility matrix before launch.</li>
+<li><strong>Reseller status</strong> — joining Google&#x27;s partner programme unlocks provisioning/billing APIs; needed before Tier 1 can be self-serve. Not needed for hand-provisioned pilots.</li>
+<li><strong>Legal access obligations</strong> — on Tier 1, Risk Mandate is data controller for the tenant and may receive lawful-access requests. Ciphertext-only storage limits what can be produced; document this position with counsel.</li>
+<li><strong>Multi-user customers</strong> — sharing a data key across a customer&#x27;s users needs a key-sharing scheme (per-user wrapped copies of the customer key, rotated on offboarding). Design before Tier 1 onboards its second seat.</li>
+<li><strong>Drive quota and API rate limits</strong> — not a concern once Cloud Storage is the store, but confirm Drive isn&#x27;t accidentally on any hot path.</li>
+<li><strong>Cost model</strong> — £7/seat Workspace + Cloud consumption per project; validate margin on the shared tier with real pilot usage.</li>
+</ul>
+<hr>
+<h2 id="10-next-steps">10. Next steps</h2>
+<ol>
+<li>Hand-provision a Workspace tenant + Cloud project for one pilot customer (Tier 1).</li>
+<li>Implement OIDC login (no refresh tokens) and passkey + PRF key wrapping in the Risk Mandate app.</li>
+<li>Point SGit at a per-customer Cloud Storage bucket; confirm Drive is out of the data path.</li>
+<li>Write the Tier 1 trust statement (admin audit log + ciphertext + DPA).</li>
+<li>Design the multi-user key-sharing scheme.</li>
+<li>Prototype a Tier 1 → Tier 3 domain transfer on a throwaway tenant to prove the migration story.</li>
+<li>Evaluate Google partner/reseller onboarding once pilot volume justifies automation.</li>
+</ol>
+<hr>
+<h2 id="11-client-side-data-access-marketplace-domain-install">11. Client-side data access — Marketplace domain install</h2>
+<p><strong>Goal:</strong> a user signed into their Workspace account opens <code>riskmandate.ai</code> (or <code>sgit.ai</code>) and the page can read their Drive and Gmail <strong>in the browser</strong>, limited to what they can already access, with no OAuth consent prompts and no tokens ever touching Risk Mandate&#x27;s servers.</p>
+<h3 id="111-mechanism">11.1 Mechanism</h3>
+<ul>
+<li>Risk Mandate is published as a <strong>Google Workspace Marketplace app</strong>, listed privately to the tenant.</li>
+<li>The tenant admin performs a <strong>domain install</strong>. This pre-grants the app&#x27;s scopes for every user in the domain — the admin&#x27;s consent replaces per-user consent.</li>
+<li>The web page uses <strong>Google Identity Services</strong> (token client) to request an access token silently against the user&#x27;s existing Google session. Because the grant is already on file, no consent screen appears.</li>
+<li>The token lives only in the tab. Drive and Gmail enforce the user&#x27;s own ACLs, so the page can only reach what the user could already open.</li>
+<li>Tokens expire hourly; a silent re-request renews them without a prompt while the Google session is alive.</li>
+</ul>
+<p>This is <strong>not</strong> a browser extension. Nothing is installed in Chrome. The grant is recorded against the tenant.</p>
+<h3 id="112-scopes">11.2 Scopes</h3>
+<table>
+<thead><tr><th>Need</th><th>Scope</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Open specific Drive files</td><td><code>drive.file</code> + Google Picker</td><td>User picks a file; app sees only that file. Also enables &quot;Open with Risk Mandate&quot; in Drive.</td></tr>
+<tr><td>Browse Drive broadly</td><td><code>drive.readonly</code></td><td>Only if Picker is insufficient. Broader; prefer <code>drive.file</code>.</td></tr>
+<tr><td>Read Gmail</td><td><code>gmail.readonly</code></td><td>No picker equivalent; filter client-side.</td></tr>
+</tbody>
+</table>
+<p>Keep every scope read-only unless a write path is explicitly designed.</p>
+<h3 id="113-allow-listing-which-sites-may-invoke-the-app">11.3 Allow-listing which sites may invoke the app</h3>
+<p>Two controls, both required:</p>
+<ol>
+<li><strong>Google Cloud Console → OAuth client → Authorised JavaScript origins.</strong> List <code>https://riskmandate.ai</code>, <code>https://sgit.ai</code> and any other Risk Mandate-owned origin. Google issues tokens only to pages served from these origins. Either one client with multiple origins, or one client per site under the same Cloud project.</li>
+<li><strong>Admin console → Security → API controls → App access control.</strong> Mark the Risk Mandate app as <em>Trusted</em>; set unconfigured third-party apps to <em>Restricted</em> (or <em>Limited</em>). No other app can then request Workspace data from users in the tenant, even with user consent.</li>
+</ol>
+<p>Together these mean: only Risk Mandate-owned origins can mint tokens, and only Risk Mandate&#x27;s app is permitted to hold Workspace scopes in the tenant.</p>
+<h3 id="114-clean-browser-login-walkthrough">11.4 Clean-browser login walkthrough</h3>
+<ol>
+<li>User opens a clean Chrome and signs into <code>accounts.google.com</code> with their Workspace username, password and 2FA.</li>
+<li>Google session established. The domain install is already on file; the app appears in the waffle launcher and in Drive&#x27;s &quot;Open with&quot; menu.</li>
+<li>User navigates to <code>riskmandate.ai</code>. The page performs OIDC sign-in — passes silently against the existing Google session.</li>
+<li>The page requests a Drive/Gmail access token via Google Identity Services — passes silently because the admin grant covers these scopes. Token held in the tab only.</li>
+<li>The page performs one <strong>passkey assertion with PRF</strong> (the only user-visible step on a clean device) to derive the wrapping key and unwrap the SGit data key in memory.</li>
+<li>User works. Drive/Gmail reads happen client-side with the user&#x27;s own permissions; SGit encrypt/decrypt happens client-side; ciphertext goes to the per-customer Cloud Storage bucket.</li>
+<li>On tab close, the access token and the data key are gone. Nothing persists in plaintext anywhere.</li>
+</ol>
+<h3 id="115-why-not-domain-wide-delegation-for-this">11.5 Why not domain-wide delegation for this</h3>
+<p>Domain-wide delegation (service account impersonating users) also removes consent prompts, but it moves data access <strong>server-side</strong> and creates the most powerful credential in the design. It is reserved for Tier 2/3 features that must run without the user present, scoped narrowly, run on Cloud Run with Workload Identity (no key file), and with every impersonation logged. For the client-side experience above it is unnecessary.</p>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/riskmandate-workspace-architecture-briefing.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

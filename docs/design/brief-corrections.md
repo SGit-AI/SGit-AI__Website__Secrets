@@ -50,6 +50,28 @@ The six actions in `deploy-pages.yml` are pinned to the commit SHAs of `actions/
 
 Section 9.1's validate job runs `node --test tests/unit/`. Node 22 treats a positional argument as a glob pattern for test files, not a directory, and fails with "Cannot find module .../tests/unit". The gate runs `node --test tests/unit/**/*.test.js`, which is the same intent in the form Node accepts.
 
+## v0.1.1 (2026-10-05): the content pages and the family chrome
+
+### C12. "The four design docs, rendered" became every document under docs/, rendered
+
+Section 6.1 lists `/docs/design/` as the design documents rendered. Rendering needs a markdown-to-HTML step, and the house has no build step and no dependency the gate could rely on, so `admin/build/md_to_html.py` is a standard-library renderer for the constructs these documents use (headings with GitHub-style ids, nested and task lists, tables with alignment, fenced code, blockquotes, inline emphasis, links). Once it existed, rendering only the design folder would have left the ops notes and `docs/reality.md` as raw markdown on the site, so `gen_docs.py` renders every document under `docs/` and writes an index page for `docs/design/` and `docs/ops/`. The markdown stays the source of truth and is the markdown twin of the rendered page (`<meta name="sg-secrets:source">` names it), so the twin rule holds without a second copy.
+
+### C13. The 404 page is not in the sitemap or llms.txt
+
+Section 6.1 does not mention a not-found page. One exists (`404.html`, which GitHub Pages serves for a missing path) with the full chrome so the version badge and nav are there; it is excluded from `sitemap.xml` and `llms.txt` because it is not a page anyone navigates to.
+
+### C14. The three guard rows on /security/ that this build cannot confirm
+
+Section 9.5 says the protections are "listed on `/security/`". Four of them (branch protection, organisation 2FA, the verified domain, the Actions policy) are organisation settings this session cannot read, so each row says "unconfirmed as of 2026-10-05" rather than yes or no, and `needs.md` asks for them. A reviewer who sets them changes the row to a dated yes in the same pull request.
+
+### C15. Releases bump the third digit, not the second
+
+Section 9.1 says every push to `dev` is a minor bump and section 11 numbers the steps v0.1.0 to v0.9.0. Dinis decided on 2026-10-05 that each release bumps the third digit (v0.1.0, v0.1.1, v0.1.2, …), as the sibling sites do (sgit.ai is at v0.6.59 after hundreds of releases), and that the second digit is reserved for a milestone he names. The step numbers in section 11 therefore name the deliverable, not the release; `data/steps.json` records which release delivered each step. `tag_release.py` already accepted a patch bump, so nothing in the pipeline changed.
+
+### C16. The admin section and the markdown viewer follow the siblings
+
+Section 6.1 names `/admin/index.html` and `/admin/versions.html` only. The sibling sites (sgit.ai, nfrs.sgit.ai, pki.sgit.ai) share one nav shape, grouped dropdown menus with a parent link, a stage pill and the version, and an admin section of three pages: how the site is built, the release history, and a comms page of numbered asks and tasks. This site now follows that shape (`admin/build/chrome.py`, `assets/nav.js`, `admin/comms.html`). For documents, the family's own brief ("Markdown and file viewers in a vault: what not to build") says not to write a client-side viewer, and the sibling websites publish documents as pages rendered at build time with the raw markdown one click away as the source of truth; `gen_docs.py` does exactly that, so no viewer script runs in the browser and the CSP stays at `script-src 'self'` with one small nav script.
+
 ## Open questions carried from section 12 (unanswered at this version)
 
 - Does the Playwright virtual authenticator support PRF? (step 4)

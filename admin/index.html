@@ -11,30 +11,68 @@
   <link rel="alternate" type="text/markdown" href="/admin/index.md">
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
   <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="secrets.sgit.ai">
   <meta property="og:url" content="https://secrets.sgit.ai/admin/">
   <meta property="og:title" content="Admin — secrets.sgit.ai">
   <meta property="og:description" content="How the site is built and gated, and the admin pages that are proposed: a client for GCP&#x27;s own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.">
-  <meta name="sg-secrets:version" content="0.1.0">
+  <meta name="sg-secrets:version" content="0.1.1">
   <meta name="sg-secrets:released" content="2026-10-05">
 <!-- sg-secrets:head:end -->
 </head>
 <body>
   <!-- sg-secrets:nav:start -->
   <header class="sg-header">
-    <a class="sg-brand" href="/">secrets<span>.sgit.ai</span></a>
-    <nav class="sg-nav" aria-label="Site">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/docs/reality.md">Reality</a></li>
-      <li><a href="/docs/design/secrets-sgit-ai__mvp-build-brief.md">The brief</a></li>
-      <li><a href="/admin/" aria-current="page">Admin</a></li>
-      <li><a href="/admin/versions.html">Versions</a></li>
-      <li><a href="/llms.txt">llms.txt</a></li>
-    </ul>
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl here" href="/admin/" aria-current="page">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
     </nav>
-    <a class="sg-badge sg-badge-version" href="/admin/versions.html" data-version="0.1.0" title="released 2026-10-05">v0.1.0</a>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">How the site is built</span></div>
   </header>
 <!-- sg-secrets:nav:end -->
   <main>
@@ -42,7 +80,7 @@
     <p class="sg-lead">Two things live under <code>/admin/</code>: how this site is built and released, which exists, and the environment admin pages, which are proposed.</p>
 
     <h2>How the site is built</h2>
-    <p>There is no build step and no bundler. The committed tree is the deployed tree. Five generators under <code>admin/build/</code> write the parts that must not drift (the chrome, the status tables, the release table, the markdown twins, the machine indexes), each with a <code>--check</code> mode, and an eight-check gate in <code>admin/build/validate.js</code> refuses a release that disagrees with itself. The same command, <code>python3 admin/build/gate.py</code>, runs locally and in CI. Every push to <code>dev</code> is a release: the version in <code>admin/build/version.txt</code> is repeated in the commit subject as <code>site vX.Y.Z : what</code>, CI tags it, deploys it, and then polls the live site until it serves that version. The whole procedure is in <a href="/docs/ops/release.md">docs/ops/release.md</a>.</p>
+    <p>There is no build step and no bundler. The committed tree is the deployed tree. Five generators under <code>admin/build/</code> write the parts that must not drift (the chrome, the status tables, the release table, the markdown twins, the machine indexes), each with a <code>--check</code> mode, and an eight-check gate in <code>admin/build/validate.js</code> refuses a release that disagrees with itself. The same command, <code>python3 admin/build/gate.py</code>, runs locally and in CI. Every push to <code>dev</code> is a release: the version in <code>admin/build/version.txt</code> is repeated in the commit subject as <code>site vX.Y.Z : what</code>, CI tags it, deploys it, and then polls the live site until it serves that version. The whole procedure is in <a href="/docs/ops/release.html">docs/ops/release.md</a>.</p>
 
     <h3>The eight checks</h3>
     <ol>
@@ -62,6 +100,7 @@
   <table class="sg-features" data-area="admin" data-generated-from="data/features.json">
     <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
     <tbody>
+      <tr><td>admin</td><td>Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json</td><td><span class="sg-status sg-status-shipped">shipped v0.1.1</span></td><td>admin/comms.html</td><td>gen_versions.py renders the step tracker; a done step must name a release that exists.</td></tr>
       <tr><td>admin</td><td>Admin sign-in with the visitor&#x27;s own Google account, token in memory only</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/oauth.js</td><td>Step 7. Implicit flow to verify first; PKCE fallback.</td></tr>
       <tr><td>admin</td><td>Setup checklist: every per-project resource as a row, with Fix where fixable client-side</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/setup-checklist.html</td><td>Step 3 read-only, step 7 with fixes.</td></tr>
       <tr><td>admin</td><td>Auth config, storage, rules diff and deploy, users, environment export</td><td><span class="sg-status sg-status-proposed">proposed</span></td><td>admin/*.html</td><td>Step 7. GCP IAM is the role; the pages are a client for GCP&#x27;s own APIs.</td></tr>
@@ -90,12 +129,19 @@
   </table>
 <!-- sg-secrets:features:end -->
 
-    <p>Release history: <a href="/admin/versions.html">versions</a>. What a human still has to do: <a href="/docs/ops/needs.md">needs.md</a>.</p>
+    <h2>The admin section</h2>
+    <ul>
+      <li><a href="/admin/">How the site is built</a>: this page.</li>
+      <li><a href="/admin/versions.html">Release history</a>: one row per release, generated from <code>data/versions.json</code>.</li>
+      <li><a href="/admin/comms.html">Comms</a>: the asks back to the project lead and the nine build steps with their status, generated from <code>data/steps.json</code>.</li>
+      <li><a href="/docs/ops/needs.html">What needs a human</a>, exactly, and the rest of the <a href="/docs/">documents</a>, each rendered from its markdown with the raw file one click away.</li>
+      <li>The build itself, served as plain files: <a href="/admin/build/chrome.py">chrome.py</a> (the nav, footer, badges and CSP), <a href="/admin/build/validate.js">validate.js</a> (the eight checks), <a href="/admin/build/version.txt">version.txt</a>, <a href="/assets/nav.js">nav.js</a> (the menu interaction, the only script on the site at this version).</li>
+    </ul>
   </main>
   <!-- sg-secrets:footer:start -->
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version" href="/admin/versions.html" data-version="0.1.0" title="released 2026-10-05">v0.1.0</a> · released 2026-10-05 · <a href="/admin/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a></p>
-    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/docs/reality.md">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.1" title="released 2026-10-05">v0.1.1</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/admin/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->
 </body>

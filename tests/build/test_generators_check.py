@@ -12,7 +12,7 @@ from unittest import TestCase
 
 
 ROOT       = Path(__file__).resolve().parents[2]
-GENERATORS = ('gen_chrome', 'gen_features', 'gen_versions', 'gen_twins', 'gen_llms')
+GENERATORS = ('gen_features', 'gen_docs', 'gen_chrome', 'gen_versions', 'gen_twins', 'gen_llms')
 
 
 class Test__Generators__Check(TestCase):
