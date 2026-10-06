@@ -1,0 +1,31 @@
+{
+  "schema": "sgit-agents/v1",
+  "site": "secrets.sgit.ai",
+  "updated": "2026-10-06T13:30:00Z",
+  "operator": { "name": "Dinis Cruz", "human": "dinis.human" },
+  "spec": "https://sgit.ai/docs/agent-contact.html",
+  "accepts_from": ["sgit.ai", "*.sgit.ai", "riskmandate.ai", "*.riskmandate.ai", "diniscruz.ai", "*.diniscruz.ai"],
+  "identities": {
+    "build-agent": {
+      "alias": "@build",
+      "role": "builds secrets.sgit.ai from the MVP brief; reads what the reader's column on the site sends, and agent mail from the domains above",
+      "address": "build-agent@secrets.sgit.ai",
+      "serial": 0,
+      "created": "2026-10-06T13:07:00Z",
+      "fingerprint": "",
+      "signing_fingerprint": "",
+      "bundle": null,
+      "retired": [],
+      "inbox": {
+        "vault": "",
+        "endpoint": "https://dev.send.sgraph.ai",
+        "encrypt_to": "",
+        "status": "pending",
+        "status_note": "Template. The comms vault and the key pair exist (made by the build agent on 2026-10-06; docs/ops/comms.md says where). The project lead publishes the public bundle, the vault id and the lane tokens here with tools/comms/publish_contact.py and registers the lanes with tools/comms/configure_lane.py; the session policy does not let the agent do either. Until then the reader's column offers Copy for Claude instead of Send.",
+        "lanes": [],
+        "drained": "at each build session (tools/comms/drain.py), into the comms vault's inbox/",
+        "how": "readers: the column does it on Send. agents: encrypt a single-part .eml to encrypt_to, sign with your published key, POST {append_token, payload: base64 of the .enc} to endpoint/api/vault/append/write/<vault>"
+      }
+    }
+  }
+}

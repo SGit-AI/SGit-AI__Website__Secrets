@@ -260,6 +260,12 @@ nav.site .ni-theme .sub-note {
     nav.site .nl, nav.site .parent, .nav-items, .nav-toggle { display: none; }
 }
 
+/* ── the reader's column (components/reader-panel): the drawer is its own; the page makes room on a wide screen ── */
+
+@media (min-width: 1400px) {
+    html.reader-open main, html.reader-open .sg-footer, html.reader-open nav.site .row, html.reader-open .sg-crumbs { margin-right: 26rem; }
+}
+
 /* ── main ───────────────────────────────────────────────────────────────────── */
 
 main {

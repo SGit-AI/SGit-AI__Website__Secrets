@@ -84,6 +84,20 @@ Section 6.1 names `/admin/index.html` and `/admin/versions.html` only. The sibli
 
 Section 5 lists `sgit.secrets.ui.theme` among the UI conveniences and section 10 says the CSS is the family's tokens copied into one file. Dinis asked on 2026-10-06 for four themes a reader can pick, a dark one, a light one and two more, as VoiceDebrief.ai does from its header, and for the change to be CSS only. So: every colour on the site is now a semantic token (`--sg-bg`, `--sg-text`, `--sg-accent`, `--sg-status-*`, `--sg-cat-*`) and `assets/themes.css` is the one file that gives them values, once per theme, in a `html[data-theme]` block; `site.css`, `mockups.css` and the review navigator's `tokens.css` name no colour (the navigator's tokens are the site's with the family values as fallbacks, so it also runs alone). The themes are `data/themes.json` (Night, the family palette and the default; Day; Paper; Ember); the nav picker is generated from it; `assets/theme.js` sets the attribute before the first paint from the stored choice or, when nothing is stored, from `prefers-color-scheme`. The key therefore holds a theme id, not `light`/`dark`. `tests/build/test_themes.py` fails when a theme misses a token or a stylesheet or script names a colour, and the gate's checks 5 and 8 now scan `assets/` too.
 
+## v0.1.7 (2026-10-06): the reader's column and the comms channel
+
+### C19. One page widens the Content-Security-Policy, declared in its head marker
+
+Section 9.5 gives the policy exactly, and every page carries it exactly. Dinis asked on 2026-10-06 for a way to talk to the build agent from the site and for a chat over the site through OpenRouter, which need two connections the policy forbids: `openrouter.ai` and the comms vault's endpoint `dev.send.sgraph.ai`. Rather than widen every page, one page, `/reader/`, declares the two hosts in its head marker (`<!-- sg-secrets:head:start connect="…" -->`), the chrome generator adds them to that page's `connect-src` and nothing else, and the chrome test fails if any other page declares an extension. The column on every other page keeps the exact policy: the log, the graph and the offline search need nothing beyond this origin, and the parts that do point at `/reader/`, where the same log is.
+
+### C20. The comms channel, and what the session could not finish
+
+The brief has no channel from a reader to the build agent; the newsroom brief on sgit.ai (the reader's log and the chat relay) and the Agent Contact spec do. This site now follows them: an append-only log in the browser, sealed to the agent's key and written to a write-only lane on its comms vault, drained by `tools/comms/drain.py`. The session that built it could create the vault and the key pair and could not, under its permission policy, register the lanes on the vault, push the private keys into it, or gather the secrets into a handover file; so the contact file is a template with status `pending` and `docs/ops/comms.md` lists the four steps the lead does once. `.well-known/` is served by Pages as any other folder; the deploy excludes nothing new.
+
+### C21. The reader's key, and where it may live
+
+Section 5 says nothing secret is ever stored in localStorage, and section 9.5 says plaintext exists only in the browser. The chat's OpenRouter key is the reader's own secret, not the site's: it is held in memory, or in `sessionStorage` under `sgit.secrets.ui.openrouterKey` only when the reader ticks *keep for this tab*, and is sent to `openrouter.ai` and nowhere else. Tier 2 of the newsroom brief (a vault-held key, no key in the browser at all) is proposed and not built.
+
 ## Open questions carried from section 12 (unanswered at this version)
 
 - Does the Playwright virtual authenticator support PRF? (step 4)

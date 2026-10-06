@@ -1,6 +1,6 @@
 # What only a human can do
 
-*secrets.sgit.ai · operations · maintained by the build session · last updated at v0.1.1 (2026-10-05) · CC BY 4.0*
+*secrets.sgit.ai · operations · maintained by the build session · last updated at v0.1.7 (2026-10-06) · CC BY 4.0*
 
 Everything on this list blocks a step of the brief and cannot be done from inside the repository. Each item says who, what, exactly, and which step waits on it. Items are removed when done and the removal is dated in `docs/design/brief-corrections.md` if anything turned out differently from the brief.
 
@@ -21,6 +21,11 @@ Everything on this list blocks a step of the brief and cannot be done from insid
 6. **Project ids (GCP org admin).** Confirm `sgit-secrets-tfstate`, `sgit-secrets-dev`, `sgit-secrets-main`, `sgit-secrets-prod` are available, or choose others; the brief marks them PROPOSED.
 7. **Run the bootstrap (a human with org-level IAM).** Once `infra/bootstrap/bootstrap.sh` exists: run it with `--dry-run`, then for real. It prints the values for the GitHub environment variables (`WORKLOAD_IDENTITY_PROVIDER`, `SERVICE_ACCOUNT`) per environment.
 8. **Google OAuth client secret for sign-in (GCP project owner).** Create the Web application OAuth client in the `dev` project (origin `https://secrets.sgit.ai`, redirect `https://<authDomain>/__/auth/handler`) and store its secret as the GitHub environment secret `GOOGLE_OAUTH_CLIENT_SECRET` in the `dev` environment. It never enters the repository.
+
+## Blocking the comms channel (the reader's column's Send button)
+
+9. **Finish the comms vault (project lead).** The build session of 2026-10-06 created the vault (`ockml7sn` on `https://dev.send.sgraph.ai`) and the agent's key pair (`sha256:6d9fe81fd718ab0b`), and its permission policy stopped it from registering the lanes and from pushing the keys. The four steps, with the commands, are in `docs/ops/comms.md`: store `SGIT_COMMS_VAULT_KEY` and `SGIT_COMMS_PKI_PASSPHRASE` as environment secrets, push the keys into the vault, run `publish_contact.py`, run `configure_lane.py`, prove a round trip.
+10. **An OpenRouter key for yourself (project lead).** For the chat on `/reader/`; with a spend limit; entered in the browser, never stored in the repository or in any secret of the build.
 
 ## Not yet needed
 

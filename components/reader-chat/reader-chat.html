@@ -1,0 +1,25 @@
+<section class="chat">
+  <div class="setup" data-setup>
+    <p class="tier" data-tier></p>
+    <form class="keyform" data-key-form>
+      <label for="key">Your OpenRouter key</label>
+      <div class="row">
+        <input id="key" type="password" data-key autocomplete="off" spellcheck="false" placeholder="sk-or-…">
+        <button type="submit">Use</button>
+        <button type="button" data-forget hidden>Forget</button>
+      </div>
+      <label class="keep"><input type="checkbox" data-keep> keep for this tab (sessionStorage; closes with the tab)</label>
+    </form>
+    <p class="hint">Without a key the chat searches the site offline. With your key it talks to <code data-model></code> through openrouter.ai, with tools that read this site, read your log and file your feedback into it. The key goes to openrouter.ai and nowhere else, and is never written to localStorage.</p>
+  </div>
+  <ol class="messages" data-messages aria-live="polite"></ol>
+  <form class="ask" data-ask-form>
+    <label for="ask">Ask the site, or say what should change</label>
+    <textarea id="ask" data-ask rows="2" placeholder="How does unlock work? · The keyring page is missing… · What should I read next?"></textarea>
+    <div class="row">
+      <button type="button" class="mic" data-mic hidden aria-pressed="false" title="Dictate with this browser's speech recognition">&#127908;</button>
+      <label class="speak"><input type="checkbox" data-speak> speak replies</label>
+      <button type="submit" class="primary">Send</button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,41 @@
+/* review-graph: an SVG neighbourhood. Every colour a token from tokens.css. */
+:host    { display: block; font-family: var(--rv-font); font-size: var(--rv-fs-small); }
+[hidden] { display: none !important; }
+
+.graph   { margin: 0; }
+svg {
+    background:    var(--rv-surface);
+    border:        1px solid var(--rv-border);
+    border-radius: var(--rv-radius);
+    display:       block;
+    height:        auto;
+    width:         100%;
+}
+.link        { stroke: var(--rv-text-muted); stroke-opacity: 0.55; stroke-width: 1; }
+.link-tree   { stroke-dasharray: 3 3; }
+.link-edge   { stroke: var(--rv-accent); stroke-opacity: 0.7; stroke-width: 1.4; }
+
+.node        { cursor: pointer; }
+.node circle { fill: var(--rv-layer-components); stroke: var(--rv-bg); stroke-width: 1.5; }
+.node:hover circle, .node:focus circle { stroke: var(--rv-text-heading); }
+.node.focus circle { stroke: var(--rv-text-heading); stroke-width: 2.5; }
+.layer-story circle, .layer-rule circle, .layer-example circle { fill: var(--rv-layer-stories); }
+.layer-flow circle, .layer-step circle                         { fill: var(--rv-layer-flows); }
+.layer-component circle                                        { fill: var(--rv-layer-components); }
+.layer-environment circle, .layer-resource circle, .layer-pipeline circle, .layer-job circle { fill: var(--rv-layer-deploy); }
+.node.proposed circle { stroke: var(--rv-proposed); stroke-dasharray: 2 2; }
+.label       { fill: var(--rv-text); font-family: var(--rv-font); font-size: 11px; paint-order: stroke; stroke: var(--rv-bg); stroke-opacity: 0.85; stroke-width: 3px; }
+.node.focus .label { fill: var(--rv-text-heading); font-weight: 700; }
+
+.caption     { color: var(--rv-text-muted); font-size: var(--rv-fs-xs); margin-top: var(--rv-sp-1); }
+.key {
+    border-radius: var(--rv-radius-pill);
+    color:         var(--rv-on-layer);
+    font-family:   var(--rv-mono);
+    margin-right:  var(--rv-sp-1);
+    padding:       0 var(--rv-sp-2);
+}
+.key-stories    { background: var(--rv-layer-stories); }
+.key-flows      { background: var(--rv-layer-flows); }
+.key-components { background: var(--rv-layer-components); }
+.key-deploy     { background: var(--rv-layer-deploy); }

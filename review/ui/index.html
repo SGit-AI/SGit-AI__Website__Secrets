@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-review-shell="navigator">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +15,8 @@
   <script type="module" src="components/review-crumb/review-crumb.js"></script>
   <script type="module" src="components/review-tree/review-tree.js"></script>
   <script type="module" src="components/review-node/review-node.js"></script>
+  <script type="module" src="components/review-ladder/review-ladder.js"></script>
+  <script type="module" src="components/review-graph/review-graph.js"></script>
   <script type="module" src="shell.js"></script>
 </head>
 <body>
@@ -33,15 +35,22 @@
     </span>
   </header>
   <main class="layout">
+    <aside class="left" aria-label="Layers">
+      <review-ladder></review-ladder>
+    </aside>
     <section class="centre" aria-label="Tree">
       <review-tree></review-tree>
     </section>
     <aside class="right" aria-label="Selected node">
+      <details class="graph" open>
+        <summary>Graph: the node in focus and its neighbours</summary>
+        <review-graph depth="1"></review-graph>
+      </details>
       <review-node></review-node>
     </aside>
   </main>
   <footer class="bottom">
-    <p>Step 1 of the review brief: the intent layers, written by the build agent from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the MVP brief</a> and awaiting acceptance by the project lead; nothing derived from code yet. The data is <a href="../intent/stories.json">intent/stories.json</a>, <a href="../intent/flows.json">flows.json</a>, <a href="../intent/components.json">components.json</a> and <a href="../intent/deploy.json">deploy.json</a>; the folder is described in <a href="../README.md">review/README.md</a>. No framework, no build step: web components in the coding.sgit.ai shape, one per file shape (<a href="README.md">ui/README.md</a>).</p>
+    <p>Step 1 of the review brief, with the ladder and the graph view from v0.1.7: the intent layers, written by the build agent from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the MVP brief</a> and awaiting acceptance by the project lead; nothing derived from code yet. The data is <a href="../intent/stories.json">intent/stories.json</a>, <a href="../intent/flows.json">flows.json</a>, <a href="../intent/components.json">components.json</a> and <a href="../intent/deploy.json">deploy.json</a>; the folder is described in <a href="../README.md">review/README.md</a>. No framework, no build step: web components in the coding.sgit.ai shape, one per file shape (<a href="README.md">ui/README.md</a>).</p>
   </footer>
 </body>
 </html>

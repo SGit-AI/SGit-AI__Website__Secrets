@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.6 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.7 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -36,6 +36,8 @@ Notes for agents:
 - [Mockup: Sign in — secrets.sgit.ai](/mockups/sign-in.md): A design mockup of the sign in screen at secrets.sgit.ai/app/, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 - [Mockup: Unlock — secrets.sgit.ai](/mockups/unlock.md): A design mockup of the unlock screen at secrets.sgit.ai/app/unlock.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 - [Mockup: The vault: the list — secrets.sgit.ai](/mockups/vault.md): A design mockup of the the vault: the list screen at secrets.sgit.ai/app/vault.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
+- [The reader's page — secrets.sgit.ai](/reader/index.md): Where the reader's column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent's vault. The only page whose policy allows a connection beyond this site and Google's sign-in hosts.
+- [Review graphs — secrets.sgit.ai](/review/index.md): The review folder: this project as layered graphs. The design written top down from the brief, the code derived bottom up by parsers, the join between them, every commit read upwards, and a navigator to walk it all. What exists, what each step brings, and where to start.
 - [Security — secrets.sgit.ai](/security/index.md): The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
 - [Sharing — secrets.sgit.ai](/sharing/index.md): The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
 - [Shipped, proposed, absent — secrets.sgit.ai](/shipped/index.md): Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
@@ -54,6 +56,7 @@ Notes for agents:
 
 - [GCP bootstrap: exactly what a human does, from the command line](/docs/ops/bootstrap.md)
 - [Repository protections](/docs/ops/branch-protection.md)
+- [The comms channel: from the reader's column to the build agent](/docs/ops/comms.md)
 - [DNS for secrets.sgit.ai](/docs/ops/dns.md)
 - [What only a human can do](/docs/ops/needs.md)
 - [How a release works](/docs/ops/release.md)

@@ -1,0 +1,72 @@
+/* reader-chat: the key row, the messages, the ask box. No colour written. */
+:host    { display: flex; flex-direction: column; font-family: var(--sg-font-body); font-size: var(--sg-fs-small); min-height: 100%; }
+[hidden] { display: none !important; }
+
+.chat    { display: flex; flex-direction: column; gap: var(--sg-sp-2); min-height: 100%; }
+.tier    { color: var(--sg-text-muted); font-size: var(--sg-fs-xs); margin: 0 0 var(--sg-sp-1); }
+.hint    { color: var(--sg-text-muted); font-size: var(--sg-fs-xs); margin: var(--sg-sp-1) 0 0; }
+label    { color: var(--sg-text-muted); display: block; font-size: var(--sg-fs-xs); margin-bottom: 2px; }
+.keep, .speak { display: inline-flex; align-items: center; gap: var(--sg-sp-1); margin-top: var(--sg-sp-1); }
+.row     { align-items: center; display: flex; gap: var(--sg-sp-1); }
+input[type="password"], textarea {
+    background:    var(--sg-bg);
+    border:        1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    color:         var(--sg-text);
+    flex:          1;
+    font:          inherit;
+    padding:       var(--sg-sp-1) var(--sg-sp-2);
+    width:         100%;
+}
+input:focus, textarea:focus { border-color: var(--sg-accent); outline: none; }
+textarea { resize: vertical; }
+button {
+    background:    transparent;
+    border:        1px solid var(--sg-border);
+    border-radius: var(--sg-radius-pill);
+    color:         var(--sg-text);
+    cursor:        pointer;
+    font:          inherit;
+    font-size:     var(--sg-fs-small);
+    padding:       var(--sg-sp-1) var(--sg-sp-3);
+}
+button:hover              { color: var(--sg-text-heading); border-color: var(--sg-text-muted); }
+.primary                  { background: var(--sg-accent); border-color: var(--sg-accent); color: var(--sg-on-accent); }
+.primary:hover            { color: var(--sg-on-accent); }
+.mic[aria-pressed="true"] { border-color: var(--sg-danger); color: var(--sg-danger); }
+
+.messages {
+    display:        flex;
+    flex:           1;
+    flex-direction: column;
+    gap:            var(--sg-sp-2);
+    list-style:     none;
+    margin:         0;
+    max-height:     50vh;
+    min-height:     8rem;
+    overflow:       auto;
+    padding:        0;
+}
+.msg {
+    border-radius: var(--sg-radius);
+    max-width:     95%;
+    padding:       var(--sg-sp-2) var(--sg-sp-3);
+    white-space:   pre-wrap;
+}
+.role-user      { align-self: flex-end; background: var(--sg-accent-subtle); color: var(--sg-text-heading); }
+.role-assistant { align-self: flex-start; background: var(--sg-bg-surface); white-space: normal; }
+.role-error     { align-self: stretch; background: var(--sg-danger-subtle); color: var(--sg-danger); }
+.msg p          { margin: 0 0 var(--sg-sp-2); }
+.msg p:last-child { margin-bottom: 0; }
+.msg a          { color: var(--sg-accent); }
+.tool {
+    color:       var(--sg-text-muted);
+    display:     block;
+    font-family: var(--sg-font-mono);
+    font-size:   var(--sg-fs-xs);
+}
+.results        { margin: var(--sg-sp-1) 0 0; padding-left: var(--sg-sp-4); }
+.results li     { margin-bottom: var(--sg-sp-1); }
+.snippet        { color: var(--sg-text-muted); font-size: var(--sg-fs-xs); }
+.ask .row       { justify-content: flex-end; margin-top: var(--sg-sp-1); }
+.ask .speak     { margin-right: auto; }

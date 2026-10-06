@@ -66,8 +66,8 @@ class ReviewStore {
         return response.json()
     }
 
-    standalone() {                                                                // on its own page (not the vault host, not framed)
-        return !window.sg && window.top === window.self
+    standalone() {                                                                // the navigator shell on its own page (not the vault host, not framed, not a site page embedding a component)
+        return !window.sg && window.top === window.self && document.documentElement.hasAttribute('data-review-shell')
     }
 
     async load(setName = this.set) {
@@ -78,7 +78,11 @@ class ReviewStore {
         for (const name of INTENT_FILES) {
             try { files[name] = await this.readJson(`intent/${name}.json`) } catch (error) { files[name] = null }
         }
-        try { this._verbs = (await this.readJson('../tools/verbs.json')).verbs } catch (error) { this._verbs = {} }
+        try {                                                                     // the verbs live in review/tools/ for both sets
+            const bundle = window.__REVIEW_BUNDLE__
+            const verbs  = bundle && bundle['tools/verbs.json'] ? bundle['tools/verbs.json'] : await (await fetch(new URL('tools/verbs.json', REVIEW_URL), { cache : 'no-cache' })).json()
+            this._verbs  = verbs.verbs
+        } catch (error) { this._verbs = {} }
         this.sections = files.sections || { sections : {} }
         this.index(files)
         this.loaded = files

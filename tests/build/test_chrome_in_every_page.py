@@ -33,7 +33,10 @@ class Test__Chrome__In__Every__Page(TestCase):
         for path in self.files:
             text = path.read_text(encoding='utf-8')
             with self.subTest(page=path.relative_to(ROOT).as_posix()):
-                self.assertIn(f'<meta http-equiv="Content-Security-Policy" content="{CSP}">', text)
+                connect = re.search(r'sg-secrets:head:start connect="([^"]*)"', text)                  # one page may extend connect-src, declared in its marker (C19)
+                self.assertIn(f'<meta http-equiv="Content-Security-Policy" content="{self.chrome.csp(connect.group(1) if connect else "")}">', text)
+                if connect:
+                    self.assertEqual(path.relative_to(ROOT).as_posix(), 'reader/index.html', 'only the reader page widens connect-src')
                 self.assertIn(f'<link rel="canonical" href="{self.chrome.base_url}', text)
                 self.assertIn('<header class="sg-header">', text)
                 self.assertIn('<footer class="sg-footer">', text)

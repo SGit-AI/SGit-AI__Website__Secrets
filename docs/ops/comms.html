@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The comms channel: from the reader&#x27;s column to the build agent — secrets.sgit.ai</title>
+  <meta name="description" content="The site is read by a person and built by an agent that only exists during a session. This page is how the one talks to the other without memos: a column on every page that keeps a log of what the…">
+  <meta name="sg-secrets:source" content="/docs/ops/comms.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/docs/ops/comms.html">
+  <link rel="alternate" type="text/markdown" href="/docs/ops/comms.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/docs/ops/comms.html">
+  <meta property="og:title" content="The comms channel: from the reader&#x27;s column to the build agent — secrets.sgit.ai">
+  <meta property="og:description" content="The site is read by a person and built by an agent that only exists during a session. This page is how the one talks to the other without memos: a column on every page that keeps a log of what the…">
+  <meta name="sg-secrets:version" content="0.1.7">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/review/">Review graphs</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/docs/">Docs</a> <span class="sep">/</span> <a href="/docs/ops/">Operations</a> <span class="sep">/</span> <span aria-current="page">The comms channel: from the reader&#x27;s column to the build agent</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/docs/ops/comms.md">docs/ops/comms.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.7.</p>
+<h1 id="the-comms-channel-from-the-readers-column-to-the-build-agent">The comms channel: from the reader&#x27;s column to the build agent</h1>
+<p><em>secrets.sgit.ai · operations · written at v0.1.7 (2026-10-06) · CC BY 4.0</em></p>
+<p>The site is read by a person and built by an agent that only exists during a session. This page is how the one talks to the other without memos: a column on every page that keeps a log of what the reader marks, and a one-way encrypted lane into a vault only the agent can open.</p>
+<h2 id="the-readers-column">The reader&#x27;s column</h2>
+<p>Every page has a tab on its right edge, <strong>Reader</strong>. It opens a drawer with three views:</p>
+<ul>
+<li><strong>Log.</strong> Mark the page read, star it, vote it up or down, leave a note (typed, or dictated with the browser&#x27;s own speech recognition). Every action is one event in an append-only log in this browser&#x27;s <code>localStorage</code> (<code>sgit.secrets.reader.log.v1</code>), keyed by the page&#x27;s path and a hash of its text, so a note written against an older version of a page says <em>page changed since</em>. Undo is another event; nothing is deleted. <strong>Send to the agent</strong> seals the unsent events to the agent&#x27;s public key and writes them to the lane below. <strong>Copy for Claude</strong> puts the same on the clipboard as markdown with the JSON inside it; <strong>Paste to merge</strong> takes it back on another device. Nothing leaves the page without a click.</li>
+<li><strong>Chat.</strong> A chat over the site. Without a key it is an offline search over <code>data/search-index.json</code>, generated from every page&#x27;s markdown twin at each release. With the reader&#x27;s own OpenRouter key it is Claude Sonnet (<code>anthropic/claude-sonnet-5.5</code>) through <code>openrouter.ai</code>, with tools that search the site, open a page, list the pages, say what to read next, read the reader&#x27;s log and file a note into it, so a conversation turns into feedback the agent receives. The key is held in memory, or in this tab&#x27;s <code>sessionStorage</code> when the reader ticks <em>keep for this tab</em>; it is never written to <code>localStorage</code> and is sent to <code>openrouter.ai</code> and nowhere else. Replies can be spoken with the browser&#x27;s speech synthesis; questions can be dictated.</li>
+<li><strong>Graph.</strong> The intent nodes the page names (every content page and mockup links the nodes it realises) and their neighbours, drawn by the navigator&#x27;s <code>review-graph</code>; a click moves the focus, and a link opens the same place in <code>/review/ui/</code>.</li>
+</ul>
+<p>The column is three web components under <code>components/</code> (<code>reader-panel</code>, <code>reader-log</code>, <code>reader-chat</code>) on the site&#x27;s base <code>sg-base</code>, three files each, no framework, no colour of their own: they follow the theme. Where the page&#x27;s Content-Security-Policy does not allow a connection to <code>openrouter.ai</code> or to the vault endpoint, the Chat and Send parts say so and point at the page that does (<code>docs/design/brief-corrections.md</code>, C19).</p>
+<h2 id="the-lane-into-the-agents-vault">The lane into the agent&#x27;s vault</h2>
+<p>The agent has a comms vault on SG/Send (<code>https://dev.send.sgraph.ai</code>) and a key pair (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing). The public bundle, the vault id and the lanes are published in <a href="/.well-known/sgit-agents.json"><code>/.well-known/sgit-agents.json</code></a>, the <a href="https://sgit.ai/docs/agent-contact.html">Agent Contact v0.1</a> shape every sgit.ai site uses. A lane is a write-only address on the vault, gated by a public append token: a sender can write, and cannot list, fetch or read. The site&#x27;s column writes <code>reader-message/v1</code>, the sgit PKI envelope made with WebCrypto (the same bytes <code>sgit pki encrypt</code> would make), to the <code>readers</code> lane. Other agents write signed <code>agent-message/v1</code> mail to the <code>agents</code> lane.</p>
+<p>The agent reads the lanes at the start of a session with <code>tools/comms/drain.py</code>: list, fetch, decrypt with its private key, keep ciphertext and plaintext under the vault&#x27;s <code>inbox/</code>, print a digest it acts on, then mark-processed. What cannot be opened goes to <code>inbox/quarantine/</code> with the reason.</p>
+<h2 id="what-only-the-project-lead-can-do-once">What only the project lead can do, once</h2>
+<p>The session that built this could create the vault and the key pair, but its permission policy stopped it short of two things: registering the lanes on the vault (an account-level change on SG/Send) and pushing the private keys into the vault. So the vault key, the read key and the key pair are where that session left them, and the lead finishes the channel:</p>
+<ol>
+<li>Take the vault key from the build session&#x27;s scratchpad (<code>vaults/create.log</code>, the line <em>Vault key</em>) and the key pair from <code>~/.sg-send/keys/</code> of that session, with the passphrase in <code>vaults/pki-passphrase.txt</code>. Store the vault key as <code>SGIT_COMMS_VAULT_KEY</code> and the passphrase as <code>SGIT_COMMS_PKI_PASSPHRASE</code> in the Claude Code environment this repository runs in, so every later session can open the vault. Put the key folder in the vault (<code>agent/keys/</code>) and push it.</li>
+<li>Publish the public half: <code>python3 tools/comms/publish_contact.py --fingerprint sha256:6d9fe81fd718ab0b</code> fills the contact file with the bundle, the vault id and one fresh token per lane; commit it.</li>
+<li>Register the lanes: <code>python3 tools/comms/configure_lane.py</code> (needs <code>SGIT_COMMS_VAULT_KEY</code> and <code>SG_SEND_ACCESS_TOKEN</code>). On success it sets the contact file&#x27;s status to <code>open</code>; commit it. The column&#x27;s Send button enables itself on the next page load.</li>
+<li>Prove the round trip: <code>python3 tools/comms/send_test.py</code>, then <code>python3 tools/comms/drain.py --vault-dir &lt;the vault clone&gt;</code>.</li>
+</ol>
+<p>Until step 3 the column says the lane is pending and offers <strong>Copy for Claude</strong>, which works today.</p>
+<h2 id="the-tools">The tools</h2>
+<table>
+<thead><tr><th>File</th><th>Does</th></tr></thead>
+<tbody>
+<tr><td><code>tools/comms/comms_contact.py</code></td><td>reads and writes the contact file</td></tr>
+<tr><td><code>tools/comms/comms_lane.py</code></td><td>the append-lane calls: write (no key), list, fetch, mark-processed (enum key), configure (write key and the SG/Send token)</td></tr>
+<tr><td><code>tools/comms/comms_envelope.py</code></td><td>the sgit PKI envelope: seal to a public key, open with the agent&#x27;s private key</td></tr>
+<tr><td><code>tools/comms/publish_contact.py</code></td><td>fills the contact file from <code>sgit pki export</code> and the vault key</td></tr>
+<tr><td><code>tools/comms/configure_lane.py</code></td><td>registers the lanes on the vault</td></tr>
+<tr><td><code>tools/comms/send_test.py</code></td><td>writes one test message to the readers lane</td></tr>
+<tr><td><code>tools/comms/drain.py</code></td><td>reads the lanes into the vault&#x27;s <code>inbox/</code> and prints the digest</td></tr>
+</tbody>
+</table>
+<p>They run on a person&#x27;s or an agent&#x27;s machine, never in CI, and use the <code>sgit_ai</code> package for the key derivation and the envelope; nothing in them is a secret.</p>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/ops/comms.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

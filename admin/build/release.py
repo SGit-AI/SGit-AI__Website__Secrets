@@ -6,7 +6,7 @@
 # and then polls the live site until it serves the version. A clean push is
 # not a release; this script does not say "done" until the origin does.
 # Usage: python3 admin/build/release.py --version 0.1.3 --kind feature \
-#            --title "what" --notes "why, in a sentence a reader can act on" [--branch dev] [--no-push]
+#            --title "what" --notes "why, in a sentence a reader can act on" [--branch dev] [--no-push] [--trailers "Co-Authored-By: …"]
 # ═══════════════════════════════════════════════════════════════════════════════
 
 import json
@@ -25,13 +25,14 @@ RE_SEMVER = re.compile(r'^\d+\.\d+\.\d+$')
 
 class Release:
 
-    def __init__(self, version, kind, title, notes, branch='dev', push=True):
-        self.version = version
-        self.kind    = kind
-        self.title   = title
-        self.notes   = notes
-        self.branch  = branch
-        self.push    = push
+    def __init__(self, version, kind, title, notes, branch='dev', push=True, trailers=''):
+        self.version  = version
+        self.kind     = kind
+        self.title    = title
+        self.notes    = notes
+        self.branch   = branch
+        self.push     = push
+        self.trailers = trailers.replace('\\n', '\n').strip()                     # extra git trailers (authorship, session), one per line
 
     def run_cmd(self, *argv, check=True):
         print(f'   $ {" ".join(argv)}')
@@ -57,7 +58,7 @@ class Release:
     def commit(self):
         print('== commit')
         subject = f'site v{self.version} : {self.title}'
-        body    = f'{subject}\n\n{self.notes}\n\nKind: {self.kind}\n'
+        body    = f'{subject}\n\n{self.notes}\n\nKind: {self.kind}\n' + (f'{self.trailers}\n' if self.trailers else '')
         self.run_cmd('git', 'add', '-A')
         self.run_cmd('git', 'commit', '-q', '-F', '-', check=False) if False else subprocess.run(['git', 'commit', '-q', '-F', '-'], cwd=ROOT, input=body, text=True, check=True)
         print(f'   {subject}')
@@ -99,4 +100,4 @@ if __name__ == '__main__':
     if missing:
         print(f'usage: release.py --version X.Y.Z --kind fix|feature|refactor|docs --title "…" --notes "…" [--branch dev] [--no-push]; missing {missing}')
         sys.exit(2)
-    sys.exit(Release(option('--version'), option('--kind'), option('--title'), option('--notes'), option('--branch', 'dev'), '--no-push' not in args).run())
+    sys.exit(Release(option('--version'), option('--kind'), option('--title'), option('--notes'), option('--branch', 'dev'), '--no-push' not in args, option('--trailers', '')).run())

@@ -14,12 +14,13 @@
   <link rel="stylesheet" href="/assets/themes.css">
   <link rel="stylesheet" href="/assets/site.css">
   <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="secrets.sgit.ai">
   <meta property="og:url" content="https://secrets.sgit.ai/admin/comms.html">
   <meta property="og:title" content="Comms: asks and steps — secrets.sgit.ai">
   <meta property="og:description" content="The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.">
-  <meta name="sg-secrets:version" content="0.1.6">
+  <meta name="sg-secrets:version" content="0.1.7">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -31,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.6" title="released 2026-10-06">v0.1.6</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -69,7 +70,7 @@
           <a class="sl" href="/admin/">How the site is built</a>
           <a class="sl" href="/admin/versions.html">Release history</a>
           <a class="sl here" href="/admin/comms.html" aria-current="page">Comms: asks and steps</a>
-          <a class="sl" href="/review/ui/">Review graphs</a>
+          <a class="sl" href="/review/">Review graphs</a>
           <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
           <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
           <a class="sl" href="/llms.txt">llms.txt, for agents</a>
@@ -107,6 +108,8 @@
         <tr><td>N5</td><td>Confirm the versioning decision: every release bumps the third digit; the second digit is reserved for a milestone you name (brief-corrections C15)</td><td>nothing; recorded as decided on 2026-10-05</td><td>Confirm</td></tr>
         <tr><td>N6</td><td>Confirm that documents are rendered at build time with the raw markdown one click away, rather than a client-side markdown viewer (C16)</td><td>nothing</td><td>Confirm</td></tr>
         <tr><td>N7</td><td>Walk the intent graph at <a href="/review/ui/">/review/ui/</a> (stories, flows, components, deploy) and send corrections as numbered items; each accepted node then records you as its acceptor</td><td>review step 1; coverage counts only accepted nodes</td><td>Open</td></tr>
+        <tr><td>N8</td><td>Finish the comms channel: store the vault key and the key passphrase as environment secrets, push the key pair into the vault, publish the contact file, register the lanes, prove one round trip (<a href="/docs/ops/comms.html">docs/ops/comms.md</a>, the four steps)</td><td>the reader's column's Send button; until then Copy for Claude</td><td>Open</td></tr>
+        <tr><td>N9</td><td>Make an OpenRouter key with a spend limit for the chat on <a href="/reader/">/reader/</a>; it stays in your browser, nothing to store in the repository</td><td>nothing; the chat works offline without it</td><td>Open</td></tr>
         <tr><td>N0</td><td>DNS, Pages with the custom domain and HTTPS, and the re-run of the v0.1.0 workflow</td><td>step 1</td><td>Done, 2026-10-05</td></tr>
       </tbody>
     </table>
@@ -154,8 +157,9 @@
     <p>Listed and dated at the end of <a href="/docs/design/brief-corrections.html">brief-corrections.md</a>: the Playwright virtual authenticator and PRF, Google's implicit flow, the Security Rules syntax, where Identity Platform stores user records, and whether <code>sgit pki import</code> reads a browser-generated bundle.</p>
   </main>
   <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.6" title="released 2026-10-06">v0.1.6</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/admin/comms.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/admin/comms.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

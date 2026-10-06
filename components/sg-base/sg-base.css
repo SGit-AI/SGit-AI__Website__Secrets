@@ -1,0 +1,3 @@
+/* sg-base has no look of its own; every component brings its own file. No colour here. */
+:host    { display: none; }
+[hidden] { display: none !important; }

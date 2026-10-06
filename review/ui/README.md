@@ -2,7 +2,7 @@
 
 *web components in the shape coding.sgit.ai documents; no framework, no bundler, no build step · CC BY 4.0 for this file, Apache-2.0 for the code*
 
-One visualiser per file shape, one to one, and a component is not finished until `review/self/` shows its methods. `index.html` is the only document: it loads `tokens.css`, the components and `shell.js`, holds the layout, shows the version, and does nothing else. `tokens.css` is the only file under `ui/` where a colour is written, and each one is the fallback of a site token (`--sg-*`, valued per theme in `/assets/themes.css`, which the shell loads with `/assets/theme.js`): on the site the navigator follows the theme the reader picked from the four in `data/themes.json`, and on its own it keeps the family palette. The top bar carries the same picker as the site nav.
+One visualiser per file shape, one to one, and a component is not finished until `review/self/` shows its methods. `index.html` is the only document: it loads `tokens.css`, the components and `shell.js`, holds the layout (the ladder, the tree, the graph and the node), shows the version, and does nothing else; its `data-review-shell` attribute is what lets the store mirror the route into the URL, so a site page that embeds a component never has its hash rewritten. `tokens.css` is the only file under `ui/` where a colour is written, and each one is the fallback of a site token (`--sg-*`, valued per theme in `/assets/themes.css`, which the shell loads with `/assets/theme.js`): on the site the navigator follows the theme the reader picked from the four in `data/themes.json`, and on its own it keeps the family palette. The top bar carries the same picker as the site nav.
 
 | Component | Renders | From |
 |---|---|---|
@@ -10,7 +10,8 @@ One visualiser per file shape, one to one, and a component is not finished until
 | `review-crumb` | the path walked so far, each step a way back | the selected node's ancestors |
 | `review-tree` | story > rule > example; flow > step; component tree; environment > resource and pipeline > job; one component, every tree shape | `intent/stories.json`, `intent/flows.json`, `intent/components.json`, `intent/deploy.json`, and from step 2 the derived trees |
 | `review-node` | one node: name, type, layer, source link into the rendered brief, properties, edges in and out, children, parent | any node |
-| `review-ladder` (step 2) | the layers as a rail with counts; red where a selected change moved them | every layer file |
+| `review-ladder` | the layers as a rail, in the brief's order, with counts; the layers that do not exist yet named with the step that brings them; red where a selected change moved them, from step 4 | every layer file |
+| `review-graph` | the node in focus and its neighbours as an SVG graph laid out by a small force simulation, no library; follows the selection, or draws the nodes a page names when given `nodes="id,id"` (the reader's column on every site page embeds it that way) | the store |
 | `review-set` (step 2) | the switch between `review/` and `review/self/` | the store |
 | `review-join` (step 3) | matched, derived only, projected only, the coverage figure | `join/` |
 | `review-change` (step 4) | one commit read upwards | `changes/<hash>.json` |

@@ -15,12 +15,13 @@
   <link rel="stylesheet" href="/assets/themes.css">
   <link rel="stylesheet" href="/assets/site.css">
   <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="secrets.sgit.ai">
   <meta property="og:url" content="https://secrets.sgit.ai/docs/design/brief-corrections.html">
   <meta property="og:title" content="Brief corrections — secrets.sgit.ai">
   <meta property="og:description" content="What the brief got wrong or left open, found while building, dated, beside it.">
-  <meta name="sg-secrets:version" content="0.1.6">
+  <meta name="sg-secrets:version" content="0.1.7">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +33,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.6" title="released 2026-10-06">v0.1.6</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -70,7 +71,7 @@
           <a class="sl" href="/admin/">How the site is built</a>
           <a class="sl" href="/admin/versions.html">Release history</a>
           <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
-          <a class="sl" href="/review/ui/">Review graphs</a>
+          <a class="sl" href="/review/">Review graphs</a>
           <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
           <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
           <a class="sl" href="/llms.txt">llms.txt, for agents</a>
@@ -94,7 +95,7 @@
 <!-- sg-secrets:nav:end -->
   <main class="sg-document">
     <!-- sg-secrets:docs:start -->
-<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.6.</p>
+<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.7.</p>
 <h1 id="brief-corrections">Brief corrections</h1>
 <p><em>secrets.sgit.ai · what the MVP build brief got wrong or left open, found while building, dated · beside the brief it corrects · CC BY 4.0</em></p>
 <p>The brief (<code>secrets-sgit-ai__mvp-build-brief.md</code>) is the instruction set. Where building it showed a statement to be wrong, incomplete or impossible as written, the finding is recorded here with the date and the version, and the build carried on with the correction. Sections 1 to 4 of the brief hold closed decisions; nothing here reopens one. The design documents beside this file are copied verbatim and are never edited.</p>
@@ -138,6 +139,13 @@
 <h2 id="v016-2026-10-06-four-themes">v0.1.6 (2026-10-06): four themes</h2>
 <h3 id="c18-the-site-has-four-themes-and-the-theme-key-holds-a-name-not-light-or-dark">C18. The site has four themes, and the theme key holds a name, not light or dark</h3>
 <p>Section 5 lists <code>sgit.secrets.ui.theme</code> among the UI conveniences and section 10 says the CSS is the family&#x27;s tokens copied into one file. Dinis asked on 2026-10-06 for four themes a reader can pick, a dark one, a light one and two more, as VoiceDebrief.ai does from its header, and for the change to be CSS only. So: every colour on the site is now a semantic token (<code>--sg-bg</code>, <code>--sg-text</code>, <code>--sg-accent</code>, <code>--sg-status-*</code>, <code>--sg-cat-*</code>) and <code>assets/themes.css</code> is the one file that gives them values, once per theme, in a <code>html[data-theme]</code> block; <code>site.css</code>, <code>mockups.css</code> and the review navigator&#x27;s <code>tokens.css</code> name no colour (the navigator&#x27;s tokens are the site&#x27;s with the family values as fallbacks, so it also runs alone). The themes are <code>data/themes.json</code> (Night, the family palette and the default; Day; Paper; Ember); the nav picker is generated from it; <code>assets/theme.js</code> sets the attribute before the first paint from the stored choice or, when nothing is stored, from <code>prefers-color-scheme</code>. The key therefore holds a theme id, not <code>light</code>/<code>dark</code>. <code>tests/build/test_themes.py</code> fails when a theme misses a token or a stylesheet or script names a colour, and the gate&#x27;s checks 5 and 8 now scan <code>assets/</code> too.</p>
+<h2 id="v017-2026-10-06-the-readers-column-and-the-comms-channel">v0.1.7 (2026-10-06): the reader&#x27;s column and the comms channel</h2>
+<h3 id="c19-one-page-widens-the-content-security-policy-declared-in-its-head-marker">C19. One page widens the Content-Security-Policy, declared in its head marker</h3>
+<p>Section 9.5 gives the policy exactly, and every page carries it exactly. Dinis asked on 2026-10-06 for a way to talk to the build agent from the site and for a chat over the site through OpenRouter, which need two connections the policy forbids: <code>openrouter.ai</code> and the comms vault&#x27;s endpoint <code>dev.send.sgraph.ai</code>. Rather than widen every page, one page, <code>/reader/</code>, declares the two hosts in its head marker (<code>&lt;!-- sg-secrets:head:start connect=&quot;…&quot; --&gt;</code>), the chrome generator adds them to that page&#x27;s <code>connect-src</code> and nothing else, and the chrome test fails if any other page declares an extension. The column on every other page keeps the exact policy: the log, the graph and the offline search need nothing beyond this origin, and the parts that do point at <code>/reader/</code>, where the same log is.</p>
+<h3 id="c20-the-comms-channel-and-what-the-session-could-not-finish">C20. The comms channel, and what the session could not finish</h3>
+<p>The brief has no channel from a reader to the build agent; the newsroom brief on sgit.ai (the reader&#x27;s log and the chat relay) and the Agent Contact spec do. This site now follows them: an append-only log in the browser, sealed to the agent&#x27;s key and written to a write-only lane on its comms vault, drained by <code>tools/comms/drain.py</code>. The session that built it could create the vault and the key pair and could not, under its permission policy, register the lanes on the vault, push the private keys into it, or gather the secrets into a handover file; so the contact file is a template with status <code>pending</code> and <code>docs/ops/comms.md</code> lists the four steps the lead does once. <code>.well-known/</code> is served by Pages as any other folder; the deploy excludes nothing new.</p>
+<h3 id="c21-the-readers-key-and-where-it-may-live">C21. The reader&#x27;s key, and where it may live</h3>
+<p>Section 5 says nothing secret is ever stored in localStorage, and section 9.5 says plaintext exists only in the browser. The chat&#x27;s OpenRouter key is the reader&#x27;s own secret, not the site&#x27;s: it is held in memory, or in <code>sessionStorage</code> under <code>sgit.secrets.ui.openrouterKey</code> only when the reader ticks <em>keep for this tab</em>, and is sent to <code>openrouter.ai</code> and nowhere else. Tier 2 of the newsroom brief (a vault-held key, no key in the browser at all) is proposed and not built.</p>
 <h2 id="open-questions-carried-from-section-12-unanswered-at-this-version">Open questions carried from section 12 (unanswered at this version)</h2>
 <ul>
 <li>Does the Playwright virtual authenticator support PRF? (step 4)</li>
@@ -149,8 +157,9 @@
     <!-- sg-secrets:docs:end -->
   </main>
   <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.6" title="released 2026-10-06">v0.1.6</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

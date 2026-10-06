@@ -1,0 +1,20 @@
+<button class="toggle" type="button" data-toggle aria-expanded="false" aria-controls="panel" title="The reader's column: log, chat, graph">Reader</button>
+<aside class="panel" id="panel" data-panel hidden aria-label="The reader's column">
+  <header class="head">
+    <nav class="tabs" data-tabs aria-label="Reader views">
+      <button type="button" class="tab" data-tab="log" aria-pressed="false">Log</button>
+      <button type="button" class="tab" data-tab="chat" aria-pressed="false">Chat</button>
+      <button type="button" class="tab" data-tab="graph" aria-pressed="false">Graph</button>
+    </nav>
+    <button type="button" class="close" data-close aria-label="Close the reader's column">&#215;</button>
+  </header>
+  <section class="body" data-body="log"><reader-log></reader-log></section>
+  <section class="body" data-body="chat" hidden><reader-chat></reader-chat></section>
+  <section class="body" data-body="graph" hidden>
+    <p class="hint" data-graph-hint>Loading the graph…</p>
+    <review-graph nodes="" depth="1"></review-graph>
+  </section>
+  <footer class="foot">
+    <p>What you mark here stays in this browser until you send it or copy it. Nothing leaves the page without a click. <a href="/docs/ops/comms.html">How this channel works</a>.</p>
+  </footer>
+</aside>

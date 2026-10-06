@@ -30,7 +30,7 @@ class Site__Pages:
         for path in sorted(self.root.rglob('*.html')):
             if SKIP_DIRS & set(path.relative_to(self.root).parts):
                 continue
-            if self.marker('head', 'start') in path.read_text(encoding='utf-8'):
+            if self.has_block(path.read_text(encoding='utf-8'), 'head'):         # with or without attributes on the marker
                 found.append(path)
         return found
 

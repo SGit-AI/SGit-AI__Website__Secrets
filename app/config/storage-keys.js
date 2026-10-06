@@ -12,8 +12,11 @@ export const LOCAL_STORAGE_KEYS = Object.freeze({
     config  : 'sgit.secrets.config.v1',                                           // the active environment configuration (section 5 of the brief)
     theme   : 'sgit.secrets.ui.theme',                                            // the picked theme, one id from data/themes.json (assets/theme.js)
     lastEnv : 'sgit.secrets.ui.lastEnv',                                          // the last built-in environment picked, for the badge
+    reader  : 'sgit.secrets.ui.reader',                                           // the reader's column: open or closed, which tab
+    readerLog : 'sgit.secrets.reader.log.v1',                                     // the reader's log: append-only events (read, star, vote, note) keyed by page and content hash; opinions about public pages, never a secret
 })
 
 export const SESSION_STORAGE_KEYS = Object.freeze({
     adminOauthState : 'sgit.secrets.admin.oauthState',                            // the random OAuth state for the admin redirect; never the token
+    openrouterKey   : 'sgit.secrets.ui.openrouterKey',                            // the reader's own OpenRouter key, only when they tick 'keep for this tab'; this tab, this session, never localStorage
 })

@@ -1,0 +1,45 @@
+/* review-ladder: a rail of layers with counts; absent ones named with their step. Tokens only. */
+:host    { display: block; font-family: var(--rv-font); font-size: var(--rv-fs-small); }
+[hidden] { display: none !important; }
+
+.group {
+    color:          var(--rv-text-muted);
+    font-size:      var(--rv-fs-xs);
+    font-weight:    600;
+    letter-spacing: 0.06em;
+    margin:         var(--rv-sp-3) 0 var(--rv-sp-1);
+    text-transform: uppercase;
+}
+.rungs  { list-style: none; margin: 0; padding: 0; }
+.rung {
+    align-items:   center;
+    border-left:   2px solid var(--rv-border);
+    display:       flex;
+    gap:           var(--rv-sp-2);
+    padding:       1px 0 1px var(--rv-sp-2);
+}
+.rung.absent         { border-left-style: dashed; color: var(--rv-text-muted); }
+.rung.absent .label  { font-style: italic; }
+button.label {
+    background:  transparent;
+    border:      0;
+    color:       var(--rv-text);
+    cursor:      pointer;
+    font:        inherit;
+    padding:     0;
+    text-align:  left;
+}
+button.label:hover  { color: var(--rv-text-heading); }
+button.label.here   { color: var(--rv-accent); font-weight: 600; }
+.count { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); margin-left: auto; }
+.step {
+    border:        1px solid var(--rv-border);
+    border-radius: var(--rv-radius-pill);
+    color:         var(--rv-text-muted);
+    font-family:   var(--rv-mono);
+    font-size:     var(--rv-fs-xs);
+    margin-left:   auto;
+    padding:       0 var(--rv-sp-2);
+}
+.set   { color: var(--rv-text-muted); font-size: var(--rv-fs-xs); margin: var(--rv-sp-3) 0 0; }
+.empty { color: var(--rv-text-muted); }

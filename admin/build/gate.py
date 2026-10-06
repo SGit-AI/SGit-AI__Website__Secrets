@@ -14,7 +14,7 @@ from pathlib import Path
 
 
 ROOT       = Path(__file__).resolve().parents[2]
-GENERATORS = ('gen_features', 'gen_docs', 'gen_chrome', 'gen_versions', 'gen_twins', 'gen_llms')   # in dependency order: reality.md before it is rendered, rendered pages before the chrome
+GENERATORS = ('gen_features', 'gen_docs', 'gen_chrome', 'gen_versions', 'gen_twins', 'gen_search', 'gen_llms')   # in dependency order: reality.md before it is rendered, rendered pages before the chrome
 
 
 class Gate:

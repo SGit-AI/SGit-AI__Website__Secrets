@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The reader's page — secrets.sgit.ai</title>
+  <meta name="description" content="Where the reader's column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent's vault. The only page whose policy allows a connection beyond this site and Google's sign-in hosts.">
+  <!-- sg-secrets:head:start connect="https://openrouter.ai https://dev.send.sgraph.ai" -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://openrouter.ai https://dev.send.sgraph.ai; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/reader/">
+  <link rel="alternate" type="text/markdown" href="/reader/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/reader/">
+  <meta property="og:title" content="The reader&#x27;s page — secrets.sgit.ai">
+  <meta property="og:description" content="Where the reader&#x27;s column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent&#x27;s vault. The only page whose policy allows a connection beyond this site and Google&#x27;s sign-in hosts.">
+  <meta name="sg-secrets:version" content="0.1.7">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/review/">Review graphs</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">The reader&#x27;s page</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>The reader's page</h1>
+    <!-- sg-secrets:status:start ids="site.reader-column,site.reader-chat,site.agent-contact" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.7</span> The reader&#x27;s column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names · <span class="sg-status sg-status-shipped">shipped v0.1.7</span> A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader&#x27;s own key · <span class="sg-status sg-status-proposed">proposed</span> The build agent&#x27;s contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">Every page has the reader's column: the log of what you marked and noted, and the graph of what the page names. Two things need a connection beyond this site, and the site's policy forbids that on every page but this one: the chat through <code>openrouter.ai</code> with your own key, and <strong>Send to the agent</strong>, which writes your sealed log to the build agent's vault on <code>dev.send.sgraph.ai</code>. Open the column here (the tab on the right) to do either; your log is the same one, kept in this browser.</p>
+
+    <h2>What this page may connect to, and why</h2>
+    <table>
+      <thead><tr><th>Host</th><th>Carries</th><th>Only when</th></tr></thead>
+      <tbody>
+        <tr><td><code>openrouter.ai</code></td><td>your question, the pages the tools read for it, and your key in the request header</td><td>you have entered a key and press Send in the chat</td></tr>
+        <tr><td><code>dev.send.sgraph.ai</code></td><td>your log's unsent events, sealed to the agent's public key; the server stores ciphertext it cannot open</td><td>you press Send to the agent, and the agent's lane is open</td></tr>
+      </tbody>
+    </table>
+    <p>Every other page keeps the brief's exact policy, which allows this site and Google's sign-in hosts and nothing else; this page's head declares the two additions, and the gate fails if any other page does (<a href="/docs/design/brief-corrections.html">brief-corrections C19</a>). How the channel works end to end, and what the project lead does once to open the lane: <a href="/docs/ops/comms.html">docs/ops/comms.md</a>.</p>
+
+    <h2>Your key</h2>
+    <p>The chat uses <code>anthropic/claude-sonnet-5.5</code> through OpenRouter. Make a key with a spend limit at openrouter.ai; the column keeps it in memory for this page, or in this tab's session storage if you tick <em>keep for this tab</em>. It is never written to local storage and never sent anywhere but openrouter.ai. <strong>Forget</strong> drops it.</p>
+
+    <h2>Without a key</h2>
+    <p>The chat still works as an offline search over every page, and <strong>Copy for Claude</strong> in the log puts your feedback on the clipboard as markdown with the JSON inside, to paste into a Claude session or into another device's column.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/reader/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

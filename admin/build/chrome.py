@@ -66,7 +66,7 @@ NAV_GROUPS        = (('The design'  , '/how-it-works/' , (('/how-it-works/'     
                      ('Admin'       , '/admin/'        , (('/admin/'                                               , 'How the site is built'     ),
                                                           ('/admin/versions.html'                                  , 'Release history'           ),
                                                           ('/admin/comms.html'                                     , 'Comms: asks and steps'     ),
-                                                          ('/review/ui/'                                              , 'Review graphs'             ),
+                                                          ('/review/'                                                 , 'Review graphs'             ),
                                                           ('/docs/ops/needs.html'                                  , 'What needs a human'        ),
                                                           ('/docs/ops/bootstrap.html'                              , 'GCP bootstrap, as commands'),
                                                           ('/llms.txt'                                             , 'llms.txt, for agents'      ))))
@@ -75,7 +75,7 @@ CRUMB_FOLDERS     = {'/docs/'        : ('Docs'            , '/docs/'        ),
                      '/team/'        : ('The team'        , '/team/'        ),
                      '/team/roles/'  : ('Roles'           , '/team/'        ),
                      '/about/'       : ('About'           , '/about/participant.html'),
-                     '/review/ui/'      : ('Review graphs'   , '/review/ui/'      ),   # breadcrumb names for folders that have no nav entry of their own
+                     '/review/'      : ('Review graphs'   , '/review/'      ),
                      '/docs/design/' : ('Design documents', '/docs/design/' ),
                      '/docs/ops/'    : ('Operations'      , '/docs/ops/'    ),
                      '/admin/'       : ('Admin'           , '/admin/'       )}
@@ -111,11 +111,16 @@ class Chrome:
 
     # ── head ──────────────────────────────────────────────────────────────────
 
-    def head(self, url_path, title, description):
+    def csp(self, connect=''):                                                   # the brief's policy, exact; one page may add connect-src hosts in its head marker (C19)
+        if not connect:
+            return CSP
+        return CSP.replace('https://identitytoolkit.googleapis.com; ', f'https://identitytoolkit.googleapis.com {connect.strip()}; ')
+
+    def head(self, url_path, title, description, connect=''):
         canonical  = self.canonical_url(url_path)
         twin       = self.twin_path(url_path)
         esc        = html.escape
-        lines      = [f'<meta http-equiv="Content-Security-Policy" content="{CSP}">'                         ,
+        lines      = [f'<meta http-equiv="Content-Security-Policy" content="{self.csp(connect)}">'            ,
                       f'<link rel="canonical" href="{canonical}">'                                           ,
                       f'<link rel="alternate" type="text/markdown" href="{twin}">'                          ,
                       f'<link rel="license" href="{LICENCE_URL}">'                                           ,
@@ -123,6 +128,7 @@ class Chrome:
                       f'<link rel="stylesheet" href="/assets/themes.css">'                                   ,
                       f'<link rel="stylesheet" href="/assets/site.css">'                                     ,
                       f'<script src="/assets/nav.js" defer></script>'                                        ,
+                      f'<script type="module" src="/components/reader-panel/reader-panel.js"></script>'       ,   # the reader's column; a module, so it never blocks the page
                       f'<meta property="og:type" content="website">'                                         ,
                       f'<meta property="og:site_name" content="{SITE_NAME}">'                               ,
                       f'<meta property="og:url" content="{canonical}">'                                      ,
@@ -203,7 +209,8 @@ class Chrome:
 
     def footer(self, url_path):
         twin = self.twin_path(url_path)
-        return '\n'.join(['  <footer class="sg-footer">'                                                                                      ,
+        return '\n'.join(['  <reader-panel></reader-panel>'                                                                                    ,
+                          '  <footer class="sg-footer">'                                                                                      ,
                           f'    <p>{SITE_NAME} · site {self.version_badge()} · released {self.released} · '
                           f'<a href="/admin/versions.html">releases</a> · <a href="{twin}">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · '
                           f'<a href="{REPO_URL}">source</a> · <a href="{PARENT_URL}">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>'                                  ,

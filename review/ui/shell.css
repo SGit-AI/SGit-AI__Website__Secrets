@@ -64,9 +64,17 @@ a { color: var(--rv-accent); }
     display:               grid;
     flex:                  1;
     gap:                   0;
-    grid-template-columns: minmax(0, 3fr) minmax(20rem, 2fr);
+    grid-template-columns: minmax(11rem, 1fr) minmax(0, 3fr) minmax(20rem, 2fr);
     min-height:            0;
 }
+.left {
+    border-right: 1px solid var(--rv-border);
+    min-height:   0;
+    overflow:     auto;
+    padding:      var(--rv-sp-2) var(--rv-sp-3);
+}
+.right .graph         { margin-bottom: var(--rv-sp-3); }
+.right .graph summary { color: var(--rv-text-muted); cursor: pointer; font-size: var(--rv-fs-small); margin-bottom: var(--rv-sp-2); }
 .centre, .right {
     min-height: 0;
     overflow:   auto;
@@ -84,5 +92,6 @@ a { color: var(--rv-accent); }
 
 @media (max-width: 860px) {
     .layout { grid-template-columns: 1fr; }
+    .left   { border-right: 0; border-bottom: 1px solid var(--rv-border); }
     .right  { border-left: 0; border-top: 1px solid var(--rv-border); }
 }

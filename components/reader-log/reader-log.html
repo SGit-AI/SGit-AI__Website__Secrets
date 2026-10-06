@@ -1,0 +1,34 @@
+<section class="log">
+  <p class="page"><strong data-page-title></strong> <code class="hash" data-hash title="hash of this page's text; a note written against another text says so"></code></p>
+  <div class="marks" role="group" aria-label="Mark this page" data-marks>
+    <button type="button" class="mark" data-mark="read" aria-pressed="false">Read</button>
+    <button type="button" class="mark" data-mark="star" aria-pressed="false">&#9733; Star</button>
+    <button type="button" class="mark" data-mark="up" aria-pressed="false">&#9650; Up</button>
+    <button type="button" class="mark" data-mark="down" aria-pressed="false">&#9660; Down</button>
+  </div>
+  <form class="note" data-note-form>
+    <label for="note">A note on this page</label>
+    <textarea id="note" data-note rows="3" placeholder="What is wrong, what is missing, what you want next…"></textarea>
+    <div class="row">
+      <button type="button" class="mic" data-mic hidden aria-pressed="false" title="Dictate with this browser's speech recognition">&#127908; Dictate</button>
+      <button type="submit" class="add">Add note</button>
+    </div>
+  </form>
+  <h3>On this page <span class="count" data-count-page></span></h3>
+  <ol class="events" data-events-page></ol>
+  <h3>Unsent <span class="count" data-count-unsent></span></h3>
+  <div class="send">
+    <button type="button" class="primary" data-send disabled>Send to the agent</button>
+    <button type="button" data-copy>Copy for Claude</button>
+    <button type="button" data-paste-toggle>Paste to merge</button>
+  </div>
+  <p class="status" data-status aria-live="polite"></p>
+  <form class="paste" data-paste-form hidden>
+    <textarea data-paste rows="4" placeholder="Paste what 'Copy for Claude' produced on another device"></textarea>
+    <button type="submit">Merge</button>
+  </form>
+  <details class="all">
+    <summary>Every page: <span data-count-all></span> events</summary>
+    <ol class="events" data-events-all></ol>
+  </details>
+</section>
