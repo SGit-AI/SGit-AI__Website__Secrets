@@ -4,7 +4,7 @@
 
 What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
 
-Source tree: 115 files, hash `a11a471f279e1e46`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+Source tree: 124 files, hash `05e1248bfdf8f452`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
 
 ## The project
 
@@ -22,6 +22,10 @@ Source tree: 115 files, hash `a11a471f279e1e46`. Derived files must carry this h
 | methods | not derived yet |
 | surfaces | not derived yet |
 | tests | not derived yet |
+| claims | 71 (38 shipped, every one with evidence that resolves; strict) |
+| releases | 10 |
+| anchors | 179 (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |
+| brief sections | 14 top-level, 31 subsections, as review/brief/ |
 
 Coverage (projected nodes with a derived match beneath them): not computed yet: the join runs from step 3.
 Change files: 0. Streams: 0. Open gaps: none recorded yet.
@@ -50,6 +54,8 @@ Change files: 0. Streams: 0. Open gaps: none recorded yet.
 
 ```
 python3 review/tools/sections.py             # the brief's section anchors, for the links from every intent node
+python3 review/tools/brief.py                # the brief as sections, review/brief/, shown in place by the navigator
+python3 review/tools/claims.py               # the claims layer from data/features.json and data/versions.json; strict on evidence
 python3 review/tools/validate_review.py      # every JSON file against its schema; every edge a known verb
 python3 review/tools/freshness.py            # derived files match the tree being built
 python3 review/tools/readme.py               # this file

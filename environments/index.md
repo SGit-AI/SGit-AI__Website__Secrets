@@ -2,11 +2,11 @@
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool · proposed Terraform module secrets-env and the dev environment root · proposed config/environments.json with real dev values from Terraform outputs · proposed Environment page: pick a built-in environment, enter a custom one, import, export, reset
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.infra.bootstrap) Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool · [proposed](/review/ui/#node=claim.infra.terraform) Terraform module secrets-env and the dev environment root · [proposed](/review/ui/#node=claim.infra.environments-config) config/environments.json with real dev values from Terraform outputs · [proposed](/review/ui/#node=claim.app.environment-page) Environment page: pick a built-in environment, enter a custom one, import, export, reset
 
 One site serves every environment. An environment is one GCP project holding an Identity Platform configuration and one bucket; the project is the unit that is created and destroyed. The browser picks the environment at runtime, with `prod` as the default on `secrets.sgit.ai`, and shows which one is active in the app header at all times, so nobody enters a real secret into `dev` by mistake.
 

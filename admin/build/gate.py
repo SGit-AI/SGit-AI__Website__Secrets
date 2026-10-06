@@ -24,8 +24,8 @@ class Gate:
 
     def commands(self):
         flag = [] if self.build else ['--check']
-        review = [('python3 review/tools/sections.py' + ('' if self.build else ' --check'), ['python3', 'review/tools/sections.py', *flag]),
-                  ('python3 review/tools/readme.py' + ('' if self.build else ' --check'), ['python3', 'review/tools/readme.py', *flag])]
+        review = [(f'python3 review/tools/{name}.py' + ('' if self.build else ' --check'), ['python3', f'review/tools/{name}.py', *flag])
+                  for name in ('sections', 'brief', 'claims', 'readme')]                 # the brief's anchors, the brief as sections, the claims layer, then the README that counts them
         gens   = [(f'python3 admin/build/{name}.py' + ('' if self.build else ' --check'), ['python3', f'admin/build/{name}.py', *flag]) for name in GENERATORS]
         steps  = gens[:-1] + review + gens[-1:]                                   # the review README hashes the source tree, which the page generators rewrite, so it comes after them; gen_llms last, it concatenates the README
         if self.build:                                                            # after regenerating, prove --check is clean too

@@ -2,7 +2,7 @@
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -29,29 +29,29 @@ The admin pages will work only when the visitor signs in with a Google account t
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
-| admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
-| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
-| admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
-| admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | [shipped v0.1.1](/review/ui/#node=claim.admin.comms) | [admin/comms.html](/review/ui/#file=admin/comms.html) | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| admin | Admin sign-in with the visitor's own Google account, token in memory only | [proposed](/review/ui/#node=claim.admin.oauth) | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
+| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | [proposed](/review/ui/#node=claim.admin.setup-checklist) | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
+| admin | Auth config, storage, rules diff and deploy, users, environment export | [proposed](/review/ui/#node=claim.admin.pages) | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
+| admin | Release history page generated from data/versions.json | [shipped v0.1.0](/review/ui/#node=claim.admin.versions) | [admin/versions.html](/review/ui/#file=admin/versions.html) | One row per release; the newest row must equal version.txt. |
 
 ## The pipeline, as it stands
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | shipped v0.1.0 | admin/build/version.txt | Check 1 of the gate fails on any disagreement. |
-| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | shipped v0.1.0 | admin/build/chrome.py | gen_chrome.py --check is part of the gate. |
-| pipeline | Markdown twin of every HTML page, links pointing at markdown | shipped v0.1.0 | admin/build/gen_twins.py | index.html has index.md beside it; the twin carries the site version. |
-| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | shipped v0.1.0 | admin/build/gen_llms.py | llms-full.txt concatenates every twin and every design document. |
-| pipeline | docs/reality.md and the status tables generated from data/features.json | shipped v0.1.0 | admin/build/gen_features.py | If the reality document does not list it, it does not exist. |
-| pipeline | The eight-check release gate, no dependencies | shipped v0.1.0 | admin/build/validate.js | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
-| pipeline | The same gate locally and in CI, one command | shipped v0.1.0 | admin/build/gate.py | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
-| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | shipped v0.1.0 | admin/build/tag_release.py | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
-| pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
-| pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
-| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
-| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
-| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
+| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | [shipped v0.1.0](/review/ui/#node=claim.pipeline.version-source) | [admin/build/version.txt](/review/ui/#file=admin/build/version.txt) | Check 1 of the gate fails on any disagreement. |
+| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | [shipped v0.1.0](/review/ui/#node=claim.pipeline.chrome) | [admin/build/chrome.py](/review/ui/#file=admin/build/chrome.py) | gen_chrome.py --check is part of the gate. |
+| pipeline | Markdown twin of every HTML page, links pointing at markdown | [shipped v0.1.0](/review/ui/#node=claim.pipeline.twins) | [admin/build/gen_twins.py](/review/ui/#file=admin/build/gen_twins.py) | index.html has index.md beside it; the twin carries the site version. |
+| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | [shipped v0.1.0](/review/ui/#node=claim.pipeline.llms) | [admin/build/gen_llms.py](/review/ui/#file=admin/build/gen_llms.py) | llms-full.txt concatenates every twin and every design document. |
+| pipeline | docs/reality.md and the status tables generated from data/features.json | [shipped v0.1.0](/review/ui/#node=claim.pipeline.reality) | [admin/build/gen_features.py](/review/ui/#file=admin/build/gen_features.py) | If the reality document does not list it, it does not exist. |
+| pipeline | The eight-check release gate, no dependencies | [shipped v0.1.0](/review/ui/#node=claim.pipeline.gate) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
+| pipeline | The same gate locally and in CI, one command | [shipped v0.1.0](/review/ui/#node=claim.pipeline.gate-local) | [admin/build/gate.py](/review/ui/#file=admin/build/gate.py) | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
+| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | [shipped v0.1.0](/review/ui/#node=claim.pipeline.tag-release) | [admin/build/tag_release.py](/review/ui/#file=admin/build/tag_release.py) | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
+| pipeline | Deploy to GitHub Pages from the validated tree | [shipped v0.1.0](/review/ui/#node=claim.pipeline.deploy) | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
+| pipeline | verify-live: the run is red until the live site serves the released version | [shipped v0.1.0](/review/ui/#node=claim.pipeline.verify-live) | [admin/build/verify_live.py](/review/ui/#file=admin/build/verify_live.py) | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
+| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | [shipped v0.1.0](/review/ui/#node=claim.pipeline.vendor) | [vendor/MANIFEST.json](/review/ui/#file=vendor/MANIFEST.json) | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | [shipped v0.1.3](/review/ui/#node=claim.pipeline.release-script) | [admin/build/release.py](/review/ui/#file=admin/build/release.py) | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | [shipped v0.1.3](/review/ui/#node=claim.pipeline.gate-extras) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | From section 4 of the repository guidance; the advisory never fails the build. |
 
 ## The admin section
 

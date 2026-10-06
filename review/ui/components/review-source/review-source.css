@@ -1,0 +1,37 @@
+/* review-source: a file with line numbers, a range marked. Tokens only. */
+:host    { display: block; font-family: var(--rv-font); font-size: var(--rv-fs); }
+[hidden] { display: none !important; }
+
+.head    { align-items: baseline; display: flex; flex-wrap: wrap; gap: var(--rv-sp-2); }
+.layer {
+    background:    var(--rv-layer-derived);
+    border-radius: var(--rv-radius-pill);
+    color:         var(--rv-on-layer);
+    font-family:   var(--rv-mono);
+    font-size:     var(--rv-fs-xs);
+    padding:       0 var(--rv-sp-2);
+}
+.name    { color: var(--rv-text-heading); font-family: var(--rv-mono); font-size: 1rem; margin: 0; word-break: break-all; }
+.meta    { color: var(--rv-text-muted); font-size: var(--rv-fs-small); }
+.meta a, .links a { color: var(--rv-accent); text-decoration: none; }
+.meta a:hover, .links a:hover { text-decoration: underline; }
+.leave   { border-bottom: 1px dotted var(--rv-text-muted); }
+h3       { color: var(--rv-text-heading); font-size: var(--rv-fs); margin: var(--rv-sp-3) 0 var(--rv-sp-1); }
+.links   { list-style: none; margin: 0 0 var(--rv-sp-3); padding: 0; }
+.code {
+    background:    var(--rv-bg-secondary);
+    border:        1px solid var(--rv-border);
+    border-radius: var(--rv-radius);
+    font-family:   var(--rv-mono);
+    font-size:     var(--rv-fs-xs);
+    line-height:   1.45;
+    margin:        0;
+    max-height:    70vh;
+    overflow:      auto;
+    padding:       var(--rv-sp-2) 0;
+}
+.lines   { margin: 0; padding-left: 4.5em; }
+.lines li { padding: 0 var(--rv-sp-3) 0 var(--rv-sp-1); white-space: pre; }
+.lines li::marker { color: var(--rv-text-muted); }
+.lines li.marked  { background: var(--rv-selected); color: var(--rv-text-heading); }
+.empty   { color: var(--rv-text-muted); }

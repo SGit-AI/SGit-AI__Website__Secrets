@@ -49,3 +49,7 @@ Section 7 puts the layers on `review-ladder` in the left rail. The ladder arrive
 - The JavaScript parser (section 12): decided in principle as a vendored, pinned, hashed `acorn` under `review/tools/vendor/`; verified at step 2.
 - How examples are matched to tests by execution in a browser-only project (section 12): the proposal stands, a test page writes which example ids it satisfied to a results file; built at step 3.
 - Whether the deploy layer is derived from the workflow and Terraform files or declared (section 12): both, with the join reporting the difference; step 3.
+
+### R10. A claims layer, and the brief as data, which the review brief does not have
+
+The review brief's layers are the intent (stories, rules, examples, flows, components, deploy) and the code derived beneath them. This site adds a layer the brief does not name: claims, one per row of `data/features.json`, with typed edges to the intent they realise and to anchors (files, tests, sections, documents, URLs, commits, tags, CI runs) where a chain of evidence ends, and releases as nodes with their commit, tag and run. It also keeps the brief itself as data under `review/brief/` so the navigator can show a section in place. Verbs added to `verbs.json`: realises, shipped_in, lives_in, proven_by, described_in, seen_at, recorded_in, each with its inverse. The anchor kinds are a closed list in `tools/config.json`. Proposed for the review brief as a seventh layer; recorded here until it says so.

@@ -1,0 +1,4572 @@
+{
+  "anchors": [
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/05ebf4d0565e9e8d8084136b422646afafbb9711",
+      "id": "anchor.commit.05ebf4d0565e9e8d8084136b422646afafbb9711",
+      "kind": "commit",
+      "name": "commit 05ebf4d",
+      "opens": "on GitHub",
+      "ref": "commit:05ebf4d0565e9e8d8084136b422646afafbb9711"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/06b492182ff8106fd40caffc56f27e2a56db7613",
+      "id": "anchor.commit.06b492182ff8106fd40caffc56f27e2a56db7613",
+      "kind": "commit",
+      "name": "commit 06b4921",
+      "opens": "on GitHub",
+      "ref": "commit:06b492182ff8106fd40caffc56f27e2a56db7613"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/306aa0c2e9d22366b748390be06e13eb93599152",
+      "id": "anchor.commit.306aa0c2e9d22366b748390be06e13eb93599152",
+      "kind": "commit",
+      "name": "commit 306aa0c",
+      "opens": "on GitHub",
+      "ref": "commit:306aa0c2e9d22366b748390be06e13eb93599152"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/33fce58f68451cb7cc2106acdec7a44d0fb833dd",
+      "id": "anchor.commit.33fce58f68451cb7cc2106acdec7a44d0fb833dd",
+      "kind": "commit",
+      "name": "commit 33fce58",
+      "opens": "on GitHub",
+      "ref": "commit:33fce58f68451cb7cc2106acdec7a44d0fb833dd"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/72acdf7a1e0128e28e169a9291c254a6946666fe",
+      "id": "anchor.commit.72acdf7a1e0128e28e169a9291c254a6946666fe",
+      "kind": "commit",
+      "name": "commit 72acdf7",
+      "opens": "on GitHub",
+      "ref": "commit:72acdf7a1e0128e28e169a9291c254a6946666fe"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/8ece6167362164eb5cfd4fcab4f5e2189b02a2cb",
+      "id": "anchor.commit.8ece6167362164eb5cfd4fcab4f5e2189b02a2cb",
+      "kind": "commit",
+      "name": "commit 8ece616",
+      "opens": "on GitHub",
+      "ref": "commit:8ece6167362164eb5cfd4fcab4f5e2189b02a2cb"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/a110792ec5f224319836c3adc8ebf7b440cd0d08",
+      "id": "anchor.commit.a110792ec5f224319836c3adc8ebf7b440cd0d08",
+      "kind": "commit",
+      "name": "commit a110792",
+      "opens": "on GitHub",
+      "ref": "commit:a110792ec5f224319836c3adc8ebf7b440cd0d08"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/caefd5ec992e905f00cb54ed1b77e5db6cb09c07",
+      "id": "anchor.commit.caefd5ec992e905f00cb54ed1b77e5db6cb09c07",
+      "kind": "commit",
+      "name": "commit caefd5e",
+      "opens": "on GitHub",
+      "ref": "commit:caefd5ec992e905f00cb54ed1b77e5db6cb09c07"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/e031a3f01779e298eb4cabe48e779cd7afd5b04a",
+      "id": "anchor.commit.e031a3f01779e298eb4cabe48e779cd7afd5b04a",
+      "kind": "commit",
+      "name": "commit e031a3f",
+      "opens": "on GitHub",
+      "ref": "commit:e031a3f01779e298eb4cabe48e779cd7afd5b04a"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/design/brief-corrections.html#c16-the-admin-section-and-the-markdown-viewer-follow-the-siblings",
+      "id": "anchor.doc.docs/design/brief-corrections.md@c16-the-admin-section-and-the-markdown-viewer-follow-the-siblings",
+      "kind": "doc",
+      "name": "docs/design/brief-corrections.md #c16-the-admin-section-and-the-markdown-viewer-follow-the-siblings",
+      "opens": "the rendered page",
+      "ref": "doc:docs/design/brief-corrections.md#c16-the-admin-section-and-the-markdown-viewer-follow-the-siblings"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/design/brief-corrections.html#c18-the-site-has-four-themes-and-the-theme-key-holds-a-name-not-light-or-dark",
+      "id": "anchor.doc.docs/design/brief-corrections.md@c18-the-site-has-four-themes-and-the-theme-key-holds-a-name-not-light-or-dark",
+      "kind": "doc",
+      "name": "docs/design/brief-corrections.md #c18-the-site-has-four-themes-and-the-theme-key-holds-a-name-not-light-or-dark",
+      "opens": "the rendered page",
+      "ref": "doc:docs/design/brief-corrections.md#c18-the-site-has-four-themes-and-the-theme-key-holds-a-name-not-light-or-dark"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/design/brief-corrections.html#c19-one-page-widens-the-content-security-policy-declared-in-its-head-marker",
+      "id": "anchor.doc.docs/design/brief-corrections.md@c19-one-page-widens-the-content-security-policy-declared-in-its-head-marker",
+      "kind": "doc",
+      "name": "docs/design/brief-corrections.md #c19-one-page-widens-the-content-security-policy-declared-in-its-head-marker",
+      "opens": "the rendered page",
+      "ref": "doc:docs/design/brief-corrections.md#c19-one-page-widens-the-content-security-policy-declared-in-its-head-marker"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/design/brief-corrections.html#c22-the-mockups-are-a-prototype-in-three-ux-variants-with-a-column",
+      "id": "anchor.doc.docs/design/brief-corrections.md@c22-the-mockups-are-a-prototype-in-three-ux-variants-with-a-column",
+      "kind": "doc",
+      "name": "docs/design/brief-corrections.md #c22-the-mockups-are-a-prototype-in-three-ux-variants-with-a-column",
+      "opens": "the rendered page",
+      "ref": "doc:docs/design/brief-corrections.md#c22-the-mockups-are-a-prototype-in-three-ux-variants-with-a-column"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/design/brief-corrections.html#c23-everything-links-to-everything-claims-anchors-and-the-brief-as-sections",
+      "id": "anchor.doc.docs/design/brief-corrections.md@c23-everything-links-to-everything-claims-anchors-and-the-brief-as-sections",
+      "kind": "doc",
+      "name": "docs/design/brief-corrections.md #c23-everything-links-to-everything-claims-anchors-and-the-brief-as-sections",
+      "opens": "the rendered page",
+      "ref": "doc:docs/design/brief-corrections.md#c23-everything-links-to-everything-claims-anchors-and-the-brief-as-sections"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/ops/bootstrap.html",
+      "id": "anchor.doc.docs/ops/bootstrap.md",
+      "kind": "doc",
+      "name": "docs/ops/bootstrap.md",
+      "opens": "the rendered page",
+      "ref": "doc:docs/ops/bootstrap.md"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/ops/branch-protection.html",
+      "id": "anchor.doc.docs/ops/branch-protection.md",
+      "kind": "doc",
+      "name": "docs/ops/branch-protection.md",
+      "opens": "the rendered page",
+      "ref": "doc:docs/ops/branch-protection.md"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/ops/comms.html",
+      "id": "anchor.doc.docs/ops/comms.md",
+      "kind": "doc",
+      "name": "docs/ops/comms.md",
+      "opens": "the rendered page",
+      "ref": "doc:docs/ops/comms.md"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/ops/dns.html",
+      "id": "anchor.doc.docs/ops/dns.md",
+      "kind": "doc",
+      "name": "docs/ops/dns.md",
+      "opens": "the rendered page",
+      "ref": "doc:docs/ops/dns.md"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/ops/release.html",
+      "id": "anchor.doc.docs/ops/release.md",
+      "kind": "doc",
+      "name": "docs/ops/release.md",
+      "opens": "the rendered page",
+      "ref": "doc:docs/ops/release.md"
+    },
+    {
+      "anchor": true,
+      "href": "/keyring/index.html",
+      "id": "anchor.doc.keyring/index.html",
+      "kind": "doc",
+      "name": "keyring/index.html",
+      "opens": "the rendered page",
+      "ref": "doc:keyring/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/BRIEF-CORRECTIONS.md",
+      "id": "anchor.doc.review/BRIEF-CORRECTIONS.md",
+      "kind": "doc",
+      "name": "review/BRIEF-CORRECTIONS.md",
+      "opens": "the rendered page",
+      "ref": "doc:review/BRIEF-CORRECTIONS.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/README.md",
+      "id": "anchor.doc.review/README.md",
+      "kind": "doc",
+      "name": "review/README.md",
+      "opens": "the rendered page",
+      "ref": "doc:review/README.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/README.md",
+      "id": "anchor.doc.review/ui/README.md",
+      "kind": "doc",
+      "name": "review/ui/README.md",
+      "opens": "the rendered page",
+      "ref": "doc:review/ui/README.md"
+    },
+    {
+      "anchor": true,
+      "href": "/sharing/index.html",
+      "id": "anchor.doc.sharing/index.html",
+      "kind": "doc",
+      "name": "sharing/index.html",
+      "opens": "the rendered page",
+      "ref": "doc:sharing/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/blob/dev/.github/workflows/deploy-pages.yml",
+      "id": "anchor.file..github/workflows/deploy-pages.yml",
+      "kind": "file",
+      "name": ".github/workflows/deploy-pages.yml",
+      "opens": "on GitHub (not served by the site)",
+      "ref": "file:.github/workflows/deploy-pages.yml"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=.well-known/sgit-agents.json",
+      "id": "anchor.file..well-known/sgit-agents.json",
+      "kind": "file",
+      "name": ".well-known/sgit-agents.json",
+      "opens": "in the navigator",
+      "ref": "file:.well-known/sgit-agents.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=CNAME",
+      "id": "anchor.file.CNAME",
+      "kind": "file",
+      "name": "CNAME",
+      "opens": "in the navigator",
+      "ref": "file:CNAME"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=about/participant.html",
+      "id": "anchor.file.about/participant.html",
+      "kind": "file",
+      "name": "about/participant.html",
+      "opens": "in the navigator",
+      "ref": "file:about/participant.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/assemble_site.py",
+      "id": "anchor.file.admin/build/assemble_site.py",
+      "kind": "file",
+      "name": "admin/build/assemble_site.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/assemble_site.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/chrome.py",
+      "id": "anchor.file.admin/build/chrome.py",
+      "kind": "file",
+      "name": "admin/build/chrome.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/chrome.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gate.py",
+      "id": "anchor.file.admin/build/gate.py",
+      "kind": "file",
+      "name": "admin/build/gate.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gate.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_chrome.py",
+      "id": "anchor.file.admin/build/gen_chrome.py",
+      "kind": "file",
+      "name": "admin/build/gen_chrome.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_chrome.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_docs.py",
+      "id": "anchor.file.admin/build/gen_docs.py",
+      "kind": "file",
+      "name": "admin/build/gen_docs.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_docs.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_features.py",
+      "id": "anchor.file.admin/build/gen_features.py",
+      "kind": "file",
+      "name": "admin/build/gen_features.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_features.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_llms.py",
+      "id": "anchor.file.admin/build/gen_llms.py",
+      "kind": "file",
+      "name": "admin/build/gen_llms.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_llms.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_search.py",
+      "id": "anchor.file.admin/build/gen_search.py",
+      "kind": "file",
+      "name": "admin/build/gen_search.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_search.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_twins.py",
+      "id": "anchor.file.admin/build/gen_twins.py",
+      "kind": "file",
+      "name": "admin/build/gen_twins.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_twins.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_versions.py",
+      "id": "anchor.file.admin/build/gen_versions.py",
+      "kind": "file",
+      "name": "admin/build/gen_versions.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_versions.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/html_to_md.py",
+      "id": "anchor.file.admin/build/html_to_md.py",
+      "kind": "file",
+      "name": "admin/build/html_to_md.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/html_to_md.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/md_to_html.py",
+      "id": "anchor.file.admin/build/md_to_html.py",
+      "kind": "file",
+      "name": "admin/build/md_to_html.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/md_to_html.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/release.py",
+      "id": "anchor.file.admin/build/release.py",
+      "kind": "file",
+      "name": "admin/build/release.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/release.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/tag_release.py",
+      "id": "anchor.file.admin/build/tag_release.py",
+      "kind": "file",
+      "name": "admin/build/tag_release.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/tag_release.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/validate.js",
+      "id": "anchor.file.admin/build/validate.js",
+      "kind": "file",
+      "name": "admin/build/validate.js",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/validate.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/validate.js",
+      "id": "anchor.file.admin/build/validate.js@check-1",
+      "kind": "file",
+      "name": "admin/build/validate.js (check-1)",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/validate.js#check-1"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/validate.js",
+      "id": "anchor.file.admin/build/validate.js@check-5",
+      "kind": "file",
+      "name": "admin/build/validate.js (check-5)",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/validate.js#check-5"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/validate.js",
+      "id": "anchor.file.admin/build/validate.js@check-6",
+      "kind": "file",
+      "name": "admin/build/validate.js (check-6)",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/validate.js#check-6"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/verify_live.py",
+      "id": "anchor.file.admin/build/verify_live.py",
+      "kind": "file",
+      "name": "admin/build/verify_live.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/verify_live.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/version.txt",
+      "id": "anchor.file.admin/build/version.txt",
+      "kind": "file",
+      "name": "admin/build/version.txt",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/version.txt"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/comms.html",
+      "id": "anchor.file.admin/comms.html",
+      "kind": "file",
+      "name": "admin/comms.html",
+      "opens": "in the navigator",
+      "ref": "file:admin/comms.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/versions.html",
+      "id": "anchor.file.admin/versions.html",
+      "kind": "file",
+      "name": "admin/versions.html",
+      "opens": "in the navigator",
+      "ref": "file:admin/versions.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=assets/nav.js",
+      "id": "anchor.file.assets/nav.js",
+      "kind": "file",
+      "name": "assets/nav.js",
+      "opens": "in the navigator",
+      "ref": "file:assets/nav.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=assets/site.css",
+      "id": "anchor.file.assets/site.css",
+      "kind": "file",
+      "name": "assets/site.css",
+      "opens": "in the navigator",
+      "ref": "file:assets/site.css"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=assets/theme.js",
+      "id": "anchor.file.assets/theme.js",
+      "kind": "file",
+      "name": "assets/theme.js",
+      "opens": "in the navigator",
+      "ref": "file:assets/theme.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=assets/themes.css",
+      "id": "anchor.file.assets/themes.css",
+      "kind": "file",
+      "name": "assets/themes.css",
+      "opens": "in the navigator",
+      "ref": "file:assets/themes.css"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=components/proto-app/proto-app.js",
+      "id": "anchor.file.components/proto-app/proto-app.js",
+      "kind": "file",
+      "name": "components/proto-app/proto-app.js",
+      "opens": "in the navigator",
+      "ref": "file:components/proto-app/proto-app.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=components/proto-base/proto-base.js",
+      "id": "anchor.file.components/proto-base/proto-base.js",
+      "kind": "file",
+      "name": "components/proto-base/proto-base.js",
+      "opens": "in the navigator",
+      "ref": "file:components/proto-base/proto-base.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=components/proto-column/proto-column.js",
+      "id": "anchor.file.components/proto-column/proto-column.js",
+      "kind": "file",
+      "name": "components/proto-column/proto-column.js",
+      "opens": "in the navigator",
+      "ref": "file:components/proto-column/proto-column.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=components/reader-chat/reader-chat.js",
+      "id": "anchor.file.components/reader-chat/reader-chat.js",
+      "kind": "file",
+      "name": "components/reader-chat/reader-chat.js",
+      "opens": "in the navigator",
+      "ref": "file:components/reader-chat/reader-chat.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=components/reader-log/reader-log.js",
+      "id": "anchor.file.components/reader-log/reader-log.js",
+      "kind": "file",
+      "name": "components/reader-log/reader-log.js",
+      "opens": "in the navigator",
+      "ref": "file:components/reader-log/reader-log.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=components/reader-panel/reader-panel.js",
+      "id": "anchor.file.components/reader-panel/reader-panel.js",
+      "kind": "file",
+      "name": "components/reader-panel/reader-panel.js",
+      "opens": "in the navigator",
+      "ref": "file:components/reader-panel/reader-panel.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=components/sg-base/sg-base.js",
+      "id": "anchor.file.components/sg-base/sg-base.js",
+      "kind": "file",
+      "name": "components/sg-base/sg-base.js",
+      "opens": "in the navigator",
+      "ref": "file:components/sg-base/sg-base.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=config/environments.json",
+      "id": "anchor.file.config/environments.json",
+      "kind": "file",
+      "name": "config/environments.json",
+      "opens": "in the navigator",
+      "ref": "file:config/environments.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=data/features.json",
+      "id": "anchor.file.data/features.json",
+      "kind": "file",
+      "name": "data/features.json",
+      "opens": "in the navigator",
+      "ref": "file:data/features.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=data/search-index.json",
+      "id": "anchor.file.data/search-index.json",
+      "kind": "file",
+      "name": "data/search-index.json",
+      "opens": "in the navigator",
+      "ref": "file:data/search-index.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=data/steps.json",
+      "id": "anchor.file.data/steps.json",
+      "kind": "file",
+      "name": "data/steps.json",
+      "opens": "in the navigator",
+      "ref": "file:data/steps.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=data/themes.json",
+      "id": "anchor.file.data/themes.json",
+      "kind": "file",
+      "name": "data/themes.json",
+      "opens": "in the navigator",
+      "ref": "file:data/themes.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=data/versions.json",
+      "id": "anchor.file.data/versions.json",
+      "kind": "file",
+      "name": "data/versions.json",
+      "opens": "in the navigator",
+      "ref": "file:data/versions.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=docs/design/brief-corrections.md",
+      "id": "anchor.file.docs/design/brief-corrections.md",
+      "kind": "file",
+      "name": "docs/design/brief-corrections.md",
+      "opens": "in the navigator",
+      "ref": "file:docs/design/brief-corrections.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=docs/design/secrets-sgit-ai__mvp-build-brief.md",
+      "id": "anchor.file.docs/design/secrets-sgit-ai__mvp-build-brief.md",
+      "kind": "file",
+      "name": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+      "opens": "in the navigator",
+      "ref": "file:docs/design/secrets-sgit-ai__mvp-build-brief.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=docs/ops/needs.md",
+      "id": "anchor.file.docs/ops/needs.md",
+      "kind": "file",
+      "name": "docs/ops/needs.md",
+      "opens": "in the navigator",
+      "ref": "file:docs/ops/needs.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=docs/reality.md",
+      "id": "anchor.file.docs/reality.md",
+      "kind": "file",
+      "name": "docs/reality.md",
+      "opens": "in the navigator",
+      "ref": "file:docs/reality.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=environments/index.html",
+      "id": "anchor.file.environments/index.html",
+      "kind": "file",
+      "name": "environments/index.html",
+      "opens": "in the navigator",
+      "ref": "file:environments/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=how-it-works/index.html",
+      "id": "anchor.file.how-it-works/index.html",
+      "kind": "file",
+      "name": "how-it-works/index.html",
+      "opens": "in the navigator",
+      "ref": "file:how-it-works/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/blob/dev/infra/bootstrap/bootstrap.sh",
+      "id": "anchor.file.infra/bootstrap/bootstrap.sh",
+      "kind": "file",
+      "name": "infra/bootstrap/bootstrap.sh",
+      "opens": "on GitHub (not served by the site)",
+      "ref": "file:infra/bootstrap/bootstrap.sh"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/blob/dev/infra/rules/storage.rules",
+      "id": "anchor.file.infra/rules/storage.rules",
+      "kind": "file",
+      "name": "infra/rules/storage.rules",
+      "opens": "on GitHub (not served by the site)",
+      "ref": "file:infra/rules/storage.rules"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=keyring/index.html",
+      "id": "anchor.file.keyring/index.html",
+      "kind": "file",
+      "name": "keyring/index.html",
+      "opens": "in the navigator",
+      "ref": "file:keyring/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=llms.txt",
+      "id": "anchor.file.llms.txt",
+      "kind": "file",
+      "name": "llms.txt",
+      "opens": "in the navigator",
+      "ref": "file:llms.txt"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=mockups/index.html",
+      "id": "anchor.file.mockups/index.html",
+      "kind": "file",
+      "name": "mockups/index.html",
+      "opens": "in the navigator",
+      "ref": "file:mockups/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=mockups/prototype.html",
+      "id": "anchor.file.mockups/prototype.html",
+      "kind": "file",
+      "name": "mockups/prototype.html",
+      "opens": "in the navigator",
+      "ref": "file:mockups/prototype.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=mockups/screens.json",
+      "id": "anchor.file.mockups/screens.json",
+      "kind": "file",
+      "name": "mockups/screens.json",
+      "opens": "in the navigator",
+      "ref": "file:mockups/screens.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=reader/index.html",
+      "id": "anchor.file.reader/index.html",
+      "kind": "file",
+      "name": "reader/index.html",
+      "opens": "in the navigator",
+      "ref": "file:reader/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/brief/index.json",
+      "id": "anchor.file.review/brief/index.json",
+      "kind": "file",
+      "name": "review/brief/index.json",
+      "opens": "in the navigator",
+      "ref": "file:review/brief/index.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/intent/claims.json",
+      "id": "anchor.file.review/intent/claims.json",
+      "kind": "file",
+      "name": "review/intent/claims.json",
+      "opens": "in the navigator",
+      "ref": "file:review/intent/claims.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/intent/components.json",
+      "id": "anchor.file.review/intent/components.json",
+      "kind": "file",
+      "name": "review/intent/components.json",
+      "opens": "in the navigator",
+      "ref": "file:review/intent/components.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/intent/deploy.json",
+      "id": "anchor.file.review/intent/deploy.json",
+      "kind": "file",
+      "name": "review/intent/deploy.json",
+      "opens": "in the navigator",
+      "ref": "file:review/intent/deploy.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/intent/flows.json",
+      "id": "anchor.file.review/intent/flows.json",
+      "kind": "file",
+      "name": "review/intent/flows.json",
+      "opens": "in the navigator",
+      "ref": "file:review/intent/flows.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/intent/stories.json",
+      "id": "anchor.file.review/intent/stories.json",
+      "kind": "file",
+      "name": "review/intent/stories.json",
+      "opens": "in the navigator",
+      "ref": "file:review/intent/stories.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/tools/brief.py",
+      "id": "anchor.file.review/tools/brief.py",
+      "kind": "file",
+      "name": "review/tools/brief.py",
+      "opens": "in the navigator",
+      "ref": "file:review/tools/brief.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/tools/claims.py",
+      "id": "anchor.file.review/tools/claims.py",
+      "kind": "file",
+      "name": "review/tools/claims.py",
+      "opens": "in the navigator",
+      "ref": "file:review/tools/claims.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/tools/freshness.py",
+      "id": "anchor.file.review/tools/freshness.py",
+      "kind": "file",
+      "name": "review/tools/freshness.py",
+      "opens": "in the navigator",
+      "ref": "file:review/tools/freshness.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/tools/schema.py",
+      "id": "anchor.file.review/tools/schema.py",
+      "kind": "file",
+      "name": "review/tools/schema.py",
+      "opens": "in the navigator",
+      "ref": "file:review/tools/schema.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/tools/validate_review.py",
+      "id": "anchor.file.review/tools/validate_review.py",
+      "kind": "file",
+      "name": "review/tools/validate_review.py",
+      "opens": "in the navigator",
+      "ref": "file:review/tools/validate_review.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/components/review-base/review-base.js",
+      "id": "anchor.file.review/ui/components/review-base/review-base.js",
+      "kind": "file",
+      "name": "review/ui/components/review-base/review-base.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/components/review-base/review-base.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/components/review-brief/review-brief.js",
+      "id": "anchor.file.review/ui/components/review-brief/review-brief.js",
+      "kind": "file",
+      "name": "review/ui/components/review-brief/review-brief.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/components/review-brief/review-brief.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/components/review-graph/review-graph.js",
+      "id": "anchor.file.review/ui/components/review-graph/review-graph.js",
+      "kind": "file",
+      "name": "review/ui/components/review-graph/review-graph.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/components/review-graph/review-graph.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/components/review-ladder/review-ladder.js",
+      "id": "anchor.file.review/ui/components/review-ladder/review-ladder.js",
+      "kind": "file",
+      "name": "review/ui/components/review-ladder/review-ladder.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/components/review-ladder/review-ladder.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/components/review-node/review-node.js",
+      "id": "anchor.file.review/ui/components/review-node/review-node.js",
+      "kind": "file",
+      "name": "review/ui/components/review-node/review-node.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/components/review-node/review-node.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/components/review-source/review-source.js",
+      "id": "anchor.file.review/ui/components/review-source/review-source.js",
+      "kind": "file",
+      "name": "review/ui/components/review-source/review-source.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/components/review-source/review-source.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/components/review-tree/review-tree.js",
+      "id": "anchor.file.review/ui/components/review-tree/review-tree.js",
+      "kind": "file",
+      "name": "review/ui/components/review-tree/review-tree.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/components/review-tree/review-tree.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/index.html",
+      "id": "anchor.file.review/ui/index.html",
+      "kind": "file",
+      "name": "review/ui/index.html",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=security/index.html",
+      "id": "anchor.file.security/index.html",
+      "kind": "file",
+      "name": "security/index.html",
+      "opens": "in the navigator",
+      "ref": "file:security/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=sharing/index.html",
+      "id": "anchor.file.sharing/index.html",
+      "kind": "file",
+      "name": "sharing/index.html",
+      "opens": "in the navigator",
+      "ref": "file:sharing/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=shipped/index.html",
+      "id": "anchor.file.shipped/index.html",
+      "kind": "file",
+      "name": "shipped/index.html",
+      "opens": "in the navigator",
+      "ref": "file:shipped/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=team/README.md",
+      "id": "anchor.file.team/README.md",
+      "kind": "file",
+      "name": "team/README.md",
+      "opens": "in the navigator",
+      "ref": "file:team/README.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=team/roles/build-agent.md",
+      "id": "anchor.file.team/roles/build-agent.md",
+      "kind": "file",
+      "name": "team/roles/build-agent.md",
+      "opens": "in the navigator",
+      "ref": "file:team/roles/build-agent.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=team/roles/project-lead.md",
+      "id": "anchor.file.team/roles/project-lead.md",
+      "kind": "file",
+      "name": "team/roles/project-lead.md",
+      "opens": "in the navigator",
+      "ref": "file:team/roles/project-lead.md"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_generators_check.py",
+      "id": "anchor.file.tests/build/test_generators_check.py",
+      "kind": "file",
+      "name": "tests/build/test_generators_check.py",
+      "opens": "in the navigator",
+      "ref": "file:tests/build/test_generators_check.py"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/blob/dev/tests/unit/validate.test.js",
+      "id": "anchor.file.tests/unit/validate.test.js",
+      "kind": "file",
+      "name": "tests/unit/validate.test.js",
+      "opens": "on GitHub (not served by the site)",
+      "ref": "file:tests/unit/validate.test.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tools/comms/drain.py",
+      "id": "anchor.file.tools/comms/drain.py",
+      "kind": "file",
+      "name": "tools/comms/drain.py",
+      "opens": "in the navigator",
+      "ref": "file:tools/comms/drain.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=vendor/MANIFEST.json",
+      "id": "anchor.file.vendor/MANIFEST.json",
+      "kind": "file",
+      "name": "vendor/MANIFEST.json",
+      "opens": "in the navigator",
+      "ref": "file:vendor/MANIFEST.json"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=vendor/sg-tokens.css",
+      "id": "anchor.file.vendor/sg-tokens.css",
+      "kind": "file",
+      "name": "vendor/sg-tokens.css",
+      "opens": "in the navigator",
+      "ref": "file:vendor/sg-tokens.css"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37251356486",
+      "id": "anchor.run.37251356486",
+      "kind": "run",
+      "name": "Actions run 37251356486 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37251356486"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37304901577",
+      "id": "anchor.run.37304901577",
+      "kind": "run",
+      "name": "Actions run 37304901577 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37304901577"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37311322324",
+      "id": "anchor.run.37311322324",
+      "kind": "run",
+      "name": "Actions run 37311322324 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37311322324"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37399422141",
+      "id": "anchor.run.37399422141",
+      "kind": "run",
+      "name": "Actions run 37399422141 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37399422141"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37400383939",
+      "id": "anchor.run.37400383939",
+      "kind": "run",
+      "name": "Actions run 37400383939 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37400383939"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37400775063",
+      "id": "anchor.run.37400775063",
+      "kind": "run",
+      "name": "Actions run 37400775063 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37400775063"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37444877607",
+      "id": "anchor.run.37444877607",
+      "kind": "run",
+      "name": "Actions run 37444877607 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37444877607"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37473142498",
+      "id": "anchor.run.37473142498",
+      "kind": "run",
+      "name": "Actions run 37473142498 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37473142498"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37510224402",
+      "id": "anchor.run.37510224402",
+      "kind": "run",
+      "name": "Actions run 37510224402 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37510224402"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=0",
+      "id": "anchor.section.0",
+      "kind": "section",
+      "name": "brief §0 How to use this brief",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:0"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=10",
+      "id": "anchor.section.10",
+      "kind": "section",
+      "name": "brief §10 Testing",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:10"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=12",
+      "id": "anchor.section.12",
+      "kind": "section",
+      "name": "brief §12 Open questions, and what not to do",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:12"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=2",
+      "id": "anchor.section.2",
+      "kind": "section",
+      "name": "brief §2 Design documents (copy into `docs/design/`)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:2"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=3.3",
+      "id": "anchor.section.3.3",
+      "kind": "section",
+      "name": "brief §3.3 Origins and the passkey scope (the single most important decision)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:3.3"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=4.2",
+      "id": "anchor.section.4.2",
+      "kind": "section",
+      "name": "brief §4.2 Per-project resources (what Terraform creates)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:4.2"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=4.3",
+      "id": "anchor.section.4.3",
+      "kind": "section",
+      "name": "brief §4.3 Bootstrap (done once, by a human, documented in `docs/ops/bootstrap.md`)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:4.3"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=5",
+      "id": "anchor.section.5",
+      "kind": "section",
+      "name": "brief §5 Browser-side environment configuration",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:5"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=6.1",
+      "id": "anchor.section.6.1",
+      "kind": "section",
+      "name": "brief §6.1 Structure",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:6.1"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=6.2",
+      "id": "anchor.section.6.2",
+      "kind": "section",
+      "name": "brief §6.2 App pages (`/app/`)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:6.2"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=6.3",
+      "id": "anchor.section.6.3",
+      "kind": "section",
+      "name": "brief §6.3 Admin pages (`/admin/`)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:6.3"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=6.4",
+      "id": "anchor.section.6.4",
+      "kind": "section",
+      "name": "brief §6.4 Test and probe pages (`/tests/`)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:6.4"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=6.5",
+      "id": "anchor.section.6.5",
+      "kind": "section",
+      "name": "brief §6.5 The content pages: what they say",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:6.5"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=7.3",
+      "id": "anchor.section.7.3",
+      "kind": "section",
+      "name": "brief §7.3 Dependencies: vendored, pinned, hashed",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:7.3"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=7.4",
+      "id": "anchor.section.7.4",
+      "kind": "section",
+      "name": "brief §7.4 Documentation rules",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:7.4"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=8.2",
+      "id": "anchor.section.8.2",
+      "kind": "section",
+      "name": "brief §8.2 Key hierarchy",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:8.2"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=8.3",
+      "id": "anchor.section.8.3",
+      "kind": "section",
+      "name": "brief §8.3 `keyring.json`",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:8.3"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=8.4",
+      "id": "anchor.section.8.4",
+      "kind": "section",
+      "name": "brief §8.4 Entry size and documents",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:8.4"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=8.5",
+      "id": "anchor.section.8.5",
+      "kind": "section",
+      "name": "brief §8.5 Concurrency",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:8.5"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=8.6",
+      "id": "anchor.section.8.6",
+      "kind": "section",
+      "name": "brief §8.6 Security Rules (`infra/rules/storage.rules`)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:8.6"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=8.7",
+      "id": "anchor.section.8.7",
+      "kind": "section",
+      "name": "brief §8.7 Passkey details",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:8.7"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=9.1",
+      "id": "anchor.section.9.1",
+      "kind": "section",
+      "name": "brief §9.1 `deploy-pages.yml` — validate → tag-release → deploy (the house pipeline)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:9.1"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=9.2",
+      "id": "anchor.section.9.2",
+      "kind": "section",
+      "name": "brief §9.2 `infra.yml` — Terraform per environment",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:9.2"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=9.3",
+      "id": "anchor.section.9.3",
+      "kind": "section",
+      "name": "brief §9.3 The gate: `admin/build/validate.js` (no dependencies)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:9.3"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#section=9.5",
+      "id": "anchor.section.9.5",
+      "kind": "section",
+      "name": "brief §9.5 Repository protections (the boundary, section 3.4)",
+      "opens": "in the navigator (review-brief)",
+      "ref": "section:9.5"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.0",
+      "id": "anchor.tag.v0.1.0",
+      "kind": "tag",
+      "name": "tag v0.1.0",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.0"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.1",
+      "id": "anchor.tag.v0.1.1",
+      "kind": "tag",
+      "name": "tag v0.1.1",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.1"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.2",
+      "id": "anchor.tag.v0.1.2",
+      "kind": "tag",
+      "name": "tag v0.1.2",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.2"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.3",
+      "id": "anchor.tag.v0.1.3",
+      "kind": "tag",
+      "name": "tag v0.1.3",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.3"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.4",
+      "id": "anchor.tag.v0.1.4",
+      "kind": "tag",
+      "name": "tag v0.1.4",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.4"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.5",
+      "id": "anchor.tag.v0.1.5",
+      "kind": "tag",
+      "name": "tag v0.1.5",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.5"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.6",
+      "id": "anchor.tag.v0.1.6",
+      "kind": "tag",
+      "name": "tag v0.1.6",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.6"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.7",
+      "id": "anchor.tag.v0.1.7",
+      "kind": "tag",
+      "name": "tag v0.1.7",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.7"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.8",
+      "id": "anchor.tag.v0.1.8",
+      "kind": "tag",
+      "name": "tag v0.1.8",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.8"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.9",
+      "id": "anchor.tag.v0.1.9",
+      "kind": "tag",
+      "name": "tag v0.1.9",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.9"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_chrome_in_every_page.py",
+      "id": "anchor.test.tests/build/test_chrome_in_every_page.py",
+      "kind": "test",
+      "name": "tests/build/test_chrome_in_every_page.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_chrome_in_every_page.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_claims.py",
+      "id": "anchor.test.tests/build/test_claims.py",
+      "kind": "test",
+      "name": "tests/build/test_claims.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_claims.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_features_schema.py",
+      "id": "anchor.test.tests/build/test_features_schema.py",
+      "kind": "test",
+      "name": "tests/build/test_features_schema.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_features_schema.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_generators_check.py",
+      "id": "anchor.test.tests/build/test_generators_check.py",
+      "kind": "test",
+      "name": "tests/build/test_generators_check.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_generators_check.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_md_to_html.py",
+      "id": "anchor.test.tests/build/test_md_to_html.py",
+      "kind": "test",
+      "name": "tests/build/test_md_to_html.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_md_to_html.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_mockups.py",
+      "id": "anchor.test.tests/build/test_mockups.py",
+      "kind": "test",
+      "name": "tests/build/test_mockups.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_mockups.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_reader.py",
+      "id": "anchor.test.tests/build/test_reader.py",
+      "kind": "test",
+      "name": "tests/build/test_reader.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_reader.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_review_folder.py",
+      "id": "anchor.test.tests/build/test_review_folder.py",
+      "kind": "test",
+      "name": "tests/build/test_review_folder.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_review_folder.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_review_ui.py",
+      "id": "anchor.test.tests/build/test_review_ui.py",
+      "kind": "test",
+      "name": "tests/build/test_review_ui.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_review_ui.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_themes.py",
+      "id": "anchor.test.tests/build/test_themes.py",
+      "kind": "test",
+      "name": "tests/build/test_themes.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_themes.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_twins_exist.py",
+      "id": "anchor.test.tests/build/test_twins_exist.py",
+      "kind": "test",
+      "name": "tests/build/test_twins_exist.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_twins_exist.py"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/blob/dev/tests/unit/validate.test.js",
+      "id": "anchor.test.tests/unit/validate.test.js",
+      "kind": "test",
+      "name": "tests/unit/validate.test.js",
+      "opens": "on GitHub (not served by the site)",
+      "ref": "test:tests/unit/validate.test.js"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/",
+      "id": "anchor.url.https://secrets.sgit.ai/",
+      "kind": "url",
+      "name": "secrets.sgit.ai/",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/admin/build/version.txt",
+      "id": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "kind": "url",
+      "name": "secrets.sgit.ai/admin/build/version.txt",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/admin/build/version.txt"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/account.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/account.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/account.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/account.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/admin-checklist.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/admin-checklist.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/admin-checklist.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/admin-checklist.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/devices.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/devices.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/devices.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/devices.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/environment.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/environment.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/environment.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/environment.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/matrix.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/matrix.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/matrix.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/matrix.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/setup.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/setup.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/setup.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/setup.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/sign-in.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/sign-in.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/sign-in.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/sign-in.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/unlock.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/unlock.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/unlock.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/unlock.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/mockups/vault.html",
+      "id": "anchor.url.https://secrets.sgit.ai/mockups/vault.html",
+      "kind": "url",
+      "name": "secrets.sgit.ai/mockups/vault.html",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/mockups/vault.html"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/review/ui/",
+      "id": "anchor.url.https://secrets.sgit.ai/review/ui/",
+      "kind": "url",
+      "name": "secrets.sgit.ai/review/ui/",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/review/ui/"
+    }
+  ],
+  "claims": [
+    {
+      "area": "pipeline",
+      "feature": "pipeline.version-source",
+      "id": "claim.pipeline.version-source",
+      "name": "One version in admin/build/version.txt, repeated in every badge, twin, index and config",
+      "notes": "Check 1 of the gate fails on any disagreement.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/version.txt"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.chrome",
+      "id": "claim.pipeline.chrome",
+      "name": "Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition",
+      "notes": "gen_chrome.py --check is part of the gate.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/chrome.py"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.twins",
+      "id": "claim.pipeline.twins",
+      "name": "Markdown twin of every HTML page, links pointing at markdown",
+      "notes": "index.html has index.md beside it; the twin carries the site version.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/gen_twins.py"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.llms",
+      "id": "claim.pipeline.llms",
+      "name": "llms.txt, llms-full.txt and sitemap.xml generated on every release",
+      "notes": "llms-full.txt concatenates every twin and every design document.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/gen_llms.py"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.reality",
+      "id": "claim.pipeline.reality",
+      "name": "docs/reality.md and the status tables generated from data/features.json",
+      "notes": "If the reality document does not list it, it does not exist.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/gen_features.py"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.gate",
+      "id": "claim.pipeline.gate",
+      "name": "The eight-check release gate, no dependencies",
+      "notes": "Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/validate.js"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.gate-local",
+      "id": "claim.pipeline.gate-local",
+      "name": "The same gate locally and in CI, one command",
+      "notes": "The CI validate job runs gate.py; a release that fails locally fails the same way in CI.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/gate.py"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.tag-release",
+      "id": "claim.pipeline.tag-release",
+      "name": "Every push to dev is a release: version.txt and the commit subject agree, CI tags it",
+      "notes": "Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/tag_release.py"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.deploy",
+      "id": "claim.pipeline.deploy",
+      "name": "Deploy to GitHub Pages from the validated tree",
+      "notes": "Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": ".github/workflows/deploy-pages.yml"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.verify-live",
+      "id": "claim.pipeline.verify-live",
+      "name": "verify-live: the run is red until the live site serves the released version",
+      "notes": "Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/verify_live.py"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.vendor",
+      "id": "claim.pipeline.vendor",
+      "name": "Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin",
+      "notes": "Check 5 of the gate. Today the only vendored file is the family design tokens.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "vendor/MANIFEST.json"
+    },
+    {
+      "area": "site",
+      "feature": "site.live-domain",
+      "id": "claim.site.live-domain",
+      "name": "secrets.sgit.ai served by GitHub Pages over HTTPS",
+      "notes": "verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "CNAME, docs/ops/dns.md"
+    },
+    {
+      "area": "site",
+      "feature": "site.content-pages",
+      "id": "claim.site.content-pages",
+      "name": "Content pages: how it works, security, keyring spec, sharing, environments",
+      "notes": "Every page opens with a status line generated from this file and describes only designs in the future tense.",
+      "since": "0.1.1",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "how-it-works/, security/, keyring/, sharing/, environments/"
+    },
+    {
+      "area": "site",
+      "feature": "site.shipped-page",
+      "id": "claim.site.shipped-page",
+      "name": "/shipped/ generated from this file, one table per status, beside docs/reality.md",
+      "notes": "The same generator writes both, so the page and the reality document cannot disagree.",
+      "since": "0.1.1",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "shipped/index.html"
+    },
+    {
+      "area": "site",
+      "feature": "site.design-docs",
+      "id": "claim.site.design-docs",
+      "name": "The five design documents published verbatim",
+      "notes": "The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "docs/design/"
+    },
+    {
+      "area": "site",
+      "feature": "site.docs-rendered",
+      "id": "claim.site.docs-rendered",
+      "name": "Every markdown document under docs/ rendered to HTML on each release, with index pages",
+      "notes": "Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate.",
+      "since": "0.1.1",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/gen_docs.py, admin/build/md_to_html.py"
+    },
+    {
+      "area": "site",
+      "feature": "site.family-chrome",
+      "id": "claim.site.family-chrome",
+      "name": "The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs",
+      "notes": "The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link.",
+      "since": "0.1.1",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/chrome.py, assets/nav.js"
+    },
+    {
+      "area": "admin",
+      "feature": "admin.comms",
+      "id": "claim.admin.comms",
+      "name": "Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json",
+      "notes": "gen_versions.py renders the step tracker; a done step must name a release that exists.",
+      "since": "0.1.1",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/comms.html"
+    },
+    {
+      "area": "review",
+      "feature": "review.skeleton",
+      "id": "claim.review.skeleton",
+      "name": "review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository",
+      "notes": "Step 0 of the review brief. Check 9 of the gate.",
+      "since": "0.1.3",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "review/tools/"
+    },
+    {
+      "area": "review",
+      "feature": "review.intent",
+      "id": "claim.review.intent",
+      "name": "review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead",
+      "notes": "Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7).",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "review/intent/"
+    },
+    {
+      "area": "review",
+      "feature": "review.graph-view",
+      "id": "claim.review.graph-view",
+      "name": "The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step",
+      "notes": "Follows the selection in the navigator; given nodes=\"id,id\" it draws what a page names, which is how the reader's column embeds it.",
+      "since": "0.1.7",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "review/ui/components/review-graph/, review-ladder/"
+    },
+    {
+      "area": "review",
+      "feature": "review.claims",
+      "id": "claim.review.claims",
+      "name": "The claims layer: every claim on /shipped/ as a node with typed evidence down to an anchor (a file, a test, a section of the brief, a document, a URL, a commit, a tag, a CI run); every status chip on the site a link into it",
+      "notes": "Strict: a shipped claim with no anchor that resolves fails the build. Releases carry their commit, tag and Actions run; release.py backfills the newest at the next release.",
+      "since": "0.1.9",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "review/tools/claims.py, review/intent/claims.json, data/features.json"
+    },
+    {
+      "area": "review",
+      "feature": "review.brief-sections",
+      "id": "claim.review.brief-sections",
+      "name": "The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it",
+      "notes": "Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current.",
+      "since": "0.1.9",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "review/tools/brief.py, review/brief/, review/ui/components/review-brief/"
+    },
+    {
+      "area": "review",
+      "feature": "review.source-view",
+      "id": "claim.review.source-view",
+      "name": "Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving",
+      "notes": "Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead.",
+      "since": "0.1.9",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "review/ui/components/review-source/"
+    },
+    {
+      "area": "review",
+      "feature": "review.navigator-walk",
+      "id": "claim.review.navigator-walk",
+      "name": "The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief",
+      "notes": "review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash.",
+      "since": "0.1.4",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "review/ui/"
+    },
+    {
+      "area": "review",
+      "feature": "review.navigator",
+      "id": "claim.review.navigator",
+      "name": "The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search",
+      "notes": "Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "review/ui/"
+    },
+    {
+      "area": "review",
+      "feature": "review.derived",
+      "id": "claim.review.derived",
+      "name": "graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model",
+      "notes": "Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "review/tools/derive.py, derive_js.py"
+    },
+    {
+      "area": "review",
+      "feature": "review.changes",
+      "id": "claim.review.changes",
+      "name": "Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence",
+      "notes": "Step 4; the Kind: trailer carries the claim (R4).",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "review/tools/change.py"
+    },
+    {
+      "area": "review",
+      "feature": "review.self",
+      "id": "claim.review.self",
+      "name": "review/self/: the same folder for the tools and the navigator, both sets green before a release",
+      "notes": "Step 2.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "review/self/"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.release-script",
+      "id": "claim.pipeline.release-script",
+      "name": "One release script: bump, build, gate, commit with a Kind: trailer, push, verify live",
+      "notes": "The family's release discipline in one command; a clean push is not a release.",
+      "since": "0.1.3",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/release.py"
+    },
+    {
+      "area": "pipeline",
+      "feature": "pipeline.gate-extras",
+      "id": "claim.pipeline.gate-extras",
+      "name": "The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate",
+      "notes": "From section 4 of the repository guidance; the advisory never fails the build.",
+      "since": "0.1.3",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/build/validate.js"
+    },
+    {
+      "area": "site",
+      "feature": "site.team-roles",
+      "id": "claim.site.team-roles",
+      "name": "Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page",
+      "notes": "Two roles fill every seat: the project lead and the build agent.",
+      "since": "0.1.3",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "team/"
+    },
+    {
+      "area": "site",
+      "feature": "site.participant",
+      "id": "claim.site.participant",
+      "name": "Participant disclosure: who publishes this site and what they are building",
+      "notes": "Linked from the footer.",
+      "since": "0.1.3",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "about/participant.html"
+    },
+    {
+      "area": "site",
+      "feature": "site.themes",
+      "id": "claim.site.themes",
+      "name": "Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css",
+      "notes": "No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour.",
+      "since": "0.1.6",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "data/themes.json, assets/themes.css, assets/theme.js"
+    },
+    {
+      "area": "site",
+      "feature": "site.reader-column",
+      "id": "claim.site.reader-column",
+      "name": "The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names",
+      "notes": "Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret.",
+      "since": "0.1.7",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "components/reader-panel/, reader-log/"
+    },
+    {
+      "area": "site",
+      "feature": "site.reader-chat",
+      "id": "claim.site.reader-chat",
+      "name": "A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key",
+      "notes": "The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed.",
+      "since": "0.1.7",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "components/reader-chat/, reader/index.html, data/search-index.json"
+    },
+    {
+      "area": "site",
+      "feature": "site.agent-contact",
+      "id": "claim.site.agent-contact",
+      "name": "The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it",
+      "notes": "The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": ".well-known/sgit-agents.json, tools/comms/"
+    },
+    {
+      "area": "site",
+      "feature": "site.mockups",
+      "id": "claim.site.mockups",
+      "name": "Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises",
+      "notes": "Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship.",
+      "since": "0.1.5",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "mockups/, components/proto-app/, proto-base/"
+    },
+    {
+      "area": "site",
+      "feature": "site.mockups-variants",
+      "id": "claim.site.mockups-variants",
+      "name": "Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log",
+      "notes": "The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator.",
+      "since": "0.1.8",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "mockups/screens.json, components/proto-column/"
+    },
+    {
+      "area": "site",
+      "feature": "site.repo-protections",
+      "id": "claim.site.repo-protections",
+      "name": "Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/",
+      "notes": "Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "docs/ops/branch-protection.md"
+    },
+    {
+      "area": "site",
+      "feature": "site.corrections",
+      "id": "claim.site.corrections",
+      "name": "brief-corrections.md: what the brief got wrong, dated, beside it",
+      "notes": "Appended to as the build finds out.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "docs/design/brief-corrections.md"
+    },
+    {
+      "area": "site",
+      "feature": "site.needs",
+      "id": "claim.site.needs",
+      "name": "docs/ops/needs.md: exactly what only a human can do",
+      "notes": "DNS, Pages, branch protection, GCP bootstrap, OAuth client secret.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "docs/ops/needs.md"
+    },
+    {
+      "area": "infra",
+      "feature": "infra.bootstrap",
+      "id": "claim.infra.bootstrap",
+      "name": "Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool",
+      "notes": "Step 3. Run once by a human; idempotent; --dry-run.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "infra/bootstrap/bootstrap.sh"
+    },
+    {
+      "area": "infra",
+      "feature": "infra.terraform",
+      "id": "claim.infra.terraform",
+      "name": "Terraform module secrets-env and the dev environment root",
+      "notes": "Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "infra/terraform/"
+    },
+    {
+      "area": "infra",
+      "feature": "infra.workflow",
+      "id": "claim.infra.workflow",
+      "name": "infra.yml: plan on PR, apply on dispatch and on push to dev for dev",
+      "notes": "Step 3. Workload Identity Federation, no JSON keys.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": ".github/workflows/infra.yml"
+    },
+    {
+      "area": "infra",
+      "feature": "infra.rules",
+      "id": "claim.infra.rules",
+      "name": "Storage Security Rules deployed per environment",
+      "notes": "The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "infra/rules/storage.rules"
+    },
+    {
+      "area": "infra",
+      "feature": "infra.environments-config",
+      "id": "claim.infra.environments-config",
+      "name": "config/environments.json with real dev values from Terraform outputs",
+      "notes": "Step 3. Today every environment is a placeholder with _source null.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "config/environments.json"
+    },
+    {
+      "area": "app",
+      "feature": "app.sign-in",
+      "id": "claim.app.sign-in",
+      "name": "Sign in and out with Google and email/password against the chosen environment",
+      "notes": "Step 3. Popup sign-in by default; vendored Firebase SDK.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "app/index.html"
+    },
+    {
+      "area": "app",
+      "feature": "app.environment-page",
+      "id": "claim.app.environment-page",
+      "name": "Environment page: pick a built-in environment, enter a custom one, import, export, reset",
+      "notes": "Step 3. The active environment is shown in the header at all times.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "app/environment.html"
+    },
+    {
+      "area": "app",
+      "feature": "app.prf-unlock",
+      "id": "claim.app.prf-unlock",
+      "name": "Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai",
+      "notes": "Step 4. Not before the dev project exists and the probe pages are green.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "app/setup.html, app/unlock.html"
+    },
+    {
+      "area": "app",
+      "feature": "app.keyring-v1",
+      "id": "claim.app.keyring-v1",
+      "name": "Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests",
+      "notes": "Step 4. Published at /keyring/ as a specification.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "section 8 of the brief"
+    },
+    {
+      "area": "app",
+      "feature": "app.recovery-code",
+      "id": "claim.app.recovery-code",
+      "name": "Recovery code: 26 characters base32, 128 bits, shown once",
+      "notes": "Step 4. Lose every passkey and the code and the data is gone; the site will say so.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "app/setup.html"
+    },
+    {
+      "area": "app",
+      "feature": "app.entries",
+      "id": "claim.app.entries",
+      "name": "Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers",
+      "notes": "Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "app/vault.html, app/entry.html"
+    },
+    {
+      "area": "app",
+      "feature": "app.concurrency",
+      "id": "claim.app.concurrency",
+      "name": "Optimistic concurrency on keyring writes with a three-way merge",
+      "notes": "Step 5. rev in the AAD so a stale body fails to decrypt.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "section 8.5 of the brief"
+    },
+    {
+      "area": "app",
+      "feature": "app.devices",
+      "id": "claim.app.devices",
+      "name": "Devices page: add and remove passkeys, regenerate the recovery code",
+      "notes": "Step 6.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "app/devices.html"
+    },
+    {
+      "area": "app",
+      "feature": "app.account",
+      "id": "claim.app.account",
+      "name": "Account page: export and import the encrypted keyring, sign out, wipe memory",
+      "notes": "Step 6.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "app/account.html"
+    },
+    {
+      "area": "app",
+      "feature": "app.sharing-data-model",
+      "id": "claim.app.sharing-data-model",
+      "name": "Key pair per user generated at first run; public bundle written to directory/",
+      "notes": "Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "section 8.3 of the brief"
+    },
+    {
+      "area": "app",
+      "feature": "app.sharing-ui",
+      "id": "claim.app.sharing-ui",
+      "name": "Sharing an entry with another user through their inbox",
+      "notes": "Phase 2. The data model ships first so it is not rewritten later.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "absent",
+      "where": "/sharing/ (step 2 describes it)"
+    },
+    {
+      "area": "app",
+      "feature": "app.document-kind",
+      "id": "claim.app.document-kind",
+      "name": "A document kind in the keyring",
+      "notes": "Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "absent",
+      "where": "section 8.4 of the brief"
+    },
+    {
+      "area": "app",
+      "feature": "app.browser-extension",
+      "id": "claim.app.browser-extension",
+      "name": "Browser extension or autofill",
+      "notes": "A later site or a later version.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "absent",
+      "where": "section 12 of the brief"
+    },
+    {
+      "area": "app",
+      "feature": "app.agent-api",
+      "id": "claim.app.agent-api",
+      "name": "An API for agents",
+      "notes": "A later version.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "absent",
+      "where": "section 12 of the brief"
+    },
+    {
+      "area": "app",
+      "feature": "app.server-side",
+      "id": "claim.app.server-side",
+      "name": "Any server-side code: Cloud Functions, proxies, a small API",
+      "notes": "Forbidden by design. A need for one is a proposal in brief-corrections.md, not code.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "absent",
+      "where": "everywhere"
+    },
+    {
+      "area": "admin",
+      "feature": "admin.oauth",
+      "id": "claim.admin.oauth",
+      "name": "Admin sign-in with the visitor's own Google account, token in memory only",
+      "notes": "Step 7. Implicit flow to verify first; PKCE fallback.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "admin/oauth.js"
+    },
+    {
+      "area": "admin",
+      "feature": "admin.setup-checklist",
+      "id": "claim.admin.setup-checklist",
+      "name": "Setup checklist: every per-project resource as a row, with Fix where fixable client-side",
+      "notes": "Step 3 read-only, step 7 with fixes.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "admin/setup-checklist.html"
+    },
+    {
+      "area": "admin",
+      "feature": "admin.pages",
+      "id": "claim.admin.pages",
+      "name": "Auth config, storage, rules diff and deploy, users, environment export",
+      "notes": "Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "admin/*.html"
+    },
+    {
+      "area": "admin",
+      "feature": "admin.versions",
+      "id": "claim.admin.versions",
+      "name": "Release history page generated from data/versions.json",
+      "notes": "One row per release; the newest row must equal version.txt.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "admin/versions.html"
+    },
+    {
+      "area": "tests",
+      "feature": "tests.probe-pages",
+      "id": "claim.tests.probe-pages",
+      "name": "Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix",
+      "notes": "Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "tests/*.html"
+    },
+    {
+      "area": "tests",
+      "feature": "tests.unit",
+      "id": "claim.tests.unit",
+      "name": "Unit tests under node --test, real WebCrypto, no mocks",
+      "notes": "At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "tests/unit/"
+    },
+    {
+      "area": "tests",
+      "feature": "tests.build",
+      "id": "claim.tests.build",
+      "name": "Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema",
+      "notes": "pytest, TestCase classes, no mocks.",
+      "since": "0.1.0",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "tests/build/"
+    },
+    {
+      "area": "tests",
+      "feature": "tests.e2e",
+      "id": "claim.tests.e2e",
+      "name": "Playwright end to end against the real dev project with a virtual authenticator",
+      "notes": "Whether the virtual authenticator does PRF is an open question.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "tests/e2e/"
+    },
+    {
+      "area": "tests",
+      "feature": "tests.acceptance",
+      "id": "claim.tests.acceptance",
+      "name": "Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field",
+      "notes": "Before 1.0. The write-up is published whatever the result.",
+      "since": null,
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "proposed",
+      "where": "docs/acceptance.md"
+    }
+  ],
+  "edges": [
+    {
+      "from": "claim.pipeline.version-source",
+      "to": "release",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.version-source",
+      "to": "release.version-agreement",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.version-source",
+      "to": "anchor.file.admin/build/version.txt",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.version-source",
+      "to": "anchor.file.admin/build/chrome.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.version-source",
+      "to": "anchor.file.admin/build/validate.js@check-1",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.pipeline.version-source",
+      "to": "anchor.section.9.1",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.version-source",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.chrome",
+      "to": "site.chrome",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.chrome",
+      "to": "anchor.file.admin/build/chrome.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.chrome",
+      "to": "anchor.file.admin/build/gen_chrome.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.chrome",
+      "to": "anchor.test.tests/build/test_chrome_in_every_page.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.pipeline.chrome",
+      "to": "anchor.section.6.1",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.chrome",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.twins",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.twins",
+      "to": "anchor.file.admin/build/gen_twins.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.twins",
+      "to": "anchor.file.admin/build/html_to_md.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.twins",
+      "to": "anchor.test.tests/build/test_twins_exist.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.pipeline.twins",
+      "to": "anchor.section.7.4",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.twins",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.llms",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.llms",
+      "to": "anchor.file.admin/build/gen_llms.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.llms",
+      "to": "anchor.file.llms.txt",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.llms",
+      "to": "anchor.test.tests/build/test_generators_check.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.pipeline.llms",
+      "to": "anchor.section.7.4",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.llms",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.reality",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.reality",
+      "to": "anchor.file.admin/build/gen_features.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.reality",
+      "to": "anchor.file.data/features.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.reality",
+      "to": "anchor.file.docs/reality.md",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.reality",
+      "to": "anchor.test.tests/build/test_features_schema.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.pipeline.reality",
+      "to": "anchor.section.6.5",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.reality",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.gate",
+      "to": "site.gate",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.gate",
+      "to": "release.gate",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.gate",
+      "to": "anchor.file.admin/build/validate.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.gate",
+      "to": "anchor.test.tests/unit/validate.test.js",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.pipeline.gate",
+      "to": "anchor.section.9.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.gate",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.gate-local",
+      "to": "site.gate",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.gate-local",
+      "to": "anchor.file.admin/build/gate.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.gate-local",
+      "to": "anchor.file..github/workflows/deploy-pages.yml",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.gate-local",
+      "to": "anchor.section.9.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.gate-local",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.tag-release",
+      "to": "pipe.deploy-pages.tag-release",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.tag-release",
+      "to": "release.tag",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.tag-release",
+      "to": "anchor.file.admin/build/tag_release.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.tag-release",
+      "to": "anchor.file..github/workflows/deploy-pages.yml",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.tag-release",
+      "to": "anchor.section.9.1",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.tag-release",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.deploy",
+      "to": "pipe.deploy-pages.deploy",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.deploy",
+      "to": "anchor.file..github/workflows/deploy-pages.yml",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.deploy",
+      "to": "anchor.file.admin/build/assemble_site.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.deploy",
+      "to": "anchor.section.9.1",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.deploy",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.verify-live",
+      "to": "pipe.deploy-pages.verify-live",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.verify-live",
+      "to": "release.deploy-verify",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.verify-live",
+      "to": "anchor.file.admin/build/verify_live.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.verify-live",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.pipeline.verify-live",
+      "to": "anchor.section.9.1",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.verify-live",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.vendor",
+      "to": "site.vendor",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.vendor",
+      "to": "anchor.file.vendor/MANIFEST.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.vendor",
+      "to": "anchor.file.vendor/sg-tokens.css",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.vendor",
+      "to": "anchor.file.admin/build/validate.js@check-5",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.pipeline.vendor",
+      "to": "anchor.section.7.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.vendor",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.live-domain",
+      "to": "release",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.live-domain",
+      "to": "anchor.file.CNAME",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.live-domain",
+      "to": "anchor.doc.docs/ops/dns.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.live-domain",
+      "to": "anchor.url.https://secrets.sgit.ai/",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.site.live-domain",
+      "to": "anchor.section.6.1",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.live-domain",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.content-pages",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.content-pages",
+      "to": "anchor.file.how-it-works/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.content-pages",
+      "to": "anchor.file.security/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.content-pages",
+      "to": "anchor.file.keyring/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.content-pages",
+      "to": "anchor.file.sharing/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.content-pages",
+      "to": "anchor.file.environments/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.content-pages",
+      "to": "anchor.section.6.5",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.content-pages",
+      "to": "release.0.1.1",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.shipped-page",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.shipped-page",
+      "to": "anchor.file.shipped/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.shipped-page",
+      "to": "anchor.file.admin/build/gen_features.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.shipped-page",
+      "to": "anchor.section.6.5",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.shipped-page",
+      "to": "release.0.1.1",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.design-docs",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.design-docs",
+      "to": "anchor.file.docs/design/secrets-sgit-ai__mvp-build-brief.md",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.design-docs",
+      "to": "anchor.section.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.design-docs",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.docs-rendered",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.docs-rendered",
+      "to": "anchor.file.admin/build/gen_docs.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.docs-rendered",
+      "to": "anchor.file.admin/build/md_to_html.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.docs-rendered",
+      "to": "anchor.test.tests/build/test_md_to_html.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.docs-rendered",
+      "to": "anchor.doc.docs/design/brief-corrections.md@c16-the-admin-section-and-the-markdown-viewer-follow-the-siblings",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.docs-rendered",
+      "to": "release.0.1.1",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.family-chrome",
+      "to": "site.chrome",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.family-chrome",
+      "to": "anchor.file.admin/build/chrome.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.family-chrome",
+      "to": "anchor.file.assets/nav.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.family-chrome",
+      "to": "anchor.file.assets/site.css",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.family-chrome",
+      "to": "anchor.test.tests/build/test_chrome_in_every_page.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.family-chrome",
+      "to": "release.0.1.1",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.admin.comms",
+      "to": "site.admin",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.admin.comms",
+      "to": "anchor.file.admin/comms.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.admin.comms",
+      "to": "anchor.file.data/steps.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.admin.comms",
+      "to": "anchor.file.admin/build/gen_versions.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.admin.comms",
+      "to": "release.0.1.1",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.skeleton",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.skeleton",
+      "to": "anchor.file.review/tools/validate_review.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.skeleton",
+      "to": "anchor.file.review/tools/freshness.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.skeleton",
+      "to": "anchor.file.review/tools/schema.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.skeleton",
+      "to": "anchor.test.tests/build/test_review_folder.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.skeleton",
+      "to": "anchor.doc.review/BRIEF-CORRECTIONS.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.skeleton",
+      "to": "release.0.1.3",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.intent",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.intent",
+      "to": "anchor.file.review/intent/stories.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.intent",
+      "to": "anchor.file.review/intent/flows.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.intent",
+      "to": "anchor.file.review/intent/components.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.intent",
+      "to": "anchor.file.review/intent/deploy.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.intent",
+      "to": "anchor.test.tests/build/test_review_folder.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.graph-view",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.graph-view",
+      "to": "anchor.file.review/ui/components/review-graph/review-graph.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.graph-view",
+      "to": "anchor.file.review/ui/components/review-ladder/review-ladder.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.graph-view",
+      "to": "anchor.test.tests/build/test_review_ui.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.graph-view",
+      "to": "release.0.1.7",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.claims",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.claims",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.claims",
+      "to": "anchor.file.review/tools/claims.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.claims",
+      "to": "anchor.file.review/intent/claims.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.claims",
+      "to": "anchor.file.data/features.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.claims",
+      "to": "anchor.test.tests/build/test_claims.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.claims",
+      "to": "anchor.doc.docs/design/brief-corrections.md@c23-everything-links-to-everything-claims-anchors-and-the-brief-as-sections",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.claims",
+      "to": "release.0.1.9",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.brief-sections",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.brief-sections",
+      "to": "anchor.file.review/tools/brief.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.brief-sections",
+      "to": "anchor.file.review/brief/index.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.brief-sections",
+      "to": "anchor.file.review/ui/components/review-brief/review-brief.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.brief-sections",
+      "to": "anchor.test.tests/build/test_claims.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.brief-sections",
+      "to": "anchor.section.0",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.brief-sections",
+      "to": "release.0.1.9",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.source-view",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.source-view",
+      "to": "anchor.file.review/ui/components/review-source/review-source.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.source-view",
+      "to": "anchor.test.tests/build/test_review_ui.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.source-view",
+      "to": "anchor.doc.review/ui/README.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.source-view",
+      "to": "release.0.1.9",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.navigator-walk",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.navigator-walk",
+      "to": "anchor.file.review/ui/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.navigator-walk",
+      "to": "anchor.file.review/ui/components/review-base/review-base.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.navigator-walk",
+      "to": "anchor.file.review/ui/components/review-tree/review-tree.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.navigator-walk",
+      "to": "anchor.file.review/ui/components/review-node/review-node.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.navigator-walk",
+      "to": "anchor.test.tests/build/test_review_ui.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.navigator-walk",
+      "to": "anchor.url.https://secrets.sgit.ai/review/ui/",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.review.navigator-walk",
+      "to": "release.0.1.4",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.navigator",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.navigator",
+      "to": "anchor.doc.review/ui/README.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.derived",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.derived",
+      "to": "anchor.doc.review/README.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.changes",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.changes",
+      "to": "anchor.doc.review/README.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.self",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.self",
+      "to": "anchor.doc.review/README.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.release-script",
+      "to": "release",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.release-script",
+      "to": "anchor.file.admin/build/release.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.release-script",
+      "to": "anchor.doc.docs/ops/release.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.pipeline.release-script",
+      "to": "release.0.1.3",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.pipeline.gate-extras",
+      "to": "site.gate",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.pipeline.gate-extras",
+      "to": "anchor.file.admin/build/validate.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.pipeline.gate-extras",
+      "to": "anchor.test.tests/unit/validate.test.js",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.pipeline.gate-extras",
+      "to": "release.0.1.3",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.team-roles",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.team-roles",
+      "to": "anchor.file.team/README.md",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.team-roles",
+      "to": "anchor.file.team/roles/project-lead.md",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.team-roles",
+      "to": "anchor.file.team/roles/build-agent.md",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.team-roles",
+      "to": "release.0.1.3",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.participant",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.participant",
+      "to": "anchor.file.about/participant.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.participant",
+      "to": "release.0.1.3",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.themes",
+      "to": "site.chrome",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.themes",
+      "to": "anchor.file.data/themes.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.themes",
+      "to": "anchor.file.assets/themes.css",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.themes",
+      "to": "anchor.file.assets/theme.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.themes",
+      "to": "anchor.test.tests/build/test_themes.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.themes",
+      "to": "anchor.doc.docs/design/brief-corrections.md@c18-the-site-has-four-themes-and-the-theme-key-holds-a-name-not-light-or-dark",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.themes",
+      "to": "release.0.1.6",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.reader-column",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.reader-column",
+      "to": "anchor.file.components/reader-panel/reader-panel.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.reader-column",
+      "to": "anchor.file.components/reader-log/reader-log.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.reader-column",
+      "to": "anchor.file.components/sg-base/sg-base.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.reader-column",
+      "to": "anchor.test.tests/build/test_reader.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.reader-column",
+      "to": "anchor.doc.docs/ops/comms.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.reader-column",
+      "to": "release.0.1.7",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.reader-chat",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.reader-chat",
+      "to": "anchor.file.components/reader-chat/reader-chat.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.reader-chat",
+      "to": "anchor.file.reader/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.reader-chat",
+      "to": "anchor.file.data/search-index.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.reader-chat",
+      "to": "anchor.file.admin/build/gen_search.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.reader-chat",
+      "to": "anchor.test.tests/build/test_reader.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.reader-chat",
+      "to": "anchor.doc.docs/design/brief-corrections.md@c19-one-page-widens-the-content-security-policy-declared-in-its-head-marker",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.reader-chat",
+      "to": "release.0.1.7",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.agent-contact",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.agent-contact",
+      "to": "anchor.file..well-known/sgit-agents.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.agent-contact",
+      "to": "anchor.file.tools/comms/drain.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.agent-contact",
+      "to": "anchor.doc.docs/ops/comms.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.mockups",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.mockups",
+      "to": "anchor.file.mockups/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.mockups",
+      "to": "anchor.file.mockups/screens.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.mockups",
+      "to": "anchor.file.components/proto-app/proto-app.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.mockups",
+      "to": "anchor.file.components/proto-base/proto-base.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.mockups",
+      "to": "anchor.test.tests/build/test_mockups.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.mockups",
+      "to": "anchor.section.6.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.mockups",
+      "to": "release.0.1.5",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.mockups-variants",
+      "to": "content",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.mockups-variants",
+      "to": "anchor.file.mockups/screens.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.mockups-variants",
+      "to": "anchor.file.components/proto-column/proto-column.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.mockups-variants",
+      "to": "anchor.file.mockups/prototype.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.mockups-variants",
+      "to": "anchor.test.tests/build/test_mockups.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.mockups-variants",
+      "to": "anchor.doc.docs/design/brief-corrections.md@c22-the-mockups-are-a-prototype-in-three-ux-variants-with-a-column",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.mockups-variants",
+      "to": "release.0.1.8",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.repo-protections",
+      "to": "security-model",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.repo-protections",
+      "to": "release.protections",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.repo-protections",
+      "to": "anchor.doc.docs/ops/branch-protection.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.repo-protections",
+      "to": "anchor.section.9.5",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.corrections",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.corrections",
+      "to": "anchor.file.docs/design/brief-corrections.md",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.corrections",
+      "to": "anchor.section.0",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.corrections",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.needs",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.needs",
+      "to": "anchor.file.docs/ops/needs.md",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.needs",
+      "to": "anchor.section.0",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.needs",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.infra.bootstrap",
+      "to": "infrastructure",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.infra.bootstrap",
+      "to": "anchor.file.infra/bootstrap/bootstrap.sh",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.infra.bootstrap",
+      "to": "anchor.doc.docs/ops/bootstrap.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.infra.bootstrap",
+      "to": "anchor.section.4.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.infra.terraform",
+      "to": "infrastructure",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.infra.terraform",
+      "to": "res.bucket",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.infra.terraform",
+      "to": "anchor.section.4.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.infra.workflow",
+      "to": "pipe.infra",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.infra.workflow",
+      "to": "anchor.section.9.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.infra.rules",
+      "to": "infrastructure",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.infra.rules",
+      "to": "anchor.file.infra/rules/storage.rules",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.infra.rules",
+      "to": "anchor.file.admin/build/validate.js@check-6",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.infra.rules",
+      "to": "anchor.section.8.6",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.infra.environments-config",
+      "to": "site.app.config",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.infra.environments-config",
+      "to": "anchor.file.config/environments.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.infra.environments-config",
+      "to": "anchor.section.5",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.sign-in",
+      "to": "sign-in",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.sign-in",
+      "to": "flow.first-run",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.sign-in",
+      "to": "anchor.section.6.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.sign-in",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/sign-in.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.app.environment-page",
+      "to": "environment",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.environment-page",
+      "to": "flow.customer-environment",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.environment-page",
+      "to": "anchor.section.5",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.environment-page",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/environment.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.app.prf-unlock",
+      "to": "first-run",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.prf-unlock",
+      "to": "returning",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.prf-unlock",
+      "to": "anchor.section.8.7",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.prf-unlock",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/unlock.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.app.keyring-v1",
+      "to": "site.app.keyring",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.keyring-v1",
+      "to": "anchor.section.8.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.keyring-v1",
+      "to": "anchor.doc.keyring/index.html",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.recovery-code",
+      "to": "first-run",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.recovery-code",
+      "to": "anchor.section.8.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.recovery-code",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/setup.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.app.entries",
+      "to": "entries",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.entries",
+      "to": "anchor.section.6.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.entries",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/vault.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.app.concurrency",
+      "to": "entries",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.concurrency",
+      "to": "anchor.section.8.5",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.devices",
+      "to": "new-device",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.devices",
+      "to": "anchor.section.6.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.devices",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/devices.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.app.account",
+      "to": "account",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.account",
+      "to": "anchor.section.6.2",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.account",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/account.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.app.sharing-data-model",
+      "to": "sharing-model",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.sharing-data-model",
+      "to": "anchor.section.8.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.sharing-data-model",
+      "to": "anchor.doc.sharing/index.html",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.sharing-ui",
+      "to": "sharing-model",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.sharing-ui",
+      "to": "anchor.doc.sharing/index.html",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.document-kind",
+      "to": "entries",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.document-kind",
+      "to": "anchor.section.8.4",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.browser-extension",
+      "to": "security-model",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.browser-extension",
+      "to": "anchor.section.12",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.agent-api",
+      "to": "security-model",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.agent-api",
+      "to": "anchor.section.12",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.server-side",
+      "to": "security-model",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.app.server-side",
+      "to": "anchor.section.3.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.app.server-side",
+      "to": "anchor.section.12",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.admin.oauth",
+      "to": "site.admin.oauth",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.admin.oauth",
+      "to": "anchor.section.6.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.admin.setup-checklist",
+      "to": "admin",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.admin.setup-checklist",
+      "to": "anchor.section.6.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.admin.setup-checklist",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/admin-checklist.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.admin.pages",
+      "to": "site.admin",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.admin.pages",
+      "to": "anchor.section.6.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.admin.versions",
+      "to": "site.admin",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.admin.versions",
+      "to": "anchor.file.admin/versions.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.admin.versions",
+      "to": "anchor.file.data/versions.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.admin.versions",
+      "to": "anchor.file.admin/build/gen_versions.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.admin.versions",
+      "to": "anchor.section.6.3",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.admin.versions",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.tests.probe-pages",
+      "to": "probes",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.tests.probe-pages",
+      "to": "anchor.section.6.4",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.tests.probe-pages",
+      "to": "anchor.url.https://secrets.sgit.ai/mockups/matrix.html",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.tests.unit",
+      "to": "site.tests",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.tests.unit",
+      "to": "anchor.file.tests/unit/validate.test.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.tests.unit",
+      "to": "anchor.section.10",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.tests.unit",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.tests.build",
+      "to": "site.tests",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.tests.build",
+      "to": "anchor.file.tests/build/test_generators_check.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.tests.build",
+      "to": "anchor.file.admin/build/gate.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.tests.build",
+      "to": "anchor.section.10",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.tests.build",
+      "to": "release.0.1.0",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.tests.e2e",
+      "to": "site.tests",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.tests.e2e",
+      "to": "pipe.tests-browser",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.tests.e2e",
+      "to": "anchor.section.10",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.tests.acceptance",
+      "to": "site.tests",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.tests.acceptance",
+      "to": "anchor.section.10",
+      "verb": "described_in"
+    },
+    {
+      "from": "release.0.1.9",
+      "to": "anchor.tag.v0.1.9",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.8",
+      "to": "anchor.tag.v0.1.8",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.8",
+      "to": "anchor.commit.06b492182ff8106fd40caffc56f27e2a56db7613",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.8",
+      "to": "anchor.run.37510224402",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.8",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    },
+    {
+      "from": "release.0.1.7",
+      "to": "anchor.tag.v0.1.7",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.7",
+      "to": "anchor.commit.caefd5ec992e905f00cb54ed1b77e5db6cb09c07",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.7",
+      "to": "anchor.run.37473142498",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.7",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    },
+    {
+      "from": "release.0.1.6",
+      "to": "anchor.tag.v0.1.6",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.6",
+      "to": "anchor.commit.72acdf7a1e0128e28e169a9291c254a6946666fe",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.6",
+      "to": "anchor.run.37444877607",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.6",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    },
+    {
+      "from": "release.0.1.5",
+      "to": "anchor.tag.v0.1.5",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.5",
+      "to": "anchor.commit.306aa0c2e9d22366b748390be06e13eb93599152",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.5",
+      "to": "anchor.run.37400775063",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.5",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    },
+    {
+      "from": "release.0.1.4",
+      "to": "anchor.tag.v0.1.4",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.4",
+      "to": "anchor.commit.33fce58f68451cb7cc2106acdec7a44d0fb833dd",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.4",
+      "to": "anchor.run.37400383939",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.4",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    },
+    {
+      "from": "release.0.1.3",
+      "to": "anchor.tag.v0.1.3",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.3",
+      "to": "anchor.commit.05ebf4d0565e9e8d8084136b422646afafbb9711",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.3",
+      "to": "anchor.run.37399422141",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.3",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    },
+    {
+      "from": "release.0.1.2",
+      "to": "anchor.tag.v0.1.2",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.2",
+      "to": "anchor.commit.8ece6167362164eb5cfd4fcab4f5e2189b02a2cb",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.2",
+      "to": "anchor.run.37311322324",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.2",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    },
+    {
+      "from": "release.0.1.1",
+      "to": "anchor.tag.v0.1.1",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.1",
+      "to": "anchor.commit.a110792ec5f224319836c3adc8ebf7b440cd0d08",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.1",
+      "to": "anchor.run.37304901577",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.1",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    },
+    {
+      "from": "release.0.1.0",
+      "to": "anchor.tag.v0.1.0",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.0",
+      "to": "anchor.commit.e031a3f01779e298eb4cabe48e779cd7afd5b04a",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.0",
+      "to": "anchor.run.37251356486",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.0",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
+    }
+  ],
+  "provenance": {
+    "from": [
+      "data/features.json",
+      "data/versions.json",
+      "review/intent/sections.json"
+    ],
+    "strict": true,
+    "tool": "review/tools/claims.py"
+  },
+  "releases": [
+    {
+      "commit": null,
+      "date": "2026-10-06",
+      "id": "release.0.1.9",
+      "name": "v0.1.9: everything links to everything",
+      "notes": "Meaning through connectivity, from the fractal semantic graphs article: a claim means nothing until it is linked to its evidence, down to an anchor a person can open. Every claim in data/features.json now carries typed evidence (realises an intent node, lives_in a file, proven_by a test or a gate check, described_in a section or a document, seen_at a URL); review/tools/claims.py turns the claims, the releases (with their commit, tag and Actions run, backfilled from GitHub) and the anchors into the claims layer of the review graph, strict: a shipped claim with no anchor that resolves fails the build. Every status chip and every location on /shipped/ and in the status lines is a link into the navigator. The reader never leaves it to follow a chain: the brief is split into fourteen section files under review/brief/ by review/tools/brief.py and shown in place by review-brief, with the intent nodes written from each section; any served file is shown in place with line numbers and a marked range by review-source; sections and files are routes the gate resolves. The ladder gains the brief and the evidence rungs; the tree gains the Claims and The brief views; the crumb follows. C23, R10.",
+      "run": null,
+      "tag": "v0.1.9",
+      "verified": null,
+      "version": "0.1.9"
+    },
+    {
+      "commit": "06b492182ff8106fd40caffc56f27e2a56db7613",
+      "date": "2026-10-06",
+      "id": "release.0.1.8",
+      "name": "v0.1.8: the prototype: three UX variants and the column",
+      "notes": "The mockups are now a working prototype on invented data this browser keeps (components/proto-base, the store under sgit.secrets.proto.v1): sign in, create the keyring and the recovery code, add, open, reveal, copy, edit and delete entries, lock and unlock, devices, environment, account, the admin checklist, the probe matrix, routed by the app's own rules. Three UX variants in every frame for A/B testing (A Desk, the brief's shape; B Focus, one card per screen with a tab bar; C Command, a command bar, a dense table and an inspector), the pick kept under sgit.secrets.ui.proto. A column beside every frame (components/proto-column): what the screen is and the intent it realises, the paths to it and from it as a clickable graph, the data as charts (entries by kind, screens visited, actions over the last hour), the last actions, an A/B/C vote that is also a note in the reader's log, and the state as JSON with Seed, Reset and Copy. mockups/screens.json holds the screens, the paths and the variants; /mockups/prototype.html is the whole thing in one frame. The five categorical colours of every theme are now validated hues (C22).",
+      "run": {
+        "conclusion": "success",
+        "id": 37510224402,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37510224402"
+      },
+      "tag": "v0.1.8",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.8"
+    },
+    {
+      "commit": "caefd5ec992e905f00cb54ed1b77e5db6cb09c07",
+      "date": "2026-10-06",
+      "id": "release.0.1.7",
+      "name": "v0.1.7: the reader's column, the comms channel and the graph view",
+      "notes": "A column on every page (components/reader-panel, reader-log, reader-chat on sg-base): mark a page read, star it, vote, leave a note or dictate one, every action an event in an append-only log in this browser keyed by page and content hash; Copy for Claude and Paste to merge; a chat over the site that searches offline on every page and, on /reader/ with the reader's own OpenRouter key, talks to Claude Sonnet with tools that read the site and file feedback; and the graph of the intent nodes the page names. Only /reader/ widens connect-src, declared in its head marker and checked by the gate (C19). The comms channel: the build agent's contact file at /.well-known/sgit-agents.json (a template until the lead publishes the bundle), tools/comms/ to publish, configure, send and drain, the sgit PKI envelope made with WebCrypto and proven to open with the agent's key; the vault and the key pair exist, the two steps the session's policy blocked are in docs/ops/comms.md (C20, needs 9 and 10). The navigator gains the ladder of layers, naming what does not exist yet with its step, and the native graph view; /review/ is now a page. data/search-index.json from gen_search.py. gate.py --build regenerates the review README after the page generators.",
+      "run": {
+        "conclusion": "success",
+        "id": 37473142498,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37473142498"
+      },
+      "tag": "v0.1.7",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.7"
+    },
+    {
+      "commit": "72acdf7a1e0128e28e169a9291c254a6946666fe",
+      "date": "2026-10-06",
+      "id": "release.0.1.6",
+      "name": "v0.1.6: four themes",
+      "notes": "Four themes a reader picks from the nav and the review navigator keeps: Night (the family palette, the default), Day, Paper and Ember, listed in data/themes.json. Every colour on the site is now a semantic token and assets/themes.css is the one file that gives them values, once per theme; site.css, mockups.css and the navigator's tokens.css name no colour, so the mockups and the review graphs follow the pick. assets/theme.js sets html[data-theme] before the first paint from the one allowed storage key, or from the reader's prefers-color-scheme when nothing is stored. tests/build/test_themes.py fails when a theme misses a token or any stylesheet or script names a colour; the gate's origin and storage-key checks now scan assets/ too. gate.py --build now regenerates the review README after the page generators, since its tree hash covers the pages. Brief-corrections C18.",
+      "run": {
+        "conclusion": "success",
+        "id": 37444877607,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37444877607"
+      },
+      "tag": "v0.1.6",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.6"
+    },
+    {
+      "commit": "306aa0c2e9d22366b748390be06e13eb93599152",
+      "date": "2026-10-06",
+      "id": "release.0.1.5",
+      "name": "v0.1.5: the design mockups",
+      "notes": "A new section, /mockups/: ten screens the brief describes (sign in, first run, unlock, the vault, an entry, devices, environment, account, the admin checklist, the compatibility matrix), each as a static HTML picture in a mini browser frame and as ASCII art, with the intent nodes it realises linked into the review navigator. No script, no inline style, every value invented, every screen marked proposed.",
+      "run": {
+        "conclusion": "success",
+        "id": 37400775063,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37400775063"
+      },
+      "tag": "v0.1.5",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.5"
+    },
+    {
+      "commit": "33fce58f68451cb7cc2106acdec7a44d0fb833dd",
+      "date": "2026-10-06",
+      "id": "release.0.1.4",
+      "name": "v0.1.4: the intent graph and the navigator to walk it",
+      "notes": "Step 1 of the review brief. review/intent/: the MVP brief as 14 stories, 51 rules and 70 examples naming the surfaces they touch, 6 flows, 23 components with 32 edges, and the deploy layer (5 environments, 11 resources, 5 pipelines), every node carrying the section it came from and linking to it in the rendered brief through a generated section index. The navigator at /review/: review-base (the store, the node index, the event bus, the route held in a variable), review-tree, review-node and review-crumb, web components in the coding.sgit.ai shape, three files each, no framework, colours only in tokens.css. Written by the build agent; intent only once the project lead has walked it and accepted it.",
+      "run": {
+        "conclusion": "success",
+        "id": 37400383939,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37400383939"
+      },
+      "tag": "v0.1.4",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.4"
+    },
+    {
+      "commit": "05ebf4d0565e9e8d8084136b422646afafbb9711",
+      "date": "2026-10-06",
+      "id": "release.0.1.3",
+      "name": "v0.1.3: the review folder, step 0, and the repository guidance",
+      "notes": "review/ in the shape of the sgit.ai review brief: the schemas for every layer as JSON Schema with a standard-library validator, the edge vocabulary with an inverse for every verb, freshness by tree hash, a README whose every number is computed, empty intent files for the project and the tool, a fixture repository, and the first six corrections to the review brief. The gate gains check 9 (the review folder validates and is fresh), the orphan-page rule, a parse-check of every script and an em-dash advisory, as the repository guidance lists. Roles as files under team/, a participant disclosure, and admin/build/release.py: bump, build, gate, commit, push, verify live in one command.",
+      "run": {
+        "conclusion": "success",
+        "id": 37399422141,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37399422141"
+      },
+      "tag": "v0.1.3",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.3"
+    },
+    {
+      "commit": "8ece6167362164eb5cfd4fcab4f5e2189b02a2cb",
+      "date": "2026-10-05",
+      "id": "release.0.1.2",
+      "name": "v0.1.2: the GCP bootstrap, from the command line",
+      "notes": "Step 3 begins. infra/bootstrap/bootstrap.sh: the one-time, idempotent gcloud bootstrap with --dry-run and --check, creating the state project and bucket, one project per environment with billing and the APIs, the Terraform service account, and the Workload Identity Federation pool and provider, then printing the public values and the gh commands that store them. docs/ops/bootstrap.md maps exactly what a human does, in order, as commands, and names the one part Google keeps in the console (the OAuth consent screen and the two Web clients) and the two organisation settings with no API. The script is dry-run tested against a stand-in gcloud; its first real run is the project lead's.",
+      "run": {
+        "conclusion": "success",
+        "id": 37311322324,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37311322324"
+      },
+      "tag": "v0.1.2",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.2"
+    },
+    {
+      "commit": "a110792ec5f224319836c3adc8ebf7b440cd0d08",
+      "date": "2026-10-05",
+      "id": "release.0.1.1",
+      "name": "v0.1.1: the content pages and the family chrome",
+      "notes": "Six content pages: how it works, security, keyring format v1, sharing, environments, and /shipped/ generated from data/features.json with one table per status. Every content page opens with a status line generated from the same file. Every markdown document under docs/ is now rendered to an HTML page beside it (the design documents, the ops notes, reality.md) by a standard-library markdown renderer, with index pages for docs/design/ and docs/ops/; the markdown stays the source and the twin. The homepage links the new pages and carries the three-step demo as proposed. The chrome now has the family nav (grouped menus with dropdowns, the part-of-sgit.ai link, the stage pill, a phone menu) with breadcrumbs, and the admin section gains a comms page with the asks and a tracker of the nine build steps. Versions now bump the third digit per release (brief-corrections C15). v0.1.0 went live at secrets.sgit.ai (DNS, Pages and the re-run done by Dinis), so the live-domain claim is shipped; needs.md items 1 to 3 are closed.",
+      "run": {
+        "conclusion": "success",
+        "id": 37304901577,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37304901577"
+      },
+      "tag": "v0.1.1",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.1"
+    },
+    {
+      "commit": "e031a3f01779e298eb4cabe48e779cd7afd5b04a",
+      "date": "2026-10-05",
+      "id": "release.0.1.0",
+      "name": "v0.1.0: the pipeline, before the site",
+      "notes": "The repository layout, version.txt as the one source of the version, the chrome generator, markdown twins, llms.txt and llms-full.txt, docs/reality.md generated from data/features.json, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate, tag-release, deploy and verify-live, CNAME, the DNS and branch-protection notes, docs/ops/needs.md, and the five design documents copied in verbatim. A placeholder homepage with the version badge and the status table. Nothing of the app, admin or test pages exists yet; every one of those claims is marked proposed.",
+      "run": {
+        "conclusion": "success",
+        "id": 37251356486,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37251356486"
+      },
+      "tag": "v0.1.0",
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
+      "version": "0.1.0"
+    }
+  ]
+}

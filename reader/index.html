@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/reader/">
   <meta property="og:title" content="The reader&#x27;s page — secrets.sgit.ai">
   <meta property="og:description" content="Where the reader&#x27;s column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent&#x27;s vault. The only page whose policy allows a connection beyond this site and Google&#x27;s sign-in hosts.">
-  <meta name="sg-secrets:version" content="0.1.8">
+  <meta name="sg-secrets:version" content="0.1.9">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -95,7 +95,7 @@
   <main>
     <h1>The reader's page</h1>
     <!-- sg-secrets:status:start ids="site.reader-column,site.reader-chat,site.agent-contact" -->
-  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.7</span> The reader&#x27;s column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names · <span class="sg-status sg-status-shipped">shipped v0.1.7</span> A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader&#x27;s own key · <span class="sg-status sg-status-proposed">proposed</span> The build agent&#x27;s contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it</p>
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.reader-column" title="the claim and its evidence, in the navigator">shipped v0.1.7</a> The reader&#x27;s column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names · <a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.reader-chat" title="the claim and its evidence, in the navigator">shipped v0.1.7</a> A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader&#x27;s own key · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.site.agent-contact" title="the claim and its evidence, in the navigator">proposed</a> The build agent&#x27;s contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it</p>
 <!-- sg-secrets:status:end -->
     <p class="sg-lead">Every page has the reader's column: the log of what you marked and noted, and the graph of what the page names. Two things need a connection beyond this site, and the site's policy forbids that on every page but this one: the chat through <code>openrouter.ai</code> with your own key, and <strong>Send to the agent</strong>, which writes your sealed log to the build agent's vault on <code>dev.send.sgraph.ai</code>. Open the column here (the tab on the right) to do either; your log is the same one, kept in this browser.</p>
 
@@ -118,7 +118,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/reader/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/reader/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

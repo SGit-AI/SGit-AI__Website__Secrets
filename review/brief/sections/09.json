@@ -1,0 +1,242 @@
+{
+  "anchor": "9-cicd-and-devops-pipelines",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "<p>All workflows in <code>.github/workflows/</code>. Branch model: work on <code>claude/*</code> or feature branches → PR to <code>dev</code> → push to <code>dev</code> is a release → <code>main</code> is promoted from <code>dev</code> and is deploy-only (no tag), used as a fallback and as the branch <code>main</code> environment tests against.</p>",
+  "id": "9",
+  "markdown": "All workflows in `.github/workflows/`. Branch model: work on `claude/*` or feature branches → PR to `dev` → push to `dev` is a release → `main` is promoted from `dev` and is deploy-only (no tag), used as a fallback and as the branch `main` environment tests against.\n",
+  "nodes": [
+    {
+      "id": "pipeline",
+      "layer": "components",
+      "name": "The pipelines in .github/workflows"
+    }
+  ],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [
+    {
+      "anchor": "91-deploy-pagesyml-validate-tag-release-deploy-the-house-pipeline",
+      "html": "<p>Triggers: push to <code>dev</code> and <code>main</code>, PR to either, manual dispatch.</p>\n<table>\n<thead><tr><th>Job</th><th>When</th><th>Does</th><th>On failure</th></tr></thead>\n<tbody>\n<tr><td><code>validate</code></td><td>always</td><td><code>python3 admin/build/gen_*.py --check</code> for every generator; <code>node admin/build/validate.js</code>; <code>python3 -m pytest tests/build/</code>; <code>node --test tests/unit/</code></td><td>nothing tagged or deployed</td></tr>\n<tr><td><code>tag-release</code></td><td>push to <code>dev</code> only</td><td>reads <code>admin/build/version.txt</code>; finds the newest commit whose subject matches <code>site vX.Y.Z : …</code>; asserts equal; asserts next minor (or deliberate major <code>.0</code>); backfills missing historical tags idempotently; <code>git push origin refs/tags/vX.Y.Z</code></td><td>no deploy</td></tr>\n<tr><td><code>deploy</code></td><td>any push or dispatch, never PR</td><td>assembles the tree minus <code>.git</code>, <code>.github</code>, <code>infra</code>, <code>tests/unit</code>, <code>node_modules</code>; <code>upload-pages-artifact</code>; <code>deploy-pages</code></td><td>previous version stays live</td></tr>\n<tr><td><code>verify-live</code></td><td>after deploy</td><td>fetches <code>https://secrets.sgit.ai/admin/build/version.txt</code> and the homepage badge until they equal the tag or 10 minutes pass; fails the run otherwise (&quot;green does not mean live&quot;)</td><td>run is red; site may be stale</td></tr>\n</tbody>\n</table>\n<p>The release commit is not always HEAD (merge commits); anchor on the newest versioned subject. Every push to <code>dev</code> is a minor bump; patch versions are for a same-day fix and must still be in the subject.</p>",
+      "id": "9.1",
+      "markdown": "Triggers: push to `dev` and `main`, PR to either, manual dispatch.\n\n| Job | When | Does | On failure |\n|---|---|---|---|\n| `validate` | always | `python3 admin/build/gen_*.py --check` for every generator; `node admin/build/validate.js`; `python3 -m pytest tests/build/`; `node --test tests/unit/` | nothing tagged or deployed |\n| `tag-release` | push to `dev` only | reads `admin/build/version.txt`; finds the newest commit whose subject matches `site vX.Y.Z : …`; asserts equal; asserts next minor (or deliberate major `.0`); backfills missing historical tags idempotently; `git push origin refs/tags/vX.Y.Z` | no deploy |\n| `deploy` | any push or dispatch, never PR | assembles the tree minus `.git`, `.github`, `infra`, `tests/unit`, `node_modules`; `upload-pages-artifact`; `deploy-pages` | previous version stays live |\n| `verify-live` | after deploy | fetches `https://secrets.sgit.ai/admin/build/version.txt` and the homepage badge until they equal the tag or 10 minutes pass; fails the run otherwise (\"green does not mean live\") | run is red; site may be stale |\n\nThe release commit is not always HEAD (merge commits); anchor on the newest versioned subject. Every push to `dev` is a minor bump; patch versions are for a same-day fix and must still be in the subject.\n",
+      "nodes": [
+        {
+          "id": "release",
+          "layer": "stories",
+          "name": "Every push to dev is a release"
+        },
+        {
+          "id": "release.gate.validate-job",
+          "layer": "examples",
+          "name": "The validate job runs every generator with --check, validate.js, pytest…"
+        },
+        {
+          "id": "release.tag",
+          "layer": "rules",
+          "name": "tag-release reads version.txt, finds the newest commit whose subject…"
+        },
+        {
+          "id": "release.tag.push",
+          "layer": "examples",
+          "name": "A push to dev with a matching subject produces the tag vX.Y.Z."
+        },
+        {
+          "id": "release.deploy-verify",
+          "layer": "rules",
+          "name": "deploy assembles the tree minus .git, .github, infra, tests/unit and…"
+        },
+        {
+          "id": "flow.release",
+          "layer": "flows",
+          "name": "A release"
+        },
+        {
+          "id": "pipe.deploy-pages",
+          "layer": "deploy",
+          "name": "deploy-pages.yml"
+        },
+        {
+          "id": "pipe.deploy-pages.validate",
+          "layer": "deploy",
+          "name": "validate"
+        },
+        {
+          "id": "pipe.deploy-pages.tag-release",
+          "layer": "deploy",
+          "name": "tag-release"
+        },
+        {
+          "id": "pipe.deploy-pages.deploy",
+          "layer": "deploy",
+          "name": "deploy"
+        },
+        {
+          "id": "pipe.deploy-pages.verify-live",
+          "layer": "deploy",
+          "name": "verify-live"
+        }
+      ],
+      "title": "9.1 `deploy-pages.yml` — validate → tag-release → deploy (the house pipeline)"
+    },
+    {
+      "anchor": "92-infrayml-terraform-per-environment",
+      "html": "<p>Triggers: PR touching <code>infra/**</code> (plan only, posted as a PR comment per env), manual dispatch with inputs <code>environment</code> ∈ {dev, main, prod, custom} and <code>action</code> ∈ {plan, apply}, and push to <code>dev</code> for <code>dev</code> apply.</p>\n<ul>\n<li>Auth: <code>google-github-actions/auth@v2</code> with <code>workload_identity_provider</code> and <code>service_account</code> from GitHub <strong>environment</strong> variables (<code>dev</code>, <code>main</code>, <code>prod</code> environments; <code>prod</code> requires a reviewer).</li>\n<li><code>terraform fmt -check</code>, <code>validate</code>, <code>plan -out</code>, <code>apply</code> the saved plan only.</li>\n<li>After apply: run <code>infra/scripts/export_env_config.py</code> which reads Terraform outputs and rewrites that env&#x27;s block in <code>config/environments.json</code>; open a PR to <code>dev</code> with the change (never commit directly). The validate gate will refuse a config whose values do not match the environment&#x27;s Terraform state file hash recorded in the file (<code>_source</code> field).</li>\n<li>Secrets: <code>GOOGLE_OAUTH_CLIENT_SECRET</code> per GitHub environment. No JSON key files.</li>\n</ul>",
+      "id": "9.2",
+      "markdown": "Triggers: PR touching `infra/**` (plan only, posted as a PR comment per env), manual dispatch with inputs `environment` ∈ {dev, main, prod, custom} and `action` ∈ {plan, apply}, and push to `dev` for `dev` apply.\n\n- Auth: `google-github-actions/auth@v2` with `workload_identity_provider` and `service_account` from GitHub **environment** variables (`dev`, `main`, `prod` environments; `prod` requires a reviewer).\n- `terraform fmt -check`, `validate`, `plan -out`, `apply` the saved plan only.\n- After apply: run `infra/scripts/export_env_config.py` which reads Terraform outputs and rewrites that env's block in `config/environments.json`; open a PR to `dev` with the change (never commit directly). The validate gate will refuse a config whose values do not match the environment's Terraform state file hash recorded in the file (`_source` field).\n- Secrets: `GOOGLE_OAUTH_CLIENT_SECRET` per GitHub environment. No JSON key files.\n",
+      "nodes": [
+        {
+          "id": "infrastructure.terraform-module.export",
+          "layer": "examples",
+          "name": "export_env_config.py rewrites the env block and opens a PR to dev; the…"
+        },
+        {
+          "id": "infrastructure.infra-workflow",
+          "layer": "rules",
+          "name": "infra.yml plans on PR per environment, applies on dispatch and on push…"
+        },
+        {
+          "id": "infrastructure.infra-workflow.plan",
+          "layer": "examples",
+          "name": "A PR touching infra/** posts a plan per environment."
+        },
+        {
+          "id": "pipe.infra",
+          "layer": "deploy",
+          "name": "infra.yml"
+        },
+        {
+          "id": "pipe.infra.plan",
+          "layer": "deploy",
+          "name": "plan"
+        },
+        {
+          "id": "pipe.infra.apply",
+          "layer": "deploy",
+          "name": "apply"
+        }
+      ],
+      "title": "9.2 `infra.yml` — Terraform per environment"
+    },
+    {
+      "anchor": "93-the-gate-adminbuildvalidatejs-no-dependencies",
+      "html": "<ol>\n<li><strong>Version agreement</strong>: <code>version.txt</code> == every page badge == versions table row == <code>llms.txt</code> == <code>llms-full.txt</code> == <code>index.md</code> == <code>config/environments.json#siteVersion</code>; no version listed twice.</li>\n<li><strong>Internal links and fragments</strong> resolve, in every HTML and MD file.</li>\n<li><strong>Canonical host</strong>: every page has <code>rel=canonical</code> and <code>og:url</code> on the host in <code>CNAME</code>.</li>\n<li><strong>Leak tripwire</strong> on every file in the tree: sgit vault keys (<code>sgit_private_vault_</code>, <code>sgit_private_read_</code>, passphrase:uuid shape), AWS <code>AKIA/ASIA</code>, GitHub <code>gh[pousr]_</code>, <code>sk-</code>/<code>sk-ant-</code>, PEM private key blocks, Slack <code>xox[bpa]-</code>, Google OAuth client secrets (<code>GOCSPX-</code>), service-account JSON (<code>&quot;private_key_id&quot;</code>), bare 12-digit numbers. Allow-list: <code>validate.js</code> itself and <code>config/environments.json</code> for <code>AIza</code> web keys only. The fix for a trip is always a redaction, never a wider pattern.</li>\n<li><strong>Vendor manifest</strong>: every file under <code>vendor/</code> matches its SHA-256 in <code>MANIFEST.json</code>; no <code>&lt;script src=&quot;http</code> or <code>import &#x27;http</code> anywhere under <code>app/</code>, <code>components/</code>, <code>admin/</code>, <code>tests/</code> except the allow-listed Google auth hosts in <code>app/auth/</code>.</li>\n<li><strong>Storage rules in sync</strong>: <code>infra/rules/storage.rules</code> hash equals the hash recorded in <code>data/features.json#rulesHash</code> (so a rules change without a release note fails).</li>\n<li><strong>Reality</strong>: <code>docs/reality.md</code> regenerated from <code>data/features.json</code> with <code>--check</code>.</li>\n<li><strong>No storage of secrets in code</strong>: grep for <code>localStorage.setItem(</code> and assert each key is in the allowed list in <code>app/config/storage-keys.js</code>.</li>\n</ol>",
+      "id": "9.3",
+      "markdown": "1. **Version agreement**: `version.txt` == every page badge == versions table row == `llms.txt` == `llms-full.txt` == `index.md` == `config/environments.json#siteVersion`; no version listed twice.\n2. **Internal links and fragments** resolve, in every HTML and MD file.\n3. **Canonical host**: every page has `rel=canonical` and `og:url` on the host in `CNAME`.\n4. **Leak tripwire** on every file in the tree: sgit vault keys (`sgit_private_vault_`, `sgit_private_read_`, passphrase:uuid shape), AWS `AKIA/ASIA`, GitHub `gh[pousr]_`, `sk-`/`sk-ant-`, PEM private key blocks, Slack `xox[bpa]-`, Google OAuth client secrets (`GOCSPX-`), service-account JSON (`\"private_key_id\"`), bare 12-digit numbers. Allow-list: `validate.js` itself and `config/environments.json` for `AIza` web keys only. The fix for a trip is always a redaction, never a wider pattern.\n5. **Vendor manifest**: every file under `vendor/` matches its SHA-256 in `MANIFEST.json`; no `<script src=\"http` or `import 'http` anywhere under `app/`, `components/`, `admin/`, `tests/` except the allow-listed Google auth hosts in `app/auth/`.\n6. **Storage rules in sync**: `infra/rules/storage.rules` hash equals the hash recorded in `data/features.json#rulesHash` (so a rules change without a release note fails).\n7. **Reality**: `docs/reality.md` regenerated from `data/features.json` with `--check`.\n8. **No storage of secrets in code**: grep for `localStorage.setItem(` and assert each key is in the allowed list in `app/config/storage-keys.js`.\n",
+      "nodes": [
+        {
+          "id": "first-run.plaintext-only-in-browser.gate",
+          "layer": "examples",
+          "name": "The gate asserts every localStorage.setItem key is in the allowed list."
+        },
+        {
+          "id": "release.version-agreement",
+          "layer": "rules",
+          "name": "version.txt equals every page badge, the versions table row, llms.txt…"
+        },
+        {
+          "id": "release.version-agreement.check1",
+          "layer": "examples",
+          "name": "Check 1 of the gate fails on any disagreement."
+        },
+        {
+          "id": "release.gate",
+          "layer": "rules",
+          "name": "The gate checks internal links and fragments, the canonical host, the…"
+        },
+        {
+          "id": "release.gate.tripwire",
+          "layer": "examples",
+          "name": "A planted fake key anywhere in the tree fails check 4; the fix is a…"
+        },
+        {
+          "id": "content.reality.check7",
+          "layer": "examples",
+          "name": "Check 7 of the gate regenerates reality.md with --check."
+        },
+        {
+          "id": "site.gate",
+          "layer": "components",
+          "name": "admin/build/validate.js: the eight-check gate, no dependencies"
+        }
+      ],
+      "title": "9.3 The gate: `admin/build/validate.js` (no dependencies)"
+    },
+    {
+      "anchor": "94-other-workflows",
+      "html": "<ul>\n<li><code>tests-browser.yml</code>: on PR and nightly, Playwright (Chromium) runs <code>tests/e2e/</code> against a local <code>python3 -m http.server</code> of the tree with <code>?env=dev</code>, using a Firebase email/password test user created by Terraform in <code>dev</code> only and a <strong>virtual authenticator</strong> (CDP <code>WebAuthn.addVirtualAuthenticator</code> with <code>hasPrf: true</code> VERIFY FIRST; if the virtual authenticator cannot do PRF, the e2e covers everything up to the gesture and the PRF path stays on the manual matrix). Credentials for the test user are GitHub environment secrets; they protect nothing but <code>dev</code>.</li>\n<li><code>rules.yml</code>: manual dispatch <code>deploy rules to &lt;env&gt;</code>; same WIF auth; <code>firebase deploy --only storage</code> or the Rules API; posts the ruleset name.</li>\n<li><code>link-check.yml</code>: weekly external link check, opens an issue.</li>\n<li><code>dependabot.yml</code> is <strong>off</strong> (no package.json for the app); <code>vendor/</code> updates are a manual, reviewed PR with hash changes.</li>\n</ul>",
+      "id": "9.4",
+      "markdown": "- `tests-browser.yml`: on PR and nightly, Playwright (Chromium) runs `tests/e2e/` against a local `python3 -m http.server` of the tree with `?env=dev`, using a Firebase email/password test user created by Terraform in `dev` only and a **virtual authenticator** (CDP `WebAuthn.addVirtualAuthenticator` with `hasPrf: true` VERIFY FIRST; if the virtual authenticator cannot do PRF, the e2e covers everything up to the gesture and the PRF path stays on the manual matrix). Credentials for the test user are GitHub environment secrets; they protect nothing but `dev`.\n- `rules.yml`: manual dispatch `deploy rules to <env>`; same WIF auth; `firebase deploy --only storage` or the Rules API; posts the ruleset name.\n- `link-check.yml`: weekly external link check, opens an issue.\n- `dependabot.yml` is **off** (no package.json for the app); `vendor/` updates are a manual, reviewed PR with hash changes.\n",
+      "nodes": [
+        {
+          "id": "release.other-workflows",
+          "layer": "rules",
+          "name": "tests-browser.yml runs Playwright on PR and nightly against a local…"
+        },
+        {
+          "id": "pipe.tests-browser",
+          "layer": "deploy",
+          "name": "tests-browser.yml"
+        },
+        {
+          "id": "pipe.tests-browser.e2e",
+          "layer": "deploy",
+          "name": "e2e"
+        },
+        {
+          "id": "pipe.rules",
+          "layer": "deploy",
+          "name": "rules.yml"
+        },
+        {
+          "id": "pipe.rules.deploy",
+          "layer": "deploy",
+          "name": "deploy rules"
+        },
+        {
+          "id": "pipe.link-check",
+          "layer": "deploy",
+          "name": "link-check.yml"
+        },
+        {
+          "id": "pipe.link-check.weekly",
+          "layer": "deploy",
+          "name": "weekly"
+        }
+      ],
+      "title": "9.4 Other workflows"
+    },
+    {
+      "anchor": "95-repository-protections-the-boundary-section-34",
+      "html": "<p>Set on day one and listed on <code>/security/</code>:</p>\n<ul>\n<li><code>dev</code> and <code>main</code> protected: PR required, one review, no force-push, linear history; status checks <code>validate</code> required.</li>\n<li>All org members with write: hardware-key 2FA (org setting).</li>\n<li>Actions: pin every third-party action by commit SHA; <code>permissions:</code> minimal per job (<code>contents: read</code>, <code>pages: write</code>, <code>id-token: write</code> only where needed); environment <code>prod</code> with required reviewers; <code>GITHUB_TOKEN</code> not allowed to approve PRs.</li>\n<li>Verified domain <code>sgit.ai</code> in the GitHub org (subdomain-takeover guard). DNS: registrar lock, DNSSEC and a CAA record are the DNS owner&#x27;s job; the security page says whether they are in place (dated).</li>\n<li><code>&lt;meta http-equiv=&quot;Content-Security-Policy&quot;&gt;</code> on every app/admin/test page: <code>default-src &#x27;self&#x27;; connect-src &#x27;self&#x27; https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src &#x27;self&#x27; data:; style-src &#x27;self&#x27;; script-src &#x27;self&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;</code>. Plus a frame-busting check (<code>if (top !== self) …</code>) since <code>frame-ancestors</code> cannot be set in a meta tag. Keep the list exact and tested on <code>tests/config.html</code>.</li>\n</ul>\n<hr>",
+      "id": "9.5",
+      "markdown": "Set on day one and listed on `/security/`:\n\n- `dev` and `main` protected: PR required, one review, no force-push, linear history; status checks `validate` required.\n- All org members with write: hardware-key 2FA (org setting).\n- Actions: pin every third-party action by commit SHA; `permissions:` minimal per job (`contents: read`, `pages: write`, `id-token: write` only where needed); environment `prod` with required reviewers; `GITHUB_TOKEN` not allowed to approve PRs.\n- Verified domain `sgit.ai` in the GitHub org (subdomain-takeover guard). DNS: registrar lock, DNSSEC and a CAA record are the DNS owner's job; the security page says whether they are in place (dated).\n- `<meta http-equiv=\"Content-Security-Policy\">` on every app/admin/test page: `default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'`. Plus a frame-busting check (`if (top !== self) …`) since `frame-ancestors` cannot be set in a meta tag. Keep the list exact and tested on `tests/config.html`.\n\n---\n",
+      "nodes": [
+        {
+          "id": "probes.csp",
+          "layer": "rules",
+          "name": "The CSP list is exact and tested on the config probe page; a…"
+        },
+        {
+          "id": "probes.csp.config",
+          "layer": "examples",
+          "name": "The config page reports the CSP in force."
+        },
+        {
+          "id": "release.protections",
+          "layer": "rules",
+          "name": "dev and main protected (PR required, one review, no force-push, linear…"
+        },
+        {
+          "id": "release.protections.security-page",
+          "layer": "examples",
+          "name": "The security page lists the protections and whether each is in place…"
+        }
+      ],
+      "title": "9.5 Repository protections (the boundary, section 3.4)"
+    }
+  ],
+  "title": "9. CI/CD and DevOps pipelines"
+}

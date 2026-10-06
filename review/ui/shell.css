@@ -2,6 +2,7 @@
    No colour is written here: everything is a token from tokens.css. */
 
 *, *::before, *::after { box-sizing: border-box; }
+[data-region][hidden]  { display: none !important; }                             /* a component's own :host display would otherwise win over hidden */
 
 html, body {
     background:  var(--rv-bg);

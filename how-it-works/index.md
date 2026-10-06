@@ -2,11 +2,11 @@
 
 > The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 
-*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · proposed Devices page: add and remove passkeys, regenerate the recovery code
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.keyring-v1) Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · [proposed](/review/ui/#node=claim.app.devices) Devices page: add and remove passkeys, regenerate the recovery code
 
 Two things decide what you can do. The **login** decides which paths in the bucket you may touch. The **passkey** decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.
 

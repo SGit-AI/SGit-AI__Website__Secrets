@@ -1,0 +1,200 @@
+{
+  "anchor": "4-gcp-environments",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "",
+  "id": "4",
+  "markdown": "\n",
+  "nodes": [
+    {
+      "id": "infrastructure",
+      "layer": "stories",
+      "name": "One GCP project per environment, from Terraform"
+    }
+  ],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [
+    {
+      "anchor": "41-environments-and-naming",
+      "html": "<table>\n<thead><tr><th>Env</th><th>Purpose</th><th>GCP project id (PROPOSED, confirm availability)</th><th>Bucket</th><th>Who uses</th></tr></thead>\n<tbody>\n<tr><td><code>dev</code></td><td>daily development, disposable</td><td><code>sgit-secrets-dev</code></td><td><code>sgit-secrets-dev.firebasestorage.app</code> (Firebase default) or <code>sgit-secrets-dev-vaults</code></td><td>builders</td></tr>\n<tr><td><code>main</code></td><td>staging; what <code>main</code> branch is tested against</td><td><code>sgit-secrets-main</code></td><td>same pattern</td><td>review</td></tr>\n<tr><td><code>prod</code></td><td>the public default</td><td><code>sgit-secrets-prod</code></td><td>same pattern</td><td>everyone</td></tr>\n<tr><td><code>&lt;customer&gt;</code></td><td>a customer&#x27;s own project, in their org and billing</td><td>theirs</td><td>theirs</td><td>them</td></tr>\n</tbody>\n</table>\n<p>One site serves all environments. The environment is chosen at runtime by browser configuration (section 5), with <code>prod</code> as the default on <code>secrets.sgit.ai</code>. A customer running their own project either uses the public site pointed at their project (config) or forks the repo and changes <code>config/environments.json</code>.</p>",
+      "id": "4.1",
+      "markdown": "| Env | Purpose | GCP project id (PROPOSED, confirm availability) | Bucket | Who uses |\n|---|---|---|---|---|\n| `dev` | daily development, disposable | `sgit-secrets-dev` | `sgit-secrets-dev.firebasestorage.app` (Firebase default) or `sgit-secrets-dev-vaults` | builders |\n| `main` | staging; what `main` branch is tested against | `sgit-secrets-main` | same pattern | review |\n| `prod` | the public default | `sgit-secrets-prod` | same pattern | everyone |\n| `<customer>` | a customer's own project, in their org and billing | theirs | theirs | them |\n\nOne site serves all environments. The environment is chosen at runtime by browser configuration (section 5), with `prod` as the default on `secrets.sgit.ai`. A customer running their own project either uses the public site pointed at their project (config) or forks the repo and changes `config/environments.json`.\n",
+      "nodes": [
+        {
+          "id": "env.dev",
+          "layer": "deploy",
+          "name": "dev"
+        },
+        {
+          "id": "env.main",
+          "layer": "deploy",
+          "name": "main"
+        },
+        {
+          "id": "env.prod",
+          "layer": "deploy",
+          "name": "prod"
+        },
+        {
+          "id": "env.customer",
+          "layer": "deploy",
+          "name": "<customer>"
+        }
+      ],
+      "title": "4.1 Environments and naming"
+    },
+    {
+      "anchor": "42-per-project-resources-what-terraform-creates",
+      "html": "<p>Terraform lives in <code>infra/terraform/</code>, one module <code>modules/secrets-env</code>, one root per environment in <code>infra/terraform/envs/{dev,main,prod}/</code>. State in a GCS bucket in a separate bootstrap project (<code>sgit-secrets-tfstate</code>, PROPOSED), one prefix per env.</p>\n<ol>\n<li>Project services: <code>identitytoolkit.googleapis.com</code>, <code>firebase.googleapis.com</code>, <code>firebasestorage.googleapis.com</code>, <code>storage.googleapis.com</code>, <code>firebaserules.googleapis.com</code>, <code>cloudresourcemanager.googleapis.com</code>, <code>serviceusage.googleapis.com</code>, <code>iam.googleapis.com</code>.</li>\n<li>Firebase project link: <code>google_firebase_project</code> (google-beta provider).</li>\n<li>Web app registration: <code>google_firebase_web_app</code> → yields <code>appId</code>; read <code>google_firebase_web_app_config</code> for <code>apiKey</code>, <code>authDomain</code>, <code>storageBucket</code>. These are <strong>public identifiers</strong>, written into <code>config/environments.json</code> by the pipeline. Restrict the API key by HTTP referrer to <code>https://secrets.sgit.ai/*</code> and <code>http://localhost:*</code> (dev only).</li>\n<li>Identity Platform: <code>google_identity_platform_config</code> with <code>sign_in { email { enabled = true } }</code>, <code>authorized_domains = [&quot;secrets.sgit.ai&quot;, &quot;localhost&quot;]</code>, multi-tenancy off for the MVP (on for customers that want several user pools in one project; the app already passes <code>tenantId</code> when configured).</li>\n<li>Google provider: <code>google_identity_platform_default_supported_idp_config</code> with <code>idp_id = &quot;google.com&quot;</code>, <code>client_id</code>, <code>client_secret</code>. The client is a <strong>Web application</strong> OAuth client in the same project, authorised JavaScript origin <code>https://secrets.sgit.ai</code>, authorised redirect <code>https://&lt;authDomain&gt;/__/auth/handler</code>. The client secret is a GitHub Actions environment secret, passed as a Terraform variable; it never enters the repo. (The secret is only ever used by Google&#x27;s own token exchange; it is not a secret the app holds.)</li>\n<li>Admin OAuth client: a <strong>second</strong> Web application client, used only by <code>/admin/</code> and <code>/tests/</code> for the <code>cloud-platform</code> scope, authorised JavaScript origin <code>https://secrets.sgit.ai</code> (plus <code>http://localhost:8000</code> on dev), authorised redirect <code>https://secrets.sgit.ai/admin/oauth-return.html</code>. Its client id is public and goes into <code>config/environments.json</code>. Its secret is unused (implicit flow) and stays in the project.</li>\n<li>Bucket: <code>google_storage_bucket</code> with uniform bucket-level access, versioning on, a soft-delete retention of 30 days, CORS for <code>https://secrets.sgit.ai</code> (methods GET, PUT, POST, DELETE, HEAD; response headers <code>Content-Type</code>, <code>x-goog-meta-*</code>, <code>ETag</code>, <code>x-goog-generation</code>), lifecycle: keep 10 noncurrent versions. Link to Firebase with <code>google_firebase_storage_bucket</code>.</li>\n<li>Security Rules: <code>google_firebaserules_ruleset</code> + <code>google_firebaserules_release</code> named <code>firebase.storage/{bucket}</code> from <code>infra/rules/storage.rules</code> (section 8.6).</li>\n<li>IAM: the Terraform service account <code>tf-secrets@…</code> with Editor on the project (narrow later); a <code>secrets-admins</code> Google group (or named accounts) with <code>roles/owner</code> on the project, which is what makes the admin pages work for those people; nothing else. No service account keys, anywhere.</li>\n<li>Workload Identity Federation: pool <code>github</code>, provider <code>github-actions</code> restricted to <code>assertion.repository == &quot;SGit-AI/SGit-AI__Website__Secrets&quot;</code> and the <code>dev</code>/<code>main</code> branches or the environment name; binding <code>roles/iam.workloadIdentityUser</code> to the Terraform service account.</li>\n</ol>",
+      "id": "4.2",
+      "markdown": "Terraform lives in `infra/terraform/`, one module `modules/secrets-env`, one root per environment in `infra/terraform/envs/{dev,main,prod}/`. State in a GCS bucket in a separate bootstrap project (`sgit-secrets-tfstate`, PROPOSED), one prefix per env.\n\n1. Project services: `identitytoolkit.googleapis.com`, `firebase.googleapis.com`, `firebasestorage.googleapis.com`, `storage.googleapis.com`, `firebaserules.googleapis.com`, `cloudresourcemanager.googleapis.com`, `serviceusage.googleapis.com`, `iam.googleapis.com`.\n2. Firebase project link: `google_firebase_project` (google-beta provider).\n3. Web app registration: `google_firebase_web_app` → yields `appId`; read `google_firebase_web_app_config` for `apiKey`, `authDomain`, `storageBucket`. These are **public identifiers**, written into `config/environments.json` by the pipeline. Restrict the API key by HTTP referrer to `https://secrets.sgit.ai/*` and `http://localhost:*` (dev only).\n4. Identity Platform: `google_identity_platform_config` with `sign_in { email { enabled = true } }`, `authorized_domains = [\"secrets.sgit.ai\", \"localhost\"]`, multi-tenancy off for the MVP (on for customers that want several user pools in one project; the app already passes `tenantId` when configured).\n5. Google provider: `google_identity_platform_default_supported_idp_config` with `idp_id = \"google.com\"`, `client_id`, `client_secret`. The client is a **Web application** OAuth client in the same project, authorised JavaScript origin `https://secrets.sgit.ai`, authorised redirect `https://<authDomain>/__/auth/handler`. The client secret is a GitHub Actions environment secret, passed as a Terraform variable; it never enters the repo. (The secret is only ever used by Google's own token exchange; it is not a secret the app holds.)\n6. Admin OAuth client: a **second** Web application client, used only by `/admin/` and `/tests/` for the `cloud-platform` scope, authorised JavaScript origin `https://secrets.sgit.ai` (plus `http://localhost:8000` on dev), authorised redirect `https://secrets.sgit.ai/admin/oauth-return.html`. Its client id is public and goes into `config/environments.json`. Its secret is unused (implicit flow) and stays in the project.\n7. Bucket: `google_storage_bucket` with uniform bucket-level access, versioning on, a soft-delete retention of 30 days, CORS for `https://secrets.sgit.ai` (methods GET, PUT, POST, DELETE, HEAD; response headers `Content-Type`, `x-goog-meta-*`, `ETag`, `x-goog-generation`), lifecycle: keep 10 noncurrent versions. Link to Firebase with `google_firebase_storage_bucket`.\n8. Security Rules: `google_firebaserules_ruleset` + `google_firebaserules_release` named `firebase.storage/{bucket}` from `infra/rules/storage.rules` (section 8.6).\n9. IAM: the Terraform service account `tf-secrets@…` with Editor on the project (narrow later); a `secrets-admins` Google group (or named accounts) with `roles/owner` on the project, which is what makes the admin pages work for those people; nothing else. No service account keys, anywhere.\n10. Workload Identity Federation: pool `github`, provider `github-actions` restricted to `assertion.repository == \"SGit-AI/SGit-AI__Website__Secrets\"` and the `dev`/`main` branches or the environment name; binding `roles/iam.workloadIdentityUser` to the Terraform service account.\n",
+      "nodes": [
+        {
+          "id": "sign-in.popup-default.email",
+          "layer": "examples",
+          "name": "Sign in with email and password against dev."
+        },
+        {
+          "id": "infrastructure.terraform-module",
+          "layer": "rules",
+          "name": "One module secrets-env and one root per environment create the…"
+        },
+        {
+          "id": "env.tfstate",
+          "layer": "deploy",
+          "name": "tfstate"
+        },
+        {
+          "id": "res.services",
+          "layer": "deploy",
+          "name": "Project services: identitytoolkit, firebase, firebasestorage, storage, firebaserules, cloudresourcemanager, serviceusage, iam"
+        },
+        {
+          "id": "res.firebase-project",
+          "layer": "deploy",
+          "name": "google_firebase_project"
+        },
+        {
+          "id": "res.web-app",
+          "layer": "deploy",
+          "name": "google_firebase_web_app and its config: apiKey, authDomain, storageBucket, appId (public identifiers; API key restricted by referrer)"
+        },
+        {
+          "id": "res.identity-platform",
+          "layer": "deploy",
+          "name": "google_identity_platform_config: email sign-in, authorized_domains secrets.sgit.ai and localhost, multi-tenancy off"
+        },
+        {
+          "id": "res.google-idp",
+          "layer": "deploy",
+          "name": "google_identity_platform_default_supported_idp_config google.com with the Web client id and secret (secret from a GitHub environment secret)"
+        },
+        {
+          "id": "res.admin-oauth-client",
+          "layer": "deploy",
+          "name": "A second Web application OAuth client for /admin/ and /tests/, implicit flow, redirect /admin/oauth-return.html"
+        },
+        {
+          "id": "res.bucket",
+          "layer": "deploy",
+          "name": "google_storage_bucket: uniform access, versioning, 30-day soft delete, CORS for https://secrets.sgit.ai, keep 10 noncurrent versions; linked with google_firebase_storage_bucket"
+        },
+        {
+          "id": "res.rules-release",
+          "layer": "deploy",
+          "name": "google_firebaserules_ruleset and release firebase.storage/{bucket} from infra/rules/storage.rules"
+        },
+        {
+          "id": "res.iam",
+          "layer": "deploy",
+          "name": "tf-secrets@ service account with Editor (narrow later); a secrets-admins group with roles/owner; no service account keys"
+        },
+        {
+          "id": "res.wif",
+          "layer": "deploy",
+          "name": "Workload Identity Federation pool github, provider github-actions restricted to this repository and the dev/main branches or the environment name"
+        },
+        {
+          "id": "res.tfstate-bucket",
+          "layer": "deploy",
+          "name": "A GCS bucket in the bootstrap project holding Terraform state, one prefix per env"
+        }
+      ],
+      "title": "4.2 Per-project resources (what Terraform creates)"
+    },
+    {
+      "anchor": "43-bootstrap-done-once-by-a-human-documented-in-docsopsbootstrapmd",
+      "html": "<p>The first project and the WIF pool cannot be created by the pipeline that depends on them. The bootstrap is a short <code>gcloud</code> script in <code>infra/bootstrap/bootstrap.sh</code>, run by Dinis locally, that creates the tfstate project and bucket, the three env projects, enables billing, creates the Terraform service account and the WIF pool, and prints the values that go into GitHub environment variables. The script is idempotent and prints what it would do with <code>--dry-run</code>. Everything after bootstrap is Terraform.</p>",
+      "id": "4.3",
+      "markdown": "The first project and the WIF pool cannot be created by the pipeline that depends on them. The bootstrap is a short `gcloud` script in `infra/bootstrap/bootstrap.sh`, run by Dinis locally, that creates the tfstate project and bucket, the three env projects, enables billing, creates the Terraform service account and the WIF pool, and prints the values that go into GitHub environment variables. The script is idempotent and prints what it would do with `--dry-run`. Everything after bootstrap is Terraform.\n",
+      "nodes": [
+        {
+          "id": "infrastructure.bootstrap",
+          "layer": "rules",
+          "name": "bootstrap.sh, run once by a human, idempotent with --dry-run, creates…"
+        },
+        {
+          "id": "infrastructure.bootstrap.run",
+          "layer": "examples",
+          "name": "The bootstrap prints the values for the dev environment and a re-run…"
+        }
+      ],
+      "title": "4.3 Bootstrap (done once, by a human, documented in `docs/ops/bootstrap.md`)"
+    },
+    {
+      "anchor": "44-what-a-customer-runs",
+      "html": "<p><code>docs/ops/new-environment.md</code>: &quot;You have a GCP org and a billing account. Run bootstrap for one project, add your domain to <code>authorized_domains</code>, run Terraform, paste the printed config into the site&#x27;s Environment page (or into your fork&#x27;s <code>config/environments.json</code>).&quot; Target: under thirty minutes with no support. The admin pages&#x27; setup checklist (section 6.3) verifies each step.</p>",
+      "id": "4.4",
+      "markdown": "`docs/ops/new-environment.md`: \"You have a GCP org and a billing account. Run bootstrap for one project, add your domain to `authorized_domains`, run Terraform, paste the printed config into the site's Environment page (or into your fork's `config/environments.json`).\" Target: under thirty minutes with no support. The admin pages' setup checklist (section 6.3) verifies each step.\n",
+      "nodes": [
+        {
+          "id": "infrastructure.customer",
+          "layer": "rules",
+          "name": "A customer runs bootstrap for one project, adds their domain, runs…"
+        },
+        {
+          "id": "infrastructure.customer.guide",
+          "layer": "examples",
+          "name": "docs/ops/new-environment.md walks a customer through it and the…"
+        },
+        {
+          "id": "flow.customer-environment",
+          "layer": "flows",
+          "name": "A customer runs their own environment"
+        }
+      ],
+      "title": "4.4 What a customer runs"
+    },
+    {
+      "anchor": "45-identity-platform-notes",
+      "html": "<ul>\n<li>Use <strong>popup</strong> sign-in (<code>signInWithPopup</code>) by default; redirect sign-in relies on the <code>authDomain</code> helper and third-party cookies, which fail on GitHub Pages in Safari and increasingly in Chrome. Offer <code>signInWithRedirect</code> only as a fallback switch on the Environment page.</li>\n<li>Add <code>secrets.sgit.ai</code> and <code>localhost</code> to Identity Platform authorised domains, or every sign-in fails with <code>auth/unauthorized-domain</code>. The admin checklist tests this.</li>\n<li>Identity Platform&#x27;s own passkey support is not used. The unlock passkey is a plain WebAuthn credential registered by our page.</li>\n<li>Pricing reference: free to 50,000 MAU on basic providers; SAML/OIDC free only to 50 MAU.</li>\n</ul>",
+      "id": "4.5",
+      "markdown": "- Use **popup** sign-in (`signInWithPopup`) by default; redirect sign-in relies on the `authDomain` helper and third-party cookies, which fail on GitHub Pages in Safari and increasingly in Chrome. Offer `signInWithRedirect` only as a fallback switch on the Environment page.\n- Add `secrets.sgit.ai` and `localhost` to Identity Platform authorised domains, or every sign-in fails with `auth/unauthorized-domain`. The admin checklist tests this.\n- Identity Platform's own passkey support is not used. The unlock passkey is a plain WebAuthn credential registered by our page.\n- Pricing reference: free to 50,000 MAU on basic providers; SAML/OIDC free only to 50 MAU.\n",
+      "nodes": [
+        {
+          "id": "sign-in.popup-default",
+          "layer": "rules",
+          "name": "Popup sign-in (signInWithPopup) is the default; redirect sign-in is…"
+        },
+        {
+          "id": "sign-in.authorised-domains",
+          "layer": "rules",
+          "name": "secrets.sgit.ai and localhost are in the Identity Platform authorised…"
+        }
+      ],
+      "title": "4.5 Identity Platform notes"
+    },
+    {
+      "anchor": "46-the-one-external-dependency-googles-auth-endpoints",
+      "html": "<p>The app contacts <code>https://&lt;project&gt;.firebaseapp.com/__/auth/*</code> (the Firebase auth helper, in a popup) and <code>https://accounts.google.com</code> (the OAuth consent, in a popup or redirect). Both are separate browsing contexts; neither injects a script into our origin. That is the whole external surface of the app pages. Admin pages add <code>https://*.googleapis.com</code> REST calls with the user&#x27;s own token. No Google Identity Services script, no gapi, no analytics, no fonts from CDNs.</p>\n<hr>",
+      "id": "4.6",
+      "markdown": "The app contacts `https://<project>.firebaseapp.com/__/auth/*` (the Firebase auth helper, in a popup) and `https://accounts.google.com` (the OAuth consent, in a popup or redirect). Both are separate browsing contexts; neither injects a script into our origin. That is the whole external surface of the app pages. Admin pages add `https://*.googleapis.com` REST calls with the user's own token. No Google Identity Services script, no gapi, no analytics, no fonts from CDNs.\n\n---\n",
+      "nodes": [],
+      "title": "4.6 The one external dependency: Google's auth endpoints"
+    }
+  ],
+  "title": "4. GCP environments"
+}

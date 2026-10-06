@@ -16,6 +16,9 @@ const PROPERTY_KEYS = Object.freeze({
     flow        : ['actor'],
     step        : ['text', 'surface', 'actor'],
     component   : ['kind', 'runs_in', 'trust', 'honest_depth', 'provides'],
+    claim       : ['status', 'since', 'area', 'where', 'notes'],
+    release     : ['version', 'date', 'notes'],
+    anchor      : ['kind', 'ref', 'opens'],
     environment : ['project_id', 'purpose', 'status'],
     resource    : ['kind', 'environment'],
     pipeline    : ['file'],
@@ -30,12 +33,27 @@ export class ReviewNode extends ReviewBase {
     onReady() {
         this.shadowRoot.addEventListener('click', (event) => {
             const link = event.target.closest('[data-node]')
-            if (link) { event.preventDefault(); ReviewBase.store.select(link.dataset.node) }
+            if (link) { event.preventDefault(); ReviewBase.store.select(link.dataset.node); return }
+            const section = event.target.closest('[data-section]')
+            if (section) { event.preventDefault(); ReviewBase.store.showSection(section.dataset.section); return }
+            const file = event.target.closest('[data-file]')
+            if (file) { event.preventDefault(); ReviewBase.store.showFile(file.dataset.file, file.dataset.lines || null) }
         })
         this.on(REVIEW_EVENTS.select, (event) => this.render(event.detail.node))
         this.on(REVIEW_EVENTS.route,  () => this.render(null))
         const current = ReviewBase.store.route.node
         this.render(current ? ReviewBase.store.get(current) : null)
+    }
+
+    anchorPanel(panel, node) {                                                  // where a chain ends: open the thing itself
+        const p = this.el('p', { class : 'anchor-note' }, 'An anchor: the chain of evidence ends here, on something a person can open. ')
+        if (node.kind === 'file' || node.kind === 'test') {
+            const [path, lines] = node.record.ref.split(':', 2)[1].split('#')
+            p.appendChild(this.el('a', { href : node.href, 'data-file' : path, 'data-lines' : lines && lines.startsWith('L') ? lines : '' }, `Open ${path} here`))
+        } else {
+            p.appendChild(this.el('a', { href : node.href, target : node.kind === 'section' ? '_self' : '_top', 'data-section' : node.kind === 'section' ? node.record.ref.split(':')[1] : null }, `Open: ${node.opens}`))
+        }
+        panel.appendChild(p)
     }
 
     render(node) {
@@ -52,10 +70,14 @@ export class ReviewNode extends ReviewBase {
         if (node.record && node.record.proposed) head.appendChild(this.el('span', { class : 'proposed' }, `proposed by ${node.record.proposed.model}, ${node.record.proposed.date}; not yet accepted`))
         panel.appendChild(head)
 
+        if (node.layer === 'anchor') this.anchorPanel(panel, node)
         const source = store.sectionLink(node.source)
         if (source) {
             const p = this.el('p', { class : 'source' }, 'From the brief, ')
-            p.appendChild(this.el('a', { href : source.href, target : '_top' }, source.title))
+            p.appendChild(this.el('a', { href : `#section=${node.source.section}`, 'data-section' : node.source.section, title : 'read the section here, in the navigator' }, source.title))
+            p.appendChild(document.createTextNode(' ('))
+            p.appendChild(this.el('a', { href : source.href, target : '_top', class : 'leave' }, 'rendered page'))
+            p.appendChild(document.createTextNode(')'))
             if (node.source.quote) p.appendChild(this.el('q', {}, node.source.quote))
             panel.appendChild(p)
         } else if (node.source && node.source.path) {
@@ -101,6 +123,17 @@ export class ReviewNode extends ReviewBase {
                 li.appendChild(this.el('span', { class : 'verb' }, edge.verb.replace(/_/g, ' ')))
                 li.appendChild(document.createTextNode(' '))
                 li.appendChild(other ? this.el('a', { href : '#', 'data-node' : otherId, class : `layer-${other.layer}` }, other.name) : this.el('span', {}, otherId))
+                if (other && other.layer === 'anchor') {                              // the chain ends here: open it without leaving, or open the thing itself
+                    li.appendChild(document.createTextNode(' '))
+                    if (other.kind === 'file' || other.kind === 'test') {
+                        const [path, lines] = other.record.ref.split(':', 2)[1].split('#')
+                        li.appendChild(this.el('a', { href : other.href, class : 'open', 'data-file' : path, 'data-lines' : lines && lines.startsWith('L') ? lines : null }, 'open'))
+                    } else if (other.kind === 'section') {
+                        li.appendChild(this.el('a', { href : other.href, class : 'open', 'data-section' : other.record.ref.split(':')[1] }, 'read'))
+                    } else {
+                        li.appendChild(this.el('a', { href : other.href, class : 'open leave', target : '_top' }, other.kind === 'url' ? 'visit' : 'open on GitHub'))
+                    }
+                }
                 ul.appendChild(li)
             }
             panel.appendChild(ul)

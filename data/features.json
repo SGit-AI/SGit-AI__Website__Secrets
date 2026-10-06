@@ -1,81 +1,1881 @@
 {
   "version": 1,
-  "_comment": "Every claim the site makes, with its status. docs/reality.md and the status tables on the pages are generated from this file by admin/build/gen_features.py. shipped means it exists in the repository, runs, and has been exercised; proposed means it is designed (the brief says how) and not built; absent means it is deliberately not in the MVP. A shipped row carries the version that shipped it. rulesHash is the SHA-256 of rulesSource; the gate fails when they disagree.",
+  "_comment": "Every claim the site makes, with its status. docs/reality.md and the status tables on the pages are generated from this file by admin/build/gen_features.py. shipped means it exists in the repository, runs, and has been exercised; proposed means it is designed (the brief says how) and not built; absent means it is deliberately not in the MVP. A shipped row carries the version that shipped it. rulesHash is the SHA-256 of rulesSource; the gate fails when they disagree. Every claim carries evidence: typed edges (verb, to) to the intent it realises, the files it lives in, the test or check that proves it, the section or document that describes it, the URL where it is seen; review/tools/claims.py turns them into the claims layer of the review graph and fails the build when a shipped claim has no anchor that resolves.",
   "statuses": {
-    "shipped":  "exists in the repository, runs, and was exercised at the version shown",
+    "shipped": "exists in the repository, runs, and was exercised at the version shown",
     "proposed": "designed in the brief, not built; described only in the future tense",
-    "absent":   "deliberately not in the MVP; comes as a later version or a later site, or never"
+    "absent": "deliberately not in the MVP; comes as a later version or a later site, or never"
   },
   "rulesSource": "infra/rules/storage.rules",
-  "rulesHash":   "sha256:6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250",
+  "rulesHash": "sha256:6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250",
   "features": [
-    { "id": "pipeline.version-source",   "area": "pipeline", "title": "One version in admin/build/version.txt, repeated in every badge, twin, index and config",          "status": "shipped",  "since": "0.1.0", "where": "admin/build/version.txt",            "notes": "Check 1 of the gate fails on any disagreement." },
-    { "id": "pipeline.chrome",           "area": "pipeline", "title": "Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition", "status": "shipped", "since": "0.1.0", "where": "admin/build/chrome.py",        "notes": "gen_chrome.py --check is part of the gate." },
-    { "id": "pipeline.twins",            "area": "pipeline", "title": "Markdown twin of every HTML page, links pointing at markdown",                                     "status": "shipped",  "since": "0.1.0", "where": "admin/build/gen_twins.py",           "notes": "index.html has index.md beside it; the twin carries the site version." },
-    { "id": "pipeline.llms",             "area": "pipeline", "title": "llms.txt, llms-full.txt and sitemap.xml generated on every release",                               "status": "shipped",  "since": "0.1.0", "where": "admin/build/gen_llms.py",            "notes": "llms-full.txt concatenates every twin and every design document." },
-    { "id": "pipeline.reality",          "area": "pipeline", "title": "docs/reality.md and the status tables generated from data/features.json",                          "status": "shipped",  "since": "0.1.0", "where": "admin/build/gen_features.py",        "notes": "If the reality document does not list it, it does not exist." },
-    { "id": "pipeline.gate",             "area": "pipeline", "title": "The eight-check release gate, no dependencies",                                                     "status": "shipped",  "since": "0.1.0", "where": "admin/build/validate.js",            "notes": "Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys." },
-    { "id": "pipeline.gate-local",       "area": "pipeline", "title": "The same gate locally and in CI, one command",                                                     "status": "shipped",  "since": "0.1.0", "where": "admin/build/gate.py",                "notes": "The CI validate job runs gate.py; a release that fails locally fails the same way in CI." },
-    { "id": "pipeline.tag-release",      "area": "pipeline", "title": "Every push to dev is a release: version.txt and the commit subject agree, CI tags it",            "status": "shipped",  "since": "0.1.0", "where": "admin/build/tag_release.py",         "notes": "Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags." },
-    { "id": "pipeline.deploy",           "area": "pipeline", "title": "Deploy to GitHub Pages from the validated tree",                                                   "status": "shipped",  "since": "0.1.0", "where": ".github/workflows/deploy-pages.yml", "notes": "Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA." },
-    { "id": "pipeline.verify-live",      "area": "pipeline", "title": "verify-live: the run is red until the live site serves the released version",                      "status": "shipped",  "since": "0.1.0", "where": "admin/build/verify_live.py",         "notes": "Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes." },
-    { "id": "pipeline.vendor",           "area": "pipeline", "title": "Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin", "status": "shipped", "since": "0.1.0", "where": "vendor/MANIFEST.json",      "notes": "Check 5 of the gate. Today the only vendored file is the family design tokens." },
-    { "id": "site.live-domain",          "area": "site",     "title": "secrets.sgit.ai served by GitHub Pages over HTTPS",                                                 "status": "shipped",  "since": "0.1.0", "where": "CNAME, docs/ops/dns.md",             "notes": "verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made." },
-    { "id": "site.content-pages",        "area": "site",     "title": "Content pages: how it works, security, keyring spec, sharing, environments",                      "status": "shipped",  "since": "0.1.1", "where": "how-it-works/, security/, keyring/, sharing/, environments/", "notes": "Every page opens with a status line generated from this file and describes only designs in the future tense." },
-    { "id": "site.shipped-page",         "area": "site",     "title": "/shipped/ generated from this file, one table per status, beside docs/reality.md",                 "status": "shipped",  "since": "0.1.1", "where": "shipped/index.html",                 "notes": "The same generator writes both, so the page and the reality document cannot disagree." },
-    { "id": "site.design-docs",          "area": "site",     "title": "The five design documents published verbatim",                                                    "status": "shipped",  "since": "0.1.0", "where": "docs/design/",                       "notes": "The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it." },
-    { "id": "site.docs-rendered",        "area": "site",     "title": "Every markdown document under docs/ rendered to HTML on each release, with index pages",           "status": "shipped",  "since": "0.1.1", "where": "admin/build/gen_docs.py, admin/build/md_to_html.py", "notes": "Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate." },
-    { "id": "site.family-chrome",        "area": "site",     "title": "The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs", "status": "shipped", "since": "0.1.1", "where": "admin/build/chrome.py, assets/nav.js", "notes": "The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link." },
-    { "id": "admin.comms",               "area": "admin",    "title": "Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json", "status": "shipped", "since": "0.1.1", "where": "admin/comms.html",   "notes": "gen_versions.py renders the step tracker; a done step must name a release that exists." },
-    { "id": "review.skeleton",           "area": "review",   "title": "review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository", "status": "shipped", "since": "0.1.3", "where": "review/tools/", "notes": "Step 0 of the review brief. Check 9 of the gate." },
-    { "id": "review.intent",             "area": "review",   "title": "review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead", "status": "proposed", "where": "review/intent/", "notes": "Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7)." },
-    { "id": "review.graph-view",         "area": "review",   "title": "The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step", "status": "shipped", "since": "0.1.7", "where": "review/ui/components/review-graph/, review-ladder/", "notes": "Follows the selection in the navigator; given nodes=\"id,id\" it draws what a page names, which is how the reader's column embeds it." },
-    { "id": "review.navigator-walk",     "area": "review",   "title": "The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief", "status": "shipped", "since": "0.1.4", "where": "review/ui/", "notes": "review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash." },
-    { "id": "review.navigator",          "area": "review",   "title": "The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search", "status": "proposed", "where": "review/ui/", "notes": "Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md." },
-    { "id": "review.derived",            "area": "review",   "title": "graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model", "status": "proposed", "where": "review/tools/derive.py, derive_js.py", "notes": "Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn." },
-    { "id": "review.changes",            "area": "review",   "title": "Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence", "status": "proposed", "where": "review/tools/change.py", "notes": "Step 4; the Kind: trailer carries the claim (R4)." },
-    { "id": "review.self",               "area": "review",   "title": "review/self/: the same folder for the tools and the navigator, both sets green before a release", "status": "proposed", "where": "review/self/", "notes": "Step 2." },
-    { "id": "pipeline.release-script",   "area": "pipeline", "title": "One release script: bump, build, gate, commit with a Kind: trailer, push, verify live", "status": "shipped", "since": "0.1.3", "where": "admin/build/release.py", "notes": "The family's release discipline in one command; a clean push is not a release." },
-    { "id": "pipeline.gate-extras",      "area": "pipeline", "title": "The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate", "status": "shipped", "since": "0.1.3", "where": "admin/build/validate.js", "notes": "From section 4 of the repository guidance; the advisory never fails the build." },
-    { "id": "site.team-roles",           "area": "site",     "title": "Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page", "status": "shipped", "since": "0.1.3", "where": "team/", "notes": "Two roles fill every seat: the project lead and the build agent." },
-    { "id": "site.participant",          "area": "site",     "title": "Participant disclosure: who publishes this site and what they are building", "status": "shipped", "since": "0.1.3", "where": "about/participant.html", "notes": "Linked from the footer." },
-    { "id": "site.themes",               "area": "site",     "title": "Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css", "status": "shipped", "since": "0.1.6", "where": "data/themes.json, assets/themes.css, assets/theme.js", "notes": "No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour." },
-    { "id": "site.reader-column",        "area": "site",     "title": "The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names", "status": "shipped", "since": "0.1.7", "where": "components/reader-panel/, reader-log/", "notes": "Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret." },
-    { "id": "site.reader-chat",          "area": "site",     "title": "A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key", "status": "shipped", "since": "0.1.7", "where": "components/reader-chat/, reader/index.html, data/search-index.json", "notes": "The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed." },
-    { "id": "site.agent-contact",        "area": "site",     "title": "The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it", "status": "proposed", "where": ".well-known/sgit-agents.json, tools/comms/", "notes": "The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen." },
-    { "id": "site.mockups",              "area": "site",     "title": "Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises", "status": "shipped", "since": "0.1.5", "where": "mockups/, components/proto-app/, proto-base/", "notes": "Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship." },
-    { "id": "site.mockups-variants",     "area": "site",     "title": "Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log", "status": "shipped", "since": "0.1.8", "where": "mockups/screens.json, components/proto-column/", "notes": "The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator." },
-    { "id": "site.repo-protections",     "area": "site",     "title": "Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/", "status": "proposed", "where": "docs/ops/branch-protection.md",    "notes": "Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed." },
-    { "id": "site.corrections",          "area": "site",     "title": "brief-corrections.md: what the brief got wrong, dated, beside it",                                 "status": "shipped",  "since": "0.1.0", "where": "docs/design/brief-corrections.md",   "notes": "Appended to as the build finds out." },
-    { "id": "site.needs",                "area": "site",     "title": "docs/ops/needs.md: exactly what only a human can do",                                              "status": "shipped",  "since": "0.1.0", "where": "docs/ops/needs.md",                  "notes": "DNS, Pages, branch protection, GCP bootstrap, OAuth client secret." },
-    { "id": "infra.bootstrap",           "area": "infra",    "title": "Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool",  "status": "proposed", "where": "infra/bootstrap/bootstrap.sh",            "notes": "Step 3. Run once by a human; idempotent; --dry-run." },
-    { "id": "infra.terraform",           "area": "infra",    "title": "Terraform module secrets-env and the dev environment root",                                        "status": "proposed", "where": "infra/terraform/",                        "notes": "Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF." },
-    { "id": "infra.workflow",            "area": "infra",    "title": "infra.yml: plan on PR, apply on dispatch and on push to dev for dev",                              "status": "proposed", "where": ".github/workflows/infra.yml",             "notes": "Step 3. Workload Identity Federation, no JSON keys." },
-    { "id": "infra.rules",               "area": "infra",    "title": "Storage Security Rules deployed per environment",                                                  "status": "proposed", "where": "infra/rules/storage.rules",               "notes": "The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project." },
-    { "id": "infra.environments-config", "area": "infra",    "title": "config/environments.json with real dev values from Terraform outputs",                             "status": "proposed", "where": "config/environments.json",                "notes": "Step 3. Today every environment is a placeholder with _source null." },
-    { "id": "app.sign-in",               "area": "app",      "title": "Sign in and out with Google and email/password against the chosen environment",                   "status": "proposed", "where": "app/index.html",                          "notes": "Step 3. Popup sign-in by default; vendored Firebase SDK." },
-    { "id": "app.environment-page",      "area": "app",      "title": "Environment page: pick a built-in environment, enter a custom one, import, export, reset",         "status": "proposed", "where": "app/environment.html",                    "notes": "Step 3. The active environment is shown in the header at all times." },
-    { "id": "app.prf-unlock",            "area": "app",      "title": "Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai",               "status": "proposed", "where": "app/setup.html, app/unlock.html",         "notes": "Step 4. Not before the dev project exists and the probe pages are green." },
-    { "id": "app.keyring-v1",            "area": "app",      "title": "Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests",                 "status": "proposed", "where": "section 8 of the brief",                  "notes": "Step 4. Published at /keyring/ as a specification." },
-    { "id": "app.recovery-code",         "area": "app",      "title": "Recovery code: 26 characters base32, 128 bits, shown once",                                        "status": "proposed", "where": "app/setup.html",                          "notes": "Step 4. Lose every passkey and the code and the data is gone; the site will say so." },
-    { "id": "app.entries",               "area": "app",      "title": "Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers",              "status": "proposed", "where": "app/vault.html, app/entry.html",          "notes": "Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note." },
-    { "id": "app.concurrency",           "area": "app",      "title": "Optimistic concurrency on keyring writes with a three-way merge",                                  "status": "proposed", "where": "section 8.5 of the brief",                "notes": "Step 5. rev in the AAD so a stale body fails to decrypt." },
-    { "id": "app.devices",               "area": "app",      "title": "Devices page: add and remove passkeys, regenerate the recovery code",                              "status": "proposed", "where": "app/devices.html",                        "notes": "Step 6." },
-    { "id": "app.account",               "area": "app",      "title": "Account page: export and import the encrypted keyring, sign out, wipe memory",                     "status": "proposed", "where": "app/account.html",                        "notes": "Step 6." },
-    { "id": "app.sharing-data-model",    "area": "app",      "title": "Key pair per user generated at first run; public bundle written to directory/",                    "status": "proposed", "where": "section 8.3 of the brief",                "notes": "Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing." },
-    { "id": "app.sharing-ui",            "area": "app",      "title": "Sharing an entry with another user through their inbox",                                           "status": "absent",   "where": "/sharing/ (step 2 describes it)",         "notes": "Phase 2. The data model ships first so it is not rewritten later." },
-    { "id": "app.document-kind",         "area": "app",      "title": "A document kind in the keyring",                                                                   "status": "absent",   "where": "section 8.4 of the brief",                "notes": "Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring." },
-    { "id": "app.browser-extension",     "area": "app",      "title": "Browser extension or autofill",                                                                    "status": "absent",   "where": "section 12 of the brief",                 "notes": "A later site or a later version." },
-    { "id": "app.agent-api",             "area": "app",      "title": "An API for agents",                                                                                "status": "absent",   "where": "section 12 of the brief",                 "notes": "A later version." },
-    { "id": "app.server-side",           "area": "app",      "title": "Any server-side code: Cloud Functions, proxies, a small API",                                      "status": "absent",   "where": "everywhere",                              "notes": "Forbidden by design. A need for one is a proposal in brief-corrections.md, not code." },
-    { "id": "admin.oauth",               "area": "admin",    "title": "Admin sign-in with the visitor's own Google account, token in memory only",                        "status": "proposed", "where": "admin/oauth.js",                          "notes": "Step 7. Implicit flow to verify first; PKCE fallback." },
-    { "id": "admin.setup-checklist",     "area": "admin",    "title": "Setup checklist: every per-project resource as a row, with Fix where fixable client-side",        "status": "proposed", "where": "admin/setup-checklist.html",              "notes": "Step 3 read-only, step 7 with fixes." },
-    { "id": "admin.pages",               "area": "admin",    "title": "Auth config, storage, rules diff and deploy, users, environment export",                           "status": "proposed", "where": "admin/*.html",                            "notes": "Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs." },
-    { "id": "admin.versions",            "area": "admin",    "title": "Release history page generated from data/versions.json",                                          "status": "shipped",  "since": "0.1.0", "where": "admin/versions.html",                "notes": "One row per release; the newest row must equal version.txt." },
-    { "id": "tests.probe-pages",         "area": "tests",    "title": "Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix", "status": "proposed", "where": "tests/*.html",             "notes": "Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix." },
-    { "id": "tests.unit",                "area": "tests",    "title": "Unit tests under node --test, real WebCrypto, no mocks",                                           "status": "shipped",  "since": "0.1.0", "where": "tests/unit/",                        "notes": "At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4." },
-    { "id": "tests.build",               "area": "tests",    "title": "Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema", "status": "shipped", "since": "0.1.0", "where": "tests/build/",                  "notes": "pytest, TestCase classes, no mocks." },
-    { "id": "tests.e2e",                 "area": "tests",    "title": "Playwright end to end against the real dev project with a virtual authenticator",                  "status": "proposed", "where": "tests/e2e/",                              "notes": "Whether the virtual authenticator does PRF is an open question." },
-    { "id": "tests.acceptance",          "area": "tests",    "title": "Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field", "status": "proposed", "where": "docs/acceptance.md",                      "notes": "Before 1.0. The write-up is published whatever the result." }
+    {
+      "id": "pipeline.version-source",
+      "area": "pipeline",
+      "title": "One version in admin/build/version.txt, repeated in every badge, twin, index and config",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/version.txt",
+      "notes": "Check 1 of the gate fails on any disagreement.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:release"
+        },
+        {
+          "verb": "realises",
+          "to": "node:release.version-agreement"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/version.txt"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/chrome.py"
+        },
+        {
+          "verb": "proven_by",
+          "to": "file:admin/build/validate.js#check-1"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:9.1"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.chrome",
+      "area": "pipeline",
+      "title": "Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/chrome.py",
+      "notes": "gen_chrome.py --check is part of the gate.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.chrome"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/chrome.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_chrome.py"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_chrome_in_every_page.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.1"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.twins",
+      "area": "pipeline",
+      "title": "Markdown twin of every HTML page, links pointing at markdown",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/gen_twins.py",
+      "notes": "index.html has index.md beside it; the twin carries the site version.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_twins.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/html_to_md.py"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_twins_exist.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:7.4"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.llms",
+      "area": "pipeline",
+      "title": "llms.txt, llms-full.txt and sitemap.xml generated on every release",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/gen_llms.py",
+      "notes": "llms-full.txt concatenates every twin and every design document.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_llms.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:llms.txt"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_generators_check.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:7.4"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.reality",
+      "area": "pipeline",
+      "title": "docs/reality.md and the status tables generated from data/features.json",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/gen_features.py",
+      "notes": "If the reality document does not list it, it does not exist.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_features.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:data/features.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:docs/reality.md"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_features_schema.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.5"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.gate",
+      "area": "pipeline",
+      "title": "The eight-check release gate, no dependencies",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/validate.js",
+      "notes": "Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.gate"
+        },
+        {
+          "verb": "realises",
+          "to": "node:release.gate"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/validate.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/unit/validate.test.js"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:9.3"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.gate-local",
+      "area": "pipeline",
+      "title": "The same gate locally and in CI, one command",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/gate.py",
+      "notes": "The CI validate job runs gate.py; a release that fails locally fails the same way in CI.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.gate"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gate.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:.github/workflows/deploy-pages.yml"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:9.3"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.tag-release",
+      "area": "pipeline",
+      "title": "Every push to dev is a release: version.txt and the commit subject agree, CI tags it",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/tag_release.py",
+      "notes": "Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:pipe.deploy-pages.tag-release"
+        },
+        {
+          "verb": "realises",
+          "to": "node:release.tag"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/tag_release.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:.github/workflows/deploy-pages.yml"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:9.1"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.deploy",
+      "area": "pipeline",
+      "title": "Deploy to GitHub Pages from the validated tree",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": ".github/workflows/deploy-pages.yml",
+      "notes": "Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:pipe.deploy-pages.deploy"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:.github/workflows/deploy-pages.yml"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/assemble_site.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:9.1"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.verify-live",
+      "area": "pipeline",
+      "title": "verify-live: the run is red until the live site serves the released version",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/build/verify_live.py",
+      "notes": "Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:pipe.deploy-pages.verify-live"
+        },
+        {
+          "verb": "realises",
+          "to": "node:release.deploy-verify"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/verify_live.py"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/admin/build/version.txt"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:9.1"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.vendor",
+      "area": "pipeline",
+      "title": "Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "vendor/MANIFEST.json",
+      "notes": "Check 5 of the gate. Today the only vendored file is the family design tokens.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.vendor"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:vendor/MANIFEST.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:vendor/sg-tokens.css"
+        },
+        {
+          "verb": "proven_by",
+          "to": "file:admin/build/validate.js#check-5"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:7.3"
+        }
+      ]
+    },
+    {
+      "id": "site.live-domain",
+      "area": "site",
+      "title": "secrets.sgit.ai served by GitHub Pages over HTTPS",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "CNAME, docs/ops/dns.md",
+      "notes": "verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:release"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:CNAME"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/ops/dns.md"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.1"
+        }
+      ]
+    },
+    {
+      "id": "site.content-pages",
+      "area": "site",
+      "title": "Content pages: how it works, security, keyring spec, sharing, environments",
+      "status": "shipped",
+      "since": "0.1.1",
+      "where": "how-it-works/, security/, keyring/, sharing/, environments/",
+      "notes": "Every page opens with a status line generated from this file and describes only designs in the future tense.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:how-it-works/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:security/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:keyring/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:sharing/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:environments/index.html"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.5"
+        }
+      ]
+    },
+    {
+      "id": "site.shipped-page",
+      "area": "site",
+      "title": "/shipped/ generated from this file, one table per status, beside docs/reality.md",
+      "status": "shipped",
+      "since": "0.1.1",
+      "where": "shipped/index.html",
+      "notes": "The same generator writes both, so the page and the reality document cannot disagree.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:shipped/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_features.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.5"
+        }
+      ]
+    },
+    {
+      "id": "site.design-docs",
+      "area": "site",
+      "title": "The five design documents published verbatim",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "docs/design/",
+      "notes": "The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:docs/design/secrets-sgit-ai__mvp-build-brief.md"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:2"
+        }
+      ]
+    },
+    {
+      "id": "site.docs-rendered",
+      "area": "site",
+      "title": "Every markdown document under docs/ rendered to HTML on each release, with index pages",
+      "status": "shipped",
+      "since": "0.1.1",
+      "where": "admin/build/gen_docs.py, admin/build/md_to_html.py",
+      "notes": "Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_docs.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/md_to_html.py"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_md_to_html.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/design/brief-corrections.md#c16-the-admin-section-and-the-markdown-viewer-follow-the-siblings"
+        }
+      ]
+    },
+    {
+      "id": "site.family-chrome",
+      "area": "site",
+      "title": "The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs",
+      "status": "shipped",
+      "since": "0.1.1",
+      "where": "admin/build/chrome.py, assets/nav.js",
+      "notes": "The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.chrome"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/chrome.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:assets/nav.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:assets/site.css"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_chrome_in_every_page.py"
+        }
+      ]
+    },
+    {
+      "id": "admin.comms",
+      "area": "admin",
+      "title": "Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json",
+      "status": "shipped",
+      "since": "0.1.1",
+      "where": "admin/comms.html",
+      "notes": "gen_versions.py renders the step tracker; a done step must name a release that exists.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.admin"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/comms.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:data/steps.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_versions.py"
+        }
+      ]
+    },
+    {
+      "id": "review.skeleton",
+      "area": "review",
+      "title": "review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository",
+      "status": "shipped",
+      "since": "0.1.3",
+      "where": "review/tools/",
+      "notes": "Step 0 of the review brief. Check 9 of the gate.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/tools/validate_review.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/tools/freshness.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/tools/schema.py"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_review_folder.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/BRIEF-CORRECTIONS.md"
+        }
+      ]
+    },
+    {
+      "id": "review.intent",
+      "area": "review",
+      "title": "review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead",
+      "status": "proposed",
+      "where": "review/intent/",
+      "notes": "Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7).",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/intent/stories.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/intent/flows.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/intent/components.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/intent/deploy.json"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_review_folder.py"
+        }
+      ]
+    },
+    {
+      "id": "review.graph-view",
+      "area": "review",
+      "title": "The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step",
+      "status": "shipped",
+      "since": "0.1.7",
+      "where": "review/ui/components/review-graph/, review-ladder/",
+      "notes": "Follows the selection in the navigator; given nodes=\"id,id\" it draws what a page names, which is how the reader's column embeds it.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-graph/review-graph.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-ladder/review-ladder.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_review_ui.py"
+        }
+      ]
+    },
+    {
+      "id": "review.claims",
+      "area": "review",
+      "title": "The claims layer: every claim on /shipped/ as a node with typed evidence down to an anchor (a file, a test, a section of the brief, a document, a URL, a commit, a tag, a CI run); every status chip on the site a link into it",
+      "status": "shipped",
+      "since": "0.1.9",
+      "where": "review/tools/claims.py, review/intent/claims.json, data/features.json",
+      "notes": "Strict: a shipped claim with no anchor that resolves fails the build. Releases carry their commit, tag and Actions run; release.py backfills the newest at the next release.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/tools/claims.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/intent/claims.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:data/features.json"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_claims.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/design/brief-corrections.md#c23-everything-links-to-everything-claims-anchors-and-the-brief-as-sections"
+        }
+      ]
+    },
+    {
+      "id": "review.brief-sections",
+      "area": "review",
+      "title": "The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it",
+      "status": "shipped",
+      "since": "0.1.9",
+      "where": "review/tools/brief.py, review/brief/, review/ui/components/review-brief/",
+      "notes": "Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/tools/brief.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/brief/index.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-brief/review-brief.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_claims.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:0"
+        }
+      ]
+    },
+    {
+      "id": "review.source-view",
+      "area": "review",
+      "title": "Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving",
+      "status": "shipped",
+      "since": "0.1.9",
+      "where": "review/ui/components/review-source/",
+      "notes": "Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-source/review-source.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_review_ui.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/ui/README.md"
+        }
+      ]
+    },
+    {
+      "id": "review.navigator-walk",
+      "area": "review",
+      "title": "The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief",
+      "status": "shipped",
+      "since": "0.1.4",
+      "where": "review/ui/",
+      "notes": "review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-base/review-base.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-tree/review-tree.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-node/review-node.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_review_ui.py"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/review/ui/"
+        }
+      ]
+    },
+    {
+      "id": "review.navigator",
+      "area": "review",
+      "title": "The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search",
+      "status": "proposed",
+      "where": "review/ui/",
+      "notes": "Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/ui/README.md"
+        }
+      ]
+    },
+    {
+      "id": "review.derived",
+      "area": "review",
+      "title": "graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model",
+      "status": "proposed",
+      "where": "review/tools/derive.py, derive_js.py",
+      "notes": "Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/README.md"
+        }
+      ]
+    },
+    {
+      "id": "review.changes",
+      "area": "review",
+      "title": "Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence",
+      "status": "proposed",
+      "where": "review/tools/change.py",
+      "notes": "Step 4; the Kind: trailer carries the claim (R4).",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/README.md"
+        }
+      ]
+    },
+    {
+      "id": "review.self",
+      "area": "review",
+      "title": "review/self/: the same folder for the tools and the navigator, both sets green before a release",
+      "status": "proposed",
+      "where": "review/self/",
+      "notes": "Step 2.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/README.md"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.release-script",
+      "area": "pipeline",
+      "title": "One release script: bump, build, gate, commit with a Kind: trailer, push, verify live",
+      "status": "shipped",
+      "since": "0.1.3",
+      "where": "admin/build/release.py",
+      "notes": "The family's release discipline in one command; a clean push is not a release.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:release"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/release.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/ops/release.md"
+        }
+      ]
+    },
+    {
+      "id": "pipeline.gate-extras",
+      "area": "pipeline",
+      "title": "The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate",
+      "status": "shipped",
+      "since": "0.1.3",
+      "where": "admin/build/validate.js",
+      "notes": "From section 4 of the repository guidance; the advisory never fails the build.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.gate"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/validate.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/unit/validate.test.js"
+        }
+      ]
+    },
+    {
+      "id": "site.team-roles",
+      "area": "site",
+      "title": "Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page",
+      "status": "shipped",
+      "since": "0.1.3",
+      "where": "team/",
+      "notes": "Two roles fill every seat: the project lead and the build agent.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:team/README.md"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:team/roles/project-lead.md"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:team/roles/build-agent.md"
+        }
+      ]
+    },
+    {
+      "id": "site.participant",
+      "area": "site",
+      "title": "Participant disclosure: who publishes this site and what they are building",
+      "status": "shipped",
+      "since": "0.1.3",
+      "where": "about/participant.html",
+      "notes": "Linked from the footer.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:about/participant.html"
+        }
+      ]
+    },
+    {
+      "id": "site.themes",
+      "area": "site",
+      "title": "Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css",
+      "status": "shipped",
+      "since": "0.1.6",
+      "where": "data/themes.json, assets/themes.css, assets/theme.js",
+      "notes": "No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.chrome"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:data/themes.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:assets/themes.css"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:assets/theme.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_themes.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/design/brief-corrections.md#c18-the-site-has-four-themes-and-the-theme-key-holds-a-name-not-light-or-dark"
+        }
+      ]
+    },
+    {
+      "id": "site.reader-column",
+      "area": "site",
+      "title": "The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names",
+      "status": "shipped",
+      "since": "0.1.7",
+      "where": "components/reader-panel/, reader-log/",
+      "notes": "Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:components/reader-panel/reader-panel.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:components/reader-log/reader-log.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:components/sg-base/sg-base.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_reader.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/ops/comms.md"
+        }
+      ]
+    },
+    {
+      "id": "site.reader-chat",
+      "area": "site",
+      "title": "A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key",
+      "status": "shipped",
+      "since": "0.1.7",
+      "where": "components/reader-chat/, reader/index.html, data/search-index.json",
+      "notes": "The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:components/reader-chat/reader-chat.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:reader/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:data/search-index.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_search.py"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_reader.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/design/brief-corrections.md#c19-one-page-widens-the-content-security-policy-declared-in-its-head-marker"
+        }
+      ]
+    },
+    {
+      "id": "site.agent-contact",
+      "area": "site",
+      "title": "The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it",
+      "status": "proposed",
+      "where": ".well-known/sgit-agents.json, tools/comms/",
+      "notes": "The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:.well-known/sgit-agents.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:tools/comms/drain.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/ops/comms.md"
+        }
+      ]
+    },
+    {
+      "id": "site.mockups",
+      "area": "site",
+      "title": "Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises",
+      "status": "shipped",
+      "since": "0.1.5",
+      "where": "mockups/, components/proto-app/, proto-base/",
+      "notes": "Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:mockups/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:mockups/screens.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:components/proto-app/proto-app.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:components/proto-base/proto-base.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_mockups.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.2"
+        }
+      ]
+    },
+    {
+      "id": "site.mockups-variants",
+      "area": "site",
+      "title": "Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log",
+      "status": "shipped",
+      "since": "0.1.8",
+      "where": "mockups/screens.json, components/proto-column/",
+      "notes": "The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:content"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:mockups/screens.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:components/proto-column/proto-column.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:mockups/prototype.html"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_mockups.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/design/brief-corrections.md#c22-the-mockups-are-a-prototype-in-three-ux-variants-with-a-column"
+        }
+      ]
+    },
+    {
+      "id": "site.repo-protections",
+      "area": "site",
+      "title": "Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/",
+      "status": "proposed",
+      "where": "docs/ops/branch-protection.md",
+      "notes": "Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:security-model"
+        },
+        {
+          "verb": "realises",
+          "to": "node:release.protections"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/ops/branch-protection.md"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:9.5"
+        }
+      ]
+    },
+    {
+      "id": "site.corrections",
+      "area": "site",
+      "title": "brief-corrections.md: what the brief got wrong, dated, beside it",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "docs/design/brief-corrections.md",
+      "notes": "Appended to as the build finds out.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:docs/design/brief-corrections.md"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:0"
+        }
+      ]
+    },
+    {
+      "id": "site.needs",
+      "area": "site",
+      "title": "docs/ops/needs.md: exactly what only a human can do",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "docs/ops/needs.md",
+      "notes": "DNS, Pages, branch protection, GCP bootstrap, OAuth client secret.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:docs/ops/needs.md"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:0"
+        }
+      ]
+    },
+    {
+      "id": "infra.bootstrap",
+      "area": "infra",
+      "title": "Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool",
+      "status": "proposed",
+      "where": "infra/bootstrap/bootstrap.sh",
+      "notes": "Step 3. Run once by a human; idempotent; --dry-run.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:infrastructure"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:infra/bootstrap/bootstrap.sh"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/ops/bootstrap.md"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:4.3"
+        }
+      ]
+    },
+    {
+      "id": "infra.terraform",
+      "area": "infra",
+      "title": "Terraform module secrets-env and the dev environment root",
+      "status": "proposed",
+      "where": "infra/terraform/",
+      "notes": "Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:infrastructure"
+        },
+        {
+          "verb": "realises",
+          "to": "node:res.bucket"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:4.2"
+        }
+      ]
+    },
+    {
+      "id": "infra.workflow",
+      "area": "infra",
+      "title": "infra.yml: plan on PR, apply on dispatch and on push to dev for dev",
+      "status": "proposed",
+      "where": ".github/workflows/infra.yml",
+      "notes": "Step 3. Workload Identity Federation, no JSON keys.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:pipe.infra"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:9.2"
+        }
+      ]
+    },
+    {
+      "id": "infra.rules",
+      "area": "infra",
+      "title": "Storage Security Rules deployed per environment",
+      "status": "proposed",
+      "where": "infra/rules/storage.rules",
+      "notes": "The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:infrastructure"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:infra/rules/storage.rules"
+        },
+        {
+          "verb": "proven_by",
+          "to": "file:admin/build/validate.js#check-6"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:8.6"
+        }
+      ]
+    },
+    {
+      "id": "infra.environments-config",
+      "area": "infra",
+      "title": "config/environments.json with real dev values from Terraform outputs",
+      "status": "proposed",
+      "where": "config/environments.json",
+      "notes": "Step 3. Today every environment is a placeholder with _source null.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.app.config"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:config/environments.json"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:5"
+        }
+      ]
+    },
+    {
+      "id": "app.sign-in",
+      "area": "app",
+      "title": "Sign in and out with Google and email/password against the chosen environment",
+      "status": "proposed",
+      "where": "app/index.html",
+      "notes": "Step 3. Popup sign-in by default; vendored Firebase SDK.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:sign-in"
+        },
+        {
+          "verb": "realises",
+          "to": "node:flow.first-run"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.2"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/sign-in.html"
+        }
+      ]
+    },
+    {
+      "id": "app.environment-page",
+      "area": "app",
+      "title": "Environment page: pick a built-in environment, enter a custom one, import, export, reset",
+      "status": "proposed",
+      "where": "app/environment.html",
+      "notes": "Step 3. The active environment is shown in the header at all times.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:environment"
+        },
+        {
+          "verb": "realises",
+          "to": "node:flow.customer-environment"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:5"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/environment.html"
+        }
+      ]
+    },
+    {
+      "id": "app.prf-unlock",
+      "area": "app",
+      "title": "Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai",
+      "status": "proposed",
+      "where": "app/setup.html, app/unlock.html",
+      "notes": "Step 4. Not before the dev project exists and the probe pages are green.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:first-run"
+        },
+        {
+          "verb": "realises",
+          "to": "node:returning"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:8.7"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/unlock.html"
+        }
+      ]
+    },
+    {
+      "id": "app.keyring-v1",
+      "area": "app",
+      "title": "Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests",
+      "status": "proposed",
+      "where": "section 8 of the brief",
+      "notes": "Step 4. Published at /keyring/ as a specification.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.app.keyring"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:8.3"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:keyring/index.html"
+        }
+      ]
+    },
+    {
+      "id": "app.recovery-code",
+      "area": "app",
+      "title": "Recovery code: 26 characters base32, 128 bits, shown once",
+      "status": "proposed",
+      "where": "app/setup.html",
+      "notes": "Step 4. Lose every passkey and the code and the data is gone; the site will say so.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:first-run"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:8.2"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/setup.html"
+        }
+      ]
+    },
+    {
+      "id": "app.entries",
+      "area": "app",
+      "title": "Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers",
+      "status": "proposed",
+      "where": "app/vault.html, app/entry.html",
+      "notes": "Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:entries"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.2"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/vault.html"
+        }
+      ]
+    },
+    {
+      "id": "app.concurrency",
+      "area": "app",
+      "title": "Optimistic concurrency on keyring writes with a three-way merge",
+      "status": "proposed",
+      "where": "section 8.5 of the brief",
+      "notes": "Step 5. rev in the AAD so a stale body fails to decrypt.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:entries"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:8.5"
+        }
+      ]
+    },
+    {
+      "id": "app.devices",
+      "area": "app",
+      "title": "Devices page: add and remove passkeys, regenerate the recovery code",
+      "status": "proposed",
+      "where": "app/devices.html",
+      "notes": "Step 6.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:new-device"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.2"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/devices.html"
+        }
+      ]
+    },
+    {
+      "id": "app.account",
+      "area": "app",
+      "title": "Account page: export and import the encrypted keyring, sign out, wipe memory",
+      "status": "proposed",
+      "where": "app/account.html",
+      "notes": "Step 6.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:account"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.2"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/account.html"
+        }
+      ]
+    },
+    {
+      "id": "app.sharing-data-model",
+      "area": "app",
+      "title": "Key pair per user generated at first run; public bundle written to directory/",
+      "status": "proposed",
+      "where": "section 8.3 of the brief",
+      "notes": "Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:sharing-model"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:8.3"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:sharing/index.html"
+        }
+      ]
+    },
+    {
+      "id": "app.sharing-ui",
+      "area": "app",
+      "title": "Sharing an entry with another user through their inbox",
+      "status": "absent",
+      "where": "/sharing/ (step 2 describes it)",
+      "notes": "Phase 2. The data model ships first so it is not rewritten later.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:sharing-model"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:sharing/index.html"
+        }
+      ]
+    },
+    {
+      "id": "app.document-kind",
+      "area": "app",
+      "title": "A document kind in the keyring",
+      "status": "absent",
+      "where": "section 8.4 of the brief",
+      "notes": "Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:entries"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:8.4"
+        }
+      ]
+    },
+    {
+      "id": "app.browser-extension",
+      "area": "app",
+      "title": "Browser extension or autofill",
+      "status": "absent",
+      "where": "section 12 of the brief",
+      "notes": "A later site or a later version.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:security-model"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:12"
+        }
+      ]
+    },
+    {
+      "id": "app.agent-api",
+      "area": "app",
+      "title": "An API for agents",
+      "status": "absent",
+      "where": "section 12 of the brief",
+      "notes": "A later version.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:security-model"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:12"
+        }
+      ]
+    },
+    {
+      "id": "app.server-side",
+      "area": "app",
+      "title": "Any server-side code: Cloud Functions, proxies, a small API",
+      "status": "absent",
+      "where": "everywhere",
+      "notes": "Forbidden by design. A need for one is a proposal in brief-corrections.md, not code.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:security-model"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:3.3"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:12"
+        }
+      ]
+    },
+    {
+      "id": "admin.oauth",
+      "area": "admin",
+      "title": "Admin sign-in with the visitor's own Google account, token in memory only",
+      "status": "proposed",
+      "where": "admin/oauth.js",
+      "notes": "Step 7. Implicit flow to verify first; PKCE fallback.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.admin.oauth"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.3"
+        }
+      ]
+    },
+    {
+      "id": "admin.setup-checklist",
+      "area": "admin",
+      "title": "Setup checklist: every per-project resource as a row, with Fix where fixable client-side",
+      "status": "proposed",
+      "where": "admin/setup-checklist.html",
+      "notes": "Step 3 read-only, step 7 with fixes.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:admin"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.3"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/admin-checklist.html"
+        }
+      ]
+    },
+    {
+      "id": "admin.pages",
+      "area": "admin",
+      "title": "Auth config, storage, rules diff and deploy, users, environment export",
+      "status": "proposed",
+      "where": "admin/*.html",
+      "notes": "Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.admin"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.3"
+        }
+      ]
+    },
+    {
+      "id": "admin.versions",
+      "area": "admin",
+      "title": "Release history page generated from data/versions.json",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "admin/versions.html",
+      "notes": "One row per release; the newest row must equal version.txt.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.admin"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/versions.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:data/versions.json"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_versions.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.3"
+        }
+      ]
+    },
+    {
+      "id": "tests.probe-pages",
+      "area": "tests",
+      "title": "Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix",
+      "status": "proposed",
+      "where": "tests/*.html",
+      "notes": "Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:probes"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:6.4"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/mockups/matrix.html"
+        }
+      ]
+    },
+    {
+      "id": "tests.unit",
+      "area": "tests",
+      "title": "Unit tests under node --test, real WebCrypto, no mocks",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "tests/unit/",
+      "notes": "At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.tests"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:tests/unit/validate.test.js"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:10"
+        }
+      ]
+    },
+    {
+      "id": "tests.build",
+      "area": "tests",
+      "title": "Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema",
+      "status": "shipped",
+      "since": "0.1.0",
+      "where": "tests/build/",
+      "notes": "pytest, TestCase classes, no mocks.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.tests"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:tests/build/test_generators_check.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gate.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:10"
+        }
+      ]
+    },
+    {
+      "id": "tests.e2e",
+      "area": "tests",
+      "title": "Playwright end to end against the real dev project with a virtual authenticator",
+      "status": "proposed",
+      "where": "tests/e2e/",
+      "notes": "Whether the virtual authenticator does PRF is an open question.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.tests"
+        },
+        {
+          "verb": "realises",
+          "to": "node:pipe.tests-browser"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:10"
+        }
+      ]
+    },
+    {
+      "id": "tests.acceptance",
+      "area": "tests",
+      "title": "Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field",
+      "status": "proposed",
+      "where": "docs/acceptance.md",
+      "notes": "Before 1.0. The write-up is published whatever the result.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:site.tests"
+        },
+        {
+          "verb": "described_in",
+          "to": "section:10"
+        }
+      ]
+    }
   ]
 }

@@ -17,6 +17,8 @@
   <script type="module" src="components/review-node/review-node.js"></script>
   <script type="module" src="components/review-ladder/review-ladder.js"></script>
   <script type="module" src="components/review-graph/review-graph.js"></script>
+  <script type="module" src="components/review-brief/review-brief.js"></script>
+  <script type="module" src="components/review-source/review-source.js"></script>
   <script type="module" src="shell.js"></script>
 </head>
 <body>
@@ -46,11 +48,13 @@
         <summary>Graph: the node in focus and its neighbours</summary>
         <review-graph depth="1"></review-graph>
       </details>
-      <review-node></review-node>
+      <review-node data-region="node"></review-node>
+      <review-brief data-region="brief" hidden></review-brief>
+      <review-source data-region="file" hidden></review-source>
     </aside>
   </main>
   <footer class="bottom">
-    <p>Step 1 of the review brief, with the ladder and the graph view from v0.1.7: the intent layers, written by the build agent from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the MVP brief</a> and awaiting acceptance by the project lead; nothing derived from code yet. The data is <a href="../intent/stories.json">intent/stories.json</a>, <a href="../intent/flows.json">flows.json</a>, <a href="../intent/components.json">components.json</a> and <a href="../intent/deploy.json">deploy.json</a>; the folder is described in <a href="../README.md">review/README.md</a>. No framework, no build step: web components in the coding.sgit.ai shape, one per file shape (<a href="README.md">ui/README.md</a>).</p>
+    <p>The intent layers, written by the build agent from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the MVP brief</a> and awaiting acceptance by the project lead; nothing derived from code yet; since v0.1.9 the claims layer (every claim on /shipped/ with its evidence down to an anchor: a file, a test, a section of the brief, a commit, a run), the brief as sections shown in place, and files shown in place. The data is <a href="../intent/stories.json">intent/stories.json</a>, <a href="../intent/flows.json">flows.json</a>, <a href="../intent/components.json">components.json</a> and <a href="../intent/deploy.json">deploy.json</a>; the folder is described in <a href="../README.md">review/README.md</a>. No framework, no build step: web components in the coding.sgit.ai shape, one per file shape (<a href="README.md">ui/README.md</a>).</p>
   </footer>
 </body>
 </html>

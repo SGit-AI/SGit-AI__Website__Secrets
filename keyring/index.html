@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/keyring/">
   <meta property="og:title" content="Keyring format v1 — secrets.sgit.ai">
   <meta property="og:description" content="The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.">
-  <meta name="sg-secrets:version" content="0.1.8">
+  <meta name="sg-secrets:version" content="0.1.9">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -95,7 +95,7 @@
   <main>
     <h1>Keyring format, version 1</h1>
     <!-- sg-secrets:status:start ids="app.keyring-v1,app.recovery-code,app.concurrency,app.entries" -->
-  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-proposed">proposed</span> Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · <span class="sg-status sg-status-proposed">proposed</span> Recovery code: 26 characters base32, 128 bits, shown once · <span class="sg-status sg-status-proposed">proposed</span> Optimistic concurrency on keyring writes with a three-way merge · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.keyring-v1" title="the claim and its evidence, in the navigator">proposed</a> Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.recovery-code" title="the claim and its evidence, in the navigator">proposed</a> Recovery code: 26 characters base32, 128 bits, shown once · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.concurrency" title="the claim and its evidence, in the navigator">proposed</a> Optimistic concurrency on keyring writes with a three-way merge · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.entries" title="the claim and its evidence, in the navigator">proposed</a> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
 <!-- sg-secrets:status:end -->
     <p class="sg-lead">The keyring is one encrypted file in the user's own prefix of a Cloud Storage bucket. Google stores it and cannot read it. This page is the file format, published as a specification so that a reader can check the code against it and so that another implementation could open the same file. It is version 1 and it is proposed: the known-answer fixtures in <code>tests/fixtures/keyring-v1/</code> and the crypto probe page will make it checkable when step 4 ships.</p>
 
@@ -182,7 +182,7 @@ body (AES-256-GCM under the KEK)  { keys, entries[] }
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/keyring/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/keyring/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

@@ -1,0 +1,175 @@
+{
+  "anchor": "8-keyring-and-crypto-specification-v1",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "<p>Publish this at <code>/keyring/</code> as the format spec. Known-answer fixtures live in <code>tests/fixtures/keyring-v1/</code> and the crypto test page checks them.</p>",
+  "id": "8",
+  "markdown": "Publish this at `/keyring/` as the format spec. Known-answer fixtures live in `tests/fixtures/keyring-v1/` and the crypto test page checks them.\n",
+  "nodes": [
+    {
+      "id": "content.keyring-spec",
+      "layer": "rules",
+      "name": "The keyring format is published at /keyring/ as a specification with…"
+    },
+    {
+      "id": "content.keyring-spec.page",
+      "layer": "examples",
+      "name": "The keyring page is the format spec, version 1."
+    },
+    {
+      "id": "site.app.keyring",
+      "layer": "components",
+      "name": "The keyring v1 library: HKDF, AES-GCM wraps and body, known-answer fixtures"
+    }
+  ],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [
+    {
+      "anchor": "81-objects-in-the-bucket",
+      "html": "<pre><code>users/{uid}/keyring.json          the encrypted keyring (one object, versioned by GCS)\nusers/{uid}/meta.json             { &quot;v&quot;:1, &quot;createdAt&quot;, &quot;keyringRev&quot;, &quot;devices&quot;:[{&quot;id&quot;,&quot;name&quot;,&quot;createdAt&quot;,&quot;lastUsedAt&quot;}] }   (not secret)\ndirectory/{uid}.pub.json          the user&#x27;s public-key bundle, signed (phase 1 writes it; phase 2 reads it)\ninbox/{uid}/{shareId}.json        keys encrypted to this user (phase 2)</code></pre>",
+      "id": "8.1",
+      "markdown": "```\nusers/{uid}/keyring.json          the encrypted keyring (one object, versioned by GCS)\nusers/{uid}/meta.json             { \"v\":1, \"createdAt\", \"keyringRev\", \"devices\":[{\"id\",\"name\",\"createdAt\",\"lastUsedAt\"}] }   (not secret)\ndirectory/{uid}.pub.json          the user's public-key bundle, signed (phase 1 writes it; phase 2 reads it)\ninbox/{uid}/{shareId}.json        keys encrypted to this user (phase 2)\n```\n",
+      "nodes": [
+        {
+          "id": "first-run.generate.write",
+          "layer": "examples",
+          "name": "users/{uid}/keyring.json and users/{uid}/meta.json exist in the bucket…"
+        },
+        {
+          "id": "sharing-model.objects",
+          "layer": "rules",
+          "name": "directory/{uid}.pub.json holds the user's signed public-key bundle…"
+        }
+      ],
+      "title": "8.1 Objects in the bucket"
+    },
+    {
+      "anchor": "82-key-hierarchy",
+      "html": "<pre><code>passkey PRF output (32 bytes, from authenticator, never stored)\n  └─ HKDF-SHA256(ikm=prf, salt=keyring.prfSalt, info=&quot;sgit-secrets/v1/wrap/&lt;credentialId&gt;&quot;) → WK_passkey (AES-256-GCM key)\nrecovery code (26 chars base32, 128 bits, shown once)\n  └─ HKDF-SHA256(ikm=code bytes, salt=keyring.prfSalt, info=&quot;sgit-secrets/v1/wrap/recovery&quot;) → WK_recovery\nKEK (32 random bytes)             wrapped once per unlock method, under WK_*\n  └─ decrypts body\nbody (AES-256-GCM under KEK)     { privateKeys, entries[] }</code></pre>\n<p>PRF input salt: <code>keyring.prfSalt</code> (32 random bytes, fixed for the keyring&#x27;s life) is passed as <code>prf.eval.first</code>. One salt for all passkeys; the per-credential HKDF <code>info</code> keeps the wrapping keys apart. (The authenticator&#x27;s PRF is already per-credential; the info string is belt and braces.)</p>\n<p>Recovery-code KDF: HKDF alone is fast; an attacker holding the keyring can brute-force a weak code. 128 bits of entropy makes that irrelevant, which is why the code is long and machine-generated, never user-chosen. Do not add PBKDF2 &quot;for safety&quot;; it only slows legitimate recovery.</p>",
+      "id": "8.2",
+      "markdown": "```\npasskey PRF output (32 bytes, from authenticator, never stored)\n  └─ HKDF-SHA256(ikm=prf, salt=keyring.prfSalt, info=\"sgit-secrets/v1/wrap/<credentialId>\") → WK_passkey (AES-256-GCM key)\nrecovery code (26 chars base32, 128 bits, shown once)\n  └─ HKDF-SHA256(ikm=code bytes, salt=keyring.prfSalt, info=\"sgit-secrets/v1/wrap/recovery\") → WK_recovery\nKEK (32 random bytes)             wrapped once per unlock method, under WK_*\n  └─ decrypts body\nbody (AES-256-GCM under KEK)     { privateKeys, entries[] }\n```\n\nPRF input salt: `keyring.prfSalt` (32 random bytes, fixed for the keyring's life) is passed as `prf.eval.first`. One salt for all passkeys; the per-credential HKDF `info` keeps the wrapping keys apart. (The authenticator's PRF is already per-credential; the info string is belt and braces.)\n\nRecovery-code KDF: HKDF alone is fast; an attacker holding the keyring can brute-force a weak code. 128 bits of entropy makes that irrelevant, which is why the code is long and machine-generated, never user-chosen. Do not add PBKDF2 \"for safety\"; it only slows legitimate recovery.\n",
+      "nodes": [
+        {
+          "id": "returning.hkdf",
+          "layer": "rules",
+          "name": "HKDF-SHA256 with ikm the PRF output, salt keyring.prfSalt and info…"
+        }
+      ],
+      "title": "8.2 Key hierarchy"
+    },
+    {
+      "anchor": "83-keyringjson",
+      "html": "<pre><code class=\"language-json\">{\n  &quot;v&quot;: 1,\n  &quot;keyringId&quot;: &quot;uuid&quot;,\n  &quot;rev&quot;: 7,\n  &quot;prfSalt&quot;: &quot;base64(32)&quot;,\n  &quot;wraps&quot;: [\n    { &quot;id&quot;: &quot;pk-&lt;credentialId b64url&gt;&quot;, &quot;kind&quot;: &quot;passkey&quot;,  &quot;name&quot;: &quot;MacBook Chrome&quot;, &quot;createdAt&quot;: &quot;…&quot;, &quot;iv&quot;: &quot;b64&quot;, &quot;ct&quot;: &quot;b64&quot; },\n    { &quot;id&quot;: &quot;recovery-1&quot;,               &quot;kind&quot;: &quot;recovery&quot;, &quot;createdAt&quot;: &quot;…&quot;,                            &quot;iv&quot;: &quot;b64&quot;, &quot;ct&quot;: &quot;b64&quot; }\n  ],\n  &quot;body&quot;: { &quot;iv&quot;: &quot;b64&quot;, &quot;ct&quot;: &quot;b64&quot;, &quot;aad&quot;: &quot;keyringId|rev&quot; }\n}</code></pre>\n<ul>\n<li><code>wraps[].ct</code> is AES-256-GCM of the 32-byte KEK under WK_*, AAD = <code>keyringId|wrap.id</code>.</li>\n<li><code>body.ct</code> is AES-256-GCM of the UTF-8 JSON body under KEK, AAD = <code>keyringId|rev</code>, so a body cannot be transplanted between keyrings or revisions.</li>\n<li>Decrypted body:</li>\n</ul>\n<pre><code class=\"language-json\">{\n  &quot;v&quot;: 1,\n  &quot;keys&quot;: {\n    &quot;encrypt&quot;: { &quot;alg&quot;: &quot;RSA-OAEP-4096&quot;, &quot;jwk&quot;: { &quot;…private…&quot; } },\n    &quot;sign&quot;:    { &quot;alg&quot;: &quot;ECDSA-P256&quot;,    &quot;jwk&quot;: { &quot;…private…&quot; } }\n  },\n  &quot;entries&quot;: [\n    { &quot;id&quot;: &quot;uuid&quot;, &quot;kind&quot;: &quot;password&quot;, &quot;title&quot;: &quot;…&quot;, &quot;createdAt&quot;: &quot;…&quot;, &quot;updatedAt&quot;: &quot;…&quot;, &quot;fields&quot;: { &quot;username&quot;: &quot;…&quot;, &quot;password&quot;: &quot;…&quot;, &quot;url&quot;: &quot;…&quot;, &quot;notes&quot;: &quot;…&quot; }, &quot;tags&quot;: [] }\n  ]\n}</code></pre>\n<p>The key pair algorithms match <code>sgit pki</code> (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing) so that a phase-2 share envelope can be the sgit hybrid envelope and <code>sgit pki decrypt</code> can open what the browser sealed. The public bundle written to <code>directory/{uid}.pub.json</code> uses sgit&#x27;s JSON bundle shape <code>{v, encrypt, sign, label, fingerprint, signing_fingerprint}</code> with PEM blocks; VERIFY FIRST against <code>https://sgit.ai/docs/pki.md</code> before freezing.</p>",
+      "id": "8.3",
+      "markdown": "```json\n{\n  \"v\": 1,\n  \"keyringId\": \"uuid\",\n  \"rev\": 7,\n  \"prfSalt\": \"base64(32)\",\n  \"wraps\": [\n    { \"id\": \"pk-<credentialId b64url>\", \"kind\": \"passkey\",  \"name\": \"MacBook Chrome\", \"createdAt\": \"…\", \"iv\": \"b64\", \"ct\": \"b64\" },\n    { \"id\": \"recovery-1\",               \"kind\": \"recovery\", \"createdAt\": \"…\",                            \"iv\": \"b64\", \"ct\": \"b64\" }\n  ],\n  \"body\": { \"iv\": \"b64\", \"ct\": \"b64\", \"aad\": \"keyringId|rev\" }\n}\n```\n\n- `wraps[].ct` is AES-256-GCM of the 32-byte KEK under WK_*, AAD = `keyringId|wrap.id`.\n- `body.ct` is AES-256-GCM of the UTF-8 JSON body under KEK, AAD = `keyringId|rev`, so a body cannot be transplanted between keyrings or revisions.\n- Decrypted body:\n\n```json\n{\n  \"v\": 1,\n  \"keys\": {\n    \"encrypt\": { \"alg\": \"RSA-OAEP-4096\", \"jwk\": { \"…private…\" } },\n    \"sign\":    { \"alg\": \"ECDSA-P256\",    \"jwk\": { \"…private…\" } }\n  },\n  \"entries\": [\n    { \"id\": \"uuid\", \"kind\": \"password\", \"title\": \"…\", \"createdAt\": \"…\", \"updatedAt\": \"…\", \"fields\": { \"username\": \"…\", \"password\": \"…\", \"url\": \"…\", \"notes\": \"…\" }, \"tags\": [] }\n  ]\n}\n```\n\nThe key pair algorithms match `sgit pki` (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing) so that a phase-2 share envelope can be the sgit hybrid envelope and `sgit pki decrypt` can open what the browser sealed. The public bundle written to `directory/{uid}.pub.json` uses sgit's JSON bundle shape `{v, encrypt, sign, label, fingerprint, signing_fingerprint}` with PEM blocks; VERIFY FIRST against `https://sgit.ai/docs/pki.md` before freezing.\n",
+      "nodes": [
+        {
+          "id": "first-run.generate.keypair",
+          "layer": "examples",
+          "name": "The decrypted body holds keys.encrypt and keys.sign from the first…"
+        },
+        {
+          "id": "entries.body-shape",
+          "layer": "rules",
+          "name": "The decrypted body is {v, keys{encrypt, sign}, entries[{id, kind…"
+        }
+      ],
+      "title": "8.3 `keyring.json`"
+    },
+    {
+      "anchor": "84-entry-size-and-documents",
+      "html": "<p>Entries are small (soft limit 16 KB each, keyring soft limit 1 MB). Documents are not stored in the keyring: a <code>document</code> kind is <strong>absent</strong> in the MVP and, when it comes, will be a pointer to an sgit vault plus that vault&#x27;s key. Say so on <code>/shipped/</code>.</p>",
+      "id": "8.4",
+      "markdown": "Entries are small (soft limit 16 KB each, keyring soft limit 1 MB). Documents are not stored in the keyring: a `document` kind is **absent** in the MVP and, when it comes, will be a pointer to an sgit vault plus that vault's key. Say so on `/shipped/`.\n",
+      "nodes": [
+        {
+          "id": "entries.limits",
+          "layer": "rules",
+          "name": "Entries are small: a soft limit of 16 KB each and 1 MB for the keyring…"
+        }
+      ],
+      "title": "8.4 Entry size and documents"
+    },
+    {
+      "anchor": "85-concurrency",
+      "html": "<p>Writes use GCS preconditions: <code>x-goog-if-generation-match</code> (via the Firebase SDK&#x27;s metadata or the JSON API) against the generation read at unlock. On mismatch, re-fetch, re-unlock with the in-memory KEK (no new gesture: the KEK is already in memory), three-way merge entries by <code>id</code> and <code>updatedAt</code>, bump <code>rev</code>, retry once, else surface a conflict page. <code>rev</code> is also in the AAD so a stale body fails to decrypt rather than silently winning.</p>",
+      "id": "8.5",
+      "markdown": "Writes use GCS preconditions: `x-goog-if-generation-match` (via the Firebase SDK's metadata or the JSON API) against the generation read at unlock. On mismatch, re-fetch, re-unlock with the in-memory KEK (no new gesture: the KEK is already in memory), three-way merge entries by `id` and `updatedAt`, bump `rev`, retry once, else surface a conflict page. `rev` is also in the AAD so a stale body fails to decrypt rather than silently winning.\n",
+      "nodes": [
+        {
+          "id": "new-device.concurrency",
+          "layer": "rules",
+          "name": "Writes use x-goog-if-generation-match against the generation read at…"
+        }
+      ],
+      "title": "8.5 Concurrency"
+    },
+    {
+      "anchor": "86-security-rules-infrarulesstoragerules",
+      "html": "<pre><code>rules_version = &#x27;2&#x27;;\nservice firebase.storage {\n  match /b/{bucket}/o {\n    function signedIn()        { return request.auth != null; }\n    function isOwner(uid)      { return signedIn() &amp;&amp; request.auth.uid == uid; }\n    function sameTenant()      { return true; }   // tenant check added when multi-tenancy is on; see admin checklist\n\n    match /users/{uid}/{file=**}   { allow read, delete: if isOwner(uid) &amp;&amp; sameTenant();\n                                     allow write:        if isOwner(uid) &amp;&amp; sameTenant() &amp;&amp; request.resource.size &lt; 2 * 1024 * 1024; }\n    match /directory/{uid}.pub.json { allow read: if signedIn(); allow write: if isOwner(uid) &amp;&amp; request.resource.size &lt; 16 * 1024; }\n    match /inbox/{uid}/{shareId}    { allow create: if signedIn() &amp;&amp; request.resource.size &lt; 64 * 1024; allow read, delete: if isOwner(uid); }\n  }\n}</code></pre>\n<p>The <code>tests/storage.html</code> page asserts the owner path works and a foreign path returns 403; <code>rules.html</code> in admin diffs this file against what is deployed. VERIFY FIRST the exact rule syntax for the size and null checks; simplify rather than guess.</p>",
+      "id": "8.6",
+      "markdown": "```\nrules_version = '2';\nservice firebase.storage {\n  match /b/{bucket}/o {\n    function signedIn()        { return request.auth != null; }\n    function isOwner(uid)      { return signedIn() && request.auth.uid == uid; }\n    function sameTenant()      { return true; }   // tenant check added when multi-tenancy is on; see admin checklist\n\n    match /users/{uid}/{file=**}   { allow read, delete: if isOwner(uid) && sameTenant();\n                                     allow write:        if isOwner(uid) && sameTenant() && request.resource.size < 2 * 1024 * 1024; }\n    match /directory/{uid}.pub.json { allow read: if signedIn(); allow write: if isOwner(uid) && request.resource.size < 16 * 1024; }\n    match /inbox/{uid}/{shareId}    { allow create: if signedIn() && request.resource.size < 64 * 1024; allow read, delete: if isOwner(uid); }\n  }\n}\n```\n\nThe `tests/storage.html` page asserts the owner path works and a foreign path returns 403; `rules.html` in admin diffs this file against what is deployed. VERIFY FIRST the exact rule syntax for the size and null checks; simplify rather than guess.\n",
+      "nodes": [
+        {
+          "id": "infrastructure.rules",
+          "layer": "rules",
+          "name": "Security Rules give the owner read, write (under 2 MB) and delete on…"
+        },
+        {
+          "id": "infrastructure.rules.owner-403",
+          "layer": "examples",
+          "name": "The storage probe asserts the owner path works and a foreign path…"
+        },
+        {
+          "id": "storage.rules",
+          "layer": "components",
+          "name": "infra/rules/storage.rules: the Security Rules"
+        }
+      ],
+      "title": "8.6 Security Rules (`infra/rules/storage.rules`)"
+    },
+    {
+      "anchor": "87-passkey-details",
+      "html": "<ul>\n<li><code>create</code>: <code>rp: { id: &#x27;secrets.sgit.ai&#x27;, name: &#x27;secrets.sgit.ai&#x27; }</code>, <code>user.id</code> = 32 random bytes stored in <code>meta.json</code> (not the Firebase uid, which is not a secret but should not be a WebAuthn handle either), <code>pubKeyCredParams</code> ES256 then RS256, <code>authenticatorSelection: { residentKey: &#x27;required&#x27;, userVerification: &#x27;required&#x27; }</code>, <code>extensions: { prf: {} }</code>. Check <code>prf.enabled</code>; if false, tell the user this authenticator cannot be used for unlock and offer recovery-code-only or another authenticator.</li>\n<li><code>get</code>: <code>rpId</code>, <code>allowCredentials</code> from <code>meta.json</code> devices, <code>userVerification: &#x27;required&#x27;</code>, <code>extensions: { prf: { eval: { first: prfSalt } } }</code>. Read <code>getClientExtensionResults().prf.results.first</code>.</li>\n<li>Store the credential id and the public key only in <code>meta.json</code> for display and <code>allowCredentials</code>; we never verify the assertion signature (there is no server to verify it for; the PRF output is the proof that matters). Say this on <code>/security/</code> so nobody assumes a WebAuthn login happened.</li>\n<li>Known support (dated 2026-10-05, re-check on <code>/tests/webauthn-prf.html</code>): Chrome/Edge on macOS, Windows and Android with Google Password Manager; Safari 18+ with iCloud Keychain; hardware keys with hmac-secret. Build the matrix page before promising more.</li>\n</ul>\n<hr>",
+      "id": "8.7",
+      "markdown": "- `create`: `rp: { id: 'secrets.sgit.ai', name: 'secrets.sgit.ai' }`, `user.id` = 32 random bytes stored in `meta.json` (not the Firebase uid, which is not a secret but should not be a WebAuthn handle either), `pubKeyCredParams` ES256 then RS256, `authenticatorSelection: { residentKey: 'required', userVerification: 'required' }`, `extensions: { prf: {} }`. Check `prf.enabled`; if false, tell the user this authenticator cannot be used for unlock and offer recovery-code-only or another authenticator.\n- `get`: `rpId`, `allowCredentials` from `meta.json` devices, `userVerification: 'required'`, `extensions: { prf: { eval: { first: prfSalt } } }`. Read `getClientExtensionResults().prf.results.first`.\n- Store the credential id and the public key only in `meta.json` for display and `allowCredentials`; we never verify the assertion signature (there is no server to verify it for; the PRF output is the proof that matters). Say this on `/security/` so nobody assumes a WebAuthn login happened.\n- Known support (dated 2026-10-05, re-check on `/tests/webauthn-prf.html`): Chrome/Edge on macOS, Windows and Android with Google Password Manager; Safari 18+ with iCloud Keychain; hardware keys with hmac-secret. Build the matrix page before promising more.\n\n---\n",
+      "nodes": [
+        {
+          "id": "first-run.create-passkey",
+          "layer": "rules",
+          "name": "navigator.credentials.create with rp.id secrets.sgit.ai, a 32-byte…"
+        },
+        {
+          "id": "first-run.create-passkey.prf-enabled",
+          "layer": "examples",
+          "name": "After create, prf.enabled is true and the passkey is listed as a device."
+        },
+        {
+          "id": "first-run.create-passkey.prf-disabled",
+          "layer": "examples",
+          "name": "If prf.enabled is false the page says this authenticator cannot unlock…"
+        },
+        {
+          "id": "returning.prf-eval",
+          "layer": "rules",
+          "name": "navigator.credentials.get with rpId, allowCredentials from meta.json…"
+        },
+        {
+          "id": "security-model.no-assertion-verify",
+          "layer": "rules",
+          "name": "The assertion signature is never verified (there is no server to verify…"
+        },
+        {
+          "id": "security-model.no-assertion-verify.page",
+          "layer": "examples",
+          "name": "The security page says no WebAuthn login happens."
+        }
+      ],
+      "title": "8.7 Passkey details"
+    }
+  ],
+  "title": "8. Keyring and crypto specification (v1)"
+}

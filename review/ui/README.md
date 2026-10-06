@@ -10,6 +10,8 @@ One visualiser per file shape, one to one, and a component is not finished until
 | `review-crumb` | the path walked so far, each step a way back | the selected node's ancestors |
 | `review-tree` | story > rule > example; flow > step; component tree; environment > resource and pipeline > job; one component, every tree shape | `intent/stories.json`, `intent/flows.json`, `intent/components.json`, `intent/deploy.json`, and from step 2 the derived trees |
 | `review-node` | one node: name, type, layer, source link into the rendered brief, properties, edges in and out, children, parent | any node |
+| `review-brief` | a section of the brief in place: the same HTML the rendered page shows, the intent nodes written from it, previous and next; with no section, the table of contents. From `brief/index.json` and `brief/sections/<nn>.json`, split by `tools/brief.py` | `review/brief/` |
+| `review-source` | a file of the repository in place, with line numbers and a marked range (`#file=<path>&lines=L12-L30`), the claims that live in it, and the same file on GitHub at the newest release; step 5 of the review brief, pulled forward so a chain of evidence can end on code | any served file |
 | `review-ladder` | the layers as a rail, in the brief's order, with counts; the layers that do not exist yet named with the step that brings them; red where a selected change moved them, from step 4 | every layer file |
 | `review-graph` | the node in focus and its neighbours as an SVG graph laid out by a small force simulation, no library; follows the selection, or draws the nodes a page names when given `nodes="id,id"` (the reader's column on every site page embeds it that way) | the store |
 | `review-set` (step 2) | the switch between `review/` and `review/self/` | the store |
@@ -23,11 +25,11 @@ One visualiser per file shape, one to one, and a component is not finished until
 
 ## Events
 
-All through `document`, `bubbles` and `composed` set, namespaced `review:`: `review:select` (a node id), `review:route` (a view), `review:set` (project or self), `review:loaded` (the store finished reading a set).
+All through `document`, `bubbles` and `composed` set, namespaced `review:`: `review:select` (a node id), `review:route` (a view), `review:section` (a section of the brief in focus), `review:file` (a file in focus, with an optional line range), `review:set` (project or self), `review:loaded` (the store finished reading a set). The shell shows one region of the right column per event (node, brief, file), so following a claim to the brief or to code never leaves the page.
 
 ## The route
 
-Held in the store, never in `location.hash` by assignment: inside the vault host a hash router is dead (the evidence vault shipped with that bug). When the shell runs on its own the base component mirrors the route into the URL with `history.replaceState` so a view survives a reload, and reads it back on load.
+`#view=<stories|flows|components|deploy|claims|brief>`, `#node=<id>`, `#section=<n.m>` or `#file=<path>[&lines=L<a>-L<b>]`. Held in the store, never in `location.hash` by assignment: inside the vault host a hash router is dead (the evidence vault shipped with that bug). When the shell runs on its own the base component mirrors the route into the URL with `history.replaceState` so a view survives a reload, and reads it back on load.
 
 ## Where it runs
 

@@ -1,0 +1,314 @@
+{
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "sections": [
+    {
+      "anchor": "0-how-to-use-this-brief",
+      "file": "sections/00.json",
+      "id": "0",
+      "nodes": 0,
+      "subsections": [],
+      "title": "0. How to use this brief"
+    },
+    {
+      "anchor": "1-what-this-is",
+      "file": "sections/01.json",
+      "id": "1",
+      "nodes": 0,
+      "subsections": [],
+      "title": "1. What this is"
+    },
+    {
+      "anchor": "2-design-documents-copy-into-docsdesign",
+      "file": "sections/02.json",
+      "id": "2",
+      "nodes": 1,
+      "subsections": [],
+      "title": "2. Design documents (copy into `docs/design/`)"
+    },
+    {
+      "anchor": "3-architecture",
+      "file": "sections/03.json",
+      "id": "3",
+      "nodes": 27,
+      "subsections": [
+        {
+          "anchor": "31-components",
+          "id": "3.1",
+          "nodes": 9,
+          "title": "3.1 Components"
+        },
+        {
+          "anchor": "32-flows",
+          "id": "3.2",
+          "nodes": 12,
+          "title": "3.2 Flows"
+        },
+        {
+          "anchor": "33-origins-and-the-passkey-scope-the-single-most-important-decision",
+          "id": "3.3",
+          "nodes": 2,
+          "title": "3.3 Origins and the passkey scope (the single most important decision)"
+        },
+        {
+          "anchor": "34-what-a-compromised-party-gets",
+          "id": "3.4",
+          "nodes": 4,
+          "title": "3.4 What a compromised party gets"
+        }
+      ],
+      "title": "3. Architecture"
+    },
+    {
+      "anchor": "4-gcp-environments",
+      "file": "sections/04.json",
+      "id": "4",
+      "nodes": 26,
+      "subsections": [
+        {
+          "anchor": "41-environments-and-naming",
+          "id": "4.1",
+          "nodes": 4,
+          "title": "4.1 Environments and naming"
+        },
+        {
+          "anchor": "42-per-project-resources-what-terraform-creates",
+          "id": "4.2",
+          "nodes": 14,
+          "title": "4.2 Per-project resources (what Terraform creates)"
+        },
+        {
+          "anchor": "43-bootstrap-done-once-by-a-human-documented-in-docsopsbootstrapmd",
+          "id": "4.3",
+          "nodes": 2,
+          "title": "4.3 Bootstrap (done once, by a human, documented in `docs/ops/bootstrap.md`)"
+        },
+        {
+          "anchor": "44-what-a-customer-runs",
+          "id": "4.4",
+          "nodes": 3,
+          "title": "4.4 What a customer runs"
+        },
+        {
+          "anchor": "45-identity-platform-notes",
+          "id": "4.5",
+          "nodes": 2,
+          "title": "4.5 Identity Platform notes"
+        },
+        {
+          "anchor": "46-the-one-external-dependency-googles-auth-endpoints",
+          "id": "4.6",
+          "nodes": 0,
+          "title": "4.6 The one external dependency: Google's auth endpoints"
+        }
+      ],
+      "title": "4. GCP environments"
+    },
+    {
+      "anchor": "5-browser-side-environment-configuration",
+      "file": "sections/05.json",
+      "id": "5",
+      "nodes": 10,
+      "subsections": [],
+      "title": "5. Browser-side environment configuration"
+    },
+    {
+      "anchor": "6-the-site",
+      "file": "sections/06.json",
+      "id": "6",
+      "nodes": 61,
+      "subsections": [
+        {
+          "anchor": "61-structure",
+          "id": "6.1",
+          "nodes": 5,
+          "title": "6.1 Structure"
+        },
+        {
+          "anchor": "62-app-pages-app",
+          "id": "6.2",
+          "nodes": 25,
+          "title": "6.2 App pages (`/app/`)"
+        },
+        {
+          "anchor": "63-admin-pages-admin",
+          "id": "6.3",
+          "nodes": 16,
+          "title": "6.3 Admin pages (`/admin/`)"
+        },
+        {
+          "anchor": "64-test-and-probe-pages-tests",
+          "id": "6.4",
+          "nodes": 13,
+          "title": "6.4 Test and probe pages (`/tests/`)"
+        },
+        {
+          "anchor": "65-the-content-pages-what-they-say",
+          "id": "6.5",
+          "nodes": 2,
+          "title": "6.5 The content pages: what they say"
+        }
+      ],
+      "title": "6. The site"
+    },
+    {
+      "anchor": "7-house-style-from-codingsgitai-and-nfrssgitai",
+      "file": "sections/07.json",
+      "id": "7",
+      "nodes": 5,
+      "subsections": [
+        {
+          "anchor": "71-javascript",
+          "id": "7.1",
+          "nodes": 1,
+          "title": "7.1 JavaScript"
+        },
+        {
+          "anchor": "72-html-css-python",
+          "id": "7.2",
+          "nodes": 0,
+          "title": "7.2 HTML / CSS / Python"
+        },
+        {
+          "anchor": "73-dependencies-vendored-pinned-hashed",
+          "id": "7.3",
+          "nodes": 1,
+          "title": "7.3 Dependencies: vendored, pinned, hashed"
+        },
+        {
+          "anchor": "74-documentation-rules",
+          "id": "7.4",
+          "nodes": 3,
+          "title": "7.4 Documentation rules"
+        }
+      ],
+      "title": "7. House style (from coding.sgit.ai and nfrs.sgit.ai)"
+    },
+    {
+      "anchor": "8-keyring-and-crypto-specification-v1",
+      "file": "sections/08.json",
+      "id": "8",
+      "nodes": 19,
+      "subsections": [
+        {
+          "anchor": "81-objects-in-the-bucket",
+          "id": "8.1",
+          "nodes": 2,
+          "title": "8.1 Objects in the bucket"
+        },
+        {
+          "anchor": "82-key-hierarchy",
+          "id": "8.2",
+          "nodes": 1,
+          "title": "8.2 Key hierarchy"
+        },
+        {
+          "anchor": "83-keyringjson",
+          "id": "8.3",
+          "nodes": 2,
+          "title": "8.3 `keyring.json`"
+        },
+        {
+          "anchor": "84-entry-size-and-documents",
+          "id": "8.4",
+          "nodes": 1,
+          "title": "8.4 Entry size and documents"
+        },
+        {
+          "anchor": "85-concurrency",
+          "id": "8.5",
+          "nodes": 1,
+          "title": "8.5 Concurrency"
+        },
+        {
+          "anchor": "86-security-rules-infrarulesstoragerules",
+          "id": "8.6",
+          "nodes": 3,
+          "title": "8.6 Security Rules (`infra/rules/storage.rules`)"
+        },
+        {
+          "anchor": "87-passkey-details",
+          "id": "8.7",
+          "nodes": 6,
+          "title": "8.7 Passkey details"
+        }
+      ],
+      "title": "8. Keyring and crypto specification (v1)"
+    },
+    {
+      "anchor": "9-cicd-and-devops-pipelines",
+      "file": "sections/09.json",
+      "id": "9",
+      "nodes": 36,
+      "subsections": [
+        {
+          "anchor": "91-deploy-pagesyml-validate-tag-release-deploy-the-house-pipeline",
+          "id": "9.1",
+          "nodes": 11,
+          "title": "9.1 `deploy-pages.yml` — validate → tag-release → deploy (the house pipeline)"
+        },
+        {
+          "anchor": "92-infrayml-terraform-per-environment",
+          "id": "9.2",
+          "nodes": 6,
+          "title": "9.2 `infra.yml` — Terraform per environment"
+        },
+        {
+          "anchor": "93-the-gate-adminbuildvalidatejs-no-dependencies",
+          "id": "9.3",
+          "nodes": 7,
+          "title": "9.3 The gate: `admin/build/validate.js` (no dependencies)"
+        },
+        {
+          "anchor": "94-other-workflows",
+          "id": "9.4",
+          "nodes": 7,
+          "title": "9.4 Other workflows"
+        },
+        {
+          "anchor": "95-repository-protections-the-boundary-section-34",
+          "id": "9.5",
+          "nodes": 4,
+          "title": "9.5 Repository protections (the boundary, section 3.4)"
+        }
+      ],
+      "title": "9. CI/CD and DevOps pipelines"
+    },
+    {
+      "anchor": "10-testing",
+      "file": "sections/10.json",
+      "id": "10",
+      "nodes": 3,
+      "subsections": [],
+      "title": "10. Testing"
+    },
+    {
+      "anchor": "11-build-order",
+      "file": "sections/11.json",
+      "id": "11",
+      "nodes": 6,
+      "subsections": [],
+      "title": "11. Build order"
+    },
+    {
+      "anchor": "12-open-questions-and-what-not-to-do",
+      "file": "sections/12.json",
+      "id": "12",
+      "nodes": 0,
+      "subsections": [],
+      "title": "12. Open questions, and what not to do"
+    },
+    {
+      "anchor": "13-the-prompt-to-paste-into-the-claude-code-session",
+      "file": "sections/13.json",
+      "id": "13",
+      "nodes": 0,
+      "subsections": [],
+      "title": "13. The prompt to paste into the Claude Code session"
+    }
+  ]
+}

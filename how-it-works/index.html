@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/how-it-works/">
   <meta property="og:title" content="How it works — secrets.sgit.ai">
   <meta property="og:description" content="The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.">
-  <meta name="sg-secrets:version" content="0.1.8">
+  <meta name="sg-secrets:version" content="0.1.9">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -95,7 +95,7 @@
   <main>
     <h1>How it works</h1>
     <!-- sg-secrets:status:start ids="app.sign-in,app.prf-unlock,app.keyring-v1,app.devices" -->
-  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · <span class="sg-status sg-status-proposed">proposed</span> Devices page: add and remove passkeys, regenerate the recovery code</p>
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.sign-in" title="the claim and its evidence, in the navigator">proposed</a> Sign in and out with Google and email/password against the chosen environment · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.prf-unlock" title="the claim and its evidence, in the navigator">proposed</a> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.keyring-v1" title="the claim and its evidence, in the navigator">proposed</a> Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.devices" title="the claim and its evidence, in the navigator">proposed</a> Devices page: add and remove passkeys, regenerate the recovery code</p>
 <!-- sg-secrets:status:end -->
     <p class="sg-lead">Two things decide what you can do. The <strong>login</strong> decides which paths in the bucket you may touch. The <strong>passkey</strong> decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.</p>
 
@@ -175,7 +175,7 @@ open /admin/ ──▶ choose an environment
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/how-it-works/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/how-it-works/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

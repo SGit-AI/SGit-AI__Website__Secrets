@@ -18,18 +18,21 @@ export class ReviewCrumb extends ReviewBase {
             if (button && !button.classList.contains('current')) ReviewBase.store.select(button.dataset.node)
         })
         this.on(REVIEW_EVENTS.select, (event) => this.render(event.detail.id))
-        this.on(REVIEW_EVENTS.route,  () => this.render(null))
+        this.on(REVIEW_EVENTS.route,   () => this.render(null))
+        this.on(REVIEW_EVENTS.section, (event) => this.render(null, `brief: section ${event.detail.id}`))
+        this.on(REVIEW_EVENTS.file,    (event) => this.render(ReviewBase.store.route.node, `file: ${event.detail.path}${event.detail.lines ? ' ' + event.detail.lines : ''}`))
         this.render(ReviewBase.store.route.node)
     }
 
-    render(id) {
+    render(id, leaf = null) {
         const nav = this.$('[data-crumb]')
         nav.replaceChildren()
         const path = id ? ReviewBase.store.ancestors(id) : []
-        if (!path.length) {
+        if (!path.length && !leaf) {
             nav.appendChild(this.el('span', { class : 'empty' }, `${ReviewBase.store.route.view}: nothing selected`))
             return
         }
+        if (leaf && !path.length) { nav.appendChild(this.el('span', { class : 'step current' }, leaf)); return }
         path.forEach((node, index) => {
             if (index) nav.appendChild(this.el('span', { class : 'sep', 'aria-hidden' : 'true' }, '/'))
             const last   = index === path.length - 1
@@ -37,6 +40,7 @@ export class ReviewCrumb extends ReviewBase {
                                    `${LAYERS[node.layer].label}: ${node.name}`)
             nav.appendChild(button)
         })
+        if (leaf) { nav.appendChild(this.el('span', { class : 'sep', 'aria-hidden' : 'true' }, '/')); nav.appendChild(this.el('span', { class : 'step current' }, leaf)) }
     }
 }
 

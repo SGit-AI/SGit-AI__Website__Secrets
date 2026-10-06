@@ -1,8 +1,8 @@
 # secrets.sgit.ai: reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.8 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.9 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
-68 claims: 35 shipped, 28 proposed, 5 absent.
+71 claims: 38 shipped, 28 proposed, 5 absent.
 
 | Status | Meaning |
 |---|---|
@@ -10,7 +10,7 @@
 | proposed | designed in the brief, not built; described only in the future tense |
 | absent | deliberately not in the MVP; comes as a later version or a later site, or never |
 
-## Shipped (35)
+## Shipped (38)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -34,6 +34,9 @@
 | admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
 | review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
 | review | The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step | shipped v0.1.7 | review/ui/components/review-graph/, review-ladder/ | Follows the selection in the navigator; given nodes="id,id" it draws what a page names, which is how the reader's column embeds it. |
+| review | The claims layer: every claim on /shipped/ as a node with typed evidence down to an anchor (a file, a test, a section of the brief, a document, a URL, a commit, a tag, a CI run); every status chip on the site a link into it | shipped v0.1.9 | review/tools/claims.py, review/intent/claims.json, data/features.json | Strict: a shipped claim with no anchor that resolves fails the build. Releases carry their commit, tag and Actions run; release.py backfills the newest at the next release. |
+| review | The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it | shipped v0.1.9 | review/tools/brief.py, review/brief/, review/ui/components/review-brief/ | Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current. |
+| review | Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving | shipped v0.1.9 | review/ui/components/review-source/ | Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead. |
 | review | The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief | shipped v0.1.4 | review/ui/ | review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash. |
 | pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
 | pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |

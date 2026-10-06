@@ -10,7 +10,7 @@
  */
 import { ReviewBase, REVIEW_EVENTS, LAYERS, VIEWS } from '../review-base/review-base.js'
 
-const VIEW_LABELS = Object.freeze({ stories : 'Stories', flows : 'Flows', components : 'Components', deploy : 'Deploy' })
+const VIEW_LABELS = Object.freeze({ stories : 'Stories', flows : 'Flows', components : 'Components', deploy : 'Deploy', claims : 'Claims', brief : 'The brief' })
 
 export class ReviewTree extends ReviewBase {
     static jsUrl = import.meta.url
@@ -27,8 +27,11 @@ export class ReviewTree extends ReviewBase {
         })
         this.$('[data-tree]').addEventListener('click', (event) => {
             const button = event.target.closest('[data-node]')
-            if (button) ReviewBase.store.select(button.dataset.node)
+            if (button) { ReviewBase.store.select(button.dataset.node); return }
+            const section = event.target.closest('[data-section]')
+            if (section) ReviewBase.store.showSection(section.dataset.section)
         })
+        this.on(REVIEW_EVENTS.section, () => { if (this._view !== 'brief') { this._view = 'brief'; this.render() } })
         this.on(REVIEW_EVENTS.loaded, () => this.render())
         this.on(REVIEW_EVENTS.route,  (event) => { this._view = event.detail.view; this._selected = null; this.render() })
         this.on(REVIEW_EVENTS.select, (event) => this.follow(event.detail.id))
@@ -53,12 +56,59 @@ export class ReviewTree extends ReviewBase {
         }
         const tree = this.$('[data-tree]')
         tree.replaceChildren()
+        if (this._view === 'brief') return this.brief(tree)
+        if (this._view === 'claims') return this.claims(tree)
         const roots = store.roots(this._view)
         if (!roots.length) {
             tree.appendChild(this.el('p', { class : 'empty' }, 'Nothing in this layer yet.'))
             return
         }
         tree.appendChild(this.list(roots, 0))
+    }
+
+    async brief(tree) {                                                          // the brief's sections, each opening in place on the right
+        const index = await ReviewBase.store.briefIndex()
+        const ol = this.el('ol', { class : 'level level-0 brief' })
+        for (const section of index.sections) {
+            const li = this.el('li')
+            li.appendChild(this.el('button', { type : 'button', class : 'node layer-section', 'data-section' : section.id }, section.title))
+            if (section.subsections.length) {
+                const ul = this.el('ul', { class : 'level level-1' })
+                for (const sub of section.subsections) {
+                    const sli = this.el('li')
+                    const b   = this.el('button', { type : 'button', class : 'node layer-section', 'data-section' : sub.id }, sub.title)
+                    if (sub.nodes) b.appendChild(this.el('span', { class : 'count' }, String(sub.nodes)))
+                    sli.appendChild(b)
+                    ul.appendChild(sli)
+                }
+                li.appendChild(ul)
+            }
+            ol.appendChild(li)
+        }
+        tree.appendChild(ol)
+    }
+
+    claims(tree) {                                                               // every claim, grouped by area, with its status
+        const store = ReviewBase.store
+        const byArea = new Map()
+        for (const claim of store.roots('claims')) { if (!byArea.has(claim.area)) byArea.set(claim.area, []); byArea.get(claim.area).push(claim) }
+        const ol = this.el('ol', { class : 'level level-0' })
+        for (const [area, claims] of byArea) {
+            const li = this.el('li')
+            li.appendChild(this.el('p', { class : 'area' }, `${area} (${claims.length})`))
+            const ul = this.el('ul', { class : 'level level-1' })
+            for (const claim of claims) {
+                const button = this.el('button', { type : 'button', class : `node layer-claim status-${claim.status}${claim.id === this._selected ? ' selected' : ''}`, 'data-node' : claim.id })
+                button.appendChild(this.el('span', { class : `layer status-${claim.status}` }, claim.status === 'shipped' ? `shipped v${claim.record.since}` : claim.status))
+                button.appendChild(this.el('span', { class : 'name' }, claim.name))
+                const sli = this.el('li')
+                sli.appendChild(button)
+                ul.appendChild(sli)
+            }
+            li.appendChild(ul)
+            ol.appendChild(li)
+        }
+        tree.appendChild(ol)
     }
 
     list(nodes, depth) {

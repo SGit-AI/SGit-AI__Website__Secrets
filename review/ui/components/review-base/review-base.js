@@ -16,10 +16,12 @@
  */
 
 export const REVIEW_EVENTS = Object.freeze({
-    select : 'review:select',
-    route  : 'review:route',
-    set    : 'review:set',
-    loaded : 'review:loaded',
+    select  : 'review:select',
+    route   : 'review:route',
+    section : 'review:section',                                                  // { id }: a section of the brief is in focus, shown in place
+    file    : 'review:file',                                                     // { path, lines }: a file of the repository is in focus, shown in place
+    set     : 'review:set',
+    loaded  : 'review:loaded',
 })
 
 export const LAYERS = Object.freeze({
@@ -33,11 +35,14 @@ export const LAYERS = Object.freeze({
     resource    : { label : 'resource'    , group : 'deploy'     , rank : 8 },
     pipeline    : { label : 'pipeline'    , group : 'deploy'     , rank : 9 },
     job         : { label : 'job'         , group : 'deploy'     , rank : 10 },
+    claim       : { label : 'claim'       , group : 'claims'     , rank : 11 },
+    release     : { label : 'release'     , group : 'claims'     , rank : 12 },
+    anchor      : { label : 'anchor'      , group : 'claims'     , rank : 13 },
 })
 
-export const VIEWS = Object.freeze(['stories', 'flows', 'components', 'deploy'])
+export const VIEWS = Object.freeze(['stories', 'flows', 'components', 'deploy', 'claims', 'brief'])
 
-const INTENT_FILES = Object.freeze(['stories', 'flows', 'components', 'deploy', 'sections'])
+const INTENT_FILES = Object.freeze(['stories', 'flows', 'components', 'deploy', 'sections', 'claims'])
 const UI_URL       = new URL('../../', import.meta.url)                         // review/ui/
 const REVIEW_URL   = new URL('../', UI_URL)                                     // review/
 
@@ -48,7 +53,8 @@ class ReviewStore {
         this.nodes    = new Map()
         this.edges    = []
         this.sections = { sections : {} }
-        this.route    = { view : 'stories', node : null }
+        this.route    = { view : 'stories', node : null, section : null, file : null, lines : null }
+        this.brief    = null                                                      // brief/index.json, read on first use
         this.loaded   = null
         this._verbs   = {}
     }
@@ -88,7 +94,10 @@ class ReviewStore {
         this.loaded = files
         this.emit(REVIEW_EVENTS.loaded, { set : setName, counts : this.counts() })
         this.emit(REVIEW_EVENTS.set, { set : setName })
-        if (this.standalone()) this.readRouteFromUrl()
+        if (this.standalone()) {
+            this.readRouteFromUrl()
+            if (!this._hashing) { this._hashing = true; window.addEventListener('hashchange', () => this.readRouteFromUrl()) }   // a same-page link to another route
+        }
     }
 
     add(id, layer, name, record, parent, source, extra = {}) {
@@ -135,6 +144,13 @@ class ReviewStore {
             }
             for (const edge of deploy.edges) this.edges.push(edge)
         }
+        const claims = files.claims
+        if (claims) {                                                             // the claims layer: claims, releases, anchors; edges to the intent and between them
+            for (const claim of claims.claims) this.add(claim.id, 'claim', claim.name, claim, null, claim.source, { area : claim.area, status : claim.status })
+            for (const release of claims.releases) this.add(release.id, 'release', release.name, release, null, null)
+            for (const anchor of claims.anchors) this.add(anchor.id, 'anchor', anchor.name, anchor, null, null, { kind : anchor.kind, href : anchor.href, opens : anchor.opens, anchor : true })
+            for (const edge of claims.edges) this.edges.push(edge)
+        }
     }
 
     counts() {
@@ -146,7 +162,24 @@ class ReviewStore {
     get(id) { return this.nodes.get(id) || null }
 
     roots(view) {
+        if (view === 'claims') return [...this.nodes.values()].filter(node => node.layer === 'claim')
         return [...this.nodes.values()].filter(node => LAYERS[node.layer].group === view && !node.parent)
+    }
+
+    async briefIndex() {                                                          // the brief's table of contents, from brief/index.json
+        if (!this.brief) {
+            try { this.brief = await this.readJson('brief/index.json') } catch (error) { this.brief = { sections : [] } }
+        }
+        return this.brief
+    }
+
+    async briefSection(id) {                                                      // -> { section, subsection } for an id like 8 or 8.7
+        const index = await this.briefIndex()
+        const top   = id.split('.')[0]
+        const entry = index.sections.find(s => s.id === top)
+        if (!entry) return null
+        const section = await this.readJson(`brief/${entry.file}`)
+        return { section, subsection : id.includes('.') ? (section.subsections.find(s => s.id === id) || null) : null }
     }
 
     ancestors(id) {                                                               // root first, the node last
@@ -176,27 +209,43 @@ class ReviewStore {
     select(id) {
         const node = this.get(id)
         if (!node) return
-        this.route = { view : LAYERS[node.layer].group, node : id }
+        this.route = { view : LAYERS[node.layer].group, node : id, section : null, file : null, lines : null }
         this.emit(REVIEW_EVENTS.select, { id, node })
         this.writeRouteToUrl()
     }
 
     show(view) {
         if (!VIEWS.includes(view)) return
-        this.route = { view, node : null }
+        this.route = { view, node : null, section : null, file : null, lines : null }
         this.emit(REVIEW_EVENTS.route, { view })
+        this.writeRouteToUrl()
+    }
+
+    showSection(id) {                                                             // a section of the brief, in place; the navigator is not left
+        this.route = { view : 'brief', node : null, section : id, file : null, lines : null }
+        this.emit(REVIEW_EVENTS.section, { id })
+        this.writeRouteToUrl()
+    }
+
+    showFile(path, lines = null) {                                                 // a file of the repository, in place
+        this.route = { view : this.route.view, node : this.route.node, section : null, file : path, lines }
+        this.emit(REVIEW_EVENTS.file, { path, lines })
         this.writeRouteToUrl()
     }
 
     writeRouteToUrl() {                                                           // standalone only, and never by assigning location.hash
         if (!this.standalone()) return
-        const value = this.route.node ? `node=${encodeURIComponent(this.route.node)}` : `view=${this.route.view}`
+        const value = this.route.file ? `file=${this.route.file}${this.route.lines ? '&lines=' + this.route.lines : ''}`
+                    : this.route.section ? `section=${this.route.section}`
+                    : this.route.node ? `node=${encodeURIComponent(this.route.node)}` : `view=${this.route.view}`
         history.replaceState(null, '', `#${value}`)
     }
 
     readRouteFromUrl() {
         const hash = location.hash.replace(/^#/, '')
         if (hash.startsWith('node=')) this.select(decodeURIComponent(hash.slice(5)))
+        else if (hash.startsWith('section=')) this.showSection(hash.slice(8))
+        else if (hash.startsWith('file=')) { const [path, rest] = hash.slice(5).split('&lines='); this.showFile(decodeURIComponent(path), rest || null) }
         else if (hash.startsWith('view=')) this.show(hash.slice(5))
         else this.show('stories')
     }
@@ -269,6 +318,7 @@ export class ReviewBase extends HTMLElement {
     el(tag, attrs = {}, text = null) {                                           // a small element builder; no innerHTML with data in it
         const node = document.createElement(tag)
         for (const [key, value] of Object.entries(attrs)) {
+            if (value === null || value === undefined) continue
             if (key.startsWith('data-')) node.dataset[key.slice(5).replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = value
             else node.setAttribute(key, value)
         }

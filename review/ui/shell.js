@@ -26,6 +26,14 @@ function showSet(name) {
     if (label) label.textContent = SET_LABELS[name] || name
 }
 
-document.addEventListener(REVIEW_EVENTS.set, (event) => showSet(event.detail.set))
+function showRegion(name) {                                                    // one of node, brief, file in the right column; the navigator is never left
+    for (const region of document.querySelectorAll('[data-region]')) region.hidden = region.dataset.region !== name
+}
+
+document.addEventListener(REVIEW_EVENTS.set,     (event) => showSet(event.detail.set))
+document.addEventListener(REVIEW_EVENTS.select,  () => showRegion('node'))
+document.addEventListener(REVIEW_EVENTS.route,   (event) => showRegion(event.detail.view === 'brief' ? 'brief' : 'node'))
+document.addEventListener(REVIEW_EVENTS.section, () => showRegion('brief'))
+document.addEventListener(REVIEW_EVENTS.file,    () => showRegion('file'))
 showVersion()
 showSet(ReviewBase.store.set)

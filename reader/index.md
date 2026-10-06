@@ -2,11 +2,11 @@
 
 > Where the reader's column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent's vault. The only page whose policy allows a connection beyond this site and Google's sign-in hosts.
 
-*Source: <https://secrets.sgit.ai/reader/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/reader/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.7 The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names · shipped v0.1.7 A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key · proposed The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names · [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key · [proposed](/review/ui/#node=claim.site.agent-contact) The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it
 
 Every page has the reader's column: the log of what you marked and noted, and the graph of what the page names. Two things need a connection beyond this site, and the site's policy forbids that on every page but this one: the chat through `openrouter.ai` with your own key, and **Send to the agent**, which writes your sealed log to the build agent's vault on `dev.send.sgraph.ai`. Open the column here (the tab on the right) to do either; your log is the same one, kept in this browser.
 

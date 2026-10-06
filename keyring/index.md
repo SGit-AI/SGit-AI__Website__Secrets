@@ -2,11 +2,11 @@
 
 > The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
 
-*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · proposed Recovery code: 26 characters base32, 128 bits, shown once · proposed Optimistic concurrency on keyring writes with a three-way merge · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.keyring-v1) Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · [proposed](/review/ui/#node=claim.app.recovery-code) Recovery code: 26 characters base32, 128 bits, shown once · [proposed](/review/ui/#node=claim.app.concurrency) Optimistic concurrency on keyring writes with a three-way merge · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 The keyring is one encrypted file in the user's own prefix of a Cloud Storage bucket. Google stores it and cannot read it. This page is the file format, published as a specification so that a reader can check the code against it and so that another implementation could open the same file. It is version 1 and it is proposed: the known-answer fixtures in `tests/fixtures/keyring-v1/` and the crypto probe page will make it checkable when step 4 ships.
 

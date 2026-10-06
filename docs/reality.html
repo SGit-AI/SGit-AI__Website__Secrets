@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>secrets.sgit.ai: reality — secrets.sgit.ai</title>
-  <meta name="description" content="68 claims: 35 shipped, 28 proposed, 5 absent.">
+  <meta name="description" content="71 claims: 38 shipped, 28 proposed, 5 absent.">
   <meta name="sg-secrets:source" content="/docs/reality.md">
   <!-- sg-secrets:head:start -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
@@ -20,8 +20,8 @@
   <meta property="og:site_name" content="secrets.sgit.ai">
   <meta property="og:url" content="https://secrets.sgit.ai/docs/reality.html">
   <meta property="og:title" content="secrets.sgit.ai: reality — secrets.sgit.ai">
-  <meta property="og:description" content="68 claims: 35 shipped, 28 proposed, 5 absent.">
-  <meta name="sg-secrets:version" content="0.1.8">
+  <meta property="og:description" content="71 claims: 38 shipped, 28 proposed, 5 absent.">
+  <meta name="sg-secrets:version" content="0.1.9">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -33,7 +33,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -95,10 +95,10 @@
 <!-- sg-secrets:nav:end -->
   <main class="sg-document">
     <!-- sg-secrets:docs:start -->
-<p class="sg-doc-source">Rendered from <a href="/docs/reality.md">docs/reality.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.8.</p>
+<p class="sg-doc-source">Rendered from <a href="/docs/reality.md">docs/reality.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.9.</p>
 <h1 id="secretssgitai-reality">secrets.sgit.ai: reality</h1>
-<p><em>Generated from <code>data/features.json</code> by <code>admin/build/gen_features.py</code> at site v0.1.8 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.</em></p>
-<p>68 claims: 35 shipped, 28 proposed, 5 absent.</p>
+<p><em>Generated from <code>data/features.json</code> by <code>admin/build/gen_features.py</code> at site v0.1.9 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.</em></p>
+<p>71 claims: 38 shipped, 28 proposed, 5 absent.</p>
 <table>
 <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
 <tbody>
@@ -107,7 +107,7 @@
 <tr><td>absent</td><td>deliberately not in the MVP; comes as a later version or a later site, or never</td></tr>
 </tbody>
 </table>
-<h2 id="shipped-35">Shipped (35)</h2>
+<h2 id="shipped-38">Shipped (38)</h2>
 <table>
 <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
 <tbody>
@@ -131,6 +131,9 @@
 <tr><td>admin</td><td>Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json</td><td>shipped v0.1.1</td><td>admin/comms.html</td><td>gen_versions.py renders the step tracker; a done step must name a release that exists.</td></tr>
 <tr><td>review</td><td>review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository</td><td>shipped v0.1.3</td><td>review/tools/</td><td>Step 0 of the review brief. Check 9 of the gate.</td></tr>
 <tr><td>review</td><td>The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step</td><td>shipped v0.1.7</td><td>review/ui/components/review-graph/, review-ladder/</td><td>Follows the selection in the navigator; given nodes=&quot;id,id&quot; it draws what a page names, which is how the reader&#x27;s column embeds it.</td></tr>
+<tr><td>review</td><td>The claims layer: every claim on /shipped/ as a node with typed evidence down to an anchor (a file, a test, a section of the brief, a document, a URL, a commit, a tag, a CI run); every status chip on the site a link into it</td><td>shipped v0.1.9</td><td>review/tools/claims.py, review/intent/claims.json, data/features.json</td><td>Strict: a shipped claim with no anchor that resolves fails the build. Releases carry their commit, tag and Actions run; release.py backfills the newest at the next release.</td></tr>
+<tr><td>review</td><td>The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it</td><td>shipped v0.1.9</td><td>review/tools/brief.py, review/brief/, review/ui/components/review-brief/</td><td>Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current.</td></tr>
+<tr><td>review</td><td>Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving</td><td>shipped v0.1.9</td><td>review/ui/components/review-source/</td><td>Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead.</td></tr>
 <tr><td>review</td><td>The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief</td><td>shipped v0.1.4</td><td>review/ui/</td><td>review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash.</td></tr>
 <tr><td>pipeline</td><td>One release script: bump, build, gate, commit with a Kind: trailer, push, verify live</td><td>shipped v0.1.3</td><td>admin/build/release.py</td><td>The family&#x27;s release discipline in one command; a clean push is not a release.</td></tr>
 <tr><td>pipeline</td><td>The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate</td><td>shipped v0.1.3</td><td>admin/build/validate.js</td><td>From section 4 of the repository guidance; the advisory never fails the build.</td></tr>
@@ -200,7 +203,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/reality.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/reality.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

@@ -308,6 +308,8 @@ th { color: var(--sg-text-heading); }
     padding:       1px var(--sg-sp-2);
     white-space:   nowrap;
 }
+a.sg-status         { text-decoration: none; }
+a.sg-status:hover   { outline: 2px solid var(--sg-accent); outline-offset: 1px; }
 .sg-status-shipped  { background: var(--sg-status-shipped);  color: var(--sg-on-status); }
 .sg-status-proposed { background: var(--sg-status-proposed); color: var(--sg-on-status); }
 .sg-status-absent   { background: var(--sg-status-absent);   color: var(--sg-on-status); }

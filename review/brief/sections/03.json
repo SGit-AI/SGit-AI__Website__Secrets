@@ -1,0 +1,187 @@
+{
+  "anchor": "3-architecture",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "",
+  "id": "3",
+  "markdown": "\n",
+  "nodes": [],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [
+    {
+      "anchor": "31-components",
+      "html": "<table>\n<thead><tr><th>Layer</th><th>Component</th><th>Where it runs</th><th>Trust</th></tr></thead>\n<tbody>\n<tr><td>Site + app</td><td>Static HTML/JS/CSS from this repo, GitHub Pages, custom domain <code>secrets.sgit.ai</code></td><td>Visitor&#x27;s browser</td><td><strong>The boundary.</strong> Whoever controls this repo or the <code>sgit.ai</code> DNS controls the app</td></tr>\n<tr><td>Login</td><td>Identity Platform (Firebase Auth SDK, vendored)</td><td>Google</td><td>Can impersonate; cannot decrypt</td></tr>\n<tr><td>Storage</td><td>Cloud Storage for Firebase bucket + Security Rules</td><td>Google</td><td>Holds ciphertext; can delete</td></tr>\n<tr><td>Unlock</td><td>WebAuthn passkey, RP ID <code>secrets.sgit.ai</code>, PRF extension</td><td>User&#x27;s authenticator (Google Password Manager, iCloud Keychain, hardware key)</td><td>The only thing that can decrypt</td></tr>\n<tr><td>Admin</td><td>Same static pages, calling GCP REST APIs with the signed-in Google account&#x27;s own OAuth token</td><td>Visitor&#x27;s browser</td><td>Works only if that Google account has IAM on the project</td></tr>\n<tr><td>Infra</td><td>Terraform in this repo, applied by GitHub Actions via Workload Identity Federation</td><td>GitHub Actions</td><td>Can reconfigure or delete; cannot read</td></tr>\n</tbody>\n</table>",
+      "id": "3.1",
+      "markdown": "| Layer | Component | Where it runs | Trust |\n|---|---|---|---|\n| Site + app | Static HTML/JS/CSS from this repo, GitHub Pages, custom domain `secrets.sgit.ai` | Visitor's browser | **The boundary.** Whoever controls this repo or the `sgit.ai` DNS controls the app |\n| Login | Identity Platform (Firebase Auth SDK, vendored) | Google | Can impersonate; cannot decrypt |\n| Storage | Cloud Storage for Firebase bucket + Security Rules | Google | Holds ciphertext; can delete |\n| Unlock | WebAuthn passkey, RP ID `secrets.sgit.ai`, PRF extension | User's authenticator (Google Password Manager, iCloud Keychain, hardware key) | The only thing that can decrypt |\n| Admin | Same static pages, calling GCP REST APIs with the signed-in Google account's own OAuth token | Visitor's browser | Works only if that Google account has IAM on the project |\n| Infra | Terraform in this repo, applied by GitHub Actions via Workload Identity Federation | GitHub Actions | Can reconfigure or delete; cannot read |\n",
+      "nodes": [
+        {
+          "id": "place.browser",
+          "layer": "components",
+          "name": "The visitor's browser"
+        },
+        {
+          "id": "place.google",
+          "layer": "components",
+          "name": "Google"
+        },
+        {
+          "id": "place.github",
+          "layer": "components",
+          "name": "GitHub (Pages and Actions)"
+        },
+        {
+          "id": "place.authenticator",
+          "layer": "components",
+          "name": "The user's authenticator (Google Password Manager, iCloud Keychain, hardware key)"
+        },
+        {
+          "id": "site",
+          "layer": "components",
+          "name": "Site and app: static HTML, JS and CSS from this repository, GitHub Pages, secrets.sgit.ai"
+        },
+        {
+          "id": "login",
+          "layer": "components",
+          "name": "Login: Identity Platform, through the vendored Firebase Auth SDK"
+        },
+        {
+          "id": "storage",
+          "layer": "components",
+          "name": "Storage: a Cloud Storage for Firebase bucket with Security Rules"
+        },
+        {
+          "id": "unlock",
+          "layer": "components",
+          "name": "Unlock: a WebAuthn passkey with the PRF extension, RP ID secrets.sgit.ai"
+        },
+        {
+          "id": "infra",
+          "layer": "components",
+          "name": "Infra: Terraform in this repository, applied by GitHub Actions through Workload Identity Federation"
+        }
+      ],
+      "title": "3.1 Components"
+    },
+    {
+      "anchor": "32-flows",
+      "html": "<p><strong>First run.</strong> Sign in (Identity Platform) → no keyring at <code>users/{uid}/keyring.json</code> → create passkey with PRF → generate keyring key (KEK), key pair, recovery code → write encrypted keyring → show recovery code once → done.</p>\n<p><strong>Returning.</strong> Sign in → fetch keyring → <code>navigator.credentials.get</code> with PRF eval → HKDF → unwrap KEK → decrypt body into memory → UI. Nothing decrypted is ever written to storage, localStorage, sessionStorage or IndexedDB.</p>\n<p><strong>New device.</strong> Sign in → fetch keyring → unlock via a synced passkey, cross-device passkey (QR) or the recovery code → register a new passkey → add a wrapped-KEK entry → write keyring (with optimistic concurrency, see 8.5).</p>\n<p><strong>Admin.</strong> Open <code>/admin/</code> → choose environment → &quot;Sign in with Google for admin&quot; (OAuth implicit flow, scope <code>cloud-platform</code>, token in memory only) → each check calls a GCP API; green/red/fix.</p>",
+      "id": "3.2",
+      "markdown": "**First run.** Sign in (Identity Platform) → no keyring at `users/{uid}/keyring.json` → create passkey with PRF → generate keyring key (KEK), key pair, recovery code → write encrypted keyring → show recovery code once → done.\n\n**Returning.** Sign in → fetch keyring → `navigator.credentials.get` with PRF eval → HKDF → unwrap KEK → decrypt body into memory → UI. Nothing decrypted is ever written to storage, localStorage, sessionStorage or IndexedDB.\n\n**New device.** Sign in → fetch keyring → unlock via a synced passkey, cross-device passkey (QR) or the recovery code → register a new passkey → add a wrapped-KEK entry → write keyring (with optimistic concurrency, see 8.5).\n\n**Admin.** Open `/admin/` → choose environment → \"Sign in with Google for admin\" (OAuth implicit flow, scope `cloud-platform`, token in memory only) → each check calls a GCP API; green/red/fix.\n",
+      "nodes": [
+        {
+          "id": "sign-in",
+          "layer": "stories",
+          "name": "Sign in to an environment"
+        },
+        {
+          "id": "first-run",
+          "layer": "stories",
+          "name": "First run: create a passkey and a keyring"
+        },
+        {
+          "id": "first-run.generate",
+          "layer": "rules",
+          "name": "The browser generates the KEK (32 random bytes), the key pair…"
+        },
+        {
+          "id": "first-run.plaintext-only-in-browser",
+          "layer": "rules",
+          "name": "Nothing decrypted is ever written to storage, localStorage…"
+        },
+        {
+          "id": "returning",
+          "layer": "stories",
+          "name": "Returning: unlock with the passkey"
+        },
+        {
+          "id": "returning.prf-eval.unlock",
+          "layer": "examples",
+          "name": "One gesture unlocks the keyring into memory and shows the vault list."
+        },
+        {
+          "id": "new-device",
+          "layer": "stories",
+          "name": "New device: unlock another way and add a passkey"
+        },
+        {
+          "id": "new-device.add-wrap",
+          "layer": "rules",
+          "name": "After unlocking, the page registers a new passkey and adds a…"
+        },
+        {
+          "id": "flow.first-run",
+          "layer": "flows",
+          "name": "First run"
+        },
+        {
+          "id": "flow.returning",
+          "layer": "flows",
+          "name": "Returning"
+        },
+        {
+          "id": "flow.new-device",
+          "layer": "flows",
+          "name": "New device"
+        },
+        {
+          "id": "flow.admin",
+          "layer": "flows",
+          "name": "Admin"
+        }
+      ],
+      "title": "3.2 Flows"
+    },
+    {
+      "anchor": "33-origins-and-the-passkey-scope-the-single-most-important-decision",
+      "html": "<ul>\n<li>RP ID is exactly <code>secrets.sgit.ai</code>. <strong>Never</strong> <code>sgit.ai</code>: a passkey scoped to the apex can be asserted by any of the 27+ sibling sites, and a compromise of any sibling repo would unlock every user&#x27;s secrets.</li>\n<li>The app runs on one origin and loads nothing from any other origin except Google&#x27;s auth endpoints (popup/redirect, no script injection). All libraries are vendored (section 7.3).</li>\n<li>riskmandate.ai and other consumers will use their own passkey or WebAuthn Related Origin Requests later. Out of scope for the MVP.</li>\n</ul>",
+      "id": "3.3",
+      "markdown": "- RP ID is exactly `secrets.sgit.ai`. **Never** `sgit.ai`: a passkey scoped to the apex can be asserted by any of the 27+ sibling sites, and a compromise of any sibling repo would unlock every user's secrets.\n- The app runs on one origin and loads nothing from any other origin except Google's auth endpoints (popup/redirect, no script injection). All libraries are vendored (section 7.3).\n- riskmandate.ai and other consumers will use their own passkey or WebAuthn Related Origin Requests later. Out of scope for the MVP.\n",
+      "nodes": [
+        {
+          "id": "security-model.rp-id",
+          "layer": "rules",
+          "name": "The RP ID is exactly secrets.sgit.ai, never sgit.ai: a passkey scoped…"
+        },
+        {
+          "id": "security-model.rp-id.page",
+          "layer": "examples",
+          "name": "The security page explains the RP ID decision."
+        }
+      ],
+      "title": "3.3 Origins and the passkey scope (the single most important decision)"
+    },
+    {
+      "anchor": "34-what-a-compromised-party-gets",
+      "html": "<table>\n<thead><tr><th>Party compromised</th><th>Gets</th><th>Does not get</th></tr></thead>\n<tbody>\n<tr><td>GCP project / Identity Platform admin</td><td>user emails, login metadata, ciphertext, ability to delete or roll back, ability to log in as anyone</td><td>any plaintext; PRF output is bound to the origin and the user&#x27;s authenticator</td></tr>\n<tr><td>Bucket reader</td><td>ciphertext</td><td>plaintext</td></tr>\n<tr><td>Terraform pipeline</td><td>can change rules, delete bucket</td><td>plaintext</td></tr>\n<tr><td>This repository or DNS</td><td><strong>everything, for users who load the malicious page</strong></td><td>—</td></tr>\n</tbody>\n</table>\n<p>The last row is why section 9.5 exists. Say this on the site&#x27;s security page in plain words.</p>\n<hr>",
+      "id": "3.4",
+      "markdown": "| Party compromised | Gets | Does not get |\n|---|---|---|\n| GCP project / Identity Platform admin | user emails, login metadata, ciphertext, ability to delete or roll back, ability to log in as anyone | any plaintext; PRF output is bound to the origin and the user's authenticator |\n| Bucket reader | ciphertext | plaintext |\n| Terraform pipeline | can change rules, delete bucket | plaintext |\n| This repository or DNS | **everything, for users who load the malicious page** | — |\n\nThe last row is why section 9.5 exists. Say this on the site's security page in plain words.\n\n---\n",
+      "nodes": [
+        {
+          "id": "security-model",
+          "layer": "stories",
+          "name": "What a compromised party gets"
+        },
+        {
+          "id": "security-model.table",
+          "layer": "rules",
+          "name": "A GCP, Identity Platform or bucket compromise yields ciphertext and…"
+        },
+        {
+          "id": "security-model.table.page",
+          "layer": "examples",
+          "name": "The table is on the homepage and the security page."
+        },
+        {
+          "id": "repository",
+          "layer": "components",
+          "name": "The repository SGit-AI/SGit-AI__Website__Secrets and the sgit.ai DNS"
+        }
+      ],
+      "title": "3.4 What a compromised party gets"
+    }
+  ],
+  "title": "3. Architecture"
+}

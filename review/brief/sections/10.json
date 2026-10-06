@@ -1,0 +1,31 @@
+{
+  "anchor": "10-testing",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "<table>\n<thead><tr><th>Layer</th><th>Where</th><th>Runs</th><th>Covers</th></tr></thead>\n<tbody>\n<tr><td>Unit (Node ≥ 22, WebCrypto)</td><td><code>tests/unit/*.test.js</code></td><td>gate</td><td>keyring encode/decode, KATs, HKDF info strings, merge logic, base32, config loader, kinds</td></tr>\n<tr><td>Build</td><td><code>tests/build/test_*.py</code></td><td>gate</td><td>generators on the real tree, chrome in every page, twins exist, features.json schema</td></tr>\n<tr><td>Browser probe pages</td><td><code>/tests/</code></td><td>humans and the matrix</td><td>PRF, auth, storage, rules, CSP</td></tr>\n<tr><td>E2E</td><td><code>tests/e2e/</code> Playwright</td><td>PR, nightly</td><td>sign in → setup → add entry → lock → unlock → see entry → new device via recovery code</td></tr>\n<tr><td>Acceptance</td><td><code>docs/acceptance.md</code></td><td>before 1.0</td><td>an Owner of the <code>dev</code> project is handed a uid and asked to produce one plaintext field; the write-up of the attempt is published</td></tr>\n</tbody>\n</table>\n<p>No mocks: the unit tests run the real WebCrypto; the e2e runs the real <code>dev</code> project. The only stand-in is the virtual authenticator, and only if it does PRF.</p>\n<hr>",
+  "id": "10",
+  "markdown": "| Layer | Where | Runs | Covers |\n|---|---|---|---|\n| Unit (Node ≥ 22, WebCrypto) | `tests/unit/*.test.js` | gate | keyring encode/decode, KATs, HKDF info strings, merge logic, base32, config loader, kinds |\n| Build | `tests/build/test_*.py` | gate | generators on the real tree, chrome in every page, twins exist, features.json schema |\n| Browser probe pages | `/tests/` | humans and the matrix | PRF, auth, storage, rules, CSP |\n| E2E | `tests/e2e/` Playwright | PR, nightly | sign in → setup → add entry → lock → unlock → see entry → new device via recovery code |\n| Acceptance | `docs/acceptance.md` | before 1.0 | an Owner of the `dev` project is handed a uid and asked to produce one plaintext field; the write-up of the attempt is published |\n\nNo mocks: the unit tests run the real WebCrypto; the e2e runs the real `dev` project. The only stand-in is the virtual authenticator, and only if it does PRF.\n\n---\n",
+  "nodes": [
+    {
+      "id": "release.other-workflows.e2e",
+      "layer": "examples",
+      "name": "The e2e passes sign in, setup, add entry, lock, unlock, see entry, new…"
+    },
+    {
+      "id": "security-model.acceptance",
+      "layer": "rules",
+      "name": "Before 1.0 an Owner of the dev project is handed a uid and asked to…"
+    },
+    {
+      "id": "security-model.acceptance.writeup",
+      "layer": "examples",
+      "name": "docs/acceptance.md holds the attempt and its result."
+    }
+  ],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [],
+  "title": "10. Testing"
+}

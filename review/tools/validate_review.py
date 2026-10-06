@@ -25,9 +25,10 @@ SHAPES    = {'intent/stories.json'    : 'intent-stories'   , 'intent/flows.json'
              'graph/surfaces.json'    : 'graph-surfaces'   , 'graph/tests.json'     : 'graph-tests'     ,
              'graph/deploy.json'      : 'graph-deploy'     , 'graph/stories.json'   : 'graph-stories'   ,
              'join/matches.json'      : 'join-matches'     , 'join/gaps.json'       : 'join-gaps'       ,
-             'checks/rules.json'      : 'checks-rules'     , 'checks/results.json'  : 'checks-results'  }
-PREFIXES  = {'changes/' : 'change', 'streams/' : 'stream'}
-COLLECTIONS = ('stories', 'flows', 'components', 'environments', 'resources', 'pipelines', 'files', 'methods', 'classes', 'modules', 'surfaces', 'tests', 'nodes')
+             'checks/rules.json'      : 'checks-rules'     , 'checks/results.json'  : 'checks-results'  ,
+             'brief/index.json'       : 'brief-index'      , 'intent/claims.json'   : 'intent-claims'    }
+PREFIXES  = {'changes/' : 'change', 'streams/' : 'stream', 'brief/sections/' : 'brief-section'}
+COLLECTIONS = ('stories', 'flows', 'components', 'environments', 'resources', 'pipelines', 'files', 'methods', 'classes', 'modules', 'surfaces', 'tests', 'nodes', 'claims', 'releases', 'anchors')
 
 
 class Validate__Review:

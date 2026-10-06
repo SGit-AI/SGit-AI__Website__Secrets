@@ -147,7 +147,7 @@ function resolveLink(fromRel, href, root = ROOT) {                              
 const NAVIGATOR_SHELL = 'review/ui/index.html'                                   // its fragments are routes (#node=<id>, #view=<name>), checked against the intent files
 
 function reviewNodeIds(root = ROOT) {
-    const ids = new Set(['view=stories', 'view=flows', 'view=components', 'view=deploy'])
+    const ids = new Set(['view=stories', 'view=flows', 'view=components', 'view=deploy', 'view=claims', 'view=brief'])
     const walk = (item) => {
         if (Array.isArray(item)) { for (const value of item) walk(value); return }
         if (!item || typeof item !== 'object') return
@@ -155,11 +155,17 @@ function reviewNodeIds(root = ROOT) {
         if (Array.isArray(item.steps) && typeof item.id === 'string') for (const step of item.steps) ids.add(`node=${item.id}#${step.n}`)
         for (const value of Object.values(item)) walk(value)
     }
-    for (const name of ['stories', 'flows', 'components', 'deploy']) {
+    for (const name of ['stories', 'flows', 'components', 'deploy', 'claims']) {
         const rel = `review/intent/${name}.json`
         if (exists(rel, root)) walk(JSON.parse(read(rel, root)))
     }
+    if (exists('review/intent/sections.json', root)) for (const key of Object.keys(JSON.parse(read('review/intent/sections.json', root)).sections)) ids.add(`section=${key}`)
     return ids
+}
+
+function navigatorRouteOk(fragment, root = ROOT) {                               // #file=<path>[&lines=La-Lb] is a route to a file the tree holds
+    const match = fragment.match(/^file=([^&]+)(?:&lines=L\d+(?:-L\d+)?)?$/)
+    return Boolean(match) && exists(decodeURIComponent(match[1]), root)
 }
 
 function anchorsIn(rel, root = ROOT) {
@@ -292,7 +298,7 @@ function checkInternalLinks(root = ROOT) {
                 continue
             }
             if (rel.endsWith('.html')) reached.add(target)
-            if (fragment && (target.endsWith('.html') || target.endsWith('.md')) && !anchorsOf(target).has(decodeURIComponent(fragment))) {
+            if (fragment && (target.endsWith('.html') || target.endsWith('.md')) && !anchorsOf(target).has(decodeURIComponent(fragment)) && !(target === NAVIGATOR_SHELL && navigatorRouteOk(fragment, root))) {
                 problems.push(`${rel}:${line}: fragment '#${fragment}' not found in ${target}`)
             }
         }

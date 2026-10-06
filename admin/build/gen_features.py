@@ -57,6 +57,19 @@ class Gen__Features:
         if problems:
             raise SystemExit('data/features.json is invalid:\n  ' + '\n  '.join(problems))
 
+    def claim_href(self, feature):                                                # every claim is a node in the review graph, with its evidence
+        return f'/review/ui/#node=claim.{feature["id"]}'
+
+    def where_html(self, feature):                                                # each path that exists in the tree opens in the navigator's source view
+        parts = []
+        for item in feature['where'].split(', '):
+            path = item.strip()
+            if (ROOT / path.rstrip('/')).is_file() and not path.startswith(('.github/', 'infra/', 'tests/unit/')):
+                parts.append(f'<a href="/review/ui/#file={html.escape(path)}">{html.escape(path)}</a>')
+            else:
+                parts.append(html.escape(path))
+        return ', '.join(parts)
+
     def status_label(self, feature):
         if feature['status'] == 'shipped':
             return f'shipped v{feature["since"]}'
@@ -108,8 +121,8 @@ class Gen__Features:
             rows.append('      <tr>'
                         f'<td>{html.escape(feature["area"])}</td>'
                         f'<td>{html.escape(feature["title"])}</td>'
-                        f'<td><span class="sg-status sg-status-{feature["status"]}">{self.status_label(feature)}</span></td>'
-                        f'<td>{html.escape(feature["where"])}</td>'
+                        f'<td><a class="sg-status sg-status-{feature["status"]}" href="{self.claim_href(feature)}" title="the claim and its evidence, in the navigator">{self.status_label(feature)}</a></td>'
+                        f'<td>{self.where_html(feature)}</td>'
                         f'<td>{html.escape(feature["notes"])}</td>'
                         '</tr>')
         return '\n'.join([f'  <table class="sg-features" data-area="{html.escape(area)}" data-generated-from="data/features.json">'    ,
@@ -134,7 +147,7 @@ class Gen__Features:
             feature = next((f for f in self.features if f['id'] == feature_id), None)
             if feature is None:
                 raise SystemExit(f'status block names unknown feature id "{feature_id}"')
-            chips.append(f'<span class="sg-status sg-status-{feature["status"]}">{self.status_label(feature)}</span> {html.escape(feature["title"])}')
+            chips.append(f'<a class="sg-status sg-status-{feature["status"]}" href="{self.claim_href(feature)}" title="the claim and its evidence, in the navigator">{self.status_label(feature)}</a> {html.escape(feature["title"])}')
         return ('  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: '
                 + ' · '.join(chips) + '</p>')
 

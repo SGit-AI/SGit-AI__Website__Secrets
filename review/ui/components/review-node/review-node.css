@@ -43,3 +43,10 @@ h3       { color: var(--rv-text-heading); font-size: var(--rv-fs); margin: var(-
 .verb    { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); }
 .parent a { color: var(--rv-accent); }
 .empty   { color: var(--rv-text-muted); }
+
+.open     { border: 1px solid var(--rv-border); border-radius: var(--rv-radius-pill); color: var(--rv-text-muted); font-size: var(--rv-fs-xs); margin-left: var(--rv-sp-1); padding: 0 var(--rv-sp-2); text-decoration: none; }
+.open:hover { border-color: var(--rv-accent); color: var(--rv-accent); }
+.leave    { border-style: dotted; }
+.anchor-note { background: var(--rv-accent-subtle); border-radius: var(--rv-radius); color: var(--rv-text); font-size: var(--rv-fs-small); padding: var(--rv-sp-2) var(--rv-sp-3); }
+.anchor-note a { color: var(--rv-accent); }
+.layer-claim .layer, .layer-release .layer, .layer-anchor .layer { background: var(--rv-layer-derived); color: var(--rv-on-layer); }

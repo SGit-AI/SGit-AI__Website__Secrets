@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.8 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.9 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -21,7 +21,7 @@ source: /index.md
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -31,7 +31,7 @@ A zero-knowledge secrets manager that will run entirely in the browser. The site
 
 ## The three-step demo, when it exists
 
-Status, from [/shipped/](/shipped/index.md): proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 1. **Sign in** with Google or an email address, against the environment shown in the header.
 2. **Touch your passkey.** The authenticator returns a secret bound to this origin; the browser derives the key that opens your keyring.
@@ -64,74 +64,77 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | shipped v0.1.0 | admin/build/version.txt | Check 1 of the gate fails on any disagreement. |
-| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | shipped v0.1.0 | admin/build/chrome.py | gen_chrome.py --check is part of the gate. |
-| pipeline | Markdown twin of every HTML page, links pointing at markdown | shipped v0.1.0 | admin/build/gen_twins.py | index.html has index.md beside it; the twin carries the site version. |
-| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | shipped v0.1.0 | admin/build/gen_llms.py | llms-full.txt concatenates every twin and every design document. |
-| pipeline | docs/reality.md and the status tables generated from data/features.json | shipped v0.1.0 | admin/build/gen_features.py | If the reality document does not list it, it does not exist. |
-| pipeline | The eight-check release gate, no dependencies | shipped v0.1.0 | admin/build/validate.js | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
-| pipeline | The same gate locally and in CI, one command | shipped v0.1.0 | admin/build/gate.py | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
-| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | shipped v0.1.0 | admin/build/tag_release.py | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
-| pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
-| pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
-| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
-| site | secrets.sgit.ai served by GitHub Pages over HTTPS | shipped v0.1.0 | CNAME, docs/ops/dns.md | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
-| site | Content pages: how it works, security, keyring spec, sharing, environments | shipped v0.1.1 | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
-| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | shipped v0.1.1 | shipped/index.html | The same generator writes both, so the page and the reality document cannot disagree. |
-| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
-| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
-| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
-| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
-| review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
-| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7). |
-| review | The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step | shipped v0.1.7 | review/ui/components/review-graph/, review-ladder/ | Follows the selection in the navigator; given nodes="id,id" it draws what a page names, which is how the reader's column embeds it. |
-| review | The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief | shipped v0.1.4 | review/ui/ | review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash. |
-| review | The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search | proposed | review/ui/ | Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md. |
-| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | proposed | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
-| review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
-| review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |
-| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
-| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
-| site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
-| site | Participant disclosure: who publishes this site and what they are building | shipped v0.1.3 | about/participant.html | Linked from the footer. |
-| site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | shipped v0.1.6 | data/themes.json, assets/themes.css, assets/theme.js | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
-| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
-| site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | shipped v0.1.7 | components/reader-chat/, reader/index.html, data/search-index.json | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
-| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | proposed | .well-known/sgit-agents.json, tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |
-| site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | shipped v0.1.5 | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
-| site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | shipped v0.1.8 | mockups/screens.json, components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
-| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
-| site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
-| site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
-| infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
-| infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
-| infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | proposed | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |
-| infra | Storage Security Rules deployed per environment | proposed | infra/rules/storage.rules | The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project. |
-| infra | config/environments.json with real dev values from Terraform outputs | proposed | config/environments.json | Step 3. Today every environment is a placeholder with _source null. |
-| app | Sign in and out with Google and email/password against the chosen environment | proposed | app/index.html | Step 3. Popup sign-in by default; vendored Firebase SDK. |
-| app | Environment page: pick a built-in environment, enter a custom one, import, export, reset | proposed | app/environment.html | Step 3. The active environment is shown in the header at all times. |
-| app | Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai | proposed | app/setup.html, app/unlock.html | Step 4. Not before the dev project exists and the probe pages are green. |
-| app | Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests | proposed | section 8 of the brief | Step 4. Published at /keyring/ as a specification. |
-| app | Recovery code: 26 characters base32, 128 bits, shown once | proposed | app/setup.html | Step 4. Lose every passkey and the code and the data is gone; the site will say so. |
-| app | Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers | proposed | app/vault.html, app/entry.html | Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note. |
-| app | Optimistic concurrency on keyring writes with a three-way merge | proposed | section 8.5 of the brief | Step 5. rev in the AAD so a stale body fails to decrypt. |
-| app | Devices page: add and remove passkeys, regenerate the recovery code | proposed | app/devices.html | Step 6. |
-| app | Account page: export and import the encrypted keyring, sign out, wipe memory | proposed | app/account.html | Step 6. |
-| app | Key pair per user generated at first run; public bundle written to directory/ | proposed | section 8.3 of the brief | Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing. |
-| app | Sharing an entry with another user through their inbox | absent | /sharing/ (step 2 describes it) | Phase 2. The data model ships first so it is not rewritten later. |
-| app | A document kind in the keyring | absent | section 8.4 of the brief | Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring. |
-| app | Browser extension or autofill | absent | section 12 of the brief | A later site or a later version. |
-| app | An API for agents | absent | section 12 of the brief | A later version. |
-| app | Any server-side code: Cloud Functions, proxies, a small API | absent | everywhere | Forbidden by design. A need for one is a proposal in brief-corrections.md, not code. |
-| admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
-| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
-| admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
-| admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
-| tests | Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix | proposed | tests/*.html | Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix. |
-| tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
-| tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
-| tests | Playwright end to end against the real dev project with a virtual authenticator | proposed | tests/e2e/ | Whether the virtual authenticator does PRF is an open question. |
-| tests | Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field | proposed | docs/acceptance.md | Before 1.0. The write-up is published whatever the result. |
+| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | [shipped v0.1.0](/review/ui/#node=claim.pipeline.version-source) | [admin/build/version.txt](/review/ui/#file=admin/build/version.txt) | Check 1 of the gate fails on any disagreement. |
+| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | [shipped v0.1.0](/review/ui/#node=claim.pipeline.chrome) | [admin/build/chrome.py](/review/ui/#file=admin/build/chrome.py) | gen_chrome.py --check is part of the gate. |
+| pipeline | Markdown twin of every HTML page, links pointing at markdown | [shipped v0.1.0](/review/ui/#node=claim.pipeline.twins) | [admin/build/gen_twins.py](/review/ui/#file=admin/build/gen_twins.py) | index.html has index.md beside it; the twin carries the site version. |
+| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | [shipped v0.1.0](/review/ui/#node=claim.pipeline.llms) | [admin/build/gen_llms.py](/review/ui/#file=admin/build/gen_llms.py) | llms-full.txt concatenates every twin and every design document. |
+| pipeline | docs/reality.md and the status tables generated from data/features.json | [shipped v0.1.0](/review/ui/#node=claim.pipeline.reality) | [admin/build/gen_features.py](/review/ui/#file=admin/build/gen_features.py) | If the reality document does not list it, it does not exist. |
+| pipeline | The eight-check release gate, no dependencies | [shipped v0.1.0](/review/ui/#node=claim.pipeline.gate) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
+| pipeline | The same gate locally and in CI, one command | [shipped v0.1.0](/review/ui/#node=claim.pipeline.gate-local) | [admin/build/gate.py](/review/ui/#file=admin/build/gate.py) | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
+| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | [shipped v0.1.0](/review/ui/#node=claim.pipeline.tag-release) | [admin/build/tag_release.py](/review/ui/#file=admin/build/tag_release.py) | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
+| pipeline | Deploy to GitHub Pages from the validated tree | [shipped v0.1.0](/review/ui/#node=claim.pipeline.deploy) | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
+| pipeline | verify-live: the run is red until the live site serves the released version | [shipped v0.1.0](/review/ui/#node=claim.pipeline.verify-live) | [admin/build/verify_live.py](/review/ui/#file=admin/build/verify_live.py) | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
+| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | [shipped v0.1.0](/review/ui/#node=claim.pipeline.vendor) | [vendor/MANIFEST.json](/review/ui/#file=vendor/MANIFEST.json) | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | [shipped v0.1.0](/review/ui/#node=claim.site.live-domain) | [CNAME](/review/ui/#file=CNAME), [docs/ops/dns.md](/review/ui/#file=docs/ops/dns.md) | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments | [shipped v0.1.1](/review/ui/#node=claim.site.content-pages) | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
+| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | [shipped v0.1.1](/review/ui/#node=claim.site.shipped-page) | [shipped/index.html](/review/ui/#file=shipped/index.html) | The same generator writes both, so the page and the reality document cannot disagree. |
+| site | The five design documents published verbatim | [shipped v0.1.0](/review/ui/#node=claim.site.design-docs) | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
+| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | [shipped v0.1.1](/review/ui/#node=claim.site.docs-rendered) | [admin/build/gen_docs.py](/review/ui/#file=admin/build/gen_docs.py), [admin/build/md_to_html.py](/review/ui/#file=admin/build/md_to_html.py) | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
+| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | [shipped v0.1.1](/review/ui/#node=claim.site.family-chrome) | [admin/build/chrome.py](/review/ui/#file=admin/build/chrome.py), [assets/nav.js](/review/ui/#file=assets/nav.js) | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | [shipped v0.1.1](/review/ui/#node=claim.admin.comms) | [admin/comms.html](/review/ui/#file=admin/comms.html) | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | [shipped v0.1.3](/review/ui/#node=claim.review.skeleton) | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
+| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | [proposed](/review/ui/#node=claim.review.intent) | review/intent/ | Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7). |
+| review | The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step | [shipped v0.1.7](/review/ui/#node=claim.review.graph-view) | review/ui/components/review-graph/, review-ladder/ | Follows the selection in the navigator; given nodes="id,id" it draws what a page names, which is how the reader's column embeds it. |
+| review | The claims layer: every claim on /shipped/ as a node with typed evidence down to an anchor (a file, a test, a section of the brief, a document, a URL, a commit, a tag, a CI run); every status chip on the site a link into it | [shipped v0.1.9](/review/ui/#node=claim.review.claims) | [review/tools/claims.py](/review/ui/#file=review/tools/claims.py), [review/intent/claims.json](/review/ui/#file=review/intent/claims.json), [data/features.json](/review/ui/#file=data/features.json) | Strict: a shipped claim with no anchor that resolves fails the build. Releases carry their commit, tag and Actions run; release.py backfills the newest at the next release. |
+| review | The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it | [shipped v0.1.9](/review/ui/#node=claim.review.brief-sections) | [review/tools/brief.py](/review/ui/#file=review/tools/brief.py), review/brief/, review/ui/components/review-brief/ | Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current. |
+| review | Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving | [shipped v0.1.9](/review/ui/#node=claim.review.source-view) | review/ui/components/review-source/ | Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead. |
+| review | The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief | [shipped v0.1.4](/review/ui/#node=claim.review.navigator-walk) | review/ui/ | review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash. |
+| review | The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search | [proposed](/review/ui/#node=claim.review.navigator) | review/ui/ | Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md. |
+| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | [proposed](/review/ui/#node=claim.review.derived) | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
+| review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | [proposed](/review/ui/#node=claim.review.changes) | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
+| review | review/self/: the same folder for the tools and the navigator, both sets green before a release | [proposed](/review/ui/#node=claim.review.self) | review/self/ | Step 2. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | [shipped v0.1.3](/review/ui/#node=claim.pipeline.release-script) | [admin/build/release.py](/review/ui/#file=admin/build/release.py) | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | [shipped v0.1.3](/review/ui/#node=claim.pipeline.gate-extras) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | From section 4 of the repository guidance; the advisory never fails the build. |
+| site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | [shipped v0.1.3](/review/ui/#node=claim.site.team-roles) | team/ | Two roles fill every seat: the project lead and the build agent. |
+| site | Participant disclosure: who publishes this site and what they are building | [shipped v0.1.3](/review/ui/#node=claim.site.participant) | [about/participant.html](/review/ui/#file=about/participant.html) | Linked from the footer. |
+| site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | [shipped v0.1.6](/review/ui/#node=claim.site.themes) | [data/themes.json](/review/ui/#file=data/themes.json), [assets/themes.css](/review/ui/#file=assets/themes.css), [assets/theme.js](/review/ui/#file=assets/theme.js) | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
+| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
+| site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) | components/reader-chat/, [reader/index.html](/review/ui/#file=reader/index.html), [data/search-index.json](/review/ui/#file=data/search-index.json) | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
+| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | [proposed](/review/ui/#node=claim.site.agent-contact) | [.well-known/sgit-agents.json](/review/ui/#file=.well-known/sgit-agents.json), tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |
+| site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | [shipped v0.1.5](/review/ui/#node=claim.site.mockups) | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
+| site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) | [mockups/screens.json](/review/ui/#file=mockups/screens.json), components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
+| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | [proposed](/review/ui/#node=claim.site.repo-protections) | [docs/ops/branch-protection.md](/review/ui/#file=docs/ops/branch-protection.md) | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
+| site | brief-corrections.md: what the brief got wrong, dated, beside it | [shipped v0.1.0](/review/ui/#node=claim.site.corrections) | [docs/design/brief-corrections.md](/review/ui/#file=docs/design/brief-corrections.md) | Appended to as the build finds out. |
+| site | docs/ops/needs.md: exactly what only a human can do | [shipped v0.1.0](/review/ui/#node=claim.site.needs) | [docs/ops/needs.md](/review/ui/#file=docs/ops/needs.md) | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
+| infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | [proposed](/review/ui/#node=claim.infra.bootstrap) | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
+| infra | Terraform module secrets-env and the dev environment root | [proposed](/review/ui/#node=claim.infra.terraform) | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
+| infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | [proposed](/review/ui/#node=claim.infra.workflow) | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |
+| infra | Storage Security Rules deployed per environment | [proposed](/review/ui/#node=claim.infra.rules) | infra/rules/storage.rules | The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project. |
+| infra | config/environments.json with real dev values from Terraform outputs | [proposed](/review/ui/#node=claim.infra.environments-config) | [config/environments.json](/review/ui/#file=config/environments.json) | Step 3. Today every environment is a placeholder with _source null. |
+| app | Sign in and out with Google and email/password against the chosen environment | [proposed](/review/ui/#node=claim.app.sign-in) | app/index.html | Step 3. Popup sign-in by default; vendored Firebase SDK. |
+| app | Environment page: pick a built-in environment, enter a custom one, import, export, reset | [proposed](/review/ui/#node=claim.app.environment-page) | app/environment.html | Step 3. The active environment is shown in the header at all times. |
+| app | Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai | [proposed](/review/ui/#node=claim.app.prf-unlock) | app/setup.html, app/unlock.html | Step 4. Not before the dev project exists and the probe pages are green. |
+| app | Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests | [proposed](/review/ui/#node=claim.app.keyring-v1) | section 8 of the brief | Step 4. Published at /keyring/ as a specification. |
+| app | Recovery code: 26 characters base32, 128 bits, shown once | [proposed](/review/ui/#node=claim.app.recovery-code) | app/setup.html | Step 4. Lose every passkey and the code and the data is gone; the site will say so. |
+| app | Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers | [proposed](/review/ui/#node=claim.app.entries) | app/vault.html, app/entry.html | Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note. |
+| app | Optimistic concurrency on keyring writes with a three-way merge | [proposed](/review/ui/#node=claim.app.concurrency) | section 8.5 of the brief | Step 5. rev in the AAD so a stale body fails to decrypt. |
+| app | Devices page: add and remove passkeys, regenerate the recovery code | [proposed](/review/ui/#node=claim.app.devices) | app/devices.html | Step 6. |
+| app | Account page: export and import the encrypted keyring, sign out, wipe memory | [proposed](/review/ui/#node=claim.app.account) | app/account.html | Step 6. |
+| app | Key pair per user generated at first run; public bundle written to directory/ | [proposed](/review/ui/#node=claim.app.sharing-data-model) | section 8.3 of the brief | Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing. |
+| app | Sharing an entry with another user through their inbox | [absent](/review/ui/#node=claim.app.sharing-ui) | /sharing/ (step 2 describes it) | Phase 2. The data model ships first so it is not rewritten later. |
+| app | A document kind in the keyring | [absent](/review/ui/#node=claim.app.document-kind) | section 8.4 of the brief | Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring. |
+| app | Browser extension or autofill | [absent](/review/ui/#node=claim.app.browser-extension) | section 12 of the brief | A later site or a later version. |
+| app | An API for agents | [absent](/review/ui/#node=claim.app.agent-api) | section 12 of the brief | A later version. |
+| app | Any server-side code: Cloud Functions, proxies, a small API | [absent](/review/ui/#node=claim.app.server-side) | everywhere | Forbidden by design. A need for one is a proposal in brief-corrections.md, not code. |
+| admin | Admin sign-in with the visitor's own Google account, token in memory only | [proposed](/review/ui/#node=claim.admin.oauth) | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
+| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | [proposed](/review/ui/#node=claim.admin.setup-checklist) | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
+| admin | Auth config, storage, rules diff and deploy, users, environment export | [proposed](/review/ui/#node=claim.admin.pages) | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
+| admin | Release history page generated from data/versions.json | [shipped v0.1.0](/review/ui/#node=claim.admin.versions) | [admin/versions.html](/review/ui/#file=admin/versions.html) | One row per release; the newest row must equal version.txt. |
+| tests | Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix | [proposed](/review/ui/#node=claim.tests.probe-pages) | tests/*.html | Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix. |
+| tests | Unit tests under node --test, real WebCrypto, no mocks | [shipped v0.1.0](/review/ui/#node=claim.tests.unit) | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
+| tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | [shipped v0.1.0](/review/ui/#node=claim.tests.build) | tests/build/ | pytest, TestCase classes, no mocks. |
+| tests | Playwright end to end against the real dev project with a virtual authenticator | [proposed](/review/ui/#node=claim.tests.e2e) | tests/e2e/ | Whether the virtual authenticator does PRF is an open question. |
+| tests | Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field | [proposed](/review/ui/#node=claim.tests.acceptance) | docs/acceptance.md | Before 1.0. The write-up is published whatever the result. |
 
 ## Where to read next
 
@@ -154,7 +157,7 @@ source: /about/participant.md
 
 > Who publishes this site, what they are building, and why that matters when reading its claims: the people who run the sgit family build the secrets manager this site describes, and the site is written while it is built.
 
-*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -186,7 +189,7 @@ source: /admin/comms.md
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -259,7 +262,7 @@ source: /admin/index.md
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -286,29 +289,29 @@ The admin pages will work only when the visitor signs in with a Google account t
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
-| admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
-| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
-| admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
-| admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | [shipped v0.1.1](/review/ui/#node=claim.admin.comms) | [admin/comms.html](/review/ui/#file=admin/comms.html) | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| admin | Admin sign-in with the visitor's own Google account, token in memory only | [proposed](/review/ui/#node=claim.admin.oauth) | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
+| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | [proposed](/review/ui/#node=claim.admin.setup-checklist) | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
+| admin | Auth config, storage, rules diff and deploy, users, environment export | [proposed](/review/ui/#node=claim.admin.pages) | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
+| admin | Release history page generated from data/versions.json | [shipped v0.1.0](/review/ui/#node=claim.admin.versions) | [admin/versions.html](/review/ui/#file=admin/versions.html) | One row per release; the newest row must equal version.txt. |
 
 ## The pipeline, as it stands
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | shipped v0.1.0 | admin/build/version.txt | Check 1 of the gate fails on any disagreement. |
-| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | shipped v0.1.0 | admin/build/chrome.py | gen_chrome.py --check is part of the gate. |
-| pipeline | Markdown twin of every HTML page, links pointing at markdown | shipped v0.1.0 | admin/build/gen_twins.py | index.html has index.md beside it; the twin carries the site version. |
-| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | shipped v0.1.0 | admin/build/gen_llms.py | llms-full.txt concatenates every twin and every design document. |
-| pipeline | docs/reality.md and the status tables generated from data/features.json | shipped v0.1.0 | admin/build/gen_features.py | If the reality document does not list it, it does not exist. |
-| pipeline | The eight-check release gate, no dependencies | shipped v0.1.0 | admin/build/validate.js | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
-| pipeline | The same gate locally and in CI, one command | shipped v0.1.0 | admin/build/gate.py | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
-| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | shipped v0.1.0 | admin/build/tag_release.py | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
-| pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
-| pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
-| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
-| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
-| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
+| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | [shipped v0.1.0](/review/ui/#node=claim.pipeline.version-source) | [admin/build/version.txt](/review/ui/#file=admin/build/version.txt) | Check 1 of the gate fails on any disagreement. |
+| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | [shipped v0.1.0](/review/ui/#node=claim.pipeline.chrome) | [admin/build/chrome.py](/review/ui/#file=admin/build/chrome.py) | gen_chrome.py --check is part of the gate. |
+| pipeline | Markdown twin of every HTML page, links pointing at markdown | [shipped v0.1.0](/review/ui/#node=claim.pipeline.twins) | [admin/build/gen_twins.py](/review/ui/#file=admin/build/gen_twins.py) | index.html has index.md beside it; the twin carries the site version. |
+| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | [shipped v0.1.0](/review/ui/#node=claim.pipeline.llms) | [admin/build/gen_llms.py](/review/ui/#file=admin/build/gen_llms.py) | llms-full.txt concatenates every twin and every design document. |
+| pipeline | docs/reality.md and the status tables generated from data/features.json | [shipped v0.1.0](/review/ui/#node=claim.pipeline.reality) | [admin/build/gen_features.py](/review/ui/#file=admin/build/gen_features.py) | If the reality document does not list it, it does not exist. |
+| pipeline | The eight-check release gate, no dependencies | [shipped v0.1.0](/review/ui/#node=claim.pipeline.gate) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
+| pipeline | The same gate locally and in CI, one command | [shipped v0.1.0](/review/ui/#node=claim.pipeline.gate-local) | [admin/build/gate.py](/review/ui/#file=admin/build/gate.py) | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
+| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | [shipped v0.1.0](/review/ui/#node=claim.pipeline.tag-release) | [admin/build/tag_release.py](/review/ui/#file=admin/build/tag_release.py) | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
+| pipeline | Deploy to GitHub Pages from the validated tree | [shipped v0.1.0](/review/ui/#node=claim.pipeline.deploy) | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
+| pipeline | verify-live: the run is red until the live site serves the released version | [shipped v0.1.0](/review/ui/#node=claim.pipeline.verify-live) | [admin/build/verify_live.py](/review/ui/#file=admin/build/verify_live.py) | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
+| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | [shipped v0.1.0](/review/ui/#node=claim.pipeline.vendor) | [vendor/MANIFEST.json](/review/ui/#file=vendor/MANIFEST.json) | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | [shipped v0.1.3](/review/ui/#node=claim.pipeline.release-script) | [admin/build/release.py](/review/ui/#file=admin/build/release.py) | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | [shipped v0.1.3](/review/ui/#node=claim.pipeline.gate-extras) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | From section 4 of the repository guidance; the advisory never fails the build. |
 
 ## The admin section
 
@@ -331,7 +334,7 @@ source: /admin/versions.md
 
 > Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
 
-*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -339,6 +342,7 @@ One row per release. The version increments on every push to `dev`: a minor bump
 
 | Version | Date | Release | What changed |
 |---|---|---|---|
+| `v0.1.9` | 2026-10-06 | everything links to everything | Meaning through connectivity, from the fractal semantic graphs article: a claim means nothing until it is linked to its evidence, down to an anchor a person can open. Every claim in data/features.json now carries typed evidence (realises an intent node, lives_in a file, proven_by a test or a gate check, described_in a section or a document, seen_at a URL); review/tools/claims.py turns the claims, the releases (with their commit, tag and Actions run, backfilled from GitHub) and the anchors into the claims layer of the review graph, strict: a shipped claim with no anchor that resolves fails the build. Every status chip and every location on /shipped/ and in the status lines is a link into the navigator. The reader never leaves it to follow a chain: the brief is split into fourteen section files under review/brief/ by review/tools/brief.py and shown in place by review-brief, with the intent nodes written from each section; any served file is shown in place with line numbers and a marked range by review-source; sections and files are routes the gate resolves. The ladder gains the brief and the evidence rungs; the tree gains the Claims and The brief views; the crumb follows. C23, R10. |
 | `v0.1.8` | 2026-10-06 | the prototype: three UX variants and the column | The mockups are now a working prototype on invented data this browser keeps (components/proto-base, the store under sgit.secrets.proto.v1): sign in, create the keyring and the recovery code, add, open, reveal, copy, edit and delete entries, lock and unlock, devices, environment, account, the admin checklist, the probe matrix, routed by the app's own rules. Three UX variants in every frame for A/B testing (A Desk, the brief's shape; B Focus, one card per screen with a tab bar; C Command, a command bar, a dense table and an inspector), the pick kept under sgit.secrets.ui.proto. A column beside every frame (components/proto-column): what the screen is and the intent it realises, the paths to it and from it as a clickable graph, the data as charts (entries by kind, screens visited, actions over the last hour), the last actions, an A/B/C vote that is also a note in the reader's log, and the state as JSON with Seed, Reset and Copy. mockups/screens.json holds the screens, the paths and the variants; /mockups/prototype.html is the whole thing in one frame. The five categorical colours of every theme are now validated hues (C22). |
 | `v0.1.7` | 2026-10-06 | the reader's column, the comms channel and the graph view | A column on every page (components/reader-panel, reader-log, reader-chat on sg-base): mark a page read, star it, vote, leave a note or dictate one, every action an event in an append-only log in this browser keyed by page and content hash; Copy for Claude and Paste to merge; a chat over the site that searches offline on every page and, on /reader/ with the reader's own OpenRouter key, talks to Claude Sonnet with tools that read the site and file feedback; and the graph of the intent nodes the page names. Only /reader/ widens connect-src, declared in its head marker and checked by the gate (C19). The comms channel: the build agent's contact file at /.well-known/sgit-agents.json (a template until the lead publishes the bundle), tools/comms/ to publish, configure, send and drain, the sgit PKI envelope made with WebCrypto and proven to open with the agent's key; the vault and the key pair exist, the two steps the session's policy blocked are in docs/ops/comms.md (C20, needs 9 and 10). The navigator gains the ladder of layers, naming what does not exist yet with its step, and the native graph view; /review/ is now a page. data/search-index.json from gen_search.py. gate.py --build regenerates the review README after the page generators. |
 | `v0.1.6` | 2026-10-06 | four themes | Four themes a reader picks from the nav and the review navigator keeps: Night (the family palette, the default), Day, Paper and Ember, listed in data/themes.json. Every colour on the site is now a semantic token and assets/themes.css is the one file that gives them values, once per theme; site.css, mockups.css and the navigator's tokens.css name no colour, so the mockups and the review graphs follow the pick. assets/theme.js sets html[data-theme] before the first paint from the one allowed storage key, or from the reader's prefers-color-scheme when nothing is stored. tests/build/test_themes.py fails when a theme misses a token or any stylesheet or script names a colour; the gate's origin and storage-key checks now scan assets/ too. gate.py --build now regenerates the review README after the page generators, since its tree hash covers the pages. Brief-corrections C18. |
@@ -364,7 +368,7 @@ source: /docs/design/index.md
 
 > The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
 
-*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -390,7 +394,7 @@ source: /docs/index.md
 
 > Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
 
-*Source: <https://secrets.sgit.ai/docs/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -421,7 +425,7 @@ source: /docs/ops/index.md
 
 > How a release works, what only a human can do, the DNS record and the repository protections.
 
-*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -447,11 +451,11 @@ source: /environments/index.md
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool · proposed Terraform module secrets-env and the dev environment root · proposed config/environments.json with real dev values from Terraform outputs · proposed Environment page: pick a built-in environment, enter a custom one, import, export, reset
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.infra.bootstrap) Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool · [proposed](/review/ui/#node=claim.infra.terraform) Terraform module secrets-env and the dev environment root · [proposed](/review/ui/#node=claim.infra.environments-config) config/environments.json with real dev values from Terraform outputs · [proposed](/review/ui/#node=claim.app.environment-page) Environment page: pick a built-in environment, enter a custom one, import, export, reset
 
 One site serves every environment. An environment is one GCP project holding an Identity Platform configuration and one bucket; the project is the unit that is created and destroyed. The browser picks the environment at runtime, with `prod` as the default on `secrets.sgit.ai`, and shows which one is active in the app header at all times, so nobody enters a real secret into `dev` by mistake.
 
@@ -538,11 +542,11 @@ source: /how-it-works/index.md
 
 > The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 
-*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · proposed Devices page: add and remove passkeys, regenerate the recovery code
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.keyring-v1) Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · [proposed](/review/ui/#node=claim.app.devices) Devices page: add and remove passkeys, regenerate the recovery code
 
 Two things decide what you can do. The **login** decides which paths in the bucket you may touch. The **passkey** decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.
 
@@ -644,11 +648,11 @@ source: /keyring/index.md
 
 > The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
 
-*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · proposed Recovery code: 26 characters base32, 128 bits, shown once · proposed Optimistic concurrency on keyring writes with a three-way merge · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.keyring-v1) Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · [proposed](/review/ui/#node=claim.app.recovery-code) Recovery code: 26 characters base32, 128 bits, shown once · [proposed](/review/ui/#node=claim.app.concurrency) Optimistic concurrency on keyring writes with a three-way merge · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 The keyring is one encrypted file in the user's own prefix of a Cloud Storage bucket. Google stores it and cannot read it. This page is the file format, published as a specification so that a reader can check the code against it and so that another implementation could open the same file. It is version 1 and it is proposed: the known-answer fixtures in `tests/fixtures/keyring-v1/` and the crypto probe page will make it checkable when step 4 ships.
 
@@ -762,11 +766,11 @@ source: /mockups/account.md
 
 > A design mockup of the account screen at secrets.sgit.ai/app/account.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/account.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/account.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/app/account.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -808,11 +812,11 @@ source: /mockups/admin-checklist.md
 
 > A design mockup of the admin: the setup checklist screen at secrets.sgit.ai/admin/setup-checklist.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/admin-checklist.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/admin-checklist.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/admin/setup-checklist.html` is meant to look like, from section 6.3 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -857,11 +861,11 @@ source: /mockups/devices.md
 
 > A design mockup of the devices: passkeys and the recovery code screen at secrets.sgit.ai/app/devices.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/devices.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/devices.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/app/devices.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -903,11 +907,11 @@ source: /mockups/entry.md
 
 > A design mockup of the one entry: an sgit vault key screen at secrets.sgit.ai/app/entry.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/entry.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/entry.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/app/entry.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -953,11 +957,11 @@ source: /mockups/environment.md
 
 > A design mockup of the environment screen at secrets.sgit.ai/app/environment.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/environment.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/environment.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/app/environment.html` is meant to look like, from section 5 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -1000,11 +1004,11 @@ source: /mockups/index.md
 
 > What the app, admin and test screens are meant to look like, before they exist: ten mockups, each as a static picture in a mini browser frame and as ASCII art, with the intent nodes it realises. Every screen is proposed.
 
-*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers · proposed Devices page: add and remove passkeys, regenerate the recovery code · proposed Setup checklist: every per-project resource as a row, with Fix where fixable client-side · proposed Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers · [proposed](/review/ui/#node=claim.app.devices) Devices page: add and remove passkeys, regenerate the recovery code · [proposed](/review/ui/#node=claim.admin.setup-checklist) Setup checklist: every per-project resource as a row, with Fix where fixable client-side · [proposed](/review/ui/#node=claim.tests.probe-pages) Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix
 
 The screens the brief describes, built as a prototype before the app exists: each one works on invented data this browser keeps, in a mini browser frame, in one of three UX variants to compare; the same screen as ASCII art so an agent can read it; and the intent nodes in [the review graph](/review/ui/) that each screen realises. Beside every frame a column says what the screen is, draws the paths to it and from it, and charts what you have done. Every value is invented; every screen is proposed. [**Open the whole prototype**](/mockups/prototype.md).
 
@@ -1068,11 +1072,11 @@ source: /mockups/matrix.md
 
 > A design mockup of the tests: the compatibility matrix screen at secrets.sgit.ai/tests/matrix.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/matrix.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/matrix.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/tests/matrix.html` is meant to look like, from section 6.4 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -1115,11 +1119,11 @@ source: /mockups/prototype.md
 
 > The whole design prototype in one frame: every screen the brief describes, working on invented data this browser keeps, in three UX variants to compare. Beside it, what the screen is, the paths to it and from it, and what you have done.
 
-*Source: <https://secrets.sgit.ai/mockups/prototype.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/prototype.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 Start where the app would start you and click through: sign in, create the keyring, write the recovery code down, add entries, open one, reveal it, lock, unlock, add a device, change the environment. Everything is invented and everything is kept in this browser only (`localStorage`, `sgit.secrets.proto.v1`); **Seed** fills it, **Reset** empties it. The three buttons in the frame's bar switch the UX: the same screens, three different shapes, so you can say which works (the column's A/B/C vote lands in your reader's log).
 
@@ -1144,11 +1148,11 @@ source: /mockups/setup.md
 
 > A design mockup of the first run: create a passkey screen at secrets.sgit.ai/app/setup.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/setup.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/setup.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/app/setup.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -1195,11 +1199,11 @@ source: /mockups/sign-in.md
 
 > A design mockup of the sign in screen at secrets.sgit.ai/app/, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/sign-in.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/sign-in.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/app/` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -1248,11 +1252,11 @@ source: /mockups/unlock.md
 
 > A design mockup of the unlock screen at secrets.sgit.ai/app/unlock.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/unlock.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/unlock.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/app/unlock.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -1298,11 +1302,11 @@ source: /mockups/vault.md
 
 > A design mockup of the the vault: the list screen at secrets.sgit.ai/app/vault.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/vault.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/vault.html> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.5](/review/ui/#node=claim.site.mockups) Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 What `secrets.sgit.ai/app/vault.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
@@ -1347,11 +1351,11 @@ source: /reader/index.md
 
 > Where the reader's column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent's vault. The only page whose policy allows a connection beyond this site and Google's sign-in hosts.
 
-*Source: <https://secrets.sgit.ai/reader/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/reader/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.7 The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names · shipped v0.1.7 A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key · proposed The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names · [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key · [proposed](/review/ui/#node=claim.site.agent-contact) The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it
 
 Every page has the reader's column: the log of what you marked and noted, and the graph of what the page names. Two things need a connection beyond this site, and the site's policy forbids that on every page but this one: the chat through `openrouter.ai` with your own key, and **Send to the agent**, which writes your sealed log to the build agent's vault on `dev.send.sgraph.ai`. Open the column here (the tab on the right) to do either; your log is the same one, kept in this browser.
 
@@ -1385,11 +1389,11 @@ source: /review/index.md
 
 > The review folder: this project as layered graphs. The design written top down from the brief, the code derived bottom up by parsers, the join between them, every commit read upwards, and a navigator to walk it all. What exists, what each step brings, and where to start.
 
-*Source: <https://secrets.sgit.ai/review/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/review/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.3 review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository · proposed review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead · shipped v0.1.4 The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief · shipped v0.1.7 The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step · proposed The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search · proposed graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model · proposed Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence · proposed review/self/: the same folder for the tools and the navigator, both sets green before a release
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.3](/review/ui/#node=claim.review.skeleton) review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository · [proposed](/review/ui/#node=claim.review.intent) review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead · [shipped v0.1.4](/review/ui/#node=claim.review.navigator-walk) The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief · [shipped v0.1.7](/review/ui/#node=claim.review.graph-view) The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step · [proposed](/review/ui/#node=claim.review.navigator) The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search · [proposed](/review/ui/#node=claim.review.derived) graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model · [proposed](/review/ui/#node=claim.review.changes) Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence · [proposed](/review/ui/#node=claim.review.self) review/self/: the same folder for the tools and the navigator, both sets green before a release
 
 A repository is not only code. `review/` holds this project as graphs, one layer on another: the intent written top down from [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md) (stories, rules, examples; flows; components; the deploy layer), the code derived bottom up from the syntax tree by parsers (never by a model), the join between the two with a coverage figure, every commit read upwards, and the house rules as queries over all of it. The navigator walks the graphs; this page says what is there and what is not yet.
 
@@ -1439,11 +1443,11 @@ source: /security/index.md
 
 > The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
 
-*Source: <https://secrets.sgit.ai/security/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/security/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ · proposed Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.site.repo-protections) Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ · [proposed](/review/ui/#node=claim.tests.acceptance) Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai
 
 This page says what the design withholds from whom, and then says plainly what it cannot withhold. It describes a design. The acceptance test that will check it, an Owner of the GCP project being handed a uid and asked to produce one plaintext field, is listed as proposed above and its write-up will be published whatever the result.
 
@@ -1516,11 +1520,11 @@ source: /sharing/index.md
 
 > The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
 
-*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Key pair per user generated at first run; public bundle written to directory/ · absent Sharing an entry with another user through their inbox
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sharing-data-model) Key pair per user generated at first run; public bundle written to directory/ · [absent](/review/ui/#node=claim.app.sharing-ui) Sharing an entry with another user through their inbox
 
 Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their passkey, because their PRF secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is **phase 2 and absent from the MVP**; the data model is phase 1, because adding it later would mean rewriting every keyring.
 
@@ -1565,7 +1569,7 @@ source: /shipped/index.md
 
 > Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
-*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1573,47 +1577,50 @@ This site publishes its argument before the thing is finished. To keep that hone
 
 A *shipped* row names the version that shipped it and where in the repository it lives. A *proposed* row points at the section of the brief that designs it. An *absent* row says why it is not in the MVP and, where there is one, what comes instead.
 
-## Shipped (35)
+## Shipped (38)
 
 exists in the repository, runs, and was exercised at the version shown.
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | shipped v0.1.0 | admin/build/version.txt | Check 1 of the gate fails on any disagreement. |
-| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | shipped v0.1.0 | admin/build/chrome.py | gen_chrome.py --check is part of the gate. |
-| pipeline | Markdown twin of every HTML page, links pointing at markdown | shipped v0.1.0 | admin/build/gen_twins.py | index.html has index.md beside it; the twin carries the site version. |
-| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | shipped v0.1.0 | admin/build/gen_llms.py | llms-full.txt concatenates every twin and every design document. |
-| pipeline | docs/reality.md and the status tables generated from data/features.json | shipped v0.1.0 | admin/build/gen_features.py | If the reality document does not list it, it does not exist. |
-| pipeline | The eight-check release gate, no dependencies | shipped v0.1.0 | admin/build/validate.js | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
-| pipeline | The same gate locally and in CI, one command | shipped v0.1.0 | admin/build/gate.py | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
-| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | shipped v0.1.0 | admin/build/tag_release.py | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
-| pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
-| pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
-| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
-| site | secrets.sgit.ai served by GitHub Pages over HTTPS | shipped v0.1.0 | CNAME, docs/ops/dns.md | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
-| site | Content pages: how it works, security, keyring spec, sharing, environments | shipped v0.1.1 | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
-| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | shipped v0.1.1 | shipped/index.html | The same generator writes both, so the page and the reality document cannot disagree. |
-| site | The five design documents published verbatim | shipped v0.1.0 | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
-| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
-| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
-| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
-| review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
-| review | The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step | shipped v0.1.7 | review/ui/components/review-graph/, review-ladder/ | Follows the selection in the navigator; given nodes="id,id" it draws what a page names, which is how the reader's column embeds it. |
-| review | The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief | shipped v0.1.4 | review/ui/ | review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash. |
-| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
-| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
-| site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
-| site | Participant disclosure: who publishes this site and what they are building | shipped v0.1.3 | about/participant.html | Linked from the footer. |
-| site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | shipped v0.1.6 | data/themes.json, assets/themes.css, assets/theme.js | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
-| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
-| site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | shipped v0.1.7 | components/reader-chat/, reader/index.html, data/search-index.json | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
-| site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | shipped v0.1.5 | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
-| site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | shipped v0.1.8 | mockups/screens.json, components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
-| site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
-| site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
-| admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
-| tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
-| tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
+| pipeline | One version in admin/build/version.txt, repeated in every badge, twin, index and config | [shipped v0.1.0](/review/ui/#node=claim.pipeline.version-source) | [admin/build/version.txt](/review/ui/#file=admin/build/version.txt) | Check 1 of the gate fails on any disagreement. |
+| pipeline | Chrome (head, nav, footer, version badge, CSP, canonical) generated into every page from one definition | [shipped v0.1.0](/review/ui/#node=claim.pipeline.chrome) | [admin/build/chrome.py](/review/ui/#file=admin/build/chrome.py) | gen_chrome.py --check is part of the gate. |
+| pipeline | Markdown twin of every HTML page, links pointing at markdown | [shipped v0.1.0](/review/ui/#node=claim.pipeline.twins) | [admin/build/gen_twins.py](/review/ui/#file=admin/build/gen_twins.py) | index.html has index.md beside it; the twin carries the site version. |
+| pipeline | llms.txt, llms-full.txt and sitemap.xml generated on every release | [shipped v0.1.0](/review/ui/#node=claim.pipeline.llms) | [admin/build/gen_llms.py](/review/ui/#file=admin/build/gen_llms.py) | llms-full.txt concatenates every twin and every design document. |
+| pipeline | docs/reality.md and the status tables generated from data/features.json | [shipped v0.1.0](/review/ui/#node=claim.pipeline.reality) | [admin/build/gen_features.py](/review/ui/#file=admin/build/gen_features.py) | If the reality document does not list it, it does not exist. |
+| pipeline | The eight-check release gate, no dependencies | [shipped v0.1.0](/review/ui/#node=claim.pipeline.gate) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | Version agreement, internal links, canonical host, leak tripwire, vendor manifest, rules in sync, reality, storage keys. |
+| pipeline | The same gate locally and in CI, one command | [shipped v0.1.0](/review/ui/#node=claim.pipeline.gate-local) | [admin/build/gate.py](/review/ui/#file=admin/build/gate.py) | The CI validate job runs gate.py; a release that fails locally fails the same way in CI. |
+| pipeline | Every push to dev is a release: version.txt and the commit subject agree, CI tags it | [shipped v0.1.0](/review/ui/#node=claim.pipeline.tag-release) | [admin/build/tag_release.py](/review/ui/#file=admin/build/tag_release.py) | Anchors on the newest commit whose subject is 'site vX.Y.Z : ...', asserts the next minor or patch or major .0, backfills missing tags. |
+| pipeline | Deploy to GitHub Pages from the validated tree | [shipped v0.1.0](/review/ui/#node=claim.pipeline.deploy) | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
+| pipeline | verify-live: the run is red until the live site serves the released version | [shipped v0.1.0](/review/ui/#node=claim.pipeline.verify-live) | [admin/build/verify_live.py](/review/ui/#file=admin/build/verify_live.py) | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
+| pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | [shipped v0.1.0](/review/ui/#node=claim.pipeline.vendor) | [vendor/MANIFEST.json](/review/ui/#file=vendor/MANIFEST.json) | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+| site | secrets.sgit.ai served by GitHub Pages over HTTPS | [shipped v0.1.0](/review/ui/#node=claim.site.live-domain) | [CNAME](/review/ui/#file=CNAME), [docs/ops/dns.md](/review/ui/#file=docs/ops/dns.md) | verify-live passed on the v0.1.0 run (attempt 2, 2026-10-05) after the DNS record and Pages settings were made. |
+| site | Content pages: how it works, security, keyring spec, sharing, environments | [shipped v0.1.1](/review/ui/#node=claim.site.content-pages) | how-it-works/, security/, keyring/, sharing/, environments/ | Every page opens with a status line generated from this file and describes only designs in the future tense. |
+| site | /shipped/ generated from this file, one table per status, beside docs/reality.md | [shipped v0.1.1](/review/ui/#node=claim.site.shipped-page) | [shipped/index.html](/review/ui/#file=shipped/index.html) | The same generator writes both, so the page and the reality document cannot disagree. |
+| site | The five design documents published verbatim | [shipped v0.1.0](/review/ui/#node=claim.site.design-docs) | docs/design/ | The markdown is the source of truth; since v0.2.0 each is also rendered to an HTML page beside it. |
+| site | Every markdown document under docs/ rendered to HTML on each release, with index pages | [shipped v0.1.1](/review/ui/#node=claim.site.docs-rendered) | [admin/build/gen_docs.py](/review/ui/#file=admin/build/gen_docs.py), [admin/build/md_to_html.py](/review/ui/#file=admin/build/md_to_html.py) | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
+| site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | [shipped v0.1.1](/review/ui/#node=claim.site.family-chrome) | [admin/build/chrome.py](/review/ui/#file=admin/build/chrome.py), [assets/nav.js](/review/ui/#file=assets/nav.js) | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
+| admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | [shipped v0.1.1](/review/ui/#node=claim.admin.comms) | [admin/comms.html](/review/ui/#file=admin/comms.html) | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | [shipped v0.1.3](/review/ui/#node=claim.review.skeleton) | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
+| review | The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step | [shipped v0.1.7](/review/ui/#node=claim.review.graph-view) | review/ui/components/review-graph/, review-ladder/ | Follows the selection in the navigator; given nodes="id,id" it draws what a page names, which is how the reader's column embeds it. |
+| review | The claims layer: every claim on /shipped/ as a node with typed evidence down to an anchor (a file, a test, a section of the brief, a document, a URL, a commit, a tag, a CI run); every status chip on the site a link into it | [shipped v0.1.9](/review/ui/#node=claim.review.claims) | [review/tools/claims.py](/review/ui/#file=review/tools/claims.py), [review/intent/claims.json](/review/ui/#file=review/intent/claims.json), [data/features.json](/review/ui/#file=data/features.json) | Strict: a shipped claim with no anchor that resolves fails the build. Releases carry their commit, tag and Actions run; release.py backfills the newest at the next release. |
+| review | The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it | [shipped v0.1.9](/review/ui/#node=claim.review.brief-sections) | [review/tools/brief.py](/review/ui/#file=review/tools/brief.py), review/brief/, review/ui/components/review-brief/ | Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current. |
+| review | Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving | [shipped v0.1.9](/review/ui/#node=claim.review.source-view) | review/ui/components/review-source/ | Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead. |
+| review | The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief | [shipped v0.1.4](/review/ui/#node=claim.review.navigator-walk) | review/ui/ | review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | [shipped v0.1.3](/review/ui/#node=claim.pipeline.release-script) | [admin/build/release.py](/review/ui/#file=admin/build/release.py) | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | [shipped v0.1.3](/review/ui/#node=claim.pipeline.gate-extras) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | From section 4 of the repository guidance; the advisory never fails the build. |
+| site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | [shipped v0.1.3](/review/ui/#node=claim.site.team-roles) | team/ | Two roles fill every seat: the project lead and the build agent. |
+| site | Participant disclosure: who publishes this site and what they are building | [shipped v0.1.3](/review/ui/#node=claim.site.participant) | [about/participant.html](/review/ui/#file=about/participant.html) | Linked from the footer. |
+| site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | [shipped v0.1.6](/review/ui/#node=claim.site.themes) | [data/themes.json](/review/ui/#file=data/themes.json), [assets/themes.css](/review/ui/#file=assets/themes.css), [assets/theme.js](/review/ui/#file=assets/theme.js) | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
+| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
+| site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) | components/reader-chat/, [reader/index.html](/review/ui/#file=reader/index.html), [data/search-index.json](/review/ui/#file=data/search-index.json) | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
+| site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | [shipped v0.1.5](/review/ui/#node=claim.site.mockups) | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
+| site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) | [mockups/screens.json](/review/ui/#file=mockups/screens.json), components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
+| site | brief-corrections.md: what the brief got wrong, dated, beside it | [shipped v0.1.0](/review/ui/#node=claim.site.corrections) | [docs/design/brief-corrections.md](/review/ui/#file=docs/design/brief-corrections.md) | Appended to as the build finds out. |
+| site | docs/ops/needs.md: exactly what only a human can do | [shipped v0.1.0](/review/ui/#node=claim.site.needs) | [docs/ops/needs.md](/review/ui/#file=docs/ops/needs.md) | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
+| admin | Release history page generated from data/versions.json | [shipped v0.1.0](/review/ui/#node=claim.admin.versions) | [admin/versions.html](/review/ui/#file=admin/versions.html) | One row per release; the newest row must equal version.txt. |
+| tests | Unit tests under node --test, real WebCrypto, no mocks | [shipped v0.1.0](/review/ui/#node=claim.tests.unit) | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
+| tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | [shipped v0.1.0](/review/ui/#node=claim.tests.build) | tests/build/ | pytest, TestCase classes, no mocks. |
 
 ## Proposed (28)
 
@@ -1621,34 +1628,34 @@ designed in the brief, not built; described only in the future tense.
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7). |
-| review | The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search | proposed | review/ui/ | Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md. |
-| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | proposed | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
-| review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
-| review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |
-| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | proposed | .well-known/sgit-agents.json, tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |
-| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
-| infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
-| infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
-| infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | proposed | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |
-| infra | Storage Security Rules deployed per environment | proposed | infra/rules/storage.rules | The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project. |
-| infra | config/environments.json with real dev values from Terraform outputs | proposed | config/environments.json | Step 3. Today every environment is a placeholder with _source null. |
-| app | Sign in and out with Google and email/password against the chosen environment | proposed | app/index.html | Step 3. Popup sign-in by default; vendored Firebase SDK. |
-| app | Environment page: pick a built-in environment, enter a custom one, import, export, reset | proposed | app/environment.html | Step 3. The active environment is shown in the header at all times. |
-| app | Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai | proposed | app/setup.html, app/unlock.html | Step 4. Not before the dev project exists and the probe pages are green. |
-| app | Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests | proposed | section 8 of the brief | Step 4. Published at /keyring/ as a specification. |
-| app | Recovery code: 26 characters base32, 128 bits, shown once | proposed | app/setup.html | Step 4. Lose every passkey and the code and the data is gone; the site will say so. |
-| app | Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers | proposed | app/vault.html, app/entry.html | Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note. |
-| app | Optimistic concurrency on keyring writes with a three-way merge | proposed | section 8.5 of the brief | Step 5. rev in the AAD so a stale body fails to decrypt. |
-| app | Devices page: add and remove passkeys, regenerate the recovery code | proposed | app/devices.html | Step 6. |
-| app | Account page: export and import the encrypted keyring, sign out, wipe memory | proposed | app/account.html | Step 6. |
-| app | Key pair per user generated at first run; public bundle written to directory/ | proposed | section 8.3 of the brief | Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing. |
-| admin | Admin sign-in with the visitor's own Google account, token in memory only | proposed | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
-| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | proposed | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
-| admin | Auth config, storage, rules diff and deploy, users, environment export | proposed | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
-| tests | Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix | proposed | tests/*.html | Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix. |
-| tests | Playwright end to end against the real dev project with a virtual authenticator | proposed | tests/e2e/ | Whether the virtual authenticator does PRF is an open question. |
-| tests | Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field | proposed | docs/acceptance.md | Before 1.0. The write-up is published whatever the result. |
+| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | [proposed](/review/ui/#node=claim.review.intent) | review/intent/ | Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7). |
+| review | The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search | [proposed](/review/ui/#node=claim.review.navigator) | review/ui/ | Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md. |
+| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | [proposed](/review/ui/#node=claim.review.derived) | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
+| review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | [proposed](/review/ui/#node=claim.review.changes) | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
+| review | review/self/: the same folder for the tools and the navigator, both sets green before a release | [proposed](/review/ui/#node=claim.review.self) | review/self/ | Step 2. |
+| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | [proposed](/review/ui/#node=claim.site.agent-contact) | [.well-known/sgit-agents.json](/review/ui/#file=.well-known/sgit-agents.json), tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |
+| site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | [proposed](/review/ui/#node=claim.site.repo-protections) | [docs/ops/branch-protection.md](/review/ui/#file=docs/ops/branch-protection.md) | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
+| infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | [proposed](/review/ui/#node=claim.infra.bootstrap) | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
+| infra | Terraform module secrets-env and the dev environment root | [proposed](/review/ui/#node=claim.infra.terraform) | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
+| infra | infra.yml: plan on PR, apply on dispatch and on push to dev for dev | [proposed](/review/ui/#node=claim.infra.workflow) | .github/workflows/infra.yml | Step 3. Workload Identity Federation, no JSON keys. |
+| infra | Storage Security Rules deployed per environment | [proposed](/review/ui/#node=claim.infra.rules) | infra/rules/storage.rules | The rules text is in the repository and hashed; nothing is deployed yet. Syntax to verify on a real project. |
+| infra | config/environments.json with real dev values from Terraform outputs | [proposed](/review/ui/#node=claim.infra.environments-config) | [config/environments.json](/review/ui/#file=config/environments.json) | Step 3. Today every environment is a placeholder with _source null. |
+| app | Sign in and out with Google and email/password against the chosen environment | [proposed](/review/ui/#node=claim.app.sign-in) | app/index.html | Step 3. Popup sign-in by default; vendored Firebase SDK. |
+| app | Environment page: pick a built-in environment, enter a custom one, import, export, reset | [proposed](/review/ui/#node=claim.app.environment-page) | app/environment.html | Step 3. The active environment is shown in the header at all times. |
+| app | Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai | [proposed](/review/ui/#node=claim.app.prf-unlock) | app/setup.html, app/unlock.html | Step 4. Not before the dev project exists and the probe pages are green. |
+| app | Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests | [proposed](/review/ui/#node=claim.app.keyring-v1) | section 8 of the brief | Step 4. Published at /keyring/ as a specification. |
+| app | Recovery code: 26 characters base32, 128 bits, shown once | [proposed](/review/ui/#node=claim.app.recovery-code) | app/setup.html | Step 4. Lose every passkey and the code and the data is gone; the site will say so. |
+| app | Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers | [proposed](/review/ui/#node=claim.app.entries) | app/vault.html, app/entry.html | Step 5. Kinds: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note. |
+| app | Optimistic concurrency on keyring writes with a three-way merge | [proposed](/review/ui/#node=claim.app.concurrency) | section 8.5 of the brief | Step 5. rev in the AAD so a stale body fails to decrypt. |
+| app | Devices page: add and remove passkeys, regenerate the recovery code | [proposed](/review/ui/#node=claim.app.devices) | app/devices.html | Step 6. |
+| app | Account page: export and import the encrypted keyring, sign out, wipe memory | [proposed](/review/ui/#node=claim.app.account) | app/account.html | Step 6. |
+| app | Key pair per user generated at first run; public bundle written to directory/ | [proposed](/review/ui/#node=claim.app.sharing-data-model) | section 8.3 of the brief | Step 4 generates the keys; step 9 writes the public bundle. Phase 1 data model for phase 2 sharing. |
+| admin | Admin sign-in with the visitor's own Google account, token in memory only | [proposed](/review/ui/#node=claim.admin.oauth) | admin/oauth.js | Step 7. Implicit flow to verify first; PKCE fallback. |
+| admin | Setup checklist: every per-project resource as a row, with Fix where fixable client-side | [proposed](/review/ui/#node=claim.admin.setup-checklist) | admin/setup-checklist.html | Step 3 read-only, step 7 with fixes. |
+| admin | Auth config, storage, rules diff and deploy, users, environment export | [proposed](/review/ui/#node=claim.admin.pages) | admin/*.html | Step 7. GCP IAM is the role; the pages are a client for GCP's own APIs. |
+| tests | Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix | [proposed](/review/ui/#node=claim.tests.probe-pages) | tests/*.html | Steps 3 to 6. Each prints PASS/FAIL/SKIP with the raw values; together they are the compatibility matrix. |
+| tests | Playwright end to end against the real dev project with a virtual authenticator | [proposed](/review/ui/#node=claim.tests.e2e) | tests/e2e/ | Whether the virtual authenticator does PRF is an open question. |
+| tests | Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field | [proposed](/review/ui/#node=claim.tests.acceptance) | docs/acceptance.md | Before 1.0. The write-up is published whatever the result. |
 
 ## Absent (5)
 
@@ -1656,11 +1663,11 @@ deliberately not in the MVP; comes as a later version or a later site, or never.
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
-| app | Sharing an entry with another user through their inbox | absent | /sharing/ (step 2 describes it) | Phase 2. The data model ships first so it is not rewritten later. |
-| app | A document kind in the keyring | absent | section 8.4 of the brief | Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring. |
-| app | Browser extension or autofill | absent | section 12 of the brief | A later site or a later version. |
-| app | An API for agents | absent | section 12 of the brief | A later version. |
-| app | Any server-side code: Cloud Functions, proxies, a small API | absent | everywhere | Forbidden by design. A need for one is a proposal in brief-corrections.md, not code. |
+| app | Sharing an entry with another user through their inbox | [absent](/review/ui/#node=claim.app.sharing-ui) | /sharing/ (step 2 describes it) | Phase 2. The data model ships first so it is not rewritten later. |
+| app | A document kind in the keyring | [absent](/review/ui/#node=claim.app.document-kind) | section 8.4 of the brief | Documents will be a pointer to an sgit vault plus that vault's key, not bytes in the keyring. |
+| app | Browser extension or autofill | [absent](/review/ui/#node=claim.app.browser-extension) | section 12 of the brief | A later site or a later version. |
+| app | An API for agents | [absent](/review/ui/#node=claim.app.agent-api) | section 12 of the brief | A later version. |
+| app | Any server-side code: Cloud Functions, proxies, a small API | [absent](/review/ui/#node=claim.app.server-side) | everywhere | Forbidden by design. A need for one is a proposal in brief-corrections.md, not code. |
 
 ## How a row changes status
 
@@ -1679,7 +1686,7 @@ source: /team/index.md
 
 > Who does what, as one file per role with the rules it enforces and the mistake behind each, and where the board of work lives.
 
-*Source: <https://secrets.sgit.ai/team/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/team/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1700,9 +1707,9 @@ source: /docs/reality.md
 
 # secrets.sgit.ai: reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.8 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.9 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
-68 claims: 35 shipped, 28 proposed, 5 absent.
+71 claims: 38 shipped, 28 proposed, 5 absent.
 
 | Status | Meaning |
 |---|---|
@@ -1710,7 +1717,7 @@ source: /docs/reality.md
 | proposed | designed in the brief, not built; described only in the future tense |
 | absent | deliberately not in the MVP; comes as a later version or a later site, or never |
 
-## Shipped (35)
+## Shipped (38)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -1734,6 +1741,9 @@ source: /docs/reality.md
 | admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
 | review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
 | review | The native graph view in the navigator and on every page: the node in focus and its neighbours as an SVG graph, laid out by a small force simulation, no library; and the ladder of layers naming what does not exist yet with its step | shipped v0.1.7 | review/ui/components/review-graph/, review-ladder/ | Follows the selection in the navigator; given nodes="id,id" it draws what a page names, which is how the reader's column embeds it. |
+| review | The claims layer: every claim on /shipped/ as a node with typed evidence down to an anchor (a file, a test, a section of the brief, a document, a URL, a commit, a tag, a CI run); every status chip on the site a link into it | shipped v0.1.9 | review/tools/claims.py, review/intent/claims.json, data/features.json | Strict: a shipped claim with no anchor that resolves fails the build. Releases carry their commit, tag and Actions run; release.py backfills the newest at the next release. |
+| review | The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it | shipped v0.1.9 | review/tools/brief.py, review/brief/, review/ui/components/review-brief/ | Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current. |
+| review | Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving | shipped v0.1.9 | review/ui/components/review-source/ | Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead. |
 | review | The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief | shipped v0.1.4 | review/ui/ | review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash. |
 | pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
 | pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
@@ -1907,6 +1917,12 @@ Section 5 says nothing secret is ever stored in localStorage, and section 9.5 sa
 ### C22. The mockups are a prototype, in three UX variants, with a column
 
 Section 6.2 draws the screens in prose and the mockups of v0.1.5 drew them as pictures. Dinis asked on 2026-10-06 for the mockups to be interactive, with a column beside each that shows the screen's details and a graph of the paths to and from it, with the data captured in `localStorage` and visualised, and with two more complete UX variants beside the brief's own for A/B testing. So `mockups/screens.json` holds the screens, the paths and the three variants; `components/proto-base` is the pretend app's store (user, environment, keyring, entries, devices, a log, visits, votes) under `sgit.secrets.proto.v1`; `components/proto-app` renders the ten screens in the frame in the picked variant (Desk, Focus, Command); `components/proto-column` shows the details, the paths graph, the charts, the vote and the state. The real app will store none of this, and the prototype says so on every page. One more correction came out of it: the five categorical colours of each theme failed the dataviz validator (two adjacent pairs indistinguishable under colour-vision deficiency), so they are now five validated hues per surface, with `--sg-on-cat` as the text on them; the kinds of entry and the layers of the review graph use them.
+
+## v0.1.9 (2026-10-06): everything links to everything
+
+### C23. Everything links to everything: claims, anchors, and the brief as sections
+
+The brief lists what to build and section 6.5 says every claim carries a status, but nothing in it says how a reader follows a claim to the thing that makes it true. Dinis set the guideline on 2026-10-06, from [Fractal Semantic Graphs](https://sgit.ai/articles/introducing-fractal-semantic-graphs.html): a statement means nothing until it is linked to its evidence, which is linked to its evidence, down to an anchor, a node it does not pay to continue past because a person can open it and see the thing itself (a commit, a CI run, a source file, a section of the brief, a story). So every claim in `data/features.json` now carries typed evidence (`realises` an intent node, `lives_in` a file, `proven_by` a test or a gate check, `described_in` a section or a document, `seen_at` a URL), `review/tools/claims.py` turns the claims, the releases (with their commit, tag and Actions run, backfilled from GitHub) and the anchors into the claims layer of the review graph, and every status chip and every path on `/shipped/` and in the status lines is a link into the navigator. The rule is strict from this release: a shipped claim with no anchor that resolves, or any claim that realises no intent node, fails the build. The second half of the guideline is that the reader never leaves the navigator to follow a chain: the brief is split into fourteen section files under `review/brief/` (one per top-level section, each with its subsections, the same HTML the rendered page shows and the intent nodes written from it) and shown in place by `review-brief`; any file the site serves is shown in place with line numbers by `review-source`; a section or a file is a route (`#section=8.7`, `#file=assets/themes.css&lines=L12-L30`) the gate resolves like a node. The rendered brief page and GitHub stay one click away for anyone who wants to leave.
 
 ## Open questions carried from section 12 (unanswered at this version)
 
@@ -3712,6 +3728,10 @@ Section 7 puts the layers on `review-ladder` in the left rail. The ladder arrive
 - How examples are matched to tests by execution in a browser-only project (section 12): the proposal stands, a test page writes which example ids it satisfied to a results file; built at step 3.
 - Whether the deploy layer is derived from the workflow and Terraform files or declared (section 12): both, with the join reporting the difference; step 3.
 
+### R10. A claims layer, and the brief as data, which the review brief does not have
+
+The review brief's layers are the intent (stories, rules, examples, flows, components, deploy) and the code derived beneath them. This site adds a layer the brief does not name: claims, one per row of `data/features.json`, with typed edges to the intent they realise and to anchors (files, tests, sections, documents, URLs, commits, tags, CI runs) where a chain of evidence ends, and releases as nodes with their commit, tag and run. It also keeps the brief itself as data under `review/brief/` so the navigator can show a section in place. Verbs added to `verbs.json`: realises, shipped_in, lives_in, proven_by, described_in, seen_at, recorded_in, each with its inverse. The anchor kinds are a closed list in `tools/config.json`. Proposed for the review brief as a seventh layer; recorded here until it says so.
+
 
 ==============================================================================
 source: /review/README.md
@@ -3723,7 +3743,7 @@ source: /review/README.md
 
 What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
 
-Source tree: 115 files, hash `a11a471f279e1e46`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+Source tree: 124 files, hash `05e1248bfdf8f452`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
 
 ## The project
 
@@ -3741,6 +3761,10 @@ Source tree: 115 files, hash `a11a471f279e1e46`. Derived files must carry this h
 | methods | not derived yet |
 | surfaces | not derived yet |
 | tests | not derived yet |
+| claims | 71 (38 shipped, every one with evidence that resolves; strict) |
+| releases | 10 |
+| anchors | 179 (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |
+| brief sections | 14 top-level, 31 subsections, as review/brief/ |
 
 Coverage (projected nodes with a derived match beneath them): not computed yet: the join runs from step 3.
 Change files: 0. Streams: 0. Open gaps: none recorded yet.
@@ -3769,6 +3793,8 @@ Change files: 0. Streams: 0. Open gaps: none recorded yet.
 
 ```
 python3 review/tools/sections.py             # the brief's section anchors, for the links from every intent node
+python3 review/tools/brief.py                # the brief as sections, review/brief/, shown in place by the navigator
+python3 review/tools/claims.py               # the claims layer from data/features.json and data/versions.json; strict on evidence
 python3 review/tools/validate_review.py      # every JSON file against its schema; every edge a known verb
 python3 review/tools/freshness.py            # derived files match the tree being built
 python3 review/tools/readme.py               # this file

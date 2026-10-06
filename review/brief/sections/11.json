@@ -1,0 +1,46 @@
+{
+  "anchor": "11-build-order",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "<p>Every step ends with a release (<code>site vX.Y.Z : …</code>) and an entry in <code>data/features.json</code> so <code>/shipped/</code> and <code>docs/reality.md</code> are true at every version.</p>\n<table>\n<thead><tr><th>Step</th><th>Version</th><th>Deliverable</th><th>Acceptance</th></tr></thead>\n<tbody>\n<tr><td>1</td><td>v0.1.0</td><td><strong>The pipeline before the site</strong>: repo layout, <code>version.txt</code>, chrome generator, placeholder index with badge, <code>validate.js</code> with all eight checks, <code>deploy-pages.yml</code> incl. <code>verify-live</code>, CNAME, DNS note for Dinis (<code>secrets</code> CNAME → <code>sgit-ai.github.io</code>), branch protections, <code>docs/design/</code> copied in</td><td>A push to <code>dev</code> tags v0.1.0 and <code>verify-live</code> passes against <code>secrets.sgit.ai</code></td></tr>\n<tr><td>2</td><td>v0.2.0</td><td>Content pages (6.1, 6.5) with everything marked proposed; <code>/shipped/</code> generated; <code>.md</code> twins; <code>llms.txt</code>/<code>llms-full.txt</code>; sitemap</td><td>Gate green; every claim on the site carries a status</td></tr>\n<tr><td>3</td><td>v0.3.0</td><td><code>infra/bootstrap</code>, Terraform module + <code>dev</code> env, <code>infra.yml</code>, Security Rules, <code>config/environments.json</code> with <code>dev</code> real and <code>main</code>/<code>prod</code> placeholders; environment page; vendored Firebase; sign-in/out with Google and email/password against <code>dev</code></td><td><code>tests/auth.html</code> and <code>tests/storage.html</code> pass on <code>dev</code>; admin checklist exists as read-only and is green for <code>dev</code></td></tr>\n<tr><td>4</td><td>v0.4.0</td><td>PRF probe page; keyring v1 library with unit KATs; setup and unlock flows; recovery code</td><td><code>tests/keyring-roundtrip.html</code> passes on Chrome + Safari; e2e passes to &quot;unlock&quot;</td></tr>\n<tr><td>5</td><td>v0.5.0</td><td>Entries: kinds, vault list, entry page, copy/reveal, lock timers, concurrency merge</td><td>e2e passes end to end; soft limits enforced</td></tr>\n<tr><td>6</td><td>v0.6.0</td><td>Devices page: add/remove passkey, regenerate recovery; account export/import; <code>meta.json</code></td><td>Second-device flow passes manually on a phone; matrix page shipped with the first three rows</td></tr>\n<tr><td>7</td><td>v0.7.0</td><td>Admin pages with fixes: auth-config, storage, rules diff/deploy, users, environment-export; <code>rules.yml</code></td><td>A fresh <code>main</code> project is brought from bootstrap to green checklist using only the admin pages and Terraform, timed and written up in <code>docs/ops/new-environment.md</code></td></tr>\n<tr><td>8</td><td>v0.8.0</td><td><code>prod</code> environment live; homepage demo real; security page final; acceptance test performed and published</td><td><code>/shipped/</code> shows the MVP rows as shipped; acceptance write-up published</td></tr>\n<tr><td>9</td><td>v0.9.0</td><td>Phase 2 data only: public bundle written to <code>directory/</code>, inbox rules live, sharing UI still proposed</td><td><code>sgit pki</code> can import the published bundle (VERIFY)</td></tr>\n</tbody>\n</table>\n<p>Do not start step 4 until step 3&#x27;s probe pages are green on a real <code>dev</code> project; do not start step 7 before step 6, because the admin users page needs <code>meta.json</code>.</p>\n<hr>",
+  "id": "11",
+  "markdown": "Every step ends with a release (`site vX.Y.Z : …`) and an entry in `data/features.json` so `/shipped/` and `docs/reality.md` are true at every version.\n\n| Step | Version | Deliverable | Acceptance |\n|---|---|---|---|\n| 1 | v0.1.0 | **The pipeline before the site**: repo layout, `version.txt`, chrome generator, placeholder index with badge, `validate.js` with all eight checks, `deploy-pages.yml` incl. `verify-live`, CNAME, DNS note for Dinis (`secrets` CNAME → `sgit-ai.github.io`), branch protections, `docs/design/` copied in | A push to `dev` tags v0.1.0 and `verify-live` passes against `secrets.sgit.ai` |\n| 2 | v0.2.0 | Content pages (6.1, 6.5) with everything marked proposed; `/shipped/` generated; `.md` twins; `llms.txt`/`llms-full.txt`; sitemap | Gate green; every claim on the site carries a status |\n| 3 | v0.3.0 | `infra/bootstrap`, Terraform module + `dev` env, `infra.yml`, Security Rules, `config/environments.json` with `dev` real and `main`/`prod` placeholders; environment page; vendored Firebase; sign-in/out with Google and email/password against `dev` | `tests/auth.html` and `tests/storage.html` pass on `dev`; admin checklist exists as read-only and is green for `dev` |\n| 4 | v0.4.0 | PRF probe page; keyring v1 library with unit KATs; setup and unlock flows; recovery code | `tests/keyring-roundtrip.html` passes on Chrome + Safari; e2e passes to \"unlock\" |\n| 5 | v0.5.0 | Entries: kinds, vault list, entry page, copy/reveal, lock timers, concurrency merge | e2e passes end to end; soft limits enforced |\n| 6 | v0.6.0 | Devices page: add/remove passkey, regenerate recovery; account export/import; `meta.json` | Second-device flow passes manually on a phone; matrix page shipped with the first three rows |\n| 7 | v0.7.0 | Admin pages with fixes: auth-config, storage, rules diff/deploy, users, environment-export; `rules.yml` | A fresh `main` project is brought from bootstrap to green checklist using only the admin pages and Terraform, timed and written up in `docs/ops/new-environment.md` |\n| 8 | v0.8.0 | `prod` environment live; homepage demo real; security page final; acceptance test performed and published | `/shipped/` shows the MVP rows as shipped; acceptance write-up published |\n| 9 | v0.9.0 | Phase 2 data only: public bundle written to `directory/`, inbox rules live, sharing UI still proposed | `sgit pki` can import the published bundle (VERIFY) |\n\nDo not start step 4 until step 3's probe pages are green on a real `dev` project; do not start step 7 before step 6, because the admin users page needs `meta.json`.\n\n---\n",
+  "nodes": [
+    {
+      "id": "new-device.add-wrap.phone",
+      "layer": "examples",
+      "name": "The second-device flow passes manually on a phone."
+    },
+    {
+      "id": "entries.limits.soft",
+      "layer": "examples",
+      "name": "Soft limits are enforced in the vault and entry pages."
+    },
+    {
+      "id": "admin.checklist.green",
+      "layer": "examples",
+      "name": "A fresh main project is brought from bootstrap to a green checklist…"
+    },
+    {
+      "id": "release.deploy-verify.live",
+      "layer": "examples",
+      "name": "verify-live passes against secrets.sgit.ai after a push to dev."
+    },
+    {
+      "id": "infrastructure.terraform-module.dev",
+      "layer": "examples",
+      "name": "Terraform applies the module to dev and config/environments.json gets…"
+    },
+    {
+      "id": "sharing-model.objects.bundle",
+      "layer": "examples",
+      "name": "The public bundle is written to directory/ in sgit's JSON bundle shape…"
+    }
+  ],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [],
+  "title": "11. Build order"
+}

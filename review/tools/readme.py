@@ -73,6 +73,15 @@ class Review__Readme:
         for name, relative, key in LAYERS[1:]:
             value = self.count(folder, relative, key)
             lines.append(f'| {name} | {"not derived yet" if value is None else value} |')
+        claims = self.tree.read_json(folder / 'intent' / 'claims.json') if (folder / 'intent' / 'claims.json').exists() else None
+        if claims is not None:
+            shipped = sum(1 for c in claims['claims'] if c['status'] == 'shipped')
+            lines.append(f'| claims | {len(claims["claims"])} ({shipped} shipped, every one with evidence that resolves; strict) |')
+            lines.append(f'| releases | {len(claims["releases"])} |')
+            lines.append(f'| anchors | {len(claims["anchors"])} (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |')
+        brief = self.tree.read_json(REVIEW / 'brief' / 'index.json') if folder == REVIEW and (REVIEW / 'brief' / 'index.json').exists() else None
+        if brief is not None:
+            lines.append(f'| brief sections | {len(brief["sections"])} top-level, {sum(len(s["subsections"]) for s in brief["sections"])} subsections, as review/brief/ |')
         figure = 'not computed yet: the join runs from step 3' if coverage is None else f'{coverage["figure"]:.1%} ({coverage["matched"]} of {coverage["projected"]})'
         lines += ['',
                   f'Coverage (projected nodes with a derived match beneath them): {figure}.',
@@ -97,6 +106,8 @@ class Review__Readme:
         lines += self.section('The tool (review/self/)', REVIEW / 'self')
         lines += ['## Regenerate and check', '',
                   '```', 'python3 review/tools/sections.py             # the brief\'s section anchors, for the links from every intent node',
+                  'python3 review/tools/brief.py                # the brief as sections, review/brief/, shown in place by the navigator',
+                  'python3 review/tools/claims.py               # the claims layer from data/features.json and data/versions.json; strict on evidence',
                   'python3 review/tools/validate_review.py      # every JSON file against its schema; every edge a known verb',
                   'python3 review/tools/freshness.py            # derived files match the tree being built',
                   'python3 review/tools/readme.py               # this file',

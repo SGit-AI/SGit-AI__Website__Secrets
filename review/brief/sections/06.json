@@ -1,0 +1,366 @@
+{
+  "anchor": "6-the-site",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "",
+  "id": "6",
+  "markdown": "\n",
+  "nodes": [],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [
+    {
+      "anchor": "61-structure",
+      "html": "<pre><code>/                         index.html + index.md     what it is, what is shipped, the three-step demo\n/how-it-works/            the flows, drawn; what each party can and cannot see\n/security/                the threat model (3.4), the RP ID decision, the code-is-the-boundary statement, what we ask you to trust\n/keyring/                 the file format (section 8), published as a specification with versions\n/sharing/                 the sharing scheme, marked PROPOSED until the UI ships\n/environments/            how environments and customer deployments work; the setup guide\n/shipped/                 what is built vs proposed vs absent, per feature, generated from data/features.json\n/app/                     the application (6.2)\n/admin/                   admin pages (6.3)\n/tests/                   test and probe pages (6.4)\n/docs/design/             the four design docs, rendered\n/admin/versions.html      release history, generated\n/llms.txt  /llms-full.txt /index.md  /sitemap.xml  /robots.txt  CNAME\n/.well-known/             reserved for sgit-agents.json (agent contact) later; not in MVP</code></pre>\n<p>Every HTML page has a <code>.md</code> twin generated from the same source. The chrome (nav, footer, version badge, environment badge on app pages) is one definition in <code>admin/build/chrome.py</code>.</p>",
+      "id": "6.1",
+      "markdown": "```\n/                         index.html + index.md     what it is, what is shipped, the three-step demo\n/how-it-works/            the flows, drawn; what each party can and cannot see\n/security/                the threat model (3.4), the RP ID decision, the code-is-the-boundary statement, what we ask you to trust\n/keyring/                 the file format (section 8), published as a specification with versions\n/sharing/                 the sharing scheme, marked PROPOSED until the UI ships\n/environments/            how environments and customer deployments work; the setup guide\n/shipped/                 what is built vs proposed vs absent, per feature, generated from data/features.json\n/app/                     the application (6.2)\n/admin/                   admin pages (6.3)\n/tests/                   test and probe pages (6.4)\n/docs/design/             the four design docs, rendered\n/admin/versions.html      release history, generated\n/llms.txt  /llms-full.txt /index.md  /sitemap.xml  /robots.txt  CNAME\n/.well-known/             reserved for sgit-agents.json (agent contact) later; not in MVP\n```\n\nEvery HTML page has a `.md` twin generated from the same source. The chrome (nav, footer, version badge, environment badge on app pages) is one definition in `admin/build/chrome.py`.\n",
+      "nodes": [
+        {
+          "id": "content.pages",
+          "layer": "rules",
+          "name": "The site has the homepage, how-it-works, security, keyring, sharing…"
+        },
+        {
+          "id": "content.pages.shipped",
+          "layer": "examples",
+          "name": "/shipped/ is generated from data/features.json per feature with…"
+        },
+        {
+          "id": "sharing-model.ui-absent",
+          "layer": "rules",
+          "name": "The sharing UI is phase 2, marked PROPOSED on /sharing/ until it ships."
+        },
+        {
+          "id": "sharing-model.ui-absent.page",
+          "layer": "examples",
+          "name": "The sharing page describes the scheme and says the UI is absent."
+        },
+        {
+          "id": "site.chrome",
+          "layer": "components",
+          "name": "admin/build/chrome.py: the one definition of nav, footer, version badge and environment badge"
+        }
+      ],
+      "title": "6.1 Structure"
+    },
+    {
+      "anchor": "62-app-pages-app",
+      "html": "<table>\n<thead><tr><th>Page</th><th>Does</th><th>Needs</th></tr></thead>\n<tbody>\n<tr><td><code>index.html</code></td><td>Sign in; shows environment; routes to setup or unlock</td><td>config</td></tr>\n<tr><td><code>setup.html</code></td><td>First-run: create passkey (PRF), generate keyring, show recovery code once with a &quot;I have written it down&quot; gate</td><td>signed in, no keyring</td></tr>\n<tr><td><code>unlock.html</code></td><td>Passkey assertion with PRF; fallback to recovery code; unlocks into memory</td><td>signed in, keyring exists</td></tr>\n<tr><td><code>vault.html</code></td><td>The list: search, kinds filter, add, open</td><td>unlocked</td></tr>\n<tr><td><code>entry.html</code></td><td>One entry: view/copy with reveal, edit, delete; kind-specific fields</td><td>unlocked</td></tr>\n<tr><td><code>devices.html</code></td><td>Registered passkeys (name, created, last used), add passkey, remove passkey (requires another unlock method to remain), regenerate recovery code</td><td>unlocked</td></tr>\n<tr><td><code>environment.html</code></td><td>Section 5</td><td>—</td></tr>\n<tr><td><code>account.html</code></td><td>Email, uid, env, sign out, wipe memory, export encrypted keyring (download the ciphertext file), import (replace)</td><td>signed in</td></tr>\n</tbody>\n</table>\n<p>Entry kinds (the &quot;kinds kept apart&quot; rule): <code>password</code>, <code>api-key</code>, <code>sgit-vault-key</code>, <code>sgit-read-key</code>, <code>pki-private-key</code>, <code>note</code>. Each kind has its own fields and its own reveal behaviour; an <code>sgit-vault-key</code> entry displays its prefix (<code>sgit_private_vault_…</code>) and refuses to be put in a shareable (phase 2) set without a confirmation. Kinds are a closed list in <code>app/kinds.js</code>, frozen.</p>\n<p>Lock behaviour: keys cleared from memory on sign-out, environment change, tab hidden for more than 5 minutes (configurable), and on <code>beforeunload</code>. Clipboard copies clear after 30 s where the Clipboard API allows.</p>",
+      "id": "6.2",
+      "markdown": "| Page | Does | Needs |\n|---|---|---|\n| `index.html` | Sign in; shows environment; routes to setup or unlock | config |\n| `setup.html` | First-run: create passkey (PRF), generate keyring, show recovery code once with a \"I have written it down\" gate | signed in, no keyring |\n| `unlock.html` | Passkey assertion with PRF; fallback to recovery code; unlocks into memory | signed in, keyring exists |\n| `vault.html` | The list: search, kinds filter, add, open | unlocked |\n| `entry.html` | One entry: view/copy with reveal, edit, delete; kind-specific fields | unlocked |\n| `devices.html` | Registered passkeys (name, created, last used), add passkey, remove passkey (requires another unlock method to remain), regenerate recovery code | unlocked |\n| `environment.html` | Section 5 | — |\n| `account.html` | Email, uid, env, sign out, wipe memory, export encrypted keyring (download the ciphertext file), import (replace) | signed in |\n\nEntry kinds (the \"kinds kept apart\" rule): `password`, `api-key`, `sgit-vault-key`, `sgit-read-key`, `pki-private-key`, `note`. Each kind has its own fields and its own reveal behaviour; an `sgit-vault-key` entry displays its prefix (`sgit_private_vault_…`) and refuses to be put in a shareable (phase 2) set without a confirmation. Kinds are a closed list in `app/kinds.js`, frozen.\n\nLock behaviour: keys cleared from memory on sign-out, environment change, tab hidden for more than 5 minutes (configurable), and on `beforeunload`. Clipboard copies clear after 30 s where the Clipboard API allows.\n",
+      "nodes": [
+        {
+          "id": "sign-in.popup-default.google",
+          "layer": "examples",
+          "name": "Sign in with Google in a popup against dev and see uid, email and…"
+        },
+        {
+          "id": "sign-in.routes",
+          "layer": "rules",
+          "name": "After sign-in the index page routes to setup when there is no keyring…"
+        },
+        {
+          "id": "sign-in.routes.setup",
+          "layer": "examples",
+          "name": "A new user lands on setup."
+        },
+        {
+          "id": "sign-in.routes.unlock",
+          "layer": "examples",
+          "name": "A returning user lands on unlock."
+        },
+        {
+          "id": "first-run.recovery-once",
+          "layer": "rules",
+          "name": "The recovery code is shown once, behind an \"I have written it down\"…"
+        },
+        {
+          "id": "first-run.recovery-once.gate",
+          "layer": "examples",
+          "name": "The recovery code is not dismissed until the user confirms they have…"
+        },
+        {
+          "id": "returning.recovery-fallback",
+          "layer": "rules",
+          "name": "The unlock page falls back to the recovery code when no passkey can be…"
+        },
+        {
+          "id": "returning.recovery-fallback.code",
+          "layer": "examples",
+          "name": "Entering the recovery code unlocks the keyring without a passkey."
+        },
+        {
+          "id": "returning.lock",
+          "layer": "rules",
+          "name": "Keys are cleared from memory on sign-out, on environment change, when…"
+        },
+        {
+          "id": "returning.lock.hidden",
+          "layer": "examples",
+          "name": "After the tab is hidden for five minutes the vault requires a new…"
+        },
+        {
+          "id": "new-device.devices-page",
+          "layer": "rules",
+          "name": "The devices page lists registered passkeys (name, created, last used)…"
+        },
+        {
+          "id": "new-device.devices-page.remove",
+          "layer": "examples",
+          "name": "Removing the last passkey while no recovery code exists is refused."
+        },
+        {
+          "id": "entries",
+          "layer": "stories",
+          "name": "Keep secrets of six kinds"
+        },
+        {
+          "id": "entries.kinds",
+          "layer": "rules",
+          "name": "Entry kinds are a closed, frozen list in app/kinds.js: password…"
+        },
+        {
+          "id": "entries.kinds.add",
+          "layer": "examples",
+          "name": "Add an entry of each kind from the vault list and open it."
+        },
+        {
+          "id": "entries.kinds.reveal",
+          "layer": "examples",
+          "name": "An entry page reveals a field on request and copies it with a clearing…"
+        },
+        {
+          "id": "entries.vault-key-guard",
+          "layer": "rules",
+          "name": "An sgit-vault-key entry displays its prefix (sgit_private_vault_…) and…"
+        },
+        {
+          "id": "entries.vault-key-guard.prefix",
+          "layer": "examples",
+          "name": "A vault-key entry shows its prefix on the entry page."
+        },
+        {
+          "id": "account",
+          "layer": "stories",
+          "name": "Manage the account"
+        },
+        {
+          "id": "account.export-import",
+          "layer": "rules",
+          "name": "The account page exports the encrypted keyring as a downloaded…"
+        },
+        {
+          "id": "account.export-import.file",
+          "layer": "examples",
+          "name": "Export downloads keyring.json ciphertext; import replaces the keyring."
+        },
+        {
+          "id": "account.wipe",
+          "layer": "rules",
+          "name": "Sign out and wipe memory clear every key from memory."
+        },
+        {
+          "id": "account.wipe.signout",
+          "layer": "examples",
+          "name": "After sign out no key remains in memory and the vault requires a new…"
+        },
+        {
+          "id": "site.app",
+          "layer": "components",
+          "name": "The application pages under /app/"
+        },
+        {
+          "id": "site.app.kinds",
+          "layer": "components",
+          "name": "app/kinds.js: the closed list of entry kinds"
+        }
+      ],
+      "title": "6.2 App pages (`/app/`)"
+    },
+    {
+      "anchor": "63-admin-pages-admin",
+      "html": "<p>Admin pages work only when the visitor signs in with a Google account that has IAM on the selected environment&#x27;s GCP project. There is no &quot;admin role&quot; in the app: the GCP project&#x27;s IAM is the role, and the pages are a client for GCP&#x27;s own APIs.</p>\n<p><strong>Auth.</strong> <code>admin/oauth.js</code> implements the OAuth 2.0 implicit flow by redirect to <code>https://accounts.google.com/o/oauth2/v2/auth</code> with <code>response_type=token</code>, <code>scope=https://www.googleapis.com/auth/cloud-platform</code>, <code>client_id</code> from config, <code>redirect_uri=https://secrets.sgit.ai/admin/oauth-return.html</code>, a random <code>state</code> kept in sessionStorage; the return page reads the fragment, validates <code>state</code>, keeps the access token <strong>in memory only</strong> (never storage), and clears the fragment from history. No external script. Token lifetime is about an hour; the pages re-prompt when a call returns 401. VERIFY FIRST: that Google still issues implicit-flow tokens for a Web application client with these origins; if not, switch to Authorization Code with PKCE using a client of type &quot;Desktop&quot; (no secret required) and note the change.</p>\n<table>\n<thead><tr><th>Page</th><th>Checks / actions</th><th>APIs</th></tr></thead>\n<tbody>\n<tr><td><code>index.html</code></td><td>Pick environment, sign in, show who you are and which project</td><td><code>oauth2/v3/tokeninfo</code>, <code>cloudresourcemanager/v1/projects/{id}</code></td></tr>\n<tr><td><code>setup-checklist.html</code></td><td>Every section-4.2 item as a row: exists / enabled / configured / <strong>Fix</strong> where fixable client-side</td><td><code>serviceusage/v1/projects/{id}/services</code>, <code>identitytoolkit.googleapis.com/admin/v2/projects/{id}/config</code>, <code>…/defaultSupportedIdpConfigs</code>, <code>storage/v1/b/{bucket}</code> (+ <code>?fields=cors,versioning,iamConfiguration</code>), <code>firebaserules.googleapis.com/v1/projects/{id}/releases</code></td></tr>\n<tr><td><code>auth-config.html</code></td><td>Authorised domains (list/add/remove), providers enabled, tenants (list/create)</td><td>Identity Toolkit admin v2</td></tr>\n<tr><td><code>storage.html</code></td><td>Bucket CORS (show/apply the canonical set), versioning, object count per prefix, soft-delete status</td><td>Storage JSON API</td></tr>\n<tr><td><code>rules.html</code></td><td>Show the deployed Security Rules source vs <code>infra/rules/storage.rules</code> in the repo (diff), deploy the repo version</td><td>Firebase Rules API: create ruleset, update release</td></tr>\n<tr><td><code>users.html</code></td><td>Users in Identity Platform (email, uid, providers, created, last sign-in), whether each has a keyring object, disable/enable</td><td><code>identitytoolkit.googleapis.com/v1/projects/{id}/accounts:batchGet</code>, Storage list</td></tr>\n<tr><td><code>environment-export.html</code></td><td>Produce the <code>config/environments.json</code> entry for this project from live values (so a customer can paste it)</td><td>Firebase Management API <code>firebase.googleapis.com/v1beta1/projects/{id}/webApps</code> + <code>…/config</code></td></tr>\n</tbody>\n</table>\n<p>Every write action shows the exact request it will send before sending it, and logs the response on the page. Admin pages never touch a keyring&#x27;s contents (they cannot; they are ciphertext) and never store the token.</p>\n<p>Hardening noted for later, not MVP: move <code>/admin/</code> and <code>/tests/</code> to their own origin (<code>admin.secrets.sgit.ai</code>, second repo) so that nothing with <code>cloud-platform</code> tokens runs in the vault&#x27;s origin.</p>",
+      "id": "6.3",
+      "markdown": "Admin pages work only when the visitor signs in with a Google account that has IAM on the selected environment's GCP project. There is no \"admin role\" in the app: the GCP project's IAM is the role, and the pages are a client for GCP's own APIs.\n\n**Auth.** `admin/oauth.js` implements the OAuth 2.0 implicit flow by redirect to `https://accounts.google.com/o/oauth2/v2/auth` with `response_type=token`, `scope=https://www.googleapis.com/auth/cloud-platform`, `client_id` from config, `redirect_uri=https://secrets.sgit.ai/admin/oauth-return.html`, a random `state` kept in sessionStorage; the return page reads the fragment, validates `state`, keeps the access token **in memory only** (never storage), and clears the fragment from history. No external script. Token lifetime is about an hour; the pages re-prompt when a call returns 401. VERIFY FIRST: that Google still issues implicit-flow tokens for a Web application client with these origins; if not, switch to Authorization Code with PKCE using a client of type \"Desktop\" (no secret required) and note the change.\n\n| Page | Checks / actions | APIs |\n|---|---|---|\n| `index.html` | Pick environment, sign in, show who you are and which project | `oauth2/v3/tokeninfo`, `cloudresourcemanager/v1/projects/{id}` |\n| `setup-checklist.html` | Every section-4.2 item as a row: exists / enabled / configured / **Fix** where fixable client-side | `serviceusage/v1/projects/{id}/services`, `identitytoolkit.googleapis.com/admin/v2/projects/{id}/config`, `…/defaultSupportedIdpConfigs`, `storage/v1/b/{bucket}` (+ `?fields=cors,versioning,iamConfiguration`), `firebaserules.googleapis.com/v1/projects/{id}/releases` |\n| `auth-config.html` | Authorised domains (list/add/remove), providers enabled, tenants (list/create) | Identity Toolkit admin v2 |\n| `storage.html` | Bucket CORS (show/apply the canonical set), versioning, object count per prefix, soft-delete status | Storage JSON API |\n| `rules.html` | Show the deployed Security Rules source vs `infra/rules/storage.rules` in the repo (diff), deploy the repo version | Firebase Rules API: create ruleset, update release |\n| `users.html` | Users in Identity Platform (email, uid, providers, created, last sign-in), whether each has a keyring object, disable/enable | `identitytoolkit.googleapis.com/v1/projects/{id}/accounts:batchGet`, Storage list |\n| `environment-export.html` | Produce the `config/environments.json` entry for this project from live values (so a customer can paste it) | Firebase Management API `firebase.googleapis.com/v1beta1/projects/{id}/webApps` + `…/config` |\n\nEvery write action shows the exact request it will send before sending it, and logs the response on the page. Admin pages never touch a keyring's contents (they cannot; they are ciphertext) and never store the token.\n\nHardening noted for later, not MVP: move `/admin/` and `/tests/` to their own origin (`admin.secrets.sgit.ai`, second repo) so that nothing with `cloud-platform` tokens runs in the vault's origin.\n",
+      "nodes": [
+        {
+          "id": "sign-in.authorised-domains.checklist",
+          "layer": "examples",
+          "name": "The setup checklist shows the authorised domains row green for dev."
+        },
+        {
+          "id": "admin",
+          "layer": "stories",
+          "name": "Administer an environment from the browser"
+        },
+        {
+          "id": "admin.oauth",
+          "layer": "rules",
+          "name": "admin/oauth.js runs the OAuth 2.0 implicit flow by redirect to…"
+        },
+        {
+          "id": "admin.oauth.return",
+          "layer": "examples",
+          "name": "The return page validates state, keeps the token in memory and clears…"
+        },
+        {
+          "id": "admin.oauth.whoami",
+          "layer": "examples",
+          "name": "The admin index shows who you are and which project."
+        },
+        {
+          "id": "admin.checklist",
+          "layer": "rules",
+          "name": "The setup checklist shows every section-4.2 item as a row: exists…"
+        },
+        {
+          "id": "admin.pages",
+          "layer": "rules",
+          "name": "auth-config lists and edits authorised domains, providers and tenants…"
+        },
+        {
+          "id": "admin.pages.auth-config",
+          "layer": "examples",
+          "name": "Authorised domains are listed, added and removed."
+        },
+        {
+          "id": "admin.pages.storage",
+          "layer": "examples",
+          "name": "The canonical CORS set is shown and applied."
+        },
+        {
+          "id": "admin.pages.rules",
+          "layer": "examples",
+          "name": "The deployed rules source is diffed against infra/rules/storage.rules…"
+        },
+        {
+          "id": "admin.pages.users",
+          "layer": "examples",
+          "name": "Users are listed with email, uid, providers, created, last sign-in and…"
+        },
+        {
+          "id": "admin.pages.environment-export",
+          "layer": "examples",
+          "name": "The environment entry is produced from the Firebase Management API for…"
+        },
+        {
+          "id": "admin.show-request",
+          "layer": "rules",
+          "name": "Every write action shows the exact request it will send before sending…"
+        },
+        {
+          "id": "admin.show-request.preview",
+          "layer": "examples",
+          "name": "A write on any admin page previews the request before sending."
+        },
+        {
+          "id": "site.admin",
+          "layer": "components",
+          "name": "The admin pages under /admin/"
+        },
+        {
+          "id": "site.admin.oauth",
+          "layer": "components",
+          "name": "admin/oauth.js: the implicit-flow sign-in, token in memory only"
+        }
+      ],
+      "title": "6.3 Admin pages (`/admin/`)"
+    },
+    {
+      "anchor": "64-test-and-probe-pages-tests",
+      "html": "<p>Each page is self-contained, runs in the browser, needs no secrets, and prints a result table with PASS/FAIL/SKIP and the raw values behind each row. They double as the compatibility matrix: a visitor can run them on any device and paste the result into an issue.</p>\n<table>\n<thead><tr><th>Page</th><th>Verifies</th></tr></thead>\n<tbody>\n<tr><td><code>webauthn-prf.html</code></td><td>Platform authenticator present; <code>create</code> with <code>prf</code> extension; <code>getClientExtensionResults().prf.enabled</code>; <code>get</code> with <code>prf.eval</code> returns 32 bytes; same salt → same bytes twice; different salt → different bytes. Registers a throwaway credential under RP ID <code>secrets.sgit.ai</code> and tells the user how to delete it</td></tr>\n<tr><td><code>crypto.html</code></td><td>WebCrypto: HKDF-SHA256, AES-256-GCM, RSA-OAEP-4096 keygen/wrap/unwrap, ECDSA P-256 sign/verify; known-answer tests for the keyring format (section 8) against fixtures in <code>tests/fixtures/</code></td></tr>\n<tr><td><code>config.html</code></td><td>Active environment, which store it came from, every field present, API key restricted (calls a harmless endpoint and reports)</td></tr>\n<tr><td><code>auth.html</code></td><td>Sign in to the active environment, report uid/email/tenant, token claims (redacted), sign out</td></tr>\n<tr><td><code>storage.html</code></td><td>With a signed-in user: write <code>users/{uid}/_probe</code> (random bytes), read it back, overwrite with precondition, delete; attempt to read another uid&#x27;s path and expect 403</td></tr>\n<tr><td><code>keyring-roundtrip.html</code></td><td>Full first-run and unlock in one page with a throwaway passkey: create → write → fetch → unlock → compare</td></tr>\n<tr><td><code>offline.html</code></td><td>What works with the network off (unlock of a cached keyring: no; viewing already-unlocked entries: yes)</td></tr>\n<tr><td><code>leak-check.html</code></td><td>Scans the page&#x27;s own localStorage, sessionStorage and IndexedDB for anything that looks like key material; expects none</td></tr>\n<tr><td><code>matrix.html</code></td><td>Runs the above headlessly in sequence and renders a shareable summary (browser, OS, authenticator, results)</td></tr>\n</tbody>\n</table>",
+      "id": "6.4",
+      "markdown": "Each page is self-contained, runs in the browser, needs no secrets, and prints a result table with PASS/FAIL/SKIP and the raw values behind each row. They double as the compatibility matrix: a visitor can run them on any device and paste the result into an issue.\n\n| Page | Verifies |\n|---|---|\n| `webauthn-prf.html` | Platform authenticator present; `create` with `prf` extension; `getClientExtensionResults().prf.enabled`; `get` with `prf.eval` returns 32 bytes; same salt → same bytes twice; different salt → different bytes. Registers a throwaway credential under RP ID `secrets.sgit.ai` and tells the user how to delete it |\n| `crypto.html` | WebCrypto: HKDF-SHA256, AES-256-GCM, RSA-OAEP-4096 keygen/wrap/unwrap, ECDSA P-256 sign/verify; known-answer tests for the keyring format (section 8) against fixtures in `tests/fixtures/` |\n| `config.html` | Active environment, which store it came from, every field present, API key restricted (calls a harmless endpoint and reports) |\n| `auth.html` | Sign in to the active environment, report uid/email/tenant, token claims (redacted), sign out |\n| `storage.html` | With a signed-in user: write `users/{uid}/_probe` (random bytes), read it back, overwrite with precondition, delete; attempt to read another uid's path and expect 403 |\n| `keyring-roundtrip.html` | Full first-run and unlock in one page with a throwaway passkey: create → write → fetch → unlock → compare |\n| `offline.html` | What works with the network off (unlock of a cached keyring: no; viewing already-unlocked entries: yes) |\n| `leak-check.html` | Scans the page's own localStorage, sessionStorage and IndexedDB for anything that looks like key material; expects none |\n| `matrix.html` | Runs the above headlessly in sequence and renders a shareable summary (browser, OS, authenticator, results) |\n",
+      "nodes": [
+        {
+          "id": "sign-in.popup-default.probe",
+          "layer": "examples",
+          "name": "The auth probe page reports uid, email, tenant and redacted token…"
+        },
+        {
+          "id": "first-run.plaintext-only-in-browser.leak-check",
+          "layer": "examples",
+          "name": "The leak-check page scans localStorage, sessionStorage and IndexedDB…"
+        },
+        {
+          "id": "returning.prf-eval.probe",
+          "layer": "examples",
+          "name": "The PRF probe page shows create with prf, prf.enabled, get returning 32…"
+        },
+        {
+          "id": "returning.hkdf.kat",
+          "layer": "examples",
+          "name": "The crypto page checks HKDF-SHA256, AES-256-GCM, RSA-OAEP-4096 and…"
+        },
+        {
+          "id": "returning.lock.offline",
+          "layer": "examples",
+          "name": "The offline page shows that unlocking a cached keyring with the network…"
+        },
+        {
+          "id": "new-device.concurrency.precondition",
+          "layer": "examples",
+          "name": "The storage probe overwrites an object with a precondition and sees the…"
+        },
+        {
+          "id": "entries.body-shape.roundtrip",
+          "layer": "examples",
+          "name": "The keyring round-trip page creates, writes, fetches, unlocks and…"
+        },
+        {
+          "id": "environment.config-file.probe",
+          "layer": "examples",
+          "name": "The config probe shows the active environment, which store it came…"
+        },
+        {
+          "id": "probes",
+          "layer": "stories",
+          "name": "Prove the browser can do it"
+        },
+        {
+          "id": "probes.pages",
+          "layer": "rules",
+          "name": "Each page is self-contained, runs in the browser, needs no secrets…"
+        },
+        {
+          "id": "probes.pages.storage",
+          "layer": "examples",
+          "name": "With a signed-in user: write users/{uid}/_probe, read it back…"
+        },
+        {
+          "id": "probes.pages.matrix",
+          "layer": "examples",
+          "name": "The matrix page runs the probes in sequence and renders a shareable…"
+        },
+        {
+          "id": "site.tests",
+          "layer": "components",
+          "name": "The probe pages under /tests/"
+        }
+      ],
+      "title": "6.4 Test and probe pages (`/tests/`)"
+    },
+    {
+      "anchor": "65-the-content-pages-what-they-say",
+      "html": "<p>The site publishes its argument before the thing is finished, in the family&#x27;s manner. Each content page carries a status line (<code>shipped vX.Y.Z</code> / <code>proposed</code> / <code>absent</code>) generated from <code>data/features.json</code>. The homepage leads with the three-step demo (sign in, passkey, see your secret) and a one-line statement of the model, then the &quot;what a compromised admin gets&quot; table, then the shipped/proposed table. No feature is described in the present tense until <code>features.json</code> says shipped.</p>\n<hr>",
+      "id": "6.5",
+      "markdown": "The site publishes its argument before the thing is finished, in the family's manner. Each content page carries a status line (`shipped vX.Y.Z` / `proposed` / `absent`) generated from `data/features.json`. The homepage leads with the three-step demo (sign in, passkey, see your secret) and a one-line statement of the model, then the \"what a compromised admin gets\" table, then the shipped/proposed table. No feature is described in the present tense until `features.json` says shipped.\n\n---\n",
+      "nodes": [
+        {
+          "id": "content",
+          "layer": "stories",
+          "name": "A site that says what is built and what is proposed"
+        },
+        {
+          "id": "content.pages.homepage",
+          "layer": "examples",
+          "name": "The homepage leads with the three-step demo, a one-line statement of…"
+        }
+      ],
+      "title": "6.5 The content pages: what they say"
+    }
+  ],
+  "title": "6. The site"
+}

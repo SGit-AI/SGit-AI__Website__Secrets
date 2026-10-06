@@ -62,3 +62,10 @@
 .surface { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); }
 .count   { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); }
 .empty   { color: var(--rv-text-muted); }
+
+.area              { color: var(--rv-text-muted); font-size: var(--rv-fs-xs); letter-spacing: 0.06em; margin: var(--rv-sp-3) 0 var(--rv-sp-1); text-transform: uppercase; }
+.layer-claim .layer { background: var(--rv-layer-derived); color: var(--rv-on-layer); }
+.layer-claim .layer.status-proposed { background: var(--rv-proposed); }
+.layer-claim .layer.status-absent   { background: var(--rv-held); }
+.layer-section     { color: var(--rv-text); }
+.brief .level-1 .node { font-size: var(--rv-fs-small); }

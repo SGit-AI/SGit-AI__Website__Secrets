@@ -1,0 +1,76 @@
+{
+  "anchor": "7-house-style-from-codingsgitai-and-nfrssgitai",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "",
+  "id": "7",
+  "markdown": "\n",
+  "nodes": [],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [
+    {
+      "anchor": "71-javascript",
+      "html": "<ul>\n<li>Native web components, no framework, no build step, ESM everywhere (<code>&lt;script type=&quot;module&quot;&gt;</code>).</li>\n<li>The three-file triplet per component: <code>sg-secrets-&lt;name&gt;.js/.html/.css</code> under <code>components/sg-secrets-&lt;name&gt;/v0/v0.1/v0.1.0/</code>; <code>static jsUrl = import.meta.url</code>; <code>get resourceName()</code>; <code>get sharedCssPaths()</code>; <code>onReady()</code> not <code>connectedCallback</code>.</li>\n<li>4-space indent, single quotes, no semicolons, trailing commas in multi-line literals, aligned object keys, <code>_</code> prefix for private, <code>Object.freeze</code> on exported constants, JSDoc banner on components.</li>\n<li>Events namespaced <code>sg-secrets:</code> through <code>document</code> with <code>bubbles: true, composed: true</code>.</li>\n<li>Shared state via small modules (<code>app/state/session.js</code> holds the unlocked keyring in a closure; nothing exports the raw keys).</li>\n</ul>",
+      "id": "7.1",
+      "markdown": "- Native web components, no framework, no build step, ESM everywhere (`<script type=\"module\">`).\n- The three-file triplet per component: `sg-secrets-<name>.js/.html/.css` under `components/sg-secrets-<name>/v0/v0.1/v0.1.0/`; `static jsUrl = import.meta.url`; `get resourceName()`; `get sharedCssPaths()`; `onReady()` not `connectedCallback`.\n- 4-space indent, single quotes, no semicolons, trailing commas in multi-line literals, aligned object keys, `_` prefix for private, `Object.freeze` on exported constants, JSDoc banner on components.\n- Events namespaced `sg-secrets:` through `document` with `bubbles: true, composed: true`.\n- Shared state via small modules (`app/state/session.js` holds the unlocked keyring in a closure; nothing exports the raw keys).\n",
+      "nodes": [
+        {
+          "id": "site.app.session",
+          "layer": "components",
+          "name": "app/state/session.js: holds the unlocked keyring in a closure; nothing exports the raw keys"
+        }
+      ],
+      "title": "7.1 JavaScript"
+    },
+    {
+      "anchor": "72-html-css-python",
+      "html": "<ul>\n<li>HTML fragments 2-space indented; ARIA on controls; <code>data-*</code> as the behaviour hook; the chrome is injected by the generator.</li>\n<li>CSS: design tokens in <code>assets/sg-tokens.css</code> (copy the family&#x27;s tokens, pin the version in a comment); <code>:host</code> scoping; per-block value alignment.</li>\n<li>Python (generators and tests): Type<em>Safe style, one class per file, banner comments, no docstrings, `</em><em>init</em><em>.py<code> empty; test files </code>test</em>*.py` with no mocks (the generators are tested by running them on the tree).</li>\n</ul>",
+      "id": "7.2",
+      "markdown": "- HTML fragments 2-space indented; ARIA on controls; `data-*` as the behaviour hook; the chrome is injected by the generator.\n- CSS: design tokens in `assets/sg-tokens.css` (copy the family's tokens, pin the version in a comment); `:host` scoping; per-block value alignment.\n- Python (generators and tests): Type_Safe style, one class per file, banner comments, no docstrings, `__init__.py` empty; test files `test_*.py` with no mocks (the generators are tested by running them on the tree).\n",
+      "nodes": [],
+      "title": "7.2 HTML / CSS / Python"
+    },
+    {
+      "anchor": "73-dependencies-vendored-pinned-hashed",
+      "html": "<p><code>vendor/</code> holds every third-party file the app loads, with <code>vendor/MANIFEST.json</code> listing source URL, version, SHA-256, licence. The gate (9.3) recomputes the hashes. Expected contents:</p>\n<ul>\n<li><code>sg-component.js</code> (the family base class, copied from the CDN path and pinned) and <code>sg-tokens.css</code>.</li>\n<li>Firebase JS SDK modular ESM bundles for <code>app</code>, <code>auth</code>, <code>storage</code> (the <code>firebase-*.js</code> files from the pinned gstatic path), referenced by relative import. No runtime fetch from gstatic.</li>\n<li>Nothing else. No crypto libraries: WebCrypto only. No base32/base64 libraries: write the forty lines.</li>\n</ul>",
+      "id": "7.3",
+      "markdown": "`vendor/` holds every third-party file the app loads, with `vendor/MANIFEST.json` listing source URL, version, SHA-256, licence. The gate (9.3) recomputes the hashes. Expected contents:\n\n- `sg-component.js` (the family base class, copied from the CDN path and pinned) and `sg-tokens.css`.\n- Firebase JS SDK modular ESM bundles for `app`, `auth`, `storage` (the `firebase-*.js` files from the pinned gstatic path), referenced by relative import. No runtime fetch from gstatic.\n- Nothing else. No crypto libraries: WebCrypto only. No base32/base64 libraries: write the forty lines.\n",
+      "nodes": [
+        {
+          "id": "site.vendor",
+          "layer": "components",
+          "name": "vendor/: sg-component.js, sg-tokens.css and the Firebase JS SDK bundles for app, auth and storage, pinned and hashed in MANIFEST.json"
+        }
+      ],
+      "title": "7.3 Dependencies: vendored, pinned, hashed"
+    },
+    {
+      "anchor": "74-documentation-rules",
+      "html": "<ul>\n<li>Every page has a <code>.md</code> twin; <code>index.md</code> and <code>llms.txt</code> are generated; <code>llms-full.txt</code> concatenates every page and every design doc.</li>\n<li>&quot;If the reality document doesn&#x27;t list it, it does not exist&quot;: <code>docs/reality.md</code> is the list of what is built, regenerated from <code>data/features.json</code> on every release. Briefs are aspirations; this brief is an aspiration until <code>reality.md</code> says otherwise.</li>\n<li>Every number on a page comes from a data file or carries an as-of date.</li>\n<li>Agents never push to <code>dev</code> directly from a session branch without the gate passing; branch naming <code>claude/&lt;description&gt;-&lt;session-id&gt;</code>.</li>\n</ul>\n<hr>",
+      "id": "7.4",
+      "markdown": "- Every page has a `.md` twin; `index.md` and `llms.txt` are generated; `llms-full.txt` concatenates every page and every design doc.\n- \"If the reality document doesn't list it, it does not exist\": `docs/reality.md` is the list of what is built, regenerated from `data/features.json` on every release. Briefs are aspirations; this brief is an aspiration until `reality.md` says otherwise.\n- Every number on a page comes from a data file or carries an as-of date.\n- Agents never push to `dev` directly from a session branch without the gate passing; branch naming `claude/<description>-<session-id>`.\n\n---\n",
+      "nodes": [
+        {
+          "id": "content.twins",
+          "layer": "rules",
+          "name": "Every HTML page has a .md twin generated from the same source; index.md…"
+        },
+        {
+          "id": "content.twins.index",
+          "layer": "examples",
+          "name": "index.md exists beside index.html and carries the version."
+        },
+        {
+          "id": "content.reality",
+          "layer": "rules",
+          "name": "docs/reality.md is regenerated from data/features.json on every…"
+        }
+      ],
+      "title": "7.4 Documentation rules"
+    }
+  ],
+  "title": "7. House style (from coding.sgit.ai and nfrs.sgit.ai)"
+}

@@ -1,58 +1,168 @@
 {
   "releases": [
     {
+      "version": "0.1.9",
+      "date": "2026-10-06",
+      "title": "everything links to everything",
+      "notes": "Meaning through connectivity, from the fractal semantic graphs article: a claim means nothing until it is linked to its evidence, down to an anchor a person can open. Every claim in data/features.json now carries typed evidence (realises an intent node, lives_in a file, proven_by a test or a gate check, described_in a section or a document, seen_at a URL); review/tools/claims.py turns the claims, the releases (with their commit, tag and Actions run, backfilled from GitHub) and the anchors into the claims layer of the review graph, strict: a shipped claim with no anchor that resolves fails the build. Every status chip and every location on /shipped/ and in the status lines is a link into the navigator. The reader never leaves it to follow a chain: the brief is split into fourteen section files under review/brief/ by review/tools/brief.py and shown in place by review-brief, with the intent nodes written from each section; any served file is shown in place with line numbers and a marked range by review-source; sections and files are routes the gate resolves. The ladder gains the brief and the evidence rungs; the tree gains the Claims and The brief views; the crumb follows. C23, R10.",
+      "tag": "v0.1.9",
+      "commit": null,
+      "run": null,
+      "verified": null
+    },
+    {
       "version": "0.1.8",
       "date": "2026-10-06",
       "title": "the prototype: three UX variants and the column",
-      "notes": "The mockups are now a working prototype on invented data this browser keeps (components/proto-base, the store under sgit.secrets.proto.v1): sign in, create the keyring and the recovery code, add, open, reveal, copy, edit and delete entries, lock and unlock, devices, environment, account, the admin checklist, the probe matrix, routed by the app's own rules. Three UX variants in every frame for A/B testing (A Desk, the brief's shape; B Focus, one card per screen with a tab bar; C Command, a command bar, a dense table and an inspector), the pick kept under sgit.secrets.ui.proto. A column beside every frame (components/proto-column): what the screen is and the intent it realises, the paths to it and from it as a clickable graph, the data as charts (entries by kind, screens visited, actions over the last hour), the last actions, an A/B/C vote that is also a note in the reader's log, and the state as JSON with Seed, Reset and Copy. mockups/screens.json holds the screens, the paths and the variants; /mockups/prototype.html is the whole thing in one frame. The five categorical colours of every theme are now validated hues (C22)."
+      "notes": "The mockups are now a working prototype on invented data this browser keeps (components/proto-base, the store under sgit.secrets.proto.v1): sign in, create the keyring and the recovery code, add, open, reveal, copy, edit and delete entries, lock and unlock, devices, environment, account, the admin checklist, the probe matrix, routed by the app's own rules. Three UX variants in every frame for A/B testing (A Desk, the brief's shape; B Focus, one card per screen with a tab bar; C Command, a command bar, a dense table and an inspector), the pick kept under sgit.secrets.ui.proto. A column beside every frame (components/proto-column): what the screen is and the intent it realises, the paths to it and from it as a clickable graph, the data as charts (entries by kind, screens visited, actions over the last hour), the last actions, an A/B/C vote that is also a note in the reader's log, and the state as JSON with Seed, Reset and Copy. mockups/screens.json holds the screens, the paths and the variants; /mockups/prototype.html is the whole thing in one frame. The five categorical colours of every theme are now validated hues (C22).",
+      "tag": "v0.1.8",
+      "commit": "06b492182ff8106fd40caffc56f27e2a56db7613",
+      "run": {
+        "id": 37510224402,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37510224402",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.7",
       "date": "2026-10-06",
       "title": "the reader's column, the comms channel and the graph view",
-      "notes": "A column on every page (components/reader-panel, reader-log, reader-chat on sg-base): mark a page read, star it, vote, leave a note or dictate one, every action an event in an append-only log in this browser keyed by page and content hash; Copy for Claude and Paste to merge; a chat over the site that searches offline on every page and, on /reader/ with the reader's own OpenRouter key, talks to Claude Sonnet with tools that read the site and file feedback; and the graph of the intent nodes the page names. Only /reader/ widens connect-src, declared in its head marker and checked by the gate (C19). The comms channel: the build agent's contact file at /.well-known/sgit-agents.json (a template until the lead publishes the bundle), tools/comms/ to publish, configure, send and drain, the sgit PKI envelope made with WebCrypto and proven to open with the agent's key; the vault and the key pair exist, the two steps the session's policy blocked are in docs/ops/comms.md (C20, needs 9 and 10). The navigator gains the ladder of layers, naming what does not exist yet with its step, and the native graph view; /review/ is now a page. data/search-index.json from gen_search.py. gate.py --build regenerates the review README after the page generators."
+      "notes": "A column on every page (components/reader-panel, reader-log, reader-chat on sg-base): mark a page read, star it, vote, leave a note or dictate one, every action an event in an append-only log in this browser keyed by page and content hash; Copy for Claude and Paste to merge; a chat over the site that searches offline on every page and, on /reader/ with the reader's own OpenRouter key, talks to Claude Sonnet with tools that read the site and file feedback; and the graph of the intent nodes the page names. Only /reader/ widens connect-src, declared in its head marker and checked by the gate (C19). The comms channel: the build agent's contact file at /.well-known/sgit-agents.json (a template until the lead publishes the bundle), tools/comms/ to publish, configure, send and drain, the sgit PKI envelope made with WebCrypto and proven to open with the agent's key; the vault and the key pair exist, the two steps the session's policy blocked are in docs/ops/comms.md (C20, needs 9 and 10). The navigator gains the ladder of layers, naming what does not exist yet with its step, and the native graph view; /review/ is now a page. data/search-index.json from gen_search.py. gate.py --build regenerates the review README after the page generators.",
+      "tag": "v0.1.7",
+      "commit": "caefd5ec992e905f00cb54ed1b77e5db6cb09c07",
+      "run": {
+        "id": 37473142498,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37473142498",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.6",
       "date": "2026-10-06",
       "title": "four themes",
-      "notes": "Four themes a reader picks from the nav and the review navigator keeps: Night (the family palette, the default), Day, Paper and Ember, listed in data/themes.json. Every colour on the site is now a semantic token and assets/themes.css is the one file that gives them values, once per theme; site.css, mockups.css and the navigator's tokens.css name no colour, so the mockups and the review graphs follow the pick. assets/theme.js sets html[data-theme] before the first paint from the one allowed storage key, or from the reader's prefers-color-scheme when nothing is stored. tests/build/test_themes.py fails when a theme misses a token or any stylesheet or script names a colour; the gate's origin and storage-key checks now scan assets/ too. gate.py --build now regenerates the review README after the page generators, since its tree hash covers the pages. Brief-corrections C18."
+      "notes": "Four themes a reader picks from the nav and the review navigator keeps: Night (the family palette, the default), Day, Paper and Ember, listed in data/themes.json. Every colour on the site is now a semantic token and assets/themes.css is the one file that gives them values, once per theme; site.css, mockups.css and the navigator's tokens.css name no colour, so the mockups and the review graphs follow the pick. assets/theme.js sets html[data-theme] before the first paint from the one allowed storage key, or from the reader's prefers-color-scheme when nothing is stored. tests/build/test_themes.py fails when a theme misses a token or any stylesheet or script names a colour; the gate's origin and storage-key checks now scan assets/ too. gate.py --build now regenerates the review README after the page generators, since its tree hash covers the pages. Brief-corrections C18.",
+      "tag": "v0.1.6",
+      "commit": "72acdf7a1e0128e28e169a9291c254a6946666fe",
+      "run": {
+        "id": 37444877607,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37444877607",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.5",
       "date": "2026-10-06",
       "title": "the design mockups",
-      "notes": "A new section, /mockups/: ten screens the brief describes (sign in, first run, unlock, the vault, an entry, devices, environment, account, the admin checklist, the compatibility matrix), each as a static HTML picture in a mini browser frame and as ASCII art, with the intent nodes it realises linked into the review navigator. No script, no inline style, every value invented, every screen marked proposed."
+      "notes": "A new section, /mockups/: ten screens the brief describes (sign in, first run, unlock, the vault, an entry, devices, environment, account, the admin checklist, the compatibility matrix), each as a static HTML picture in a mini browser frame and as ASCII art, with the intent nodes it realises linked into the review navigator. No script, no inline style, every value invented, every screen marked proposed.",
+      "tag": "v0.1.5",
+      "commit": "306aa0c2e9d22366b748390be06e13eb93599152",
+      "run": {
+        "id": 37400775063,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37400775063",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.4",
       "date": "2026-10-06",
       "title": "the intent graph and the navigator to walk it",
-      "notes": "Step 1 of the review brief. review/intent/: the MVP brief as 14 stories, 51 rules and 70 examples naming the surfaces they touch, 6 flows, 23 components with 32 edges, and the deploy layer (5 environments, 11 resources, 5 pipelines), every node carrying the section it came from and linking to it in the rendered brief through a generated section index. The navigator at /review/: review-base (the store, the node index, the event bus, the route held in a variable), review-tree, review-node and review-crumb, web components in the coding.sgit.ai shape, three files each, no framework, colours only in tokens.css. Written by the build agent; intent only once the project lead has walked it and accepted it."
+      "notes": "Step 1 of the review brief. review/intent/: the MVP brief as 14 stories, 51 rules and 70 examples naming the surfaces they touch, 6 flows, 23 components with 32 edges, and the deploy layer (5 environments, 11 resources, 5 pipelines), every node carrying the section it came from and linking to it in the rendered brief through a generated section index. The navigator at /review/: review-base (the store, the node index, the event bus, the route held in a variable), review-tree, review-node and review-crumb, web components in the coding.sgit.ai shape, three files each, no framework, colours only in tokens.css. Written by the build agent; intent only once the project lead has walked it and accepted it.",
+      "tag": "v0.1.4",
+      "commit": "33fce58f68451cb7cc2106acdec7a44d0fb833dd",
+      "run": {
+        "id": 37400383939,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37400383939",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.3",
       "date": "2026-10-06",
       "title": "the review folder, step 0, and the repository guidance",
-      "notes": "review/ in the shape of the sgit.ai review brief: the schemas for every layer as JSON Schema with a standard-library validator, the edge vocabulary with an inverse for every verb, freshness by tree hash, a README whose every number is computed, empty intent files for the project and the tool, a fixture repository, and the first six corrections to the review brief. The gate gains check 9 (the review folder validates and is fresh), the orphan-page rule, a parse-check of every script and an em-dash advisory, as the repository guidance lists. Roles as files under team/, a participant disclosure, and admin/build/release.py: bump, build, gate, commit, push, verify live in one command."
+      "notes": "review/ in the shape of the sgit.ai review brief: the schemas for every layer as JSON Schema with a standard-library validator, the edge vocabulary with an inverse for every verb, freshness by tree hash, a README whose every number is computed, empty intent files for the project and the tool, a fixture repository, and the first six corrections to the review brief. The gate gains check 9 (the review folder validates and is fresh), the orphan-page rule, a parse-check of every script and an em-dash advisory, as the repository guidance lists. Roles as files under team/, a participant disclosure, and admin/build/release.py: bump, build, gate, commit, push, verify live in one command.",
+      "tag": "v0.1.3",
+      "commit": "05ebf4d0565e9e8d8084136b422646afafbb9711",
+      "run": {
+        "id": 37399422141,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37399422141",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.2",
       "date": "2026-10-05",
       "title": "the GCP bootstrap, from the command line",
-      "notes": "Step 3 begins. infra/bootstrap/bootstrap.sh: the one-time, idempotent gcloud bootstrap with --dry-run and --check, creating the state project and bucket, one project per environment with billing and the APIs, the Terraform service account, and the Workload Identity Federation pool and provider, then printing the public values and the gh commands that store them. docs/ops/bootstrap.md maps exactly what a human does, in order, as commands, and names the one part Google keeps in the console (the OAuth consent screen and the two Web clients) and the two organisation settings with no API. The script is dry-run tested against a stand-in gcloud; its first real run is the project lead's."
+      "notes": "Step 3 begins. infra/bootstrap/bootstrap.sh: the one-time, idempotent gcloud bootstrap with --dry-run and --check, creating the state project and bucket, one project per environment with billing and the APIs, the Terraform service account, and the Workload Identity Federation pool and provider, then printing the public values and the gh commands that store them. docs/ops/bootstrap.md maps exactly what a human does, in order, as commands, and names the one part Google keeps in the console (the OAuth consent screen and the two Web clients) and the two organisation settings with no API. The script is dry-run tested against a stand-in gcloud; its first real run is the project lead's.",
+      "tag": "v0.1.2",
+      "commit": "8ece6167362164eb5cfd4fcab4f5e2189b02a2cb",
+      "run": {
+        "id": 37311322324,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37311322324",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.1",
       "date": "2026-10-05",
       "title": "the content pages and the family chrome",
-      "notes": "Six content pages: how it works, security, keyring format v1, sharing, environments, and /shipped/ generated from data/features.json with one table per status. Every content page opens with a status line generated from the same file. Every markdown document under docs/ is now rendered to an HTML page beside it (the design documents, the ops notes, reality.md) by a standard-library markdown renderer, with index pages for docs/design/ and docs/ops/; the markdown stays the source and the twin. The homepage links the new pages and carries the three-step demo as proposed. The chrome now has the family nav (grouped menus with dropdowns, the part-of-sgit.ai link, the stage pill, a phone menu) with breadcrumbs, and the admin section gains a comms page with the asks and a tracker of the nine build steps. Versions now bump the third digit per release (brief-corrections C15). v0.1.0 went live at secrets.sgit.ai (DNS, Pages and the re-run done by Dinis), so the live-domain claim is shipped; needs.md items 1 to 3 are closed."
+      "notes": "Six content pages: how it works, security, keyring format v1, sharing, environments, and /shipped/ generated from data/features.json with one table per status. Every content page opens with a status line generated from the same file. Every markdown document under docs/ is now rendered to an HTML page beside it (the design documents, the ops notes, reality.md) by a standard-library markdown renderer, with index pages for docs/design/ and docs/ops/; the markdown stays the source and the twin. The homepage links the new pages and carries the three-step demo as proposed. The chrome now has the family nav (grouped menus with dropdowns, the part-of-sgit.ai link, the stage pill, a phone menu) with breadcrumbs, and the admin section gains a comms page with the asks and a tracker of the nine build steps. Versions now bump the third digit per release (brief-corrections C15). v0.1.0 went live at secrets.sgit.ai (DNS, Pages and the re-run done by Dinis), so the live-domain claim is shipped; needs.md items 1 to 3 are closed.",
+      "tag": "v0.1.1",
+      "commit": "a110792ec5f224319836c3adc8ebf7b440cd0d08",
+      "run": {
+        "id": 37304901577,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37304901577",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.0",
       "date": "2026-10-05",
       "title": "the pipeline, before the site",
-      "notes": "The repository layout, version.txt as the one source of the version, the chrome generator, markdown twins, llms.txt and llms-full.txt, docs/reality.md generated from data/features.json, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate, tag-release, deploy and verify-live, CNAME, the DNS and branch-protection notes, docs/ops/needs.md, and the five design documents copied in verbatim. A placeholder homepage with the version badge and the status table. Nothing of the app, admin or test pages exists yet; every one of those claims is marked proposed."
+      "notes": "The repository layout, version.txt as the one source of the version, the chrome generator, markdown twins, llms.txt and llms-full.txt, docs/reality.md generated from data/features.json, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate, tag-release, deploy and verify-live, CNAME, the DNS and branch-protection notes, docs/ops/needs.md, and the five design documents copied in verbatim. A placeholder homepage with the version badge and the status table. Nothing of the app, admin or test pages exists yet; every one of those claims is marked proposed.",
+      "tag": "v0.1.0",
+      "commit": "e031a3f01779e298eb4cabe48e779cd7afd5b04a",
+      "run": {
+        "id": 37251356486,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37251356486",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     }
-  ]
+  ],
+  "_comment": " Each release carries its tag, its commit, its Actions run (id, url, conclusion) and how it was verified live; release.py backfills the commit and the run of earlier releases at the next release, since a run only exists after the push."
 }

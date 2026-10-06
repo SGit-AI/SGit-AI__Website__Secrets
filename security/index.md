@@ -2,11 +2,11 @@
 
 > The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
 
-*Source: <https://secrets.sgit.ai/security/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/security/> · site v0.1.9 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): proposed Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ · proposed Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.site.repo-protections) Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ · [proposed](/review/ui/#node=claim.tests.acceptance) Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai
 
 This page says what the design withholds from whom, and then says plainly what it cannot withhold. It describes a design. The acceptance test that will check it, an Owner of the GCP project being handed a uid and asked to produce one plaintext field, is listed as proposed above and its write-up will be published whatever the result.
 

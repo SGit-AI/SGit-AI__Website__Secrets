@@ -35,6 +35,14 @@ export const LADDER = Object.freeze([
         { label : 'pipelines',    layers : ['pipeline'],    view : 'deploy' },
         { label : 'jobs',         layers : ['job'],         view : 'deploy' },
     ] },
+    { group : 'The brief', rungs : [
+        { label : 'sections', layers : [], view : 'brief', brief : true },
+    ] },
+    { group : 'Evidence, from the releases', rungs : [
+        { label : 'claims',   layers : ['claim'],   view : 'claims' },
+        { label : 'releases', layers : ['release'], view : 'claims' },
+        { label : 'anchors',  layers : ['anchor'],  view : 'claims', note : 'where a chain of evidence ends: a file, a test, a section, a document, a URL, a commit, a tag, a run' },
+    ] },
     { group : 'Across the layers', rungs : [
         { label : 'join',    step : 3, note : 'intent matched to code, with a coverage figure' },
         { label : 'changes', step : 4, note : 'every commit read upwards' },
@@ -56,12 +64,15 @@ export class ReviewLadder extends ReviewBase {
         this.on(REVIEW_EVENTS.loaded, () => this.render())
         this.on(REVIEW_EVENTS.route,  () => this.render())
         this.on(REVIEW_EVENTS.select, () => this.render())
+        this.on(REVIEW_EVENTS.section, () => this.render())
         if (ReviewBase.store.loaded) this.render()
     }
 
-    render() {
+    async render() {
         const store  = ReviewBase.store
         const counts = store.counts()
+        const brief  = await store.briefIndex()
+        counts.sections = brief.sections.reduce((n, s) => n + 1 + s.subsections.length, 0)
         const nav    = this.$('[data-ladder]')
         nav.replaceChildren()
         for (const group of LADDER) {
@@ -73,9 +84,9 @@ export class ReviewLadder extends ReviewBase {
                     li.appendChild(this.el('span', { class : 'label' }, rung.label))
                     li.appendChild(this.el('span', { class : 'step', title : rung.note }, `step ${rung.step}`))
                 } else {
-                    const count  = rung.layers.reduce((sum, layer) => sum + (counts[layer] || 0), 0)
+                    const count  = rung.brief ? counts.sections : rung.layers.reduce((sum, layer) => sum + (counts[layer] || 0), 0)
                     const here   = store.route.view === rung.view
-                    const button = this.el('button', { type : 'button', class : `label${here ? ' here' : ''}`, 'data-view' : rung.view, 'aria-pressed' : here ? 'true' : 'false' }, rung.label)
+                    const button = this.el('button', { type : 'button', class : `label${here ? ' here' : ''}`, 'data-view' : rung.view, 'aria-pressed' : here ? 'true' : 'false', title : rung.note || null }, rung.label)
                     li.appendChild(button)
                     li.appendChild(this.el('span', { class : 'count' }, String(count)))
                 }

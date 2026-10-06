@@ -1,0 +1,15 @@
+{
+  "anchor": "0-how-to-use-this-brief",
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "html": "<ol>\n<li>Read sections 1–4 before writing anything. They hold the decisions that are already made; do not reopen them.</li>\n<li>The build order in section 11 is the plan. Each step has acceptance criteria. Ship the pipeline first, then the content, then the app, then admin and tests. Every push to <code>dev</code> is a release.</li>\n<li>Copy the four design documents listed in section 2 into <code>docs/design/</code> on your first commit, unchanged. They are the reasoning; this brief is the instruction.</li>\n<li>Where this brief says PROPOSED or VERIFY FIRST, test before building on it. Where you find this brief wrong, correct it in <code>docs/design/brief-corrections.md</code> with what you found, and carry on.</li>\n<li>The house rules are at coding.sgit.ai and nfrs.sgit.ai. Section 7 extracts what applies here. When in doubt, read <code>https://coding.sgit.ai/llms-full.txt</code> and <code>https://nfrs.sgit.ai/llms.txt</code>.</li>\n</ol>\n<p>What exists today: the repository, with README, Apache-2.0 LICENSE and a Python .gitignore, on branches <code>dev</code> and <code>main</code>. Nothing else.</p>\n<hr>",
+  "id": "0",
+  "markdown": "1. Read sections 1–4 before writing anything. They hold the decisions that are already made; do not reopen them.\n2. The build order in section 11 is the plan. Each step has acceptance criteria. Ship the pipeline first, then the content, then the app, then admin and tests. Every push to `dev` is a release.\n3. Copy the four design documents listed in section 2 into `docs/design/` on your first commit, unchanged. They are the reasoning; this brief is the instruction.\n4. Where this brief says PROPOSED or VERIFY FIRST, test before building on it. Where you find this brief wrong, correct it in `docs/design/brief-corrections.md` with what you found, and carry on.\n5. The house rules are at coding.sgit.ai and nfrs.sgit.ai. Section 7 extracts what applies here. When in doubt, read `https://coding.sgit.ai/llms-full.txt` and `https://nfrs.sgit.ai/llms.txt`.\n\nWhat exists today: the repository, with README, Apache-2.0 LICENSE and a Python .gitignore, on branches `dev` and `main`. Nothing else.\n\n---\n",
+  "nodes": [],
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "provenance": {
+    "doc_sha256": "e4a0e757469b966c2845a8e793d629a6373639317ed72316be90a28d860b3f6b",
+    "tool": "review/tools/brief.py"
+  },
+  "subsections": [],
+  "title": "0. How to use this brief"
+}

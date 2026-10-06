@@ -38,6 +38,27 @@ class Release:
         print(f'   $ {" ".join(argv)}')
         return subprocess.run(argv, cwd=ROOT, check=check)
 
+    def backfill_records(self, data):                                           # earlier releases get their commit (from the tag) and their Actions run (from GitHub); the newest at the next release
+        runs = {}
+        try:
+            import urllib.request
+            listing = json.loads(urllib.request.urlopen('https://api.github.com/repos/SGit-AI/SGit-AI__Website__Secrets/actions/runs?branch=dev&per_page=50', timeout=20).read())
+            runs    = {r['head_sha']: r for r in listing['workflow_runs']}
+        except Exception as error:                                               # offline: the records stay as they are and the next release tries again
+            print(f'   (could not read the Actions runs: {error})')
+        for release in data['releases']:
+            tag = f"v{release['version']}"
+            release.setdefault('tag', tag)
+            if not release.get('commit'):
+                sha = subprocess.run(['git', 'rev-list', '-n1', tag], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+                release['commit'] = sha or None
+            if release.get('commit') and not release.get('run') and release['commit'] in runs:
+                run = runs[release['commit']]
+                release['run']      = {'id': run['id'], 'url': run['html_url'], 'conclusion': run['conclusion']}
+                release['verified'] = {'url': 'https://secrets.sgit.ai/admin/build/version.txt', 'by': 'verify-live in the run above, and admin/build/verify_live.py after the push'} if run['conclusion'] == 'success' else None
+            release.setdefault('run', None)
+            release.setdefault('verified', None)
+
     def bump(self):
         (ROOT / 'admin' / 'build' / 'version.txt').write_text(self.version + '\n', encoding='utf-8')
         env = ROOT / 'config' / 'environments.json'
@@ -47,7 +68,8 @@ class Release:
         if data['releases'] and data['releases'][0]['version'] == self.version:
             data['releases'][0].update({'title': self.title, 'notes': self.notes, 'date': date.today().isoformat()})
         else:
-            data['releases'].insert(0, {'version': self.version, 'date': date.today().isoformat(), 'title': self.title, 'notes': self.notes})
+            data['releases'].insert(0, {'version': self.version, 'date': date.today().isoformat(), 'title': self.title, 'notes': self.notes, 'tag': f'v{self.version}', 'commit': None, 'run': None, 'verified': None})
+        self.backfill_records(data)
         versions.write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
         print(f'== bumped to v{self.version}')
 
