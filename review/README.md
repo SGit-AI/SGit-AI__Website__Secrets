@@ -4,7 +4,7 @@
 
 What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
 
-Source tree: 80 files, hash `34a707064f1f2239`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+Source tree: 82 files, hash `3b359a0441e941ed`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
 
 ## The project
 

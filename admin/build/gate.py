@@ -24,9 +24,10 @@ class Gate:
 
     def commands(self):
         flag = [] if self.build else ['--check']
-        steps  = [('python3 review/tools/sections.py' + ('' if self.build else ' --check'), ['python3', 'review/tools/sections.py', *flag]),   # the review files first: gen_llms concatenates review/README.md
+        review = [('python3 review/tools/sections.py' + ('' if self.build else ' --check'), ['python3', 'review/tools/sections.py', *flag]),
                   ('python3 review/tools/readme.py' + ('' if self.build else ' --check'), ['python3', 'review/tools/readme.py', *flag])]
-        steps += [(f'python3 admin/build/{name}.py' + ('' if self.build else ' --check'), ['python3', f'admin/build/{name}.py', *flag]) for name in GENERATORS]
+        gens   = [(f'python3 admin/build/{name}.py' + ('' if self.build else ' --check'), ['python3', f'admin/build/{name}.py', *flag]) for name in GENERATORS]
+        steps  = gens[:-1] + review + gens[-1:]                                   # the review README hashes the source tree, which the page generators rewrite, so it comes after them; gen_llms last, it concatenates the README
         if self.build:                                                            # after regenerating, prove --check is clean too
             steps += [(f'python3 admin/build/{name}.py --check', ['python3', f'admin/build/{name}.py', '--check']) for name in GENERATORS]
         steps += [('node admin/build/validate.js'       , ['node', 'admin/build/validate.js'                    ]),

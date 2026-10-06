@@ -10,6 +10,8 @@
   <link rel="canonical" href="https://secrets.sgit.ai/admin/">
   <link rel="alternate" type="text/markdown" href="/admin/index.md">
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
   <link rel="stylesheet" href="/assets/site.css">
   <script src="/assets/nav.js" defer></script>
   <meta property="og:type" content="website">
@@ -17,7 +19,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/admin/">
   <meta property="og:title" content="Admin — secrets.sgit.ai">
   <meta property="og:description" content="How the site is built and gated, and the admin pages that are proposed: a client for GCP&#x27;s own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.">
-  <meta name="sg-secrets:version" content="0.1.5">
+  <meta name="sg-secrets:version" content="0.1.6">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -29,7 +31,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.6" title="released 2026-10-06">v0.1.6</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -71,6 +73,16 @@
           <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
           <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
           <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
           </div>
         </div>
         </div>
@@ -141,12 +153,12 @@
       <li><a href="/admin/versions.html">Release history</a>: one row per release, generated from <code>data/versions.json</code>.</li>
       <li><a href="/admin/comms.html">Comms</a>: the asks back to the project lead and the nine build steps with their status, generated from <code>data/steps.json</code>.</li>
       <li><a href="/docs/ops/needs.html">What needs a human</a>, exactly, and the rest of the <a href="/docs/">documents</a>, each rendered from its markdown with the raw file one click away.</li>
-      <li>The build itself, served as plain files: <a href="/admin/build/chrome.py">chrome.py</a> (the nav, footer, badges and CSP), <a href="/admin/build/validate.js">validate.js</a> (the eight checks), <a href="/admin/build/version.txt">version.txt</a>, <a href="/assets/nav.js">nav.js</a> (the menu interaction, the only script on the site at this version).</li>
+      <li>The build itself, served as plain files: <a href="/admin/build/chrome.py">chrome.py</a> (the nav, footer, badges and CSP), <a href="/admin/build/validate.js">validate.js</a> (the eight checks), <a href="/admin/build/version.txt">version.txt</a>, <a href="/assets/nav.js">nav.js</a> (the menu interaction) and <a href="/assets/theme.js">theme.js</a> (the theme picker; the four themes are <a href="/data/themes.json">data/themes.json</a> and every colour on the site is in <a href="/assets/themes.css">themes.css</a>). Those two are the only scripts on the plain pages.</li>
     </ul>
   </main>
   <!-- sg-secrets:footer:start -->
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/admin/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.6" title="released 2026-10-06">v0.1.6</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/admin/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

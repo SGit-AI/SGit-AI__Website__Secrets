@@ -1,13 +1,14 @@
 /* ── mockups.css — the mini browser and the mocked app chrome for /mockups/ ────
    Static pictures of screens that do not exist yet: no script, no form posts
-   (form-action 'none'), every colour a token from site.css. The mock app
+   (form-action 'none'), no colour written: every one a token whose value per
+   theme is in assets/themes.css, so the mockups follow the picked theme. The mock app
    chrome inside the frame is deliberately plainer than the site chrome. */
 
 .mb {
     background:    var(--sg-bg-secondary);
     border:        1px solid var(--sg-border);
     border-radius: 10px;
-    box-shadow:    0 12px 32px rgba(0, 0, 0, 0.35);
+    box-shadow:    var(--sg-shadow);
     margin:        var(--sg-sp-4) 0 var(--sg-sp-6);
     overflow:      hidden;
 }
@@ -21,7 +22,7 @@
 }
 .mb-dots            { display: flex; gap: 6px; }
 .mb-dots span {
-    background:    var(--sg-color-mid-grey);
+    background:    var(--sg-text-muted);
     border-radius: 50%;
     display:       inline-block;
     height:        10px;
@@ -67,7 +68,7 @@
     padding:       1px var(--sg-sp-2);
 }
 .env-prod           { border: 1px solid var(--sg-border); color: var(--sg-text-muted); }
-.env-dev            { background: var(--sg-status-proposed); color: var(--sg-color-navy); }
+.env-dev            { background: var(--sg-status-proposed); color: var(--sg-on-status); }
 .lock {
     border-radius: var(--sg-radius-pill);
     font-size:     var(--sg-fs-xs);
@@ -112,7 +113,7 @@
     margin:        var(--sg-sp-1) var(--sg-sp-1) 0 0;
     padding:       var(--sg-sp-1) var(--sg-sp-3);
 }
-.btn-primary        { background: var(--sg-accent); border-color: var(--sg-accent); color: var(--sg-color-navy); }
+.btn-primary        { background: var(--sg-accent); border-color: var(--sg-accent); color: var(--sg-on-accent); }
 .btn-danger         { border-color: var(--sg-danger); color: var(--sg-danger); }
 .btn-ghost          { color: var(--sg-text-muted); }
 .row                { align-items: center; display: flex; flex-wrap: wrap; gap: var(--sg-sp-2); }
@@ -131,16 +132,16 @@
     font-size:     var(--sg-fs-xs);
     padding:       0 var(--sg-sp-2);
 }
-.kind-password      { background: var(--sg-accent); color: var(--sg-color-navy); }
-.kind-api-key       { background: var(--sg-color-slate); color: var(--sg-text-heading); }
-.kind-sgit-vault-key { background: var(--sg-danger); color: var(--sg-text-heading); }
-.kind-sgit-read-key { background: var(--sg-color-mid-grey); color: var(--sg-color-navy); }
-.kind-pki-private-key { background: var(--sg-status-proposed); color: var(--sg-color-navy); }
+.kind-password      { background: var(--sg-cat-1); color: var(--sg-on-accent); }
+.kind-api-key       { background: var(--sg-cat-2); color: var(--sg-on-accent); }
+.kind-sgit-vault-key { background: var(--sg-danger); color: var(--sg-on-accent); }
+.kind-sgit-read-key { background: var(--sg-cat-4); color: var(--sg-on-accent); }
+.kind-pki-private-key { background: var(--sg-cat-5); color: var(--sg-on-accent); }
 .kind-note          { background: var(--sg-bg-surface); color: var(--sg-text); }
 .title              { flex: 1; }
 .when               { color: var(--sg-text-muted); font-size: var(--sg-fs-xs); }
 .warn-box {
-    background:    rgba(224, 184, 78, 0.10);
+    background:    var(--sg-status-proposed-subtle);
     border-left:   3px solid var(--sg-status-proposed);
     border-radius: var(--sg-radius);
     font-size:     var(--sg-fs-small);

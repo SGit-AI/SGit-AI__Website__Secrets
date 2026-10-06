@@ -2,7 +2,7 @@
 
 *web components in the shape coding.sgit.ai documents; no framework, no bundler, no build step · CC BY 4.0 for this file, Apache-2.0 for the code*
 
-One visualiser per file shape, one to one, and a component is not finished until `review/self/` shows its methods. `index.html` is the only document: it loads `tokens.css`, the components and `shell.js`, holds the layout, shows the version, and does nothing else. `tokens.css` is the only file under `ui/` where a colour is written.
+One visualiser per file shape, one to one, and a component is not finished until `review/self/` shows its methods. `index.html` is the only document: it loads `tokens.css`, the components and `shell.js`, holds the layout, shows the version, and does nothing else. `tokens.css` is the only file under `ui/` where a colour is written, and each one is the fallback of a site token (`--sg-*`, valued per theme in `/assets/themes.css`, which the shell loads with `/assets/theme.js`): on the site the navigator follows the theme the reader picked from the four in `data/themes.json`, and on its own it keeps the family palette. The top bar carries the same picker as the site nav.
 
 | Component | Renders | From |
 |---|---|---|

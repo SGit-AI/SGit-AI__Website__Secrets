@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "_comment": "The themes a reader can pick from the nav. Every colour on the site is a token; assets/themes.css gives each token a value per theme, in a block html[data-theme=<id>], and the :root block is the default below. assets/theme.js sets the attribute before the first paint from localStorage (sgit.secrets.ui.theme) or, when nothing is stored, from the reader's prefers-color-scheme. The nav picker is generated from this file by admin/build/chrome.py; tests/build/test_themes.py checks every theme here has a complete block and that no colour is written anywhere else.",
+  "default": "night",
+  "whenPreferringLight": "day",
+  "themes": [
+    { "id": "night", "name": "Night", "mode": "dark",  "description": "Dark, teal",                "about": "The family palette: navy surfaces, teal accent. The default." },
+    { "id": "day",   "name": "Day",   "mode": "light", "description": "Light, teal",               "about": "The same palette on white, for daylight and for printing." },
+    { "id": "paper", "name": "Paper", "mode": "light", "description": "Warm off-white, terracotta", "about": "Paper tones for long reading: a warm page, an earthy accent." },
+    { "id": "ember", "name": "Ember", "mode": "dark",  "description": "Dark, amber",               "about": "A warm dark: coffee surfaces, amber accent, easy at night." }
+  ]
+}

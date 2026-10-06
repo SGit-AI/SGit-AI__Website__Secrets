@@ -10,6 +10,8 @@
   <link rel="canonical" href="https://secrets.sgit.ai/admin/versions.html">
   <link rel="alternate" type="text/markdown" href="/admin/versions.md">
   <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
   <link rel="stylesheet" href="/assets/site.css">
   <script src="/assets/nav.js" defer></script>
   <meta property="og:type" content="website">
@@ -17,7 +19,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/admin/versions.html">
   <meta property="og:title" content="Release history — secrets.sgit.ai">
   <meta property="og:description" content="Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.">
-  <meta name="sg-secrets:version" content="0.1.5">
+  <meta name="sg-secrets:version" content="0.1.6">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -29,7 +31,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.6" title="released 2026-10-06">v0.1.6</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -73,6 +75,16 @@
           <a class="sl" href="/llms.txt">llms.txt, for agents</a>
           </div>
         </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
+          </div>
+        </div>
         </div>
       </div>
     </nav>
@@ -86,6 +98,7 @@
   <table class="sg-versions" data-generated-from="data/versions.json">
     <thead><tr><th>Version</th><th>Date</th><th>Release</th><th>What changed</th></tr></thead>
     <tbody>
+      <tr><td><code>v0.1.6</code></td><td>2026-10-06</td><td>four themes</td><td>Four themes a reader picks from the nav and the review navigator keeps: Night (the family palette, the default), Day, Paper and Ember, listed in data/themes.json. Every colour on the site is now a semantic token and assets/themes.css is the one file that gives them values, once per theme; site.css, mockups.css and the navigator&#x27;s tokens.css name no colour, so the mockups and the review graphs follow the pick. assets/theme.js sets html[data-theme] before the first paint from the one allowed storage key, or from the reader&#x27;s prefers-color-scheme when nothing is stored. tests/build/test_themes.py fails when a theme misses a token or any stylesheet or script names a colour; the gate&#x27;s origin and storage-key checks now scan assets/ too. gate.py --build now regenerates the review README after the page generators, since its tree hash covers the pages. Brief-corrections C18.</td></tr>
       <tr><td><code>v0.1.5</code></td><td>2026-10-06</td><td>the design mockups</td><td>A new section, /mockups/: ten screens the brief describes (sign in, first run, unlock, the vault, an entry, devices, environment, account, the admin checklist, the compatibility matrix), each as a static HTML picture in a mini browser frame and as ASCII art, with the intent nodes it realises linked into the review navigator. No script, no inline style, every value invented, every screen marked proposed.</td></tr>
       <tr><td><code>v0.1.4</code></td><td>2026-10-06</td><td>the intent graph and the navigator to walk it</td><td>Step 1 of the review brief. review/intent/: the MVP brief as 14 stories, 51 rules and 70 examples naming the surfaces they touch, 6 flows, 23 components with 32 edges, and the deploy layer (5 environments, 11 resources, 5 pipelines), every node carrying the section it came from and linking to it in the rendered brief through a generated section index. The navigator at /review/: review-base (the store, the node index, the event bus, the route held in a variable), review-tree, review-node and review-crumb, web components in the coding.sgit.ai shape, three files each, no framework, colours only in tokens.css. Written by the build agent; intent only once the project lead has walked it and accepted it.</td></tr>
       <tr><td><code>v0.1.3</code></td><td>2026-10-06</td><td>the review folder, step 0, and the repository guidance</td><td>review/ in the shape of the sgit.ai review brief: the schemas for every layer as JSON Schema with a standard-library validator, the edge vocabulary with an inverse for every verb, freshness by tree hash, a README whose every number is computed, empty intent files for the project and the tool, a fixture repository, and the first six corrections to the review brief. The gate gains check 9 (the review folder validates and is fresh), the orphan-page rule, a parse-check of every script and an em-dash advisory, as the repository guidance lists. Roles as files under team/, a participant disclosure, and admin/build/release.py: bump, build, gate, commit, push, verify live in one command.</td></tr>
@@ -99,7 +112,7 @@
   </main>
   <!-- sg-secrets:footer:start -->
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/admin/versions.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.6" title="released 2026-10-06">v0.1.6</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/admin/versions.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

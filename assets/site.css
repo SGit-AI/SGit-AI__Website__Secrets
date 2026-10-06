@@ -1,31 +1,12 @@
 /* ── site.css — the stylesheet for every plain page on secrets.sgit.ai ─────────
-   Tokens: a :root copy of vendor/sg-tokens.css (SGraph shared design tokens
-   v1.0.0, sha256 14509c73…), because that file is :host scoped for components.
-   Values are aligned per block. No colour literal below this block. */
+   No colour is written in this file. Every colour is a semantic token
+   (--sg-bg, --sg-text, --sg-accent, --sg-status-*, --sg-cat-*) whose value
+   per theme is in assets/themes.css, loaded before this file; the theme is
+   html[data-theme], set by assets/theme.js from the reader's choice in the
+   nav. The tokens below are the ones that do not change with the theme:
+   type, spacing, radius, motion, width. Values are aligned per block. */
 
 :root {
-    --sg-color-teal:        #4ECDC4;
-    --sg-color-teal-hover:  #3DB8B0;
-    --sg-color-navy:        #1A1A2E;
-    --sg-color-deep-blue:   #16213E;
-    --sg-color-slate:       #2C3E6B;
-    --sg-color-coral:       #E94560;
-    --sg-color-warm-white:  #F0F0F5;
-    --sg-color-light-grey:  #E0E0E0;
-    --sg-color-mid-grey:    #8892A0;
-
-    --sg-bg:                var(--sg-color-navy);
-    --sg-bg-secondary:      var(--sg-color-deep-blue);
-    --sg-bg-surface:        rgba(44, 62, 107, 0.35);
-    --sg-border:            var(--sg-color-slate);
-    --sg-text:              var(--sg-color-light-grey);
-    --sg-text-heading:      #FFFFFF;
-    --sg-text-muted:        var(--sg-color-mid-grey);
-    --sg-accent:            var(--sg-color-teal);
-    --sg-accent-hover:      var(--sg-color-teal-hover);
-    --sg-accent-subtle:     rgba(78, 205, 196, 0.12);
-    --sg-danger:            var(--sg-color-coral);
-
     --sg-font-body:         'DM Sans', system-ui, -apple-system, sans-serif;
     --sg-font-mono:         'JetBrains Mono', ui-monospace, monospace;
     --sg-fs-body:           1rem;
@@ -42,10 +23,6 @@
     --sg-radius:            6px;
     --sg-radius-pill:       9999px;
     --sg-transition-fast:   150ms ease;
-
-    --sg-status-shipped:    var(--sg-color-teal);
-    --sg-status-proposed:   #E0B84E;
-    --sg-status-absent:     var(--sg-color-mid-grey);
     --sg-max-width:         72rem;
 }
 
@@ -105,7 +82,7 @@ pre code { background: transparent; padding: 0; }
 /* ── chrome: the family nav ───────────────────────────────────────────────── */
 
 .sg-header {
-    background:      rgba(26, 26, 46, 0.92);
+    background:      var(--sg-bg-header);
     backdrop-filter: blur(8px);
     border-bottom:   1px solid var(--sg-border);
     position:        sticky;
@@ -139,7 +116,7 @@ nav.site .parent {
     white-space:     nowrap;
 }
 nav.site .parent b     { font-weight: 700; }
-nav.site .parent:hover { background: var(--sg-accent); color: var(--sg-color-navy); }
+nav.site .parent:hover { background: var(--sg-accent); color: var(--sg-on-accent); }
 .stage-pill {
     color:          var(--sg-status-proposed);
     font-size:      0.62rem;
@@ -174,7 +151,7 @@ nav.site .sub {
     background:    var(--sg-bg-secondary);
     border:        1px solid var(--sg-border);
     border-radius: var(--sg-radius);
-    box-shadow:    0 8px 24px rgba(0, 0, 0, 0.35);
+    box-shadow:    var(--sg-shadow);
     display:       none;
     flex-direction: column;
     left:          calc(-1 * var(--sg-sp-3));
@@ -189,7 +166,7 @@ nav.site .ni-has:focus-within > .sub,
 nav.site .ni-has.open > .sub  { display: flex; }
 nav.site .ni-has:hover .caret,
 nav.site .ni-has.open .caret  { transform: rotate(180deg); }
-nav.site .sub a.sl {
+nav.site .sub .sl {
     border-radius:   var(--sg-radius);
     color:           var(--sg-text);
     display:         block;
@@ -198,8 +175,35 @@ nav.site .sub a.sl {
     text-decoration: none;
     white-space:     nowrap;
 }
-nav.site .sub a.sl:hover { background: var(--sg-bg-surface); color: var(--sg-text-heading); }
-nav.site .sub a.sl.here  { color: var(--sg-accent); font-weight: 600; }
+nav.site .sub .sl:hover  { background: var(--sg-bg-surface); color: var(--sg-text-heading); }
+nav.site .sub .sl.here   { color: var(--sg-accent); font-weight: 600; }
+
+/* the theme picker: a dropdown of buttons, generated from data/themes.json */
+nav.site .ni-theme button {
+    background: none;
+    border:     0;
+    cursor:     pointer;
+    font:       inherit;
+}
+nav.site .ni-theme button.nl    { font-size: var(--sg-fs-small); padding: 0; }
+nav.site .ni-theme .sub         { min-width: 16rem; }
+nav.site .ni-theme button.sl {
+    align-items:    flex-start;
+    border-left:    3px solid transparent;
+    display:        flex;
+    flex-direction: column;
+    text-align:     left;
+    width:          100%;
+}
+nav.site .ni-theme button.sl small                  { color: var(--sg-text-muted); font-size: var(--sg-fs-xs); }
+nav.site .ni-theme button.sl[aria-pressed="true"]   { border-left-color: var(--sg-accent); color: var(--sg-accent); font-weight: 600; }
+nav.site .ni-theme .sub-note {
+    color:       var(--sg-text-muted);
+    font-size:   var(--sg-fs-xs);
+    line-height: 1.35;
+    padding:     var(--sg-sp-2) var(--sg-sp-3) var(--sg-sp-1);
+    white-space: normal;
+}
 .sg-crumbs {
     color:     var(--sg-text-muted);
     font-size: var(--sg-fs-xs);
@@ -239,6 +243,8 @@ nav.site .sub a.sl.here  { color: var(--sg-accent); font-weight: 600; }
     nav.site.open .nav-items { display: flex; }
     nav.site .ni             { width: 100%; }
     nav.site .ni > .nl       { display: block; font-size: var(--sg-fs-body); padding: var(--sg-sp-2) 0; }
+    nav.site .ni-theme > .nl { font-size: var(--sg-fs-body); padding: var(--sg-sp-2) 0; }
+    nav.site .ni-theme .sub  { min-width: 0; }
     nav.site .caret          { display: none; }
     nav.site .sub {
         border:     0;
@@ -251,7 +257,7 @@ nav.site .sub a.sl.here  { color: var(--sg-accent); font-weight: 600; }
 }
 @media print {
     .sg-header { position: static; background: none; backdrop-filter: none; }
-    nav.site a.nl, nav.site .parent, .nav-items, .nav-toggle { display: none; }
+    nav.site .nl, nav.site .parent, .nav-items, .nav-toggle { display: none; }
 }
 
 /* ── main ───────────────────────────────────────────────────────────────────── */
@@ -273,7 +279,7 @@ main {
     border-radius: var(--sg-radius);
     padding:       var(--sg-sp-3) var(--sg-sp-4);
 }
-.sg-warn { border-left-color: var(--sg-status-proposed); background: rgba(224, 184, 78, 0.10); }
+.sg-warn { border-left-color: var(--sg-status-proposed); background: var(--sg-status-proposed-subtle); }
 
 table {
     border-collapse: collapse;
@@ -296,9 +302,9 @@ th { color: var(--sg-text-heading); }
     padding:       1px var(--sg-sp-2);
     white-space:   nowrap;
 }
-.sg-status-shipped  { background: var(--sg-status-shipped);  color: var(--sg-color-navy); }
-.sg-status-proposed { background: var(--sg-status-proposed); color: var(--sg-color-navy); }
-.sg-status-absent   { background: var(--sg-status-absent);   color: var(--sg-color-navy); }
+.sg-status-shipped  { background: var(--sg-status-shipped);  color: var(--sg-on-status); }
+.sg-status-proposed { background: var(--sg-status-proposed); color: var(--sg-on-status); }
+.sg-status-absent   { background: var(--sg-status-absent);   color: var(--sg-on-status); }
 
 /* ── chrome: footer ─────────────────────────────────────────────────────────── */
 

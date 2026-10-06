@@ -10,7 +10,7 @@
 
 export const LOCAL_STORAGE_KEYS = Object.freeze({
     config  : 'sgit.secrets.config.v1',                                           // the active environment configuration (section 5 of the brief)
-    theme   : 'sgit.secrets.ui.theme',                                            // light / dark
+    theme   : 'sgit.secrets.ui.theme',                                            // the picked theme, one id from data/themes.json (assets/theme.js)
     lastEnv : 'sgit.secrets.ui.lastEnv',                                          // the last built-in environment picked, for the badge
 })
 

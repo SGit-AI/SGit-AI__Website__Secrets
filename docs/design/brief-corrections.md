@@ -78,6 +78,12 @@ Section 6.1 names `/admin/index.html` and `/admin/versions.html` only. The sibli
 
 [Every sgit repository](https://sgit.ai/docs/guidance/repositories.html) was published after the brief. What it adds, and what this repository did about each: the `review/` folder (built from step 0 at v0.1.3, with its own corrections file `review/BRIEF-CORRECTIONS.md`); roles as files (`team/`); a participant disclosure (`about/participant.html`); one release script (`admin/build/release.py`); and three more gate checks (orphan pages, script parse-check, an em-dash advisory). The guidance's "honest column" row is on nfrs.sgit.ai, not here, and is a request to that site once step 3 has something to measure. The guidance's rule that every push goes through one script does not change the branch model: `release.py` pushes `dev` directly until branch protection is on (needs.md), then pushes a branch and the release is the merge.
 
+## v0.1.6 (2026-10-06): four themes
+
+### C18. The site has four themes, and the theme key holds a name, not light or dark
+
+Section 5 lists `sgit.secrets.ui.theme` among the UI conveniences and section 10 says the CSS is the family's tokens copied into one file. Dinis asked on 2026-10-06 for four themes a reader can pick, a dark one, a light one and two more, as VoiceDebrief.ai does from its header, and for the change to be CSS only. So: every colour on the site is now a semantic token (`--sg-bg`, `--sg-text`, `--sg-accent`, `--sg-status-*`, `--sg-cat-*`) and `assets/themes.css` is the one file that gives them values, once per theme, in a `html[data-theme]` block; `site.css`, `mockups.css` and the review navigator's `tokens.css` name no colour (the navigator's tokens are the site's with the family values as fallbacks, so it also runs alone). The themes are `data/themes.json` (Night, the family palette and the default; Day; Paper; Ember); the nav picker is generated from it; `assets/theme.js` sets the attribute before the first paint from the stored choice or, when nothing is stored, from `prefers-color-scheme`. The key therefore holds a theme id, not `light`/`dark`. `tests/build/test_themes.py` fails when a theme misses a token or a stylesheet or script names a colour, and the gate's checks 5 and 8 now scan `assets/` too.
+
 ## Open questions carried from section 12 (unanswered at this version)
 
 - Does the Playwright virtual authenticator support PRF? (step 4)

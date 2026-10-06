@@ -1,27 +1,32 @@
 /* ── tokens.css — the design tokens of the review navigator ───────────────────
    The only file under review/ui/ where a colour is written. Components use
-   var(--rv-*) and nothing else. The palette is the site's (vendor/sg-tokens.css
-   v1.0.0): navy surfaces, teal accent, amber for proposed, coral for moved.
-   Applies to :root for the shell and :host for components, which load this file
-   into their shadow roots as a <link>. */
+   var(--rv-*) and nothing else. Every colour token is the site's semantic
+   token (--sg-*, valued per theme in /assets/themes.css, which the shell
+   loads) with the Night value as its fallback: on secrets.sgit.ai the
+   navigator follows the theme the reader picked; on its own, or inlined into
+   a vault's dist/index.html, the fallbacks give it the family palette.
+   Applies to :root for the shell and :host for components, which load this
+   file into their shadow roots as a <link>; a custom property set on the
+   document inherits through the shadow boundary, so the :host rule sees it. */
 
 :root, :host {
-    --rv-bg:              #1A1A2E;
-    --rv-bg-secondary:    #16213E;
-    --rv-surface:         rgba(44, 62, 107, 0.35);
-    --rv-surface-strong:  rgba(44, 62, 107, 0.65);
-    --rv-border:          #2C3E6B;
-    --rv-text:            #E0E0E0;
-    --rv-text-heading:    #FFFFFF;
-    --rv-text-muted:      #8892A0;
-    --rv-accent:          #4ECDC4;
-    --rv-accent-subtle:   rgba(78, 205, 196, 0.12);
-    --rv-proposed:        #E0B84E;
-    --rv-proposed-subtle: rgba(224, 184, 78, 0.14);
-    --rv-moved:           #E94560;
-    --rv-moved-subtle:    rgba(233, 69, 96, 0.14);
-    --rv-held:            #8892A0;
-    --rv-selected:        rgba(78, 205, 196, 0.22);
+    --rv-bg:              var(--sg-bg,                     #1A1A2E);
+    --rv-bg-secondary:    var(--sg-bg-secondary,           #16213E);
+    --rv-surface:         var(--sg-bg-surface,             rgba(44, 62, 107, 0.35));
+    --rv-surface-strong:  var(--sg-bg-surface-strong,      rgba(44, 62, 107, 0.65));
+    --rv-border:          var(--sg-border,                 #2C3E6B);
+    --rv-text:            var(--sg-text,                   #E0E0E0);
+    --rv-text-heading:    var(--sg-text-heading,           #FFFFFF);
+    --rv-text-muted:      var(--sg-text-muted,             #8892A0);
+    --rv-accent:          var(--sg-accent,                 #4ECDC4);
+    --rv-accent-subtle:   var(--sg-accent-subtle,          rgba(78, 205, 196, 0.12));
+    --rv-proposed:        var(--sg-status-proposed,        #E0B84E);
+    --rv-proposed-subtle: var(--sg-status-proposed-subtle, rgba(224, 184, 78, 0.14));
+    --rv-moved:           var(--sg-danger,                 #E94560);
+    --rv-moved-subtle:    var(--sg-danger-subtle,          rgba(233, 69, 96, 0.14));
+    --rv-held:            var(--sg-status-absent,          #8892A0);
+    --rv-selected:        var(--sg-selected,               rgba(78, 205, 196, 0.22));
+    --rv-on-layer:        var(--sg-on-accent,              #1A1A2E);
 
     --rv-font:            'DM Sans', system-ui, -apple-system, sans-serif;
     --rv-mono:            'JetBrains Mono', ui-monospace, monospace;
@@ -39,11 +44,11 @@
     --rv-radius-pill:     9999px;
     --rv-fast:            150ms ease;
 
-    --rv-layer-stories:    #4ECDC4;
-    --rv-layer-rules:      #6FD6CE;
-    --rv-layer-examples:   #90DFD9;
-    --rv-layer-flows:      #9B8CFF;
-    --rv-layer-components: #7FB3FF;
-    --rv-layer-deploy:     #B0C4DE;
-    --rv-layer-derived:    #C9A96E;
+    --rv-layer-stories:    var(--sg-cat-1, #4ECDC4);
+    --rv-layer-rules:      var(--sg-cat-1, #4ECDC4);
+    --rv-layer-examples:   var(--sg-cat-1, #4ECDC4);
+    --rv-layer-flows:      var(--sg-cat-3, #9B8CFF);
+    --rv-layer-components: var(--sg-cat-2, #7FB3FF);
+    --rv-layer-deploy:     var(--sg-cat-4, #B0C4DE);
+    --rv-layer-derived:    var(--sg-cat-5, #C9A96E);
 }

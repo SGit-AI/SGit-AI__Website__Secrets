@@ -46,6 +46,19 @@ a { color: var(--rv-accent); }
     text-decoration: none;
 }
 .top .back           { color: var(--rv-text-muted); font-size: var(--rv-fs-small); }
+.top .themes         { display: flex; gap: var(--rv-sp-1); }
+.top .theme {
+    background:    none;
+    border:        1px solid var(--rv-border);
+    border-radius: var(--rv-radius-pill);
+    color:         var(--rv-text-muted);
+    cursor:        pointer;
+    font:          inherit;
+    font-size:     var(--rv-fs-xs);
+    padding:       1px var(--rv-sp-2);
+}
+.top .theme:hover                 { color: var(--rv-text-heading); }
+.top .theme[aria-pressed="true"]  { background: var(--rv-accent-subtle); border-color: var(--rv-accent); color: var(--rv-accent); }
 
 .layout {
     display:               grid;

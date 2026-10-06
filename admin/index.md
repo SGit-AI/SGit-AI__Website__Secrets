@@ -2,7 +2,7 @@
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.5 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.6 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -59,7 +59,7 @@ The admin pages will work only when the visitor signs in with a Google account t
 - [Release history](/admin/versions.md): one row per release, generated from `data/versions.json`.
 - [Comms](/admin/comms.md): the asks back to the project lead and the nine build steps with their status, generated from `data/steps.json`.
 - [What needs a human](/docs/ops/needs.md), exactly, and the rest of the [documents](/docs/index.md), each rendered from its markdown with the raw file one click away.
-- The build itself, served as plain files: [chrome.py](/admin/build/chrome.py) (the nav, footer, badges and CSP), [validate.js](/admin/build/validate.js) (the eight checks), [version.txt](/admin/build/version.txt), [nav.js](/assets/nav.js) (the menu interaction, the only script on the site at this version).
+- The build itself, served as plain files: [chrome.py](/admin/build/chrome.py) (the nav, footer, badges and CSP), [validate.js](/admin/build/validate.js) (the eight checks), [version.txt](/admin/build/version.txt), [nav.js](/assets/nav.js) (the menu interaction) and [theme.js](/assets/theme.js) (the theme picker; the four themes are [data/themes.json](/data/themes.json) and every colour on the site is in [themes.css](/assets/themes.css)). Those two are the only scripts on the plain pages.
 
 ---
 

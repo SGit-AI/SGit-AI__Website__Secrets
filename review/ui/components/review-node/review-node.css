@@ -8,10 +8,10 @@
     font-size:     var(--rv-fs-xs);
     padding:       0 var(--rv-sp-2);
 }
-.layer-story .layer, .layer-rule .layer, .layer-example .layer { background: var(--rv-layer-stories); color: var(--rv-bg); }
-.layer-flow .layer, .layer-step .layer                         { background: var(--rv-layer-flows); color: var(--rv-bg); }
-.layer-component .layer                                        { background: var(--rv-layer-components); color: var(--rv-bg); }
-.layer-environment .layer, .layer-resource .layer, .layer-pipeline .layer, .layer-job .layer { background: var(--rv-layer-deploy); color: var(--rv-bg); }
+.layer-story .layer, .layer-rule .layer, .layer-example .layer { background: var(--rv-layer-stories); color: var(--rv-on-layer); }
+.layer-flow .layer, .layer-step .layer                         { background: var(--rv-layer-flows); color: var(--rv-on-layer); }
+.layer-component .layer                                        { background: var(--rv-layer-components); color: var(--rv-on-layer); }
+.layer-environment .layer, .layer-resource .layer, .layer-pipeline .layer, .layer-job .layer { background: var(--rv-layer-deploy); color: var(--rv-on-layer); }
 .name     { color: var(--rv-text-heading); font-size: 1.15rem; margin: 0; }
 .proposed {
     background:    var(--rv-proposed-subtle);

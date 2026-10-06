@@ -5,7 +5,9 @@
 # the phone menu button), breadcrumbs, footer, CSP and canonical URL. Every
 # HTML page gets it injected between markers by gen_chrome.py, so the chrome
 # cannot drift between pages. The nav shape is the one sgit.ai, nfrs.sgit.ai
-# and pki.sgit.ai run; the interaction lives in assets/nav.js.
+# and pki.sgit.ai run; the interaction lives in assets/nav.js. The theme picker
+# in the nav is generated from data/themes.json; assets/theme.js applies the
+# choice and assets/themes.css holds every colour, four times.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 import html
@@ -18,6 +20,8 @@ ROOT              = Path(__file__).resolve().parents[2]
 VERSION_FILE      = ROOT / 'admin' / 'build' / 'version.txt'
 CNAME_FILE        = ROOT / 'CNAME'
 VERSIONS_FILE     = ROOT / 'data' / 'versions.json'
+THEMES_FILE       = ROOT / 'data' / 'themes.json'
+THEME_STORAGE_KEY = 'sgit.secrets.ui.theme'                                        # LOCAL_STORAGE_KEYS.theme in app/config/storage-keys.js; the picker's note names it
 
 MARKER_PREFIX     = 'sg-secrets'                                                  # <!-- sg-secrets:<block>:start -->
 
@@ -85,6 +89,7 @@ class Chrome:
         self.base_url  = f'https://{self.host}'
         self.released  = self.release_date()
         self.labels    = {href: label for _, _, items in NAV_GROUPS for href, label in items}
+        self.themes    = json.loads(THEMES_FILE.read_text(encoding='utf-8'))['themes']
 
     def release_date(self):
         releases = json.loads(VERSIONS_FILE.read_text(encoding='utf-8'))['releases']
@@ -114,6 +119,8 @@ class Chrome:
                       f'<link rel="canonical" href="{canonical}">'                                           ,
                       f'<link rel="alternate" type="text/markdown" href="{twin}">'                          ,
                       f'<link rel="license" href="{LICENCE_URL}">'                                           ,
+                      f'<script src="/assets/theme.js"></script>'                                            ,   # before the stylesheets, so the theme is set before the first paint
+                      f'<link rel="stylesheet" href="/assets/themes.css">'                                   ,
                       f'<link rel="stylesheet" href="/assets/site.css">'                                     ,
                       f'<script src="/assets/nav.js" defer></script>'                                        ,
                       f'<meta property="og:type" content="website">'                                         ,
@@ -160,11 +167,24 @@ class Chrome:
                           '        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>'                    ,
                           '        <div class="nav-items">'                                                                                           ,
                           *groups                                                                                                                     ,
+                          self.theme_picker()                                                                                                         ,
                           '        </div>'                                                                                                            ,
                           '      </div>'                                                                                                              ,
                           '    </nav>'                                                                                                                ,
                           self.crumbs(url_path, title)                                                                                                ,
                           '  </header>'                                                                                                               ])
+
+    def theme_picker(self):                                                     # a dropdown of buttons; needs assets/theme.js, which every page loads
+        picks = [f'          <button class="sl" type="button" data-theme-pick="{t["id"]}" aria-pressed="false">'
+                 f'<b>{html.escape(t["name"])}</b><small>{html.escape(t["description"])}</small></button>'
+                 for t in self.themes]
+        return '\n'.join([ '        <div class="ni ni-has ni-theme">'                                                                                  ,
+                           '          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>'          ,
+                           '          <div class="sub" role="group" aria-label="Theme">'                                                              ,
+                           *picks                                                                                                                      ,
+                          f'          <small class="sub-note">Kept in this browser only, as <code>{THEME_STORAGE_KEY}</code>; nothing else is stored.</small>',
+                           '          </div>'                                                                                                           ,
+                           '        </div>'                                                                                                             ])
 
     def crumbs(self, url_path, title):
         if url_path == '/':

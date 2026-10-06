@@ -1,6 +1,12 @@
 {
   "releases": [
     {
+      "version": "0.1.6",
+      "date": "2026-10-06",
+      "title": "four themes",
+      "notes": "Four themes a reader picks from the nav and the review navigator keeps: Night (the family palette, the default), Day, Paper and Ember, listed in data/themes.json. Every colour on the site is now a semantic token and assets/themes.css is the one file that gives them values, once per theme; site.css, mockups.css and the navigator's tokens.css name no colour, so the mockups and the review graphs follow the pick. assets/theme.js sets html[data-theme] before the first paint from the one allowed storage key, or from the reader's prefers-color-scheme when nothing is stored. tests/build/test_themes.py fails when a theme misses a token or any stylesheet or script names a colour; the gate's origin and storage-key checks now scan assets/ too. gate.py --build now regenerates the review README after the page generators, since its tree hash covers the pages. Brief-corrections C18."
+    },
+    {
       "version": "0.1.5",
       "date": "2026-10-06",
       "title": "the design mockups",

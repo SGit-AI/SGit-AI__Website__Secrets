@@ -7,7 +7,7 @@
       "sha256":   "14509c73b43ecc79dd6080b6530a0860a9c22a06f0c160d7e9862f1bb2614171",
       "licence":  "Apache-2.0",
       "fetched":  "2026-10-05",
-      "purpose":  "The family design tokens, :host scoped for shadow-DOM components (step 4). assets/site.css carries a :root copy of the same values for plain pages."
+      "purpose":  "The family design tokens, :host scoped for shadow-DOM components (step 4). assets/themes.css carries the same values as the Night theme, the default of four, for plain pages."
     }
   }
 }

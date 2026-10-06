@@ -52,7 +52,7 @@ const LEAK_ALLOW_FILES = Object.freeze([SELF])                                  
 
 // ── runtime-origin rules (check 5) ────────────────────────────────────────────
 
-const RUNTIME_DIRS          = Object.freeze(['app', 'components', 'admin', 'tests', 'review'])
+const RUNTIME_DIRS          = Object.freeze(['app', 'components', 'admin', 'tests', 'review', 'assets'])
 const RUNTIME_RE            = Object.freeze([
     { name : '<script src="http…">'      , re : /<script\b[^>]*\bsrc\s*=\s*["']https?:/i       },
     { name : "import from 'http…'"       , re : /\bfrom\s+["']https?:/                          },

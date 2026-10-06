@@ -7,6 +7,8 @@
   <title>Review graphs — secrets.sgit.ai</title>
   <meta name="description" content="The navigator over review/: the design as a graph written from the brief, and from step 2 the code derived beneath it. Walk from a story to a rule to an example to the surface it names; every node carries its section.">
   <link rel="canonical" href="https://secrets.sgit.ai/review/ui/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="shell.css">
   <script type="module" src="components/review-base/review-base.js"></script>
@@ -23,6 +25,12 @@
     <review-crumb class="crumb"></review-crumb>
     <a class="version" href="/admin/versions.html" data-version title="site release history">v…</a>
     <a class="back" href="/admin/">admin</a>
+    <span class="themes" role="group" aria-label="Theme">
+      <button class="theme" type="button" data-theme-pick="night" title="Dark, teal" aria-pressed="false">Night</button>
+      <button class="theme" type="button" data-theme-pick="day" title="Light, teal" aria-pressed="false">Day</button>
+      <button class="theme" type="button" data-theme-pick="paper" title="Warm off-white, terracotta" aria-pressed="false">Paper</button>
+      <button class="theme" type="button" data-theme-pick="ember" title="Dark, amber" aria-pressed="false">Ember</button>
+    </span>
   </header>
   <main class="layout">
     <section class="centre" aria-label="Tree">
