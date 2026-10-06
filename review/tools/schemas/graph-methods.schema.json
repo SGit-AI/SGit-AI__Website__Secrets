@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "edges": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "end": {
+                    "type": "integer"
+                  },
+                  "line": {
+                    "type": "integer"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "line",
+                  "end",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "doc": {
+                    "type": "string"
+                  },
+                  "quote": {
+                    "type": "string"
+                  },
+                  "section": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "doc",
+                  "section"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "to": {
+            "type": "string"
+          },
+          "verb": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "verb"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "layer": {
+      "const": "methods"
+    },
+    "methods": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "calls": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer"
+                },
+                "to": {
+                  "type": "string"
+                },
+                "via": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "to",
+                "kind"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "class": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "decorators": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "doc": {
+            "type": "string"
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._/:@-]*$",
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "loc": {
+            "type": "integer"
+          },
+          "module": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object"
+          },
+          "proposed": {
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string"
+              },
+              "prompt": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "model",
+              "prompt",
+              "date"
+            ],
+            "type": "object"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "end": {
+                    "type": "integer"
+                  },
+                  "line": {
+                    "type": "integer"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "line",
+                  "end",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "doc": {
+                    "type": "string"
+                  },
+                  "quote": {
+                    "type": "string"
+                  },
+                  "section": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "doc",
+                  "section"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "unresolved": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "source",
+          "module",
+          "signature",
+          "fingerprint",
+          "calls"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "type": "string"
+        },
+        "inputs": {
+          "additionalProperties": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "tool_version": {
+          "type": "string"
+        },
+        "tree_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool",
+        "tool_version",
+        "commit",
+        "tree_sha256",
+        "inputs"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "layer",
+    "provenance",
+    "methods"
+  ],
+  "title": "review/graph/methods.json",
+  "type": "object"
+}

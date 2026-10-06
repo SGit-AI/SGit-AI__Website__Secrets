@@ -1,0 +1,14 @@
+{
+  "provenance": {
+    "accepted_by": null,
+    "brief_corrections": "review/BRIEF-CORRECTIONS.md",
+    "kind": "intent",
+    "source_doc": "https://sgit.ai/docs/briefs/code-review-graphs-in-the-repository.md",
+    "written_by": {
+      "date": "2026-10-06",
+      "note": "step 0: empty, valid; filled at step 1",
+      "who": "agent: the build session (Claude Code)"
+    }
+  },
+  "rules": []
+}

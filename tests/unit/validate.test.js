@@ -106,7 +106,7 @@ test('nextVersionOk: next minor, patch, or major .0.0', () => {
     assert.equal(V.nextVersionOk('0.1.0', '1.1.0'), false)
 })
 
-test('the eight checks pass on the real tree', () => {
+test('every check passes on the real tree', () => {
     for (const check of V.CHECKS) {
         assert.deepEqual(check.run(V.ROOT), [], `check ${check.n} ${check.name}`)
     }

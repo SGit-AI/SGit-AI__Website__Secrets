@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "layer": {
+      "const": "stories"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_by": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "date": {
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "who": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "who",
+                "date"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "brief_corrections": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "intent"
+        },
+        "source_doc": {
+          "type": "string"
+        },
+        "written_by": {
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            },
+            "who": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "who",
+            "date"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "source_doc",
+        "written_by",
+        "accepted_by"
+      ],
+      "type": "object"
+    },
+    "stories": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "as_a": {
+            "type": "string"
+          },
+          "i_want": {
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._/:@-]*$",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object"
+          },
+          "proposed": {
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string"
+              },
+              "prompt": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "model",
+              "prompt",
+              "date"
+            ],
+            "type": "object"
+          },
+          "rules": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "examples": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9._/:@-]*$",
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "properties": {
+                        "type": "object"
+                      },
+                      "proposed": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "date": {
+                            "type": "string"
+                          },
+                          "model": {
+                            "type": "string"
+                          },
+                          "prompt": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "model",
+                          "prompt",
+                          "date"
+                        ],
+                        "type": "object"
+                      },
+                      "satisfied_by": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "source": {
+                        "anyOf": [
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "end": {
+                                "type": "integer"
+                              },
+                              "line": {
+                                "type": "integer"
+                              },
+                              "path": {
+                                "type": "string"
+                              },
+                              "sha256": {
+                                "pattern": "^[0-9a-f]{64}$",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "path",
+                              "line",
+                              "end",
+                              "sha256"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "doc": {
+                                "type": "string"
+                              },
+                              "quote": {
+                                "type": "string"
+                              },
+                              "section": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "doc",
+                              "section"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "surface": {
+                        "type": "string"
+                      },
+                      "text": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "source",
+                      "text",
+                      "surface"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "id": {
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._/:@-]*$",
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "properties": {
+                  "type": "object"
+                },
+                "proposed": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "date": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "prompt": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "model",
+                    "prompt",
+                    "date"
+                  ],
+                  "type": "object"
+                },
+                "source": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "end": {
+                          "type": "integer"
+                        },
+                        "line": {
+                          "type": "integer"
+                        },
+                        "path": {
+                          "type": "string"
+                        },
+                        "sha256": {
+                          "pattern": "^[0-9a-f]{64}$",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "path",
+                        "line",
+                        "end",
+                        "sha256"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "doc": {
+                          "type": "string"
+                        },
+                        "quote": {
+                          "type": "string"
+                        },
+                        "section": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "doc",
+                        "section"
+                      ],
+                      "type": "object"
+                    }
+                  ]
+                },
+                "text": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "source",
+                "text",
+                "examples"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "so_that": {
+            "type": "string"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "end": {
+                    "type": "integer"
+                  },
+                  "line": {
+                    "type": "integer"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "line",
+                  "end",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "doc": {
+                    "type": "string"
+                  },
+                  "quote": {
+                    "type": "string"
+                  },
+                  "section": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "doc",
+                  "section"
+                ],
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "source",
+          "rules"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "layer",
+    "provenance",
+    "stories"
+  ],
+  "title": "review/intent/stories.json",
+  "type": "object"
+}

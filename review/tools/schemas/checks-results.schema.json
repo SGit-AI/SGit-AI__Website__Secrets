@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "type": "string"
+        },
+        "inputs": {
+          "additionalProperties": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "tool_version": {
+          "type": "string"
+        },
+        "tree_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool",
+        "tool_version",
+        "commit",
+        "tree_sha256",
+        "inputs"
+      ],
+      "type": "object"
+    },
+    "results": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "checked": {
+            "type": "integer"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "rule": {
+            "type": "string"
+          },
+          "violations": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "rule",
+          "checked",
+          "violations"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "provenance",
+    "results"
+  ],
+  "title": "review/checks/results.json",
+  "type": "object"
+}

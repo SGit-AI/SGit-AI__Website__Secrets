@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "edges": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "end": {
+                    "type": "integer"
+                  },
+                  "line": {
+                    "type": "integer"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "line",
+                  "end",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "doc": {
+                    "type": "string"
+                  },
+                  "quote": {
+                    "type": "string"
+                  },
+                  "section": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "doc",
+                  "section"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "to": {
+            "type": "string"
+          },
+          "verb": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "verb"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "layer": {
+      "const": "modules"
+    },
+    "modules": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "classes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "doc": {
+            "type": "string"
+          },
+          "exports": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "functions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._/:@-]*$",
+            "type": "string"
+          },
+          "imports": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "as": {
+                  "type": "string"
+                },
+                "line": {
+                  "type": "integer"
+                },
+                "module": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "module",
+                "name"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "language": {
+            "type": "string"
+          },
+          "loc": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "object"
+          },
+          "proposed": {
+            "additionalProperties": false,
+            "properties": {
+              "date": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string"
+              },
+              "prompt": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "model",
+              "prompt",
+              "date"
+            ],
+            "type": "object"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "end": {
+                    "type": "integer"
+                  },
+                  "line": {
+                    "type": "integer"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "pattern": "^[0-9a-f]{64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "line",
+                  "end",
+                  "sha256"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "doc": {
+                    "type": "string"
+                  },
+                  "quote": {
+                    "type": "string"
+                  },
+                  "section": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "doc",
+                  "section"
+                ],
+                "type": "object"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "source",
+          "path",
+          "package",
+          "language"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "packages": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "classes": {
+            "type": "integer"
+          },
+          "id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._/:@-]*$",
+            "type": "string"
+          },
+          "loc": {
+            "type": "integer"
+          },
+          "methods": {
+            "type": "integer"
+          },
+          "modules": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "modules"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "type": "string"
+        },
+        "inputs": {
+          "additionalProperties": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "tool_version": {
+          "type": "string"
+        },
+        "tree_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool",
+        "tool_version",
+        "commit",
+        "tree_sha256",
+        "inputs"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "layer",
+    "provenance",
+    "modules"
+  ],
+  "title": "review/graph/modules.json",
+  "type": "object"
+}

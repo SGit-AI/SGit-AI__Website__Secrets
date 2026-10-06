@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "by_layer": {
+          "type": "object"
+        },
+        "figure": {
+          "type": "number"
+        },
+        "matched": {
+          "type": "integer"
+        },
+        "projected": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "projected",
+        "matched",
+        "figure"
+      ],
+      "type": "object"
+    },
+    "matches": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "type": "number"
+          },
+          "derived": {
+            "type": "string"
+          },
+          "how": {
+            "enum": [
+              "surface-name",
+              "path",
+              "id",
+              "declared",
+              "accepted"
+            ],
+            "type": "string"
+          },
+          "projected": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "projected",
+          "derived",
+          "how"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "type": "string"
+        },
+        "inputs": {
+          "additionalProperties": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "tool_version": {
+          "type": "string"
+        },
+        "tree_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool",
+        "tool_version",
+        "commit",
+        "tree_sha256",
+        "inputs"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "provenance",
+    "matches",
+    "coverage"
+  ],
+  "title": "review/join/matches.json",
+  "type": "object"
+}

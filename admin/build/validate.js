@@ -13,6 +13,8 @@
 //   2 internal links         6 storage rules hash in sync with data/features.json
 //   3 canonical host         7 docs/reality.md regenerates identically
 //   4 leak tripwire          8 browser storage keys come from app/config/storage-keys.js
+//   9 the review folder: every JSON file validates against its schema and is fresh
+// Plus one advisory that never fails the build: em-dashes in prose we write.
 
 'use strict'
 
@@ -50,7 +52,7 @@ const LEAK_ALLOW_FILES = Object.freeze([SELF])                                  
 
 // ── runtime-origin rules (check 5) ────────────────────────────────────────────
 
-const RUNTIME_DIRS          = Object.freeze(['app', 'components', 'admin', 'tests'])
+const RUNTIME_DIRS          = Object.freeze(['app', 'components', 'admin', 'tests', 'review'])
 const RUNTIME_RE            = Object.freeze([
     { name : '<script src="http…">'      , re : /<script\b[^>]*\bsrc\s*=\s*["']https?:/i       },
     { name : "import from 'http…'"       , re : /\bfrom\s+["']https?:/                          },
@@ -257,6 +259,7 @@ function checkVersionAgreement(root = ROOT) {
 function checkInternalLinks(root = ROOT) {
     const problems = []
     const anchors  = new Map()
+    const reached  = new Set(['index.html'])                                      // orphan rule: a page nothing links to is unpublished
     const anchorsOf = (rel) => {
         if (!anchors.has(rel)) anchors.set(rel, anchorsIn(rel, root))
         return anchors.get(rel)
@@ -269,10 +272,14 @@ function checkInternalLinks(root = ROOT) {
                 problems.push(`${rel}:${line}: link '${href}' → ${target} does not exist`)
                 continue
             }
+            if (rel.endsWith('.html')) reached.add(target)
             if (fragment && (target.endsWith('.html') || target.endsWith('.md')) && !anchorsOf(target).has(fragment)) {
                 problems.push(`${rel}:${line}: fragment '#${fragment}' not found in ${target}`)
             }
         }
+    }
+    for (const rel of walkTree(root).filter(f => f.endsWith('.html') && read(f, root).includes('sg-secrets:head:start'))) {
+        if (!reached.has(rel) && rel !== '404.html') problems.push(`${rel}: no page links to it (an orphan page is unpublished)`)
     }
     return problems
 }
@@ -322,6 +329,7 @@ function checkVendorManifest(root = ROOT) {
         if (!present.includes(file)) problems.push(`vendor/MANIFEST.json lists ${file} but it is not in vendor/`)
         for (const key of ['source', 'version', 'sha256', 'licence']) if (!manifest[file][key]) problems.push(`vendor/MANIFEST.json: ${file} has no ${key}`)
     }
+    problems.push(...checkScriptsParse(root))
     for (const rel of walkTree(root).filter(f => RUNTIME_DIRS.some(d => f.startsWith(d + '/')) && /\.(html|js|mjs|css)$/.test(f))) {
         const text = read(rel, root)
         const foreign = (index, name) => {
@@ -339,6 +347,39 @@ function checkVendorManifest(root = ROOT) {
         }
     }
     return problems
+}
+
+function checkScriptsParse(root = ROOT) {                                        // every script the site serves parses (node --check)
+    const problems = []
+    for (const rel of walkTree(root).filter(f => /\.(js|mjs)$/.test(f) && !f.startsWith('vendor/') && !f.includes('/fixtures/'))) {
+        const run = spawnSync('node', ['--check', path.join(root, rel)], { encoding : 'utf8' })
+        if (run.status !== 0) problems.push(`${rel}: does not parse: ${(run.stderr || '').trim().split('\n').slice(-1)[0]}`)
+    }
+    return problems
+}
+
+function checkReviewFolder(root = ROOT) {                                         // check 9: schemas, verbs, freshness, README current
+    const problems = []
+    for (const argv of [['review/tools/validate_review.py'], ['review/tools/freshness.py'], ['review/tools/freshness.py', '--set', 'self'], ['review/tools/readme.py', '--check']]) {
+        const run = spawnSync('python3', argv, { cwd : root, encoding : 'utf8' })
+        if (run.error) problems.push(`could not run ${argv.join(' ')}: ${run.error.message}`)
+        else if (run.status !== 0) problems.push(`${argv.join(' ')} failed:\n${(run.stdout + run.stderr).trim()}`)
+    }
+    return problems
+}
+
+const EM_DASH_PROSE = Object.freeze(['*.html', '*/index.html', 'admin/*.html', 'docs/ops/*.md', 'docs/reality.md', 'docs/design/brief-corrections.md', 'review/BRIEF-CORRECTIONS.md', 'team/**/*.md', 'README.md'])
+
+function adviseEmDashes(root = ROOT) {                                            // advisory: the house writes without em-dashes; verbatim documents are exempt
+    const notes = []
+    const globs = EM_DASH_PROSE.map(g => new RegExp('^' + g.replace(/\./g, '\\.').replace(/\*\*\//g, '(.+/)?').replace(/\*/g, '[^/]+') + '$'))
+    for (const rel of walkTree(root).filter(f => globs.some(g => g.test(f)))) {
+        const text = read(rel, root)
+        const body = rel.endsWith('.html') ? (text.match(/<main\b[^>]*>([\s\S]*?)<\/main>/) || ['', ''])[1] : text
+        const count = (body.match(/—/g) || []).length
+        if (count) notes.push(`${rel}: ${count} em-dash(es) in prose we write; the house uses commas, colons or full stops`)
+    }
+    return notes
 }
 
 function checkRulesInSync(root = ROOT) {
@@ -381,7 +422,9 @@ const CHECKS = Object.freeze([
     { n : 6, name : 'storage rules in sync'                     , run : checkRulesInSync      },
     { n : 7, name : 'reality regenerates identically'           , run : checkReality          },
     { n : 8, name : 'browser storage keys are allow-listed'     , run : checkStorageKeys      },
+    { n : 9, name : 'review folder valid and fresh'             , run : checkReviewFolder     },
 ])
+const N = CHECKS.length
 
 function main() {
     let failed = 0
@@ -389,18 +432,20 @@ function main() {
         let problems
         try { problems = check.run(ROOT) } catch (error) { problems = [`threw: ${error.message}`] }
         if (problems.length === 0) {
-            console.log(`  ✓ ${check.n}/8 ${check.name}`)
+            console.log(`  ✓ ${check.n}/${N} ${check.name}`)
         } else {
             failed += 1
-            console.log(`  ✗ ${check.n}/8 ${check.name}`)
+            console.log(`  ✗ ${check.n}/${N} ${check.name}`)
             for (const problem of problems) console.log(`      ${problem}`)
         }
     }
+    const notes = adviseEmDashes(ROOT)
+    for (const note of notes) console.log(`  · advisory: ${note}`)
     if (failed) {
-        console.log(`validate: ${failed} of 8 checks failed (site v${readVersion()})`)
+        console.log(`validate: ${failed} of ${N} checks failed (site v${readVersion()})`)
         process.exit(1)
     }
-    console.log(`validate: 8/8 checks passed (site v${readVersion()})`)
+    console.log(`validate: ${N}/${N} checks passed (site v${readVersion()})${notes.length ? `, ${notes.length} advisory note(s)` : ''}`)
 }
 
 module.exports = {
@@ -408,7 +453,7 @@ module.exports = {
     walkTree, isBinary, sha256, headingSlug, stripCode, isInternalLink, resolveLink, anchorsIn, linksIn,
     loadStorageKeys, storageKeyProblems, nextVersionOk,
     checkVersionAgreement, checkInternalLinks, checkCanonicalHost, checkLeakTripwire,
-    checkVendorManifest, checkRulesInSync, checkReality, checkStorageKeys,
+    checkVendorManifest, checkRulesInSync, checkReality, checkStorageKeys, checkReviewFolder, checkScriptsParse, adviseEmDashes,
 }
 
 if (require.main === module) main()

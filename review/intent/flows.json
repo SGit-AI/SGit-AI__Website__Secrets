@@ -1,0 +1,15 @@
+{
+  "flows": [],
+  "layer": "flows",
+  "provenance": {
+    "accepted_by": null,
+    "brief_corrections": "review/BRIEF-CORRECTIONS.md",
+    "kind": "intent",
+    "source_doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+    "written_by": {
+      "date": "2026-10-06",
+      "note": "step 0: empty, valid; filled at step 1",
+      "who": "agent: the build session (Claude Code)"
+    }
+  }
+}

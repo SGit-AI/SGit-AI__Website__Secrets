@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Role: build agent — secrets.sgit.ai</title>
+  <meta name="description" content="The session that builds the site from the brief, one release at a time, under the rules below. It never pushes a release that fails the gate, never writes a secret into the tree, and never describe…">
+  <meta name="sg-secrets:source" content="/team/roles/build-agent.md">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/team/roles/build-agent.html">
+  <link rel="alternate" type="text/markdown" href="/team/roles/build-agent.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/team/roles/build-agent.html">
+  <meta property="og:title" content="Role: build agent — secrets.sgit.ai">
+  <meta property="og:description" content="The session that builds the site from the brief, one release at a time, under the rules below. It never pushes a release that fails the gate, never writes a secret into the tree, and never describe…">
+  <meta name="sg-secrets:version" content="0.1.3">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.3" title="released 2026-10-06">v0.1.3</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/team/">The team</a> <span class="sep">/</span> <a href="/team/">Roles</a> <span class="sep">/</span> <span aria-current="page">Role: build agent</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main class="sg-document">
+    <!-- sg-secrets:docs:start -->
+<p class="sg-doc-source">Rendered from <a href="/team/roles/build-agent.md">team/roles/build-agent.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.3.</p>
+<h1 id="role-build-agent">Role: build agent</h1>
+<p><em>secrets.sgit.ai · the Claude Code session · written at v0.1.3 (2026-10-06) · CC BY 4.0</em></p>
+<p>The session that builds the site from the brief, one release at a time, under the rules below. It never pushes a release that fails the gate, never writes a secret into the tree, and never describes a thing in the present tense before <code>data/features.json</code> says shipped.</p>
+<h2 id="rules-this-role-enforces-and-the-mistake-behind-each">Rules this role enforces, and the mistake behind each</h2>
+<table>
+<thead><tr><th>Rule</th><th>The mistake it came from</th></tr></thead>
+<tbody>
+<tr><td>Run <code>python3 admin/build/gate.py --build</code> before every commit; CI runs the same command.</td><td>The sibling site sgit.ai shipped two releases that reported success and never reached anyone; the gate and verify-live exist for that reason.</td></tr>
+<tr><td>Every third-party file is vendored and hashed; no runtime script from another origin, ever.</td><td>The design&#x27;s own threat table: whoever serves the JavaScript gets everything. A CDN is a second party that serves it.</td></tr>
+<tr><td>The fix for a tripwire hit is a redaction, never a wider pattern.</td><td>The brief&#x27;s rule, section 9.3; a wider pattern hides the next real key.</td></tr>
+<tr><td>When the brief is wrong, record it in the corrections file and carry on; never edit the brief or the design documents.</td><td>The design documents are the reasoning and are copied verbatim; a corrected brief would no longer be the one that was accepted.</td></tr>
+<tr><td>When something needs a human, write exactly what, as commands, in needs.md, and continue with what does not depend on it.</td><td>The bootstrap page was the first one written this way; the clicking it could not remove is named rather than hidden.</td></tr>
+<tr><td>Derived review files come from parsers, never from the model; every node carries its source; the same inputs give byte-identical files.</td><td>The review brief, section 8: a review tool that is wrong is worse than none, because it produces confidence.</td></tr>
+<tr><td>Every number on a page is generated or dated.</td><td>nfrs.sgit.ai&#x27;s rule, and the reason <code>docs/reality.md</code>, the status tables and <code>review/README.md</code> are written by scripts.</td></tr>
+<tr><td>No em-dashes in prose the session writes; the gate says so as an advisory.</td><td>The house prose rule on coding.sgit.ai; the design documents are exempt because they are verbatim.</td></tr>
+</tbody>
+</table>
+<h2 id="starting-prompt">Starting prompt</h2>
+<p>The initial prompt in the design pack (<code>docs/design/</code>), then: &quot;Read <code>docs/ops/release.md</code>, <code>docs/design/brief-corrections.md</code> and <code>review/BRIEF-CORRECTIONS.md</code>. Continue from the first open step on the comms page. Every release is <code>site vX.Y.Z : what</code> with the third digit bumped and a <code>Kind:</code> trailer.&quot;</p>
+    <!-- sg-secrets:docs:end -->
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.3" title="released 2026-10-06">v0.1.3</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/team/roles/build-agent.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

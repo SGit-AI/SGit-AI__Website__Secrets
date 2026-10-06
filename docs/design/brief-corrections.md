@@ -72,6 +72,12 @@ Section 9.1 says every push to `dev` is a minor bump and section 11 numbers the 
 
 Section 6.1 names `/admin/index.html` and `/admin/versions.html` only. The sibling sites (sgit.ai, nfrs.sgit.ai, pki.sgit.ai) share one nav shape, grouped dropdown menus with a parent link, a stage pill and the version, and an admin section of three pages: how the site is built, the release history, and a comms page of numbered asks and tasks. This site now follows that shape (`admin/build/chrome.py`, `assets/nav.js`, `admin/comms.html`). For documents, the family's own brief ("Markdown and file viewers in a vault: what not to build") says not to write a client-side viewer, and the sibling websites publish documents as pages rendered at build time with the raw markdown one click away as the source of truth; `gen_docs.py` does exactly that, so no viewer script runs in the browser and the CSP stays at `script-src 'self'` with one small nav script.
 
+## v0.1.3 (2026-10-06): the repository guidance and the review folder
+
+### C17. The repository guidance published on 6 October adds things the brief did not name
+
+[Every sgit repository](https://sgit.ai/docs/guidance/repositories.html) was published after the brief. What it adds, and what this repository did about each: the `review/` folder (built from step 0 at v0.1.3, with its own corrections file `review/BRIEF-CORRECTIONS.md`); roles as files (`team/`); a participant disclosure (`about/participant.html`); one release script (`admin/build/release.py`); and three more gate checks (orphan pages, script parse-check, an em-dash advisory). The guidance's "honest column" row is on nfrs.sgit.ai, not here, and is a request to that site once step 3 has something to measure. The guidance's rule that every push goes through one script does not change the branch model: `release.py` pushes `dev` directly until branch protection is on (needs.md), then pushes a branch and the release is the merge.
+
 ## Open questions carried from section 12 (unanswered at this version)
 
 - Does the Playwright virtual authenticator support PRF? (step 4)

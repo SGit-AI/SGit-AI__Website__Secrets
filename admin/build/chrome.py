@@ -56,7 +56,8 @@ NAV_GROUPS        = (('The design'  , '/how-it-works/' , (('/how-it-works/'     
                                                           ('/docs/design/'                                         , 'Design documents'          ),
                                                           ('/docs/design/secrets-sgit-ai__mvp-build-brief.html'   , 'The MVP build brief'       ),
                                                           ('/docs/design/brief-corrections.html'                   , 'Brief corrections'         ),
-                                                          ('/docs/ops/'                                            , 'Operations'                ))),
+                                                          ('/docs/ops/'                                            , 'Operations'                ),
+                                                          ('/team/'                                                , 'The team'                  ))),
                      ('Admin'       , '/admin/'        , (('/admin/'                                               , 'How the site is built'     ),
                                                           ('/admin/versions.html'                                  , 'Release history'           ),
                                                           ('/admin/comms.html'                                     , 'Comms: asks and steps'     ),
@@ -64,7 +65,10 @@ NAV_GROUPS        = (('The design'  , '/how-it-works/' , (('/how-it-works/'     
                                                           ('/docs/ops/bootstrap.html'                              , 'GCP bootstrap, as commands'),
                                                           ('/llms.txt'                                             , 'llms.txt, for agents'      ))))
 
-CRUMB_FOLDERS     = {'/docs/'        : ('Docs'            , '/docs/'        ),   # breadcrumb names for folders that have no nav entry of their own
+CRUMB_FOLDERS     = {'/docs/'        : ('Docs'            , '/docs/'        ),
+                     '/team/'        : ('The team'        , '/team/'        ),
+                     '/team/roles/'  : ('Roles'           , '/team/'        ),
+                     '/about/'       : ('About'           , '/about/participant.html'),   # breadcrumb names for folders that have no nav entry of their own
                      '/docs/design/' : ('Design documents', '/docs/design/' ),
                      '/docs/ops/'    : ('Operations'      , '/docs/ops/'    ),
                      '/admin/'       : ('Admin'           , '/admin/'       )}
@@ -179,7 +183,7 @@ class Chrome:
         return '\n'.join(['  <footer class="sg-footer">'                                                                                      ,
                           f'    <p>{SITE_NAME} · site {self.version_badge()} · released {self.released} · '
                           f'<a href="/admin/versions.html">releases</a> · <a href="{twin}">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · '
-                          f'<a href="{REPO_URL}">source</a> · <a href="{PARENT_URL}">part of sgit.ai</a></p>'                                  ,
+                          f'<a href="{REPO_URL}">source</a> · <a href="{PARENT_URL}">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>'                                  ,
                           f'    <p>Everything in the repository is public; nothing in it is secret. '
                           f'Content <a href="{LICENCE_URL}">{LICENCE_NAME}</a>, code Apache-2.0. '
                           f'What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; '

@@ -17,8 +17,8 @@
   <meta property="og:url" content="https://secrets.sgit.ai/admin/comms.html">
   <meta property="og:title" content="Comms: asks and steps — secrets.sgit.ai">
   <meta property="og:description" content="The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.">
-  <meta name="sg-secrets:version" content="0.1.2">
-  <meta name="sg-secrets:released" content="2026-10-05">
+  <meta name="sg-secrets:version" content="0.1.3">
+  <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
 <body>
@@ -29,7 +29,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.2" title="released 2026-10-05">v0.1.2</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.3" title="released 2026-10-06">v0.1.3</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -57,6 +57,7 @@
           <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
           <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
           <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
           </div>
         </div>
         <div class="ni ni-has">
@@ -114,12 +115,32 @@
   </table>
 <!-- sg-secrets:steps:end -->
 
+    <h2>The review brief's build order</h2>
+    <p>The ten steps of <a href="https://sgit.ai/docs/briefs/code-review-graphs-in-the-repository.html">Code review graphs in the repository</a>, from the same file. Their corrections file is <a href="/review/BRIEF-CORRECTIONS.md">review/BRIEF-CORRECTIONS.md</a>.</p>
+    <!-- sg-secrets:review-steps:start -->
+  <table class="sg-steps" data-generated-from="data/steps.json">
+    <thead><tr><th>#</th><th>Step</th><th>Planned as</th><th>Delivered as</th><th>Status</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>R0</td><td>review/ skeleton, schemas, fixture repository, freshness wired into the gate</td><td></td><td><code>v0.1.3</code></td><td><span class="sg-status sg-status-shipped">done</span></td><td>Check 9 of the gate; a stale derived file fails the build, a fresh empty folder passes.</td></tr>
+      <tr><td>R1</td><td>intent/ from the MVP brief, every node carrying its section; the shell and the first components to walk it</td><td></td><td></td><td><span class="sg-status sg-status-proposed">building</span></td><td>Done when the project lead has walked it as a graph and recorded corrections.</td></tr>
+      <tr><td>R2</td><td>derive.py for Python (lifted from the vault), derive_js.py for the components, review/self/ built, review-set and review-ladder</td><td></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td>The tool reviews itself; both sets open in the navigator.</td></tr>
+      <tr><td>R3</td><td>derive_js.py extended to the site&#x27;s pages and routes as surfaces; graph/ for the site; review-join</td><td></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td>Coverage figure on the README and in the join view, from one script.</td></tr>
+      <tr><td>R4</td><td>change.py, review-change, the moved-layer marking; every commit from here carries a change file</td><td></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td></td></tr>
+      <tr><td>R5</td><td>stream.py, review-source, review-reach, review-stream: down to source lines, up with hop counts</td><td></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td>Story to line in six clicks; method to its stories in two.</td></tr>
+      <tr><td>R6</td><td>check.py with the house rules as queries; review-checks with trend</td><td></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td></td></tr>
+      <tr><td>R7</td><td>bundle.py; the folder published once as a vault with a read key</td><td></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td></td></tr>
+      <tr><td>R8</td><td>Delta-first mode applied to sgit.ai&#x27;s and the CLI&#x27;s repositories</td><td></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td>Not this repository&#x27;s; listed for completeness.</td></tr>
+      <tr><td>R9</td><td>The components lifted into a repository of their own, served from a versioned path</td><td></td><td></td><td><span class="sg-status sg-status-absent">open</span></td><td></td></tr>
+    </tbody>
+  </table>
+<!-- sg-secrets:review-steps:end -->
+
     <h2>Open questions carried from the brief</h2>
     <p>Listed and dated at the end of <a href="/docs/design/brief-corrections.html">brief-corrections.md</a>: the Playwright virtual authenticator and PRF, Google's implicit flow, the Security Rules syntax, where Identity Platform stores user records, and whether <code>sgit pki import</code> reads a browser-generated bundle.</p>
   </main>
   <!-- sg-secrets:footer:start -->
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.2" title="released 2026-10-05">v0.1.2</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/admin/comms.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.3" title="released 2026-10-06">v0.1.3</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/admin/comms.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

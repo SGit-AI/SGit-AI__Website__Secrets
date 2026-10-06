@@ -22,11 +22,14 @@ RE_H1         = re.compile(r'^#\s+(.+?)\s*$', re.M)
 RE_PARAGRAPH  = re.compile(r'^(?!#|\||>|-|\*|\d+\.|```|\s*$)(.+?)$', re.M)
 RE_TITLE      = re.compile(r'<title>.*?</title>', re.S)
 RE_DESC       = re.compile(r'<meta name="description" content=".*?">', re.S)
+TEAM_ROOT     = ROOT / 'team'
 FOLDERS       = {'design' : ('Design documents',
                              'The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. '
                              'Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.'),
                  'ops'    : ('Operations',
-                             'How a release works, what only a human can do, the DNS record and the repository protections.')}
+                             'How a release works, what only a human can do, the DNS record and the repository protections.'),
+                 'team'   : ('The team',
+                             'Who does what, as one file per role with the rules it enforces and the mistake behind each, and where the board of work lives.')}
 DESCRIPTIONS  = {'secrets-sgit-ai__mvp-build-brief.md'                      : 'The instruction set: architecture, environments, the site, the keyring specification, the pipeline, the build order.',
                  'brief-corrections.md'                                     : 'What the brief got wrong or left open, found while building, dated, beside it.',
                  'riskmandate-gcp-key-vault-password-manager-mvp.md'        : 'The primary design: all-GCP stack, keyring, PRF unlock, sharing scheme, storage layout, threat summary, password-manager MVP scope.',
@@ -49,7 +52,7 @@ class Gen__Docs:
 
     def sources(self):
         found = []
-        for path in sorted(DOCS_ROOT.rglob('*.md')):
+        for path in sorted(list(DOCS_ROOT.rglob('*.md')) + list(TEAM_ROOT.rglob('*.md'))):
             if path.name == 'index.md':
                 continue
             html_twin = path.with_suffix('.html')
@@ -114,14 +117,16 @@ class Gen__Docs:
     def render_index(self, folder):
         label, description = FOLDERS[folder]
         items = []
-        for path in sorted((DOCS_ROOT / folder).glob('*.md')):
+        base = TEAM_ROOT if folder == 'team' else DOCS_ROOT / folder
+        for path in sorted(base.rglob('*.md')):
             if path.name == 'index.md':
                 continue
             text  = path.read_text(encoding='utf-8')
             h1    = RE_H1.search(text)
             title = re.sub(r'[*_`]', '', h1.group(1)) if h1 else path.stem
-            items.append(f'<li><a href="/docs/{folder}/{path.stem}.html">{html.escape(title)}</a>: {html.escape(self.description_of(path, text))} '
-                         f'<a href="/docs/{folder}/{path.name}">(markdown)</a></li>')
+            url   = '/' + path.relative_to(ROOT).as_posix()
+            items.append(f'<li><a href="{url[:-3]}.html">{html.escape(title)}</a>: {html.escape(self.description_of(path, text))} '
+                         f'<a href="{url}">(markdown)</a></li>')
         body = '\n'.join([f'<h1>{html.escape(label)}</h1>', f'<p>{html.escape(description)}</p>', '<ul>', *items, '</ul>'])
         return label, description, body
 
@@ -147,8 +152,9 @@ class Gen__Docs:
                 changed.append(path.with_suffix('.html').relative_to(ROOT).as_posix())
         for folder in FOLDERS:
             title, description, body = self.render_index(folder)
-            if self.update(DOCS_ROOT / folder / 'index.html', title, description, body):
-                changed.append(f'docs/{folder}/index.html')
+            target = (TEAM_ROOT if folder == 'team' else DOCS_ROOT / folder) / 'index.html'
+            if self.update(target, title, description, body):
+                changed.append(target.relative_to(ROOT).as_posix())
         return changed
 
 

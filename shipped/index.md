@@ -2,7 +2,7 @@
 
 > Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
-*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -10,7 +10,7 @@ This site publishes its argument before the thing is finished. To keep that hone
 
 A *shipped* row names the version that shipped it and where in the repository it lives. A *proposed* row points at the section of the brief that designs it. An *absent* row says why it is not in the MVP and, where there is one, what comes instead.
 
-## Shipped (23)
+## Shipped (28)
 
 exists in the repository, runs, and was exercised at the version shown.
 
@@ -34,18 +34,28 @@ exists in the repository, runs, and was exercised at the version shown.
 | site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
 | site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
 | admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
+| site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
+| site | Participant disclosure: who publishes this site and what they are building | shipped v0.1.3 | about/participant.html | Linked from the footer. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
 | tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
 | tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
 
-## Proposed (22)
+## Proposed (27)
 
 designed in the brief, not built; described only in the future tense.
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
+| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Step 1. Written by the agent; intent only once the lead has walked it and accepted it. |
+| review | The navigator: web components, one visualiser per file shape, no framework, no build step, served at /review/ | proposed | review/ui/ | Steps 1 to 6. review-base is a sibling of the tools' base component (R2). |
+| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | proposed | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
+| review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
+| review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |
 | site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
 | infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |

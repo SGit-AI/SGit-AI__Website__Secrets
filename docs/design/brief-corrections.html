@@ -18,8 +18,8 @@
   <meta property="og:url" content="https://secrets.sgit.ai/docs/design/brief-corrections.html">
   <meta property="og:title" content="Brief corrections — secrets.sgit.ai">
   <meta property="og:description" content="What the brief got wrong or left open, found while building, dated, beside it.">
-  <meta name="sg-secrets:version" content="0.1.2">
-  <meta name="sg-secrets:released" content="2026-10-05">
+  <meta name="sg-secrets:version" content="0.1.3">
+  <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
 <body>
@@ -30,7 +30,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.2" title="released 2026-10-05">v0.1.2</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.3" title="released 2026-10-06">v0.1.3</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -58,6 +58,7 @@
           <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
           <a class="sl here" href="/docs/design/brief-corrections.html" aria-current="page">Brief corrections</a>
           <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
           </div>
         </div>
         <div class="ni ni-has">
@@ -79,7 +80,7 @@
 <!-- sg-secrets:nav:end -->
   <main class="sg-document">
     <!-- sg-secrets:docs:start -->
-<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.2.</p>
+<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.3.</p>
 <h1 id="brief-corrections">Brief corrections</h1>
 <p><em>secrets.sgit.ai · what the MVP build brief got wrong or left open, found while building, dated · beside the brief it corrects · CC BY 4.0</em></p>
 <p>The brief (<code>secrets-sgit-ai__mvp-build-brief.md</code>) is the instruction set. Where building it showed a statement to be wrong, incomplete or impossible as written, the finding is recorded here with the date and the version, and the build carried on with the correction. Sections 1 to 4 of the brief hold closed decisions; nothing here reopens one. The design documents beside this file are copied verbatim and are never edited.</p>
@@ -117,6 +118,9 @@
 <p>Section 9.1 says every push to <code>dev</code> is a minor bump and section 11 numbers the steps v0.1.0 to v0.9.0. Dinis decided on 2026-10-05 that each release bumps the third digit (v0.1.0, v0.1.1, v0.1.2, …), as the sibling sites do (sgit.ai is at v0.6.59 after hundreds of releases), and that the second digit is reserved for a milestone he names. The step numbers in section 11 therefore name the deliverable, not the release; <code>data/steps.json</code> records which release delivered each step. <code>tag_release.py</code> already accepted a patch bump, so nothing in the pipeline changed.</p>
 <h3 id="c16-the-admin-section-and-the-markdown-viewer-follow-the-siblings">C16. The admin section and the markdown viewer follow the siblings</h3>
 <p>Section 6.1 names <code>/admin/index.html</code> and <code>/admin/versions.html</code> only. The sibling sites (sgit.ai, nfrs.sgit.ai, pki.sgit.ai) share one nav shape, grouped dropdown menus with a parent link, a stage pill and the version, and an admin section of three pages: how the site is built, the release history, and a comms page of numbered asks and tasks. This site now follows that shape (<code>admin/build/chrome.py</code>, <code>assets/nav.js</code>, <code>admin/comms.html</code>). For documents, the family&#x27;s own brief (&quot;Markdown and file viewers in a vault: what not to build&quot;) says not to write a client-side viewer, and the sibling websites publish documents as pages rendered at build time with the raw markdown one click away as the source of truth; <code>gen_docs.py</code> does exactly that, so no viewer script runs in the browser and the CSP stays at <code>script-src &#x27;self&#x27;</code> with one small nav script.</p>
+<h2 id="v013-2026-10-06-the-repository-guidance-and-the-review-folder">v0.1.3 (2026-10-06): the repository guidance and the review folder</h2>
+<h3 id="c17-the-repository-guidance-published-on-6-october-adds-things-the-brief-did-not-name">C17. The repository guidance published on 6 October adds things the brief did not name</h3>
+<p><a href="https://sgit.ai/docs/guidance/repositories.html">Every sgit repository</a> was published after the brief. What it adds, and what this repository did about each: the <code>review/</code> folder (built from step 0 at v0.1.3, with its own corrections file <code>review/BRIEF-CORRECTIONS.md</code>); roles as files (<code>team/</code>); a participant disclosure (<code>about/participant.html</code>); one release script (<code>admin/build/release.py</code>); and three more gate checks (orphan pages, script parse-check, an em-dash advisory). The guidance&#x27;s &quot;honest column&quot; row is on nfrs.sgit.ai, not here, and is a request to that site once step 3 has something to measure. The guidance&#x27;s rule that every push goes through one script does not change the branch model: <code>release.py</code> pushes <code>dev</code> directly until branch protection is on (needs.md), then pushes a branch and the release is the merge.</p>
 <h2 id="open-questions-carried-from-section-12-unanswered-at-this-version">Open questions carried from section 12 (unanswered at this version)</h2>
 <ul>
 <li>Does the Playwright virtual authenticator support PRF? (step 4)</li>
@@ -129,7 +133,7 @@
   </main>
   <!-- sg-secrets:footer:start -->
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.2" title="released 2026-10-05">v0.1.2</a> · released 2026-10-05 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.3" title="released 2026-10-06">v0.1.3</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

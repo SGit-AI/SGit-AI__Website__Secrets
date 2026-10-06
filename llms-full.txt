@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.2 (2026-10-05). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.3 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -21,7 +21,7 @@ source: /index.md
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -82,6 +82,16 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 | site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
 | site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
 | admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
+| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Step 1. Written by the agent; intent only once the lead has walked it and accepted it. |
+| review | The navigator: web components, one visualiser per file shape, no framework, no build step, served at /review/ | proposed | review/ui/ | Steps 1 to 6. review-base is a sibling of the tools' base component (R2). |
+| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | proposed | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
+| review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
+| review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
+| site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
+| site | Participant disclosure: who publishes this site and what they are building | shipped v0.1.3 | about/participant.html | Linked from the footer. |
 | site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
@@ -129,6 +139,38 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 
 
 ==============================================================================
+source: /about/participant.md
+==============================================================================
+
+# Participant disclosure
+
+> Who publishes this site, what they are building, and why that matters when reading its claims: the people who run the sgit family build the secrets manager this site describes, and the site is written while it is built.
+
+*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+This site is published by the people building the thing it describes. Read its claims with that in mind.
+
+secrets.sgit.ai is part of the [sgit.ai](https://sgit.ai) family of sites, published by Dinis Cruz and the sgit team, and built in the open by a Claude Code session working from a published brief. The secrets manager it describes is the key-vault layer under sgit and Risk Mandate, both of which the same people build. The site therefore has an interest in the design being right, and in it being adopted.
+
+## What that means for the reader
+
+- Every claim carries a status from `data/features.json`: shipped with a version, proposed, or absent. The [shipped page](/shipped/index.md) and [docs/reality.md](/docs/reality.md) are generated from it and cannot disagree with each other or with the pages.
+- The brief this site was built from is [published in full](/docs/design/secrets-sgit-ai__mvp-build-brief.md), with [what it got wrong](/docs/design/brief-corrections.md) beside it, so the site can be checked against something other than its own claims.
+- The security argument is a design until the acceptance test is run and its write-up published, whatever the result; the [security page](/security/index.md) says so in its own status line.
+- Everything in the repository is public, including the configuration of every environment and the review graphs of the code, at [the repository](https://github.com/SGit-AI/SGit-AI__Website__Secrets).
+
+## Who did what
+
+The design documents were written by Dinis Cruz with AI co-authorship in October 2026. The site, its pipeline and its content pages are written by a Claude Code session under the rules in [the build agent's role file](/team/roles/build-agent.md); the person's decisions are recorded in [the project lead's](/team/roles/project-lead.md). Content is CC BY 4.0; code is Apache-2.0.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/about/participant.html)*
+
+
+==============================================================================
 source: /admin/comms.md
 ==============================================================================
 
@@ -136,7 +178,7 @@ source: /admin/comms.md
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -172,6 +214,23 @@ Section 11 of the brief, one row per step, from `data/steps.json`. The planned v
 | T8 | prod live; homepage demo real; security page final; acceptance test published | `v0.8.0` |  | open |  |
 | T9 | Phase 2 data only: public bundle in directory/, inbox rules live | `v0.9.0` |  | open | sgit pki import of the published bundle to verify. |
 
+## The review brief's build order
+
+The ten steps of [Code review graphs in the repository](https://sgit.ai/docs/briefs/code-review-graphs-in-the-repository.html), from the same file. Their corrections file is [review/BRIEF-CORRECTIONS.md](/review/BRIEF-CORRECTIONS.md).
+
+| # | Step | Planned as | Delivered as | Status | Note |
+|---|---|---|---|---|---|
+| R0 | review/ skeleton, schemas, fixture repository, freshness wired into the gate |  | `v0.1.3` | done | Check 9 of the gate; a stale derived file fails the build, a fresh empty folder passes. |
+| R1 | intent/ from the MVP brief, every node carrying its section; the shell and the first components to walk it |  |  | building | Done when the project lead has walked it as a graph and recorded corrections. |
+| R2 | derive.py for Python (lifted from the vault), derive_js.py for the components, review/self/ built, review-set and review-ladder |  |  | open | The tool reviews itself; both sets open in the navigator. |
+| R3 | derive_js.py extended to the site's pages and routes as surfaces; graph/ for the site; review-join |  |  | open | Coverage figure on the README and in the join view, from one script. |
+| R4 | change.py, review-change, the moved-layer marking; every commit from here carries a change file |  |  | open |  |
+| R5 | stream.py, review-source, review-reach, review-stream: down to source lines, up with hop counts |  |  | open | Story to line in six clicks; method to its stories in two. |
+| R6 | check.py with the house rules as queries; review-checks with trend |  |  | open |  |
+| R7 | bundle.py; the folder published once as a vault with a read key |  |  | open |  |
+| R8 | Delta-first mode applied to sgit.ai's and the CLI's repositories |  |  | open | Not this repository's; listed for completeness. |
+| R9 | The components lifted into a repository of their own, served from a versioned path |  |  | open |  |
+
 ## Open questions carried from the brief
 
 Listed and dated at the end of [brief-corrections.md](/docs/design/brief-corrections.md): the Playwright virtual authenticator and PRF, Google's implicit flow, the Security Rules syntax, where Identity Platform stores user records, and whether `sgit pki import` reads a browser-generated bundle.
@@ -189,7 +248,7 @@ source: /admin/index.md
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -237,6 +296,8 @@ The admin pages will work only when the visitor signs in with a Google account t
 | pipeline | Deploy to GitHub Pages from the validated tree | shipped v0.1.0 | .github/workflows/deploy-pages.yml | Excludes .git, .github, infra, tests/unit and node_modules. Actions pinned by commit SHA. |
 | pipeline | verify-live: the run is red until the live site serves the released version | shipped v0.1.0 | admin/build/verify_live.py | Green does not mean live. Polls version.txt and the homepage badge for up to ten minutes. |
 | pipeline | Every third-party file vendored and hashed in vendor/MANIFEST.json; no runtime script from another origin | shipped v0.1.0 | vendor/MANIFEST.json | Check 5 of the gate. Today the only vendored file is the family design tokens. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
 
 ## The admin section
 
@@ -259,7 +320,7 @@ source: /admin/versions.md
 
 > Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
 
-*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -267,6 +328,7 @@ One row per release. The version increments on every push to `dev`: a minor bump
 
 | Version | Date | Release | What changed |
 |---|---|---|---|
+| `v0.1.3` | 2026-10-06 | the review folder, step 0, and the repository guidance | review/ in the shape of the sgit.ai review brief: the schemas for every layer as JSON Schema with a standard-library validator, the edge vocabulary with an inverse for every verb, freshness by tree hash, a README whose every number is computed, empty intent files for the project and the tool, a fixture repository, and the first six corrections to the review brief. The gate gains check 9 (the review folder validates and is fresh), the orphan-page rule, a parse-check of every script and an em-dash advisory, as the repository guidance lists. Roles as files under team/, a participant disclosure, and admin/build/release.py: bump, build, gate, commit, push, verify live in one command. |
 | `v0.1.2` | 2026-10-05 | the GCP bootstrap, from the command line | Step 3 begins. infra/bootstrap/bootstrap.sh: the one-time, idempotent gcloud bootstrap with --dry-run and --check, creating the state project and bucket, one project per environment with billing and the APIs, the Terraform service account, and the Workload Identity Federation pool and provider, then printing the public values and the gh commands that store them. docs/ops/bootstrap.md maps exactly what a human does, in order, as commands, and names the one part Google keeps in the console (the OAuth consent screen and the two Web clients) and the two organisation settings with no API. The script is dry-run tested against a stand-in gcloud; its first real run is the project lead's. |
 | `v0.1.1` | 2026-10-05 | the content pages and the family chrome | Six content pages: how it works, security, keyring format v1, sharing, environments, and /shipped/ generated from data/features.json with one table per status. Every content page opens with a status line generated from the same file. Every markdown document under docs/ is now rendered to an HTML page beside it (the design documents, the ops notes, reality.md) by a standard-library markdown renderer, with index pages for docs/design/ and docs/ops/; the markdown stays the source and the twin. The homepage links the new pages and carries the three-step demo as proposed. The chrome now has the family nav (grouped menus with dropdowns, the part-of-sgit.ai link, the stage pill, a phone menu) with breadcrumbs, and the admin section gains a comms page with the asks and a tracker of the nine build steps. Versions now bump the third digit per release (brief-corrections C15). v0.1.0 went live at secrets.sgit.ai (DNS, Pages and the re-run done by Dinis), so the live-domain claim is shipped; needs.md items 1 to 3 are closed. |
 | `v0.1.0` | 2026-10-05 | the pipeline, before the site | The repository layout, version.txt as the one source of the version, the chrome generator, markdown twins, llms.txt and llms-full.txt, docs/reality.md generated from data/features.json, the eight-check gate in admin/build/validate.js, deploy-pages.yml with validate, tag-release, deploy and verify-live, CNAME, the DNS and branch-protection notes, docs/ops/needs.md, and the five design documents copied in verbatim. A placeholder homepage with the version badge and the status table. Nothing of the app, admin or test pages exists yet; every one of those claims is marked proposed. |
@@ -286,7 +348,7 @@ source: /docs/design/index.md
 
 > The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
 
-*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -312,7 +374,7 @@ source: /docs/index.md
 
 > Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
 
-*Source: <https://secrets.sgit.ai/docs/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -343,7 +405,7 @@ source: /docs/ops/index.md
 
 > How a release works, what only a human can do, the DNS record and the repository protections.
 
-*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -368,7 +430,7 @@ source: /environments/index.md
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -459,7 +521,7 @@ source: /how-it-works/index.md
 
 > The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 
-*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -565,7 +627,7 @@ source: /keyring/index.md
 
 > The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
 
-*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -683,7 +745,7 @@ source: /security/index.md
 
 > The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
 
-*Source: <https://secrets.sgit.ai/security/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/security/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -760,7 +822,7 @@ source: /sharing/index.md
 
 > The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
 
-*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -809,7 +871,7 @@ source: /shipped/index.md
 
 > Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
-*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -817,7 +879,7 @@ This site publishes its argument before the thing is finished. To keep that hone
 
 A *shipped* row names the version that shipped it and where in the repository it lives. A *proposed* row points at the section of the brief that designs it. An *absent* row says why it is not in the MVP and, where there is one, what comes instead.
 
-## Shipped (23)
+## Shipped (28)
 
 exists in the repository, runs, and was exercised at the version shown.
 
@@ -841,18 +903,28 @@ exists in the repository, runs, and was exercised at the version shown.
 | site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
 | site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
 | admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
+| site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
+| site | Participant disclosure: who publishes this site and what they are building | shipped v0.1.3 | about/participant.html | Linked from the footer. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
 | tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
 | tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
 
-## Proposed (22)
+## Proposed (27)
 
 designed in the brief, not built; described only in the future tense.
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
+| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Step 1. Written by the agent; intent only once the lead has walked it and accepted it. |
+| review | The navigator: web components, one visualiser per file shape, no framework, no build step, served at /review/ | proposed | review/ui/ | Steps 1 to 6. review-base is a sibling of the tools' base component (R2). |
+| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | proposed | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
+| review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
+| review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |
 | site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
 | infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
@@ -898,14 +970,37 @@ A feature becomes shipped in the release that makes it true, by editing one row 
 
 
 ==============================================================================
+source: /team/index.md
+==============================================================================
+
+# The team
+
+> Who does what, as one file per role with the rules it enforces and the mistake behind each, and where the board of work lives.
+
+*Source: <https://secrets.sgit.ai/team/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Who does what, as one file per role with the rules it enforces and the mistake behind each, and where the board of work lives.
+
+- [The team](/team/README.md): Two roles fill every seat at this stage: a person and an agent. Each role is one file with the rules it enforces and the mistake behind each rule, so that a new agent can read the team page and one… [(markdown)](/team/README.md)
+- [Role: build agent](/team/roles/build-agent.md): The session that builds the site from the brief, one release at a time, under the rules below. It never pushes a release that fails the gate, never writes a secret into the tree, and never describe… [(markdown)](/team/roles/build-agent.md)
+- [Role: project lead](/team/roles/project-lead.md): The person whose words the briefs come from and who says go. Holds every account the build cannot: the DNS zone, the GitHub organisation, the GCP billing account. [(markdown)](/team/roles/project-lead.md)
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/team/)*
+
+
+==============================================================================
 source: /docs/reality.md
 ==============================================================================
 
-# secrets.sgit.ai — reality
+# secrets.sgit.ai: reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.2 (2026-10-05). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.3 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
-50 claims: 23 shipped, 22 proposed, 5 absent.
+60 claims: 28 shipped, 27 proposed, 5 absent.
 
 | Status | Meaning |
 |---|---|
@@ -913,7 +1008,7 @@ source: /docs/reality.md
 | proposed | designed in the brief, not built; described only in the future tense |
 | absent | deliberately not in the MVP; comes as a later version or a later site, or never |
 
-## Shipped (23)
+## Shipped (28)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -935,16 +1030,26 @@ source: /docs/reality.md
 | site | Every markdown document under docs/ rendered to HTML on each release, with index pages | shipped v0.1.1 | admin/build/gen_docs.py, admin/build/md_to_html.py | Standard-library renderer; the markdown stays the twin. gen_docs --check is part of the gate. |
 | site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
 | admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
+| review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
+| pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
+| pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
+| site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
+| site | Participant disclosure: who publishes this site and what they are building | shipped v0.1.3 | about/participant.html | Linked from the footer. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
 | tests | Unit tests under node --test, real WebCrypto, no mocks | shipped v0.1.0 | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
 | tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | shipped v0.1.0 | tests/build/ | pytest, TestCase classes, no mocks. |
 
-## Proposed (22)
+## Proposed (27)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
+| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Step 1. Written by the agent; intent only once the lead has walked it and accepted it. |
+| review | The navigator: web components, one visualiser per file shape, no framework, no build step, served at /review/ | proposed | review/ui/ | Steps 1 to 6. review-base is a sibling of the tools' base component (R2). |
+| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | proposed | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
+| review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
+| review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |
 | site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
 | infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
@@ -1060,6 +1165,12 @@ Section 9.1 says every push to `dev` is a minor bump and section 11 numbers the 
 ### C16. The admin section and the markdown viewer follow the siblings
 
 Section 6.1 names `/admin/index.html` and `/admin/versions.html` only. The sibling sites (sgit.ai, nfrs.sgit.ai, pki.sgit.ai) share one nav shape, grouped dropdown menus with a parent link, a stage pill and the version, and an admin section of three pages: how the site is built, the release history, and a comms page of numbered asks and tasks. This site now follows that shape (`admin/build/chrome.py`, `assets/nav.js`, `admin/comms.html`). For documents, the family's own brief ("Markdown and file viewers in a vault: what not to build") says not to write a client-side viewer, and the sibling websites publish documents as pages rendered at build time with the raw markdown one click away as the source of truth; `gen_docs.py` does exactly that, so no viewer script runs in the browser and the CSP stays at `script-src 'self'` with one small nav script.
+
+## v0.1.3 (2026-10-06): the repository guidance and the review folder
+
+### C17. The repository guidance published on 6 October adds things the brief did not name
+
+[Every sgit repository](https://sgit.ai/docs/guidance/repositories.html) was published after the brief. What it adds, and what this repository did about each: the `review/` folder (built from step 0 at v0.1.3, with its own corrections file `review/BRIEF-CORRECTIONS.md`); roles as files (`team/`); a participant disclosure (`about/participant.html`); one release script (`admin/build/release.py`); and three more gate checks (orphan pages, script parse-check, an em-dash advisory). The guidance's "honest column" row is on nfrs.sgit.ai, not here, and is a request to that site once step 3 has something to measure. The guidance's rule that every push goes through one script does not change the branch model: `release.py` pushes `dev` directly until branch protection is on (needs.md), then pushes a branch and the release is the merge.
 
 ## Open questions carried from section 12 (unanswered at this version)
 
@@ -2680,4 +2791,183 @@ See `/admin/` on the site or the header of `admin/build/validate.js`. The rule f
 ## Backfilling tags
 
 `tag_release.py` tags every historical release commit that has no tag, oldest first, then pushes all the new tags. A tag that already points at its release commit is left alone. A tag that points elsewhere fails the job: tags are never moved.
+
+
+==============================================================================
+source: /team/README.md
+==============================================================================
+
+# The team
+
+*secrets.sgit.ai · who does what, as files · written at v0.1.3 (2026-10-06) · in the shape of the sgit.ai team section · CC BY 4.0*
+
+Two roles fill every seat at this stage: a person and an agent. Each role is one file with the rules it enforces and the mistake behind each rule, so that a new agent can read the team page and one role and begin. The board of work is `data/steps.json` (the nine build steps of the MVP brief and the ten of the review brief), rendered on the comms page, and `docs/ops/needs.md` (the asks back to the person). Neither lives in a vault yet; if the board outgrows a file, it moves to a vault of its own and this page says where.
+
+| Role | Held by | Decides |
+|---|---|---|
+| [Project lead](roles/project-lead.md) | Dinis Cruz | What ships next, what the brief means where it is ambiguous, whether an intent node is accepted, everything that needs a human account (DNS, billing, GCP, GitHub settings) |
+| [Build agent](roles/build-agent.md) | A Claude Code session, one at a time | Everything else, within the rules its role file lists, recording each departure from the brief in the corrections files |
+
+Other teams review the work and the review is published with the reply: the first is the sgit.ai site team's review brief, answered in `review/BRIEF-CORRECTIONS.md`.
+
+
+==============================================================================
+source: /team/roles/build-agent.md
+==============================================================================
+
+# Role: build agent
+
+*secrets.sgit.ai · the Claude Code session · written at v0.1.3 (2026-10-06) · CC BY 4.0*
+
+The session that builds the site from the brief, one release at a time, under the rules below. It never pushes a release that fails the gate, never writes a secret into the tree, and never describes a thing in the present tense before `data/features.json` says shipped.
+
+## Rules this role enforces, and the mistake behind each
+
+| Rule | The mistake it came from |
+|---|---|
+| Run `python3 admin/build/gate.py --build` before every commit; CI runs the same command. | The sibling site sgit.ai shipped two releases that reported success and never reached anyone; the gate and verify-live exist for that reason. |
+| Every third-party file is vendored and hashed; no runtime script from another origin, ever. | The design's own threat table: whoever serves the JavaScript gets everything. A CDN is a second party that serves it. |
+| The fix for a tripwire hit is a redaction, never a wider pattern. | The brief's rule, section 9.3; a wider pattern hides the next real key. |
+| When the brief is wrong, record it in the corrections file and carry on; never edit the brief or the design documents. | The design documents are the reasoning and are copied verbatim; a corrected brief would no longer be the one that was accepted. |
+| When something needs a human, write exactly what, as commands, in needs.md, and continue with what does not depend on it. | The bootstrap page was the first one written this way; the clicking it could not remove is named rather than hidden. |
+| Derived review files come from parsers, never from the model; every node carries its source; the same inputs give byte-identical files. | The review brief, section 8: a review tool that is wrong is worse than none, because it produces confidence. |
+| Every number on a page is generated or dated. | nfrs.sgit.ai's rule, and the reason `docs/reality.md`, the status tables and `review/README.md` are written by scripts. |
+| No em-dashes in prose the session writes; the gate says so as an advisory. | The house prose rule on coding.sgit.ai; the design documents are exempt because they are verbatim. |
+
+## Starting prompt
+
+The initial prompt in the design pack (`docs/design/`), then: "Read `docs/ops/release.md`, `docs/design/brief-corrections.md` and `review/BRIEF-CORRECTIONS.md`. Continue from the first open step on the comms page. Every release is `site vX.Y.Z : what` with the third digit bumped and a `Kind:` trailer."
+
+
+==============================================================================
+source: /team/roles/project-lead.md
+==============================================================================
+
+# Role: project lead
+
+*secrets.sgit.ai · the person · written at v0.1.3 (2026-10-06) · CC BY 4.0*
+
+The person whose words the briefs come from and who says go. Holds every account the build cannot: the DNS zone, the GitHub organisation, the GCP billing account.
+
+## Rules this role enforces, and the mistake behind each
+
+| Rule | The mistake it came from |
+|---|---|
+| A release bumps the third digit; the second digit is a milestone the lead names. | The brief numbered the build steps as minor versions; the family's sites run hundreds of patch-level releases, and the first content release nearly shipped as v0.2.0 (brief-corrections C15). |
+| Nothing that needs a human account is done by guesswork: the agent writes the exact commands and the lead runs them. | The first deploy failed at Pages enablement, as predicted; the fix was a human setting, listed in needs.md, not a workflow flag. |
+| An intent node is intent only when the lead has read it back as a graph and accepted it. | The review brief, section 5: a model's node is a proposal until a person accepts it, and a proposal never counts towards coverage. |
+| Everything the lead asks for is captured as a file, not a chat message: needs.md, the comms page, the corrections files. | The sibling sites' comms pages exist because a decision made in a chat was lost. |
+
+## Starting prompt
+
+"Read the comms page and `docs/ops/needs.md`. Do the items marked for you, in order, and reply with what the script printed. Then walk `/review/` and send corrections to the intent graph as numbered items."
+
+
+==============================================================================
+source: /review/BRIEF-CORRECTIONS.md
+==============================================================================
+
+# Review brief corrections
+
+*secrets.sgit.ai · where [Code review graphs in the repository](https://sgit.ai/docs/briefs/code-review-graphs-in-the-repository.html) was wrong or left open for this repository, found while building, dated · the brief says it will be corrected from this file · CC BY 4.0*
+
+The MVP brief has its own file, `docs/design/brief-corrections.md`. This one is for the review brief only.
+
+## v0.1.3 (2026-10-06): step 0, the skeleton
+
+### R1. The first "new project" already had source files
+
+Section 2 says a project that begins after the brief writes `review/intent/` before the first source file exists, and names this repository as the first. The repository had shipped three releases (v0.1.0 to v0.1.2) with about sixty source files before the brief was published on 6 October 2026. The full-coverage mode still applies, because sixty files derive in seconds, so the folder is built as a new project: intent first (step 1), then every file derived on every release (step 2). The only consequence is that there was a period of three releases in which the code outran the graph, and this entry records it.
+
+### R2. `review-base` is a sibling of the tools' `SgComponent`, not an import
+
+Section 7 leaves open whether the base component imports the tools' `SgComponent` from its versioned CDN path. This repository's rule P4 (no runtime script from any origin but this site) and check 5 of its gate forbid the import, so `review-base` is written beside it with the same contract (`static jsUrl = import.meta.url`, `resourceName`, `sharedCssPaths`, `onReady()`), as the brief proposes. When the components move to a repository of their own (step 9) the question can be reopened there.
+
+### R3. The schemas are JSON Schema, checked by a small validator of our own
+
+Section 10 step 0 asks for the schemas as JSON Schema files. The gate has no dependencies, so `tools/schema.py` is a standard-library validator for the subset the schemas use (type, required, properties, additionalProperties, items, enum, const, minItems, pattern, anyOf, $ref within the file). A schema construct outside that subset is a bug the tests catch, not a silent pass.
+
+### R4. The claim comes from a `Kind:` trailer, because the subject is already spoken for
+
+Section 6 takes the claim from the commit message's first word or a `Kind:` trailer. This repository's subjects are `site vX.Y.Z : what` by the release rule, so the first word is always `site`. Every commit from step 4 on carries a `Kind: fix|feature|refactor|docs` trailer, and `change.py` reads that; a commit without one is read as `unknown` and reported as such.
+
+### R5. Freshness compares a tree hash, not timestamps
+
+Section 8 says a derived folder older than the tree it describes fails. File times are not stable across clones and checkouts, so `freshness.py` compares the `tree_sha256` in each derived file's provenance (a hash over every source file's path and content) with the tree being built. The set of source files is `tools/config.json`, so a new kind of source file is a one-line change there, recorded in this file when it happens.
+
+### R6. The edge vocabulary is in one file and the validator refuses any other verb
+
+Section 3 says the grammar may not change and the layers may add types. To keep the graphs honest to the grammar's first rule (every edge a verb with a distinct inverse), `tools/verbs.json` holds the only verbs any layer may use, each with its inverse, a sentence, a domain and a range, and `validate_review.py` fails on an edge whose verb is not there or whose ends do not resolve to nodes. Six of the verbs are from the established edge set at graphs.sgit.ai; the rest are this folder's and are marked as not established.
+
+## Open, to be answered as the steps are built
+
+- The JavaScript parser (section 12): decided in principle as a vendored, pinned, hashed `acorn` under `review/tools/vendor/`; verified at step 2.
+- How examples are matched to tests by execution in a browser-only project (section 12): the proposal stands, a test page writes which example ids it satisfied to a results file; built at step 3.
+- Whether the deploy layer is derived from the workflow and Terraform files or declared (section 12): both, with the join reporting the difference; step 3.
+
+
+==============================================================================
+source: /review/README.md
+==============================================================================
+
+# review/: the project as layered graphs
+
+*Generated by `review/tools/readme.py`; every number here is computed. The folder follows [Code review graphs in the repository](https://sgit.ai/docs/briefs/code-review-graphs-in-the-repository.html); where that brief was wrong for this repository, `BRIEF-CORRECTIONS.md` says so.*
+
+What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
+
+Source tree: 61 files, hash `eb58237e7b981749`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+
+## The project
+
+| Layer | Count |
+|---|---|
+| stories | 0 (not yet accepted; 0 proposed by a model) |
+| rules | 0 |
+| examples | 0 |
+| flows | 0 |
+| components | 0 |
+| deploy | 0 |
+| files | not derived yet |
+| modules | not derived yet |
+| classes | not derived yet |
+| methods | not derived yet |
+| surfaces | not derived yet |
+| tests | not derived yet |
+
+Coverage (projected nodes with a derived match beneath them): not computed yet: the join runs from step 3.
+Change files: 0. Streams: 0. Open gaps: none recorded yet.
+
+## The tool (review/self/)
+
+| Layer | Count |
+|---|---|
+| stories | 0 (not yet accepted; 0 proposed by a model) |
+| rules | 0 |
+| examples | 0 |
+| flows | 0 |
+| components | 0 |
+| deploy | 0 |
+| files | not derived yet |
+| modules | not derived yet |
+| classes | not derived yet |
+| methods | not derived yet |
+| surfaces | not derived yet |
+| tests | not derived yet |
+
+Coverage (projected nodes with a derived match beneath them): not computed yet: the join runs from step 3.
+Change files: 0. Streams: 0. Open gaps: none recorded yet.
+
+## Regenerate and check
+
+```
+python3 review/tools/validate_review.py      # every JSON file against its schema; every edge a known verb
+python3 review/tools/freshness.py            # derived files match the tree being built
+python3 review/tools/readme.py               # this file
+python3 -m http.server 8000                   # then open http://localhost:8000/review/ for the navigator
+```
+
+The gate runs the first two as check 9 and the third as a generator, so a stale or malformed folder fails the build.
+
+*Code Apache-2.0, content CC BY 4.0.*
 

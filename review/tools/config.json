@@ -1,0 +1,33 @@
+{
+  "_comment": "What the review derivation reads and ignores. Shared by every tool through review_tree.py. source_globs are relative to the repository root; exclude_dirs match any path segment; exclude_paths match a prefix.",
+  "source_globs": [
+    "admin/build/*.py",
+    "admin/build/*.js",
+    "assets/*.js",
+    "app/**/*.js",
+    "components/**/*.js",
+    "components/**/*.html",
+    "components/**/*.css",
+    "tests/build/*.py",
+    "tests/unit/*.js",
+    "review/tools/*.py",
+    "review/ui/**/*.js",
+    "review/ui/**/*.html",
+    "review/ui/**/*.css",
+    "infra/**/*.tf",
+    "infra/rules/*.rules",
+    "infra/bootstrap/*.sh",
+    ".github/workflows/*.yml",
+    "*.html",
+    "*/index.html",
+    "admin/*.html",
+    "docs/**/*.html"
+  ],
+  "exclude_dirs": ["node_modules", "__pycache__", ".git", "_site", "fixtures", "vendor", "dist"],
+  "exclude_paths": ["review/graph/", "review/join/", "review/changes/", "review/streams/", "review/checks/", "review/self/"],
+  "changes_required_from": null,
+  "self": {
+    "_comment": "The self set reviews the tool itself: review/tools and review/ui, with their own intent written from the review brief.",
+    "source_globs": ["review/tools/*.py", "review/ui/**/*.js", "review/ui/**/*.html", "review/ui/**/*.css"]
+  }
+}

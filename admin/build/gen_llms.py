@@ -17,7 +17,9 @@ LLMS_FILE      = ROOT / 'llms.txt'
 LLMS_FULL_FILE = ROOT / 'llms-full.txt'
 SITEMAP_FILE   = ROOT / 'sitemap.xml'
 DOC_SECTIONS   = (('docs/design' , 'Design documents (the reasoning; the brief is the instruction)'),
-                  ('docs/ops'    , 'Operations (what a human must do, and how a release works)'    ))
+                  ('docs/ops'    , 'Operations (what a human must do, and how a release works)'    ),
+                  ('team'        , 'The team (roles as files, and where the board lives)'          ),
+                  ('review'      , 'The review folder (the project as layered graphs)'             ))
 DOC_SKIP       = ('index.md',)                                                   # the twin of a generated index page
 RE_MD_TITLE    = re.compile(r'^#\s+(.+?)\s*$', re.M)
 
@@ -40,8 +42,8 @@ class Gen__Llms:
 
     def doc_entries(self, folder):
         entries = []
-        for path in sorted((ROOT / folder).glob('*.md')):
-            if path.name in DOC_SKIP:
+        for path in sorted((ROOT / folder).rglob('*.md')):
+            if path.name in DOC_SKIP or 'fixtures' in path.parts or 'ui' in path.parts:
                 continue
             text  = path.read_text(encoding='utf-8')
             title = RE_MD_TITLE.search(text)

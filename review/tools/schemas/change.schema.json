@@ -1,0 +1,277 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checks": {
+      "properties": {
+        "now_failing": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "now_passing": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "claim": {
+      "properties": {
+        "held_layers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "held_layers"
+      ],
+      "type": "object"
+    },
+    "commit": {
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "fix",
+            "feature",
+            "refactor",
+            "docs",
+            "site",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "sha": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha",
+        "subject",
+        "kind"
+      ],
+      "type": "object"
+    },
+    "evidence": {
+      "properties": {
+        "agrees": {
+          "type": "boolean"
+        },
+        "details": {
+          "type": "object"
+        },
+        "reading": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "reading",
+        "agrees"
+      ],
+      "type": "object"
+    },
+    "files": {
+      "items": {
+        "properties": {
+          "added": {
+            "type": "integer"
+          },
+          "after": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "before": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "removed": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "layers": {
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "added": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "changed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "held": {
+            "type": "boolean"
+          },
+          "moved": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "removed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "signature_changed": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "added",
+          "removed",
+          "changed",
+          "moved"
+        ],
+        "type": "object"
+      },
+      "type": "object"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "commit": {
+          "type": "string"
+        },
+        "inputs": {
+          "additionalProperties": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "tool_version": {
+          "type": "string"
+        },
+        "tree_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool",
+        "tool_version",
+        "commit",
+        "tree_sha256",
+        "inputs"
+      ],
+      "type": "object"
+    },
+    "reach": {
+      "properties": {
+        "flows": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "hops": {
+          "type": "object"
+        },
+        "stories": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "surfaces": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "summary": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "tests": {
+      "properties": {
+        "added": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "changed": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "examples_satisfied": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "provenance",
+    "commit",
+    "files",
+    "layers",
+    "reach",
+    "claim",
+    "evidence",
+    "tests",
+    "checks",
+    "summary"
+  ],
+  "title": "review/changes/<hash>.json",
+  "type": "object"
+}

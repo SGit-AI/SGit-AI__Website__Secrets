@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_by": {
+          "anyOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "date": {
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "who": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "who",
+                "date"
+              ],
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "brief_corrections": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "intent"
+        },
+        "source_doc": {
+          "type": "string"
+        },
+        "written_by": {
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            },
+            "who": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "who",
+            "date"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "source_doc",
+        "written_by",
+        "accepted_by"
+      ],
+      "type": "object"
+    },
+    "rules": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "cannot": {
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._/:@-]*$",
+            "type": "string"
+          },
+          "layer": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "error",
+              "warning",
+              "advisory"
+            ],
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "source",
+          "query"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "rules"
+  ],
+  "title": "review/checks/rules.json",
+  "type": "object"
+}

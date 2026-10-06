@@ -70,7 +70,7 @@ class Gen__Features:
     def reality_markdown(self):
         groups = self.by_status(self.features)
         counts = ', '.join(f'{len(groups[status])} {status}' for status in STATUSES)
-        lines  = [f'# {SITE_NAME} — reality'                                                                                          ,
+        lines  = [f'# {SITE_NAME}: reality'                                                                                          ,
                   ''                                                                                                                  ,
                   f'*Generated from `data/features.json` by `admin/build/gen_features.py` at site v{self.chrome.version} '
                   f'({self.chrome.released}). If the reality document does not list it, it does not exist. '

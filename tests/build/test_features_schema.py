@@ -14,7 +14,7 @@ from unittest import TestCase
 
 ROOT     = Path(__file__).resolve().parents[2]
 STATUSES = {'shipped', 'proposed', 'absent'}
-AREAS    = {'pipeline', 'site', 'infra', 'app', 'admin', 'tests'}
+AREAS    = {'pipeline', 'site', 'infra', 'app', 'admin', 'tests', 'review'}
 
 
 class Test__Features__Schema(TestCase):

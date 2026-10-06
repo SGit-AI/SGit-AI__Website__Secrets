@@ -63,8 +63,8 @@ class Gen__Versions:
                           '    </tbody>'                                                                                ,
                           '  </table>'                                                                                  ])
 
-    def steps_html(self):
-        steps    = json.loads(STEPS_FILE.read_text(encoding='utf-8'))['steps']
+    def steps_html(self, key='steps', prefix='T'):
+        steps    = json.loads(STEPS_FILE.read_text(encoding='utf-8'))[key]
         released = {r['version'] for r in self.releases}
         rows     = []
         for step in steps:
@@ -74,9 +74,9 @@ class Gen__Versions:
                 raise SystemExit(f'data/steps.json: step {step["step"]} is done but v{step["releasedAs"]} is not in data/versions.json')
             delivered = f'<code>v{step["releasedAs"]}</code>' if step['releasedAs'] else ''
             rows.append('      <tr>'
-                        f'<td>T{step["step"]}</td>'
+                        f'<td>{prefix}{step["step"]}</td>'
                         f'<td>{html.escape(step["title"])}</td>'
-                        f'<td><code>v{step["plannedVersion"]}</code></td>'
+                        f'<td>{"<code>v" + step["plannedVersion"] + "</code>" if step.get("plannedVersion") else ""}</td>'
                         f'<td>{delivered}</td>'
                         f'<td><span class="sg-status sg-status-{ {"done": "shipped", "building": "proposed", "open": "absent"}[step["status"]] }">{step["status"]}</span></td>'
                         f'<td>{html.escape(step["note"])}</td>'
@@ -90,7 +90,7 @@ class Gen__Versions:
 
     def run(self):
         changed = []
-        for page, block, body in ((VERSIONS_PAGE, 'versions', self.table_html()), (COMMS_PAGE, 'steps', self.steps_html())):
+        for page, block, body in ((VERSIONS_PAGE, 'versions', self.table_html()), (COMMS_PAGE, 'steps', self.steps_html()), (COMMS_PAGE, 'review-steps', self.steps_html('review_steps', 'R'))):
             text        = page.read_text(encoding='utf-8')
             text, found = self.pages.replace_block(text, block, body)
             if not found:

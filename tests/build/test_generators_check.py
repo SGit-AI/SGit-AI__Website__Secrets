@@ -39,4 +39,4 @@ class Test__Generators__Check(TestCase):
     def test_validate_js_passes_on_the_tree(self):
         result = subprocess.run(['node', 'admin/build/validate.js'], cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertIn('8/8 checks passed', result.stdout)
+        self.assertRegex(result.stdout, r'\d+/\d+ checks passed')

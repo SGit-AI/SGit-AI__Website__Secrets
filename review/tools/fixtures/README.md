@@ -1,0 +1,3 @@
+# Fixtures for the review tools
+
+`repo/` is a tiny repository with a known shape: three Python classes (`Store__Memory`, a subclass `Store__Counted` whose `put` dispatches to the base, and `Service__Notes` which holds the subclass and exposes `add` and `read`), one test module, and one JavaScript component triplet (`fx-card`) on a fixture base class. The expected derived files for it live beside it from step 2 of the review brief (`expected/`), and the test suite asserts that `derive.py` and `derive_js.py` reproduce them byte for byte. Nothing in here is real code; the values are obviously fake.

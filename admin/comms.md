@@ -2,7 +2,7 @@
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.2 (2026-10-05) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -37,6 +37,23 @@ Section 11 of the brief, one row per step, from `data/steps.json`. The planned v
 | T7 | Admin pages with fixes; rules.yml; new-environment.md timed on a fresh main project | `v0.7.0` |  | open | Not before step 6: the users page needs meta.json. |
 | T8 | prod live; homepage demo real; security page final; acceptance test published | `v0.8.0` |  | open |  |
 | T9 | Phase 2 data only: public bundle in directory/, inbox rules live | `v0.9.0` |  | open | sgit pki import of the published bundle to verify. |
+
+## The review brief's build order
+
+The ten steps of [Code review graphs in the repository](https://sgit.ai/docs/briefs/code-review-graphs-in-the-repository.html), from the same file. Their corrections file is [review/BRIEF-CORRECTIONS.md](/review/BRIEF-CORRECTIONS.md).
+
+| # | Step | Planned as | Delivered as | Status | Note |
+|---|---|---|---|---|---|
+| R0 | review/ skeleton, schemas, fixture repository, freshness wired into the gate |  | `v0.1.3` | done | Check 9 of the gate; a stale derived file fails the build, a fresh empty folder passes. |
+| R1 | intent/ from the MVP brief, every node carrying its section; the shell and the first components to walk it |  |  | building | Done when the project lead has walked it as a graph and recorded corrections. |
+| R2 | derive.py for Python (lifted from the vault), derive_js.py for the components, review/self/ built, review-set and review-ladder |  |  | open | The tool reviews itself; both sets open in the navigator. |
+| R3 | derive_js.py extended to the site's pages and routes as surfaces; graph/ for the site; review-join |  |  | open | Coverage figure on the README and in the join view, from one script. |
+| R4 | change.py, review-change, the moved-layer marking; every commit from here carries a change file |  |  | open |  |
+| R5 | stream.py, review-source, review-reach, review-stream: down to source lines, up with hop counts |  |  | open | Story to line in six clicks; method to its stories in two. |
+| R6 | check.py with the house rules as queries; review-checks with trend |  |  | open |  |
+| R7 | bundle.py; the folder published once as a vault with a read key |  |  | open |  |
+| R8 | Delta-first mode applied to sgit.ai's and the CLI's repositories |  |  | open | Not this repository's; listed for completeness. |
+| R9 | The components lifted into a repository of their own, served from a versioned path |  |  | open |  |
 
 ## Open questions carried from the brief
 
