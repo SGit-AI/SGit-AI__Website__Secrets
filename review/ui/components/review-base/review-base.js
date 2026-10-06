@@ -22,6 +22,8 @@ export const REVIEW_EVENTS = Object.freeze({
     file    : 'review:file',                                                     // { path, lines }: a file of the repository is in focus, shown in place
     set     : 'review:set',
     loaded  : 'review:loaded',
+    mode    : 'review:mode',                                                     // { mode }: intent or code; the shell lays the regions out for it
+    graph   : 'review:graph',                                                    // { loaded }: the derived code layers were read
 })
 
 export const LAYERS = Object.freeze({
@@ -38,9 +40,17 @@ export const LAYERS = Object.freeze({
     claim       : { label : 'claim'       , group : 'claims'     , rank : 11 },
     release     : { label : 'release'     , group : 'claims'     , rank : 12 },
     anchor      : { label : 'anchor'      , group : 'claims'     , rank : 13 },
+    file        : { label : 'file'        , group : 'code'       , rank : 14 },
+    class       : { label : 'class'       , group : 'code'       , rank : 15 },
+    method      : { label : 'method'      , group : 'code'       , rank : 16 },
+    test        : { label : 'test'        , group : 'code'       , rank : 17 },
+    surface     : { label : 'surface'     , group : 'code'       , rank : 18 },
 })
 
-export const VIEWS = Object.freeze(['stories', 'flows', 'components', 'deploy', 'claims', 'brief'])
+export const CODE_LAYERS = Object.freeze(['file', 'class', 'method', 'test', 'surface'])
+const GRAPH_FILES = Object.freeze(['files', 'modules', 'classes', 'methods', 'tests', 'surfaces'])
+
+export const VIEWS = Object.freeze(['stories', 'flows', 'components', 'deploy', 'claims', 'brief', 'code'])
 
 const INTENT_FILES = Object.freeze(['stories', 'flows', 'components', 'deploy', 'sections', 'claims'])
 const UI_URL       = new URL('../../', import.meta.url)                         // review/ui/
@@ -55,6 +65,10 @@ class ReviewStore {
         this.sections = { sections : {} }
         this.route    = { view : 'stories', node : null, section : null, file : null, lines : null }
         this.brief    = null                                                      // brief/index.json, read on first use
+        this.graph    = null                                                      // the derived layers, read on first use (they are large)
+        this.graphIndex = null                                                    // graph/index.json: their counts and file paths, read with the intent
+        this.mode     = 'intent'
+        this.byPath   = new Map()                                                 // file path -> file node id
         this.loaded   = null
         this._verbs   = {}
     }
@@ -90,6 +104,7 @@ class ReviewStore {
             this._verbs  = verbs.verbs
         } catch (error) { this._verbs = {} }
         this.sections = files.sections || { sections : {} }
+        try { this.graphIndex = await this.readJson('graph/index.json') } catch (error) { this.graphIndex = null }   // counts and paths of the derived layers, before they load
         this.index(files)
         this.loaded = files
         this.emit(REVIEW_EVENTS.loaded, { set : setName, counts : this.counts() })
@@ -153,9 +168,10 @@ class ReviewStore {
         }
     }
 
-    counts() {
+    counts() {                                                                    // per layer; the derived layers from the index until they load
         const counts = {}
         for (const node of this.nodes.values()) counts[node.layer] = (counts[node.layer] || 0) + 1
+        if (!this.graph && this.graphIndex) for (const [layer, key] of [['file', 'files'], ['class', 'classes'], ['method', 'methods'], ['test', 'tests'], ['surface', 'surfaces']]) counts[layer] = this.graphIndex.counts[key] || 0
         return counts
     }
 
@@ -163,7 +179,49 @@ class ReviewStore {
 
     roots(view) {
         if (view === 'claims') return [...this.nodes.values()].filter(node => node.layer === 'claim')
+        if (view === 'code') return [...this.nodes.values()].filter(node => node.layer === 'file' || (node.layer === 'surface' && !node.parent))
         return [...this.nodes.values()].filter(node => LAYERS[node.layer].group === view && !node.parent)
+    }
+
+    async loadGraph() {                                                           // graph/*.json: files, modules, classes, methods, tests, surfaces; once
+        if (this.graph) return this.graph
+        const files = {}
+        for (const name of GRAPH_FILES) {
+            try { files[name] = await this.readJson(`graph/${name}.json`) } catch (error) { files[name] = null }
+        }
+        this.graph = files
+        this.indexGraph(files)
+        this.emit(REVIEW_EVENTS.graph, { loaded : Boolean(files.files) })
+        return files
+    }
+
+    indexGraph(files) {
+        const modules = new Map((files.modules ? files.modules.modules : []).map(m => [m.id, m]))
+        for (const file of files.files ? files.files.files : []) {
+            const module = file.module ? modules.get(file.module) : null
+            this.add(file.id, 'file', file.path, { ...file, module : module || null }, null, { path : file.path, line : 1, end : file.lines, sha256 : file.sha256 }, { path : file.path, language : file.language, doc : module ? module.doc : (file.summary && file.summary.doc) || '' })
+            this.byPath.set(file.path, file.id)
+        }
+        for (const cls of files.classes ? files.classes.classes : []) {
+            const fileId = this.byPath.get(cls.source.path)
+            this.add(cls.id, 'class', cls.name, cls, fileId || null, cls.source, { path : cls.source.path, doc : cls.doc || '' })
+        }
+        for (const method of files.methods ? files.methods.methods : []) {
+            const parent = method.class || this.byPath.get(method.source.path) || null
+            this.add(method.id, 'method', method.signature || method.name, method, parent, method.source, { path : method.source.path, doc : method.doc || '', calls : method.calls })
+        }
+        for (const test of files.tests ? files.tests.tests : []) this.add(test.id, 'test', test.name, test, this.byPath.get(test.path) || null, test.source, { path : test.path })
+        for (const surface of files.surfaces ? files.surfaces.surfaces : []) this.add(surface.id, 'surface', `${surface.kind}: ${surface.name}`, surface, null, surface.source, { path : surface.path || '', kind : surface.kind })
+        for (const name of GRAPH_FILES) for (const edge of (files[name] && files[name].edges) || []) this.edges.push(edge)
+    }
+
+    fileNode(path) { return this.byPath.has(path) ? this.get(this.byPath.get(path)) : null }
+    knownPath(path) { return this.byPath.has(path) || Boolean(this.graphIndex && this.graphIndex.paths.includes(path)) }   // a served file the derivation saw
+
+    setMode(mode) {
+        if (this.mode === mode) return
+        this.mode = mode
+        this.emit(REVIEW_EVENTS.mode, { mode })
     }
 
     async briefIndex() {                                                          // the brief's table of contents, from brief/index.json
@@ -209,27 +267,40 @@ class ReviewStore {
     select(id) {
         const node = this.get(id)
         if (!node) return
+        const code = CODE_LAYERS.includes(node.layer)
         this.route = { view : LAYERS[node.layer].group, node : id, section : null, file : null, lines : null }
+        this.setMode(code ? 'code' : 'intent')
         this.emit(REVIEW_EVENTS.select, { id, node })
+        if (code && node.path) {                                                  // the source shows beside the node, its lines marked
+            const lines = node.source && node.source.line ? `L${node.source.line}-L${node.source.end}` : null
+            this.emit(REVIEW_EVENTS.file, { path : node.path, lines, node : id })
+        }
         this.writeRouteToUrl()
     }
 
     show(view) {
         if (!VIEWS.includes(view)) return
         this.route = { view, node : null, section : null, file : null, lines : null }
+        this.setMode(view === 'code' ? 'code' : 'intent')
+        if (view === 'code') this.loadGraph().then(() => this.emit(REVIEW_EVENTS.route, { view }))
         this.emit(REVIEW_EVENTS.route, { view })
         this.writeRouteToUrl()
     }
 
     showSection(id) {                                                             // a section of the brief, in place; the navigator is not left
         this.route = { view : 'brief', node : null, section : id, file : null, lines : null }
+        this.setMode('intent')
         this.emit(REVIEW_EVENTS.section, { id })
         this.writeRouteToUrl()
     }
 
-    showFile(path, lines = null) {                                                 // a file of the repository, in place
-        this.route = { view : this.route.view, node : this.route.node, section : null, file : path, lines }
-        this.emit(REVIEW_EVENTS.file, { path, lines })
+    async showFile(path, lines = null) {                                           // a file of the repository, in place, in code mode
+        await this.loadGraph()
+        const file = this.fileNode(path)
+        this.route = { view : 'code', node : file ? file.id : this.route.node, section : null, file : path, lines }
+        this.setMode('code')
+        if (file) this.emit(REVIEW_EVENTS.select, { id : file.id, node : file })
+        this.emit(REVIEW_EVENTS.file, { path, lines, node : file ? file.id : null })
         this.writeRouteToUrl()
     }
 
@@ -237,13 +308,13 @@ class ReviewStore {
         if (!this.standalone()) return
         const value = this.route.file ? `file=${this.route.file}${this.route.lines ? '&lines=' + this.route.lines : ''}`
                     : this.route.section ? `section=${this.route.section}`
-                    : this.route.node ? `node=${encodeURIComponent(this.route.node)}` : `view=${this.route.view}`
+                    : this.route.node ? `node=${encodeURIComponent(this.route.node).replace(/%3A/g, ':').replace(/%2F/g, '/')}` : `view=${this.route.view}`   // ids keep their : and / readable
         history.replaceState(null, '', `#${value}`)
     }
 
     readRouteFromUrl() {
         const hash = location.hash.replace(/^#/, '')
-        if (hash.startsWith('node=')) this.select(decodeURIComponent(hash.slice(5)))
+        if (hash.startsWith('node=')) { const id = decodeURIComponent(hash.slice(5)); if (/^(file|class|method|test|surface|module):/.test(id)) this.loadGraph().then(() => this.select(id)); else this.select(id) }
         else if (hash.startsWith('section=')) this.showSection(hash.slice(8))
         else if (hash.startsWith('file=')) { const [path, rest] = hash.slice(5).split('&lines='); this.showFile(decodeURIComponent(path), rest || null) }
         else if (hash.startsWith('view=')) this.show(hash.slice(5))

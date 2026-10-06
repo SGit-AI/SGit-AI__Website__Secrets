@@ -33,6 +33,8 @@
 }
 .properties dt { color: var(--rv-text-muted); font-size: var(--rv-fs-small); }
 .properties dd { margin: 0; }
+.properties a.path { color: var(--rv-accent); font-family: var(--rv-mono); font-size: var(--rv-fs-small); text-decoration: none; }
+.properties a.path:hover { text-decoration: underline; }
 .mono          { font-family: var(--rv-mono); font-size: var(--rv-fs-xs); word-break: break-all; }
 
 h3       { color: var(--rv-text-heading); font-size: var(--rv-fs); margin: var(--rv-sp-4) 0 var(--rv-sp-2); }
@@ -50,3 +52,6 @@ h3       { color: var(--rv-text-heading); font-size: var(--rv-fs); margin: var(-
 .anchor-note { background: var(--rv-accent-subtle); border-radius: var(--rv-radius); color: var(--rv-text); font-size: var(--rv-fs-small); padding: var(--rv-sp-2) var(--rv-sp-3); }
 .anchor-note a { color: var(--rv-accent); }
 .layer-claim .layer, .layer-release .layer, .layer-anchor .layer { background: var(--rv-layer-derived); color: var(--rv-on-layer); }
+
+h2.name a.path { color: var(--rv-accent); text-decoration: none; }
+h2.name a.path:hover { text-decoration: underline; }

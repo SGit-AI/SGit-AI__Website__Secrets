@@ -1,0 +1,3006 @@
+{
+  "edges": [
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_canonical_matches_the_page_location",
+      "source": {
+        "end": 57,
+        "line": 57,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "ab218e6cc6c006695da0d82ad8efa182e7a3d29c0ab529df6baf7274ac0083e6"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_canonical_matches_the_page_location",
+      "source": {
+        "end": 57,
+        "line": 57,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "ab218e6cc6c006695da0d82ad8efa182e7a3d29c0ab529df6baf7274ac0083e6"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_every_badge_equals_version_txt",
+      "source": {
+        "end": 50,
+        "line": 50,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "e0d0f53891a7b6ad482ef7ca55d79dd840e76212de756f6c8348a742d1758ee0"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_every_badge_equals_version_txt",
+      "source": {
+        "end": 50,
+        "line": 50,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "e0d0f53891a7b6ad482ef7ca55d79dd840e76212de756f6c8348a742d1758ee0"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_every_page_has_the_chrome",
+      "source": {
+        "end": 32,
+        "line": 32,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "2f2e248b2b7e2d678fcc7bf1fddf40501c71cd1fe8b2f9f047997eb09e48473e"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_every_page_has_the_chrome",
+      "source": {
+        "end": 32,
+        "line": 32,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "2f2e248b2b7e2d678fcc7bf1fddf40501c71cd1fe8b2f9f047997eb09e48473e"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_no_inline_script_or_style",
+      "source": {
+        "end": 65,
+        "line": 65,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "974aa2e8d7027cb6f2364a28184533d42806e3b748b8d1ce856af1836c1bea54"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_no_inline_script_or_style",
+      "source": {
+        "end": 65,
+        "line": 65,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "974aa2e8d7027cb6f2364a28184533d42806e3b748b8d1ce856af1836c1bea54"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_there_are_pages",
+      "source": {
+        "end": 28,
+        "line": 28,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "a0462bf12ff895d7afe2117b81b82e1911ba95aa01888ade0e62f58d92403fed"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_chrome_in_every_page.py:test_there_are_pages",
+      "source": {
+        "end": 28,
+        "line": 28,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "a0462bf12ff895d7afe2117b81b82e1911ba95aa01888ade0e62f58d92403fed"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_claims.py:test_brief_sections_match_the_markdown",
+      "source": {
+        "end": 90,
+        "line": 90,
+        "path": "tests/build/test_claims.py",
+        "sha256": "63d237c6769cb48ec5e0e473c44fbc41c358357576c1fd9eca44adabbde9dd80"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_claims.py:test_claims_layer_is_current_and_strict",
+      "source": {
+        "end": 58,
+        "line": 58,
+        "path": "tests/build/test_claims.py",
+        "sha256": "d5f5ab5c789664871ca4cccf5bc35ef85b29f9ecb96607e2eb9e2b1c5db26f16"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_claims.py:test_every_feature_is_a_claim_with_evidence",
+      "source": {
+        "end": 41,
+        "line": 41,
+        "path": "tests/build/test_claims.py",
+        "sha256": "2fa189e599987304ea618af7add366aa9f3a9332efdafe7a471dcf6a98a780ac"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_claims.py:test_every_status_chip_links_to_its_claim",
+      "source": {
+        "end": 69,
+        "line": 69,
+        "path": "tests/build/test_claims.py",
+        "sha256": "039e2f21996ae1c7e11bb50380d1a095af468311f717382d8f5f6d0241d9641a"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_claims.py:test_locations_link_into_the_source_view",
+      "source": {
+        "end": 83,
+        "line": 83,
+        "path": "tests/build/test_claims.py",
+        "sha256": "73dd2bf65897e01ac94058f2fc24500e26421b808c639568059e7ce303a13a05"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_claims.py:test_navigator_shell_has_the_regions",
+      "source": {
+        "end": 115,
+        "line": 115,
+        "path": "tests/build/test_claims.py",
+        "sha256": "98a4d46ce83f6bca1db83581e6b480cb99b7f2d0621720e461f5a1737a15b694"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_claims.py:test_releases_carry_their_records",
+      "source": {
+        "end": 104,
+        "line": 104,
+        "path": "tests/build/test_claims.py",
+        "sha256": "cc4c49b8f96d4249d3824742484c1c9623df0484e578186ce432ef48db465753"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_claims.py:test_shipped_claims_end_on_an_anchor",
+      "source": {
+        "end": 48,
+        "line": 48,
+        "path": "tests/build/test_claims.py",
+        "sha256": "db4d2bca0942c4f40ba38b49233e08ca00250df452359f91441162f254631c73"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_html_to_md.py:test_code",
+      "source": {
+        "end": 39,
+        "line": 39,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "3aa0041781f53f591089fa2aeed013200e54828311ae3f4f4f343edba87dc071"
+      },
+      "to": "module:admin/build/html_to_md.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_html_to_md.py:test_headings_and_paragraphs",
+      "source": {
+        "end": 23,
+        "line": 23,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "486981dd85f5c4f66417710e7e725ece9f8bbda01cd3799e07699c86e14b863c"
+      },
+      "to": "module:admin/build/html_to_md.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_html_to_md.py:test_links_point_at_twins",
+      "source": {
+        "end": 27,
+        "line": 27,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "78983c2f02bec003b4abb9a5ad1ede4315f3a2519259fc3c4ec50922825a2306"
+      },
+      "to": "module:admin/build/html_to_md.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_html_to_md.py:test_lists",
+      "source": {
+        "end": 31,
+        "line": 31,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "a720ffbbadd6dcf11a09e090f24368865ce8a96ec0f6fea7b55fec60701867a8"
+      },
+      "to": "module:admin/build/html_to_md.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_html_to_md.py:test_spans_and_scripts",
+      "source": {
+        "end": 43,
+        "line": 43,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "d5778ed3b538ca3c125aff3b092e20c75123cbd65b4a06ccdd379c4bdeb17345"
+      },
+      "to": "module:admin/build/html_to_md.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_html_to_md.py:test_table",
+      "source": {
+        "end": 35,
+        "line": 35,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "46b83afb509e45ba387b0b3da3ef9050fded397866e66a0b8b3198ebfc02c491"
+      },
+      "to": "module:admin/build/html_to_md.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_md_to_html.py:test_code_fence_and_blockquote",
+      "source": {
+        "end": 54,
+        "line": 54,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "97331f3206a86d4697451de32c85ae69eb2cbc5dfe18fcd1fa0c24a0c10ae5a3"
+      },
+      "to": "module:admin/build/md_to_html.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_md_to_html.py:test_headings_get_github_ids",
+      "source": {
+        "end": 25,
+        "line": 25,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "4a2dd3d9edabd7a9fcb58e985b14d138d81771e7de1ca54268fa3a28b506a5c8"
+      },
+      "to": "module:admin/build/md_to_html.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_md_to_html.py:test_html_is_escaped",
+      "source": {
+        "end": 35,
+        "line": 35,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "83d39495acdc411ec225959306a6e5ed324f3da03f162e1efc95c56fcbdf975f"
+      },
+      "to": "module:admin/build/md_to_html.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_md_to_html.py:test_inline",
+      "source": {
+        "end": 31,
+        "line": 31,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "09b576d67bfda29de59e809777dda08afaeab9138b77e3e87cba9f2d41f6b31c"
+      },
+      "to": "module:admin/build/md_to_html.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_md_to_html.py:test_link_rewriter",
+      "source": {
+        "end": 60,
+        "line": 60,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "4d0f26fac0024fa3637a9fb83aa3b2876b7f3dfc333e9527a34afb9f8e62419b"
+      },
+      "to": "module:admin/build/md_to_html.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_md_to_html.py:test_nested_and_ordered_lists",
+      "source": {
+        "end": 47,
+        "line": 47,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "8740a3ab24ad91c8f1ac5a2e8a4a1961626d09bea428cccf094c8165a431c090"
+      },
+      "to": "module:admin/build/md_to_html.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_md_to_html.py:test_real_documents_render_every_heading_and_table",
+      "source": {
+        "end": 65,
+        "line": 65,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "261ab7fca0fc6e9808707aa61e36ff557b8db5f4fe216ae39dee0f06c11b89c2"
+      },
+      "to": "module:admin/build/md_to_html.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_md_to_html.py:test_table",
+      "source": {
+        "end": 41,
+        "line": 41,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "46b83afb509e45ba387b0b3da3ef9050fded397866e66a0b8b3198ebfc02c491"
+      },
+      "to": "module:admin/build/md_to_html.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_comms_tools_parse_and_name_no_secret",
+      "source": {
+        "end": 124,
+        "line": 124,
+        "path": "tests/build/test_reader.py",
+        "sha256": "24b095c7f5b4a25af9255f35f54e533003144922808382e23e3a860f47990076"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_comms_tools_parse_and_name_no_secret",
+      "source": {
+        "end": 124,
+        "line": 124,
+        "path": "tests/build/test_reader.py",
+        "sha256": "24b095c7f5b4a25af9255f35f54e533003144922808382e23e3a860f47990076"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_contact_file_shape",
+      "source": {
+        "end": 91,
+        "line": 91,
+        "path": "tests/build/test_reader.py",
+        "sha256": "60843d602a34a611e9aa45afe804f8a86fc2cefb7501142ddacb2e61f2e65b3e"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_contact_file_shape",
+      "source": {
+        "end": 91,
+        "line": 91,
+        "path": "tests/build/test_reader.py",
+        "sha256": "60843d602a34a611e9aa45afe804f8a86fc2cefb7501142ddacb2e61f2e65b3e"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_every_page_carries_the_column",
+      "source": {
+        "end": 73,
+        "line": 73,
+        "path": "tests/build/test_reader.py",
+        "sha256": "56bca67e83a810d7bcfa072b5e3ca5e46a62ce069fdfec8b8941d328104f64de"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_every_page_carries_the_column",
+      "source": {
+        "end": 73,
+        "line": 73,
+        "path": "tests/build/test_reader.py",
+        "sha256": "56bca67e83a810d7bcfa072b5e3ca5e46a62ce069fdfec8b8941d328104f64de"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_only_the_reader_page_widens_connect_src",
+      "source": {
+        "end": 80,
+        "line": 80,
+        "path": "tests/build/test_reader.py",
+        "sha256": "0cb81a28f7132e4f7cfc91d5c23d0f534b6a9780f1dae68e4c24d28fadd3296e"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_only_the_reader_page_widens_connect_src",
+      "source": {
+        "end": 80,
+        "line": 80,
+        "path": "tests/build/test_reader.py",
+        "sha256": "0cb81a28f7132e4f7cfc91d5c23d0f534b6a9780f1dae68e4c24d28fadd3296e"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_search_index_is_fresh_and_covers_every_page",
+      "source": {
+        "end": 111,
+        "line": 111,
+        "path": "tests/build/test_reader.py",
+        "sha256": "a391e4b6b1b19de7ae195a0c95de46758fc30f498b2762d6ec6af8a4eecda8ac"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_search_index_is_fresh_and_covers_every_page",
+      "source": {
+        "end": 111,
+        "line": 111,
+        "path": "tests/build/test_reader.py",
+        "sha256": "a391e4b6b1b19de7ae195a0c95de46758fc30f498b2762d6ec6af8a4eecda8ac"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_storage_keys_are_members_of_the_allow_list",
+      "source": {
+        "end": 60,
+        "line": 60,
+        "path": "tests/build/test_reader.py",
+        "sha256": "362b88438c8f6165a0f1ddfe400134eafe425403a6a32acea538d243e3948938"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_storage_keys_are_members_of_the_allow_list",
+      "source": {
+        "end": 60,
+        "line": 60,
+        "path": "tests/build/test_reader.py",
+        "sha256": "362b88438c8f6165a0f1ddfe400134eafe425403a6a32acea538d243e3948938"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_the_key_never_goes_to_local_storage",
+      "source": {
+        "end": 68,
+        "line": 68,
+        "path": "tests/build/test_reader.py",
+        "sha256": "0328dc42e4f20eff944cdd61b6c90e34221d76be9f018cb9545d9335de42403a"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_the_key_never_goes_to_local_storage",
+      "source": {
+        "end": 68,
+        "line": 68,
+        "path": "tests/build/test_reader.py",
+        "sha256": "0328dc42e4f20eff944cdd61b6c90e34221d76be9f018cb9545d9335de42403a"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_three_files_per_component_and_the_base_contract",
+      "source": {
+        "end": 39,
+        "line": 39,
+        "path": "tests/build/test_reader.py",
+        "sha256": "deb8aad2e154c03cdfad0e360599b2e370cf0c3073b285e441a30599d30a961d"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_reader.py:test_three_files_per_component_and_the_base_contract",
+      "source": {
+        "end": 39,
+        "line": 39,
+        "path": "tests/build/test_reader.py",
+        "sha256": "deb8aad2e154c03cdfad0e360599b2e370cf0c3073b285e441a30599d30a961d"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_every_review_file_validates",
+      "source": {
+        "end": 28,
+        "line": 28,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "103ee642d4c5fe5d1b6aee0f316a22ae33886e6405f2d650931e94b2d80e675f"
+      },
+      "to": "module:review/tools/review_tree.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_every_review_file_validates",
+      "source": {
+        "end": 28,
+        "line": 28,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "103ee642d4c5fe5d1b6aee0f316a22ae33886e6405f2d650931e94b2d80e675f"
+      },
+      "to": "module:review/tools/schema.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_fixture_repository_is_present",
+      "source": {
+        "end": 82,
+        "line": 82,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "d11b8fbdb4bec3ef806bb14b36abfe8091b9f968c4afd058e52d6de1b49b5128"
+      },
+      "to": "module:review/tools/review_tree.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_fixture_repository_is_present",
+      "source": {
+        "end": 82,
+        "line": 82,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "d11b8fbdb4bec3ef806bb14b36abfe8091b9f968c4afd058e52d6de1b49b5128"
+      },
+      "to": "module:review/tools/schema.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_freshness_passes_on_the_tree",
+      "source": {
+        "end": 32,
+        "line": 32,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "0288fdb34ea0fa42460b31776a7f464d2d3878b100303f23910067196ad75d67"
+      },
+      "to": "module:review/tools/review_tree.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_freshness_passes_on_the_tree",
+      "source": {
+        "end": 32,
+        "line": 32,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "0288fdb34ea0fa42460b31776a7f464d2d3878b100303f23910067196ad75d67"
+      },
+      "to": "module:review/tools/schema.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_readme_is_current_and_deterministic",
+      "source": {
+        "end": 37,
+        "line": 37,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "66e505672ed489a480cfbf2e0a97202c0c348393e23f3cb4d8c61ce0c8bd7e13"
+      },
+      "to": "module:review/tools/review_tree.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_readme_is_current_and_deterministic",
+      "source": {
+        "end": 37,
+        "line": 37,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "66e505672ed489a480cfbf2e0a97202c0c348393e23f3cb4d8c61ce0c8bd7e13"
+      },
+      "to": "module:review/tools/schema.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_schema_validator_subset",
+      "source": {
+        "end": 72,
+        "line": 72,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "0de72086c1e03dae35bb2c3457baa1b22e73c4511d6a305d97b3d74dba577f0d"
+      },
+      "to": "module:review/tools/review_tree.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_schema_validator_subset",
+      "source": {
+        "end": 72,
+        "line": 72,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "0de72086c1e03dae35bb2c3457baa1b22e73c4511d6a305d97b3d74dba577f0d"
+      },
+      "to": "module:review/tools/schema.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_stale_provenance_fails_freshness",
+      "source": {
+        "end": 61,
+        "line": 61,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "495e2d8a3c3ee052c679dffc2993bd5c850bc80cc1fcadaefdb9c3b51355bcac"
+      },
+      "to": "module:review/tools/review_tree.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_stale_provenance_fails_freshness",
+      "source": {
+        "end": 61,
+        "line": 61,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "495e2d8a3c3ee052c679dffc2993bd5c850bc80cc1fcadaefdb9c3b51355bcac"
+      },
+      "to": "module:review/tools/schema.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_tree_hash_is_stable_and_sensitive",
+      "source": {
+        "end": 53,
+        "line": 53,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "df32355adb05ca56697814498e5aeb3369f2be08ac68c823bd7686aacc7eac8b"
+      },
+      "to": "module:review/tools/review_tree.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_tree_hash_is_stable_and_sensitive",
+      "source": {
+        "end": 53,
+        "line": 53,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "df32355adb05ca56697814498e5aeb3369f2be08ac68c823bd7686aacc7eac8b"
+      },
+      "to": "module:review/tools/schema.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_verbs_have_distinct_inverses_and_sentences",
+      "source": {
+        "end": 43,
+        "line": 43,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "7a48c764f25d6ac70b53a15d5e0b1d199df486a61a147709345a606002927427"
+      },
+      "to": "module:review/tools/review_tree.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_review_folder.py:test_verbs_have_distinct_inverses_and_sentences",
+      "source": {
+        "end": 43,
+        "line": 43,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "7a48c764f25d6ac70b53a15d5e0b1d199df486a61a147709345a606002927427"
+      },
+      "to": "module:review/tools/schema.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_default_block_is_the_default_theme",
+      "source": {
+        "end": 59,
+        "line": 59,
+        "path": "tests/build/test_themes.py",
+        "sha256": "bd8f35218fb62b11d04c2d91ee7b3ba2ddd95e662bc311ad769cdab44ce41695"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_default_block_is_the_default_theme",
+      "source": {
+        "end": 59,
+        "line": 59,
+        "path": "tests/build/test_themes.py",
+        "sha256": "bd8f35218fb62b11d04c2d91ee7b3ba2ddd95e662bc311ad769cdab44ce41695"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_every_page_loads_the_theme_before_the_stylesheet",
+      "source": {
+        "end": 92,
+        "line": 92,
+        "path": "tests/build/test_themes.py",
+        "sha256": "dd0c2e979d159f54e234e2902b8ea425d7b13b74c34fb51fe2749f00be0a587f"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_every_page_loads_the_theme_before_the_stylesheet",
+      "source": {
+        "end": 92,
+        "line": 92,
+        "path": "tests/build/test_themes.py",
+        "sha256": "dd0c2e979d159f54e234e2902b8ea425d7b13b74c34fb51fe2749f00be0a587f"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_every_theme_defines_every_token",
+      "source": {
+        "end": 64,
+        "line": 64,
+        "path": "tests/build/test_themes.py",
+        "sha256": "d939c2de6d9f8d96e5530964ba5259e52fb797fbebe92fa7c67d08bfbd12f1a1"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_every_theme_defines_every_token",
+      "source": {
+        "end": 64,
+        "line": 64,
+        "path": "tests/build/test_themes.py",
+        "sha256": "d939c2de6d9f8d96e5530964ba5259e52fb797fbebe92fa7c67d08bfbd12f1a1"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_four_themes_dark_and_light",
+      "source": {
+        "end": 46,
+        "line": 46,
+        "path": "tests/build/test_themes.py",
+        "sha256": "369be5aed2663007cfe155b464c4e1d1b55a2f211cb7792b698b085bb24b772f"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_four_themes_dark_and_light",
+      "source": {
+        "end": 46,
+        "line": 46,
+        "path": "tests/build/test_themes.py",
+        "sha256": "369be5aed2663007cfe155b464c4e1d1b55a2f211cb7792b698b085bb24b772f"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_no_colour_outside_themes_css",
+      "source": {
+        "end": 81,
+        "line": 81,
+        "path": "tests/build/test_themes.py",
+        "sha256": "dc21c2b400bd61b5b53d1b441022d5a76e31ff0730d52d44e2b6fd5e78257356"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_no_colour_outside_themes_css",
+      "source": {
+        "end": 81,
+        "line": 81,
+        "path": "tests/build/test_themes.py",
+        "sha256": "dc21c2b400bd61b5b53d1b441022d5a76e31ff0730d52d44e2b6fd5e78257356"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_picker_is_generated_from_the_data",
+      "source": {
+        "end": 105,
+        "line": 105,
+        "path": "tests/build/test_themes.py",
+        "sha256": "2992bcac91516fe61956dd5e37e503ad4c2faa4615345b6f119e8bf4527a32e4"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_picker_is_generated_from_the_data",
+      "source": {
+        "end": 105,
+        "line": 105,
+        "path": "tests/build/test_themes.py",
+        "sha256": "2992bcac91516fe61956dd5e37e503ad4c2faa4615345b6f119e8bf4527a32e4"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_storage_key_is_the_allowed_one",
+      "source": {
+        "end": 77,
+        "line": 77,
+        "path": "tests/build/test_themes.py",
+        "sha256": "56d3343fb9ebf57aab98e223abd1b777c8437a2c6f1937346ecac2891ffcd77c"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_storage_key_is_the_allowed_one",
+      "source": {
+        "end": 77,
+        "line": 77,
+        "path": "tests/build/test_themes.py",
+        "sha256": "56d3343fb9ebf57aab98e223abd1b777c8437a2c6f1937346ecac2891ffcd77c"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_theme_js_follows_the_data",
+      "source": {
+        "end": 70,
+        "line": 70,
+        "path": "tests/build/test_themes.py",
+        "sha256": "9598cf2d30333a80d545ddfed0b48c3cdea19bcaea7805d38ad74c53481e79a7"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_themes.py:test_theme_js_follows_the_data",
+      "source": {
+        "end": 70,
+        "line": 70,
+        "path": "tests/build/test_themes.py",
+        "sha256": "9598cf2d30333a80d545ddfed0b48c3cdea19bcaea7805d38ad74c53481e79a7"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_twins_exist.py:test_every_page_has_a_twin",
+      "source": {
+        "end": 26,
+        "line": 26,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "9d1e7e9736d870f49a6a69510262fe7ad38c6d5c99b1e9375eb4c81ef2a0f002"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_twins_exist.py:test_every_page_has_a_twin",
+      "source": {
+        "end": 26,
+        "line": 26,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "9d1e7e9736d870f49a6a69510262fe7ad38c6d5c99b1e9375eb4c81ef2a0f002"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_twins_exist.py:test_index_md_is_the_homepage_twin",
+      "source": {
+        "end": 58,
+        "line": 58,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "733b8669a2d362466a854f20354dead47de5566ee4ed7be0551420e228a7c1d5"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_twins_exist.py:test_index_md_is_the_homepage_twin",
+      "source": {
+        "end": 58,
+        "line": 58,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "733b8669a2d362466a854f20354dead47de5566ee4ed7be0551420e228a7c1d5"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_twins_exist.py:test_internal_links_in_twins_point_at_markdown",
+      "source": {
+        "end": 45,
+        "line": 45,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "77559bae95c124107349e5856ae80601efa0cc94fc2047d262828a01ebfc0a55"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_twins_exist.py:test_internal_links_in_twins_point_at_markdown",
+      "source": {
+        "end": 45,
+        "line": 45,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "77559bae95c124107349e5856ae80601efa0cc94fc2047d262828a01ebfc0a55"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_twins_exist.py:test_twin_names_source_and_version",
+      "source": {
+        "end": 34,
+        "line": 34,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "0e2070738b469747fef72be33038a778728bbc64c29b1a9bf26f603f7de727e2"
+      },
+      "to": "module:admin/build/chrome.py",
+      "verb": "tests"
+    },
+    {
+      "from": "test:tests/build/test_twins_exist.py:test_twin_names_source_and_version",
+      "source": {
+        "end": 34,
+        "line": 34,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "0e2070738b469747fef72be33038a778728bbc64c29b1a9bf26f603f7de727e2"
+      },
+      "to": "module:admin/build/pages.py",
+      "verb": "tests"
+    }
+  ],
+  "layer": "tests",
+  "provenance": {
+    "commit": "8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15",
+    "inputs": {
+      ".github/workflows/deploy-pages.yml": "049991bbdd5f2392a57743549312512869a6753e213d996cd4377afc0ad5807e",
+      "404.html": "9b46abeb57d2e297f0495934570dd8d17e0aa0e68e48954fa2f3219d4d3ae387",
+      "admin/build/assemble_site.py": "560c312956e540d3e48ff13df69cc1173df5ffbed59f0cd1a7b1a1711e7be31f",
+      "admin/build/chrome.py": "ae75a0a6a4de89374a66597a1755797b28d45fa158c41cf50b512ba3554ee8b8",
+      "admin/build/gate.py": "33a4b24abee7b6bf827ed2ff8acc3e14534ad49dbc708c5616a8af6e784bfd4c",
+      "admin/build/gen_chrome.py": "702aec56f2c9d2e87b138e944e07d6c66f60b459519c545e913ef75bfa9189fe",
+      "admin/build/gen_docs.py": "698761ae15847e90ccbb88367274f78b408fa1ce549b30d9c995b494a1126984",
+      "admin/build/gen_features.py": "63bc6861ed19d7b228822d7b1dd7f9225a1c7f113c5b68fcc0839f73649312f0",
+      "admin/build/gen_llms.py": "9964a8d3d69c884b142ec26e5de2d4fad1dab137ae98609159cd30e7f416d930",
+      "admin/build/gen_search.py": "c95b637874318ad5a0839625693482f95195299b393261dceb04564408cbf050",
+      "admin/build/gen_twins.py": "970b3654f1e836ffd9a55f7446e8a001bb5f9e8502859041e135eff34067b450",
+      "admin/build/gen_versions.py": "5636c992e1203d293e429799c8137badd74425e8bbdfd7e0cefc39cc4c33a311",
+      "admin/build/html_to_md.py": "5ea5f75c049c8b75981b62a598939cb478f92b2ee333244e220824b78c56ee2c",
+      "admin/build/md_to_html.py": "97841987ebdf3aec4b7cf19fc9b0ee8a66139f34a6753e361ba139dd969e1a33",
+      "admin/build/pages.py": "cf7005fd5ace37c3ead23a6c8d00b5bc3bc9718a16a686e5c70a36bbca1a9591",
+      "admin/build/release.py": "9ceae016e3c901ada9ce4cd8572df4b84754dee44a40a86f5d1efb48e6d79a88",
+      "admin/build/tag_release.py": "158ce432c0222b9d430c01c87a3f83e63d38a7f24f435d859190bf2bc6512cb8",
+      "admin/build/validate.js": "68435b5a429a25a44843f9351cbc93cbb307ef629c67b08f952f9c92d248b12e",
+      "admin/build/verify_live.py": "6077890fe9995fb22f9d1cf94c8b3a28a30f840fb1309fd95ea937d53d85b6a8",
+      "admin/comms.html": "31899728bebfefcbe2d01ea7b1434036e234fd0aa6a52674c63cd4395c317853",
+      "admin/index.html": "f19fc59f0ef9e500c1bdbfc217234ceeafff2094d743f3a051f2aa2fb70bbabc",
+      "admin/versions.html": "9795651d661843c6b423ee8db9d6bf0ac33985df02785cd4b282b7b81dfbb2f1",
+      "app/config/storage-keys.js": "892c307ba6cd556386db86acfeeade7038973ee3f19434a84f3b20241577fb3d",
+      "assets/mockups.css": "878d38eb32e9374482d3adbe376f4beef6cb221b4c1eff30f3a184f390e8078a",
+      "assets/nav.js": "33e66df93332e4f1a45b14512657b0534a9d202f5538ecfcf2dc86e56ac20f6b",
+      "assets/site.css": "2ae97f6b17fee2528f5bcaf714f98d2284c60340f5bd7c4a34960168316559d3",
+      "assets/theme.js": "ef43359d66faf716e0f02d066de0333f7c0c65f6cc918d5f5a4a012767cfa640",
+      "assets/themes.css": "bd626138ed6e4b759b93ac5bc1951e071989570fcc3e21201f38a9fed608e18b",
+      "components/proto-app/proto-app.css": "aceebf6bc7fc4b2901397bbdbf4721879f26afb0ae0e0c9ffb27e36b235583f6",
+      "components/proto-app/proto-app.html": "054ada9d830fb37b7c02b33d187382f7686bc7122de7c4f86318d8778249c11a",
+      "components/proto-app/proto-app.js": "c6d2e3fb31872bd11f06ca52edee74f14318e0a6625b30b21d293a7665e71e60",
+      "components/proto-base/proto-base.css": "34ce374bce5103460fb2e6bef97e622de5d06671f518ab25ad0bbc7fe75da03e",
+      "components/proto-base/proto-base.html": "23e7a5e9f5742249ccb7ee4ea4e77d4c78b6f5a581a94ee09b22afb39684e2de",
+      "components/proto-base/proto-base.js": "f003b63dba9be1648a1b09fae1557fe99303c0f6b2f77a765aac3951e1e0d0f6",
+      "components/proto-column/proto-column.css": "68119e7d6cc50205084fa6149eb3cb042427390d43d76a4163b81986aa4ae7ec",
+      "components/proto-column/proto-column.html": "ee27758a7187b6c909db305af31eb9f9d9918ac8b00d0b03df8b4cccbfac09c0",
+      "components/proto-column/proto-column.js": "d5cf4ba9814460b9f9014a0051f3c9f95847050467d972be86b7c61cca93c0d8",
+      "components/reader-chat/reader-chat.css": "f19ee932f80a87e320df4bc395fd1be61c2321dca00ea8270d56210336d3b57b",
+      "components/reader-chat/reader-chat.html": "6aa521b732ea119e8790e3c636b5df1fbb316afe0dcb75c0443f834b8eafeb80",
+      "components/reader-chat/reader-chat.js": "23199872e7e675829eedd6fc66b7463288efa2aa5219d5d74b906184544c59e8",
+      "components/reader-log/reader-log.css": "f79481cdec253fb9451014d1dc6f3297dc5fc07d9e36af5ecea30ff20f73a140",
+      "components/reader-log/reader-log.html": "9f5b6680c591815d55136d90c1171c2d20d7dbf3db35fce9b50f1e8c17460978",
+      "components/reader-log/reader-log.js": "63074bfdcb23b0f0ffdcbb40ecb5fa0d9c6bdb2966584178eb517acee8467647",
+      "components/reader-panel/reader-panel.css": "b6ed37cd79a2ba8524962471b23e85f9c27a744dbd9419bcd1fa9852a9f08a73",
+      "components/reader-panel/reader-panel.html": "1166e5b2156d639fc95086ad6e9d27334395955ffc7b9ae19bdc7e172b1ccf86",
+      "components/reader-panel/reader-panel.js": "fcdbc42218c7714e08e1aee27025d1f96478b1e12c59ab2c39cf20ac68ae71e3",
+      "components/sg-base/sg-base.css": "99330398051ff7294e8e48ed01ec1ef8d58c997c95454232eba1288dd03829b7",
+      "components/sg-base/sg-base.html": "6c8ec644d400f539e2b85f7002918d5a0b63278a8a229fdf8e153133a3be20bc",
+      "components/sg-base/sg-base.js": "efaef01d9ae7d6a79f5c174d6580e084a0aa78e04bd9582ea8a1b45da841e7f2",
+      "docs/design/brief-corrections.html": "316500c5ebb103ca8ffe7b9d9c21fa552c79cc5121c8336dccf2e5e9c68e9e26",
+      "docs/design/index.html": "2cf037d1d63f61e282ab63c65a040b4318b06ee01659325c2665d87a7bfa1376",
+      "docs/design/riskmandate-aws-cognito-architecture.html": "6fa54ac45aab13bf3359018d9e9ece2f772e6af3bff708805b5fef507746b84f",
+      "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html": "3f97bf0bc6c24061f927e28c2401b660b2c8eb01b61f7c3a4c61760701a6c282",
+      "docs/design/riskmandate-user-onboarding-account-experience.html": "61504fe88554a3e8921ed4b186297325c85bfb3e8e2c3c5392f3a46e985666b6",
+      "docs/design/riskmandate-workspace-architecture-briefing.html": "d5728432eef6a8c16c58de17b042710b1b8356f8fc215ceae57bfa6f1ba7d7f6",
+      "docs/design/secrets-sgit-ai__mvp-build-brief.html": "a34841e7e37888cedebb4896a8eb25e7868dd859d06aa20e7da6fd351e5a8f20",
+      "docs/index.html": "778611a2ce74ea873a40f5a55264992f7600b4a38f9b89e63e6e87fa3bc5035c",
+      "docs/ops/bootstrap.html": "efde351507745e68a0568234d578d278be372c51a86222bcced7066fc6be7c02",
+      "docs/ops/branch-protection.html": "c43d7d4e8ed99998c66ffc96d54b873ab6286403600ea89140ac648f2c95825b",
+      "docs/ops/comms.html": "c0a83e62cd1bc171caba85a1c011dc060f88774f965fa16b137b057eb3fca3b1",
+      "docs/ops/dns.html": "1b223544c4b7b80a50c7793040de176f462918c697794b06eba4cfe011f9c955",
+      "docs/ops/index.html": "61bb55eb37ada6f64d1116b444a79057c684a3c32f19f504f10ebf6cd0933bf8",
+      "docs/ops/needs.html": "5c4d7e3714970da30e8b4969417f9118a784af7fbf3634f9e43a79267e3156c2",
+      "docs/ops/release.html": "3b243ac04acacd5c84dc964da41a4297bc69e72c323422e99c525292b68972fe",
+      "docs/reality.html": "ec010396ef3785f5a79fe9d1a3533e2d8c7b0aa64b29beca0c2121ee99f80e90",
+      "environments/index.html": "22e620517cbd6fc6eebca8b4231b17e3217bee9efce68243ff29644e840c721e",
+      "how-it-works/index.html": "bb4016981425af891907082079de6787dbdf301b62f8597891d3b0ef30ae41c4",
+      "index.html": "4bb0c8e1595a5bb48d9bebefddb860c97ffc35d94a64cf7d2f09630061c33399",
+      "infra/bootstrap/bootstrap.sh": "257713fea062998a8b9fc440af2a19cb376e1f1d12859cea851bc13c41840863",
+      "infra/rules/storage.rules": "6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250",
+      "keyring/index.html": "724c3255eddf40b74ff3fb5d1b3d029337742c38fc13bc57cd4fc1628938507e",
+      "mockups/index.html": "0d68a4e5b29874f0e27eedca8fd97ac8c7e02c416f8610c56db9badb4d820842",
+      "reader/index.html": "a3b15e5542e7ff26ec51ffd90e722dabacd10cd7ffad4719ea1d00f1942d460d",
+      "review/index.html": "9a5270ccad63e16c03ffa70e91fb4d287c90ee82acffa4be2cc84ce064918905",
+      "review/tools/brief.py": "d4ccbd69c47d946b98285fa2b1329a432a097d922eeefc3014264c1dcbd7d0ba",
+      "review/tools/claims.py": "1aa4fa4be71b0ff60a115ec43371484f484f43a259ad33aa5e0a48ba41c5e425",
+      "review/tools/derive.py": "30c9a92953bf535b18f1e2038c96c872481d65def1efe15c815fc04b00baa818",
+      "review/tools/freshness.py": "e58e6faf67bb3db5b76f2c83d7b51828745601a0d8e780b03f6846edefa0b56a",
+      "review/tools/readme.py": "249ea8066847cabd0ce621a2b1d08431662ae64c4f38d7127083888d11cd6674",
+      "review/tools/review_tree.py": "4c7ca887f38a5d5066d5ac29a02932ba02dfc3ca0ca422029c1b8f4416c56267",
+      "review/tools/schema.py": "2c9ddc0179837e099ec44bbef373965808089f907d2ed781b18519e717974153",
+      "review/tools/sections.py": "5e44f868dfc1a3f345030e6ec8b5cb00318e5c950f7c4f0c807476efd67d8471",
+      "review/tools/validate_review.py": "0a5963cef9b7de5179bf2fcbe21903de190b8eaf58da4d70150165c62818c3df",
+      "review/ui/components/review-base/review-base.css": "5bddef64490d6cf379d1131f5685e98982dcb092b6ddff4114ee3e1497f27bf2",
+      "review/ui/components/review-base/review-base.html": "c2a003b1a7a3328bf43563a7ca1618ad3fd53939308d07693bfa4ac31f58c1af",
+      "review/ui/components/review-base/review-base.js": "de0f68e0903a571a7fff670732e4d8226c94ad196541a403c5fc1433ca1e9cfa",
+      "review/ui/components/review-brief/review-brief.css": "ce2e624a4dfb3c84aa33f175263f1e147d024dfc6cd26f9a1ce76f9c7cc8f56a",
+      "review/ui/components/review-brief/review-brief.html": "4ee2c0d35d2740a0a11e5bac0e22ea694e794ca18ae3a39fe85ad334dc30374e",
+      "review/ui/components/review-brief/review-brief.js": "9cba4a3d983fe1035e8352b02467edde02f03b9bfd012c3f66fc0a10efb0da44",
+      "review/ui/components/review-code/review-code.css": "b399a290f21ab53332010b78a2ba05a3004b9bc202da435143d35c950490d0a1",
+      "review/ui/components/review-code/review-code.html": "c7e330884d4288b8e90df28ff7c318b042a4c89bdda35c238b47331beec11628",
+      "review/ui/components/review-code/review-code.js": "01d735468b4962f0c3445dbb7daa27b930c5c1f5c16ba4c651bf183113d3942e",
+      "review/ui/components/review-crumb/review-crumb.css": "3e92016f640c4a792d08a44653c358d6f1ac33e786458c1d2c751575ca1e9e51",
+      "review/ui/components/review-crumb/review-crumb.html": "c6c292aabfd8a2f48bd3a87cb9a06527a02c5aacb62f3b498d5f8e51b2949eb2",
+      "review/ui/components/review-crumb/review-crumb.js": "79e68f7948c999a505f696f846dac50c14eb36f159ba54329812cae741b1d7ae",
+      "review/ui/components/review-graph/review-graph.css": "1ad2d0ef823b465b2f2bf7428cd453db7099cb45fa75ece260af63c04cb838e0",
+      "review/ui/components/review-graph/review-graph.html": "e5436b0cceb8ced0e49c34d88dd374cd050fd9d8b078427c47c1369087229078",
+      "review/ui/components/review-graph/review-graph.js": "c356b762cb486463cda134df66c5c3a8d1b473cc2384e57fc0506330110d527b",
+      "review/ui/components/review-ladder/review-ladder.css": "ce6ff9196be9ff7042e28705a2cd0ea4fe6c37cec8bee1c37e5e6fce5523fcc3",
+      "review/ui/components/review-ladder/review-ladder.html": "b1a6fcf66e0a13dedadf6e3b5910005c40e6071b3f1b4df99434d6def2c87758",
+      "review/ui/components/review-ladder/review-ladder.js": "30c9281b26c095191766eb4d5c44ee71d0bef5b144293eab6f9778785c7b3284",
+      "review/ui/components/review-node/review-node.css": "07340dde30e78bb8c83a519266eb0ca8c07ebed9ac1db1581a8176dd4f179dee",
+      "review/ui/components/review-node/review-node.html": "efb7d34312e2bc09b3786f2efcb2661356890644cd62f5bfd21bc99107b2b410",
+      "review/ui/components/review-node/review-node.js": "4700a35973f4f9a5c5c920e1cd563d2f43517af3ebb6055939cc86feade6f037",
+      "review/ui/components/review-source/review-source.css": "851875cc1868a34a7d0c0a796b870ab0575bf0f14c773a875a5c4161febfd92f",
+      "review/ui/components/review-source/review-source.html": "d5c3fe5a7f876138e0884f9425cef7a88904c0f3ac9d619599bad5a4300410f2",
+      "review/ui/components/review-source/review-source.js": "8892b9aaae391d949883895e761da830f766634e30ac938eb46fb6b300902610",
+      "review/ui/components/review-tree/review-tree.css": "e425db73e35a99bb648cd75e175b4e0d3cc1bbd0d383b826a2c54afea12ffb33",
+      "review/ui/components/review-tree/review-tree.html": "97752923276bf4f22f87b9430a8b2a3a39e74eb229fbfd2d13d39f4919f05037",
+      "review/ui/components/review-tree/review-tree.js": "f2f55f441885d78c4aeb8c2ba6b73c606956450170a30b9c9175e41619dabbfb",
+      "review/ui/index.html": "ca48b3b287ef8006ebf76738c6c7641e8cf316a95c6974ab65b2184c83423956",
+      "review/ui/shell.css": "1486453f2f17c9531e89a1420ac1ed1b1879d91e650d5a149634a6a6686fb41d",
+      "review/ui/shell.js": "919b72bfb421cf2e1bde8925650d837c5662ba70ca2c56d74edb0d569d0a5493",
+      "review/ui/tokens.css": "403feedc08fa2340b995f733cc8b1b475e445c1599a55953e206ec45a7ef07d7",
+      "security/index.html": "d8802c8b39aa07179ad3a3a45f944cd0ff7b99bfecdf2af19edbcd41b47e3215",
+      "sharing/index.html": "7a375ce4fb6959b526a4f26b83a4a2c6ff15001f3aadd11ab3305d01ff4834fd",
+      "shipped/index.html": "92e5c44283e4e4477f5011eb95a6b22500b6854f8536b8a8ea6e5148fb3e8735",
+      "team/index.html": "4d2954f25a2837ceefcf29aa08a1aee8e7129143130d5f0fd82682ff39da4994",
+      "tests/build/test_chrome_in_every_page.py": "9dae42da02b45fc8da10fc8c075820beab0efd97dc9397877c2ade472404d7ee",
+      "tests/build/test_claims.py": "ab7c3e9f3682f5206b2c913b8b77acef7fe95cc342ede6a60faa242998d3a9bc",
+      "tests/build/test_derive.py": "32932d167bdca964cb3c3f42c4afeeb7e6dc1b132484a05f94fd0e4b2feb35eb",
+      "tests/build/test_features_schema.py": "668110eb00c829c850957feb4b74e088a0db753c484caf28da0efa401baa6cf6",
+      "tests/build/test_generators_check.py": "cf09bbf7e108d772126babca52cfdd82161ec03cb66252f5fd0b3372d0b48402",
+      "tests/build/test_html_to_md.py": "5d1b237195888cd9b7d1cac31279b16c02fe4f29fa706fabf41cc39e71e25705",
+      "tests/build/test_md_to_html.py": "10cb4bbcf8c39f5f66218c573b8ecdf16bcf34725e8b7b8366d1ce81b5dc7691",
+      "tests/build/test_mockups.py": "49832c28075c1e3ff9e33c4e10aba5b47811c93286fd858deec0fdaf9e6bfefd",
+      "tests/build/test_reader.py": "02c9dc40dfe5e8d836192a85b804b1f5a4ff4c212ea8cb7f152c54742cb28a43",
+      "tests/build/test_review_folder.py": "c8be271686036652974e8db1e228b0d692e4a3c9a53aade3c503aac768d68be0",
+      "tests/build/test_review_ui.py": "8845f05ce8e468301dc038633d565b0402fc424fb931521bf44064c786bec1ff",
+      "tests/build/test_themes.py": "7875597a323c0b2d3dbe2d7eae44a72caea9605798c82669bf40762f2482f8f2",
+      "tests/build/test_twins_exist.py": "54b54b07ddbde52620b4651598868ebdf0a05a6b0040e9c2c78e94d269f62c9d",
+      "tests/unit/validate.test.js": "23ccc04d81e305b76369190ecca472f2a9edce9d817a0abde5bab0399f38d42d",
+      "vendor/acorn.mjs": "b4c8c70200e72bae33cf1085e0ecb1e792c1b6924ed50cab817caf14f51bb249",
+      "vendor/sg-tokens.css": "14509c73b43ecc79dd6080b6530a0860a9c22a06f0c160d7e9862f1bb2614171"
+    },
+    "tool": "review/tools/derive.py",
+    "tool_version": "0.1",
+    "tree_sha256": "a9aa74b74cfb4b65f96dfc16d3249621b76c5c83a5616ee1499d2fafa5f1279d"
+  },
+  "tests": [
+    {
+      "id": "test:tests/build/test_chrome_in_every_page.py:test_canonical_matches_the_page_location",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_canonical_matches_the_page_location",
+      "path": "tests/build/test_chrome_in_every_page.py",
+      "source": {
+        "end": 57,
+        "line": 57,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "ab218e6cc6c006695da0d82ad8efa182e7a3d29c0ab529df6baf7274ac0083e6"
+      }
+    },
+    {
+      "id": "test:tests/build/test_chrome_in_every_page.py:test_every_badge_equals_version_txt",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_every_badge_equals_version_txt",
+      "path": "tests/build/test_chrome_in_every_page.py",
+      "source": {
+        "end": 50,
+        "line": 50,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "e0d0f53891a7b6ad482ef7ca55d79dd840e76212de756f6c8348a742d1758ee0"
+      }
+    },
+    {
+      "id": "test:tests/build/test_chrome_in_every_page.py:test_every_page_has_the_chrome",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_every_page_has_the_chrome",
+      "path": "tests/build/test_chrome_in_every_page.py",
+      "source": {
+        "end": 32,
+        "line": 32,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "2f2e248b2b7e2d678fcc7bf1fddf40501c71cd1fe8b2f9f047997eb09e48473e"
+      }
+    },
+    {
+      "id": "test:tests/build/test_chrome_in_every_page.py:test_no_inline_script_or_style",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_no_inline_script_or_style",
+      "path": "tests/build/test_chrome_in_every_page.py",
+      "source": {
+        "end": 65,
+        "line": 65,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "974aa2e8d7027cb6f2364a28184533d42806e3b748b8d1ce856af1836c1bea54"
+      }
+    },
+    {
+      "id": "test:tests/build/test_chrome_in_every_page.py:test_there_are_pages",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_there_are_pages",
+      "path": "tests/build/test_chrome_in_every_page.py",
+      "source": {
+        "end": 28,
+        "line": 28,
+        "path": "tests/build/test_chrome_in_every_page.py",
+        "sha256": "a0462bf12ff895d7afe2117b81b82e1911ba95aa01888ade0e62f58d92403fed"
+      }
+    },
+    {
+      "id": "test:tests/build/test_claims.py:test_brief_sections_match_the_markdown",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_brief_sections_match_the_markdown",
+      "path": "tests/build/test_claims.py",
+      "source": {
+        "end": 90,
+        "line": 90,
+        "path": "tests/build/test_claims.py",
+        "sha256": "63d237c6769cb48ec5e0e473c44fbc41c358357576c1fd9eca44adabbde9dd80"
+      }
+    },
+    {
+      "id": "test:tests/build/test_claims.py:test_claims_layer_is_current_and_strict",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_claims_layer_is_current_and_strict",
+      "path": "tests/build/test_claims.py",
+      "source": {
+        "end": 58,
+        "line": 58,
+        "path": "tests/build/test_claims.py",
+        "sha256": "d5f5ab5c789664871ca4cccf5bc35ef85b29f9ecb96607e2eb9e2b1c5db26f16"
+      }
+    },
+    {
+      "id": "test:tests/build/test_claims.py:test_every_feature_is_a_claim_with_evidence",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_every_feature_is_a_claim_with_evidence",
+      "path": "tests/build/test_claims.py",
+      "source": {
+        "end": 41,
+        "line": 41,
+        "path": "tests/build/test_claims.py",
+        "sha256": "2fa189e599987304ea618af7add366aa9f3a9332efdafe7a471dcf6a98a780ac"
+      }
+    },
+    {
+      "id": "test:tests/build/test_claims.py:test_every_status_chip_links_to_its_claim",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_every_status_chip_links_to_its_claim",
+      "path": "tests/build/test_claims.py",
+      "source": {
+        "end": 69,
+        "line": 69,
+        "path": "tests/build/test_claims.py",
+        "sha256": "039e2f21996ae1c7e11bb50380d1a095af468311f717382d8f5f6d0241d9641a"
+      }
+    },
+    {
+      "id": "test:tests/build/test_claims.py:test_locations_link_into_the_source_view",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_locations_link_into_the_source_view",
+      "path": "tests/build/test_claims.py",
+      "source": {
+        "end": 83,
+        "line": 83,
+        "path": "tests/build/test_claims.py",
+        "sha256": "73dd2bf65897e01ac94058f2fc24500e26421b808c639568059e7ce303a13a05"
+      }
+    },
+    {
+      "id": "test:tests/build/test_claims.py:test_navigator_shell_has_the_regions",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_navigator_shell_has_the_regions",
+      "path": "tests/build/test_claims.py",
+      "source": {
+        "end": 115,
+        "line": 115,
+        "path": "tests/build/test_claims.py",
+        "sha256": "98a4d46ce83f6bca1db83581e6b480cb99b7f2d0621720e461f5a1737a15b694"
+      }
+    },
+    {
+      "id": "test:tests/build/test_claims.py:test_releases_carry_their_records",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_releases_carry_their_records",
+      "path": "tests/build/test_claims.py",
+      "source": {
+        "end": 104,
+        "line": 104,
+        "path": "tests/build/test_claims.py",
+        "sha256": "cc4c49b8f96d4249d3824742484c1c9623df0484e578186ce432ef48db465753"
+      }
+    },
+    {
+      "id": "test:tests/build/test_claims.py:test_shipped_claims_end_on_an_anchor",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_shipped_claims_end_on_an_anchor",
+      "path": "tests/build/test_claims.py",
+      "source": {
+        "end": 48,
+        "line": 48,
+        "path": "tests/build/test_claims.py",
+        "sha256": "db4d2bca0942c4f40ba38b49233e08ca00250df452359f91441162f254631c73"
+      }
+    },
+    {
+      "id": "test:tests/build/test_derive.py:test_every_edge_resolves_and_every_source_is_hashed",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_every_edge_resolves_and_every_source_is_hashed",
+      "path": "tests/build/test_derive.py",
+      "source": {
+        "end": 76,
+        "line": 76,
+        "path": "tests/build/test_derive.py",
+        "sha256": "bf762d23a8564b8e9f74fc0519fcfab59a1474c4145cb4e3cf827bc80e016869"
+      }
+    },
+    {
+      "id": "test:tests/build/test_derive.py:test_fixture_counts_and_index",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_fixture_counts_and_index",
+      "path": "tests/build/test_derive.py",
+      "source": {
+        "end": 40,
+        "line": 40,
+        "path": "tests/build/test_derive.py",
+        "sha256": "5fbb9fc516e4935e0c0f5147e1701ce9c01cb982be96f2194052cf47533da7d4"
+      }
+    },
+    {
+      "id": "test:tests/build/test_derive.py:test_javascript_element_class_and_handler",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_javascript_element_class_and_handler",
+      "path": "tests/build/test_derive.py",
+      "source": {
+        "end": 62,
+        "line": 62,
+        "path": "tests/build/test_derive.py",
+        "sha256": "27c881b39aa5c6f6d136fab595ba576a672cd78a7e2fe19c5bb849b9686de875"
+      }
+    },
+    {
+      "id": "test:tests/build/test_derive.py:test_python_classes_methods_and_the_base_call",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_python_classes_methods_and_the_base_call",
+      "path": "tests/build/test_derive.py",
+      "source": {
+        "end": 52,
+        "line": 52,
+        "path": "tests/build/test_derive.py",
+        "sha256": "55bb95b62e3ca053de91c1e33497c4e970a8068d852029c0e07468eed6535cb5"
+      }
+    },
+    {
+      "id": "test:tests/build/test_derive.py:test_real_tree_is_derived_and_current",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_real_tree_is_derived_and_current",
+      "path": "tests/build/test_derive.py",
+      "source": {
+        "end": 89,
+        "line": 89,
+        "path": "tests/build/test_derive.py",
+        "sha256": "322ef3697624fbd0929faec7f62397de8054fcc2b5da576e403dc8bebc8355be"
+      }
+    },
+    {
+      "id": "test:tests/build/test_derive.py:test_tests_reach_the_module_they_import",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_tests_reach_the_module_they_import",
+      "path": "tests/build/test_derive.py",
+      "source": {
+        "end": 71,
+        "line": 71,
+        "path": "tests/build/test_derive.py",
+        "sha256": "00cb45c0b067e9920735ed76f3ebdbd77a126759116433d474105a1538f1f8c7"
+      }
+    },
+    {
+      "id": "test:tests/build/test_derive.py:test_the_javascript_parser_is_vendored_and_hashed",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_the_javascript_parser_is_vendored_and_hashed",
+      "path": "tests/build/test_derive.py",
+      "source": {
+        "end": 99,
+        "line": 99,
+        "path": "tests/build/test_derive.py",
+        "sha256": "9a12b92a3c5162be8bfbdce40dc62e84b53c505f4896e2b40c28916815947035"
+      }
+    },
+    {
+      "id": "test:tests/build/test_features_schema.py:test_every_status_has_a_meaning",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_every_status_has_a_meaning",
+      "path": "tests/build/test_features_schema.py",
+      "source": {
+        "end": 41,
+        "line": 41,
+        "path": "tests/build/test_features_schema.py",
+        "sha256": "24c3508d507696e042b5ad19ed3ea9bb422ecb705f31f666de1ec44963e1d0b9"
+      }
+    },
+    {
+      "id": "test:tests/build/test_features_schema.py:test_homepage_table_has_every_feature",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_homepage_table_has_every_feature",
+      "path": "tests/build/test_features_schema.py",
+      "source": {
+        "end": 49,
+        "line": 49,
+        "path": "tests/build/test_features_schema.py",
+        "sha256": "59b7a7e6ca56ee92bb7ffab45718e31d1258b10264cdd0a96fd122815c07ebb1"
+      }
+    },
+    {
+      "id": "test:tests/build/test_features_schema.py:test_ids_are_unique_and_dotted_by_area",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_ids_are_unique_and_dotted_by_area",
+      "path": "tests/build/test_features_schema.py",
+      "source": {
+        "end": 26,
+        "line": 26,
+        "path": "tests/build/test_features_schema.py",
+        "sha256": "515654f0d393567f0fd44a75bbdc29b6a018a4b93ecafae2d49c089229701b5e"
+      }
+    },
+    {
+      "id": "test:tests/build/test_features_schema.py:test_reality_lists_every_feature",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_reality_lists_every_feature",
+      "path": "tests/build/test_features_schema.py",
+      "source": {
+        "end": 55,
+        "line": 55,
+        "path": "tests/build/test_features_schema.py",
+        "sha256": "a2543c792edad0b7984e84cc03a67bf7b8baab8084db92a6746ce2d63fd255b0"
+      }
+    },
+    {
+      "id": "test:tests/build/test_features_schema.py:test_rules_hash_matches_the_file",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_rules_hash_matches_the_file",
+      "path": "tests/build/test_features_schema.py",
+      "source": {
+        "end": 44,
+        "line": 44,
+        "path": "tests/build/test_features_schema.py",
+        "sha256": "908205cd40bee592278e174744fee00bed8f28ae789aecce99e9cba54f367b7f"
+      }
+    },
+    {
+      "id": "test:tests/build/test_features_schema.py:test_shipped_rows_carry_the_current_or_an_earlier_version",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_shipped_rows_carry_the_current_or_an_earlier_version",
+      "path": "tests/build/test_features_schema.py",
+      "source": {
+        "end": 63,
+        "line": 63,
+        "path": "tests/build/test_features_schema.py",
+        "sha256": "da48d786222eeb7ecaaf6e91ecb136aff97e6fe7d3a015a4c77f127a97b4e24a"
+      }
+    },
+    {
+      "id": "test:tests/build/test_features_schema.py:test_statuses_and_since",
+      "imports": [
+        "hashlib",
+        "json",
+        "re",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_statuses_and_since",
+      "path": "tests/build/test_features_schema.py",
+      "source": {
+        "end": 32,
+        "line": 32,
+        "path": "tests/build/test_features_schema.py",
+        "sha256": "ae6aba7693a3f79489931a65c081f7893ef5bd6b334599b9b48b33dc41bfc183"
+      }
+    },
+    {
+      "id": "test:tests/build/test_generators_check.py:test_every_generator_is_current",
+      "imports": [
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_every_generator_is_current",
+      "path": "tests/build/test_generators_check.py",
+      "source": {
+        "end": 23,
+        "line": 23,
+        "path": "tests/build/test_generators_check.py",
+        "sha256": "f303081fa4825e891b6521399744ee729a709ff3e152603327d4cfd02cf8e0c0"
+      }
+    },
+    {
+      "id": "test:tests/build/test_generators_check.py:test_generators_are_idempotent",
+      "imports": [
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_generators_are_idempotent",
+      "path": "tests/build/test_generators_check.py",
+      "source": {
+        "end": 30,
+        "line": 30,
+        "path": "tests/build/test_generators_check.py",
+        "sha256": "1767a38a1d1f4514fa5806e563917957ce7498fddcaeb01ad6c466f028d1b813"
+      }
+    },
+    {
+      "id": "test:tests/build/test_generators_check.py:test_validate_js_passes_on_the_tree",
+      "imports": [
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_validate_js_passes_on_the_tree",
+      "path": "tests/build/test_generators_check.py",
+      "source": {
+        "end": 39,
+        "line": 39,
+        "path": "tests/build/test_generators_check.py",
+        "sha256": "23716586704275f01878f55ab1975f7fb6015c4b7f31065076330919f699fb13"
+      }
+    },
+    {
+      "id": "test:tests/build/test_html_to_md.py:test_code",
+      "imports": [
+        "sys",
+        "pathlib",
+        "unittest",
+        "html_to_md"
+      ],
+      "kind": "unittest",
+      "name": "test_code",
+      "path": "tests/build/test_html_to_md.py",
+      "source": {
+        "end": 39,
+        "line": 39,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "3aa0041781f53f591089fa2aeed013200e54828311ae3f4f4f343edba87dc071"
+      }
+    },
+    {
+      "id": "test:tests/build/test_html_to_md.py:test_headings_and_paragraphs",
+      "imports": [
+        "sys",
+        "pathlib",
+        "unittest",
+        "html_to_md"
+      ],
+      "kind": "unittest",
+      "name": "test_headings_and_paragraphs",
+      "path": "tests/build/test_html_to_md.py",
+      "source": {
+        "end": 23,
+        "line": 23,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "486981dd85f5c4f66417710e7e725ece9f8bbda01cd3799e07699c86e14b863c"
+      }
+    },
+    {
+      "id": "test:tests/build/test_html_to_md.py:test_links_point_at_twins",
+      "imports": [
+        "sys",
+        "pathlib",
+        "unittest",
+        "html_to_md"
+      ],
+      "kind": "unittest",
+      "name": "test_links_point_at_twins",
+      "path": "tests/build/test_html_to_md.py",
+      "source": {
+        "end": 27,
+        "line": 27,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "78983c2f02bec003b4abb9a5ad1ede4315f3a2519259fc3c4ec50922825a2306"
+      }
+    },
+    {
+      "id": "test:tests/build/test_html_to_md.py:test_lists",
+      "imports": [
+        "sys",
+        "pathlib",
+        "unittest",
+        "html_to_md"
+      ],
+      "kind": "unittest",
+      "name": "test_lists",
+      "path": "tests/build/test_html_to_md.py",
+      "source": {
+        "end": 31,
+        "line": 31,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "a720ffbbadd6dcf11a09e090f24368865ce8a96ec0f6fea7b55fec60701867a8"
+      }
+    },
+    {
+      "id": "test:tests/build/test_html_to_md.py:test_spans_and_scripts",
+      "imports": [
+        "sys",
+        "pathlib",
+        "unittest",
+        "html_to_md"
+      ],
+      "kind": "unittest",
+      "name": "test_spans_and_scripts",
+      "path": "tests/build/test_html_to_md.py",
+      "source": {
+        "end": 43,
+        "line": 43,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "d5778ed3b538ca3c125aff3b092e20c75123cbd65b4a06ccdd379c4bdeb17345"
+      }
+    },
+    {
+      "id": "test:tests/build/test_html_to_md.py:test_table",
+      "imports": [
+        "sys",
+        "pathlib",
+        "unittest",
+        "html_to_md"
+      ],
+      "kind": "unittest",
+      "name": "test_table",
+      "path": "tests/build/test_html_to_md.py",
+      "source": {
+        "end": 35,
+        "line": 35,
+        "path": "tests/build/test_html_to_md.py",
+        "sha256": "46b83afb509e45ba387b0b3da3ef9050fded397866e66a0b8b3198ebfc02c491"
+      }
+    },
+    {
+      "id": "test:tests/build/test_md_to_html.py:test_code_fence_and_blockquote",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "md_to_html"
+      ],
+      "kind": "unittest",
+      "name": "test_code_fence_and_blockquote",
+      "path": "tests/build/test_md_to_html.py",
+      "source": {
+        "end": 54,
+        "line": 54,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "97331f3206a86d4697451de32c85ae69eb2cbc5dfe18fcd1fa0c24a0c10ae5a3"
+      }
+    },
+    {
+      "id": "test:tests/build/test_md_to_html.py:test_headings_get_github_ids",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "md_to_html"
+      ],
+      "kind": "unittest",
+      "name": "test_headings_get_github_ids",
+      "path": "tests/build/test_md_to_html.py",
+      "source": {
+        "end": 25,
+        "line": 25,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "4a2dd3d9edabd7a9fcb58e985b14d138d81771e7de1ca54268fa3a28b506a5c8"
+      }
+    },
+    {
+      "id": "test:tests/build/test_md_to_html.py:test_html_is_escaped",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "md_to_html"
+      ],
+      "kind": "unittest",
+      "name": "test_html_is_escaped",
+      "path": "tests/build/test_md_to_html.py",
+      "source": {
+        "end": 35,
+        "line": 35,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "83d39495acdc411ec225959306a6e5ed324f3da03f162e1efc95c56fcbdf975f"
+      }
+    },
+    {
+      "id": "test:tests/build/test_md_to_html.py:test_inline",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "md_to_html"
+      ],
+      "kind": "unittest",
+      "name": "test_inline",
+      "path": "tests/build/test_md_to_html.py",
+      "source": {
+        "end": 31,
+        "line": 31,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "09b576d67bfda29de59e809777dda08afaeab9138b77e3e87cba9f2d41f6b31c"
+      }
+    },
+    {
+      "id": "test:tests/build/test_md_to_html.py:test_link_rewriter",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "md_to_html"
+      ],
+      "kind": "unittest",
+      "name": "test_link_rewriter",
+      "path": "tests/build/test_md_to_html.py",
+      "source": {
+        "end": 60,
+        "line": 60,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "4d0f26fac0024fa3637a9fb83aa3b2876b7f3dfc333e9527a34afb9f8e62419b"
+      }
+    },
+    {
+      "id": "test:tests/build/test_md_to_html.py:test_nested_and_ordered_lists",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "md_to_html"
+      ],
+      "kind": "unittest",
+      "name": "test_nested_and_ordered_lists",
+      "path": "tests/build/test_md_to_html.py",
+      "source": {
+        "end": 47,
+        "line": 47,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "8740a3ab24ad91c8f1ac5a2e8a4a1961626d09bea428cccf094c8165a431c090"
+      }
+    },
+    {
+      "id": "test:tests/build/test_md_to_html.py:test_real_documents_render_every_heading_and_table",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "md_to_html"
+      ],
+      "kind": "unittest",
+      "name": "test_real_documents_render_every_heading_and_table",
+      "path": "tests/build/test_md_to_html.py",
+      "source": {
+        "end": 65,
+        "line": 65,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "261ab7fca0fc6e9808707aa61e36ff557b8db5f4fe216ae39dee0f06c11b89c2"
+      }
+    },
+    {
+      "id": "test:tests/build/test_md_to_html.py:test_table",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "md_to_html"
+      ],
+      "kind": "unittest",
+      "name": "test_table",
+      "path": "tests/build/test_md_to_html.py",
+      "source": {
+        "end": 41,
+        "line": 41,
+        "path": "tests/build/test_md_to_html.py",
+        "sha256": "46b83afb509e45ba387b0b3da3ef9050fded397866e66a0b8b3198ebfc02c491"
+      }
+    },
+    {
+      "id": "test:tests/build/test_mockups.py:test_categorical_colours_pass_the_validator",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_categorical_colours_pass_the_validator",
+      "path": "tests/build/test_mockups.py",
+      "source": {
+        "end": 96,
+        "line": 96,
+        "path": "tests/build/test_mockups.py",
+        "sha256": "4a3961323e87c1da63803bfc8337e7e223996b1d42b3012f00788b92b3d1c26d"
+      }
+    },
+    {
+      "id": "test:tests/build/test_mockups.py:test_every_mockup_page_embeds_the_prototype",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_every_mockup_page_embeds_the_prototype",
+      "path": "tests/build/test_mockups.py",
+      "source": {
+        "end": 74,
+        "line": 74,
+        "path": "tests/build/test_mockups.py",
+        "sha256": "691c46cdb5f3de74d0e7e1ef8026b9f7063e99bb1c0e17c443d87c5583837844"
+      }
+    },
+    {
+      "id": "test:tests/build/test_mockups.py:test_intent_ids_exist",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_intent_ids_exist",
+      "path": "tests/build/test_mockups.py",
+      "source": {
+        "end": 67,
+        "line": 67,
+        "path": "tests/build/test_mockups.py",
+        "sha256": "f29a250d4c06eb54af9db1f6d5e3c7a916e3fe646354e35cff6b87dc7193a2c7"
+      }
+    },
+    {
+      "id": "test:tests/build/test_mockups.py:test_paths_join_screens_that_exist",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_paths_join_screens_that_exist",
+      "path": "tests/build/test_mockups.py",
+      "source": {
+        "end": 58,
+        "line": 58,
+        "path": "tests/build/test_mockups.py",
+        "sha256": "c2fee9616e373d489104c657663716bf42f1497501d8f8a83fd07d1947243796"
+      }
+    },
+    {
+      "id": "test:tests/build/test_mockups.py:test_prototype_components_follow_the_shape",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_prototype_components_follow_the_shape",
+      "path": "tests/build/test_mockups.py",
+      "source": {
+        "end": 87,
+        "line": 87,
+        "path": "tests/build/test_mockups.py",
+        "sha256": "a4102e79966b161ffa9a0f0577b20075e0495468d5701fbfe86ef468e69faa6e"
+      }
+    },
+    {
+      "id": "test:tests/build/test_mockups.py:test_ten_screens_three_variants",
+      "imports": [
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_ten_screens_three_variants",
+      "path": "tests/build/test_mockups.py",
+      "source": {
+        "end": 48,
+        "line": 48,
+        "path": "tests/build/test_mockups.py",
+        "sha256": "f25a2c1f204be33246731b35261cd4184450675f822665ba7c4b269627839a98"
+      }
+    },
+    {
+      "id": "test:tests/build/test_reader.py:test_comms_tools_parse_and_name_no_secret",
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_comms_tools_parse_and_name_no_secret",
+      "path": "tests/build/test_reader.py",
+      "source": {
+        "end": 124,
+        "line": 124,
+        "path": "tests/build/test_reader.py",
+        "sha256": "24b095c7f5b4a25af9255f35f54e533003144922808382e23e3a860f47990076"
+      }
+    },
+    {
+      "id": "test:tests/build/test_reader.py:test_contact_file_shape",
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_contact_file_shape",
+      "path": "tests/build/test_reader.py",
+      "source": {
+        "end": 91,
+        "line": 91,
+        "path": "tests/build/test_reader.py",
+        "sha256": "60843d602a34a611e9aa45afe804f8a86fc2cefb7501142ddacb2e61f2e65b3e"
+      }
+    },
+    {
+      "id": "test:tests/build/test_reader.py:test_every_page_carries_the_column",
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_every_page_carries_the_column",
+      "path": "tests/build/test_reader.py",
+      "source": {
+        "end": 73,
+        "line": 73,
+        "path": "tests/build/test_reader.py",
+        "sha256": "56bca67e83a810d7bcfa072b5e3ca5e46a62ce069fdfec8b8941d328104f64de"
+      }
+    },
+    {
+      "id": "test:tests/build/test_reader.py:test_only_the_reader_page_widens_connect_src",
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_only_the_reader_page_widens_connect_src",
+      "path": "tests/build/test_reader.py",
+      "source": {
+        "end": 80,
+        "line": 80,
+        "path": "tests/build/test_reader.py",
+        "sha256": "0cb81a28f7132e4f7cfc91d5c23d0f534b6a9780f1dae68e4c24d28fadd3296e"
+      }
+    },
+    {
+      "id": "test:tests/build/test_reader.py:test_search_index_is_fresh_and_covers_every_page",
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_search_index_is_fresh_and_covers_every_page",
+      "path": "tests/build/test_reader.py",
+      "source": {
+        "end": 111,
+        "line": 111,
+        "path": "tests/build/test_reader.py",
+        "sha256": "a391e4b6b1b19de7ae195a0c95de46758fc30f498b2762d6ec6af8a4eecda8ac"
+      }
+    },
+    {
+      "id": "test:tests/build/test_reader.py:test_storage_keys_are_members_of_the_allow_list",
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_storage_keys_are_members_of_the_allow_list",
+      "path": "tests/build/test_reader.py",
+      "source": {
+        "end": 60,
+        "line": 60,
+        "path": "tests/build/test_reader.py",
+        "sha256": "362b88438c8f6165a0f1ddfe400134eafe425403a6a32acea538d243e3948938"
+      }
+    },
+    {
+      "id": "test:tests/build/test_reader.py:test_the_key_never_goes_to_local_storage",
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_the_key_never_goes_to_local_storage",
+      "path": "tests/build/test_reader.py",
+      "source": {
+        "end": 68,
+        "line": 68,
+        "path": "tests/build/test_reader.py",
+        "sha256": "0328dc42e4f20eff944cdd61b6c90e34221d76be9f018cb9545d9335de42403a"
+      }
+    },
+    {
+      "id": "test:tests/build/test_reader.py:test_three_files_per_component_and_the_base_contract",
+      "imports": [
+        "base64",
+        "hashlib",
+        "json",
+        "re",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_three_files_per_component_and_the_base_contract",
+      "path": "tests/build/test_reader.py",
+      "source": {
+        "end": 39,
+        "line": 39,
+        "path": "tests/build/test_reader.py",
+        "sha256": "deb8aad2e154c03cdfad0e360599b2e370cf0c3073b285e441a30599d30a961d"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_folder.py:test_every_review_file_validates",
+      "imports": [
+        "json",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "review_tree",
+        "schema"
+      ],
+      "kind": "unittest",
+      "name": "test_every_review_file_validates",
+      "path": "tests/build/test_review_folder.py",
+      "source": {
+        "end": 28,
+        "line": 28,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "103ee642d4c5fe5d1b6aee0f316a22ae33886e6405f2d650931e94b2d80e675f"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_folder.py:test_fixture_repository_is_present",
+      "imports": [
+        "json",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "review_tree",
+        "schema"
+      ],
+      "kind": "unittest",
+      "name": "test_fixture_repository_is_present",
+      "path": "tests/build/test_review_folder.py",
+      "source": {
+        "end": 82,
+        "line": 82,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "d11b8fbdb4bec3ef806bb14b36abfe8091b9f968c4afd058e52d6de1b49b5128"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_folder.py:test_freshness_passes_on_the_tree",
+      "imports": [
+        "json",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "review_tree",
+        "schema"
+      ],
+      "kind": "unittest",
+      "name": "test_freshness_passes_on_the_tree",
+      "path": "tests/build/test_review_folder.py",
+      "source": {
+        "end": 32,
+        "line": 32,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "0288fdb34ea0fa42460b31776a7f464d2d3878b100303f23910067196ad75d67"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_folder.py:test_readme_is_current_and_deterministic",
+      "imports": [
+        "json",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "review_tree",
+        "schema"
+      ],
+      "kind": "unittest",
+      "name": "test_readme_is_current_and_deterministic",
+      "path": "tests/build/test_review_folder.py",
+      "source": {
+        "end": 37,
+        "line": 37,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "66e505672ed489a480cfbf2e0a97202c0c348393e23f3cb4d8c61ce0c8bd7e13"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_folder.py:test_schema_validator_subset",
+      "imports": [
+        "json",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "review_tree",
+        "schema"
+      ],
+      "kind": "unittest",
+      "name": "test_schema_validator_subset",
+      "path": "tests/build/test_review_folder.py",
+      "source": {
+        "end": 72,
+        "line": 72,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "0de72086c1e03dae35bb2c3457baa1b22e73c4511d6a305d97b3d74dba577f0d"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_folder.py:test_stale_provenance_fails_freshness",
+      "imports": [
+        "json",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "review_tree",
+        "schema"
+      ],
+      "kind": "unittest",
+      "name": "test_stale_provenance_fails_freshness",
+      "path": "tests/build/test_review_folder.py",
+      "source": {
+        "end": 61,
+        "line": 61,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "495e2d8a3c3ee052c679dffc2993bd5c850bc80cc1fcadaefdb9c3b51355bcac"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_folder.py:test_tree_hash_is_stable_and_sensitive",
+      "imports": [
+        "json",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "review_tree",
+        "schema"
+      ],
+      "kind": "unittest",
+      "name": "test_tree_hash_is_stable_and_sensitive",
+      "path": "tests/build/test_review_folder.py",
+      "source": {
+        "end": 53,
+        "line": 53,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "df32355adb05ca56697814498e5aeb3369f2be08ac68c823bd7686aacc7eac8b"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_folder.py:test_verbs_have_distinct_inverses_and_sentences",
+      "imports": [
+        "json",
+        "subprocess",
+        "sys",
+        "pathlib",
+        "unittest",
+        "review_tree",
+        "schema"
+      ],
+      "kind": "unittest",
+      "name": "test_verbs_have_distinct_inverses_and_sentences",
+      "path": "tests/build/test_review_folder.py",
+      "source": {
+        "end": 43,
+        "line": 43,
+        "path": "tests/build/test_review_folder.py",
+        "sha256": "7a48c764f25d6ac70b53a15d5e0b1d199df486a61a147709345a606002927427"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_base_contract_in_every_component",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_base_contract_in_every_component",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 34,
+        "line": 34,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "7990b1a96c339c27d657264327458b9e36ac8ac636c5e976d095cb3292e9e28a"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_markup_is_a_fragment_with_real_controls",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_markup_is_a_fragment_with_real_controls",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 55,
+        "line": 55,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "864baaad69c97b00e3dee2ba786ddc60fb61a7b532e4961503a8f2dcb85f8439"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_no_colour_outside_tokens",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_no_colour_outside_tokens",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 45,
+        "line": 45,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "467a850b98cf928f75cc110432ed5b915976576f49356ac5f937450e9ab089e8"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_readme_lists_every_component_present",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_readme_lists_every_component_present",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 78,
+        "line": 78,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "9b595b459a8b1a643b94bf102b6101457fa92b3c5b85f113929a6fc1001b6573"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_route_never_assigns_location_hash",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_route_never_assigns_location_hash",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 73,
+        "line": 73,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "2206f3c0f908f559f6866264f50641158999fd6c40447938553d5fc42e9b3a24"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_scripts_parse",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_scripts_parse",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 84,
+        "line": 84,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "c28fba1a322ee6976633c2bca42af742370787de15d181f368939f1deb5a4935"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_sections_index_matches_the_brief",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_sections_index_matches_the_brief",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 90,
+        "line": 90,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "f31c60463dd0a9fe828f915b09c1b0e7ec57076ac6a949b3ba04720ccb083b66"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_shell_has_csp_and_no_inline_code",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_shell_has_csp_and_no_inline_code",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 64,
+        "line": 64,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "71e46b064292d6e8e773bb831e962f00c9593d85518b2c06851cb8b3e2532f76"
+      }
+    },
+    {
+      "id": "test:tests/build/test_review_ui.py:test_three_files_per_component_same_basename",
+      "imports": [
+        "re",
+        "subprocess",
+        "pathlib",
+        "unittest"
+      ],
+      "kind": "unittest",
+      "name": "test_three_files_per_component_same_basename",
+      "path": "tests/build/test_review_ui.py",
+      "source": {
+        "end": 28,
+        "line": 28,
+        "path": "tests/build/test_review_ui.py",
+        "sha256": "8dc83514cd2a4f9f2a758fcd88d8c9abd17c8f31b0f24020aa0c343578443bfe"
+      }
+    },
+    {
+      "id": "test:tests/build/test_themes.py:test_default_block_is_the_default_theme",
+      "imports": [
+        "json",
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_default_block_is_the_default_theme",
+      "path": "tests/build/test_themes.py",
+      "source": {
+        "end": 59,
+        "line": 59,
+        "path": "tests/build/test_themes.py",
+        "sha256": "bd8f35218fb62b11d04c2d91ee7b3ba2ddd95e662bc311ad769cdab44ce41695"
+      }
+    },
+    {
+      "id": "test:tests/build/test_themes.py:test_every_page_loads_the_theme_before_the_stylesheet",
+      "imports": [
+        "json",
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_every_page_loads_the_theme_before_the_stylesheet",
+      "path": "tests/build/test_themes.py",
+      "source": {
+        "end": 92,
+        "line": 92,
+        "path": "tests/build/test_themes.py",
+        "sha256": "dd0c2e979d159f54e234e2902b8ea425d7b13b74c34fb51fe2749f00be0a587f"
+      }
+    },
+    {
+      "id": "test:tests/build/test_themes.py:test_every_theme_defines_every_token",
+      "imports": [
+        "json",
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_every_theme_defines_every_token",
+      "path": "tests/build/test_themes.py",
+      "source": {
+        "end": 64,
+        "line": 64,
+        "path": "tests/build/test_themes.py",
+        "sha256": "d939c2de6d9f8d96e5530964ba5259e52fb797fbebe92fa7c67d08bfbd12f1a1"
+      }
+    },
+    {
+      "id": "test:tests/build/test_themes.py:test_four_themes_dark_and_light",
+      "imports": [
+        "json",
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_four_themes_dark_and_light",
+      "path": "tests/build/test_themes.py",
+      "source": {
+        "end": 46,
+        "line": 46,
+        "path": "tests/build/test_themes.py",
+        "sha256": "369be5aed2663007cfe155b464c4e1d1b55a2f211cb7792b698b085bb24b772f"
+      }
+    },
+    {
+      "id": "test:tests/build/test_themes.py:test_no_colour_outside_themes_css",
+      "imports": [
+        "json",
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_no_colour_outside_themes_css",
+      "path": "tests/build/test_themes.py",
+      "source": {
+        "end": 81,
+        "line": 81,
+        "path": "tests/build/test_themes.py",
+        "sha256": "dc21c2b400bd61b5b53d1b441022d5a76e31ff0730d52d44e2b6fd5e78257356"
+      }
+    },
+    {
+      "id": "test:tests/build/test_themes.py:test_picker_is_generated_from_the_data",
+      "imports": [
+        "json",
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_picker_is_generated_from_the_data",
+      "path": "tests/build/test_themes.py",
+      "source": {
+        "end": 105,
+        "line": 105,
+        "path": "tests/build/test_themes.py",
+        "sha256": "2992bcac91516fe61956dd5e37e503ad4c2faa4615345b6f119e8bf4527a32e4"
+      }
+    },
+    {
+      "id": "test:tests/build/test_themes.py:test_storage_key_is_the_allowed_one",
+      "imports": [
+        "json",
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_storage_key_is_the_allowed_one",
+      "path": "tests/build/test_themes.py",
+      "source": {
+        "end": 77,
+        "line": 77,
+        "path": "tests/build/test_themes.py",
+        "sha256": "56d3343fb9ebf57aab98e223abd1b777c8437a2c6f1937346ecac2891ffcd77c"
+      }
+    },
+    {
+      "id": "test:tests/build/test_themes.py:test_theme_js_follows_the_data",
+      "imports": [
+        "json",
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_theme_js_follows_the_data",
+      "path": "tests/build/test_themes.py",
+      "source": {
+        "end": 70,
+        "line": 70,
+        "path": "tests/build/test_themes.py",
+        "sha256": "9598cf2d30333a80d545ddfed0b48c3cdea19bcaea7805d38ad74c53481e79a7"
+      }
+    },
+    {
+      "id": "test:tests/build/test_twins_exist.py:test_every_page_has_a_twin",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_every_page_has_a_twin",
+      "path": "tests/build/test_twins_exist.py",
+      "source": {
+        "end": 26,
+        "line": 26,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "9d1e7e9736d870f49a6a69510262fe7ad38c6d5c99b1e9375eb4c81ef2a0f002"
+      }
+    },
+    {
+      "id": "test:tests/build/test_twins_exist.py:test_index_md_is_the_homepage_twin",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_index_md_is_the_homepage_twin",
+      "path": "tests/build/test_twins_exist.py",
+      "source": {
+        "end": 58,
+        "line": 58,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "733b8669a2d362466a854f20354dead47de5566ee4ed7be0551420e228a7c1d5"
+      }
+    },
+    {
+      "id": "test:tests/build/test_twins_exist.py:test_internal_links_in_twins_point_at_markdown",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_internal_links_in_twins_point_at_markdown",
+      "path": "tests/build/test_twins_exist.py",
+      "source": {
+        "end": 45,
+        "line": 45,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "77559bae95c124107349e5856ae80601efa0cc94fc2047d262828a01ebfc0a55"
+      }
+    },
+    {
+      "id": "test:tests/build/test_twins_exist.py:test_twin_names_source_and_version",
+      "imports": [
+        "re",
+        "sys",
+        "pathlib",
+        "unittest",
+        "chrome",
+        "pages"
+      ],
+      "kind": "unittest",
+      "name": "test_twin_names_source_and_version",
+      "path": "tests/build/test_twins_exist.py",
+      "source": {
+        "end": 34,
+        "line": 34,
+        "path": "tests/build/test_twins_exist.py",
+        "sha256": "0e2070738b469747fef72be33038a778728bbc64c29b1a9bf26f603f7de727e2"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:every-check-passes-on-the-real-tree",
+      "imports": [],
+      "kind": "node-test",
+      "name": "every check passes on the real tree",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 109,
+        "line": 109,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "66d3fc3d15df8395c390641e674a20109bf6fc6d38dbca2b42b32350749827e0"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:headingSlug-follows-GitHub-anchors",
+      "imports": [],
+      "kind": "node-test",
+      "name": "headingSlug follows GitHub anchors",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 56,
+        "line": 56,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "cd8310c2db9b41559d33cf553fe436790f36347cb3ecc5bf608e6968dabf4e5c"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:isInternalLink",
+      "imports": [],
+      "kind": "node-test",
+      "name": "isInternalLink",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 62,
+        "line": 62,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "9914055cb3fa33984bce019fe5be850f51b4636086c492ad8f1aa4781b889a34"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:leak-tripwire-AIza-is-allowed-only-in-config-environments.json",
+      "imports": [],
+      "kind": "node-test",
+      "name": "leak tripwire: AIza is allowed only in config/environments.json",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 50,
+        "line": 50,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "c69653a823ad804d5270312a9233bd92ac834417cf7e9fe867c697cfbbbce734"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:leak-tripwire-catches-each-fake-shape",
+      "imports": [],
+      "kind": "node-test",
+      "name": "leak tripwire: catches each fake shape",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 17,
+        "line": 17,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "f76d58b426711d77479398f2a4c082ea76491889df977c292f788fbda0b32736"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:leak-tripwire-does-not-trip-on-the-shapes-the-brief-writes-about",
+      "imports": [],
+      "kind": "node-test",
+      "name": "leak tripwire: does not trip on the shapes the brief writes about",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 37,
+        "line": 37,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "a7c7c895d88c29807ff0ef53661e30e0490c259c376b2365edcf3cce694ae5ae"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:nextVersionOk-next-minor-patch-or-major-.0.0",
+      "imports": [],
+      "kind": "node-test",
+      "name": "nextVersionOk: next minor, patch, or major .0.0",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 99,
+        "line": 99,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "9c2c4f799c8613d319eab75a99bc2ca558282d8183eba97ddf2a7226829d5822"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:resolveLink-maps-directories-to-index.html-and-keeps-fragments",
+      "imports": [],
+      "kind": "node-test",
+      "name": "resolveLink maps directories to index.html and keeps fragments",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 72,
+        "line": 72,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "e314ce37568c205f7cdbf2393abd5b1e84aea98256c222a4b08471061298d064"
+      }
+    },
+    {
+      "id": "test:tests/unit/validate.test.js:storage-keys-literals-and-constants-from-the-allow-list-pass-anything-else-fails",
+      "imports": [],
+      "kind": "node-test",
+      "name": "storage keys: literals and constants from the allow-list pass, anything else fails",
+      "path": "tests/unit/validate.test.js",
+      "source": {
+        "end": 79,
+        "line": 79,
+        "path": "tests/unit/validate.test.js",
+        "sha256": "79be3eb8dd8b977a33ebfb70ba1ff9d61cf37df1552e066c00e573ddc839cf4f"
+      }
+    }
+  ]
+}

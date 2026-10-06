@@ -1,0 +1,70 @@
+{
+  "_comment": "What the review derivation reads and ignores. Shared by every tool through review_tree.py. source_globs are relative to the repository root; exclude_dirs match any path segment; exclude_paths match a prefix.",
+  "changes_required_from": null,
+  "self": {
+    "_comment": "The self set reviews the tool itself: review/tools and review/ui, with their own intent written from the review brief.",
+    "source_globs": [
+      "review/tools/*.py",
+      "review/ui/**/*.js",
+      "review/ui/**/*.html",
+      "review/ui/**/*.css"
+    ]
+  },
+  "anchors": {
+    "_comment": "The kinds of node a chain of evidence ends on: a person can open each and see the thing itself, so the graph does not continue past it (diminishing returns). claims.py turns a claim's evidence refs into anchor nodes of these kinds; a shipped claim with no anchor that resolves fails the build.",
+    "kinds": {
+      "file": {
+        "ref": "file:<path>[#L<a>-L<b>]",
+        "resolves": "the path exists in the repository",
+        "opens": "in the navigator (review-source) when the site serves it; on GitHub at the release commit otherwise"
+      },
+      "test": {
+        "ref": "test:<path>",
+        "resolves": "the path exists under tests/",
+        "opens": "in the navigator; run by the gate on every release"
+      },
+      "section": {
+        "ref": "section:<n.m>",
+        "resolves": "the number is in intent/sections.json",
+        "opens": "in the navigator (review-brief) from brief/sections/"
+      },
+      "doc": {
+        "ref": "doc:<path>[#<anchor>]",
+        "resolves": "the path exists",
+        "opens": "the rendered page on the site"
+      },
+      "url": {
+        "ref": "url:<https://…>",
+        "resolves": "the host is this site or GitHub",
+        "opens": "the page itself, which is the evidence"
+      },
+      "commit": {
+        "ref": "commit:<sha>",
+        "resolves": "the sha is a release commit in data/versions.json",
+        "opens": "on GitHub"
+      },
+      "tag": {
+        "ref": "tag:<vX.Y.Z>",
+        "resolves": "the tag is a release in data/versions.json",
+        "opens": "on GitHub"
+      },
+      "run": {
+        "ref": "run:<id>",
+        "resolves": "the id is a release run in data/versions.json",
+        "opens": "the Actions run on GitHub: validate, tag, deploy, verify-live"
+      }
+    }
+  },
+  "source_globs": [
+    "pkg/*.py",
+    "tests/*.py",
+    "components/**/*.js",
+    "components/**/*.html",
+    "components/**/*.css",
+    "components/*.js"
+  ],
+  "exclude_dirs": [
+    "__pycache__"
+  ],
+  "exclude_paths": []
+}

@@ -23,6 +23,7 @@ SHAPES    = {'intent/stories.json'    : 'intent-stories'   , 'intent/flows.json'
              'graph/files.json'       : 'graph-files'      , 'graph/methods.json'   : 'graph-methods'   ,
              'graph/classes.json'     : 'graph-classes'    , 'graph/modules.json'   : 'graph-modules'   ,
              'graph/surfaces.json'    : 'graph-surfaces'   , 'graph/tests.json'     : 'graph-tests'     ,
+             'graph/index.json'       : 'graph-index'      ,
              'graph/deploy.json'      : 'graph-deploy'     , 'graph/stories.json'   : 'graph-stories'   ,
              'join/matches.json'      : 'join-matches'     , 'join/gaps.json'       : 'join-gaps'       ,
              'checks/rules.json'      : 'checks-rules'     , 'checks/results.json'  : 'checks-results'  ,

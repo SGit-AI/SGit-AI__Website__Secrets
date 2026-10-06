@@ -47,6 +47,20 @@ a { color: var(--rv-accent); }
     text-decoration: none;
 }
 .top .back           { color: var(--rv-text-muted); font-size: var(--rv-fs-small); }
+.top .modes          { display: flex; gap: 2px; }
+.top .mode, .top .fold {
+    background:    transparent;
+    border:        1px solid var(--rv-border);
+    border-radius: var(--rv-radius-pill);
+    color:         var(--rv-text-muted);
+    cursor:        pointer;
+    font:          inherit;
+    font-size:     var(--rv-fs-xs);
+    padding:       1px var(--rv-sp-3);
+}
+.top .mode:hover, .top .fold:hover   { color: var(--rv-text-heading); }
+.top .mode[aria-pressed="true"]      { background: var(--rv-accent); border-color: var(--rv-accent); color: var(--rv-on-layer); font-weight: 600; }
+.top .fold[aria-pressed="true"]      { border-style: dashed; }
 .top .themes         { display: flex; gap: var(--rv-sp-1); }
 .top .theme {
     background:    none;
@@ -90,6 +104,28 @@ a { color: var(--rv-accent); }
     padding:    var(--rv-sp-2) var(--rv-sp-4);
 }
 .bottom p { margin: 0; }
+
+.layout.fold-left                { grid-template-columns: 0 minmax(0, 3fr) minmax(20rem, 2fr); }
+.layout.fold-left .left          { display: none; }
+
+/* code mode: the same three columns, the same elements, placed by area: the tree
+   left, the source in the middle, the graph and the code panel right. The columns
+   become `display: contents` so the custom elements are never re-parented (that
+   would re-run their connect) and each one is a grid item of its own. */
+.layout[data-mode="code"] {
+    grid-template-areas:   "tree source side";
+    grid-template-columns: minmax(12rem, 1fr) minmax(0, 3fr) minmax(22rem, 2fr);
+    grid-template-rows:    minmax(0, 1fr);
+}
+.layout[data-mode="code"].fold-left                   { grid-template-columns: 0 minmax(0, 3fr) minmax(22rem, 2fr); }
+.layout[data-mode="code"] .left,
+.layout[data-mode="code"] .centre,
+.layout[data-mode="code"] .right                      { display: contents; }
+.layout[data-mode="code"] review-ladder               { display: none; }
+.layout[data-mode="code"] review-tree                 { border-right: 1px solid var(--rv-border); grid-area: tree;   min-height: 0; overflow: auto; padding: var(--rv-sp-2) var(--rv-sp-3); }
+.layout[data-mode="code"].fold-left review-tree       { display: none; }
+.layout[data-mode="code"] review-source               { grid-area: source; min-height: 0; overflow: auto; padding: var(--rv-sp-4); }
+.layout[data-mode="code"] .side                       { border-left: 1px solid var(--rv-border); grid-area: side; min-height: 0; overflow: auto; padding: var(--rv-sp-4); }
 
 @media (max-width: 860px) {
     .layout { grid-template-columns: 1fr; }

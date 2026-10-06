@@ -19,6 +19,7 @@
   <script type="module" src="components/review-graph/review-graph.js"></script>
   <script type="module" src="components/review-brief/review-brief.js"></script>
   <script type="module" src="components/review-source/review-source.js"></script>
+  <script type="module" src="components/review-code/review-code.js"></script>
   <script type="module" src="shell.js"></script>
 </head>
 <body>
@@ -26,6 +27,11 @@
     <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
     <span class="title">review/</span>
     <span class="set" data-set-label>the project</span>
+    <nav class="modes" data-modes aria-label="Mode">
+      <button type="button" class="mode" data-mode="intent" aria-pressed="true" title="Top down: the brief, the intent, the claims">Intent</button>
+      <button type="button" class="mode" data-mode="code" aria-pressed="false" title="Bottom up: the files, the classes, the methods, what reaches them">Code</button>
+    </nav>
+    <button type="button" class="fold" data-fold="left" aria-pressed="false" title="Show or hide the left column">&#9707;</button>
     <review-crumb class="crumb"></review-crumb>
     <a class="version" href="/admin/versions.html" data-version title="site release history">v…</a>
     <a class="back" href="/admin/">admin</a>
@@ -36,7 +42,7 @@
       <button class="theme" type="button" data-theme-pick="ember" title="Dark, amber" aria-pressed="false">Ember</button>
     </span>
   </header>
-  <main class="layout">
+  <main class="layout" data-mode="intent">
     <aside class="left" aria-label="Layers">
       <review-ladder></review-ladder>
     </aside>
@@ -44,17 +50,20 @@
       <review-tree></review-tree>
     </section>
     <aside class="right" aria-label="Selected node">
-      <details class="graph" open>
-        <summary>Graph: the node in focus and its neighbours</summary>
-        <review-graph depth="1"></review-graph>
-      </details>
-      <review-node data-region="node"></review-node>
-      <review-brief data-region="brief" hidden></review-brief>
+      <div class="side">
+        <details class="graph" open>
+          <summary>Graph: the node in focus and its neighbours</summary>
+          <review-graph depth="1"></review-graph>
+        </details>
+        <review-node data-region="node"></review-node>
+        <review-brief data-region="brief" hidden></review-brief>
+        <review-code data-region="code" hidden></review-code>
+      </div>
       <review-source data-region="file" hidden></review-source>
     </aside>
   </main>
   <footer class="bottom">
-    <p>The intent layers, written by the build agent from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the MVP brief</a> and awaiting acceptance by the project lead; nothing derived from code yet; since v0.1.9 the claims layer (every claim on /shipped/ with its evidence down to an anchor: a file, a test, a section of the brief, a commit, a run), the brief as sections shown in place, and files shown in place. The data is <a href="../intent/stories.json">intent/stories.json</a>, <a href="../intent/flows.json">flows.json</a>, <a href="../intent/components.json">components.json</a> and <a href="../intent/deploy.json">deploy.json</a>; the folder is described in <a href="../README.md">review/README.md</a>. No framework, no build step: web components in the coding.sgit.ai shape, one per file shape (<a href="README.md">ui/README.md</a>).</p>
+    <p>The intent layers, written by the build agent from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the MVP brief</a> and awaiting acceptance by the project lead; since v0.1.9 the claims layer (every claim on /shipped/ with its evidence down to an anchor: a file, a test, a section of the brief, a commit, a run), the brief as sections shown in place, and files shown in place; since v0.1.11 the derived layers (files, classes, methods, tests, surfaces, from the syntax trees) and a code mode that reads the graph upwards from any piece of source. The data is <a href="../intent/stories.json">intent/stories.json</a>, <a href="../intent/flows.json">flows.json</a>, <a href="../intent/components.json">components.json</a> and <a href="../intent/deploy.json">deploy.json</a>; the folder is described in <a href="../README.md">review/README.md</a>. No framework, no build step: web components in the coding.sgit.ai shape, one per file shape (<a href="README.md">ui/README.md</a>).</p>
   </footer>
 </body>
 </html>

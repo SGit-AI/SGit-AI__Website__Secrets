@@ -20,7 +20,11 @@ export class ReviewCrumb extends ReviewBase {
         this.on(REVIEW_EVENTS.select, (event) => this.render(event.detail.id))
         this.on(REVIEW_EVENTS.route,   () => this.render(null))
         this.on(REVIEW_EVENTS.section, (event) => this.render(null, `brief: section ${event.detail.id}`))
-        this.on(REVIEW_EVENTS.file,    (event) => this.render(ReviewBase.store.route.node, `file: ${event.detail.path}${event.detail.lines ? ' ' + event.detail.lines : ''}`))
+        this.on(REVIEW_EVENTS.file,    (event) => {                                // a file leaf only when the node in focus is not already in that file
+            const node = ReviewBase.store.route.node ? ReviewBase.store.get(ReviewBase.store.route.node) : null
+            const same = node && node.path === event.detail.path
+            this.render(ReviewBase.store.route.node, same ? null : `file: ${event.detail.path}${event.detail.lines ? ' ' + event.detail.lines : ''}`)
+        })
         this.render(ReviewBase.store.route.node)
     }
 

@@ -798,10 +798,10 @@
     {
       "id": "review.navigator",
       "area": "review",
-      "title": "The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search",
+      "title": "The rest of the navigator: set switch, join, change, reach, stream, checks, search",
       "status": "proposed",
       "where": "review/ui/",
-      "notes": "Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md.",
+      "notes": "Steps 3 to 6; one visualiser per file shape, listed in review/ui/README.md. The ladder, the source view and the code panel are shipped.",
       "evidence": [
         {
           "verb": "realises",
@@ -816,10 +816,92 @@
     {
       "id": "review.derived",
       "area": "review",
-      "title": "graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model",
+      "title": "graph/: files, modules, classes, methods, tests and surfaces derived from the syntax tree by parsers, never a model; an index of counts and paths; calls resolved across files and through super()",
+      "status": "shipped",
+      "where": "review/tools/derive.py, derive_js.mjs, review/graph/",
+      "notes": "Step 2 of the review brief. Python from the stdlib parser; JavaScript from a vendored, hashed acorn that only the build runs. Vendored files are hashed, not parsed. graph/deploy.json and the join are step 3.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/tools/derive.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/tools/derive_js.mjs"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/graph/index.json"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_derive.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/BRIEF-CORRECTIONS.md"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/README.md"
+        }
+      ],
+      "since": "0.1.11"
+    },
+    {
+      "id": "review.code-mode",
+      "area": "review",
+      "title": "Code mode in the navigator: open a file and the layout changes to the source in the middle, its tree on the left and the graph upwards from it on the right (what the code says about itself, the claims that live in it, the stories they realise, calls, callers, tests, surfaces); claims folded by release; the left column folds; every file path named by a node is a link",
+      "status": "shipped",
+      "since": "0.1.11",
+      "where": "review/ui/components/review-code/, review-tree/, shell.js",
+      "notes": "Two modes, intent and code, remembered with the fold under one allow-listed key. The ladder's derived rungs are live from graph/index.json before the layers load.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-code/review-code.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-base/review-base.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/components/review-tree/review-tree.js"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:review/ui/shell.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_review_ui.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:review/ui/README.md"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/review/ui/"
+        }
+      ]
+    },
+    {
+      "id": "review.explain",
+      "area": "review",
+      "title": "The explanation layer: per block of code, what it does (pseudo-code), why (its intent) and the story it serves, at a technical and a business level, each block hashed to the lines it explains so a diff reads as a blast radius against meaning",
       "status": "proposed",
-      "where": "review/tools/derive.py, derive_js.py",
-      "notes": "Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn.",
+      "where": "review/explain/",
+      "notes": "C24. The first rung exists in code mode (the code's own comments, the claims and stories that reach the file). The written levels are data by the build agent, never parser output, never a model at build time.",
       "evidence": [
         {
           "verb": "realises",
@@ -827,7 +909,7 @@
         },
         {
           "verb": "described_in",
-          "to": "doc:review/README.md"
+          "to": "doc:docs/design/brief-corrections.md"
         }
       ]
     },

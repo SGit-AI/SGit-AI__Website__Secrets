@@ -2,12 +2,20 @@
   "_comment": "Every third-party file the site loads, with where it came from and its SHA-256. The gate (check 5) recomputes every hash and fails on any file under vendor/ that is not listed, or any listed file that is missing or changed. Updates are a manual, reviewed PR with the hash change in the diff. No runtime fetch from any other origin, ever.",
   "files": {
     "sg-tokens.css": {
-      "source":   "https://dev.tools.sgraph.ai/components/tokens/v1/v1.0/v1.0.0/sg-tokens.css",
-      "version":  "1.0.0",
-      "sha256":   "14509c73b43ecc79dd6080b6530a0860a9c22a06f0c160d7e9862f1bb2614171",
-      "licence":  "Apache-2.0",
-      "fetched":  "2026-10-05",
-      "purpose":  "The family design tokens, :host scoped for shadow-DOM components (step 4). assets/themes.css carries the same values as the Night theme, the default of four, for plain pages."
+      "source": "https://dev.tools.sgraph.ai/components/tokens/v1/v1.0/v1.0.0/sg-tokens.css",
+      "version": "1.0.0",
+      "sha256": "14509c73b43ecc79dd6080b6530a0860a9c22a06f0c160d7e9862f1bb2614171",
+      "licence": "Apache-2.0",
+      "fetched": "2026-10-05",
+      "purpose": "The family design tokens, :host scoped for shadow-DOM components (step 4). assets/themes.css carries the same values as the Night theme, the default of four, for plain pages."
+    },
+    "acorn.mjs": {
+      "source": "https://unpkg.com/acorn@8.15.0/dist/acorn.mjs",
+      "version": "8.15.0",
+      "sha256": "b4c8c70200e72bae33cf1085e0ecb1e792c1b6924ed50cab817caf14f51bb249",
+      "licence": "MIT",
+      "fetched": "2026-10-06",
+      "purpose": "The JavaScript parser the review derivation runs at build time (review/tools/derive_js.mjs) to read the site's own scripts into the code graph. Never loaded by a page; node only."
     }
   }
 }

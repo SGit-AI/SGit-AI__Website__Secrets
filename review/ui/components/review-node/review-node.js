@@ -56,6 +56,16 @@ export class ReviewNode extends ReviewBase {
         panel.appendChild(p)
     }
 
+    linkPaths(parent, text) {                                                     // the file paths a property names, as links into the source view; only paths the derivation saw
+        const store = ReviewBase.store
+        const parts = text.split(/([A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)+)/)
+        for (const [i, part] of parts.entries()) {
+            if (i % 2 && store.knownPath(part)) parent.appendChild(this.el('a', { href : `#file=${part}`, 'data-file' : part, class : 'path' }, part))
+            else if (part) parent.appendChild(document.createTextNode(part))
+        }
+        return parent
+    }
+
     render(node) {
         const panel = this.$('[data-panel]')
         panel.replaceChildren()
@@ -66,7 +76,7 @@ export class ReviewNode extends ReviewBase {
         const store = ReviewBase.store
         const head  = this.el('header', { class : `head layer-${node.layer}` })
         head.appendChild(this.el('span', { class : 'layer' }, LAYERS[node.layer].label))
-        head.appendChild(this.el('h2', { class : 'name' }, node.name))
+        head.appendChild(this.linkPaths(this.el('h2', { class : 'name' }), node.name))
         if (node.record && node.record.proposed) head.appendChild(this.el('span', { class : 'proposed' }, `proposed by ${node.record.proposed.model}, ${node.record.proposed.date}; not yet accepted`))
         panel.appendChild(head)
 
@@ -89,7 +99,7 @@ export class ReviewNode extends ReviewBase {
             const value = node.record[key]
             if (value === undefined || value === null || value === '') continue
             dl.appendChild(this.el('dt', {}, key.replace(/_/g, ' ')))
-            dl.appendChild(this.el('dd', {}, Array.isArray(value) ? value.join(', ') : String(value)))
+            dl.appendChild(this.linkPaths(this.el('dd'), Array.isArray(value) ? value.join(', ') : String(value)))
         }
         dl.appendChild(this.el('dt', {}, 'id'))
         dl.appendChild(this.el('dd', { class : 'mono' }, node.id))

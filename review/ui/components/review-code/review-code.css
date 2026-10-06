@@ -1,0 +1,35 @@
+/* review-code: the bottom-up panel. Tokens only. */
+:host    { display: block; font-family: var(--rv-font); font-size: var(--rv-fs); }
+[hidden] { display: none !important; }
+
+.head    { align-items: baseline; display: flex; flex-wrap: wrap; gap: var(--rv-sp-2); }
+.layer {
+    border-radius: var(--rv-radius-pill);
+    color:         var(--rv-on-layer);
+    font-family:   var(--rv-mono);
+    font-size:     var(--rv-fs-xs);
+    padding:       0 var(--rv-sp-2);
+    white-space:   nowrap;
+}
+.layer.layer-file, .layer.layer-class, .layer.layer-method, .layer.layer-test, .layer.layer-surface { background: var(--rv-layer-derived); }
+.layer.layer-claim, .layer.layer-release, .layer.layer-anchor { background: var(--rv-layer-derived); }
+.layer.layer-component { background: var(--rv-layer-components); }
+.layer.layer-story, .layer.layer-rule, .layer.layer-example { background: var(--rv-layer-stories); }
+.layer.layer-flow, .layer.layer-step { background: var(--rv-layer-flows); }
+.name    { color: var(--rv-text-heading); font-family: var(--rv-mono); font-size: 1rem; margin: 0; word-break: break-all; }
+.where   { color: var(--rv-text-muted); font-size: var(--rv-fs-small); }
+.where a, .links a, .outline a, .foot a { color: var(--rv-accent); text-decoration: none; }
+.where a:hover, .links a:hover, .outline a:hover, .foot a:hover { text-decoration: underline; }
+.mono    { font-family: var(--rv-mono); font-size: var(--rv-fs-small); }
+.muted   { color: var(--rv-text-muted); font-size: var(--rv-fs-xs); }
+.leave   { border-bottom: 1px dotted var(--rv-text-muted); }
+h3       { color: var(--rv-text-heading); font-size: var(--rv-fs); margin: var(--rv-sp-4) 0 var(--rv-sp-1); }
+.doc     { background: var(--rv-surface); border-left: 3px solid var(--rv-layer-derived); border-radius: var(--rv-radius); padding: var(--rv-sp-2) var(--rv-sp-3); white-space: pre-wrap; }
+.links   { list-style: none; margin: 0; padding: 0; }
+.links li { padding: 2px 0; }
+.outline { margin: 0; padding-left: var(--rv-sp-4); }
+.outline li { padding: 1px 0; }
+.outline .sub { list-style: none; padding-left: var(--rv-sp-4); }
+.lines   { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); }
+.foot    { color: var(--rv-text-muted); font-size: var(--rv-fs-small); margin-top: var(--rv-sp-4); }
+.empty   { color: var(--rv-text-muted); }

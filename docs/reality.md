@@ -1,8 +1,8 @@
 # secrets.sgit.ai: reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.10 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.11 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
-71 claims: 38 shipped, 28 proposed, 5 absent.
+73 claims: 40 shipped, 28 proposed, 5 absent.
 
 | Status | Meaning |
 |---|---|
@@ -10,7 +10,7 @@
 | proposed | designed in the brief, not built; described only in the future tense |
 | absent | deliberately not in the MVP; comes as a later version or a later site, or never |
 
-## Shipped (38)
+## Shipped (40)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -38,6 +38,8 @@
 | review | The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it | shipped v0.1.9 | review/tools/brief.py, review/brief/, review/ui/components/review-brief/ | Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current. |
 | review | Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving | shipped v0.1.9 | review/ui/components/review-source/ | Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead. |
 | review | The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief | shipped v0.1.4 | review/ui/ | review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash. |
+| review | graph/: files, modules, classes, methods, tests and surfaces derived from the syntax tree by parsers, never a model; an index of counts and paths; calls resolved across files and through super() | shipped v0.1.11 | review/tools/derive.py, derive_js.mjs, review/graph/ | Step 2 of the review brief. Python from the stdlib parser; JavaScript from a vendored, hashed acorn that only the build runs. Vendored files are hashed, not parsed. graph/deploy.json and the join are step 3. |
+| review | Code mode in the navigator: open a file and the layout changes to the source in the middle, its tree on the left and the graph upwards from it on the right (what the code says about itself, the claims that live in it, the stories they realise, calls, callers, tests, surfaces); claims folded by release; the left column folds; every file path named by a node is a link | shipped v0.1.11 | review/ui/components/review-code/, review-tree/, shell.js | Two modes, intent and code, remembered with the fold under one allow-listed key. The ladder's derived rungs are live from graph/index.json before the layers load. |
 | pipeline | One release script: bump, build, gate, commit with a Kind: trailer, push, verify live | shipped v0.1.3 | admin/build/release.py | The family's release discipline in one command; a clean push is not a release. |
 | pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
 | site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
@@ -58,8 +60,8 @@
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
 | review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7). |
-| review | The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search | proposed | review/ui/ | Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md. |
-| review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | proposed | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
+| review | The rest of the navigator: set switch, join, change, reach, stream, checks, search | proposed | review/ui/ | Steps 3 to 6; one visualiser per file shape, listed in review/ui/README.md. The ladder, the source view and the code panel are shipped. |
+| review | The explanation layer: per block of code, what it does (pseudo-code), why (its intent) and the story it serves, at a technical and a business level, each block hashed to the lines it explains so a diff reads as a blast radius against meaning | proposed | review/explain/ | C24. The first rung exists in code mode (the code's own comments, the claims and stories that reach the file). The written levels are data by the build agent, never parser output, never a model at build time. |
 | review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
 | review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |
 | site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | proposed | .well-known/sgit-agents.json, tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |

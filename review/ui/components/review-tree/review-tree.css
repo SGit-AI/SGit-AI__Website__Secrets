@@ -58,6 +58,7 @@
 .layer-flow .layer, .layer-step .layer                         { background: var(--rv-layer-flows); color: var(--rv-on-layer); }
 .layer-component .layer                                        { background: var(--rv-layer-components); color: var(--rv-on-layer); }
 .layer-environment .layer, .layer-resource .layer, .layer-pipeline .layer, .layer-job .layer { background: var(--rv-layer-deploy); color: var(--rv-on-layer); }
+.layer-file .layer, .layer-class .layer, .layer-method .layer, .layer-test .layer, .layer-surface .layer { background: var(--rv-layer-derived); color: var(--rv-on-layer); }
 .name    { flex: 1; min-width: 12rem; }
 .surface { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); }
 .count   { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); }
@@ -69,3 +70,20 @@
 .layer-claim .layer.status-absent   { background: var(--rv-held); }
 .layer-section     { color: var(--rv-text); }
 .brief .level-1 .node { font-size: var(--rv-fs-small); }
+
+.group            { margin: var(--rv-sp-1) 0; }
+.group-head       { align-items: center; cursor: pointer; display: flex; gap: var(--rv-sp-2); padding: var(--rv-sp-1) var(--rv-sp-2); }
+.group-head:hover { background: var(--rv-surface); border-radius: var(--rv-radius); }
+.group-head .layer { opacity: 1; }
+.layer.status-shipped  { background: var(--rv-layer-derived); color: var(--rv-on-layer); }
+.layer.status-proposed { background: var(--rv-proposed); color: var(--rv-on-layer); }
+.layer.status-absent   { background: var(--rv-held); color: var(--rv-on-layer); }
+.pkg              { color: var(--rv-text-heading); }
+.layer-file .layer, .layer-class .layer, .layer-method .layer { background: var(--rv-layer-derived); color: var(--rv-on-layer); }
+li.area           { color: var(--rv-text-muted); font-size: var(--rv-fs-xs); letter-spacing: 0.06em; margin-top: var(--rv-sp-2); text-transform: uppercase; }
+
+/* the code tree: narrow column, one line per node, the count at the end */
+.code .node        { flex-wrap: nowrap; }
+.code .name        { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.code .count       { margin-left: auto; }
+.code .pkg         { color: var(--rv-text-heading); }

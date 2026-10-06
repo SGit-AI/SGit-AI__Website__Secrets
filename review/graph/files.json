@@ -1,0 +1,1873 @@
+{
+  "edges": [],
+  "files": [
+    {
+      "bytes": 3935,
+      "id": "file:.github/workflows/deploy-pages.yml",
+      "language": "yaml",
+      "lines": 106,
+      "path": ".github/workflows/deploy-pages.yml",
+      "sha256": "049991bbdd5f2392a57743549312512869a6753e213d996cd4377afc0ad5807e",
+      "summary": {}
+    },
+    {
+      "bytes": 7915,
+      "id": "file:404.html",
+      "language": "html",
+      "lines": 122,
+      "path": "404.html",
+      "sha256": "9b46abeb57d2e297f0495934570dd8d17e0aa0e68e48954fa2f3219d4d3ae387",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Not found — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 2193,
+      "id": "file:admin/build/assemble_site.py",
+      "language": "python",
+      "lines": 49,
+      "module": "module:admin/build/assemble_site.py",
+      "path": "admin/build/assemble_site.py",
+      "sha256": "560c312956e540d3e48ff13df69cc1173df5ffbed59f0cd1a7b1a1711e7be31f",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Assemble__Site\nCopies the deployable tree into _site/ for the Pages artifact: everything\nexcept .git, .github, infra, tests/unit and node_modules (section 9.1 of the\nbrief). The exclude list lives here and nowhere else; the deploy job calls\nthis file so the same tree can be assembled and inspected locally.\nUsage: python3 admin/build/assemble_site.py [--out _site]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 20007,
+      "id": "file:admin/build/chrome.py",
+      "language": "python",
+      "lines": 226,
+      "module": "module:admin/build/chrome.py",
+      "path": "admin/build/chrome.py",
+      "sha256": "ae75a0a6a4de89374a66597a1755797b28d45fa158c41cf50b512ba3554ee8b8",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Chrome\nThe one definition of the site chrome: head block, the family nav (grouped\nmenus with dropdowns, the parent link, the stage pill, the version badge,\nthe phone menu button), breadcrumbs, footer, CSP and canonical URL. Every\nHTML page gets it injected between markers by gen_chrome.py, so the chrome\ncannot drift between pages. The nav shape is the one sgit.ai, nfrs.sgit.ai\nand pki.sgit.ai run; the interaction lives in assets/nav.js. The theme picker\nin the nav is generated from data/themes.json; assets/theme.js applies the\nchoice and assets/themes.css holds every colour, ",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 3492,
+      "id": "file:admin/build/gate.py",
+      "language": "python",
+      "lines": 55,
+      "module": "module:admin/build/gate.py",
+      "path": "admin/build/gate.py",
+      "sha256": "33a4b24abee7b6bf827ed2ff8acc3e14534ad49dbc708c5616a8af6e784bfd4c",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gate\nThe release gate, one command, identical locally and in CI. The CI validate\njob runs exactly this file, so a release that fails here fails the same way\nthere. Order matters: the generators run before the gate reads their output.\nUsage: python3 admin/build/gate.py            check everything (what CI does)\npython3 admin/build/gate.py --build    regenerate, then check everything",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 2425,
+      "id": "file:admin/build/gen_chrome.py",
+      "language": "python",
+      "lines": 49,
+      "module": "module:admin/build/gen_chrome.py",
+      "path": "admin/build/gen_chrome.py",
+      "sha256": "702aec56f2c9d2e87b138e944e07d6c66f60b459519c545e913ef75bfa9189fe",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Chrome\nInjects the chrome (head block, nav, footer) into every HTML page between the\nsg-secrets markers. `--check` fails when any page is not current.\nUsage: python3 admin/build/gen_chrome.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 11992,
+      "id": "file:admin/build/gen_docs.py",
+      "language": "python",
+      "lines": 170,
+      "module": "module:admin/build/gen_docs.py",
+      "path": "admin/build/gen_docs.py",
+      "sha256": "698761ae15847e90ccbb88367274f78b408fa1ce549b30d9c995b494a1126984",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Docs\nRenders every markdown document under docs/ to an HTML page beside it\n(docs/design/x.md -> docs/design/x.html) and writes an index page per\nfolder. The markdown stays the source and the twin; the HTML page names it\nin <meta name=\"sg-secrets:source\">. Runs before gen_chrome, which fills the\nchrome; only the document block and the head metas are this generator's.\nUsage: python3 admin/build/gen_docs.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 11271,
+      "id": "file:admin/build/gen_features.py",
+      "language": "python",
+      "lines": 178,
+      "module": "module:admin/build/gen_features.py",
+      "path": "admin/build/gen_features.py",
+      "sha256": "63bc6861ed19d7b228822d7b1dd7f9225a1c7f113c5b68fcc0839f73649312f0",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Features\nReads data/features.json, validates it, and generates (1) docs/reality.md, the\nlist of what is built, and (2) the status tables in pages that carry a\n<!-- sg-secrets:features:start area=\"...\" --> block. `--check` fails on drift.\nUsage: python3 admin/build/gen_features.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 7194,
+      "id": "file:admin/build/gen_llms.py",
+      "language": "python",
+      "lines": 118,
+      "module": "module:admin/build/gen_llms.py",
+      "path": "admin/build/gen_llms.py",
+      "sha256": "9964a8d3d69c884b142ec26e5de2d4fad1dab137ae98609159cd30e7f416d930",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Llms\nGenerates the machine indexes: llms.txt (every page and document, one line\neach), llms-full.txt (every page twin and every document concatenated) and\nsitemap.xml. Runs after gen_twins.\nUsage: python3 admin/build/gen_llms.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 3958,
+      "id": "file:admin/build/gen_search.py",
+      "language": "python",
+      "lines": 79,
+      "module": "module:admin/build/gen_search.py",
+      "path": "admin/build/gen_search.py",
+      "sha256": "c95b637874318ad5a0839625693482f95195299b393261dceb04564408cbf050",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Search\nWrites data/search-index.json: one entry per page and per rendered document\n(url, twin, title, description, headings, the text), from the markdown twins\ngen_twins wrote. The reader's column searches it offline (tier 0) and the\nchat's search tool reads it (tier 1); nothing leaves the browser for a search.\nUsage: python3 admin/build/gen_search.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 4933,
+      "id": "file:admin/build/gen_twins.py",
+      "language": "python",
+      "lines": 75,
+      "module": "module:admin/build/gen_twins.py",
+      "path": "admin/build/gen_twins.py",
+      "sha256": "970b3654f1e836ffd9a55f7446e8a001bb5f9e8502859041e135eff34067b450",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Twins\nWrites the markdown twin of every HTML page (index.html -> index.md) from the\npage's <main>, with a header that names the source and the site version.\nUsage: python3 admin/build/gen_twins.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 6673,
+      "id": "file:admin/build/gen_versions.py",
+      "language": "python",
+      "lines": 112,
+      "module": "module:admin/build/gen_versions.py",
+      "path": "admin/build/gen_versions.py",
+      "sha256": "5636c992e1203d293e429799c8137badd74425e8bbdfd7e0cefc39cc4c33a311",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Versions\nRenders the release history table in admin/versions.html from\ndata/versions.json, and checks the file agrees with version.txt.\nUsage: python3 admin/build/gen_versions.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 7848,
+      "id": "file:admin/build/html_to_md.py",
+      "language": "python",
+      "lines": 210,
+      "module": "module:admin/build/html_to_md.py",
+      "path": "admin/build/html_to_md.py",
+      "sha256": "5ea5f75c049c8b75981b62a598939cb478f92b2ee333244e220824b78c56ee2c",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Html__To__Markdown\nConverts the <main> of a page into its markdown twin. Handles the elements the\nsite uses (headings, paragraphs, lists, tables, links, code, emphasis) and\nrewrites internal .html links to their .md twins so an agent never parses HTML.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 9841,
+      "id": "file:admin/build/md_to_html.py",
+      "language": "python",
+      "lines": 191,
+      "module": "module:admin/build/md_to_html.py",
+      "path": "admin/build/md_to_html.py",
+      "sha256": "97841987ebdf3aec4b7cf19fc9b0ee8a66139f34a6753e361ba139dd969e1a33",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Markdown__To__Html\nRenders the markdown the site carries (the design documents, the ops notes,\nreality.md) to an HTML fragment: headings with GitHub-style ids, paragraphs,\nnested lists, task lists, tables, fenced code, blockquotes, rules, links,\nimages, emphasis and inline code. Standard library only; no extensions.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 4915,
+      "id": "file:admin/build/pages.py",
+      "language": "python",
+      "lines": 94,
+      "module": "module:admin/build/pages.py",
+      "path": "admin/build/pages.py",
+      "sha256": "cf7005fd5ace37c3ead23a6c8d00b5bc3bc9718a16a686e5c70a36bbca1a9591",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Site__Pages\nFinds every HTML page that carries the chrome markers and reads what the\ngenerators need from it: url path, title, description, main content.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 7394,
+      "id": "file:admin/build/release.py",
+      "language": "python",
+      "lines": 126,
+      "module": "module:admin/build/release.py",
+      "path": "admin/build/release.py",
+      "sha256": "9ceae016e3c901ada9ce4cd8572df4b84754dee44a40a86f5d1efb48e6d79a88",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Release\nOne script for a release, in the family's order: bump, build, validate, push,\nverify. Sets the version, adds the release row, regenerates everything, runs\nthe whole gate, commits \"site vX.Y.Z : what\" with a Kind: trailer, pushes,\nand then polls the live site until it serves the version. A clean push is\nnot a release; this script does not say \"done\" until the origin does.\nUsage: python3 admin/build/release.py --version 0.1.3 --kind feature \\\n--title \"what\" --notes \"why, in a sentence a reader can act on\" [--branch dev] [--no-push] [--trailers \"Co-Authored-By: …\"]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 5311,
+      "id": "file:admin/build/tag_release.py",
+      "language": "python",
+      "lines": 106,
+      "module": "module:admin/build/tag_release.py",
+      "path": "admin/build/tag_release.py",
+      "sha256": "158ce432c0222b9d430c01c87a3f83e63d38a7f24f435d859190bf2bc6512cb8",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Tag__Release\nThe tag-release job. Reads admin/build/version.txt, finds the newest commit\nwhose subject reads \"site vX.Y.Z : what\", asserts the two agree, asserts the\nversion is the next minor (or a patch, or a deliberate major .0.0) after the\nnewest existing tag, backfills any historical release that has no tag, and\npushes the tags. Idempotent: a tag that already points at the right commit is\nleft alone; one that points elsewhere is a failure, never moved.\nUsage: python3 admin/build/tag_release.py [--dry-run] [--remote origin] [--no-push]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 27486,
+      "id": "file:admin/build/validate.js",
+      "language": "javascript",
+      "lines": 484,
+      "module": "module:admin/build/validate.js",
+      "path": "admin/build/validate.js",
+      "sha256": "68435b5a429a25a44843f9351cbc93cbb307ef629c67b08f952f9c92d248b12e",
+      "summary": {
+        "classes": 0,
+        "doc": "",
+        "functions": 30
+      }
+    },
+    {
+      "bytes": 4338,
+      "id": "file:admin/build/verify_live.py",
+      "language": "python",
+      "lines": 78,
+      "module": "module:admin/build/verify_live.py",
+      "path": "admin/build/verify_live.py",
+      "sha256": "6077890fe9995fb22f9d1cf94c8b3a28a30f840fb1309fd95ea937d53d85b6a8",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Verify__Live\nThe verify-live job: green does not mean live. Polls the live site's\nadmin/build/version.txt and the homepage version badge, with a cache-buster,\nuntil both equal the released version or the timeout passes. A deploy whose\nbytes nobody can read is not a release, so the run fails loudly otherwise.\nUsage: python3 admin/build/verify_live.py --version 0.1.0 [--base https://secrets.sgit.ai] [--timeout 600] [--interval 15]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 17302,
+      "id": "file:admin/comms.html",
+      "language": "html",
+      "lines": 177,
+      "path": "admin/comms.html",
+      "sha256": "31899728bebfefcbe2d01ea7b1434036e234fd0aa6a52674c63cd4395c317853",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Comms: asks and steps — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 21128,
+      "id": "file:admin/index.html",
+      "language": "html",
+      "lines": 178,
+      "path": "admin/index.html",
+      "sha256": "f19fc59f0ef9e500c1bdbfc217234ceeafff2094d743f3a051f2aa2fb70bbabc",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Admin — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 19917,
+      "id": "file:admin/versions.html",
+      "language": "html",
+      "lines": 137,
+      "path": "admin/versions.html",
+      "sha256": "9795651d661843c6b423ee8db9d6bf0ac33985df02785cd4b282b7b81dfbb2f1",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Release history — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 2384,
+      "id": "file:app/config/storage-keys.js",
+      "language": "javascript",
+      "lines": 25,
+      "module": "module:app/config/storage-keys.js",
+      "path": "app/config/storage-keys.js",
+      "sha256": "892c307ba6cd556386db86acfeeade7038973ee3f19434a84f3b20241577fb3d",
+      "summary": {
+        "classes": 0,
+        "doc": "── storage-keys.js — the only keys the app may write to browser storage ──────\n\nThe gate (admin/build/validate.js, check 8) reads this file and fails the\nbuild when any localStorage.setItem or sessionStorage.setItem call under\napp/, components/, admin/ or tests/ uses a key that is not listed here, or\nuses a key that is not a literal. Nothing derived from a key, a PRF output,\na KEK, a token or a decrypted body is ever stored: these keys hold UI\nconveniences and the chosen environment configuration, all public values.\nUpdate here only; do not duplicate locally.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 2080,
+      "id": "file:assets/mockups.css",
+      "language": "css",
+      "lines": 45,
+      "path": "assets/mockups.css",
+      "sha256": "878d38eb32e9374482d3adbe376f4beef6cb221b4c1eff30f3a184f390e8078a",
+      "summary": {}
+    },
+    {
+      "bytes": 2308,
+      "id": "file:assets/nav.js",
+      "language": "javascript",
+      "lines": 46,
+      "module": "module:assets/nav.js",
+      "path": "assets/nav.js",
+      "sha256": "33e66df93332e4f1a45b14512657b0534a9d202f5538ecfcf2dc86e56ac20f6b",
+      "summary": {
+        "classes": 0,
+        "doc": "── nav.js — the family nav interaction, as sgit.ai, nfrs.sgit.ai and pki.sgit.ai run it ──\n\nTwo jobs, and only one of them needs JavaScript on a desktop: hover and\n:focus-within open a dropdown in CSS alone. This handles the rest: the phone\nmenu button, and the fact that a finger has no hover. If this file never\nloads the nav still works, because every group label is a link to that\nsection's own page. Served from this origin only (CSP script-src 'self').\nNo storage, no network, no state beyond the open class.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 12166,
+      "id": "file:assets/site.css",
+      "language": "css",
+      "lines": 355,
+      "path": "assets/site.css",
+      "sha256": "2ae97f6b17fee2528f5bcaf714f98d2284c60340f5bd7c4a34960168316559d3",
+      "summary": {}
+    },
+    {
+      "bytes": 3031,
+      "id": "file:assets/theme.js",
+      "language": "javascript",
+      "lines": 57,
+      "module": "module:assets/theme.js",
+      "path": "assets/theme.js",
+      "sha256": "ef43359d66faf716e0f02d066de0333f7c0c65f6cc918d5f5a4a012767cfa640",
+      "summary": {
+        "classes": 0,
+        "doc": "── theme.js — four themes, one attribute, one storage key ───────────────────\n\nSets html[data-theme] before the first paint, so there is no flash: this\nscript is loaded in <head> without defer, before the stylesheets, and does\nnothing slow. The value comes from localStorage under the one key the app\nmay use for it (LOCAL_STORAGE_KEYS.theme in app/config/storage-keys.js; a\nclassic script cannot import that module, so the literal is repeated here\nand the gate's check 8 confirms it is the allowed one), or, when nothing is\nstored, from the reader's prefers-color-scheme. Then it wires every element",
+        "functions": 5
+      }
+    },
+    {
+      "bytes": 7468,
+      "id": "file:assets/themes.css",
+      "language": "css",
+      "lines": 174,
+      "path": "assets/themes.css",
+      "sha256": "bd626138ed6e4b759b93ac5bc1951e071989570fcc3e21201f38a9fed608e18b",
+      "summary": {}
+    },
+    {
+      "bytes": 13731,
+      "id": "file:components/proto-app/proto-app.css",
+      "language": "css",
+      "lines": 250,
+      "path": "components/proto-app/proto-app.css",
+      "sha256": "aceebf6bc7fc4b2901397bbdbf4721879f26afb0ae0e0c9ffb27e36b235583f6",
+      "summary": {}
+    },
+    {
+      "bytes": 717,
+      "id": "file:components/proto-app/proto-app.html",
+      "language": "html",
+      "lines": 12,
+      "path": "components/proto-app/proto-app.html",
+      "sha256": "054ada9d830fb37b7c02b33d187382f7686bc7122de7c4f86318d8778249c11a",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 33348,
+      "id": "file:components/proto-app/proto-app.js",
+      "language": "javascript",
+      "lines": 408,
+      "module": "module:components/proto-app/proto-app.js",
+      "path": "components/proto-app/proto-app.js",
+      "sha256": "c6d2e3fb31872bd11f06ca52edee74f14318e0a6625b30b21d293a7665e71e60",
+      "summary": {
+        "classes": 1,
+        "doc": "proto-app — the design prototype in a mini browser frame: the ten screens\nthe brief describes, working on invented data (proto-base's store), in one\nof three UX variants picked from the frame's bar: Desk (the brief's own\nshape: header, sidebar, list, forms), Focus (one card per screen, a bottom\nbar of tabs, phone first) and Command (a command bar, a dense table, an\ninspector). The same screen bodies render in all three; the chrome around\nthem, the targets and the way you move differ, which is what A/B testing\nneeds. `screen=\"vault\"` starts the frame on a screen; without it the frame\nstarts whe",
+        "functions": 1
+      }
+    },
+    {
+      "bytes": 163,
+      "id": "file:components/proto-base/proto-base.css",
+      "language": "css",
+      "lines": 3,
+      "path": "components/proto-base/proto-base.css",
+      "sha256": "34ce374bce5103460fb2e6bef97e622de5d06671f518ab25ad0bbc7fe75da03e",
+      "summary": {}
+    },
+    {
+      "bytes": 71,
+      "id": "file:components/proto-base/proto-base.html",
+      "language": "html",
+      "lines": 1,
+      "path": "components/proto-base/proto-base.html",
+      "sha256": "23e7a5e9f5742249ccb7ee4ea4e77d4c78b6f5a581a94ee09b22afb39684e2de",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 13984,
+      "id": "file:components/proto-base/proto-base.js",
+      "language": "javascript",
+      "lines": 277,
+      "module": "module:components/proto-base/proto-base.js",
+      "path": "components/proto-base/proto-base.js",
+      "sha256": "f003b63dba9be1648a1b09fae1557fe99303c0f6b2f77a765aac3951e1e0d0f6",
+      "summary": {
+        "classes": 2,
+        "doc": "proto-base — the base of the design prototype under /mockups/, and its store.\nThe store is the pretend app: who is signed in, which environment, whether\nthe keyring is locked, the entries, the devices, the recovery code, plus a\nlog of every action and a count of every screen visited, all in localStorage\nunder LOCAL_STORAGE_KEYS.proto so a reader can click through the screens as\nif the app existed and see their own data come back. Every value is\ninvented; nothing here is a secret, and the real app will never store what\nthis stores. The screens, the paths between them and the three UX variants\nc",
+        "functions": 4
+      }
+    },
+    {
+      "bytes": 5398,
+      "id": "file:components/proto-column/proto-column.css",
+      "language": "css",
+      "lines": 99,
+      "path": "components/proto-column/proto-column.css",
+      "sha256": "68119e7d6cc50205084fa6149eb3cb042427390d43d76a4163b81986aa4ae7ec",
+      "summary": {}
+    },
+    {
+      "bytes": 1836,
+      "id": "file:components/proto-column/proto-column.html",
+      "language": "html",
+      "lines": 39,
+      "path": "components/proto-column/proto-column.html",
+      "sha256": "ee27758a7187b6c909db305af31eb9f9d9918ac8b00d0b03df8b4cccbfac09c0",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 12233,
+      "id": "file:components/proto-column/proto-column.js",
+      "language": "javascript",
+      "lines": 208,
+      "module": "module:components/proto-column/proto-column.js",
+      "path": "components/proto-column/proto-column.js",
+      "sha256": "d5cf4ba9814460b9f9014a0051f3c9f95847050467d972be86b7c61cca93c0d8",
+      "summary": {
+        "classes": 1,
+        "doc": "proto-column — the column beside the prototype: what the current screen is\n(its path, its purpose, the section of the brief, the intent nodes it\nrealises, how often you have been here), the paths to it and from it as a\nsmall graph you can click, the data the prototype kept in this browser as\ncharts (entries by kind, screens visited, actions over the last hour) and\nas the log, the A/B/C vote on the UX variants, and the state as JSON with\nSeed, Reset and Copy. Charts are plain SVG: thin bars, direct labels in\ntext tokens, a title on every mark, the categorical colours of the theme.\n\n@module prot",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 3262,
+      "id": "file:components/reader-chat/reader-chat.css",
+      "language": "css",
+      "lines": 72,
+      "path": "components/reader-chat/reader-chat.css",
+      "sha256": "f19ee932f80a87e320df4bc395fd1be61c2321dca00ea8270d56210336d3b57b",
+      "summary": {}
+    },
+    {
+      "bytes": 1561,
+      "id": "file:components/reader-chat/reader-chat.html",
+      "language": "html",
+      "lines": 25,
+      "path": "components/reader-chat/reader-chat.html",
+      "sha256": "6aa521b732ea119e8790e3c636b5df1fbb316afe0dcb75c0443f834b8eafeb80",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 15013,
+      "id": "file:components/reader-chat/reader-chat.js",
+      "language": "javascript",
+      "lines": 278,
+      "module": "module:components/reader-chat/reader-chat.js",
+      "path": "components/reader-chat/reader-chat.js",
+      "sha256": "23199872e7e675829eedd6fc66b7463288efa2aa5219d5d74b906184544c59e8",
+      "summary": {
+        "classes": 1,
+        "doc": "reader-chat — a chat over the site, in two tiers. Tier 0, no key: a matcher\nover data/search-index.json, entirely in the browser. Tier 1, the reader's\nown OpenRouter key: Claude Sonnet through openrouter.ai with tools that read\nthis site (search, open_page, list_pages, read_next), read the reader's log\n(my_feedback) and file a note into it (file_feedback), so a conversation\nturns into feedback the build agent receives. The key is held in memory, or\nin this tab's sessionStorage when the reader ticks \"keep for this tab\",\nnever in localStorage, and is sent to openrouter.ai and nowhere else. Voice",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 3500,
+      "id": "file:components/reader-log/reader-log.css",
+      "language": "css",
+      "lines": 64,
+      "path": "components/reader-log/reader-log.css",
+      "sha256": "f79481cdec253fb9451014d1dc6f3297dc5fc07d9e36af5ecea30ff20f73a140",
+      "summary": {}
+    },
+    {
+      "bytes": 1986,
+      "id": "file:components/reader-log/reader-log.html",
+      "language": "html",
+      "lines": 34,
+      "path": "components/reader-log/reader-log.html",
+      "sha256": "9f5b6680c591815d55136d90c1171c2d20d7dbf3db35fce9b50f1e8c17460978",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 14654,
+      "id": "file:components/reader-log/reader-log.js",
+      "language": "javascript",
+      "lines": 258,
+      "module": "module:components/reader-log/reader-log.js",
+      "path": "components/reader-log/reader-log.js",
+      "sha256": "63074bfdcb23b0f0ffdcbb40ecb5fa0d9c6bdb2966584178eb517acee8467647",
+      "summary": {
+        "classes": 1,
+        "doc": "reader-log — the reader's log for this page: read, star, up or down, a note\n(typed or dictated), every action one event in an append-only log in\nlocalStorage, keyed by page path and a hash of the page's text so a note\nwritten against an older version says so. Undo is another event, never a\ndeletion. \"Send to the agent\" seals the unsent events to the build agent's\npublic key (the sgit PKI envelope, made here with WebCrypto) and writes them\nto the readers lane of the comms vault named in /.well-known/sgit-agents.json.\n\"Copy for Claude\" puts the same on the clipboard as markdown with JSON, and\n\"P",
+        "functions": 7
+      }
+    },
+    {
+      "bytes": 3021,
+      "id": "file:components/reader-panel/reader-panel.css",
+      "language": "css",
+      "lines": 93,
+      "path": "components/reader-panel/reader-panel.css",
+      "sha256": "b6ed37cd79a2ba8524962471b23e85f9c27a744dbd9419bcd1fa9852a9f08a73",
+      "summary": {}
+    },
+    {
+      "bytes": 1290,
+      "id": "file:components/reader-panel/reader-panel.html",
+      "language": "html",
+      "lines": 20,
+      "path": "components/reader-panel/reader-panel.html",
+      "sha256": "1166e5b2156d639fc95086ad6e9d27334395955ffc7b9ae19bdc7e172b1ccf86",
+      "summary": {
+        "elements": [
+          "reader-chat",
+          "reader-log",
+          "review-graph"
+        ],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 5504,
+      "id": "file:components/reader-panel/reader-panel.js",
+      "language": "javascript",
+      "lines": 115,
+      "module": "module:components/reader-panel/reader-panel.js",
+      "path": "components/reader-panel/reader-panel.js",
+      "sha256": "fcdbc42218c7714e08e1aee27025d1f96478b1e12c59ab2c39cf20ac68ae71e3",
+      "summary": {
+        "classes": 1,
+        "doc": "reader-panel — the reader's column: a tab on the right edge of every page\nthat opens a drawer with three views. Log: mark this page read, star it,\nvote, leave a note, dictate one, then send it all to the build agent or copy\nit for Claude (reader-log). Chat: ask the site, offline or through the\nreader's own OpenRouter key (reader-chat). Graph: the intent nodes this page\nnames and their neighbours, drawn by the navigator's review-graph, loaded\nonly when the tab is first opened. Open or closed and the current tab are\nkept in localStorage under LOCAL_STORAGE_KEYS.reader; nothing else.\n\n@module rea",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 158,
+      "id": "file:components/sg-base/sg-base.css",
+      "language": "css",
+      "lines": 3,
+      "path": "components/sg-base/sg-base.css",
+      "sha256": "99330398051ff7294e8e48ed01ec1ef8d58c997c95454232eba1288dd03829b7",
+      "summary": {}
+    },
+    {
+      "bytes": 68,
+      "id": "file:components/sg-base/sg-base.html",
+      "language": "html",
+      "lines": 1,
+      "path": "components/sg-base/sg-base.html",
+      "sha256": "6c8ec644d400f539e2b85f7002918d5a0b63278a8a229fdf8e153133a3be20bc",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 5249,
+      "id": "file:components/sg-base/sg-base.js",
+      "language": "javascript",
+      "lines": 118,
+      "module": "module:components/sg-base/sg-base.js",
+      "path": "components/sg-base/sg-base.js",
+      "sha256": "efaef01d9ae7d6a79f5c174d6580e084a0aa78e04bd9582ea8a1b45da841e7f2",
+      "summary": {
+        "classes": 1,
+        "doc": "sg-base — the base component for the site's own components (the reader's\ncolumn and what it holds), in the coding.sgit.ai shape and the same contract\nas review-base: `static jsUrl = import.meta.url` to locate itself,\n`resourceName`, `sharedCssPaths`, `onReady()` instead of `connectedCallback`.\nMarkup and styles come from the two sibling files as a fetched fragment and\na <link>, never inline, because the site's CSP is style-src 'self'. Design\ntokens need no link: every --sg-* custom property is set on :root by\nassets/themes.css and assets/site.css and inherits through the shadow root,\nso a comp",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 33486,
+      "id": "file:docs/design/brief-corrections.html",
+      "language": "html",
+      "lines": 186,
+      "path": "docs/design/brief-corrections.html",
+      "sha256": "316500c5ebb103ca8ffe7b9d9c21fa552c79cc5121c8336dccf2e5e9c68e9e26",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Brief corrections — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 9975,
+      "id": "file:docs/design/index.html",
+      "language": "html",
+      "lines": 127,
+      "path": "docs/design/index.html",
+      "sha256": "2cf037d1d63f61e282ab63c65a040b4318b06ee01659325c2665d87a7bfa1376",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Design documents — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 18886,
+      "id": "file:docs/design/riskmandate-aws-cognito-architecture.html",
+      "language": "html",
+      "lines": 209,
+      "path": "docs/design/riskmandate-aws-cognito-architecture.html",
+      "sha256": "6fa54ac45aab13bf3359018d9e9ece2f772e6af3bff708805b5fef507746b84f",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Risk Mandate — AWS Cognito Client-Side Architecture — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 23255,
+      "id": "file:docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html",
+      "language": "html",
+      "lines": 253,
+      "path": "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html",
+      "sha256": "3f97bf0bc6c24061f927e28c2401b660b2c8eb01b61f7c3a4c61760701a6c282",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Risk Mandate — GCP Key Vault Architecture &amp; Password Manager MVP — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 38410,
+      "id": "file:docs/design/riskmandate-user-onboarding-account-experience.html",
+      "language": "html",
+      "lines": 334,
+      "path": "docs/design/riskmandate-user-onboarding-account-experience.html",
+      "sha256": "61504fe88554a3e8921ed4b186297325c85bfb3e8e2c3c5392f3a46e985666b6",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Risk Mandate — User Onboarding &amp; Account Experience — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 29128,
+      "id": "file:docs/design/riskmandate-workspace-architecture-briefing.html",
+      "language": "html",
+      "lines": 317,
+      "path": "docs/design/riskmandate-workspace-architecture-briefing.html",
+      "sha256": "d5728432eef6a8c16c58de17b042710b1b8356f8fc215ceae57bfa6f1ba7d7f6",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Risk Mandate — Google Workspace as Identity, Storage and Deployment Substrate — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 69870,
+      "id": "file:docs/design/secrets-sgit-ai__mvp-build-brief.html",
+      "language": "html",
+      "lines": 560,
+      "path": "docs/design/secrets-sgit-ai__mvp-build-brief.html",
+      "sha256": "a34841e7e37888cedebb4896a8eb25e7868dd859d06aa20e7da6fd351e5a8f20",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "secrets.sgit.ai — MVP build brief — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 9701,
+      "id": "file:docs/index.html",
+      "language": "html",
+      "lines": 126,
+      "path": "docs/index.html",
+      "sha256": "778611a2ce74ea873a40f5a55264992f7600b4a38f9b89e63e6e87fa3bc5035c",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Documents — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 19478,
+      "id": "file:docs/ops/bootstrap.html",
+      "language": "html",
+      "lines": 208,
+      "path": "docs/ops/bootstrap.html",
+      "sha256": "efde351507745e68a0568234d578d278be372c51a86222bcced7066fc6be7c02",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "GCP bootstrap: exactly what a human does, from the command line — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 12015,
+      "id": "file:docs/ops/branch-protection.html",
+      "language": "html",
+      "lines": 153,
+      "path": "docs/ops/branch-protection.html",
+      "sha256": "c43d7d4e8ed99998c66ffc96d54b873ab6286403600ea89140ac648f2c95825b",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Repository protections — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 15836,
+      "id": "file:docs/ops/comms.html",
+      "language": "html",
+      "lines": 156,
+      "path": "docs/ops/comms.html",
+      "sha256": "c0a83e62cd1bc171caba85a1c011dc060f88774f965fa16b137b057eb3fca3b1",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "The comms channel: from the reader&#x27;s column to the build agent — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 10603,
+      "id": "file:docs/ops/dns.html",
+      "language": "html",
+      "lines": 148,
+      "path": "docs/ops/dns.html",
+      "sha256": "1b223544c4b7b80a50c7793040de176f462918c697794b06eba4cfe011f9c955",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "DNS for secrets.sgit.ai — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 9142,
+      "id": "file:docs/ops/index.html",
+      "language": "html",
+      "lines": 127,
+      "path": "docs/ops/index.html",
+      "sha256": "61bb55eb37ada6f64d1116b444a79057c684a3c32f19f504f10ebf6cd0933bf8",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Operations — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 12557,
+      "id": "file:docs/ops/needs.html",
+      "language": "html",
+      "lines": 151,
+      "path": "docs/ops/needs.html",
+      "sha256": "5c4d7e3714970da30e8b4969417f9118a784af7fbf3634f9e43a79267e3156c2",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "What only a human can do — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 13478,
+      "id": "file:docs/ops/release.html",
+      "language": "html",
+      "lines": 154,
+      "path": "docs/ops/release.html",
+      "sha256": "3b243ac04acacd5c84dc964da41a4297bc69e72c323422e99c525292b68972fe",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "How a release works — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 30501,
+      "id": "file:docs/reality.html",
+      "language": "html",
+      "lines": 223,
+      "path": "docs/reality.html",
+      "sha256": "ec010396ef3785f5a79fe9d1a3533e2d8c7b0aa64b29beca0c2121ee99f80e90",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "secrets.sgit.ai: reality — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 14976,
+      "id": "file:environments/index.html",
+      "language": "html",
+      "lines": 186,
+      "path": "environments/index.html",
+      "sha256": "22e620517cbd6fc6eebca8b4231b17e3217bee9efce68243ff29644e840c721e",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Environments — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 15312,
+      "id": "file:how-it-works/index.html",
+      "language": "html",
+      "lines": 193,
+      "path": "how-it-works/index.html",
+      "sha256": "bb4016981425af891907082079de6787dbdf301b62f8597891d3b0ef30ae41c4",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "How it works — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 47863,
+      "id": "file:index.html",
+      "language": "html",
+      "lines": 241,
+      "path": "index.html",
+      "sha256": "4bb0c8e1595a5bb48d9bebefddb860c97ffc35d94a64cf7d2f09630061c33399",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "secrets.sgit.ai — a zero-knowledge secrets manager in the browser"
+      }
+    },
+    {
+      "bytes": 11338,
+      "id": "file:infra/bootstrap/bootstrap.sh",
+      "language": "shell",
+      "lines": 227,
+      "path": "infra/bootstrap/bootstrap.sh",
+      "sha256": "257713fea062998a8b9fc440af2a19cb376e1f1d12859cea851bc13c41840863",
+      "summary": {}
+    },
+    {
+      "bytes": 1258,
+      "id": "file:infra/rules/storage.rules",
+      "language": "rules",
+      "lines": 29,
+      "path": "infra/rules/storage.rules",
+      "sha256": "6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250",
+      "summary": {}
+    },
+    {
+      "bytes": 16140,
+      "id": "file:keyring/index.html",
+      "language": "html",
+      "lines": 200,
+      "path": "keyring/index.html",
+      "sha256": "724c3255eddf40b74ff3fb5d1b3d029337742c38fc13bc57cd4fc1628938507e",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Keyring format v1 — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 14657,
+      "id": "file:mockups/index.html",
+      "language": "html",
+      "lines": 147,
+      "path": "mockups/index.html",
+      "sha256": "0d68a4e5b29874f0e27eedca8fd97ac8c7e02c416f8610c56db9badb4d820842",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Design mockups — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 11455,
+      "id": "file:reader/index.html",
+      "language": "html",
+      "lines": 136,
+      "path": "reader/index.html",
+      "sha256": "a3b15e5542e7ff26ec51ffd90e722dabacd10cd7ffad4719ea1d00f1942d460d",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "The reader's page — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 15478,
+      "id": "file:review/index.html",
+      "language": "html",
+      "lines": 156,
+      "path": "review/index.html",
+      "sha256": "9a5270ccad63e16c03ffa70e91fb4d287c90ee82acffa4be2cc84ce064918905",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Review graphs — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 7212,
+      "id": "file:review/tools/brief.py",
+      "language": "python",
+      "lines": 125,
+      "module": "module:review/tools/brief.py",
+      "path": "review/tools/brief.py",
+      "sha256": "d4ccbd69c47d946b98285fa2b1329a432a097d922eeefc3014264c1dcbd7d0ba",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Brief\nSplits the MVP brief into the review folder's own pieces: one JSON file per\ntop-level section under review/brief/sections/ (fourteen files, not one per\nheading), each holding its subsections as markdown and as the same HTML the\nrendered page shows, plus the intent nodes written from each subsection; and\nreview/brief/index.json, the table of contents. The navigator shows a section\nin place (review-brief) so a reader following a claim to the brief never\nleaves it. The markdown stays the source; this is derived and checked.\nUsage: python3 review/tools/brief.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 11146,
+      "id": "file:review/tools/claims.py",
+      "language": "python",
+      "lines": 191,
+      "module": "module:review/tools/claims.py",
+      "path": "review/tools/claims.py",
+      "sha256": "1aa4fa4be71b0ff60a115ec43371484f484f43a259ad33aa5e0a48ba41c5e425",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Claims\nWrites review/intent/claims.json, the claims layer of the review graph: one\nnode per claim in data/features.json, one per release in data/versions.json,\nand one anchor node per thing a chain of evidence ends on (a file, a test, a\nsection of the brief, a document, a URL, a commit, a tag, a CI run), with\nthe typed edges between them. A claim's evidence refs are strings\n\"<verb> <kind>:<value>\" in features.json; here they become edges to nodes,\nevery one checked: the file exists, the section is in the brief, the intent\nnode is in the set. Strict: a shipped claim with no an",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 25321,
+      "id": "file:review/tools/derive.py",
+      "language": "python",
+      "lines": 375,
+      "module": "module:review/tools/derive.py",
+      "path": "review/tools/derive.py",
+      "sha256": "30c9a92953bf535b18f1e2038c96c872481d65def1efe15c815fc04b00baa818",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Derive\nStep 2 of the review brief: the code graph, derived bottom up from the syntax\ntree by parsers, never by a model. Python through the standard library's\nast; JavaScript through the vendored acorn (derive_js.mjs, run by node);\nevery other source file counted and hashed. Writes review/graph/index.json, files.json,\nmodules.json, classes.json, methods.json, tests.json and surfaces.json in the\nreview brief's shapes, each with provenance (tool, commit, tree hash, every\ninput's hash), sorted so two runs on the same tree are byte-identical. The\nwords a file says about itself (it",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 4234,
+      "id": "file:review/tools/freshness.py",
+      "language": "python",
+      "lines": 84,
+      "module": "module:review/tools/freshness.py",
+      "path": "review/tools/freshness.py",
+      "sha256": "e58e6faf67bb3db5b76f2c83d7b51828745601a0d8e780b03f6846edefa0b56a",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Freshness\nFails when review/ is older than the code it describes: any derived file\nwhose provenance names a tree hash other than the tree being built, or, once\nconfig.json#changes_required_from names a commit, a commit after it that\ntouched source and has no review/changes/<hash>.json. A fresh empty folder\n(no derived files yet) passes and says so. Check 9 of the gate runs this.\nUsage: python3 review/tools/freshness.py [--set self]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 8718,
+      "id": "file:review/tools/readme.py",
+      "language": "python",
+      "lines": 135,
+      "module": "module:review/tools/readme.py",
+      "path": "review/tools/readme.py",
+      "sha256": "249ea8066847cabd0ce621a2b1d08431662ae64c4f38d7127083888d11cd6674",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Review__Readme\nWrites review/README.md: what the folder is, the counts per layer, the\ncoverage figure, the change-file count, the open gaps and proposals, and how\nto regenerate and read it. Every number is computed here, never typed.\nUsage: python3 review/tools/readme.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 4793,
+      "id": "file:review/tools/review_tree.py",
+      "language": "python",
+      "lines": 91,
+      "module": "module:review/tools/review_tree.py",
+      "path": "review/tools/review_tree.py",
+      "sha256": "4c7ca887f38a5d5066d5ac29a02932ba02dfc3ca0ca422029c1b8f4416c56267",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Review__Tree\nWhat every review tool shares: which files count as source, the hash of that\ntree, stable (byte-identical) JSON writing, and the provenance block every\nderived file carries. Determinism rule: sorted keys, sorted lists where order\ncarries no meaning, no timestamps outside provenance, two-space indent, LF.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 4139,
+      "id": "file:review/tools/schema.py",
+      "language": "python",
+      "lines": 80,
+      "module": "module:review/tools/schema.py",
+      "path": "review/tools/schema.py",
+      "sha256": "2c9ddc0179837e099ec44bbef373965808089f907d2ed781b18519e717974153",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Schema__Validator\nA small JSON Schema validator, standard library only, covering the subset the\nreview schemas use: type, required, properties, additionalProperties, items,\nenum, const, minItems, pattern, anyOf, $ref to a definition in the same file.\nReturns a list of problems as \"path: message\"; an empty list is valid.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 2840,
+      "id": "file:review/tools/sections.py",
+      "language": "python",
+      "lines": 57,
+      "module": "module:review/tools/sections.py",
+      "path": "review/tools/sections.py",
+      "sha256": "5e44f868dfc1a3f345030e6ec8b5cb00318e5c950f7c4f0c807476efd67d8471",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Sections\nWrites review/intent/sections.json: every numbered section of the MVP brief\nwith the anchor the rendered page gives its heading, so a projected node's\n{doc, section} source can link to the exact place in the brief. Derived\nfrom the brief's markdown with the same slug rule the renderer uses.\nUsage: python3 review/tools/sections.py [--check]",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 6189,
+      "id": "file:review/tools/validate_review.py",
+      "language": "python",
+      "lines": 117,
+      "module": "module:review/tools/validate_review.py",
+      "path": "review/tools/validate_review.py",
+      "sha256": "0a5963cef9b7de5179bf2fcbe21903de190b8eaf58da4d70150165c62818c3df",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Validate__Review\nThe schema checks: every JSON file under review/ and review/self/ validates\nagainst the schema for its shape, every edge uses a verb from verbs.json,\nevery node id in a file is unique, and every edge endpoint resolves to a\nnode in the folder's layers. Standard library only.\nUsage: python3 review/tools/validate_review.py",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 67,
+      "id": "file:review/ui/components/review-base/review-base.css",
+      "language": "css",
+      "lines": 2,
+      "path": "review/ui/components/review-base/review-base.css",
+      "sha256": "5bddef64490d6cf379d1131f5685e98982dcb092b6ddff4114ee3e1497f27bf2",
+      "summary": {}
+    },
+    {
+      "bytes": 72,
+      "id": "file:review/ui/components/review-base/review-base.html",
+      "language": "html",
+      "lines": 1,
+      "path": "review/ui/components/review-base/review-base.html",
+      "sha256": "c2a003b1a7a3328bf43563a7ca1618ad3fd53939308d07693bfa4ac31f58c1af",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 22247,
+      "id": "file:review/ui/components/review-base/review-base.js",
+      "language": "javascript",
+      "lines": 403,
+      "module": "module:review/ui/components/review-base/review-base.js",
+      "path": "review/ui/components/review-base/review-base.js",
+      "sha256": "de0f68e0903a571a7fff670732e4d8226c94ad196541a403c5fc1433ca1e9cfa",
+      "summary": {
+        "classes": 2,
+        "doc": "review-base — the base component every visualiser extends, and the shared store.\n\nA sibling of the tools' SgComponent with the same contract (brief-corrections R2):\n`static jsUrl = import.meta.url` to locate itself, `resourceName`, `sharedCssPaths`,\n`onReady()` instead of `connectedCallback`. Styles enter the shadow root as <link>\nelements, never as inline <style>, because the site's CSP is style-src 'self'.\n\nThe store reads the review folder's JSON files by path (an inlined bundle on\nwindow.__REVIEW_BUNDLE__ is the fallback for the vault host), indexes every node\nby id with its layer, parent ",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 3074,
+      "id": "file:review/ui/components/review-brief/review-brief.css",
+      "language": "css",
+      "lines": 42,
+      "path": "review/ui/components/review-brief/review-brief.css",
+      "sha256": "ce2e624a4dfb3c84aa33f175263f1e147d024dfc6cd26f9a1ce76f9c7cc8f56a",
+      "summary": {}
+    },
+    {
+      "bytes": 115,
+      "id": "file:review/ui/components/review-brief/review-brief.html",
+      "language": "html",
+      "lines": 3,
+      "path": "review/ui/components/review-brief/review-brief.html",
+      "sha256": "4ee2c0d35d2740a0a11e5bac0e22ea694e794ca18ae3a39fe85ad334dc30374e",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 7440,
+      "id": "file:review/ui/components/review-brief/review-brief.js",
+      "language": "javascript",
+      "lines": 123,
+      "module": "module:review/ui/components/review-brief/review-brief.js",
+      "path": "review/ui/components/review-brief/review-brief.js",
+      "sha256": "9cba4a3d983fe1035e8352b02467edde02f03b9bfd012c3f66fc0a10efb0da44",
+      "summary": {
+        "classes": 1,
+        "doc": "review-brief — a section of the MVP brief, shown in place: the heading, the\nsame HTML the rendered page shows (from review/brief/sections/, split by\nreview/tools/brief.py), the intent nodes that were written from it (each a\nway into the graph), the previous and next subsection, and a link to the\nrendered page for anyone who wants to leave. With no section in the route\nit shows the table of contents. A reader following a claim down to the\nbrief stays in the navigator.\n\n@module review-brief\n@version 0.1.0",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 2345,
+      "id": "file:review/ui/components/review-code/review-code.css",
+      "language": "css",
+      "lines": 35,
+      "path": "review/ui/components/review-code/review-code.css",
+      "sha256": "b399a290f21ab53332010b78a2ba05a3004b9bc202da435143d35c950490d0a1",
+      "summary": {}
+    },
+    {
+      "bytes": 127,
+      "id": "file:review/ui/components/review-code/review-code.html",
+      "language": "html",
+      "lines": 3,
+      "path": "review/ui/components/review-code/review-code.html",
+      "sha256": "c7e330884d4288b8e90df28ff7c318b042a4c89bdda35c238b47331beec11628",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 13484,
+      "id": "file:review/ui/components/review-code/review-code.js",
+      "language": "javascript",
+      "lines": 203,
+      "module": "module:review/ui/components/review-code/review-code.js",
+      "path": "review/ui/components/review-code/review-code.js",
+      "sha256": "01d735468b4962f0c3445dbb7daa27b930c5c1f5c16ba4c651bf183113d3942e",
+      "summary": {
+        "classes": 1,
+        "doc": "review-code — the code panel, the bottom-up view: for the file, class,\nmethod, test or surface in focus, what it says about itself (the technical\nlayer: its banner, its def's comment, its JSDoc, taken from the code by the\nparser), why it exists (the business layer: the claims that live in it and\nthe stories they realise, the components that name it, the tests that test\nit, the pages that expose it), its outline (classes and methods, each a\nclick that marks the lines in the source beside it), what it imports and\nwhat imports it, and for a method what it calls and what calls it, every\none a link",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 635,
+      "id": "file:review/ui/components/review-crumb/review-crumb.css",
+      "language": "css",
+      "lines": 16,
+      "path": "review/ui/components/review-crumb/review-crumb.css",
+      "sha256": "3e92016f640c4a792d08a44653c358d6f1ac33e786458c1d2c751575ca1e9e51",
+      "summary": {}
+    },
+    {
+      "bytes": 109,
+      "id": "file:review/ui/components/review-crumb/review-crumb.html",
+      "language": "html",
+      "lines": 3,
+      "path": "review/ui/components/review-crumb/review-crumb.html",
+      "sha256": "c6c292aabfd8a2f48bd3a87cb9a06527a02c5aacb62f3b498d5f8e51b2949eb2",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 2653,
+      "id": "file:review/ui/components/review-crumb/review-crumb.js",
+      "language": "javascript",
+      "lines": 51,
+      "module": "module:review/ui/components/review-crumb/review-crumb.js",
+      "path": "review/ui/components/review-crumb/review-crumb.js",
+      "sha256": "79e68f7948c999a505f696f846dac50c14eb36f159ba54329812cae741b1d7ae",
+      "summary": {
+        "classes": 1,
+        "doc": "review-crumb — the path walked so far, root to the selected node, each step\na way back: clicking an ancestor selects it.\n\n@module review-crumb\n@version 0.1.0",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 2191,
+      "id": "file:review/ui/components/review-graph/review-graph.css",
+      "language": "css",
+      "lines": 41,
+      "path": "review/ui/components/review-graph/review-graph.css",
+      "sha256": "1ad2d0ef823b465b2f2bf7428cd453db7099cb45fa75ece260af63c04cb838e0",
+      "summary": {}
+    },
+    {
+      "bytes": 290,
+      "id": "file:review/ui/components/review-graph/review-graph.html",
+      "language": "html",
+      "lines": 4,
+      "path": "review/ui/components/review-graph/review-graph.html",
+      "sha256": "e5436b0cceb8ced0e49c34d88dd374cd050fd9d8b078427c47c1369087229078",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 9220,
+      "id": "file:review/ui/components/review-graph/review-graph.js",
+      "language": "javascript",
+      "lines": 174,
+      "module": "module:review/ui/components/review-graph/review-graph.js",
+      "path": "review/ui/components/review-graph/review-graph.js",
+      "sha256": "c356b762cb486463cda134df66c5c3a8d1b473cc2384e57fc0506330110d527b",
+      "summary": {
+        "classes": 1,
+        "doc": "review-graph — the native graph view: the node in focus and its neighbours\n(parent, children, edges in and out) drawn as an SVG graph, laid out by a\nsmall force simulation written here, no library. Two ways to use it: with no\n`nodes` attribute it follows the selection in the navigator; with\n`nodes=\"id,id\"` it draws those nodes and their neighbourhood, which is how a\npage's reader's column shows the intent the page realises. `depth` (default\n1) is how many hops out. A click on a node selects it, so the graph is a way\nto walk, not a picture. Colours are the layer tokens from tokens.css.\n\n@module",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 1665,
+      "id": "file:review/ui/components/review-ladder/review-ladder.css",
+      "language": "css",
+      "lines": 45,
+      "path": "review/ui/components/review-ladder/review-ladder.css",
+      "sha256": "ce6ff9196be9ff7042e28705a2cd0ea4fe6c37cec8bee1c37e5e6fce5523fcc3",
+      "summary": {}
+    },
+    {
+      "bytes": 130,
+      "id": "file:review/ui/components/review-ladder/review-ladder.html",
+      "language": "html",
+      "lines": 3,
+      "path": "review/ui/components/review-ladder/review-ladder.html",
+      "sha256": "b1a6fcf66e0a13dedadf6e3b5910005c40e6071b3f1b4df99434d6def2c87758",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 5802,
+      "id": "file:review/ui/components/review-ladder/review-ladder.js",
+      "language": "javascript",
+      "lines": 102,
+      "module": "module:review/ui/components/review-ladder/review-ladder.js",
+      "path": "review/ui/components/review-ladder/review-ladder.js",
+      "sha256": "30c9281b26c095191766eb4d5c44ee71d0bef5b144293eab6f9778785c7b3284",
+      "summary": {
+        "classes": 1,
+        "doc": "review-ladder — the layers of the review folder as a rail, top to bottom in\nthe brief's order: the intent (stories, rules, examples, flows, steps,\ncomponents), the derived code (files, classes, methods, tests, surfaces),\nthe deploy layer, then the join, the changes and the checks. Each intent\nlayer shows its count and switches the tree; each layer that does not exist\nyet says which step of the review brief brings it, so what is missing is on\nthe page, not implied. Counts come from the store; the absent layers are\nnamed here, with their step, until the derivation writes them.\n\n@module review-la",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 3325,
+      "id": "file:review/ui/components/review-node/review-node.css",
+      "language": "css",
+      "lines": 57,
+      "path": "review/ui/components/review-node/review-node.css",
+      "sha256": "07340dde30e78bb8c83a519266eb0ca8c07ebed9ac1db1581a8176dd4f179dee",
+      "summary": {}
+    },
+    {
+      "bytes": 118,
+      "id": "file:review/ui/components/review-node/review-node.html",
+      "language": "html",
+      "lines": 3,
+      "path": "review/ui/components/review-node/review-node.html",
+      "sha256": "efb7d34312e2bc09b3786f2efcb2661356890644cd62f5bfd21bc99107b2b410",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 8785,
+      "id": "file:review/ui/components/review-node/review-node.js",
+      "language": "javascript",
+      "lines": 154,
+      "module": "module:review/ui/components/review-node/review-node.js",
+      "path": "review/ui/components/review-node/review-node.js",
+      "sha256": "4700a35973f4f9a5c5c920e1cd563d2f43517af3ebb6055939cc86feade6f037",
+      "summary": {
+        "classes": 1,
+        "doc": "review-node — one node: name, layer, the section of the brief it came from\n(linked into the rendered brief), its text and properties, its parent and\nchildren, and its edges in and out read as sentences. Every link selects\nanother node, which is how walking up and down works from the right panel.\n\n@module review-node\n@version 0.1.0",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 1744,
+      "id": "file:review/ui/components/review-source/review-source.css",
+      "language": "css",
+      "lines": 37,
+      "path": "review/ui/components/review-source/review-source.css",
+      "sha256": "851875cc1868a34a7d0c0a796b870ab0575bf0f14c773a875a5c4161febfd92f",
+      "summary": {}
+    },
+    {
+      "bytes": 108,
+      "id": "file:review/ui/components/review-source/review-source.html",
+      "language": "html",
+      "lines": 3,
+      "path": "review/ui/components/review-source/review-source.html",
+      "sha256": "d5c3fe5a7f876138e0884f9425cef7a88904c0f3ac9d619599bad5a4300410f2",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 5036,
+      "id": "file:review/ui/components/review-source/review-source.js",
+      "language": "javascript",
+      "lines": 95,
+      "module": "module:review/ui/components/review-source/review-source.js",
+      "path": "review/ui/components/review-source/review-source.js",
+      "sha256": "8892b9aaae391d949883895e761da830f766634e30ac938eb46fb6b300902610",
+      "summary": {
+        "classes": 1,
+        "doc": "review-source — a file of the repository shown in place: the path, its\nsize and line count, the lines with numbers, a range marked when the route\nnames one (#file=<path>&lines=L12-L30), the claims that live in it (each a\nway back up), and a link to the same file on GitHub at the newest release\ncommit for anyone who wants to leave. The site serves every file it\ndeploys, so the fetch is same-origin; a file the deploy leaves out (the\nworkflows, infra, the unit tests) shows the GitHub link only. Step 5 of the\nreview brief, pulled forward so a chain of evidence can end on code.\n\n@module review-sour",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 4552,
+      "id": "file:review/ui/components/review-tree/review-tree.css",
+      "language": "css",
+      "lines": 89,
+      "path": "review/ui/components/review-tree/review-tree.css",
+      "sha256": "e425db73e35a99bb648cd75e175b4e0d3cc1bbd0d383b826a2c54afea12ffb33",
+      "summary": {}
+    },
+    {
+      "bytes": 810,
+      "id": "file:review/ui/components/review-tree/review-tree.html",
+      "language": "html",
+      "lines": 12,
+      "path": "review/ui/components/review-tree/review-tree.html",
+      "sha256": "97752923276bf4f22f87b9430a8b2a3a39e74eb229fbfd2d13d39f4919f05037",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 13208,
+      "id": "file:review/ui/components/review-tree/review-tree.js",
+      "language": "javascript",
+      "lines": 208,
+      "module": "module:review/ui/components/review-tree/review-tree.js",
+      "path": "review/ui/components/review-tree/review-tree.js",
+      "sha256": "f2f55f441885d78c4aeb8c2ba6b73c606956450170a30b9c9175e41619dabbfb",
+      "summary": {
+        "classes": 1,
+        "doc": "review-tree — story > rule > example, flow > step, the component tree, and\nenvironment > resource / pipeline > job: one component, every tree shape.\nA click on a node selects it (walking down); the selected path stays open.\nThe four view buttons at the top switch the tree; review-ladder replaces them\nfrom step 2.\n\n@module review-tree\n@version 0.1.0",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 5255,
+      "id": "file:review/ui/index.html",
+      "language": "html",
+      "lines": 69,
+      "path": "review/ui/index.html",
+      "sha256": "ca48b3b287ef8006ebf76738c6c7641e8cf316a95c6974ab65b2184c83423956",
+      "summary": {
+        "elements": [
+          "review-brief",
+          "review-code",
+          "review-crumb",
+          "review-graph",
+          "review-ladder",
+          "review-node",
+          "review-source",
+          "review-tree"
+        ],
+        "title": "Review graphs — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 5659,
+      "id": "file:review/ui/shell.css",
+      "language": "css",
+      "lines": 134,
+      "path": "review/ui/shell.css",
+      "sha256": "1486453f2f17c9531e89a1420ac1ed1b1879d91e650d5a149634a6a6686fb41d",
+      "summary": {}
+    },
+    {
+      "bytes": 4277,
+      "id": "file:review/ui/shell.js",
+      "language": "javascript",
+      "lines": 80,
+      "module": "module:review/ui/shell.js",
+      "path": "review/ui/shell.js",
+      "sha256": "919b72bfb421cf2e1bde8925650d837c5662ba70ca2c56d74edb0d569d0a5493",
+      "summary": {
+        "classes": 0,
+        "doc": "── shell.js — what the shell does and nothing else: show the version, name the set ──\n\nThe shell holds the layout; the components do the work. This script fills\nthe version badge from admin/build/version.txt and the set label from the\nstore, so the top bar says what the vault guidance asks of every app.",
+        "functions": 7
+      }
+    },
+    {
+      "bytes": 2975,
+      "id": "file:review/ui/tokens.css",
+      "language": "css",
+      "lines": 54,
+      "path": "review/ui/tokens.css",
+      "sha256": "403feedc08fa2340b995f733cc8b1b475e445c1599a55953e206ec45a7ef07d7",
+      "summary": {}
+    },
+    {
+      "bytes": 16534,
+      "id": "file:security/index.html",
+      "language": "html",
+      "lines": 174,
+      "path": "security/index.html",
+      "sha256": "d8802c8b39aa07179ad3a3a45f944cd0ff7b99bfecdf2af19edbcd41b47e3215",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Security — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 11788,
+      "id": "file:sharing/index.html",
+      "language": "html",
+      "lines": 150,
+      "path": "sharing/index.html",
+      "sha256": "7a375ce4fb6959b526a4f26b83a4a2c6ff15001f3aadd11ab3305d01ff4834fd",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Sharing — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 43979,
+      "id": "file:shipped/index.html",
+      "language": "html",
+      "lines": 216,
+      "path": "shipped/index.html",
+      "sha256": "92e5c44283e4e4477f5011eb95a6b22500b6854f8536b8a8ea6e5148fb3e8735",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Shipped, proposed, absent — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 8672,
+      "id": "file:team/index.html",
+      "language": "html",
+      "lines": 124,
+      "path": "team/index.html",
+      "sha256": "4d2954f25a2837ceefcf29aa08a1aee8e7129143130d5f0fd82682ff39da4994",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "The team — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 4178,
+      "id": "file:tests/build/test_chrome_in_every_page.py",
+      "language": "python",
+      "lines": 71,
+      "module": "module:tests/build/test_chrome_in_every_page.py",
+      "path": "tests/build/test_chrome_in_every_page.py",
+      "sha256": "9dae42da02b45fc8da10fc8c075820beab0efd97dc9397877c2ade472404d7ee",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Chrome__In__Every__Page\nEvery HTML page on the real tree carries the generated chrome: the CSP, the\ncanonical URL on the CNAME host, the version badge equal to version.txt, the\nnav, the footer and a <main>.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 7147,
+      "id": "file:tests/build/test_claims.py",
+      "language": "python",
+      "lines": 120,
+      "module": "module:tests/build/test_claims.py",
+      "path": "tests/build/test_claims.py",
+      "sha256": "ab7c3e9f3682f5206b2c913b8b77acef7fe95cc342ede6a60faa242998d3a9bc",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Claims\nEverything links to everything: every claim in data/features.json carries\nevidence that resolves; every shipped claim has an anchor; the claims layer\nis what claims.py writes and validates; every status chip on the site is a\nlink into the navigator at a claim that exists; every location that is a\nserved file links into the source view; the brief is split into sections\nthat match the markdown, one file per top-level section; every release\ncarries its tag and commit, and the navigator shell has the brief and\nsource regions.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 6439,
+      "id": "file:tests/build/test_derive.py",
+      "language": "python",
+      "lines": 108,
+      "module": "module:tests/build/test_derive.py",
+      "path": "tests/build/test_derive.py",
+      "sha256": "32932d167bdca964cb3c3f42c4afeeb7e6dc1b132484a05f94fd0e4b2feb35eb",
+      "summary": {
+        "classes": 1,
+        "doc": "── test_derive.py — step 2 of the review brief: the derived layers come from the syntax trees ──\nRuns the derivation over the fixture repository under review/tools/fixtures/repo\n(two Python classes with a subclass whose put() calls the base, one custom element\nover a base class, one test) and checks the shapes: classes with their methods,\ncalls resolved across files, the import edge, the element and its handler. Then\nthe real tree: graph/ validates, derive --check is clean, and the parser the\nJavaScript half runs is vendored, pinned and hashed, never fetched.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 3301,
+      "id": "file:tests/build/test_features_schema.py",
+      "language": "python",
+      "lines": 67,
+      "module": "module:tests/build/test_features_schema.py",
+      "path": "tests/build/test_features_schema.py",
+      "sha256": "668110eb00c829c850957feb4b74e088a0db753c484caf28da0efa401baa6cf6",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Features__Schema\ndata/features.json is well formed, agrees with the rules file it hashes, and\nevery claim on the homepage and in docs/reality.md comes from it.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 2348,
+      "id": "file:tests/build/test_generators_check.py",
+      "language": "python",
+      "lines": 42,
+      "module": "module:tests/build/test_generators_check.py",
+      "path": "tests/build/test_generators_check.py",
+      "sha256": "cf09bbf7e108d772126babca52cfdd82161ec03cb66252f5fd0b3372d0b48402",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Generators__Check\nEvery generator, run on the real tree with --check, reports nothing stale.\nNo mocks: the generators are tested by running them.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 2442,
+      "id": "file:tests/build/test_html_to_md.py",
+      "language": "python",
+      "lines": 45,
+      "module": "module:tests/build/test_html_to_md.py",
+      "path": "tests/build/test_html_to_md.py",
+      "sha256": "5d1b237195888cd9b7d1cac31279b16c02fe4f29fa706fabf41cc39e71e25705",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Html__To__Md\nThe twin converter on the fragments the site uses: headings, paragraphs,\nlists, tables, links (rewritten to .md), code and emphasis.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 4048,
+      "id": "file:tests/build/test_md_to_html.py",
+      "language": "python",
+      "lines": 73,
+      "module": "module:tests/build/test_md_to_html.py",
+      "path": "tests/build/test_md_to_html.py",
+      "sha256": "10cb4bbcf8c39f5f66218c573b8ecdf16bcf34725e8b7b8366d1ce81b5dc7691",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Md__To__Html\nThe markdown renderer on the constructs the documents use, and on the real\ndesign documents: every heading rendered, every table rendered, no raw\nmarkdown table rows left in the HTML.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 6072,
+      "id": "file:tests/build/test_mockups.py",
+      "language": "python",
+      "lines": 103,
+      "module": "module:tests/build/test_mockups.py",
+      "path": "tests/build/test_mockups.py",
+      "sha256": "49832c28075c1e3ff9e33c4e10aba5b47811c93286fd858deec0fdaf9e6bfefd",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Mockups\nThe design prototype: screens.json names ten screens, three variants and\npaths that only join screens that exist; every intent id a screen claims is a\nnode in review/intent/; every mockup page embeds proto-app on a screen that\nexists beside proto-column and loads both modules; the prototype page embeds\nthe frame with no screen; the categorical colours of every theme pass the\ndataviz validator's hard checks (five hues, adjacent pairs apart).",
+        "functions": 1
+      }
+    },
+    {
+      "bytes": 7788,
+      "id": "file:tests/build/test_reader.py",
+      "language": "python",
+      "lines": 130,
+      "module": "module:tests/build/test_reader.py",
+      "path": "tests/build/test_reader.py",
+      "sha256": "02c9dc40dfe5e8d836192a85b804b1f5a4ff4c212ea8cb7f152c54742cb28a43",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Reader\nThe reader's column and the comms channel: the site components follow the\ncoding.sgit.ai shape (three files, the base contract, no colour, no inline\nhandler, no semicolon line ends, no location.hash assignment); every browser\nstorage key they write is allow-listed; every page carries the column and\nits module; only /reader/ widens connect-src; the contact file has the\nAgent Contact v0.1 shape and, when a bundle is published, fingerprints that\nmatch the keys; the search index is what gen_search writes.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 5237,
+      "id": "file:tests/build/test_review_folder.py",
+      "language": "python",
+      "lines": 87,
+      "module": "module:tests/build/test_review_folder.py",
+      "path": "tests/build/test_review_folder.py",
+      "sha256": "c8be271686036652974e8db1e228b0d692e4a3c9a53aade3c503aac768d68be0",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Review__Folder\nThe review folder's own tools on the real tree and on fixtures: every file\nvalidates, the grammar's verbs all have distinct inverses, a stale provenance\nfails freshness, the README is byte-identical when generated twice, and the\nschema validator rejects what it should.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 4818,
+      "id": "file:tests/build/test_review_ui.py",
+      "language": "python",
+      "lines": 92,
+      "module": "module:tests/build/test_review_ui.py",
+      "path": "tests/build/test_review_ui.py",
+      "sha256": "8845f05ce8e468301dc038633d565b0402fc424fb931521bf44064c786bec1ff",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Review__UI\nThe navigator follows the coding.sgit.ai shape: three files per component\nwith the same basename, the base contract in every component, no literal\ncolour outside tokens.css, no inline handlers, data-* for behaviour, every\ninteractive element a real control, the CSP on the shell, every component\nthe README lists present, and every script parses.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 6053,
+      "id": "file:tests/build/test_themes.py",
+      "language": "python",
+      "lines": 109,
+      "module": "module:tests/build/test_themes.py",
+      "path": "tests/build/test_themes.py",
+      "sha256": "7875597a323c0b2d3dbe2d7eae44a72caea9605798c82669bf40762f2482f8f2",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Themes\nThe themes are data (data/themes.json), the colours are one file\n(assets/themes.css) and nothing else on the site names a colour. Every theme\ndefines every token the default defines; every page loads theme.js and\nthemes.css before site.css; the nav picker lists every theme; the storage\nkey theme.js writes is the one app/config/storage-keys.js allows.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 3404,
+      "id": "file:tests/build/test_twins_exist.py",
+      "language": "python",
+      "lines": 61,
+      "module": "module:tests/build/test_twins_exist.py",
+      "path": "tests/build/test_twins_exist.py",
+      "sha256": "54b54b07ddbde52620b4651598868ebdf0a05a6b0040e9c2c78e94d269f62c9d",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Test__Twins__Exist\nEvery HTML page has a markdown twin beside it; the twin names its source and\nthe site version, and every internal link inside it points at markdown.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 5878,
+      "id": "file:tests/unit/validate.test.js",
+      "language": "javascript",
+      "lines": 113,
+      "module": "module:tests/unit/validate.test.js",
+      "path": "tests/unit/validate.test.js",
+      "sha256": "23ccc04d81e305b76369190ecca472f2a9edce9d817a0abde5bab0399f38d42d",
+      "summary": {
+        "classes": 0,
+        "doc": "── validate.test.js — the gate's checks against fake fixtures and the real tree ──\n\nRuns under `node --test tests/unit/`. The fake secrets below are assembled at\nruntime from pieces so that this file never contains a value the tripwire\nwould match; the tripwire scans tests/ too, as it should.",
+        "functions": 0
+      }
+    },
+    {
+      "bytes": 229792,
+      "id": "file:vendor/acorn.mjs",
+      "language": "javascript",
+      "lines": 6233,
+      "path": "vendor/acorn.mjs",
+      "sha256": "b4c8c70200e72bae33cf1085e0ecb1e792c1b6924ed50cab817caf14f51bb249",
+      "summary": {}
+    },
+    {
+      "bytes": 3539,
+      "id": "file:vendor/sg-tokens.css",
+      "language": "css",
+      "lines": 69,
+      "path": "vendor/sg-tokens.css",
+      "sha256": "14509c73b43ecc79dd6080b6530a0860a9c22a06f0c160d7e9862f1bb2614171",
+      "summary": {}
+    }
+  ],
+  "layer": "files",
+  "provenance": {
+    "commit": "8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15",
+    "inputs": {
+      ".github/workflows/deploy-pages.yml": "049991bbdd5f2392a57743549312512869a6753e213d996cd4377afc0ad5807e",
+      "404.html": "9b46abeb57d2e297f0495934570dd8d17e0aa0e68e48954fa2f3219d4d3ae387",
+      "admin/build/assemble_site.py": "560c312956e540d3e48ff13df69cc1173df5ffbed59f0cd1a7b1a1711e7be31f",
+      "admin/build/chrome.py": "ae75a0a6a4de89374a66597a1755797b28d45fa158c41cf50b512ba3554ee8b8",
+      "admin/build/gate.py": "33a4b24abee7b6bf827ed2ff8acc3e14534ad49dbc708c5616a8af6e784bfd4c",
+      "admin/build/gen_chrome.py": "702aec56f2c9d2e87b138e944e07d6c66f60b459519c545e913ef75bfa9189fe",
+      "admin/build/gen_docs.py": "698761ae15847e90ccbb88367274f78b408fa1ce549b30d9c995b494a1126984",
+      "admin/build/gen_features.py": "63bc6861ed19d7b228822d7b1dd7f9225a1c7f113c5b68fcc0839f73649312f0",
+      "admin/build/gen_llms.py": "9964a8d3d69c884b142ec26e5de2d4fad1dab137ae98609159cd30e7f416d930",
+      "admin/build/gen_search.py": "c95b637874318ad5a0839625693482f95195299b393261dceb04564408cbf050",
+      "admin/build/gen_twins.py": "970b3654f1e836ffd9a55f7446e8a001bb5f9e8502859041e135eff34067b450",
+      "admin/build/gen_versions.py": "5636c992e1203d293e429799c8137badd74425e8bbdfd7e0cefc39cc4c33a311",
+      "admin/build/html_to_md.py": "5ea5f75c049c8b75981b62a598939cb478f92b2ee333244e220824b78c56ee2c",
+      "admin/build/md_to_html.py": "97841987ebdf3aec4b7cf19fc9b0ee8a66139f34a6753e361ba139dd969e1a33",
+      "admin/build/pages.py": "cf7005fd5ace37c3ead23a6c8d00b5bc3bc9718a16a686e5c70a36bbca1a9591",
+      "admin/build/release.py": "9ceae016e3c901ada9ce4cd8572df4b84754dee44a40a86f5d1efb48e6d79a88",
+      "admin/build/tag_release.py": "158ce432c0222b9d430c01c87a3f83e63d38a7f24f435d859190bf2bc6512cb8",
+      "admin/build/validate.js": "68435b5a429a25a44843f9351cbc93cbb307ef629c67b08f952f9c92d248b12e",
+      "admin/build/verify_live.py": "6077890fe9995fb22f9d1cf94c8b3a28a30f840fb1309fd95ea937d53d85b6a8",
+      "admin/comms.html": "31899728bebfefcbe2d01ea7b1434036e234fd0aa6a52674c63cd4395c317853",
+      "admin/index.html": "f19fc59f0ef9e500c1bdbfc217234ceeafff2094d743f3a051f2aa2fb70bbabc",
+      "admin/versions.html": "9795651d661843c6b423ee8db9d6bf0ac33985df02785cd4b282b7b81dfbb2f1",
+      "app/config/storage-keys.js": "892c307ba6cd556386db86acfeeade7038973ee3f19434a84f3b20241577fb3d",
+      "assets/mockups.css": "878d38eb32e9374482d3adbe376f4beef6cb221b4c1eff30f3a184f390e8078a",
+      "assets/nav.js": "33e66df93332e4f1a45b14512657b0534a9d202f5538ecfcf2dc86e56ac20f6b",
+      "assets/site.css": "2ae97f6b17fee2528f5bcaf714f98d2284c60340f5bd7c4a34960168316559d3",
+      "assets/theme.js": "ef43359d66faf716e0f02d066de0333f7c0c65f6cc918d5f5a4a012767cfa640",
+      "assets/themes.css": "bd626138ed6e4b759b93ac5bc1951e071989570fcc3e21201f38a9fed608e18b",
+      "components/proto-app/proto-app.css": "aceebf6bc7fc4b2901397bbdbf4721879f26afb0ae0e0c9ffb27e36b235583f6",
+      "components/proto-app/proto-app.html": "054ada9d830fb37b7c02b33d187382f7686bc7122de7c4f86318d8778249c11a",
+      "components/proto-app/proto-app.js": "c6d2e3fb31872bd11f06ca52edee74f14318e0a6625b30b21d293a7665e71e60",
+      "components/proto-base/proto-base.css": "34ce374bce5103460fb2e6bef97e622de5d06671f518ab25ad0bbc7fe75da03e",
+      "components/proto-base/proto-base.html": "23e7a5e9f5742249ccb7ee4ea4e77d4c78b6f5a581a94ee09b22afb39684e2de",
+      "components/proto-base/proto-base.js": "f003b63dba9be1648a1b09fae1557fe99303c0f6b2f77a765aac3951e1e0d0f6",
+      "components/proto-column/proto-column.css": "68119e7d6cc50205084fa6149eb3cb042427390d43d76a4163b81986aa4ae7ec",
+      "components/proto-column/proto-column.html": "ee27758a7187b6c909db305af31eb9f9d9918ac8b00d0b03df8b4cccbfac09c0",
+      "components/proto-column/proto-column.js": "d5cf4ba9814460b9f9014a0051f3c9f95847050467d972be86b7c61cca93c0d8",
+      "components/reader-chat/reader-chat.css": "f19ee932f80a87e320df4bc395fd1be61c2321dca00ea8270d56210336d3b57b",
+      "components/reader-chat/reader-chat.html": "6aa521b732ea119e8790e3c636b5df1fbb316afe0dcb75c0443f834b8eafeb80",
+      "components/reader-chat/reader-chat.js": "23199872e7e675829eedd6fc66b7463288efa2aa5219d5d74b906184544c59e8",
+      "components/reader-log/reader-log.css": "f79481cdec253fb9451014d1dc6f3297dc5fc07d9e36af5ecea30ff20f73a140",
+      "components/reader-log/reader-log.html": "9f5b6680c591815d55136d90c1171c2d20d7dbf3db35fce9b50f1e8c17460978",
+      "components/reader-log/reader-log.js": "63074bfdcb23b0f0ffdcbb40ecb5fa0d9c6bdb2966584178eb517acee8467647",
+      "components/reader-panel/reader-panel.css": "b6ed37cd79a2ba8524962471b23e85f9c27a744dbd9419bcd1fa9852a9f08a73",
+      "components/reader-panel/reader-panel.html": "1166e5b2156d639fc95086ad6e9d27334395955ffc7b9ae19bdc7e172b1ccf86",
+      "components/reader-panel/reader-panel.js": "fcdbc42218c7714e08e1aee27025d1f96478b1e12c59ab2c39cf20ac68ae71e3",
+      "components/sg-base/sg-base.css": "99330398051ff7294e8e48ed01ec1ef8d58c997c95454232eba1288dd03829b7",
+      "components/sg-base/sg-base.html": "6c8ec644d400f539e2b85f7002918d5a0b63278a8a229fdf8e153133a3be20bc",
+      "components/sg-base/sg-base.js": "efaef01d9ae7d6a79f5c174d6580e084a0aa78e04bd9582ea8a1b45da841e7f2",
+      "docs/design/brief-corrections.html": "316500c5ebb103ca8ffe7b9d9c21fa552c79cc5121c8336dccf2e5e9c68e9e26",
+      "docs/design/index.html": "2cf037d1d63f61e282ab63c65a040b4318b06ee01659325c2665d87a7bfa1376",
+      "docs/design/riskmandate-aws-cognito-architecture.html": "6fa54ac45aab13bf3359018d9e9ece2f772e6af3bff708805b5fef507746b84f",
+      "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html": "3f97bf0bc6c24061f927e28c2401b660b2c8eb01b61f7c3a4c61760701a6c282",
+      "docs/design/riskmandate-user-onboarding-account-experience.html": "61504fe88554a3e8921ed4b186297325c85bfb3e8e2c3c5392f3a46e985666b6",
+      "docs/design/riskmandate-workspace-architecture-briefing.html": "d5728432eef6a8c16c58de17b042710b1b8356f8fc215ceae57bfa6f1ba7d7f6",
+      "docs/design/secrets-sgit-ai__mvp-build-brief.html": "a34841e7e37888cedebb4896a8eb25e7868dd859d06aa20e7da6fd351e5a8f20",
+      "docs/index.html": "778611a2ce74ea873a40f5a55264992f7600b4a38f9b89e63e6e87fa3bc5035c",
+      "docs/ops/bootstrap.html": "efde351507745e68a0568234d578d278be372c51a86222bcced7066fc6be7c02",
+      "docs/ops/branch-protection.html": "c43d7d4e8ed99998c66ffc96d54b873ab6286403600ea89140ac648f2c95825b",
+      "docs/ops/comms.html": "c0a83e62cd1bc171caba85a1c011dc060f88774f965fa16b137b057eb3fca3b1",
+      "docs/ops/dns.html": "1b223544c4b7b80a50c7793040de176f462918c697794b06eba4cfe011f9c955",
+      "docs/ops/index.html": "61bb55eb37ada6f64d1116b444a79057c684a3c32f19f504f10ebf6cd0933bf8",
+      "docs/ops/needs.html": "5c4d7e3714970da30e8b4969417f9118a784af7fbf3634f9e43a79267e3156c2",
+      "docs/ops/release.html": "3b243ac04acacd5c84dc964da41a4297bc69e72c323422e99c525292b68972fe",
+      "docs/reality.html": "ec010396ef3785f5a79fe9d1a3533e2d8c7b0aa64b29beca0c2121ee99f80e90",
+      "environments/index.html": "22e620517cbd6fc6eebca8b4231b17e3217bee9efce68243ff29644e840c721e",
+      "how-it-works/index.html": "bb4016981425af891907082079de6787dbdf301b62f8597891d3b0ef30ae41c4",
+      "index.html": "4bb0c8e1595a5bb48d9bebefddb860c97ffc35d94a64cf7d2f09630061c33399",
+      "infra/bootstrap/bootstrap.sh": "257713fea062998a8b9fc440af2a19cb376e1f1d12859cea851bc13c41840863",
+      "infra/rules/storage.rules": "6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250",
+      "keyring/index.html": "724c3255eddf40b74ff3fb5d1b3d029337742c38fc13bc57cd4fc1628938507e",
+      "mockups/index.html": "0d68a4e5b29874f0e27eedca8fd97ac8c7e02c416f8610c56db9badb4d820842",
+      "reader/index.html": "a3b15e5542e7ff26ec51ffd90e722dabacd10cd7ffad4719ea1d00f1942d460d",
+      "review/index.html": "9a5270ccad63e16c03ffa70e91fb4d287c90ee82acffa4be2cc84ce064918905",
+      "review/tools/brief.py": "d4ccbd69c47d946b98285fa2b1329a432a097d922eeefc3014264c1dcbd7d0ba",
+      "review/tools/claims.py": "1aa4fa4be71b0ff60a115ec43371484f484f43a259ad33aa5e0a48ba41c5e425",
+      "review/tools/derive.py": "30c9a92953bf535b18f1e2038c96c872481d65def1efe15c815fc04b00baa818",
+      "review/tools/freshness.py": "e58e6faf67bb3db5b76f2c83d7b51828745601a0d8e780b03f6846edefa0b56a",
+      "review/tools/readme.py": "249ea8066847cabd0ce621a2b1d08431662ae64c4f38d7127083888d11cd6674",
+      "review/tools/review_tree.py": "4c7ca887f38a5d5066d5ac29a02932ba02dfc3ca0ca422029c1b8f4416c56267",
+      "review/tools/schema.py": "2c9ddc0179837e099ec44bbef373965808089f907d2ed781b18519e717974153",
+      "review/tools/sections.py": "5e44f868dfc1a3f345030e6ec8b5cb00318e5c950f7c4f0c807476efd67d8471",
+      "review/tools/validate_review.py": "0a5963cef9b7de5179bf2fcbe21903de190b8eaf58da4d70150165c62818c3df",
+      "review/ui/components/review-base/review-base.css": "5bddef64490d6cf379d1131f5685e98982dcb092b6ddff4114ee3e1497f27bf2",
+      "review/ui/components/review-base/review-base.html": "c2a003b1a7a3328bf43563a7ca1618ad3fd53939308d07693bfa4ac31f58c1af",
+      "review/ui/components/review-base/review-base.js": "de0f68e0903a571a7fff670732e4d8226c94ad196541a403c5fc1433ca1e9cfa",
+      "review/ui/components/review-brief/review-brief.css": "ce2e624a4dfb3c84aa33f175263f1e147d024dfc6cd26f9a1ce76f9c7cc8f56a",
+      "review/ui/components/review-brief/review-brief.html": "4ee2c0d35d2740a0a11e5bac0e22ea694e794ca18ae3a39fe85ad334dc30374e",
+      "review/ui/components/review-brief/review-brief.js": "9cba4a3d983fe1035e8352b02467edde02f03b9bfd012c3f66fc0a10efb0da44",
+      "review/ui/components/review-code/review-code.css": "b399a290f21ab53332010b78a2ba05a3004b9bc202da435143d35c950490d0a1",
+      "review/ui/components/review-code/review-code.html": "c7e330884d4288b8e90df28ff7c318b042a4c89bdda35c238b47331beec11628",
+      "review/ui/components/review-code/review-code.js": "01d735468b4962f0c3445dbb7daa27b930c5c1f5c16ba4c651bf183113d3942e",
+      "review/ui/components/review-crumb/review-crumb.css": "3e92016f640c4a792d08a44653c358d6f1ac33e786458c1d2c751575ca1e9e51",
+      "review/ui/components/review-crumb/review-crumb.html": "c6c292aabfd8a2f48bd3a87cb9a06527a02c5aacb62f3b498d5f8e51b2949eb2",
+      "review/ui/components/review-crumb/review-crumb.js": "79e68f7948c999a505f696f846dac50c14eb36f159ba54329812cae741b1d7ae",
+      "review/ui/components/review-graph/review-graph.css": "1ad2d0ef823b465b2f2bf7428cd453db7099cb45fa75ece260af63c04cb838e0",
+      "review/ui/components/review-graph/review-graph.html": "e5436b0cceb8ced0e49c34d88dd374cd050fd9d8b078427c47c1369087229078",
+      "review/ui/components/review-graph/review-graph.js": "c356b762cb486463cda134df66c5c3a8d1b473cc2384e57fc0506330110d527b",
+      "review/ui/components/review-ladder/review-ladder.css": "ce6ff9196be9ff7042e28705a2cd0ea4fe6c37cec8bee1c37e5e6fce5523fcc3",
+      "review/ui/components/review-ladder/review-ladder.html": "b1a6fcf66e0a13dedadf6e3b5910005c40e6071b3f1b4df99434d6def2c87758",
+      "review/ui/components/review-ladder/review-ladder.js": "30c9281b26c095191766eb4d5c44ee71d0bef5b144293eab6f9778785c7b3284",
+      "review/ui/components/review-node/review-node.css": "07340dde30e78bb8c83a519266eb0ca8c07ebed9ac1db1581a8176dd4f179dee",
+      "review/ui/components/review-node/review-node.html": "efb7d34312e2bc09b3786f2efcb2661356890644cd62f5bfd21bc99107b2b410",
+      "review/ui/components/review-node/review-node.js": "4700a35973f4f9a5c5c920e1cd563d2f43517af3ebb6055939cc86feade6f037",
+      "review/ui/components/review-source/review-source.css": "851875cc1868a34a7d0c0a796b870ab0575bf0f14c773a875a5c4161febfd92f",
+      "review/ui/components/review-source/review-source.html": "d5c3fe5a7f876138e0884f9425cef7a88904c0f3ac9d619599bad5a4300410f2",
+      "review/ui/components/review-source/review-source.js": "8892b9aaae391d949883895e761da830f766634e30ac938eb46fb6b300902610",
+      "review/ui/components/review-tree/review-tree.css": "e425db73e35a99bb648cd75e175b4e0d3cc1bbd0d383b826a2c54afea12ffb33",
+      "review/ui/components/review-tree/review-tree.html": "97752923276bf4f22f87b9430a8b2a3a39e74eb229fbfd2d13d39f4919f05037",
+      "review/ui/components/review-tree/review-tree.js": "f2f55f441885d78c4aeb8c2ba6b73c606956450170a30b9c9175e41619dabbfb",
+      "review/ui/index.html": "ca48b3b287ef8006ebf76738c6c7641e8cf316a95c6974ab65b2184c83423956",
+      "review/ui/shell.css": "1486453f2f17c9531e89a1420ac1ed1b1879d91e650d5a149634a6a6686fb41d",
+      "review/ui/shell.js": "919b72bfb421cf2e1bde8925650d837c5662ba70ca2c56d74edb0d569d0a5493",
+      "review/ui/tokens.css": "403feedc08fa2340b995f733cc8b1b475e445c1599a55953e206ec45a7ef07d7",
+      "security/index.html": "d8802c8b39aa07179ad3a3a45f944cd0ff7b99bfecdf2af19edbcd41b47e3215",
+      "sharing/index.html": "7a375ce4fb6959b526a4f26b83a4a2c6ff15001f3aadd11ab3305d01ff4834fd",
+      "shipped/index.html": "92e5c44283e4e4477f5011eb95a6b22500b6854f8536b8a8ea6e5148fb3e8735",
+      "team/index.html": "4d2954f25a2837ceefcf29aa08a1aee8e7129143130d5f0fd82682ff39da4994",
+      "tests/build/test_chrome_in_every_page.py": "9dae42da02b45fc8da10fc8c075820beab0efd97dc9397877c2ade472404d7ee",
+      "tests/build/test_claims.py": "ab7c3e9f3682f5206b2c913b8b77acef7fe95cc342ede6a60faa242998d3a9bc",
+      "tests/build/test_derive.py": "32932d167bdca964cb3c3f42c4afeeb7e6dc1b132484a05f94fd0e4b2feb35eb",
+      "tests/build/test_features_schema.py": "668110eb00c829c850957feb4b74e088a0db753c484caf28da0efa401baa6cf6",
+      "tests/build/test_generators_check.py": "cf09bbf7e108d772126babca52cfdd82161ec03cb66252f5fd0b3372d0b48402",
+      "tests/build/test_html_to_md.py": "5d1b237195888cd9b7d1cac31279b16c02fe4f29fa706fabf41cc39e71e25705",
+      "tests/build/test_md_to_html.py": "10cb4bbcf8c39f5f66218c573b8ecdf16bcf34725e8b7b8366d1ce81b5dc7691",
+      "tests/build/test_mockups.py": "49832c28075c1e3ff9e33c4e10aba5b47811c93286fd858deec0fdaf9e6bfefd",
+      "tests/build/test_reader.py": "02c9dc40dfe5e8d836192a85b804b1f5a4ff4c212ea8cb7f152c54742cb28a43",
+      "tests/build/test_review_folder.py": "c8be271686036652974e8db1e228b0d692e4a3c9a53aade3c503aac768d68be0",
+      "tests/build/test_review_ui.py": "8845f05ce8e468301dc038633d565b0402fc424fb931521bf44064c786bec1ff",
+      "tests/build/test_themes.py": "7875597a323c0b2d3dbe2d7eae44a72caea9605798c82669bf40762f2482f8f2",
+      "tests/build/test_twins_exist.py": "54b54b07ddbde52620b4651598868ebdf0a05a6b0040e9c2c78e94d269f62c9d",
+      "tests/unit/validate.test.js": "23ccc04d81e305b76369190ecca472f2a9edce9d817a0abde5bab0399f38d42d",
+      "vendor/acorn.mjs": "b4c8c70200e72bae33cf1085e0ecb1e792c1b6924ed50cab817caf14f51bb249",
+      "vendor/sg-tokens.css": "14509c73b43ecc79dd6080b6530a0860a9c22a06f0c160d7e9862f1bb2614171"
+    },
+    "tool": "review/tools/derive.py",
+    "tool_version": "0.1",
+    "tree_sha256": "a9aa74b74cfb4b65f96dfc16d3249621b76c5c83a5616ee1499d2fafa5f1279d"
+  }
+}

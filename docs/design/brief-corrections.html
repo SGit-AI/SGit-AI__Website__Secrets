@@ -21,7 +21,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/docs/design/brief-corrections.html">
   <meta property="og:title" content="Brief corrections — secrets.sgit.ai">
   <meta property="og:description" content="What the brief got wrong or left open, found while building, dated, beside it.">
-  <meta name="sg-secrets:version" content="0.1.10">
+  <meta name="sg-secrets:version" content="0.1.11">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -33,7 +33,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.10" title="released 2026-10-06">v0.1.10</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -105,7 +105,7 @@
 <!-- sg-secrets:nav:end -->
   <main class="sg-document">
     <!-- sg-secrets:docs:start -->
-<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.10.</p>
+<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.11.</p>
 <h1 id="brief-corrections">Brief corrections</h1>
 <p><em>secrets.sgit.ai · what the MVP build brief got wrong or left open, found while building, dated · beside the brief it corrects · CC BY 4.0</em></p>
 <p>The brief (<code>secrets-sgit-ai__mvp-build-brief.md</code>) is the instruction set. Where building it showed a statement to be wrong, incomplete or impossible as written, the finding is recorded here with the date and the version, and the build carried on with the correction. Sections 1 to 4 of the brief hold closed decisions; nothing here reopens one. The design documents beside this file are copied verbatim and are never edited.</p>
@@ -162,6 +162,9 @@
 <h2 id="v019-2026-10-06-everything-links-to-everything">v0.1.9 (2026-10-06): everything links to everything</h2>
 <h3 id="c23-everything-links-to-everything-claims-anchors-and-the-brief-as-sections">C23. Everything links to everything: claims, anchors, and the brief as sections</h3>
 <p>The brief lists what to build and section 6.5 says every claim carries a status, but nothing in it says how a reader follows a claim to the thing that makes it true. Dinis set the guideline on 2026-10-06, from <a href="https://sgit.ai/articles/introducing-fractal-semantic-graphs.html">Fractal Semantic Graphs</a>: a statement means nothing until it is linked to its evidence, which is linked to its evidence, down to an anchor, a node it does not pay to continue past because a person can open it and see the thing itself (a commit, a CI run, a source file, a section of the brief, a story). So every claim in <code>data/features.json</code> now carries typed evidence (<code>realises</code> an intent node, <code>lives_in</code> a file, <code>proven_by</code> a test or a gate check, <code>described_in</code> a section or a document, <code>seen_at</code> a URL), <code>review/tools/claims.py</code> turns the claims, the releases (with their commit, tag and Actions run, backfilled from GitHub) and the anchors into the claims layer of the review graph, and every status chip and every path on <code>/shipped/</code> and in the status lines is a link into the navigator. The rule is strict from this release: a shipped claim with no anchor that resolves, or any claim that realises no intent node, fails the build. The second half of the guideline is that the reader never leaves the navigator to follow a chain: the brief is split into fourteen section files under <code>review/brief/</code> (one per top-level section, each with its subsections, the same HTML the rendered page shows and the intent nodes written from it) and shown in place by <code>review-brief</code>; any file the site serves is shown in place with line numbers by <code>review-source</code>; a section or a file is a route (<code>#section=8.7</code>, <code>#file=assets/themes.css&amp;lines=L12-L30</code>) the gate resolves like a node. The rendered brief page and GitHub stay one click away for anyone who wants to leave.</p>
+<h3 id="c24-two-modes-in-the-navigator-and-an-explanation-layer-the-brief-does-not-name">C24. Two modes in the navigator, and an explanation layer the brief does not name</h3>
+<p>The brief describes the review folder top down (the intent, then the code derived beneath it) and the navigator as one tree with one panel. Dinis&#x27;s review on 2026-10-06 asked for an information UI with maximum focus: repeated chips folded into groups, regions that collapse to gain real estate, and a second mode entered the moment source code is opened, where the source is on the left, the file&#x27;s own tree (classes, methods, calls, imports) beside it, and the graph upwards from that piece of code (the claims whose evidence lives in it, the stories they realise) on the right. From v0.1.11 the navigator has the two modes, <code>intent</code> and <code>code</code>, with one layout each; the derived layers (<code>graph/index.json</code>, <code>files</code>, <code>modules</code>, <code>classes</code>, <code>methods</code>, <code>tests</code>, <code>surfaces</code>) come from <code>review/tools/derive.py</code>, Python through the standard library&#x27;s <code>ast</code> and JavaScript through a vendored, hashed <code>acorn</code> that only the build runs, never a page.</p>
+<p>The review also asked for an abstraction layer per block of code: the source, then what it is doing (pseudo-code), then why (its intent), then the story it serves, at two levels, a technical one and a business one, so a later diff can be read as a blast radius against the meaning rather than against the lines. The first rung exists: the code&#x27;s own leading and trailing comments are shown as &quot;what it says about itself&quot;, and the claims and stories that reach the file as &quot;why it exists&quot;. The written explanation (technical and business) is not derived by a parser and the brief rules out a model writing into <code>graph/</code>; the proposal is a separate layer, <code>review/explain/&lt;path&gt;.json</code>, written by the build agent as data, each block carrying the sha256 of the lines it explains so it goes stale, visibly, when the code moves. Proposed, not built; status <code>proposed</code> on <code>/shipped/</code>.</p>
 <h2 id="open-questions-carried-from-section-12-unanswered-at-this-version">Open questions carried from section 12 (unanswered at this version)</h2>
 <ul>
 <li>Does the Playwright virtual authenticator support PRF? (step 4)</li>
@@ -175,7 +178,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.10" title="released 2026-10-06">v0.1.10</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

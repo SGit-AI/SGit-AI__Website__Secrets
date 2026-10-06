@@ -1,7 +1,7 @@
 /**
  * review-ladder — the layers of the review folder as a rail, top to bottom in
  * the brief's order: the intent (stories, rules, examples, flows, steps,
- * components), the derived code (surfaces, modules, classes, methods, lines),
+ * components), the derived code (files, classes, methods, tests, surfaces),
  * the deploy layer, then the join, the changes and the checks. Each intent
  * layer shows its count and switches the tree; each layer that does not exist
  * yet says which step of the review brief brings it, so what is missing is on
@@ -23,11 +23,12 @@ export const LADDER = Object.freeze([
         { label : 'components', layers : ['component'], view : 'components' },
     ] },
     { group : 'Derived, from the code', rungs : [
-        { label : 'surfaces', step : 2, note : 'pages, routes, commands, the things an example names' },
-        { label : 'modules',  step : 2, note : 'files, from the syntax tree' },
-        { label : 'classes',  step : 2, note : 'one class per file, in the house style' },
-        { label : 'methods',  step : 2, note : 'with calls between them' },
-        { label : 'lines',    step : 5, note : 'the source itself, reachable from a method' },
+        { label : 'files',    layers : ['file'],    view : 'code', note : 'every served source file, hashed' },
+        { label : 'classes',  layers : ['class'],   view : 'code', note : 'from the syntax tree: Python through ast, JavaScript through acorn' },
+        { label : 'methods',  layers : ['method'],  view : 'code', note : 'with the calls between them' },
+        { label : 'tests',    layers : ['test'],    view : 'code', note : 'each test and the module it reaches' },
+        { label : 'surfaces', layers : ['surface'], view : 'code', note : 'pages and custom elements, the things an example names' },
+        { label : 'lines',    step : 5, note : 'the source itself is shown already; the lines layer (one node per line, for streams) comes with step 5' },
     ] },
     { group : 'Deploy, from the brief', rungs : [
         { label : 'environments', layers : ['environment'], view : 'deploy' },

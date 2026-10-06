@@ -21,7 +21,14 @@
     "*.html",
     "*/index.html",
     "admin/*.html",
-    "docs/**/*.html"
+    "docs/**/*.html",
+    "vendor/*.js",
+    "vendor/*.mjs",
+    "vendor/*.css",
+    "app/*.html",
+    "tests/*.html",
+    "assets/*.css",
+    "*.css"
   ],
   "exclude_dirs": [
     "node_modules",
@@ -29,7 +36,6 @@
     ".git",
     "_site",
     "fixtures",
-    "vendor",
     "dist"
   ],
   "exclude_paths": [

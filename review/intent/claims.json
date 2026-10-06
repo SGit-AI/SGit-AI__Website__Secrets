@@ -65,6 +65,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15",
+      "id": "anchor.commit.8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15",
+      "kind": "commit",
+      "name": "commit 8f1412d",
+      "opens": "on GitHub",
+      "ref": "commit:8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15"
+    },
+    {
+      "anchor": true,
       "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/a110792ec5f224319836c3adc8ebf7b440cd0d08",
       "id": "anchor.commit.a110792ec5f224319836c3adc8ebf7b440cd0d08",
       "kind": "commit",
@@ -89,6 +98,15 @@
       "name": "commit e031a3f",
       "opens": "on GitHub",
       "ref": "commit:e031a3f01779e298eb4cabe48e779cd7afd5b04a"
+    },
+    {
+      "anchor": true,
+      "href": "/docs/design/brief-corrections.html",
+      "id": "anchor.doc.docs/design/brief-corrections.md",
+      "kind": "doc",
+      "name": "docs/design/brief-corrections.md",
+      "opens": "the rendered page",
+      "ref": "doc:docs/design/brief-corrections.md"
     },
     {
       "anchor": true,
@@ -749,6 +767,15 @@
     },
     {
       "anchor": true,
+      "href": "/review/ui/#file=review/graph/index.json",
+      "id": "anchor.file.review/graph/index.json",
+      "kind": "file",
+      "name": "review/graph/index.json",
+      "opens": "in the navigator",
+      "ref": "file:review/graph/index.json"
+    },
+    {
+      "anchor": true,
       "href": "/review/ui/#file=review/intent/claims.json",
       "id": "anchor.file.review/intent/claims.json",
       "kind": "file",
@@ -812,6 +839,24 @@
     },
     {
       "anchor": true,
+      "href": "/review/ui/#file=review/tools/derive.py",
+      "id": "anchor.file.review/tools/derive.py",
+      "kind": "file",
+      "name": "review/tools/derive.py",
+      "opens": "in the navigator",
+      "ref": "file:review/tools/derive.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/tools/derive_js.mjs",
+      "id": "anchor.file.review/tools/derive_js.mjs",
+      "kind": "file",
+      "name": "review/tools/derive_js.mjs",
+      "opens": "in the navigator",
+      "ref": "file:review/tools/derive_js.mjs"
+    },
+    {
+      "anchor": true,
       "href": "/review/ui/#file=review/tools/freshness.py",
       "id": "anchor.file.review/tools/freshness.py",
       "kind": "file",
@@ -854,6 +899,15 @@
       "name": "review/ui/components/review-brief/review-brief.js",
       "opens": "in the navigator",
       "ref": "file:review/ui/components/review-brief/review-brief.js"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/components/review-code/review-code.js",
+      "id": "anchor.file.review/ui/components/review-code/review-code.js",
+      "kind": "file",
+      "name": "review/ui/components/review-code/review-code.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/components/review-code/review-code.js"
     },
     {
       "anchor": true,
@@ -908,6 +962,15 @@
       "name": "review/ui/index.html",
       "opens": "in the navigator",
       "ref": "file:review/ui/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=review/ui/shell.js",
+      "id": "anchor.file.review/ui/shell.js",
+      "kind": "file",
+      "name": "review/ui/shell.js",
+      "opens": "in the navigator",
+      "ref": "file:review/ui/shell.js"
     },
     {
       "anchor": true,
@@ -1097,6 +1160,15 @@
       "name": "Actions run 37513070364 (success)",
       "opens": "the run: validate, tag-release, deploy, verify-live",
       "ref": "run:37513070364"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37513440973",
+      "id": "anchor.run.37513440973",
+      "kind": "run",
+      "name": "Actions run 37513440973 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37513440973"
     },
     {
       "anchor": true,
@@ -1352,6 +1424,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.11",
+      "id": "anchor.tag.v0.1.11",
+      "kind": "tag",
+      "name": "tag v0.1.11",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.11"
+    },
+    {
+      "anchor": true,
       "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.2",
       "id": "anchor.tag.v0.1.2",
       "kind": "tag",
@@ -1439,6 +1520,15 @@
       "name": "tests/build/test_claims.py",
       "opens": "in the navigator",
       "ref": "test:tests/build/test_claims.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_derive.py",
+      "id": "anchor.test.tests/build/test_derive.py",
+      "kind": "test",
+      "name": "tests/build/test_derive.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_derive.py"
     },
     {
       "anchor": true,
@@ -1994,8 +2084,8 @@
       "area": "review",
       "feature": "review.navigator",
       "id": "claim.review.navigator",
-      "name": "The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search",
-      "notes": "Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md.",
+      "name": "The rest of the navigator: set switch, join, change, reach, stream, checks, search",
+      "notes": "Steps 3 to 6; one visualiser per file shape, listed in review/ui/README.md. The ladder, the source view and the code panel are shipped.",
       "since": null,
       "source": {
         "doc": "data/features.json",
@@ -2008,15 +2098,43 @@
       "area": "review",
       "feature": "review.derived",
       "id": "claim.review.derived",
-      "name": "graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model",
-      "notes": "Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn.",
+      "name": "graph/: files, modules, classes, methods, tests and surfaces derived from the syntax tree by parsers, never a model; an index of counts and paths; calls resolved across files and through super()",
+      "notes": "Step 2 of the review brief. Python from the stdlib parser; JavaScript from a vendored, hashed acorn that only the build runs. Vendored files are hashed, not parsed. graph/deploy.json and the join are step 3.",
+      "since": "0.1.11",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "review/tools/derive.py, derive_js.mjs, review/graph/"
+    },
+    {
+      "area": "review",
+      "feature": "review.code-mode",
+      "id": "claim.review.code-mode",
+      "name": "Code mode in the navigator: open a file and the layout changes to the source in the middle, its tree on the left and the graph upwards from it on the right (what the code says about itself, the claims that live in it, the stories they realise, calls, callers, tests, surfaces); claims folded by release; the left column folds; every file path named by a node is a link",
+      "notes": "Two modes, intent and code, remembered with the fold under one allow-listed key. The ladder's derived rungs are live from graph/index.json before the layers load.",
+      "since": "0.1.11",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "review/ui/components/review-code/, review-tree/, shell.js"
+    },
+    {
+      "area": "review",
+      "feature": "review.explain",
+      "id": "claim.review.explain",
+      "name": "The explanation layer: per block of code, what it does (pseudo-code), why (its intent) and the story it serves, at a technical and a business level, each block hashed to the lines it explains so a diff reads as a blast radius against meaning",
+      "notes": "C24. The first rung exists in code mode (the code's own comments, the claims and stories that reach the file). The written levels are data by the build agent, never parser output, never a model at build time.",
       "since": null,
       "source": {
         "doc": "data/features.json",
         "section": null
       },
       "status": "proposed",
-      "where": "review/tools/derive.py, derive_js.py"
+      "where": "review/explain/"
     },
     {
       "area": "review",
@@ -3413,7 +3531,92 @@
     },
     {
       "from": "claim.review.derived",
+      "to": "anchor.file.review/tools/derive.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.derived",
+      "to": "anchor.file.review/tools/derive_js.mjs",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.derived",
+      "to": "anchor.file.review/graph/index.json",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.derived",
+      "to": "anchor.test.tests/build/test_derive.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.derived",
+      "to": "anchor.doc.review/BRIEF-CORRECTIONS.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.derived",
       "to": "anchor.doc.review/README.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.derived",
+      "to": "release.0.1.11",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "anchor.file.review/ui/components/review-code/review-code.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "anchor.file.review/ui/components/review-base/review-base.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "anchor.file.review/ui/components/review-tree/review-tree.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "anchor.file.review/ui/shell.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "anchor.test.tests/build/test_review_ui.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "anchor.doc.review/ui/README.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "anchor.url.https://secrets.sgit.ai/review/ui/",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.review.code-mode",
+      "to": "release.0.1.11",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.review.explain",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.review.explain",
+      "to": "anchor.doc.docs/design/brief-corrections.md",
       "verb": "described_in"
     },
     {
@@ -4227,9 +4430,29 @@
       "verb": "described_in"
     },
     {
+      "from": "release.0.1.11",
+      "to": "anchor.tag.v0.1.11",
+      "verb": "recorded_in"
+    },
+    {
       "from": "release.0.1.10",
       "to": "anchor.tag.v0.1.10",
       "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.10",
+      "to": "anchor.commit.8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.10",
+      "to": "anchor.run.37513440973",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.10",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
     },
     {
       "from": "release.0.1.9",
@@ -4445,12 +4668,30 @@
     {
       "commit": null,
       "date": "2026-10-06",
+      "id": "release.0.1.11",
+      "name": "v0.1.11: code mode",
+      "notes": "The navigator has two modes. Intent is the brief downwards, as before, with the claims folded by status and release and the left column foldable. Code is entered by opening a file, picking the Code view, or the switch in the top bar: the source in the middle with the selected lines marked, the file's tree on the left (packages, files, classes, methods), and on the right the graph upwards from that piece of code: what it says about itself (its own comments), why it exists (the claims whose evidence lives in it and the stories they realise), outline, imports and importers, calls and callers, tests and surfaces. The derived layers under review/graph/ (files, modules, classes, methods, tests, surfaces, and an index of counts and paths) come from review/tools/derive.py: Python through ast, JavaScript through a vendored, hashed acorn that only the build runs. Every file path a node names is a link into the source. The explanation layer (what, why, story, at a technical and a business level) is proposed in C24.",
+      "run": null,
+      "tag": "v0.1.11",
+      "verified": null,
+      "version": "0.1.11"
+    },
+    {
+      "commit": "8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15",
+      "date": "2026-10-06",
       "id": "release.0.1.10",
       "name": "v0.1.10: Review in the top menu",
       "notes": "Review is a group of the family nav, between Shipped and Docs: the project as graphs, the navigator, the claims and their evidence, the brief as sections, the README with the counts, and the corrections to the review brief. It leaves the Admin menu. release.py fetches the tags before backfilling a release's commit.",
-      "run": null,
+      "run": {
+        "conclusion": "success",
+        "id": 37513440973,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37513440973"
+      },
       "tag": "v0.1.10",
-      "verified": null,
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
       "version": "0.1.10"
     },
     {

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>secrets.sgit.ai: reality — secrets.sgit.ai</title>
-  <meta name="description" content="71 claims: 38 shipped, 28 proposed, 5 absent.">
+  <meta name="description" content="73 claims: 40 shipped, 28 proposed, 5 absent.">
   <meta name="sg-secrets:source" content="/docs/reality.md">
   <!-- sg-secrets:head:start -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
@@ -20,8 +20,8 @@
   <meta property="og:site_name" content="secrets.sgit.ai">
   <meta property="og:url" content="https://secrets.sgit.ai/docs/reality.html">
   <meta property="og:title" content="secrets.sgit.ai: reality — secrets.sgit.ai">
-  <meta property="og:description" content="71 claims: 38 shipped, 28 proposed, 5 absent.">
-  <meta name="sg-secrets:version" content="0.1.10">
+  <meta property="og:description" content="73 claims: 40 shipped, 28 proposed, 5 absent.">
+  <meta name="sg-secrets:version" content="0.1.11">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -33,7 +33,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.10" title="released 2026-10-06">v0.1.10</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -105,10 +105,10 @@
 <!-- sg-secrets:nav:end -->
   <main class="sg-document">
     <!-- sg-secrets:docs:start -->
-<p class="sg-doc-source">Rendered from <a href="/docs/reality.md">docs/reality.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.10.</p>
+<p class="sg-doc-source">Rendered from <a href="/docs/reality.md">docs/reality.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.11.</p>
 <h1 id="secretssgitai-reality">secrets.sgit.ai: reality</h1>
-<p><em>Generated from <code>data/features.json</code> by <code>admin/build/gen_features.py</code> at site v0.1.10 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.</em></p>
-<p>71 claims: 38 shipped, 28 proposed, 5 absent.</p>
+<p><em>Generated from <code>data/features.json</code> by <code>admin/build/gen_features.py</code> at site v0.1.11 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.</em></p>
+<p>73 claims: 40 shipped, 28 proposed, 5 absent.</p>
 <table>
 <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
 <tbody>
@@ -117,7 +117,7 @@
 <tr><td>absent</td><td>deliberately not in the MVP; comes as a later version or a later site, or never</td></tr>
 </tbody>
 </table>
-<h2 id="shipped-38">Shipped (38)</h2>
+<h2 id="shipped-40">Shipped (40)</h2>
 <table>
 <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
 <tbody>
@@ -145,6 +145,8 @@
 <tr><td>review</td><td>The brief split into sections under review/brief/, shown in place by the navigator, each with the intent nodes written from it</td><td>shipped v0.1.9</td><td>review/tools/brief.py, review/brief/, review/ui/components/review-brief/</td><td>Fourteen files, one per top-level section, not one per heading; the markdown stays the source and the gate checks the split is current.</td></tr>
 <tr><td>review</td><td>Files shown in place in the navigator with line numbers and a marked range, so a chain of evidence ends on code without leaving</td><td>shipped v0.1.9</td><td>review/ui/components/review-source/</td><td>Step 5 of the review brief pulled forward. A file the deploy leaves out (workflows, infra, unit tests) opens on GitHub at the newest release commit instead.</td></tr>
 <tr><td>review</td><td>The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief</td><td>shipped v0.1.4</td><td>review/ui/</td><td>review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash.</td></tr>
+<tr><td>review</td><td>graph/: files, modules, classes, methods, tests and surfaces derived from the syntax tree by parsers, never a model; an index of counts and paths; calls resolved across files and through super()</td><td>shipped v0.1.11</td><td>review/tools/derive.py, derive_js.mjs, review/graph/</td><td>Step 2 of the review brief. Python from the stdlib parser; JavaScript from a vendored, hashed acorn that only the build runs. Vendored files are hashed, not parsed. graph/deploy.json and the join are step 3.</td></tr>
+<tr><td>review</td><td>Code mode in the navigator: open a file and the layout changes to the source in the middle, its tree on the left and the graph upwards from it on the right (what the code says about itself, the claims that live in it, the stories they realise, calls, callers, tests, surfaces); claims folded by release; the left column folds; every file path named by a node is a link</td><td>shipped v0.1.11</td><td>review/ui/components/review-code/, review-tree/, shell.js</td><td>Two modes, intent and code, remembered with the fold under one allow-listed key. The ladder&#x27;s derived rungs are live from graph/index.json before the layers load.</td></tr>
 <tr><td>pipeline</td><td>One release script: bump, build, gate, commit with a Kind: trailer, push, verify live</td><td>shipped v0.1.3</td><td>admin/build/release.py</td><td>The family&#x27;s release discipline in one command; a clean push is not a release.</td></tr>
 <tr><td>pipeline</td><td>The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate</td><td>shipped v0.1.3</td><td>admin/build/validate.js</td><td>From section 4 of the repository guidance; the advisory never fails the build.</td></tr>
 <tr><td>site</td><td>Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page</td><td>shipped v0.1.3</td><td>team/</td><td>Two roles fill every seat: the project lead and the build agent.</td></tr>
@@ -166,8 +168,8 @@
 <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
 <tbody>
 <tr><td>review</td><td>review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead</td><td>proposed</td><td>review/intent/</td><td>Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7).</td></tr>
-<tr><td>review</td><td>The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search</td><td>proposed</td><td>review/ui/</td><td>Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md.</td></tr>
-<tr><td>review</td><td>graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model</td><td>proposed</td><td>review/tools/derive.py, derive_js.py</td><td>Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn.</td></tr>
+<tr><td>review</td><td>The rest of the navigator: set switch, join, change, reach, stream, checks, search</td><td>proposed</td><td>review/ui/</td><td>Steps 3 to 6; one visualiser per file shape, listed in review/ui/README.md. The ladder, the source view and the code panel are shipped.</td></tr>
+<tr><td>review</td><td>The explanation layer: per block of code, what it does (pseudo-code), why (its intent) and the story it serves, at a technical and a business level, each block hashed to the lines it explains so a diff reads as a blast radius against meaning</td><td>proposed</td><td>review/explain/</td><td>C24. The first rung exists in code mode (the code&#x27;s own comments, the claims and stories that reach the file). The written levels are data by the build agent, never parser output, never a model at build time.</td></tr>
 <tr><td>review</td><td>Every commit read upwards: changes/&lt;hash&gt;.json with layers moved and held, reach, claim versus evidence</td><td>proposed</td><td>review/tools/change.py</td><td>Step 4; the Kind: trailer carries the claim (R4).</td></tr>
 <tr><td>review</td><td>review/self/: the same folder for the tools and the navigator, both sets green before a release</td><td>proposed</td><td>review/self/</td><td>Step 2.</td></tr>
 <tr><td>site</td><td>The build agent&#x27;s contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it</td><td>proposed</td><td>.well-known/sgit-agents.json, tools/comms/</td><td>The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen.</td></tr>
@@ -213,7 +215,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.10" title="released 2026-10-06">v0.1.10</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/reality.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/reality.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

@@ -15,6 +15,7 @@ export const LOCAL_STORAGE_KEYS = Object.freeze({
     reader  : 'sgit.secrets.ui.reader',                                           // the reader's column: open or closed, which tab
     proto   : 'sgit.secrets.proto.v1',                                            // the design prototype's pretend state under /mockups/: invented entries, devices, a log of what was clicked; never a real secret
     protoUx : 'sgit.secrets.ui.proto',                                            // which of the three prototype UX variants the reader picked (A/B testing)
+    review  : 'sgit.secrets.ui.review',                                           // the navigator: which regions are collapsed, which mode was last used
     readerLog : 'sgit.secrets.reader.log.v1',                                     // the reader's log: append-only events (read, star, vote, note) keyed by page and content hash; opinions about public pages, never a secret
 })
 
