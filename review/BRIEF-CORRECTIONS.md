@@ -30,6 +30,20 @@ Section 8 says a derived folder older than the tree it describes fails. File tim
 
 Section 3 says the grammar may not change and the layers may add types. To keep the graphs honest to the grammar's first rule (every edge a verb with a distinct inverse), `tools/verbs.json` holds the only verbs any layer may use, each with its inverse, a sentence, a domain and a range, and `validate_review.py` fails on an edge whose verb is not there or whose ends do not resolve to nodes. Six of the verbs are from the established edge set at graphs.sgit.ai; the rest are this folder's and are marked as not established.
 
+## v0.1.4 (2026-10-06): step 1, the intent graph
+
+### R7. A section index links each node to the rendered brief
+
+Section 3 says every projected node carries `{"doc", "section"}`. For the link in the navigator to land on the heading, the page's anchor for a section number has to be known, and the markdown renderer's slugs are not derivable from the number alone. `tools/sections.py` writes `intent/sections.json`, every numbered heading of the brief with its anchor and title, with the same slug rule the renderer uses; the gate keeps it current. It is a derived file under `intent/` because it describes the brief, not the code, and it carries no provenance block because it has no tree hash to carry.
+
+### R8. Flow steps are nodes with generated ids
+
+Section 5 describes flows as ordered steps naming surfaces, with no id per step. The navigator needs every node addressable, so a step's id is `<flow id>#<n>`, assigned by the store when it indexes the file; the JSON keeps steps as the brief describes them. A step therefore cannot be the target of an edge in the files, only of the implicit containment the store adds.
+
+### R9. The first view switch is in the tree, not a ladder
+
+Section 7 puts the layers on `review-ladder` in the left rail. The ladder arrives with step 2, when there are derived layers to count; until then `review-tree` carries four view buttons for the intent layers so the graph can be walked at all. The buttons move to the ladder at step 2 and this entry is closed then.
+
 ## Open, to be answered as the steps are built
 
 - The JavaScript parser (section 12): decided in principle as a vendored, pinned, hashed `acorn` under `review/tools/vendor/`; verified at step 2.

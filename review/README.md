@@ -4,18 +4,18 @@
 
 What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
 
-Source tree: 61 files, hash `eb58237e7b981749`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+Source tree: 79 files, hash `ef7dbf3736293149`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
 
 ## The project
 
 | Layer | Count |
 |---|---|
-| stories | 0 (not yet accepted; 0 proposed by a model) |
-| rules | 0 |
-| examples | 0 |
-| flows | 0 |
-| components | 0 |
-| deploy | 0 |
+| stories | 14 (not yet accepted; 0 proposed by a model) |
+| rules | 51 |
+| examples | 70 |
+| flows | 6 |
+| components | 23 |
+| deploy | 5 |
 | files | not derived yet |
 | modules | not derived yet |
 | classes | not derived yet |
@@ -49,6 +49,7 @@ Change files: 0. Streams: 0. Open gaps: none recorded yet.
 ## Regenerate and check
 
 ```
+python3 review/tools/sections.py             # the brief's section anchors, for the links from every intent node
 python3 review/tools/validate_review.py      # every JSON file against its schema; every edge a known verb
 python3 review/tools/freshness.py            # derived files match the tree being built
 python3 review/tools/readme.py               # this file

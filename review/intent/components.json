@@ -1,6 +1,626 @@
 {
-  "components": [],
-  "edges": [],
+  "components": [
+    {
+      "id": "place.browser",
+      "kind": "place",
+      "name": "The visitor's browser",
+      "parent": null,
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      }
+    },
+    {
+      "id": "place.google",
+      "kind": "place",
+      "name": "Google",
+      "parent": null,
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      }
+    },
+    {
+      "id": "place.github",
+      "kind": "place",
+      "name": "GitHub (Pages and Actions)",
+      "parent": null,
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      }
+    },
+    {
+      "id": "place.authenticator",
+      "kind": "place",
+      "name": "The user's authenticator (Google Password Manager, iCloud Keychain, hardware key)",
+      "parent": null,
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      }
+    },
+    {
+      "honest_depth": "The brief draws the pages (6.1); the components inside the app are named in 7.1 and 7.3 but not drawn below the level of files",
+      "id": "site",
+      "kind": "component",
+      "name": "Site and app: static HTML, JS and CSS from this repository, GitHub Pages, secrets.sgit.ai",
+      "parent": null,
+      "provides": [
+        "/",
+        "/how-it-works/",
+        "/security/",
+        "/keyring/",
+        "/sharing/",
+        "/environments/",
+        "/shipped/",
+        "/docs/design/",
+        "/admin/versions.html",
+        "/llms.txt",
+        "/llms-full.txt",
+        "/index.md",
+        "/sitemap.xml",
+        "/robots.txt"
+      ],
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "trust": "The boundary. Whoever controls this repo or the sgit.ai DNS controls the app"
+    },
+    {
+      "id": "site.app",
+      "kind": "component",
+      "name": "The application pages under /app/",
+      "parent": "site",
+      "provides": [
+        "/app/index.html",
+        "/app/setup.html",
+        "/app/unlock.html",
+        "/app/vault.html",
+        "/app/entry.html",
+        "/app/devices.html",
+        "/app/environment.html",
+        "/app/account.html"
+      ],
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.2"
+      }
+    },
+    {
+      "id": "site.app.kinds",
+      "kind": "module",
+      "name": "app/kinds.js: the closed list of entry kinds",
+      "parent": "site.app",
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.2"
+      }
+    },
+    {
+      "id": "site.app.session",
+      "kind": "module",
+      "name": "app/state/session.js: holds the unlocked keyring in a closure; nothing exports the raw keys",
+      "parent": "site.app",
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "7.1"
+      }
+    },
+    {
+      "id": "site.app.config",
+      "kind": "module",
+      "name": "The config loader: config/environments.json, localStorage sgit.secrets.config.v1, ?env=",
+      "parent": "site.app",
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "5"
+      }
+    },
+    {
+      "id": "site.app.keyring",
+      "kind": "module",
+      "name": "The keyring v1 library: HKDF, AES-GCM wraps and body, known-answer fixtures",
+      "parent": "site.app",
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "8"
+      }
+    },
+    {
+      "id": "site.admin",
+      "kind": "component",
+      "name": "The admin pages under /admin/",
+      "parent": "site",
+      "provides": [
+        "/admin/index.html",
+        "/admin/setup-checklist.html",
+        "/admin/auth-config.html",
+        "/admin/storage.html",
+        "/admin/rules.html",
+        "/admin/users.html",
+        "/admin/environment-export.html",
+        "/admin/oauth-return.html"
+      ],
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.3"
+      },
+      "trust": "Works only if the Google account has IAM on the project"
+    },
+    {
+      "id": "site.admin.oauth",
+      "kind": "module",
+      "name": "admin/oauth.js: the implicit-flow sign-in, token in memory only",
+      "parent": "site.admin",
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.3"
+      }
+    },
+    {
+      "id": "site.tests",
+      "kind": "component",
+      "name": "The probe pages under /tests/",
+      "parent": "site",
+      "provides": [
+        "/tests/webauthn-prf.html",
+        "/tests/crypto.html",
+        "/tests/config.html",
+        "/tests/auth.html",
+        "/tests/storage.html",
+        "/tests/keyring-roundtrip.html",
+        "/tests/offline.html",
+        "/tests/leak-check.html",
+        "/tests/matrix.html"
+      ],
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.4"
+      }
+    },
+    {
+      "id": "site.vendor",
+      "kind": "module",
+      "name": "vendor/: sg-component.js, sg-tokens.css and the Firebase JS SDK bundles for app, auth and storage, pinned and hashed in MANIFEST.json",
+      "parent": "site",
+      "runs_in": "place.browser",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "7.3"
+      }
+    },
+    {
+      "id": "site.chrome",
+      "kind": "module",
+      "name": "admin/build/chrome.py: the one definition of nav, footer, version badge and environment badge",
+      "parent": "site",
+      "runs_in": "place.github",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.1"
+      }
+    },
+    {
+      "id": "site.gate",
+      "kind": "module",
+      "name": "admin/build/validate.js: the eight-check gate, no dependencies",
+      "parent": "site",
+      "provides": [
+        "admin/build/validate.js"
+      ],
+      "runs_in": "place.github",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.3"
+      }
+    },
+    {
+      "id": "login",
+      "kind": "component",
+      "name": "Login: Identity Platform, through the vendored Firebase Auth SDK",
+      "parent": null,
+      "provides": [
+        "https://accounts.google.com",
+        "https://<project>.firebaseapp.com/__/auth/*"
+      ],
+      "runs_in": "place.google",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "trust": "Can impersonate; cannot decrypt"
+    },
+    {
+      "id": "storage",
+      "kind": "component",
+      "name": "Storage: a Cloud Storage for Firebase bucket with Security Rules",
+      "parent": null,
+      "provides": [
+        "users/{uid}/keyring.json",
+        "users/{uid}/meta.json",
+        "directory/{uid}.pub.json",
+        "inbox/{uid}/{shareId}.json"
+      ],
+      "runs_in": "place.google",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "trust": "Holds ciphertext; can delete"
+    },
+    {
+      "id": "storage.rules",
+      "kind": "module",
+      "name": "infra/rules/storage.rules: the Security Rules",
+      "parent": "storage",
+      "runs_in": "place.google",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "8.6"
+      }
+    },
+    {
+      "id": "unlock",
+      "kind": "component",
+      "name": "Unlock: a WebAuthn passkey with the PRF extension, RP ID secrets.sgit.ai",
+      "parent": null,
+      "runs_in": "place.authenticator",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "trust": "The only thing that can decrypt"
+    },
+    {
+      "id": "infra",
+      "kind": "component",
+      "name": "Infra: Terraform in this repository, applied by GitHub Actions through Workload Identity Federation",
+      "parent": null,
+      "provides": [
+        "infra/terraform/modules/secrets-env",
+        "infra/terraform/envs/dev",
+        "infra/bootstrap/bootstrap.sh",
+        "infra/scripts/export_env_config.py"
+      ],
+      "runs_in": "place.github",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "trust": "Can reconfigure or delete; cannot read"
+    },
+    {
+      "id": "pipeline",
+      "kind": "component",
+      "name": "The pipelines in .github/workflows",
+      "parent": "infra",
+      "provides": [
+        ".github/workflows/deploy-pages.yml",
+        ".github/workflows/infra.yml",
+        ".github/workflows/tests-browser.yml",
+        ".github/workflows/rules.yml",
+        ".github/workflows/link-check.yml"
+      ],
+      "runs_in": "place.github",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9"
+      }
+    },
+    {
+      "id": "repository",
+      "kind": "component",
+      "name": "The repository SGit-AI/SGit-AI__Website__Secrets and the sgit.ai DNS",
+      "parent": null,
+      "runs_in": "place.github",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.4"
+      },
+      "trust": "Everything, for users who load the malicious page"
+    }
+  ],
+  "edges": [
+    {
+      "from": "site",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "to": "place.browser",
+      "verb": "runs_in"
+    },
+    {
+      "from": "login",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "to": "place.google",
+      "verb": "runs_in"
+    },
+    {
+      "from": "storage",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "to": "place.google",
+      "verb": "runs_in"
+    },
+    {
+      "from": "unlock",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "to": "place.authenticator",
+      "verb": "runs_in"
+    },
+    {
+      "from": "infra",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.1"
+      },
+      "to": "place.github",
+      "verb": "runs_in"
+    },
+    {
+      "from": "site.chrome",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.1"
+      },
+      "to": "place.github",
+      "verb": "runs_in"
+    },
+    {
+      "from": "site",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.1"
+      },
+      "to": "site.app",
+      "verb": "contains"
+    },
+    {
+      "from": "site",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.1"
+      },
+      "to": "site.admin",
+      "verb": "contains"
+    },
+    {
+      "from": "site",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.1"
+      },
+      "to": "site.tests",
+      "verb": "contains"
+    },
+    {
+      "from": "site",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "7.3"
+      },
+      "to": "site.vendor",
+      "verb": "contains"
+    },
+    {
+      "from": "site",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.1"
+      },
+      "to": "site.chrome",
+      "verb": "contains"
+    },
+    {
+      "from": "site",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.3"
+      },
+      "to": "site.gate",
+      "verb": "contains"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.2"
+      },
+      "to": "site.app.kinds",
+      "verb": "contains"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "7.1"
+      },
+      "to": "site.app.session",
+      "verb": "contains"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "5"
+      },
+      "to": "site.app.config",
+      "verb": "contains"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "8"
+      },
+      "to": "site.app.keyring",
+      "verb": "contains"
+    },
+    {
+      "from": "site.admin",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.3"
+      },
+      "to": "site.admin.oauth",
+      "verb": "contains"
+    },
+    {
+      "from": "storage",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "8.6"
+      },
+      "to": "storage.rules",
+      "verb": "contains"
+    },
+    {
+      "from": "infra",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9"
+      },
+      "to": "pipeline",
+      "verb": "contains"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "to": "login",
+      "verb": "reads_from"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "to": "storage",
+      "verb": "reads_from"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "to": "storage",
+      "verb": "writes_to"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "to": "unlock",
+      "verb": "reads_from"
+    },
+    {
+      "from": "site.admin",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "to": "login",
+      "verb": "reads_from"
+    },
+    {
+      "from": "storage",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "8.6"
+      },
+      "to": "storage.rules",
+      "verb": "protected_by"
+    },
+    {
+      "from": "storage",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.4"
+      },
+      "to": "unlock",
+      "verb": "protected_by"
+    },
+    {
+      "from": "infra",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "storage",
+      "verb": "writes_to"
+    },
+    {
+      "from": "infra",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "login",
+      "verb": "writes_to"
+    },
+    {
+      "from": "infra",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "storage.rules",
+      "verb": "writes_to"
+    },
+    {
+      "from": "site.app",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "7.3"
+      },
+      "to": "site.vendor",
+      "verb": "reads_from"
+    },
+    {
+      "from": "repository",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.4"
+      },
+      "to": "site",
+      "verb": "holds"
+    },
+    {
+      "from": "pipeline",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.1"
+      },
+      "to": "site",
+      "verb": "writes_to"
+    }
+  ],
   "layer": "components",
   "provenance": {
     "accepted_by": null,
@@ -9,7 +629,7 @@
     "source_doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
     "written_by": {
       "date": "2026-10-06",
-      "note": "step 0: empty, valid; filled at step 1",
+      "note": "step 1: the components of 3.1 with what 5, 6 and 7 name beneath them",
       "who": "agent: the build session (Claude Code)"
     }
   }

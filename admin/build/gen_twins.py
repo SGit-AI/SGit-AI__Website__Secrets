@@ -19,9 +19,12 @@ class Gen__Twins:
         self.chrome = Chrome()
         self.pages  = Site__Pages()
 
+    def twin_exists(self, href):                                                  # a root-relative .md path that exists, or a sibling of the page
+        return (self.pages.root / href.lstrip('/')).exists() if href.startswith('/') else True
+
     def render(self, page):
         canonical = self.chrome.canonical_url(page['url'])
-        body      = Html__To__Markdown.convert(page['main'])
+        body      = Html__To__Markdown.convert(page['main'], self.twin_exists)
         if body.startswith('# '):                                                # the page's own h1 stays; do not add a second
             heading, _, body = body.partition('\n')
         else:

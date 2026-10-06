@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "doc": {
+      "type": "string"
+    },
+    "page": {
+      "type": "string"
+    },
+    "sections": {
+      "additionalProperties": {
+        "additionalProperties": false,
+        "properties": {
+          "anchor": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "anchor",
+          "title"
+        ],
+        "type": "object"
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "doc",
+    "page",
+    "sections"
+  ],
+  "title": "review/intent/sections.json",
+  "type": "object"
+}

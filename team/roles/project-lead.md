@@ -15,4 +15,4 @@ The person whose words the briefs come from and who says go. Holds every account
 
 ## Starting prompt
 
-"Read the comms page and `docs/ops/needs.md`. Do the items marked for you, in order, and reply with what the script printed. Then walk `/review/` and send corrections to the intent graph as numbered items."
+"Read the comms page and `docs/ops/needs.md`. Do the items marked for you, in order, and reply with what the script printed. Then walk `/review/ui/` and send corrections to the intent graph as numbered items."

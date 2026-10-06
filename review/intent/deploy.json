@@ -1,8 +1,364 @@
 {
-  "edges": [],
-  "environments": [],
+  "edges": [
+    {
+      "from": "pipe.deploy-pages",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.1"
+      },
+      "to": "env.prod",
+      "verb": "deploys_to"
+    },
+    {
+      "from": "pipe.infra",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.2"
+      },
+      "to": "env.dev",
+      "verb": "deploys_to"
+    },
+    {
+      "from": "pipe.infra",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.2"
+      },
+      "to": "env.main",
+      "verb": "deploys_to"
+    },
+    {
+      "from": "pipe.infra",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.2"
+      },
+      "to": "env.prod",
+      "verb": "deploys_to"
+    },
+    {
+      "from": "pipe.rules",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.4"
+      },
+      "to": "env.dev",
+      "verb": "deploys_to"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.services",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.firebase-project",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.web-app",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.identity-platform",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.google-idp",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.admin-oauth-client",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.bucket",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.rules-release",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.iam",
+      "verb": "contains"
+    },
+    {
+      "from": "env.dev",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.wif",
+      "verb": "contains"
+    },
+    {
+      "from": "env.tfstate",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "to": "res.tfstate-bucket",
+      "verb": "contains"
+    }
+  ],
+  "environments": [
+    {
+      "id": "env.dev",
+      "name": "dev",
+      "project_id": "sgit-secrets-dev",
+      "purpose": "daily development, disposable",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.1"
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "env.main",
+      "name": "main",
+      "project_id": "sgit-secrets-main",
+      "purpose": "staging; what the main branch is tested against",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.1"
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "env.prod",
+      "name": "prod",
+      "project_id": "sgit-secrets-prod",
+      "purpose": "the public default",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.1"
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "env.customer",
+      "name": "<customer>",
+      "project_id": "theirs",
+      "purpose": "a customer's own project, in their org and billing",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.1"
+      },
+      "status": "proposed"
+    },
+    {
+      "id": "env.tfstate",
+      "name": "tfstate",
+      "project_id": "sgit-secrets-tfstate",
+      "purpose": "the bootstrap project holding Terraform state, one prefix per env",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      },
+      "status": "proposed"
+    }
+  ],
   "layer": "deploy",
-  "pipelines": [],
+  "pipelines": [
+    {
+      "file": ".github/workflows/deploy-pages.yml",
+      "id": "pipe.deploy-pages",
+      "jobs": [
+        {
+          "does": "generators --check, validate.js, pytest tests/build, node --test tests/unit",
+          "id": "pipe.deploy-pages.validate",
+          "name": "validate",
+          "on_failure": "nothing tagged or deployed",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.1"
+          },
+          "when": "always"
+        },
+        {
+          "does": "assert version.txt equals the newest site vX.Y.Z subject and the next version; backfill; push the tag",
+          "id": "pipe.deploy-pages.tag-release",
+          "name": "tag-release",
+          "on_failure": "no deploy",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.1"
+          },
+          "when": "push to dev only"
+        },
+        {
+          "does": "assemble the tree minus .git, .github, infra, tests/unit, node_modules; upload; deploy",
+          "id": "pipe.deploy-pages.deploy",
+          "name": "deploy",
+          "on_failure": "previous version stays live",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.1"
+          },
+          "when": "any push or dispatch, never PR"
+        },
+        {
+          "does": "fetch version.txt and the homepage badge until they equal the tag or 10 minutes pass",
+          "id": "pipe.deploy-pages.verify-live",
+          "name": "verify-live",
+          "on_failure": "run is red; site may be stale",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.1"
+          },
+          "when": "after deploy"
+        }
+      ],
+      "name": "deploy-pages.yml",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.1"
+      }
+    },
+    {
+      "file": ".github/workflows/infra.yml",
+      "id": "pipe.infra",
+      "jobs": [
+        {
+          "does": "terraform fmt -check, validate, plan -out, posted as a PR comment per env",
+          "id": "pipe.infra.plan",
+          "name": "plan",
+          "on_failure": "no apply",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.2"
+          },
+          "when": "PR touching infra/**, and dispatch"
+        },
+        {
+          "does": "apply the saved plan; run export_env_config.py; open a PR to dev with the config change",
+          "id": "pipe.infra.apply",
+          "name": "apply",
+          "on_failure": "nothing applied",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.2"
+          },
+          "when": "dispatch, and push to dev for dev"
+        }
+      ],
+      "name": "infra.yml",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.2"
+      }
+    },
+    {
+      "file": ".github/workflows/tests-browser.yml",
+      "id": "pipe.tests-browser",
+      "jobs": [
+        {
+          "does": "Playwright against a local http.server with ?env=dev, a Firebase email test user and a virtual authenticator (PRF VERIFY FIRST)",
+          "id": "pipe.tests-browser.e2e",
+          "name": "e2e",
+          "on_failure": "PR red",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.4"
+          },
+          "when": "PR and nightly"
+        }
+      ],
+      "name": "tests-browser.yml",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.4"
+      }
+    },
+    {
+      "file": ".github/workflows/rules.yml",
+      "id": "pipe.rules",
+      "jobs": [
+        {
+          "does": "firebase deploy --only storage or the Rules API; posts the ruleset name",
+          "id": "pipe.rules.deploy",
+          "name": "deploy rules",
+          "on_failure": "rules unchanged",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.4"
+          },
+          "when": "manual dispatch with env"
+        }
+      ],
+      "name": "rules.yml",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.4"
+      }
+    },
+    {
+      "file": ".github/workflows/link-check.yml",
+      "id": "pipe.link-check",
+      "jobs": [
+        {
+          "does": "external link check; opens an issue",
+          "id": "pipe.link-check.weekly",
+          "name": "weekly",
+          "on_failure": "an issue",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.4"
+          },
+          "when": "weekly schedule"
+        }
+      ],
+      "name": "link-check.yml",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.4"
+      }
+    }
+  ],
   "provenance": {
     "accepted_by": null,
     "brief_corrections": "review/BRIEF-CORRECTIONS.md",
@@ -10,9 +366,120 @@
     "source_doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
     "written_by": {
       "date": "2026-10-06",
-      "note": "step 0: empty, valid; filled at step 1",
+      "note": "step 1: environments 4.1, resources 4.2, pipelines 9",
       "who": "agent: the build session (Claude Code)"
     }
   },
-  "resources": []
+  "resources": [
+    {
+      "environment": "env.dev",
+      "id": "res.services",
+      "kind": "services",
+      "name": "Project services: identitytoolkit, firebase, firebasestorage, storage, firebaserules, cloudresourcemanager, serviceusage, iam",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.firebase-project",
+      "kind": "firebase",
+      "name": "google_firebase_project",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.web-app",
+      "kind": "firebase",
+      "name": "google_firebase_web_app and its config: apiKey, authDomain, storageBucket, appId (public identifiers; API key restricted by referrer)",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.identity-platform",
+      "kind": "identity",
+      "name": "google_identity_platform_config: email sign-in, authorized_domains secrets.sgit.ai and localhost, multi-tenancy off",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.google-idp",
+      "kind": "identity",
+      "name": "google_identity_platform_default_supported_idp_config google.com with the Web client id and secret (secret from a GitHub environment secret)",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.admin-oauth-client",
+      "kind": "identity",
+      "name": "A second Web application OAuth client for /admin/ and /tests/, implicit flow, redirect /admin/oauth-return.html",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.bucket",
+      "kind": "storage",
+      "name": "google_storage_bucket: uniform access, versioning, 30-day soft delete, CORS for https://secrets.sgit.ai, keep 10 noncurrent versions; linked with google_firebase_storage_bucket",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.rules-release",
+      "kind": "rules",
+      "name": "google_firebaserules_ruleset and release firebase.storage/{bucket} from infra/rules/storage.rules",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.iam",
+      "kind": "iam",
+      "name": "tf-secrets@ service account with Editor (narrow later); a secrets-admins group with roles/owner; no service account keys",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.dev",
+      "id": "res.wif",
+      "kind": "iam",
+      "name": "Workload Identity Federation pool github, provider github-actions restricted to this repository and the dev/main branches or the environment name",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    },
+    {
+      "environment": "env.tfstate",
+      "id": "res.tfstate-bucket",
+      "kind": "storage",
+      "name": "A GCS bucket in the bootstrap project holding Terraform state, one prefix per env",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.2"
+      }
+    }
+  ]
 }

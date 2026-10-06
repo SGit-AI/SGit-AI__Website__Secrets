@@ -61,6 +61,7 @@ NAV_GROUPS        = (('The design'  , '/how-it-works/' , (('/how-it-works/'     
                      ('Admin'       , '/admin/'        , (('/admin/'                                               , 'How the site is built'     ),
                                                           ('/admin/versions.html'                                  , 'Release history'           ),
                                                           ('/admin/comms.html'                                     , 'Comms: asks and steps'     ),
+                                                          ('/review/ui/'                                              , 'Review graphs'             ),
                                                           ('/docs/ops/needs.html'                                  , 'What needs a human'        ),
                                                           ('/docs/ops/bootstrap.html'                              , 'GCP bootstrap, as commands'),
                                                           ('/llms.txt'                                             , 'llms.txt, for agents'      ))))
@@ -68,7 +69,8 @@ NAV_GROUPS        = (('The design'  , '/how-it-works/' , (('/how-it-works/'     
 CRUMB_FOLDERS     = {'/docs/'        : ('Docs'            , '/docs/'        ),
                      '/team/'        : ('The team'        , '/team/'        ),
                      '/team/roles/'  : ('Roles'           , '/team/'        ),
-                     '/about/'       : ('About'           , '/about/participant.html'),   # breadcrumb names for folders that have no nav entry of their own
+                     '/about/'       : ('About'           , '/about/participant.html'),
+                     '/review/ui/'      : ('Review graphs'   , '/review/ui/'      ),   # breadcrumb names for folders that have no nav entry of their own
                      '/docs/design/' : ('Design documents', '/docs/design/' ),
                      '/docs/ops/'    : ('Operations'      , '/docs/ops/'    ),
                      '/admin/'       : ('Admin'           , '/admin/'       )}

@@ -7,9 +7,1453 @@
     "source_doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
     "written_by": {
       "date": "2026-10-06",
-      "note": "step 0: empty, valid; filled at step 1",
+      "note": "step 1: the MVP brief as stories, rules and examples; nothing added",
       "who": "agent: the build session (Claude Code)"
     }
   },
-  "stories": []
+  "stories": [
+    {
+      "as_a": "a user",
+      "i_want": "to sign in with Google or an email address against the environment shown in the header",
+      "id": "sign-in",
+      "name": "Sign in to an environment",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "sign-in.popup-default.google",
+              "name": "Sign in with Google in a popup against dev and see uid, email and…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/index.html",
+              "text": "Sign in with Google in a popup against dev and see uid, email and tenant."
+            },
+            {
+              "id": "sign-in.popup-default.email",
+              "name": "Sign in with email and password against dev.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "4.2"
+              },
+              "surface": "/app/index.html",
+              "text": "Sign in with email and password against dev."
+            },
+            {
+              "id": "sign-in.popup-default.probe",
+              "name": "The auth probe page reports uid, email, tenant and redacted token…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/auth.html",
+              "text": "The auth probe page reports uid, email, tenant and redacted token claims, then signs out."
+            }
+          ],
+          "id": "sign-in.popup-default",
+          "name": "Popup sign-in (signInWithPopup) is the default; redirect sign-in is…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "4.5"
+          },
+          "text": "Popup sign-in (signInWithPopup) is the default; redirect sign-in is only a fallback switch on the Environment page, because redirect relies on third-party cookies that fail on GitHub Pages in Safari."
+        },
+        {
+          "examples": [
+            {
+              "id": "sign-in.authorised-domains.checklist",
+              "name": "The setup checklist shows the authorised domains row green for dev.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/setup-checklist.html",
+              "text": "The setup checklist shows the authorised domains row green for dev."
+            }
+          ],
+          "id": "sign-in.authorised-domains",
+          "name": "secrets.sgit.ai and localhost are in the Identity Platform authorised…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "4.5"
+          },
+          "text": "secrets.sgit.ai and localhost are in the Identity Platform authorised domains, or every sign-in fails with auth/unauthorized-domain; the admin checklist tests this."
+        },
+        {
+          "examples": [
+            {
+              "id": "sign-in.env-shown.badge",
+              "name": "With ?env=dev the header shows a coloured dev badge on every app page.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "5"
+              },
+              "surface": "/app/index.html",
+              "text": "With ?env=dev the header shows a coloured dev badge on every app page."
+            }
+          ],
+          "id": "sign-in.env-shown",
+          "name": "The active environment is shown in the app header at all times, prod in…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "5"
+          },
+          "text": "The active environment is shown in the app header at all times, prod in neutral and anything else in a coloured badge, so nobody enters a real secret into dev by mistake."
+        },
+        {
+          "examples": [
+            {
+              "id": "sign-in.routes.setup",
+              "name": "A new user lands on setup.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/setup.html",
+              "text": "A new user lands on setup."
+            },
+            {
+              "id": "sign-in.routes.unlock",
+              "name": "A returning user lands on unlock.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/unlock.html",
+              "text": "A returning user lands on unlock."
+            }
+          ],
+          "id": "sign-in.routes",
+          "name": "After sign-in the index page routes to setup when there is no keyring…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "After sign-in the index page routes to setup when there is no keyring at users/{uid}/keyring.json and to unlock when there is one."
+        }
+      ],
+      "so_that": "the login decides which paths in the bucket I may touch",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      }
+    },
+    {
+      "as_a": "a new user",
+      "i_want": "to create a passkey with PRF, have a keyring generated and see my recovery code once",
+      "id": "first-run",
+      "name": "First run: create a passkey and a keyring",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "first-run.create-passkey.prf-enabled",
+              "name": "After create, prf.enabled is true and the passkey is listed as a device.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "8.7"
+              },
+              "surface": "/app/setup.html",
+              "text": "After create, prf.enabled is true and the passkey is listed as a device."
+            },
+            {
+              "id": "first-run.create-passkey.prf-disabled",
+              "name": "If prf.enabled is false the page says this authenticator cannot unlock…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "8.7"
+              },
+              "surface": "/app/setup.html",
+              "text": "If prf.enabled is false the page says this authenticator cannot unlock and offers recovery-code-only or another authenticator."
+            }
+          ],
+          "id": "first-run.create-passkey",
+          "name": "navigator.credentials.create with rp.id secrets.sgit.ai, a 32-byte…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.7"
+          },
+          "text": "navigator.credentials.create with rp.id secrets.sgit.ai, a 32-byte random user.id stored in meta.json (never the Firebase uid), ES256 then RS256, residentKey required, userVerification required, extensions prf."
+        },
+        {
+          "examples": [
+            {
+              "id": "first-run.generate.write",
+              "name": "users/{uid}/keyring.json and users/{uid}/meta.json exist in the bucket…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "8.1"
+              },
+              "surface": "/app/setup.html",
+              "text": "users/{uid}/keyring.json and users/{uid}/meta.json exist in the bucket after setup, and nothing in them is plaintext."
+            },
+            {
+              "id": "first-run.generate.keypair",
+              "name": "The decrypted body holds keys.encrypt and keys.sign from the first…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "8.3"
+              },
+              "surface": "/keyring/",
+              "text": "The decrypted body holds keys.encrypt and keys.sign from the first keyring, even though nothing uses them until phase 2."
+            }
+          ],
+          "id": "first-run.generate",
+          "name": "The browser generates the KEK (32 random bytes), the key pair…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "3.2"
+          },
+          "text": "The browser generates the KEK (32 random bytes), the key pair (RSA-OAEP-4096 for encryption, ECDSA P-256 for signing) and the recovery code (26 characters base32, 128 bits), wraps the KEK under the passkey and under the recovery code, and writes the encrypted keyring."
+        },
+        {
+          "examples": [
+            {
+              "id": "first-run.recovery-once.gate",
+              "name": "The recovery code is not dismissed until the user confirms they have…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/setup.html",
+              "text": "The recovery code is not dismissed until the user confirms they have written it down."
+            }
+          ],
+          "id": "first-run.recovery-once",
+          "name": "The recovery code is shown once, behind an \"I have written it down\"…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "The recovery code is shown once, behind an \"I have written it down\" gate, and is never user-chosen; losing every passkey and the code means the data is gone, and the site says so."
+        },
+        {
+          "examples": [
+            {
+              "id": "first-run.plaintext-only-in-browser.leak-check",
+              "name": "The leak-check page scans localStorage, sessionStorage and IndexedDB…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/leak-check.html",
+              "text": "The leak-check page scans localStorage, sessionStorage and IndexedDB and finds nothing that looks like key material."
+            },
+            {
+              "id": "first-run.plaintext-only-in-browser.gate",
+              "name": "The gate asserts every localStorage.setItem key is in the allowed list.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.3"
+              },
+              "surface": "admin/build/validate.js",
+              "text": "The gate asserts every localStorage.setItem key is in the allowed list."
+            }
+          ],
+          "id": "first-run.plaintext-only-in-browser",
+          "name": "Nothing decrypted is ever written to storage, localStorage…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "3.2"
+          },
+          "text": "Nothing decrypted is ever written to storage, localStorage, sessionStorage, IndexedDB, the URL or a log."
+        }
+      ],
+      "so_that": "my secrets can only ever be opened by my authenticator or my recovery code",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      }
+    },
+    {
+      "as_a": "a returning user",
+      "i_want": "to unlock my keyring with one passkey gesture",
+      "id": "returning",
+      "name": "Returning: unlock with the passkey",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "returning.prf-eval.unlock",
+              "name": "One gesture unlocks the keyring into memory and shows the vault list.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "3.2"
+              },
+              "surface": "/app/unlock.html",
+              "text": "One gesture unlocks the keyring into memory and shows the vault list."
+            },
+            {
+              "id": "returning.prf-eval.probe",
+              "name": "The PRF probe page shows create with prf, prf.enabled, get returning 32…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/webauthn-prf.html",
+              "text": "The PRF probe page shows create with prf, prf.enabled, get returning 32 bytes, same salt same bytes twice, different salt different bytes."
+            }
+          ],
+          "id": "returning.prf-eval",
+          "name": "navigator.credentials.get with rpId, allowCredentials from meta.json…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.7"
+          },
+          "text": "navigator.credentials.get with rpId, allowCredentials from meta.json devices, userVerification required and extensions prf.eval.first = prfSalt; the page reads getClientExtensionResults().prf.results.first."
+        },
+        {
+          "examples": [
+            {
+              "id": "returning.hkdf.kat",
+              "name": "The crypto page checks HKDF-SHA256, AES-256-GCM, RSA-OAEP-4096 and…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/crypto.html",
+              "text": "The crypto page checks HKDF-SHA256, AES-256-GCM, RSA-OAEP-4096 and ECDSA P-256 against known-answer fixtures for the keyring format."
+            }
+          ],
+          "id": "returning.hkdf",
+          "name": "HKDF-SHA256 with ikm the PRF output, salt keyring.prfSalt and info…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.2"
+          },
+          "text": "HKDF-SHA256 with ikm the PRF output, salt keyring.prfSalt and info sgit-secrets/v1/wrap/<credentialId> yields the wrapping key that unwraps the KEK; the recovery path uses info sgit-secrets/v1/wrap/recovery."
+        },
+        {
+          "examples": [
+            {
+              "id": "returning.recovery-fallback.code",
+              "name": "Entering the recovery code unlocks the keyring without a passkey.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/unlock.html",
+              "text": "Entering the recovery code unlocks the keyring without a passkey."
+            }
+          ],
+          "id": "returning.recovery-fallback",
+          "name": "The unlock page falls back to the recovery code when no passkey can be…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "The unlock page falls back to the recovery code when no passkey can be used."
+        },
+        {
+          "examples": [
+            {
+              "id": "returning.lock.hidden",
+              "name": "After the tab is hidden for five minutes the vault requires a new…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/vault.html",
+              "text": "After the tab is hidden for five minutes the vault requires a new gesture."
+            },
+            {
+              "id": "returning.lock.offline",
+              "name": "The offline page shows that unlocking a cached keyring with the network…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/offline.html",
+              "text": "The offline page shows that unlocking a cached keyring with the network off is not possible and viewing already-unlocked entries is."
+            }
+          ],
+          "id": "returning.lock",
+          "name": "Keys are cleared from memory on sign-out, on environment change, when…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "Keys are cleared from memory on sign-out, on environment change, when the tab has been hidden for more than 5 minutes (configurable) and on beforeunload; clipboard copies clear after 30 s where the Clipboard API allows."
+        }
+      ],
+      "so_that": "I can see my secrets on this device without a password",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      }
+    },
+    {
+      "as_a": "a user on a new device",
+      "i_want": "to unlock with a synced passkey, a cross-device passkey or the recovery code and register a passkey here",
+      "id": "new-device",
+      "name": "New device: unlock another way and add a passkey",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "new-device.add-wrap.phone",
+              "name": "The second-device flow passes manually on a phone.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "11"
+              },
+              "surface": "/app/devices.html",
+              "text": "The second-device flow passes manually on a phone."
+            }
+          ],
+          "id": "new-device.add-wrap",
+          "name": "After unlocking, the page registers a new passkey and adds a…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "3.2"
+          },
+          "text": "After unlocking, the page registers a new passkey and adds a wrapped-KEK entry for it, then writes the keyring with optimistic concurrency."
+        },
+        {
+          "examples": [
+            {
+              "id": "new-device.concurrency.precondition",
+              "name": "The storage probe overwrites an object with a precondition and sees the…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/storage.html",
+              "text": "The storage probe overwrites an object with a precondition and sees the mismatch refused."
+            }
+          ],
+          "id": "new-device.concurrency",
+          "name": "Writes use x-goog-if-generation-match against the generation read at…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.5"
+          },
+          "text": "Writes use x-goog-if-generation-match against the generation read at unlock; on mismatch re-fetch, re-unlock with the in-memory KEK, three-way merge entries by id and updatedAt, bump rev, retry once, else a conflict page; rev is in the AAD so a stale body fails to decrypt."
+        },
+        {
+          "examples": [
+            {
+              "id": "new-device.devices-page.remove",
+              "name": "Removing the last passkey while no recovery code exists is refused.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/devices.html",
+              "text": "Removing the last passkey while no recovery code exists is refused."
+            }
+          ],
+          "id": "new-device.devices-page",
+          "name": "The devices page lists registered passkeys (name, created, last used)…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "The devices page lists registered passkeys (name, created, last used), adds a passkey, removes one only while another unlock method remains, and regenerates the recovery code."
+        }
+      ],
+      "so_that": "every device I use can open the same keyring",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      }
+    },
+    {
+      "as_a": "a user",
+      "i_want": "to add, view, copy, edit and delete entries of six kinds",
+      "id": "entries",
+      "name": "Keep secrets of six kinds",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "entries.kinds.add",
+              "name": "Add an entry of each kind from the vault list and open it.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/vault.html",
+              "text": "Add an entry of each kind from the vault list and open it."
+            },
+            {
+              "id": "entries.kinds.reveal",
+              "name": "An entry page reveals a field on request and copies it with a clearing…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/entry.html",
+              "text": "An entry page reveals a field on request and copies it with a clearing clipboard."
+            }
+          ],
+          "id": "entries.kinds",
+          "name": "Entry kinds are a closed, frozen list in app/kinds.js: password…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "Entry kinds are a closed, frozen list in app/kinds.js: password, api-key, sgit-vault-key, sgit-read-key, pki-private-key, note; each has its own fields and reveal behaviour."
+        },
+        {
+          "examples": [
+            {
+              "id": "entries.vault-key-guard.prefix",
+              "name": "A vault-key entry shows its prefix on the entry page.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/entry.html",
+              "text": "A vault-key entry shows its prefix on the entry page."
+            }
+          ],
+          "id": "entries.vault-key-guard",
+          "name": "An sgit-vault-key entry displays its prefix (sgit_private_vault_…) and…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "An sgit-vault-key entry displays its prefix (sgit_private_vault_…) and refuses to be put in a shareable set without a confirmation."
+        },
+        {
+          "examples": [
+            {
+              "id": "entries.limits.soft",
+              "name": "Soft limits are enforced in the vault and entry pages.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "11"
+              },
+              "surface": "/app/entry.html",
+              "text": "Soft limits are enforced in the vault and entry pages."
+            }
+          ],
+          "id": "entries.limits",
+          "name": "Entries are small: a soft limit of 16 KB each and 1 MB for the keyring…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.4"
+          },
+          "text": "Entries are small: a soft limit of 16 KB each and 1 MB for the keyring; a document kind is absent and will be a pointer to an sgit vault plus its key."
+        },
+        {
+          "examples": [
+            {
+              "id": "entries.body-shape.roundtrip",
+              "name": "The keyring round-trip page creates, writes, fetches, unlocks and…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/keyring-roundtrip.html",
+              "text": "The keyring round-trip page creates, writes, fetches, unlocks and compares a keyring with a throwaway passkey."
+            }
+          ],
+          "id": "entries.body-shape",
+          "name": "The decrypted body is {v, keys{encrypt, sign}, entries[{id, kind…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.3"
+          },
+          "text": "The decrypted body is {v, keys{encrypt, sign}, entries[{id, kind, title, createdAt, updatedAt, fields, tags}]}; body.ct is AES-256-GCM under the KEK with AAD keyringId|rev."
+        }
+      ],
+      "so_that": "passwords, keys and notes are kept apart and handled by kind",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.2"
+      }
+    },
+    {
+      "as_a": "a user or a customer",
+      "i_want": "to pick a built-in environment, enter a custom one, export, import and reset",
+      "id": "environment",
+      "name": "Choose an environment",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "environment.config-file.probe",
+              "name": "The config probe shows the active environment, which store it came…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/config.html",
+              "text": "The config probe shows the active environment, which store it came from, every field present, and that the API key is restricted."
+            }
+          ],
+          "id": "environment.config-file",
+          "name": "config/environments.json ships every built-in environment; every value…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "5"
+          },
+          "text": "config/environments.json ships every built-in environment; every value in it is a public identifier, generated from Terraform outputs and validated by the gate."
+        },
+        {
+          "examples": [
+            {
+              "id": "environment.selection.query",
+              "name": "?env=dev selects dev and persists it.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "5"
+              },
+              "surface": "/app/environment.html",
+              "text": "?env=dev selects dev and persists it."
+            },
+            {
+              "id": "environment.selection.custom",
+              "name": "A custom environment with all fields is entered, exported as JSON…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "5"
+              },
+              "surface": "/app/environment.html",
+              "text": "A custom environment with all fields is entered, exported as JSON, imported and reset."
+            }
+          ],
+          "id": "environment.selection",
+          "name": "The app reads localStorage sgit.secrets.config.v1 if present else the…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "5"
+          },
+          "text": "The app reads localStorage sgit.secrets.config.v1 if present else the file's default; ?env=dev selects a built-in environment for that load and persists it; the only other keys are UI conveniences; every read is wrapped in try/catch and the app works with storage empty."
+        },
+        {
+          "examples": [
+            {
+              "id": "environment.change-signs-out.clear",
+              "name": "Switching from dev to a custom environment signs out and the vault…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "5"
+              },
+              "surface": "/app/environment.html",
+              "text": "Switching from dev to a custom environment signs out and the vault requires a new unlock."
+            }
+          ],
+          "id": "environment.change-signs-out",
+          "name": "Changing environment signs the user out and clears every in-memory key.",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "5"
+          },
+          "text": "Changing environment signs the user out and clears every in-memory key."
+        }
+      ],
+      "so_that": "one site serves every GCP project, including a customer's own",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "5"
+      }
+    },
+    {
+      "as_a": "a user",
+      "i_want": "to see my email, uid and environment, sign out, wipe memory, and export or import the encrypted keyring",
+      "id": "account",
+      "name": "Manage the account",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "account.export-import.file",
+              "name": "Export downloads keyring.json ciphertext; import replaces the keyring.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/account.html",
+              "text": "Export downloads keyring.json ciphertext; import replaces the keyring."
+            }
+          ],
+          "id": "account.export-import",
+          "name": "The account page exports the encrypted keyring as a downloaded…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "The account page exports the encrypted keyring as a downloaded ciphertext file and imports one to replace it."
+        },
+        {
+          "examples": [
+            {
+              "id": "account.wipe.signout",
+              "name": "After sign out no key remains in memory and the vault requires a new…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.2"
+              },
+              "surface": "/app/account.html",
+              "text": "After sign out no key remains in memory and the vault requires a new unlock."
+            }
+          ],
+          "id": "account.wipe",
+          "name": "Sign out and wipe memory clear every key from memory.",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.2"
+          },
+          "text": "Sign out and wipe memory clear every key from memory."
+        }
+      ],
+      "so_that": "I hold a copy of my ciphertext and can leave",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.2"
+      }
+    },
+    {
+      "as_a": "an operator with IAM on the project",
+      "i_want": "to check and fix the project's configuration from the admin pages with my own Google account",
+      "id": "admin",
+      "name": "Administer an environment from the browser",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "admin.oauth.return",
+              "name": "The return page validates state, keeps the token in memory and clears…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/oauth-return.html",
+              "text": "The return page validates state, keeps the token in memory and clears the fragment."
+            },
+            {
+              "id": "admin.oauth.whoami",
+              "name": "The admin index shows who you are and which project.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/index.html",
+              "text": "The admin index shows who you are and which project."
+            }
+          ],
+          "id": "admin.oauth",
+          "name": "admin/oauth.js runs the OAuth 2.0 implicit flow by redirect to…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.3"
+          },
+          "text": "admin/oauth.js runs the OAuth 2.0 implicit flow by redirect to accounts.google.com with response_type token and scope cloud-platform, state in sessionStorage, the token in memory only, the fragment cleared from history; re-prompt on 401; VERIFY FIRST that implicit flow still works, else PKCE with a Desktop client."
+        },
+        {
+          "examples": [
+            {
+              "id": "admin.checklist.green",
+              "name": "A fresh main project is brought from bootstrap to a green checklist…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "11"
+              },
+              "surface": "/admin/setup-checklist.html",
+              "text": "A fresh main project is brought from bootstrap to a green checklist using only the admin pages and Terraform, timed and written up."
+            }
+          ],
+          "id": "admin.checklist",
+          "name": "The setup checklist shows every section-4.2 item as a row: exists…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.3"
+          },
+          "text": "The setup checklist shows every section-4.2 item as a row: exists, enabled, configured, with Fix where fixable client-side."
+        },
+        {
+          "examples": [
+            {
+              "id": "admin.pages.auth-config",
+              "name": "Authorised domains are listed, added and removed.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/auth-config.html",
+              "text": "Authorised domains are listed, added and removed."
+            },
+            {
+              "id": "admin.pages.storage",
+              "name": "The canonical CORS set is shown and applied.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/storage.html",
+              "text": "The canonical CORS set is shown and applied."
+            },
+            {
+              "id": "admin.pages.rules",
+              "name": "The deployed rules source is diffed against infra/rules/storage.rules…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/rules.html",
+              "text": "The deployed rules source is diffed against infra/rules/storage.rules and the repository version deployed."
+            },
+            {
+              "id": "admin.pages.users",
+              "name": "Users are listed with email, uid, providers, created, last sign-in and…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/users.html",
+              "text": "Users are listed with email, uid, providers, created, last sign-in and whether a keyring exists."
+            },
+            {
+              "id": "admin.pages.environment-export",
+              "name": "The environment entry is produced from the Firebase Management API for…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/environment-export.html",
+              "text": "The environment entry is produced from the Firebase Management API for pasting."
+            }
+          ],
+          "id": "admin.pages",
+          "name": "auth-config lists and edits authorised domains, providers and tenants…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.3"
+          },
+          "text": "auth-config lists and edits authorised domains, providers and tenants; storage shows and applies CORS, versioning, object counts and soft delete; rules diffs the deployed rules against the repository and deploys; users lists Identity Platform users with whether each has a keyring and enables or disables them; environment-export produces the config/environments.json entry from live values."
+        },
+        {
+          "examples": [
+            {
+              "id": "admin.show-request.preview",
+              "name": "A write on any admin page previews the request before sending.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.3"
+              },
+              "surface": "/admin/rules.html",
+              "text": "A write on any admin page previews the request before sending."
+            }
+          ],
+          "id": "admin.show-request",
+          "name": "Every write action shows the exact request it will send before sending…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.3"
+          },
+          "text": "Every write action shows the exact request it will send before sending it and logs the response on the page; admin pages never touch a keyring's contents and never store the token."
+        }
+      ],
+      "so_that": "there is no admin role in the app: the project's IAM is the role",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.3"
+      }
+    },
+    {
+      "as_a": "a visitor on any device",
+      "i_want": "to run self-contained probe pages that print PASS, FAIL or SKIP with the raw values",
+      "id": "probes",
+      "name": "Prove the browser can do it",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "probes.pages.storage",
+              "name": "With a signed-in user: write users/{uid}/_probe, read it back…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/storage.html",
+              "text": "With a signed-in user: write users/{uid}/_probe, read it back, overwrite with precondition, delete; read another uid's path and expect 403."
+            },
+            {
+              "id": "probes.pages.matrix",
+              "name": "The matrix page runs the probes in sequence and renders a shareable…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.4"
+              },
+              "surface": "/tests/matrix.html",
+              "text": "The matrix page runs the probes in sequence and renders a shareable summary with browser, OS, authenticator and results."
+            }
+          ],
+          "id": "probes.pages",
+          "name": "Each page is self-contained, runs in the browser, needs no secrets…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.4"
+          },
+          "text": "Each page is self-contained, runs in the browser, needs no secrets, prints a result table and the raw values behind each row."
+        },
+        {
+          "examples": [
+            {
+              "id": "probes.csp.config",
+              "name": "The config page reports the CSP in force.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.5"
+              },
+              "surface": "/tests/config.html",
+              "text": "The config page reports the CSP in force."
+            }
+          ],
+          "id": "probes.csp",
+          "name": "The CSP list is exact and tested on the config probe page; a…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.5"
+          },
+          "text": "The CSP list is exact and tested on the config probe page; a frame-busting check stands in for frame-ancestors, which a meta tag cannot set."
+        }
+      ],
+      "so_that": "the pages double as the compatibility matrix",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.4"
+      }
+    },
+    {
+      "as_a": "the team",
+      "i_want": "every push to dev validated, tagged, deployed and verified live by one pipeline",
+      "id": "release",
+      "name": "Every push to dev is a release",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "release.version-agreement.check1",
+              "name": "Check 1 of the gate fails on any disagreement.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.3"
+              },
+              "surface": "admin/build/validate.js",
+              "text": "Check 1 of the gate fails on any disagreement."
+            }
+          ],
+          "id": "release.version-agreement",
+          "name": "version.txt equals every page badge, the versions table row, llms.txt…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.3"
+          },
+          "text": "version.txt equals every page badge, the versions table row, llms.txt, llms-full.txt, index.md and config/environments.json#siteVersion; no version listed twice."
+        },
+        {
+          "examples": [
+            {
+              "id": "release.gate.validate-job",
+              "name": "The validate job runs every generator with --check, validate.js, pytest…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.1"
+              },
+              "surface": ".github/workflows/deploy-pages.yml#validate",
+              "text": "The validate job runs every generator with --check, validate.js, pytest tests/build and the node unit tests."
+            },
+            {
+              "id": "release.gate.tripwire",
+              "name": "A planted fake key anywhere in the tree fails check 4; the fix is a…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.3"
+              },
+              "surface": "admin/build/validate.js",
+              "text": "A planted fake key anywhere in the tree fails check 4; the fix is a redaction, never a wider pattern."
+            }
+          ],
+          "id": "release.gate",
+          "name": "The gate checks internal links and fragments, the canonical host, the…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.3"
+          },
+          "text": "The gate checks internal links and fragments, the canonical host, the leak tripwire on every file, the vendor manifest and no runtime script from another origin, the storage rules hash, the regenerated reality document, and the storage keys."
+        },
+        {
+          "examples": [
+            {
+              "id": "release.tag.push",
+              "name": "A push to dev with a matching subject produces the tag vX.Y.Z.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.1"
+              },
+              "surface": ".github/workflows/deploy-pages.yml#tag-release",
+              "text": "A push to dev with a matching subject produces the tag vX.Y.Z."
+            }
+          ],
+          "id": "release.tag",
+          "name": "tag-release reads version.txt, finds the newest commit whose subject…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.1"
+          },
+          "text": "tag-release reads version.txt, finds the newest commit whose subject matches site vX.Y.Z : …, asserts equality and the next version, backfills missing tags idempotently and pushes the tag."
+        },
+        {
+          "examples": [
+            {
+              "id": "release.deploy-verify.live",
+              "name": "verify-live passes against secrets.sgit.ai after a push to dev.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "11"
+              },
+              "surface": ".github/workflows/deploy-pages.yml#verify-live",
+              "text": "verify-live passes against secrets.sgit.ai after a push to dev."
+            }
+          ],
+          "id": "release.deploy-verify",
+          "name": "deploy assembles the tree minus .git, .github, infra, tests/unit and…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.1"
+          },
+          "text": "deploy assembles the tree minus .git, .github, infra, tests/unit and node_modules and publishes to Pages; verify-live fetches version.txt and the homepage badge until they equal the tag or ten minutes pass, and fails the run otherwise."
+        },
+        {
+          "examples": [
+            {
+              "id": "release.protections.security-page",
+              "name": "The security page lists the protections and whether each is in place…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.5"
+              },
+              "surface": "/security/",
+              "text": "The security page lists the protections and whether each is in place, dated."
+            }
+          ],
+          "id": "release.protections",
+          "name": "dev and main protected (PR required, one review, no force-push, linear…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.5"
+          },
+          "text": "dev and main protected (PR required, one review, no force-push, linear history, validate required); hardware-key 2FA; actions pinned by SHA with minimal permissions; prod requires reviewers; sgit.ai verified in the organisation; a CSP on every app, admin and test page."
+        },
+        {
+          "examples": [
+            {
+              "id": "release.other-workflows.e2e",
+              "name": "The e2e passes sign in, setup, add entry, lock, unlock, see entry, new…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "10"
+              },
+              "surface": ".github/workflows/tests-browser.yml",
+              "text": "The e2e passes sign in, setup, add entry, lock, unlock, see entry, new device via recovery code."
+            }
+          ],
+          "id": "release.other-workflows",
+          "name": "tests-browser.yml runs Playwright on PR and nightly against a local…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.4"
+          },
+          "text": "tests-browser.yml runs Playwright on PR and nightly against a local server with ?env=dev and a virtual authenticator; rules.yml deploys rules on dispatch; link-check.yml runs weekly; dependabot is off and vendor updates are reviewed PRs."
+        }
+      ],
+      "so_that": "a release that fails locally fails the same way in CI and green means live",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.1"
+      }
+    },
+    {
+      "as_a": "the team or a customer",
+      "i_want": "a project per environment created and destroyed as one unit by a bootstrap script and Terraform applied through Workload Identity Federation",
+      "id": "infrastructure",
+      "name": "One GCP project per environment, from Terraform",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "infrastructure.bootstrap.run",
+              "name": "The bootstrap prints the values for the dev environment and a re-run…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "4.3"
+              },
+              "surface": "infra/bootstrap/bootstrap.sh",
+              "text": "The bootstrap prints the values for the dev environment and a re-run changes nothing."
+            }
+          ],
+          "id": "infrastructure.bootstrap",
+          "name": "bootstrap.sh, run once by a human, idempotent with --dry-run, creates…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "4.3"
+          },
+          "text": "bootstrap.sh, run once by a human, idempotent with --dry-run, creates the tfstate project and bucket, the env projects, enables billing, creates the Terraform service account and the WIF pool, and prints the GitHub environment variables."
+        },
+        {
+          "examples": [
+            {
+              "id": "infrastructure.terraform-module.dev",
+              "name": "Terraform applies the module to dev and config/environments.json gets…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "11"
+              },
+              "surface": "infra/terraform/envs/dev",
+              "text": "Terraform applies the module to dev and config/environments.json gets real dev values from the outputs."
+            },
+            {
+              "id": "infrastructure.terraform-module.export",
+              "name": "export_env_config.py rewrites the env block and opens a PR to dev; the…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.2"
+              },
+              "surface": "infra/scripts/export_env_config.py",
+              "text": "export_env_config.py rewrites the env block and opens a PR to dev; the gate refuses a block whose _source hash does not match."
+            }
+          ],
+          "id": "infrastructure.terraform-module",
+          "name": "One module secrets-env and one root per environment create the…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "4.2"
+          },
+          "text": "One module secrets-env and one root per environment create the services, the Firebase project link and web app, Identity Platform config with email and Google sign-in, the admin OAuth client id, the bucket with versioning, soft delete, CORS and lifecycle, the rules release, IAM and the WIF provider."
+        },
+        {
+          "examples": [
+            {
+              "id": "infrastructure.rules.owner-403",
+              "name": "The storage probe asserts the owner path works and a foreign path…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "8.6"
+              },
+              "surface": "/tests/storage.html",
+              "text": "The storage probe asserts the owner path works and a foreign path returns 403."
+            }
+          ],
+          "id": "infrastructure.rules",
+          "name": "Security Rules give the owner read, write (under 2 MB) and delete on…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.6"
+          },
+          "text": "Security Rules give the owner read, write (under 2 MB) and delete on users/{uid}/**, signed-in read and owner write on directory/{uid}.pub.json, signed-in create and owner read and delete on inbox/{uid}/{shareId}."
+        },
+        {
+          "examples": [
+            {
+              "id": "infrastructure.infra-workflow.plan",
+              "name": "A PR touching infra/** posts a plan per environment.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.2"
+              },
+              "surface": ".github/workflows/infra.yml",
+              "text": "A PR touching infra/** posts a plan per environment."
+            }
+          ],
+          "id": "infrastructure.infra-workflow",
+          "name": "infra.yml plans on PR per environment, applies on dispatch and on push…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "9.2"
+          },
+          "text": "infra.yml plans on PR per environment, applies on dispatch and on push to dev for dev, authenticates with google-github-actions/auth and WIF from environment variables, and holds the OAuth client secret as an environment secret."
+        },
+        {
+          "examples": [
+            {
+              "id": "infrastructure.customer.guide",
+              "name": "docs/ops/new-environment.md walks a customer through it and the…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "4.4"
+              },
+              "surface": "docs/ops/new-environment.md",
+              "text": "docs/ops/new-environment.md walks a customer through it and the checklist verifies each step."
+            }
+          ],
+          "id": "infrastructure.customer",
+          "name": "A customer runs bootstrap for one project, adds their domain, runs…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "4.4"
+          },
+          "text": "A customer runs bootstrap for one project, adds their domain, runs Terraform and pastes the printed config into the Environment page or their fork; target under thirty minutes with no support."
+        }
+      ],
+      "so_that": "no key file exists anywhere and a customer can run their own in under thirty minutes",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4"
+      }
+    },
+    {
+      "as_a": "a reader or an agent",
+      "i_want": "every page with a status line, a markdown twin, and machine indexes, with the design published before the thing is finished",
+      "id": "content",
+      "name": "A site that says what is built and what is proposed",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "content.pages.shipped",
+              "name": "/shipped/ is generated from data/features.json per feature with…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.1"
+              },
+              "surface": "/shipped/",
+              "text": "/shipped/ is generated from data/features.json per feature with shipped, proposed or absent."
+            },
+            {
+              "id": "content.pages.homepage",
+              "name": "The homepage leads with the three-step demo, a one-line statement of…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.5"
+              },
+              "surface": "/",
+              "text": "The homepage leads with the three-step demo, a one-line statement of the model, the compromised-admin table and the shipped/proposed table."
+            }
+          ],
+          "id": "content.pages",
+          "name": "The site has the homepage, how-it-works, security, keyring, sharing…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.1"
+          },
+          "text": "The site has the homepage, how-it-works, security, keyring, sharing, environments, shipped, app, admin, tests, docs/design and admin/versions, plus llms.txt, llms-full.txt, index.md, sitemap.xml, robots.txt and CNAME."
+        },
+        {
+          "examples": [
+            {
+              "id": "content.twins.index",
+              "name": "index.md exists beside index.html and carries the version.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "7.4"
+              },
+              "surface": "/index.md",
+              "text": "index.md exists beside index.html and carries the version."
+            }
+          ],
+          "id": "content.twins",
+          "name": "Every HTML page has a .md twin generated from the same source; index.md…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "7.4"
+          },
+          "text": "Every HTML page has a .md twin generated from the same source; index.md and llms.txt are generated; llms-full.txt concatenates every page and every design doc; the chrome is one definition in admin/build/chrome.py."
+        },
+        {
+          "examples": [
+            {
+              "id": "content.reality.check7",
+              "name": "Check 7 of the gate regenerates reality.md with --check.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "9.3"
+              },
+              "surface": "admin/build/validate.js",
+              "text": "Check 7 of the gate regenerates reality.md with --check."
+            }
+          ],
+          "id": "content.reality",
+          "name": "docs/reality.md is regenerated from data/features.json on every…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "7.4"
+          },
+          "text": "docs/reality.md is regenerated from data/features.json on every release; if it does not list it, it does not exist; every number on a page comes from a data file or carries an as-of date."
+        },
+        {
+          "examples": [
+            {
+              "id": "content.keyring-spec.page",
+              "name": "The keyring page is the format spec, version 1.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "8"
+              },
+              "surface": "/keyring/",
+              "text": "The keyring page is the format spec, version 1."
+            }
+          ],
+          "id": "content.keyring-spec",
+          "name": "The keyring format is published at /keyring/ as a specification with…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8"
+          },
+          "text": "The keyring format is published at /keyring/ as a specification with versions and known-answer fixtures in tests/fixtures/keyring-v1/."
+        }
+      ],
+      "so_that": "nothing reads as shipped before it is",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "6.5"
+      }
+    },
+    {
+      "as_a": "a user who will share later",
+      "i_want": "a key pair generated at first run, a signed public bundle in the directory, and an inbox of keys encrypted to me",
+      "id": "sharing-model",
+      "name": "The data model for sharing ships before the sharing",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "sharing-model.objects.bundle",
+              "name": "The public bundle is written to directory/ in sgit's JSON bundle shape…",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "11"
+              },
+              "surface": "directory/{uid}.pub.json",
+              "text": "The public bundle is written to directory/ in sgit's JSON bundle shape, and sgit pki can import it (VERIFY)."
+            }
+          ],
+          "id": "sharing-model.objects",
+          "name": "directory/{uid}.pub.json holds the user's signed public-key bundle…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.1"
+          },
+          "text": "directory/{uid}.pub.json holds the user's signed public-key bundle (phase 1 writes it, phase 2 reads it); inbox/{uid}/{shareId}.json holds keys encrypted to the user (phase 2)."
+        },
+        {
+          "examples": [
+            {
+              "id": "sharing-model.ui-absent.page",
+              "name": "The sharing page describes the scheme and says the UI is absent.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "6.1"
+              },
+              "surface": "/sharing/",
+              "text": "The sharing page describes the scheme and says the UI is absent."
+            }
+          ],
+          "id": "sharing-model.ui-absent",
+          "name": "The sharing UI is phase 2, marked PROPOSED on /sharing/ until it ships.",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "6.1"
+          },
+          "text": "The sharing UI is phase 2, marked PROPOSED on /sharing/ until it ships."
+        }
+      ],
+      "so_that": "the keyring is not rewritten when sharing arrives in phase 2",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "2"
+      }
+    },
+    {
+      "as_a": "anyone deciding whether to trust this",
+      "i_want": "the threat model, the RP ID decision and the code-is-the-boundary statement in plain words on the site",
+      "id": "security-model",
+      "name": "What a compromised party gets",
+      "rules": [
+        {
+          "examples": [
+            {
+              "id": "security-model.rp-id.page",
+              "name": "The security page explains the RP ID decision.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "3.3"
+              },
+              "surface": "/security/",
+              "text": "The security page explains the RP ID decision."
+            }
+          ],
+          "id": "security-model.rp-id",
+          "name": "The RP ID is exactly secrets.sgit.ai, never sgit.ai: a passkey scoped…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "3.3"
+          },
+          "text": "The RP ID is exactly secrets.sgit.ai, never sgit.ai: a passkey scoped to the apex can be asserted by any sibling site and a sibling compromise would unlock every user's secrets."
+        },
+        {
+          "examples": [
+            {
+              "id": "security-model.table.page",
+              "name": "The table is on the homepage and the security page.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "3.4"
+              },
+              "surface": "/security/",
+              "text": "The table is on the homepage and the security page."
+            }
+          ],
+          "id": "security-model.table",
+          "name": "A GCP, Identity Platform or bucket compromise yields ciphertext and…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "3.4"
+          },
+          "text": "A GCP, Identity Platform or bucket compromise yields ciphertext and login metadata; the Terraform pipeline can change rules and delete; the repository or DNS yields everything for users who load the malicious page."
+        },
+        {
+          "examples": [
+            {
+              "id": "security-model.no-assertion-verify.page",
+              "name": "The security page says no WebAuthn login happens.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "8.7"
+              },
+              "surface": "/security/",
+              "text": "The security page says no WebAuthn login happens."
+            }
+          ],
+          "id": "security-model.no-assertion-verify",
+          "name": "The assertion signature is never verified (there is no server to verify…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "8.7"
+          },
+          "text": "The assertion signature is never verified (there is no server to verify it for); the PRF output is the proof that matters; the site says so."
+        },
+        {
+          "examples": [
+            {
+              "id": "security-model.acceptance.writeup",
+              "name": "docs/acceptance.md holds the attempt and its result.",
+              "source": {
+                "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+                "section": "10"
+              },
+              "surface": "docs/acceptance.md",
+              "text": "docs/acceptance.md holds the attempt and its result."
+            }
+          ],
+          "id": "security-model.acceptance",
+          "name": "Before 1.0 an Owner of the dev project is handed a uid and asked to…",
+          "source": {
+            "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+            "section": "10"
+          },
+          "text": "Before 1.0 an Owner of the dev project is handed a uid and asked to produce one plaintext field; the write-up is published."
+        }
+      ],
+      "so_that": "the trust asked for is narrow and visible",
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.4"
+      }
+    }
+  ]
 }

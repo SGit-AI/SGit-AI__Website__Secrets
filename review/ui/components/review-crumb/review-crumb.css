@@ -1,0 +1,16 @@
+:host    { display: block; font-family: var(--rv-font); font-size: var(--rv-fs-small); }
+[hidden] { display: none !important; }
+
+.crumb { align-items: center; display: flex; flex-wrap: wrap; gap: var(--rv-sp-1); }
+.step {
+    background:    transparent;
+    border:        0;
+    color:         var(--rv-text-muted);
+    cursor:        pointer;
+    font:          inherit;
+    padding:       0 var(--rv-sp-1);
+}
+.step:hover   { color: var(--rv-text-heading); }
+.step.current { color: var(--rv-text-heading); cursor: default; }
+.sep          { color: var(--rv-text-muted); opacity: 0.5; }
+.empty        { color: var(--rv-text-muted); }

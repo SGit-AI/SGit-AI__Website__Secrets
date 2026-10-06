@@ -1,0 +1,33 @@
+# review/ui: the navigator
+
+*web components in the shape coding.sgit.ai documents; no framework, no bundler, no build step · CC BY 4.0 for this file, Apache-2.0 for the code*
+
+One visualiser per file shape, one to one, and a component is not finished until `review/self/` shows its methods. `index.html` is the only document: it loads `tokens.css`, the components and `shell.js`, holds the layout, shows the version, and does nothing else. `tokens.css` is the only file under `ui/` where a colour is written.
+
+| Component | Renders | From |
+|---|---|---|
+| `review-base` | nothing; the base class the others extend: self-location (`static jsUrl = import.meta.url`), loading its `.html` and `.css` into the shadow root, the shared store that reads the JSON files by path (with the inlined bundle as fallback), the node index, the event bus, the route held in a variable | every file |
+| `review-crumb` | the path walked so far, each step a way back | the selected node's ancestors |
+| `review-tree` | story > rule > example; flow > step; component tree; environment > resource and pipeline > job; one component, every tree shape | `intent/stories.json`, `intent/flows.json`, `intent/components.json`, `intent/deploy.json`, and from step 2 the derived trees |
+| `review-node` | one node: name, type, layer, source link into the rendered brief, properties, edges in and out, children, parent | any node |
+| `review-ladder` (step 2) | the layers as a rail with counts; red where a selected change moved them | every layer file |
+| `review-set` (step 2) | the switch between `review/` and `review/self/` | the store |
+| `review-join` (step 3) | matched, derived only, projected only, the coverage figure | `join/` |
+| `review-change` (step 4) | one commit read upwards | `changes/<hash>.json` |
+| `review-source` (step 5) | code with line numbers, the node's lines marked | the source resolver |
+| `review-reach` (step 5) | who reaches this, by hop, with counts | the call graph and the surface map |
+| `review-stream` (step 5) | the code on one path in call order | `streams/<entry>.json` |
+| `review-checks` (step 6) | rules, violations, trend | `checks/` |
+| `review-search` (step 5) | find a node by name across layers | the node index |
+
+## Events
+
+All through `document`, `bubbles` and `composed` set, namespaced `review:`: `review:select` (a node id), `review:route` (a view), `review:set` (project or self), `review:loaded` (the store finished reading a set).
+
+## The route
+
+Held in the store, never in `location.hash` by assignment: inside the vault host a hash router is dead (the evidence vault shipped with that bug). When the shell runs on its own the base component mirrors the route into the URL with `history.replaceState` so a view survives a reload, and reads it back on load.
+
+## Where it runs
+
+From the repository on a local static server (`python3 -m http.server 8000`, then `/review/ui/`), from GitHub Pages at `/review/ui/`, and from step 7 inside a vault through `dist/index.html`, which `bundle.py` makes by inlining the components and the data while the source stays split.

@@ -24,10 +24,11 @@ class Gate:
 
     def commands(self):
         flag = [] if self.build else ['--check']
-        steps = [(f'python3 admin/build/{name}.py' + ('' if self.build else ' --check'), ['python3', f'admin/build/{name}.py', *flag]) for name in GENERATORS]
+        steps  = [('python3 review/tools/sections.py' + ('' if self.build else ' --check'), ['python3', 'review/tools/sections.py', *flag]),   # the review files first: gen_llms concatenates review/README.md
+                  ('python3 review/tools/readme.py' + ('' if self.build else ' --check'), ['python3', 'review/tools/readme.py', *flag])]
+        steps += [(f'python3 admin/build/{name}.py' + ('' if self.build else ' --check'), ['python3', f'admin/build/{name}.py', *flag]) for name in GENERATORS]
         if self.build:                                                            # after regenerating, prove --check is clean too
             steps += [(f'python3 admin/build/{name}.py --check', ['python3', f'admin/build/{name}.py', '--check']) for name in GENERATORS]
-        steps += [('python3 review/tools/readme.py' + ('' if self.build else ' --check'), ['python3', 'review/tools/readme.py', *flag])]
         steps += [('node admin/build/validate.js'       , ['node', 'admin/build/validate.js'                    ]),
                   ('python3 -m pytest tests/build/ -q'  , ['python3', '-m', 'pytest', 'tests/build/', '-q'      ]),
                   ('node --test tests/unit/**/*.test.js', ['node', '--test', 'tests/unit/**/*.test.js'          ])]   # Node 22 takes glob patterns, not a directory

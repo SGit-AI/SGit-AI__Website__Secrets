@@ -1,0 +1,64 @@
+:host    { display: block; font-family: var(--rv-font); font-size: var(--rv-fs); }
+[hidden] { display: none !important; }
+
+.views {
+    border-bottom: 1px solid var(--rv-border);
+    display:       flex;
+    flex-wrap:     wrap;
+    gap:           var(--rv-sp-2);
+    margin-bottom: var(--rv-sp-3);
+    padding-bottom: var(--rv-sp-2);
+}
+.view {
+    background:    transparent;
+    border:        1px solid var(--rv-border);
+    border-radius: var(--rv-radius-pill);
+    color:         var(--rv-text-muted);
+    cursor:        pointer;
+    font:          inherit;
+    font-size:     var(--rv-fs-small);
+    padding:       var(--rv-sp-1) var(--rv-sp-3);
+}
+.view:hover { color: var(--rv-text-heading); }
+.view.here  { background: var(--rv-accent-subtle); border-color: var(--rv-accent); color: var(--rv-accent); }
+
+.level {
+    list-style: none;
+    margin:     0;
+    padding:    0;
+}
+.level-1, .level-2, .level-3 { border-left: 1px solid var(--rv-border); margin-left: var(--rv-sp-3); padding-left: var(--rv-sp-2); }
+
+.node {
+    align-items:     baseline;
+    background:      transparent;
+    border:          0;
+    border-radius:   var(--rv-radius);
+    color:           var(--rv-text);
+    cursor:          pointer;
+    display:         flex;
+    flex-wrap:       wrap;
+    font:            inherit;
+    gap:             var(--rv-sp-2);
+    padding:         var(--rv-sp-1) var(--rv-sp-2);
+    text-align:      left;
+    width:           100%;
+}
+.node:hover    { background: var(--rv-surface); }
+.node.selected { background: var(--rv-selected); color: var(--rv-text-heading); }
+.node.proposed .name { color: var(--rv-proposed); }
+.layer {
+    border-radius: var(--rv-radius-pill);
+    font-family:   var(--rv-mono);
+    font-size:     var(--rv-fs-xs);
+    opacity:       0.85;
+    padding:       0 var(--rv-sp-2);
+}
+.layer-story .layer, .layer-rule .layer, .layer-example .layer { background: var(--rv-layer-stories); color: var(--rv-bg); }
+.layer-flow .layer, .layer-step .layer                         { background: var(--rv-layer-flows); color: var(--rv-bg); }
+.layer-component .layer                                        { background: var(--rv-layer-components); color: var(--rv-bg); }
+.layer-environment .layer, .layer-resource .layer, .layer-pipeline .layer, .layer-job .layer { background: var(--rv-layer-deploy); color: var(--rv-bg); }
+.name    { flex: 1; min-width: 12rem; }
+.surface { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); }
+.count   { color: var(--rv-text-muted); font-family: var(--rv-mono); font-size: var(--rv-fs-xs); }
+.empty   { color: var(--rv-text-muted); }

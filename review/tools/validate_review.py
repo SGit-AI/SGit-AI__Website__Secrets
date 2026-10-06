@@ -18,7 +18,7 @@ from schema      import Schema__Validator                                       
 
 
 SCHEMAS   = REVIEW / 'tools' / 'schemas'
-SHAPES    = {'intent/stories.json'    : 'intent-stories'   , 'intent/flows.json'    : 'intent-flows'    ,
+SHAPES    = {'intent/stories.json'    : 'intent-stories'   , 'intent/flows.json'    : 'intent-flows'    , 'intent/sections.json' : 'intent-sections' ,
              'intent/components.json' : 'intent-components', 'intent/deploy.json'   : 'intent-deploy'   ,
              'graph/files.json'       : 'graph-files'      , 'graph/methods.json'   : 'graph-methods'   ,
              'graph/classes.json'     : 'graph-classes'    , 'graph/modules.json'   : 'graph-modules'   ,

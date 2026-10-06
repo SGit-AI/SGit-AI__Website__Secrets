@@ -19,8 +19,9 @@ RE_BLANKS    = re.compile(r'\n{3,}')
 
 class Html__To__Markdown(HTMLParser):
 
-    def __init__(self):
+    def __init__(self, twin_exists=None):
         super().__init__(convert_charrefs=True)
+        self.twin_exists = twin_exists or (lambda href: True)                   # gen_twins passes a check against the tree; a page with no twin keeps its .html link
         self.out         = []
         self.list_stack  = []                                                   # ('ul'|'ol', counter)
         self.link_href   = None
@@ -32,16 +33,19 @@ class Html__To__Markdown(HTMLParser):
         self.cell        = None
         self.cell_header = False
 
-    @staticmethod
-    def twin_href(href):
+    def twin_href(self, href):
         if re.match(r'^[a-z][a-z0-9+.-]*:', href) and not href.startswith('/'):  # http:, mailto:, data: stay as they are
             return href
         base, _, fragment = href.partition('#')
         if base.endswith('.html'):
-            base = base[:-len('.html')] + '.md'
+            twin = base[:-len('.html')] + '.md'
         elif base.endswith('/'):
-            base = base + 'index.md'
-        return base + ('#' + fragment if fragment else '')
+            twin = base + 'index.md'
+        else:
+            return href
+        if not self.twin_exists(twin):
+            return href
+        return twin + ('#' + fragment if fragment else '')
 
     def emit(self, text):
         if self.cell is not None:
@@ -199,8 +203,8 @@ class Html__To__Markdown(HTMLParser):
         return text.strip() + '\n'
 
     @classmethod
-    def convert(cls, fragment):
-        parser = cls()
+    def convert(cls, fragment, twin_exists=None):
+        parser = cls(twin_exists)
         parser.feed(fragment)
         parser.close()
         return parser.markdown()

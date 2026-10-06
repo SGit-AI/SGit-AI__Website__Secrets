@@ -2,7 +2,7 @@
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.4 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -20,6 +20,7 @@ The exact list, with who and which step waits on each, is [docs/ops/needs.md](/d
 | N4 | The Google OAuth client secret for sign-in, as the GitHub environment secret for `dev` | step 3 | Open |
 | N5 | Confirm the versioning decision: every release bumps the third digit; the second digit is reserved for a milestone you name (brief-corrections C15) | nothing; recorded as decided on 2026-10-05 | Confirm |
 | N6 | Confirm that documents are rendered at build time with the raw markdown one click away, rather than a client-side markdown viewer (C16) | nothing | Confirm |
+| N7 | Walk the intent graph at [/review/ui/](/review/ui/) (stories, flows, components, deploy) and send corrections as numbered items; each accepted node then records you as its acceptor | review step 1; coverage counts only accepted nodes | Open |
 | N0 | DNS, Pages with the custom domain and HTTPS, and the re-run of the v0.1.0 workflow | step 1 | Done, 2026-10-05 |
 
 ## The build order, as it stands
@@ -45,7 +46,7 @@ The ten steps of [Code review graphs in the repository](https://sgit.ai/docs/bri
 | # | Step | Planned as | Delivered as | Status | Note |
 |---|---|---|---|---|---|
 | R0 | review/ skeleton, schemas, fixture repository, freshness wired into the gate |  | `v0.1.3` | done | Check 9 of the gate; a stale derived file fails the build, a fresh empty folder passes. |
-| R1 | intent/ from the MVP brief, every node carrying its section; the shell and the first components to walk it |  |  | building | Done when the project lead has walked it as a graph and recorded corrections. |
+| R1 | intent/ from the MVP brief, every node carrying its section; the shell and the first components to walk it |  |  | building | Written and walkable at /review/ui/ since v0.1.4; done when the project lead has walked it as a graph and recorded corrections (comms N7). |
 | R2 | derive.py for Python (lifted from the vault), derive_js.py for the components, review/self/ built, review-set and review-ladder |  |  | open | The tool reviews itself; both sets open in the navigator. |
 | R3 | derive_js.py extended to the site's pages and routes as surfaces; graph/ for the site; review-join |  |  | open | Coverage figure on the README and in the join view, from one script. |
 | R4 | change.py, review-change, the moved-layer marking; every commit from here carries a change file |  |  | open |  |

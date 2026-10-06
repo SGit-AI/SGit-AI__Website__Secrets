@@ -1,0 +1,186 @@
+{
+  "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+  "page": "/docs/design/secrets-sgit-ai__mvp-build-brief.html",
+  "sections": {
+    "0": {
+      "anchor": "0-how-to-use-this-brief",
+      "title": "0 How to use this brief"
+    },
+    "1": {
+      "anchor": "1-what-this-is",
+      "title": "1 What this is"
+    },
+    "10": {
+      "anchor": "10-testing",
+      "title": "10 Testing"
+    },
+    "11": {
+      "anchor": "11-build-order",
+      "title": "11 Build order"
+    },
+    "12": {
+      "anchor": "12-open-questions-and-what-not-to-do",
+      "title": "12 Open questions, and what not to do"
+    },
+    "13": {
+      "anchor": "13-the-prompt-to-paste-into-the-claude-code-session",
+      "title": "13 The prompt to paste into the Claude Code session"
+    },
+    "2": {
+      "anchor": "2-design-documents-copy-into-docsdesign",
+      "title": "2 Design documents (copy into `docs/design/`)"
+    },
+    "3": {
+      "anchor": "3-architecture",
+      "title": "3 Architecture"
+    },
+    "3.1": {
+      "anchor": "31-components",
+      "title": "3.1 Components"
+    },
+    "3.2": {
+      "anchor": "32-flows",
+      "title": "3.2 Flows"
+    },
+    "3.3": {
+      "anchor": "33-origins-and-the-passkey-scope-the-single-most-important-decision",
+      "title": "3.3 Origins and the passkey scope (the single most important decision)"
+    },
+    "3.4": {
+      "anchor": "34-what-a-compromised-party-gets",
+      "title": "3.4 What a compromised party gets"
+    },
+    "4": {
+      "anchor": "4-gcp-environments",
+      "title": "4 GCP environments"
+    },
+    "4.1": {
+      "anchor": "41-environments-and-naming",
+      "title": "4.1 Environments and naming"
+    },
+    "4.2": {
+      "anchor": "42-per-project-resources-what-terraform-creates",
+      "title": "4.2 Per-project resources (what Terraform creates)"
+    },
+    "4.3": {
+      "anchor": "43-bootstrap-done-once-by-a-human-documented-in-docsopsbootstrapmd",
+      "title": "4.3 Bootstrap (done once, by a human, documented in `docs/ops/bootstrap.md`)"
+    },
+    "4.4": {
+      "anchor": "44-what-a-customer-runs",
+      "title": "4.4 What a customer runs"
+    },
+    "4.5": {
+      "anchor": "45-identity-platform-notes",
+      "title": "4.5 Identity Platform notes"
+    },
+    "4.6": {
+      "anchor": "46-the-one-external-dependency-googles-auth-endpoints",
+      "title": "4.6 The one external dependency: Google's auth endpoints"
+    },
+    "5": {
+      "anchor": "5-browser-side-environment-configuration",
+      "title": "5 Browser-side environment configuration"
+    },
+    "6": {
+      "anchor": "6-the-site",
+      "title": "6 The site"
+    },
+    "6.1": {
+      "anchor": "61-structure",
+      "title": "6.1 Structure"
+    },
+    "6.2": {
+      "anchor": "62-app-pages-app",
+      "title": "6.2 App pages (`/app/`)"
+    },
+    "6.3": {
+      "anchor": "63-admin-pages-admin",
+      "title": "6.3 Admin pages (`/admin/`)"
+    },
+    "6.4": {
+      "anchor": "64-test-and-probe-pages-tests",
+      "title": "6.4 Test and probe pages (`/tests/`)"
+    },
+    "6.5": {
+      "anchor": "65-the-content-pages-what-they-say",
+      "title": "6.5 The content pages: what they say"
+    },
+    "7": {
+      "anchor": "7-house-style-from-codingsgitai-and-nfrssgitai",
+      "title": "7 House style (from coding.sgit.ai and nfrs.sgit.ai)"
+    },
+    "7.1": {
+      "anchor": "71-javascript",
+      "title": "7.1 JavaScript"
+    },
+    "7.2": {
+      "anchor": "72-html-css-python",
+      "title": "7.2 HTML / CSS / Python"
+    },
+    "7.3": {
+      "anchor": "73-dependencies-vendored-pinned-hashed",
+      "title": "7.3 Dependencies: vendored, pinned, hashed"
+    },
+    "7.4": {
+      "anchor": "74-documentation-rules",
+      "title": "7.4 Documentation rules"
+    },
+    "8": {
+      "anchor": "8-keyring-and-crypto-specification-v1",
+      "title": "8 Keyring and crypto specification (v1)"
+    },
+    "8.1": {
+      "anchor": "81-objects-in-the-bucket",
+      "title": "8.1 Objects in the bucket"
+    },
+    "8.2": {
+      "anchor": "82-key-hierarchy",
+      "title": "8.2 Key hierarchy"
+    },
+    "8.3": {
+      "anchor": "83-keyringjson",
+      "title": "8.3 `keyring.json`"
+    },
+    "8.4": {
+      "anchor": "84-entry-size-and-documents",
+      "title": "8.4 Entry size and documents"
+    },
+    "8.5": {
+      "anchor": "85-concurrency",
+      "title": "8.5 Concurrency"
+    },
+    "8.6": {
+      "anchor": "86-security-rules-infrarulesstoragerules",
+      "title": "8.6 Security Rules (`infra/rules/storage.rules`)"
+    },
+    "8.7": {
+      "anchor": "87-passkey-details",
+      "title": "8.7 Passkey details"
+    },
+    "9": {
+      "anchor": "9-cicd-and-devops-pipelines",
+      "title": "9 CI/CD and DevOps pipelines"
+    },
+    "9.1": {
+      "anchor": "91-deploy-pagesyml-validate-tag-release-deploy-the-house-pipeline",
+      "title": "9.1 `deploy-pages.yml` — validate → tag-release → deploy (the house pipeline)"
+    },
+    "9.2": {
+      "anchor": "92-infrayml-terraform-per-environment",
+      "title": "9.2 `infra.yml` — Terraform per environment"
+    },
+    "9.3": {
+      "anchor": "93-the-gate-adminbuildvalidatejs-no-dependencies",
+      "title": "9.3 The gate: `admin/build/validate.js` (no dependencies)"
+    },
+    "9.4": {
+      "anchor": "94-other-workflows",
+      "title": "9.4 Other workflows"
+    },
+    "9.5": {
+      "anchor": "95-repository-protections-the-boundary-section-34",
+      "title": "9.5 Repository protections (the boundary, section 3.4)"
+    }
+  }
+}

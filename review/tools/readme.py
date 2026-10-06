@@ -96,7 +96,8 @@ class Review__Readme:
         lines += self.section('The project', REVIEW)
         lines += self.section('The tool (review/self/)', REVIEW / 'self')
         lines += ['## Regenerate and check', '',
-                  '```', 'python3 review/tools/validate_review.py      # every JSON file against its schema; every edge a known verb',
+                  '```', 'python3 review/tools/sections.py             # the brief\'s section anchors, for the links from every intent node',
+                  'python3 review/tools/validate_review.py      # every JSON file against its schema; every edge a known verb',
                   'python3 review/tools/freshness.py            # derived files match the tree being built',
                   'python3 review/tools/readme.py               # this file',
                   'python3 -m http.server 8000                   # then open http://localhost:8000/review/ for the navigator', '```', '',

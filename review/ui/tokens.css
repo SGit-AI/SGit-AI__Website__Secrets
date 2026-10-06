@@ -1,0 +1,49 @@
+/* ── tokens.css — the design tokens of the review navigator ───────────────────
+   The only file under review/ui/ where a colour is written. Components use
+   var(--rv-*) and nothing else. The palette is the site's (vendor/sg-tokens.css
+   v1.0.0): navy surfaces, teal accent, amber for proposed, coral for moved.
+   Applies to :root for the shell and :host for components, which load this file
+   into their shadow roots as a <link>. */
+
+:root, :host {
+    --rv-bg:              #1A1A2E;
+    --rv-bg-secondary:    #16213E;
+    --rv-surface:         rgba(44, 62, 107, 0.35);
+    --rv-surface-strong:  rgba(44, 62, 107, 0.65);
+    --rv-border:          #2C3E6B;
+    --rv-text:            #E0E0E0;
+    --rv-text-heading:    #FFFFFF;
+    --rv-text-muted:      #8892A0;
+    --rv-accent:          #4ECDC4;
+    --rv-accent-subtle:   rgba(78, 205, 196, 0.12);
+    --rv-proposed:        #E0B84E;
+    --rv-proposed-subtle: rgba(224, 184, 78, 0.14);
+    --rv-moved:           #E94560;
+    --rv-moved-subtle:    rgba(233, 69, 96, 0.14);
+    --rv-held:            #8892A0;
+    --rv-selected:        rgba(78, 205, 196, 0.22);
+
+    --rv-font:            'DM Sans', system-ui, -apple-system, sans-serif;
+    --rv-mono:            'JetBrains Mono', ui-monospace, monospace;
+    --rv-fs:              0.92rem;
+    --rv-fs-small:        0.8rem;
+    --rv-fs-xs:           0.72rem;
+
+    --rv-sp-1:            4px;
+    --rv-sp-2:            8px;
+    --rv-sp-3:            12px;
+    --rv-sp-4:            16px;
+    --rv-sp-6:            24px;
+
+    --rv-radius:          6px;
+    --rv-radius-pill:     9999px;
+    --rv-fast:            150ms ease;
+
+    --rv-layer-stories:    #4ECDC4;
+    --rv-layer-rules:      #6FD6CE;
+    --rv-layer-examples:   #90DFD9;
+    --rv-layer-flows:      #9B8CFF;
+    --rv-layer-components: #7FB3FF;
+    --rv-layer-deploy:     #B0C4DE;
+    --rv-layer-derived:    #C9A96E;
+}

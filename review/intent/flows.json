@@ -1,5 +1,281 @@
 {
-  "flows": [],
+  "flows": [
+    {
+      "actor": "user",
+      "id": "flow.first-run",
+      "name": "First run",
+      "serves": [
+        "sign-in",
+        "first-run",
+        "sharing-model"
+      ],
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "steps": [
+        {
+          "actor": "user",
+          "n": 1,
+          "surface": "/app/index.html",
+          "text": "Sign in (Identity Platform)"
+        },
+        {
+          "actor": "user",
+          "n": 2,
+          "surface": "users/{uid}/keyring.json",
+          "text": "No keyring at users/{uid}/keyring.json"
+        },
+        {
+          "actor": "user",
+          "n": 3,
+          "surface": "/app/setup.html",
+          "text": "Create passkey with PRF"
+        },
+        {
+          "actor": "user",
+          "n": 4,
+          "surface": "/app/setup.html",
+          "text": "Generate keyring key (KEK), key pair, recovery code"
+        },
+        {
+          "actor": "user",
+          "n": 5,
+          "surface": "users/{uid}/keyring.json",
+          "text": "Write encrypted keyring"
+        },
+        {
+          "actor": "user",
+          "n": 6,
+          "surface": "/app/setup.html",
+          "text": "Show recovery code once"
+        }
+      ]
+    },
+    {
+      "actor": "user",
+      "id": "flow.returning",
+      "name": "Returning",
+      "serves": [
+        "sign-in",
+        "returning",
+        "entries"
+      ],
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "steps": [
+        {
+          "actor": "user",
+          "n": 1,
+          "surface": "/app/index.html",
+          "text": "Sign in"
+        },
+        {
+          "actor": "user",
+          "n": 2,
+          "surface": "users/{uid}/keyring.json",
+          "text": "Fetch keyring"
+        },
+        {
+          "actor": "user",
+          "n": 3,
+          "surface": "/app/unlock.html",
+          "text": "navigator.credentials.get with PRF eval"
+        },
+        {
+          "actor": "user",
+          "n": 4,
+          "surface": "/app/unlock.html",
+          "text": "HKDF, unwrap KEK, decrypt body into memory"
+        },
+        {
+          "actor": "user",
+          "n": 5,
+          "surface": "/app/vault.html",
+          "text": "The UI"
+        }
+      ]
+    },
+    {
+      "actor": "user",
+      "id": "flow.new-device",
+      "name": "New device",
+      "serves": [
+        "new-device"
+      ],
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "steps": [
+        {
+          "actor": "user",
+          "n": 1,
+          "surface": "/app/index.html",
+          "text": "Sign in"
+        },
+        {
+          "actor": "user",
+          "n": 2,
+          "surface": "users/{uid}/keyring.json",
+          "text": "Fetch keyring"
+        },
+        {
+          "actor": "user",
+          "n": 3,
+          "surface": "/app/unlock.html",
+          "text": "Unlock via a synced passkey, cross-device passkey (QR) or the recovery code"
+        },
+        {
+          "actor": "user",
+          "n": 4,
+          "surface": "/app/devices.html",
+          "text": "Register a new passkey"
+        },
+        {
+          "actor": "user",
+          "n": 5,
+          "surface": "/app/devices.html",
+          "text": "Add a wrapped-KEK entry"
+        },
+        {
+          "actor": "user",
+          "n": 6,
+          "surface": "users/{uid}/keyring.json",
+          "text": "Write keyring with optimistic concurrency"
+        }
+      ]
+    },
+    {
+      "actor": "operator",
+      "id": "flow.admin",
+      "name": "Admin",
+      "serves": [
+        "admin"
+      ],
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "3.2"
+      },
+      "steps": [
+        {
+          "actor": "operator",
+          "n": 1,
+          "surface": "/admin/index.html",
+          "text": "Open /admin/"
+        },
+        {
+          "actor": "operator",
+          "n": 2,
+          "surface": "/admin/index.html",
+          "text": "Choose environment"
+        },
+        {
+          "actor": "operator",
+          "n": 3,
+          "surface": "/admin/oauth-return.html",
+          "text": "Sign in with Google for admin (OAuth implicit flow, scope cloud-platform, token in memory only)"
+        },
+        {
+          "actor": "operator",
+          "n": 4,
+          "surface": "/admin/setup-checklist.html",
+          "text": "Each check calls a GCP API; green, red or fix"
+        }
+      ]
+    },
+    {
+      "actor": "team",
+      "id": "flow.release",
+      "name": "A release",
+      "serves": [
+        "release"
+      ],
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "9.1"
+      },
+      "steps": [
+        {
+          "actor": "team",
+          "n": 1,
+          "surface": "dev",
+          "text": "Push to dev with subject site vX.Y.Z : …"
+        },
+        {
+          "actor": "pipeline",
+          "n": 2,
+          "surface": ".github/workflows/deploy-pages.yml#validate",
+          "text": "validate: generators --check, validate.js, pytest, node --test"
+        },
+        {
+          "actor": "pipeline",
+          "n": 3,
+          "surface": ".github/workflows/deploy-pages.yml#tag-release",
+          "text": "tag-release: assert version, tag, push"
+        },
+        {
+          "actor": "pipeline",
+          "n": 4,
+          "surface": ".github/workflows/deploy-pages.yml#deploy",
+          "text": "deploy: assemble the tree, upload, deploy to Pages"
+        },
+        {
+          "actor": "pipeline",
+          "n": 5,
+          "surface": ".github/workflows/deploy-pages.yml#verify-live",
+          "text": "verify-live: poll version.txt and the badge until they equal the tag"
+        }
+      ]
+    },
+    {
+      "actor": "customer",
+      "id": "flow.customer-environment",
+      "name": "A customer runs their own environment",
+      "serves": [
+        "infrastructure",
+        "environment"
+      ],
+      "source": {
+        "doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
+        "section": "4.4"
+      },
+      "steps": [
+        {
+          "actor": "customer",
+          "n": 1,
+          "surface": "infra/bootstrap/bootstrap.sh",
+          "text": "Run bootstrap for one project"
+        },
+        {
+          "actor": "customer",
+          "n": 2,
+          "surface": "/admin/auth-config.html",
+          "text": "Add their domain to authorized_domains"
+        },
+        {
+          "actor": "customer",
+          "n": 3,
+          "surface": "infra/terraform/envs",
+          "text": "Run Terraform"
+        },
+        {
+          "actor": "customer",
+          "n": 4,
+          "surface": "/app/environment.html",
+          "text": "Paste the printed config into the Environment page or the fork's config/environments.json"
+        },
+        {
+          "actor": "customer",
+          "n": 5,
+          "surface": "/admin/setup-checklist.html",
+          "text": "The setup checklist verifies each step"
+        }
+      ]
+    }
+  ],
   "layer": "flows",
   "provenance": {
     "accepted_by": null,
@@ -8,7 +284,7 @@
     "source_doc": "docs/design/secrets-sgit-ai__mvp-build-brief.md",
     "written_by": {
       "date": "2026-10-06",
-      "note": "step 0: empty, valid; filled at step 1",
+      "note": "step 1: the flows of section 3.2, 9.1 and 4.4",
       "who": "agent: the build session (Claude Code)"
     }
   }

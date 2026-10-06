@@ -2,7 +2,7 @@
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.3 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.4 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -64,8 +64,9 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 | site | The family nav: grouped menus with dropdowns, part-of-sgit.ai link, stage pill, phone menu, breadcrumbs | shipped v0.1.1 | admin/build/chrome.py, assets/nav.js | The shape sgit.ai, nfrs.sgit.ai and pki.sgit.ai run; works with no JavaScript because every group label is a link. |
 | admin | Comms page: the asks back to the project lead and the nine build steps with status, from data/steps.json | shipped v0.1.1 | admin/comms.html | gen_versions.py renders the step tracker; a done step must name a release that exists. |
 | review | review/: schemas for every layer, the edge vocabulary, freshness by tree hash, a computed README, the fixture repository | shipped v0.1.3 | review/tools/ | Step 0 of the review brief. Check 9 of the gate. |
-| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Step 1. Written by the agent; intent only once the lead has walked it and accepted it. |
-| review | The navigator: web components, one visualiser per file shape, no framework, no build step, served at /review/ | proposed | review/ui/ | Steps 1 to 6. review-base is a sibling of the tools' base component (R2). |
+| review | review/intent/: the MVP brief as stories, rules, examples, flows, components and deploy, each node carrying its section, accepted by the project lead | proposed | review/intent/ | Written at v0.1.4 (14 stories, 51 rules, 70 examples, 6 flows, 23 components, 5 environments, 11 resources, 5 pipelines); intent only once the lead has walked it and accepted it (comms N7). |
+| review | The navigator at /review/ui/: walk the intent down and up, with the path as a breadcrumb and every node linked to its section of the brief | shipped v0.1.4 | review/ui/ | review-base, review-tree, review-node, review-crumb: web components in the coding.sgit.ai shape, three files each; colours only in tokens.css; the route never assigns location.hash. |
+| review | The rest of the navigator: ladder, set switch, join, change, source, reach, stream, checks, search | proposed | review/ui/ | Steps 2 to 6; one visualiser per file shape, listed in review/ui/README.md. |
 | review | graph/: files, modules, classes, methods, surfaces, tests and deploy derived from the syntax tree by parsers, never a model | proposed | review/tools/derive.py, derive_js.py | Steps 2 and 3. Python from the stdlib parser; JavaScript from a vendored, hashed acorn. |
 | review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
 | review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |

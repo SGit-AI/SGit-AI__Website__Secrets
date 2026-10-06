@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Review graphs — secrets.sgit.ai</title>
+  <meta name="description" content="The navigator over review/: the design as a graph written from the brief, and from step 2 the code derived beneath it. Walk from a story to a rule to an example to the surface it names; every node carries its section.">
+  <link rel="canonical" href="https://secrets.sgit.ai/review/ui/">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="shell.css">
+  <script type="module" src="components/review-base/review-base.js"></script>
+  <script type="module" src="components/review-crumb/review-crumb.js"></script>
+  <script type="module" src="components/review-tree/review-tree.js"></script>
+  <script type="module" src="components/review-node/review-node.js"></script>
+  <script type="module" src="shell.js"></script>
+</head>
+<body>
+  <header class="top" aria-label="Review navigator">
+    <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+    <span class="title">review/</span>
+    <span class="set" data-set-label>the project</span>
+    <review-crumb class="crumb"></review-crumb>
+    <a class="version" href="/admin/versions.html" data-version title="site release history">v…</a>
+    <a class="back" href="/admin/">admin</a>
+  </header>
+  <main class="layout">
+    <section class="centre" aria-label="Tree">
+      <review-tree></review-tree>
+    </section>
+    <aside class="right" aria-label="Selected node">
+      <review-node></review-node>
+    </aside>
+  </main>
+  <footer class="bottom">
+    <p>Step 1 of the review brief: the intent layers, written by the build agent from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the MVP brief</a> and awaiting acceptance by the project lead; nothing derived from code yet. The data is <a href="../intent/stories.json">intent/stories.json</a>, <a href="../intent/flows.json">flows.json</a>, <a href="../intent/components.json">components.json</a> and <a href="../intent/deploy.json">deploy.json</a>; the folder is described in <a href="../README.md">review/README.md</a>. No framework, no build step: web components in the coding.sgit.ai shape, one per file shape (<a href="README.md">ui/README.md</a>).</p>
+  </footer>
+</body>
+</html>

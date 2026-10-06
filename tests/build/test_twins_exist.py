@@ -50,8 +50,10 @@ class Test__Twins__Exist(TestCase):
             links = [href for href in re.findall(r'\]\(([^)\s]+)\)', text) if not href.startswith('http')]
             with self.subTest(page=path.relative_to(ROOT).as_posix()):
                 for href in links:
-                    self.assertFalse(href.split('#')[0].endswith('.html'), f'{href} should point at the .md twin')
-                    self.assertFalse(href.split('#')[0].endswith('/'), f'{href} should point at index.md')
+                    target = href.split('#')[0]
+                    twin   = target[:-5] + '.md' if target.endswith('.html') else target + 'index.md' if target.endswith('/') else None
+                    if twin and (ROOT / twin.lstrip('/')).exists():
+                        self.fail(f'{href} should point at its twin {twin}')      # a page with no twin (the review shell) keeps its HTML link
 
     def test_index_md_is_the_homepage_twin(self):
         text = (ROOT / 'index.md').read_text(encoding='utf-8')

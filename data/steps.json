@@ -87,7 +87,7 @@
       "title": "intent/ from the MVP brief, every node carrying its section; the shell and the first components to walk it",
       "status": "building",
       "releasedAs": null,
-      "note": "Done when the project lead has walked it as a graph and recorded corrections."
+      "note": "Written and walkable at /review/ui/ since v0.1.4; done when the project lead has walked it as a graph and recorded corrections (comms N7)."
     },
     {
       "step": 2,
