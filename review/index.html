@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/review/">
   <meta property="og:title" content="Review graphs — secrets.sgit.ai">
   <meta property="og:description" content="The review folder: this project as layered graphs. The design written top down from the brief, the code derived bottom up by parsers, the join between them, every commit read upwards, and a navigator to walk it all. What exists, what each step brings, and where to start.">
-  <meta name="sg-secrets:version" content="0.1.9">
+  <meta name="sg-secrets:version" content="0.1.10">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.10" title="released 2026-10-06">v0.1.10</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -54,6 +54,17 @@
           </div>
         </div>
         <div class="ni ni-has">
+          <a class="nl here" href="/review/">Review<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl here" href="/review/" aria-current="page">The project as graphs</a>
+          <a class="sl" href="/review/ui/">The navigator</a>
+          <a class="sl" href="/review/ui/#view=claims">Claims and their evidence</a>
+          <a class="sl" href="/review/ui/#view=brief">The brief, as sections</a>
+          <a class="sl" href="/review/README.md">review/README.md, the counts</a>
+          <a class="sl" href="/review/BRIEF-CORRECTIONS.md">Corrections to the review brief</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
           <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
           <div class="sub">
           <a class="sl" href="/docs/">All documents</a>
@@ -65,12 +76,11 @@
           </div>
         </div>
         <div class="ni ni-has">
-          <a class="nl here" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
           <div class="sub">
           <a class="sl" href="/admin/">How the site is built</a>
           <a class="sl" href="/admin/versions.html">Release history</a>
           <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
-          <a class="sl here" href="/review/" aria-current="page">Review graphs</a>
           <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
           <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
           <a class="sl" href="/llms.txt">llms.txt, for agents</a>
@@ -89,7 +99,7 @@
         </div>
       </div>
     </nav>
-    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Review graphs</span></div>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">The project as graphs</span></div>
   </header>
 <!-- sg-secrets:nav:end -->
   <main>
@@ -138,7 +148,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.9" title="released 2026-10-06">v0.1.9</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/review/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.10" title="released 2026-10-06">v0.1.10</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/review/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

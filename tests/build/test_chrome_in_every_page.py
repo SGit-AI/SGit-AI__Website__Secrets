@@ -45,7 +45,7 @@ class Test__Chrome__In__Every__Page(TestCase):
                 self.assertIn('<script src="/assets/nav.js" defer></script>', text)
                 self.assertIn('<nav class="site" aria-label="Site">', text)
                 self.assertIn('<button class="nav-toggle"', text)
-                self.assertEqual(text.count('<div class="ni ni-has">'), 4)      # the four groups
+                self.assertEqual(text.count('<div class="ni ni-has">'), 5)      # the five groups: the design, shipped, review, docs, admin
 
     def test_every_badge_equals_version_txt(self):
         for path in self.files:

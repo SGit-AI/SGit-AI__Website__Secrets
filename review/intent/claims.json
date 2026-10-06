@@ -20,6 +20,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/21ce79fb62661db105b3d4c2135d8c57f2a66b79",
+      "id": "anchor.commit.21ce79fb62661db105b3d4c2135d8c57f2a66b79",
+      "kind": "commit",
+      "name": "commit 21ce79f",
+      "opens": "on GitHub",
+      "ref": "commit:21ce79fb62661db105b3d4c2135d8c57f2a66b79"
+    },
+    {
+      "anchor": true,
       "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/306aa0c2e9d22366b748390be06e13eb93599152",
       "id": "anchor.commit.306aa0c2e9d22366b748390be06e13eb93599152",
       "kind": "commit",
@@ -1082,6 +1091,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37513070364",
+      "id": "anchor.run.37513070364",
+      "kind": "run",
+      "name": "Actions run 37513070364 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37513070364"
+    },
+    {
+      "anchor": true,
       "href": "/review/ui/#section=0",
       "id": "anchor.section.0",
       "kind": "section",
@@ -1322,6 +1340,15 @@
       "name": "tag v0.1.1",
       "opens": "on GitHub",
       "ref": "tag:v0.1.1"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.10",
+      "id": "anchor.tag.v0.1.10",
+      "kind": "tag",
+      "name": "tag v0.1.10",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.10"
     },
     {
       "anchor": true,
@@ -4200,9 +4227,29 @@
       "verb": "described_in"
     },
     {
+      "from": "release.0.1.10",
+      "to": "anchor.tag.v0.1.10",
+      "verb": "recorded_in"
+    },
+    {
       "from": "release.0.1.9",
       "to": "anchor.tag.v0.1.9",
       "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.9",
+      "to": "anchor.commit.21ce79fb62661db105b3d4c2135d8c57f2a66b79",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.9",
+      "to": "anchor.run.37513070364",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.9",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
     },
     {
       "from": "release.0.1.8",
@@ -4398,12 +4445,30 @@
     {
       "commit": null,
       "date": "2026-10-06",
+      "id": "release.0.1.10",
+      "name": "v0.1.10: Review in the top menu",
+      "notes": "Review is a group of the family nav, between Shipped and Docs: the project as graphs, the navigator, the claims and their evidence, the brief as sections, the README with the counts, and the corrections to the review brief. It leaves the Admin menu. release.py fetches the tags before backfilling a release's commit.",
+      "run": null,
+      "tag": "v0.1.10",
+      "verified": null,
+      "version": "0.1.10"
+    },
+    {
+      "commit": "21ce79fb62661db105b3d4c2135d8c57f2a66b79",
+      "date": "2026-10-06",
       "id": "release.0.1.9",
       "name": "v0.1.9: everything links to everything",
       "notes": "Meaning through connectivity, from the fractal semantic graphs article: a claim means nothing until it is linked to its evidence, down to an anchor a person can open. Every claim in data/features.json now carries typed evidence (realises an intent node, lives_in a file, proven_by a test or a gate check, described_in a section or a document, seen_at a URL); review/tools/claims.py turns the claims, the releases (with their commit, tag and Actions run, backfilled from GitHub) and the anchors into the claims layer of the review graph, strict: a shipped claim with no anchor that resolves fails the build. Every status chip and every location on /shipped/ and in the status lines is a link into the navigator. The reader never leaves it to follow a chain: the brief is split into fourteen section files under review/brief/ by review/tools/brief.py and shown in place by review-brief, with the intent nodes written from each section; any served file is shown in place with line numbers and a marked range by review-source; sections and files are routes the gate resolves. The ladder gains the brief and the evidence rungs; the tree gains the Claims and The brief views; the crumb follows. C23, R10.",
-      "run": null,
+      "run": {
+        "conclusion": "success",
+        "id": 37513070364,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37513070364"
+      },
       "tag": "v0.1.9",
-      "verified": null,
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
       "version": "0.1.9"
     },
     {

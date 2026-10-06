@@ -40,6 +40,7 @@ class Release:
 
     def backfill_records(self, data):                                           # earlier releases get their commit (from the tag) and their Actions run (from GitHub); the newest at the next release
         runs = {}
+        subprocess.run(['git', 'fetch', '--tags', '-q', 'origin'], cwd=ROOT, check=False)   # CI makes the tags; have them before looking them up
         try:
             import urllib.request
             listing = json.loads(urllib.request.urlopen('https://api.github.com/repos/SGit-AI/SGit-AI__Website__Secrets/actions/runs?branch=dev&per_page=50', timeout=20).read())
