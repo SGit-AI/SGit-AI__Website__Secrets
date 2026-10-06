@@ -1,14 +1,31 @@
 {
   "releases": [
     {
+      "version": "0.1.13",
+      "date": "2026-10-06",
+      "title": "the column: dictation that reports, the append token held by the reader, the key's place",
+      "notes": "Three things Dinis hit on the iPad. Dictation now keeps interim results (Safari on iOS gives no final one), says what it heard or why it stopped (microphone not allowed, no speech, no network), and a second tap stops it. Send to the agent: the lane's append token is no longer published in the contact file; the lead makes the tokens with configure_lane.py --new, keeps them in SGIT_COMMS_LANE_TOKENS, and pastes the readers one into the column (Log tab, Append token), for the tab or, when ticked, on the device; a browser without it can Copy for Claude and cannot write, so for now the comments that reach the agent are the lead's own (C26). On every page but /reader/ the Send button is a link to the reader's page, which opens the column on the Log tab; the log is the same one. The chat on every other page now carries a button to the key field on /reader/#chat, and the reader's page says where the field is. The lane itself is still pending the lead's steps in docs/ops/comms.md.",
+      "tag": "v0.1.13",
+      "commit": null,
+      "run": null,
+      "verified": null
+    },
+    {
       "version": "0.1.12",
       "date": "2026-10-06",
       "title": "learn: passkeys, keys, GCP, and the passkey lab",
       "notes": "A learn section, from Dinis's reading of the security page: the words link to explanations in this site's context. Passkeys, WebAuthn and PRF (what the passkey is here and is not; the two calls drawn; what the authenticator, the browser, this site and Google each hold; the RP ID; what two passkeys mean), Keys (is there a passphrase, no; the PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM, the recovery code; what is in memory when), and GCP from this site's side (Identity Platform, the uid, the bucket, the Security Rules, Terraform, Workload Identity Federation; what Google sees and cannot). A glossary in data/terms.json, linked by the build from the first use of each term on every content page with the definition as hover text, and listed by the reader's column under a Terms tab. Flow diagrams drawn by the build from data/diagrams/ as inline SVG on the theme's tokens, with the same diagram as text. The passkey lab on the passkeys page: create lab passkeys in your own browser under this host's RP ID, ask for the PRF bytes (same salt, same bytes; another salt, others), derive the wrapping key, wrap a lab KEK, encrypt a lab body, forget the keys, unlock again with the same or a second passkey, and watch what is stored where; one allow-listed storage record of public values, no network. Chromium's virtual authenticator does PRF, which answers an open question of the brief (C25). Twins keep explicit anchors as inline HTML so fragment links into them resolve.",
       "tag": "v0.1.12",
-      "commit": null,
-      "run": null,
-      "verified": null
+      "commit": "baf16bde75c4677e91b3af7436a03f4e6fb7e17f",
+      "run": {
+        "id": 37539346453,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37539346453",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.11",

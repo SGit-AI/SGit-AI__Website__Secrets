@@ -21,7 +21,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/docs/ops/comms.html">
   <meta property="og:title" content="The comms channel: from the reader&#x27;s column to the build agent — secrets.sgit.ai">
   <meta property="og:description" content="The site is read by a person and built by an agent that only exists during a session. This page is how the one talks to the other without memos: a column on every page that keeps a log of what the…">
-  <meta name="sg-secrets:version" content="0.1.12">
+  <meta name="sg-secrets:version" content="0.1.13">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -33,7 +33,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.13" title="released 2026-10-06">v0.1.13</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -115,7 +115,7 @@
 <!-- sg-secrets:nav:end -->
   <main class="sg-document">
     <!-- sg-secrets:docs:start -->
-<p class="sg-doc-source">Rendered from <a href="/docs/ops/comms.md">docs/ops/comms.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.12.</p>
+<p class="sg-doc-source">Rendered from <a href="/docs/ops/comms.md">docs/ops/comms.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.13.</p>
 <h1 id="the-comms-channel-from-the-readers-column-to-the-build-agent">The comms channel: from the reader&#x27;s column to the build agent</h1>
 <p><em>secrets.sgit.ai · operations · written at v0.1.7 (2026-10-06) · CC BY 4.0</em></p>
 <p>The site is read by a person and built by an agent that only exists during a session. This page is how the one talks to the other without memos: a column on every page that keeps a log of what the reader marks, and a one-way encrypted lane into a vault only the agent can open.</p>
@@ -128,17 +128,17 @@
 </ul>
 <p>The column is three web components under <code>components/</code> (<code>reader-panel</code>, <code>reader-log</code>, <code>reader-chat</code>) on the site&#x27;s base <code>sg-base</code>, three files each, no framework, no colour of their own: they follow the theme. Where the page&#x27;s Content-Security-Policy does not allow a connection to <code>openrouter.ai</code> or to the vault endpoint, the Chat and Send parts say so and point at the page that does (<code>docs/design/brief-corrections.md</code>, C19).</p>
 <h2 id="the-lane-into-the-agents-vault">The lane into the agent&#x27;s vault</h2>
-<p>The agent has a comms vault on SG/Send (<code>https://dev.send.sgraph.ai</code>) and a key pair (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing). The public bundle, the vault id and the lanes are published in <a href="/.well-known/sgit-agents.json"><code>/.well-known/sgit-agents.json</code></a>, the <a href="https://sgit.ai/docs/agent-contact.html">Agent Contact v0.1</a> shape every sgit.ai site uses. A lane is a write-only address on the vault, gated by a public append token: a sender can write, and cannot list, fetch or read. The site&#x27;s column writes <code>reader-message/v1</code>, the sgit PKI envelope made with WebCrypto (the same bytes <code>sgit pki encrypt</code> would make), to the <code>readers</code> lane. Other agents write signed <code>agent-message/v1</code> mail to the <code>agents</code> lane.</p>
+<p>The agent has a comms vault on SG/Send (<code>https://dev.send.sgraph.ai</code>) and a key pair (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing). The public bundle, the vault id and the lanes are published in <a href="/.well-known/sgit-agents.json"><code>/.well-known/sgit-agents.json</code></a>, the <a href="https://sgit.ai/docs/agent-contact.html">Agent Contact v0.1</a> shape every sgit.ai site uses. A lane is a write-only address on the vault, gated by an append token: a sender who holds the token can write, and cannot list, fetch or read. The token is not published. The lead makes it once (<code>configure_lane.py --new</code> prints it), keeps it in <code>SGIT_COMMS_LANE_TOKENS</code>, and pastes the readers one into the column&#x27;s <strong>Append token</strong> field on the devices that should write (for this tab, or kept on the device when ticked); so, for now, the comments that reach the agent are the lead&#x27;s own, and opening the lane to others is a decision, not a default. The agents token goes to other agents by hand. The site&#x27;s column writes <code>reader-message/v1</code>, the sgit PKI envelope made with WebCrypto (the same bytes <code>sgit pki encrypt</code> would make), to the <code>readers</code> lane. Other agents write signed <code>agent-message/v1</code> mail to the <code>agents</code> lane.</p>
 <p>The agent reads the lanes at the start of a session with <code>tools/comms/drain.py</code>: list, fetch, decrypt with its private key, keep ciphertext and plaintext under the vault&#x27;s <code>inbox/</code>, print a digest it acts on, then mark-processed. What cannot be opened goes to <code>inbox/quarantine/</code> with the reason.</p>
 <h2 id="what-only-the-project-lead-can-do-once">What only the project lead can do, once</h2>
 <p>The session that built this could create the vault and the key pair, but its permission policy stopped it short of two things: registering the lanes on the vault (an account-level change on SG/Send) and pushing the private keys into the vault. So the vault key, the read key and the key pair are where that session left them, and the lead finishes the channel:</p>
 <ol>
 <li>Take the vault key from the build session&#x27;s scratchpad (<code>vaults/create.log</code>, the line <em>Vault key</em>) and the key pair from <code>~/.sg-send/keys/</code> of that session, with the passphrase in <code>vaults/pki-passphrase.txt</code>. Store the vault key as <code>SGIT_COMMS_VAULT_KEY</code> and the passphrase as <code>SGIT_COMMS_PKI_PASSPHRASE</code> in the Claude Code environment this repository runs in, so every later session can open the vault. Put the key folder in the vault (<code>agent/keys/</code>) and push it.</li>
-<li>Publish the public half: <code>python3 tools/comms/publish_contact.py --fingerprint sha256:6d9fe81fd718ab0b</code> fills the contact file with the bundle, the vault id and one fresh token per lane; commit it.</li>
-<li>Register the lanes: <code>python3 tools/comms/configure_lane.py</code> (needs <code>SGIT_COMMS_VAULT_KEY</code> and <code>SG_SEND_ACCESS_TOKEN</code>). On success it sets the contact file&#x27;s status to <code>open</code>; commit it. The column&#x27;s Send button enables itself on the next page load.</li>
+<li>Publish the public half: <code>python3 tools/comms/publish_contact.py --fingerprint sha256:6d9fe81fd718ab0b</code> fills the contact file with the bundle, the vault id and the lane names (no token); commit it.</li>
+<li>Register the lanes: <code>python3 tools/comms/configure_lane.py --new</code> (needs <code>SGIT_COMMS_VAULT_KEY</code> and <code>SG_SEND_ACCESS_TOKEN</code>) makes the two append tokens, prints them once, and registers their hashes on the vault. Store the printed line as <code>SGIT_COMMS_LANE_TOKENS</code> in the environment (the drainer and <code>send_test.py</code> read it there). On success it sets the contact file&#x27;s status to <code>open</code>; commit it. Then open the column on <code>/reader/</code>, press <strong>Append token</strong>, paste the readers token, tick <em>keep on this device</em> if you want it to stay, and Send is on for that device.</li>
 <li>Prove the round trip: <code>python3 tools/comms/send_test.py</code>, then <code>python3 tools/comms/drain.py --vault-dir &lt;the vault clone&gt;</code>.</li>
 </ol>
-<p>Until step 3 the column says the lane is pending and offers <strong>Copy for Claude</strong>, which works today.</p>
+<p>Until step 3 the column says the lane is pending and offers <strong>Copy for Claude</strong>, which works today. Send runs only on <code>/reader/</code> (the one page whose policy allows the connection); on every other page the button becomes a link there, and the log is the same one.</p>
 <h2 id="the-tools">The tools</h2>
 <table>
 <thead><tr><th>File</th><th>Does</th></tr></thead>
@@ -158,7 +158,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/ops/comms.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.13" title="released 2026-10-06">v0.1.13</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/ops/comms.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

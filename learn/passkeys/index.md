@@ -2,7 +2,7 @@
 
 > What a passkey is when it is the thing that unlocks your keyring: the two WebAuthn calls, the PRF extension, the RP ID, what your authenticator, your browser, this site and Google each store, what two passkeys mean, and a lab to try all of it in your own browser.
 
-*Source: <https://secrets.sgit.ai/learn/passkeys/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/learn/passkeys/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

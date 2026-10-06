@@ -70,3 +70,5 @@ button:hover              { color: var(--sg-text-heading); border-color: var(--s
 .snippet        { color: var(--sg-text-muted); font-size: var(--sg-fs-xs); }
 .ask .row       { justify-content: flex-end; margin-top: var(--sg-sp-1); }
 .ask .speak     { margin-right: auto; }
+
+.there { background: var(--sg-accent); border-radius: var(--sg-radius); color: var(--sg-on-accent); display: inline-block; margin-top: var(--sg-sp-1); padding: var(--sg-sp-1) var(--sg-sp-3); text-decoration: none; }

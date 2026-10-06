@@ -2,7 +2,7 @@
 
 > Where the reader's column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent's vault. The only page whose policy allows a connection beyond this site and Google's sign-in hosts.
 
-*Source: <https://secrets.sgit.ai/reader/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/reader/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -19,9 +19,17 @@ Every page has the reader's column: the log of what you marked and noted, and th
 
 Every other page keeps the brief's exact policy, which allows this site and Google's sign-in hosts and nothing else; this page's head declares the two additions, and the gate fails if any other page does ([brief-corrections C19](/docs/design/brief-corrections.md)). How the channel works end to end, and what the project lead does once to open the lane: [docs/ops/comms.md](/docs/ops/comms.md).
 
+<a id="chat"></a>
+
 ## Your key
 
-The chat uses `anthropic/claude-sonnet-5.5` through OpenRouter. Make a key with a spend limit at openrouter.ai; the column keeps it in memory for this page, or in this tab's session storage if you tick *keep for this tab*. It is never written to local storage and never sent anywhere but openrouter.ai. **Forget** drops it.
+Open the column (the **Reader** tab on the right edge, or [this link](/reader/index.md#chat)), pick **Chat**, and the key field is at the top. The chat uses `anthropic/claude-sonnet-5.5` through OpenRouter. Make a key with a spend limit at openrouter.ai; the column keeps it in memory for this page, or in this tab's session storage if you tick *keep for this tab*. It is never written to local storage and never sent anywhere but openrouter.ai. **Forget** drops it.
+
+<a id="log"></a>
+
+## The append token
+
+**Send to the agent** needs two things: the agent's lane to be open (the contact file says), and the lane's append token, which is not published. The project lead makes it once and pastes it into the column here, under **Append token** in the Log tab, for this tab or kept on this device. A browser without the token can still Copy for Claude; it cannot write to the lane. On every other page the Send button is a link to this one, and the log is the same.
 
 ## Without a key
 

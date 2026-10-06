@@ -5,7 +5,10 @@
  * written against an older version says so. Undo is another event, never a
  * deletion. "Send to the agent" seals the unsent events to the build agent's
  * public key (the sgit PKI envelope, made here with WebCrypto) and writes them
- * to the readers lane of the comms vault named in /.well-known/sgit-agents.json.
+ * to the readers lane of the comms vault named in /.well-known/sgit-agents.json,
+ * with the lane's append token, which the contact file does not carry: the
+ * project lead hands it to the readers who should write, and the column keeps
+ * it for this tab, or on this device when the reader ticks that.
  * "Copy for Claude" puts the same on the clipboard as markdown with JSON, and
  * "Paste to merge" takes it back on another device. Nothing leaves the page
  * without a click, and nothing here is secret.
@@ -14,7 +17,7 @@
  * @version 0.1.0
  */
 import { SgBase, READER_EVENTS } from '../sg-base/sg-base.js'
-import { LOCAL_STORAGE_KEYS }    from '../../app/config/storage-keys.js'
+import { LOCAL_STORAGE_KEYS, SESSION_STORAGE_KEYS } from '../../app/config/storage-keys.js'
 
 export const LOG_VERSION  = 1
 export const CONTACT_URL  = '/.well-known/sgit-agents.json'
@@ -96,13 +99,16 @@ export class ReaderLog extends SgBase {
         })
         this.$('[data-note-form]').addEventListener('submit', (event) => { event.preventDefault(); this.addNote() })
         this.$('[data-send]').addEventListener('click',         () => this.send())
+        this.$('[data-token-toggle]').addEventListener('click', () => { const form = this.$('[data-token-form]'); form.hidden = !form.hidden; this.$('[data-token-toggle]').setAttribute('aria-expanded', form.hidden ? 'false' : 'true') })
+        this.$('[data-token-form]').addEventListener('submit',  (event) => { event.preventDefault(); this.useToken() })
+        this.$('[data-token-forget]').addEventListener('click', () => this.forgetToken())
         this.$('[data-copy]').addEventListener('click',         () => this.copy())
         this.$('[data-paste-toggle]').addEventListener('click', () => { const form = this.$('[data-paste-form]'); form.hidden = !form.hidden })
         this.$('[data-paste-form]').addEventListener('submit', (event) => { event.preventDefault(); this.merge() })
         const mic = this.$('[data-mic]')
         if (SgBase.speechRecognition()) {
             mic.hidden = false
-            mic.addEventListener('click', () => this.dictate(mic, (text) => { const note = this.$('[data-note]'); note.value = (note.value ? note.value + ' ' : '') + text }))
+            mic.addEventListener('click', () => this.dictate(mic, (text) => { const note = this.$('[data-note]'); note.value = (note.value ? note.value + ' ' : '') + text }, (state) => this.status(state)))
         }
         this.on(READER_EVENTS.note, (event) => this.append('note', { text : event.detail.text, page : event.detail.page || this._page, via : event.detail.via || 'chat' }))
         this.render()
@@ -147,7 +153,10 @@ export class ReaderLog extends SgBase {
         this.$('[data-count-all]').textContent    = String(log.events.filter(e => e.kind !== 'sent').length)
         this.list(this.$('[data-events-page]'), here.slice(-SHOWN_PER_PAGE).reverse(), true)
         this.list(this.$('[data-events-all]'),  log.events.filter(e => e.kind !== 'sent').slice(-200).reverse(), false)
-        this.$('[data-send]').disabled = !(this._lane && unsent.length)
+        this.$('[data-send]').disabled = !(this._lane && this.heldToken() && unsent.length)
+        this.$('[data-send]').hidden   = Boolean(this._there)
+        this.$('[data-send-there]').hidden = !this._there
+        this.$('[data-token-forget]').hidden = !this.heldToken()
         this.emit(READER_EVENTS.log, { count : log.events.length, unsent : unsent.length })
     }
 
@@ -167,6 +176,33 @@ export class ReaderLog extends SgBase {
 
     status(text) { this.$('[data-status]').textContent = text }
 
+    token() {                                                                     // the lane's append token: this tab's, else this device's, else none
+        try { return sessionStorage.getItem(SESSION_STORAGE_KEYS.appendToken) || localStorage.getItem(LOCAL_STORAGE_KEYS.appendToken) || '' } catch (error) { return '' }
+    }
+
+    useToken() {
+        const token = this.$('[data-token]').value.trim()
+        const keep  = this.$('[data-token-keep]').checked
+        if (!/^[0-9a-f]{32,128}$/i.test(token)) { this.status('That does not look like an append token (hex, 64 characters).'); return }
+        try {
+            if (keep) { localStorage.setItem(LOCAL_STORAGE_KEYS.appendToken, token); sessionStorage.removeItem(SESSION_STORAGE_KEYS.appendToken) }
+            else      { sessionStorage.setItem(SESSION_STORAGE_KEYS.appendToken, token); localStorage.removeItem(LOCAL_STORAGE_KEYS.appendToken) }
+        } catch (error) { this.status('Storage is blocked here; the token is held in memory for this page.'); this._memoryToken = token }
+        this.$('[data-token]').value = ''
+        this.$('[data-token-form]').hidden = true
+        this.status(`Append token kept ${keep ? 'on this device' : 'for this tab'}.`)
+        this.render()
+    }
+
+    forgetToken() {
+        try { localStorage.removeItem(LOCAL_STORAGE_KEYS.appendToken); sessionStorage.removeItem(SESSION_STORAGE_KEYS.appendToken) } catch (error) { /* nothing to forget */ }
+        this._memoryToken = ''
+        this.status('Append token forgotten.')
+        this.render()
+    }
+
+    heldToken() { return this._memoryToken || this.token() }
+
     async contact() {                                                             // where Send goes, read from the contact file; absent or pending means Copy instead
         try {
             const response = await fetch(CONTACT_URL, { cache : 'no-cache' })
@@ -175,11 +211,12 @@ export class ReaderLog extends SgBase {
             const inbox    = identity.inbox || {}
             const lane     = (inbox.lanes || []).find(l => l.name === LANE_NAME)
             if (inbox.status === 'open' && lane && identity.bundle && identity.bundle.encrypt && !SgBase.mayConnect(inbox.endpoint.replace(/\/$/, ''))) {
-                this._lane = null
+                this._lane  = null
+                this._there = true                                                // the lane is open, but only the reader's page may connect to it
                 this.status(`Send runs on ${READER_PAGE}, the one page whose policy allows the connection to ${inbox.endpoint}; your log is the same there. Or Copy for Claude.`)
             } else if (inbox.status === 'open' && lane && identity.bundle && identity.bundle.encrypt) {
-                this._lane = { endpoint : inbox.endpoint.replace(/\/$/, ''), vault : inbox.vault, token : lane.append_token, pem : identity.bundle.encrypt, to : identity.address }
-                this.status(`Send goes to ${identity.address}, sealed to ${identity.fingerprint}; only the agent can read it.`)
+                this._lane = { endpoint : inbox.endpoint.replace(/\/$/, ''), vault : inbox.vault, pem : identity.bundle.encrypt, to : identity.address }
+                this.status(this.heldToken() ? `Send goes to ${identity.address}, sealed to ${identity.fingerprint}; only the agent can read it.` : `The lane is open. Paste the append token the project lead gave you (the Append token button) to send; or Copy for Claude.`)
             } else {
                 this._lane = null
                 this.status(`The agent's lane is ${inbox.status || 'absent'}: ${inbox.status_note || 'use Copy for Claude.'}`)
@@ -197,15 +234,16 @@ export class ReaderLog extends SgBase {
     }
 
     async send() {
-        if (!this._lane) return
+        const token = this.heldToken()
+        if (!this._lane || !token) return
         const events = unsentEvents(readLog().events)
         if (!events.length) return
         this.status('Sealing and sending…')
         try {
             const payload  = await seal(this._lane.pem, JSON.stringify(this.message(events)))
             const response = await fetch(`${this._lane.endpoint}/api/vault/append/write/${this._lane.vault}`, {
-                method : 'POST', headers : { 'Content-Type' : 'application/json' }, body : JSON.stringify({ append_token : this._lane.token, payload }) })
-            if (!response.ok) throw new Error(`HTTP ${response.status}`)
+                method : 'POST', headers : { 'Content-Type' : 'application/json' }, body : JSON.stringify({ append_token : token, payload }) })
+            if (!response.ok) throw new Error(response.status === 401 || response.status === 403 ? `HTTP ${response.status}: the lane refused this token; ask the lead for the current one` : `HTTP ${response.status}`)
             this.append('sent', { ids : events.map(e => e.id), lane : LANE_NAME, to : this._lane.to })
             this.status(`Sent ${events.length} event${events.length === 1 ? '' : 's'} to ${this._lane.to}. The agent reads the lane at its next session.`)
         } catch (error) {

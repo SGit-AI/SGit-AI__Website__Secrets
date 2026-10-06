@@ -62,3 +62,8 @@ h3    { color: var(--sg-text-heading); font-size: var(--sg-fs-small); margin: va
 .paste  { margin: var(--sg-sp-2) 0; }
 .paste button { margin-top: var(--sg-sp-1); }
 .all summary  { color: var(--sg-text-muted); cursor: pointer; font-size: var(--sg-fs-xs); margin-top: var(--sg-sp-3); }
+.there  { background: var(--sg-accent); border: 1px solid var(--sg-accent); border-radius: var(--sg-radius); color: var(--sg-on-accent); display: inline-block; font-size: var(--sg-fs-small); padding: var(--sg-sp-1) var(--sg-sp-3); text-decoration: none; }
+.token  { margin: var(--sg-sp-2) 0; }
+.token .row { display: flex; gap: var(--sg-sp-1); }
+.token input { background: var(--sg-bg); border: 1px solid var(--sg-border); border-radius: var(--sg-radius); color: var(--sg-text); flex: 1; font: inherit; font-family: var(--sg-font-mono); min-width: 0; padding: var(--sg-sp-1) var(--sg-sp-2); }
+.token .keep, .token .hint { color: var(--sg-text-muted); display: block; font-size: var(--sg-fs-xs); margin-top: var(--sg-sp-1); }

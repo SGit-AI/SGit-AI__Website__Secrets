@@ -2,7 +2,7 @@
 
 > What the Google Cloud project is for and what it sees: Identity Platform and the uid, the bucket and the Security Rules, Terraform and Workload Identity Federation, the admin pages, a customer's own project; drawn from the project's point of view.
 
-*Source: <https://secrets.sgit.ai/learn/gcp/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/learn/gcp/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

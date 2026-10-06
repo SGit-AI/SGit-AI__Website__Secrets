@@ -24,7 +24,7 @@ Everything on this list blocks a step of the brief and cannot be done from insid
 
 ## Blocking the comms channel (the reader's column's Send button)
 
-9. **Finish the comms vault (project lead).** The build session of 2026-10-06 created the vault (`ockml7sn` on `https://dev.send.sgraph.ai`) and the agent's key pair (`sha256:6d9fe81fd718ab0b`), and its permission policy stopped it from registering the lanes and from pushing the keys. The four steps, with the commands, are in `docs/ops/comms.md`: store `SGIT_COMMS_VAULT_KEY` and `SGIT_COMMS_PKI_PASSPHRASE` as environment secrets, push the keys into the vault, run `publish_contact.py`, run `configure_lane.py`, prove a round trip.
+9. **Finish the comms vault (project lead).** The build session of 2026-10-06 created the vault (`ockml7sn` on `https://dev.send.sgraph.ai`) and the agent's key pair (`sha256:6d9fe81fd718ab0b`), and its permission policy stopped it from registering the lanes and from pushing the keys. The four steps, with the commands, are in `docs/ops/comms.md`: store `SGIT_COMMS_VAULT_KEY` and `SGIT_COMMS_PKI_PASSPHRASE` as environment secrets, push the keys into the vault, run `publish_contact.py`, run `configure_lane.py --new` and store the tokens it prints as `SGIT_COMMS_LANE_TOKENS`, paste the readers token into the column on your devices, prove a round trip. The tokens are never published: only a browser holding one can write.
 10. **An OpenRouter key for yourself (project lead).** For the chat on `/reader/`; with a spend limit; entered in the browser, never stored in the repository or in any secret of the build.
 
 ## Not yet needed

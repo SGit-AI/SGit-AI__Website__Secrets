@@ -2,7 +2,7 @@
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -21,7 +21,7 @@ The exact list, with who and which step waits on each, is [docs/ops/needs.md](/d
 | N5 | Confirm the versioning decision: every release bumps the third digit; the second digit is reserved for a milestone you name (brief-corrections C15) | nothing; recorded as decided on 2026-10-05 | Confirm |
 | N6 | Confirm that documents are rendered at build time with the raw markdown one click away, rather than a client-side markdown viewer (C16) | nothing | Confirm |
 | N7 | Walk the intent graph at [/review/ui/](/review/ui/) (stories, flows, components, deploy) and send corrections as numbered items; each accepted node then records you as its acceptor | review step 1; coverage counts only accepted nodes | Open |
-| N8 | Finish the comms channel: store the vault key and the key passphrase as environment secrets, push the key pair into the vault, publish the contact file, register the lanes, prove one round trip ([docs/ops/comms.md](/docs/ops/comms.md), the four steps) | the reader's column's Send button; until then Copy for Claude | Open |
+| N8 | Finish the comms channel: store the vault key and the key passphrase as environment secrets, push the key pair into the vault, publish the contact file, register the lanes (the tokens stay with you: paste the readers one into the column on your devices), prove one round trip ([docs/ops/comms.md](/docs/ops/comms.md), the four steps) | the reader's column's Send button; until then Copy for Claude | Open |
 | N9 | Make an OpenRouter key with a spend limit for the chat on [/reader/](/reader/index.md); it stays in your browser, nothing to store in the repository | nothing; the chat works offline without it | Open |
 | N0 | DNS, Pages with the custom domain and HTTPS, and the re-run of the v0.1.0 workflow | step 1 | Done, 2026-10-05 |
 

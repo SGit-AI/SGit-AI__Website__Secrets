@@ -2,7 +2,7 @@
 
 > Is there a passphrase (no). The PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM and the recovery code: every key in the keyring, where it comes from, where it goes, and what is in memory when, drawn and then run live in the lab.
 
-*Source: <https://secrets.sgit.ai/learn/keys/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/learn/keys/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

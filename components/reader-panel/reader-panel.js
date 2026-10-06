@@ -39,6 +39,8 @@ export class ReaderPanel extends SgBase {
         document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && this._state.open) this.open(false) })
         this.show(this._state.tab, false)
         this.open(this._state.open, false)
+        const asked = location.hash.replace(/^#/, '')                            // /reader/#chat, #log: a link into the column opens it on that tab
+        if (TABS.includes(asked)) { this.show(asked); this.open(true) }
     }
 
     readState() {

@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.12 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.13 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -21,7 +21,7 @@ source: /index.md
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -102,9 +102,9 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 | site | Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin | [shipped v0.1.12](/review/ui/#node=claim.site.learn) | learn/, [data/terms.json](/review/ui/#file=data/terms.json), data/diagrams/, [admin/build/gen_terms.py](/review/ui/#file=admin/build/gen_terms.py), gen_diagrams.py | Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them. |
 | site | The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF | [shipped v0.1.12](/review/ui/#node=claim.site.passkey-lab) | components/passkey-lab/ | Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25). |
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | [shipped v0.1.6](/review/ui/#node=claim.site.themes) | [data/themes.json](/review/ui/#file=data/themes.json), [assets/themes.css](/review/ui/#file=assets/themes.css), [assets/theme.js](/review/ui/#file=assets/theme.js) | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
-| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
+| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. Since v0.1.13 dictation keeps interim results (Safari on iOS gives no final one) and says what it heard or why it stopped; the column opens on a tab from /reader/#log or #chat; the append token is held by the browser, never by the contact file. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) | components/reader-chat/, [reader/index.html](/review/ui/#file=reader/index.html), [data/search-index.json](/review/ui/#file=data/search-index.json) | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
-| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | [proposed](/review/ui/#node=claim.site.agent-contact) | [.well-known/sgit-agents.json](/review/ui/#file=.well-known/sgit-agents.json), tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |
+| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | [proposed](/review/ui/#node=claim.site.agent-contact) | [.well-known/sgit-agents.json](/review/ui/#file=.well-known/sgit-agents.json), tools/comms/ | The lane's append token is not published: the lead makes it with configure_lane.py --new, keeps it in SGIT_COMMS_LANE_TOKENS, and pastes the readers one into the column on the devices that should write (for the tab, or kept on the device). A browser without it can Copy for Claude and cannot write. Pending the lead's steps in docs/ops/comms.md (N8). |
 | site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | [shipped v0.1.5](/review/ui/#node=claim.site.mockups) | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
 | site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) | [mockups/screens.json](/review/ui/#file=mockups/screens.json), components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
 | site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | [proposed](/review/ui/#node=claim.site.repo-protections) | [docs/ops/branch-protection.md](/review/ui/#file=docs/ops/branch-protection.md) | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
@@ -161,7 +161,7 @@ source: /about/participant.md
 
 > Who publishes this site, what they are building, and why that matters when reading its claims: the people who run the sgit family build the secrets manager this site describes, and the site is written while it is built.
 
-*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -193,7 +193,7 @@ source: /admin/comms.md
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -212,7 +212,7 @@ The exact list, with who and which step waits on each, is [docs/ops/needs.md](/d
 | N5 | Confirm the versioning decision: every release bumps the third digit; the second digit is reserved for a milestone you name (brief-corrections C15) | nothing; recorded as decided on 2026-10-05 | Confirm |
 | N6 | Confirm that documents are rendered at build time with the raw markdown one click away, rather than a client-side markdown viewer (C16) | nothing | Confirm |
 | N7 | Walk the intent graph at [/review/ui/](/review/ui/) (stories, flows, components, deploy) and send corrections as numbered items; each accepted node then records you as its acceptor | review step 1; coverage counts only accepted nodes | Open |
-| N8 | Finish the comms channel: store the vault key and the key passphrase as environment secrets, push the key pair into the vault, publish the contact file, register the lanes, prove one round trip ([docs/ops/comms.md](/docs/ops/comms.md), the four steps) | the reader's column's Send button; until then Copy for Claude | Open |
+| N8 | Finish the comms channel: store the vault key and the key passphrase as environment secrets, push the key pair into the vault, publish the contact file, register the lanes (the tokens stay with you: paste the readers one into the column on your devices), prove one round trip ([docs/ops/comms.md](/docs/ops/comms.md), the four steps) | the reader's column's Send button; until then Copy for Claude | Open |
 | N9 | Make an OpenRouter key with a spend limit for the chat on [/reader/](/reader/index.md); it stays in your browser, nothing to store in the repository | nothing; the chat works offline without it | Open |
 | N0 | DNS, Pages with the custom domain and HTTPS, and the re-run of the v0.1.0 workflow | step 1 | Done, 2026-10-05 |
 
@@ -266,7 +266,7 @@ source: /admin/index.md
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -338,7 +338,7 @@ source: /admin/versions.md
 
 > Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
 
-*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -346,6 +346,7 @@ One row per release. The version increments on every push to `dev`: a minor bump
 
 | Version | Date | Release | What changed |
 |---|---|---|---|
+| `v0.1.13` | 2026-10-06 | the column: dictation that reports, the append token held by the reader, the key's place | Three things Dinis hit on the iPad. Dictation now keeps interim results (Safari on iOS gives no final one), says what it heard or why it stopped (microphone not allowed, no speech, no network), and a second tap stops it. Send to the agent: the lane's append token is no longer published in the contact file; the lead makes the tokens with configure_lane.py --new, keeps them in SGIT_COMMS_LANE_TOKENS, and pastes the readers one into the column (Log tab, Append token), for the tab or, when ticked, on the device; a browser without it can Copy for Claude and cannot write, so for now the comments that reach the agent are the lead's own (C26). On every page but /reader/ the Send button is a link to the reader's page, which opens the column on the Log tab; the log is the same one. The chat on every other page now carries a button to the key field on /reader/#chat, and the reader's page says where the field is. The lane itself is still pending the lead's steps in docs/ops/comms.md. |
 | `v0.1.12` | 2026-10-06 | learn: passkeys, keys, GCP, and the passkey lab | A learn section, from Dinis's reading of the security page: the words link to explanations in this site's context. Passkeys, WebAuthn and PRF (what the passkey is here and is not; the two calls drawn; what the authenticator, the browser, this site and Google each hold; the RP ID; what two passkeys mean), Keys (is there a passphrase, no; the PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM, the recovery code; what is in memory when), and GCP from this site's side (Identity Platform, the uid, the bucket, the Security Rules, Terraform, Workload Identity Federation; what Google sees and cannot). A glossary in data/terms.json, linked by the build from the first use of each term on every content page with the definition as hover text, and listed by the reader's column under a Terms tab. Flow diagrams drawn by the build from data/diagrams/ as inline SVG on the theme's tokens, with the same diagram as text. The passkey lab on the passkeys page: create lab passkeys in your own browser under this host's RP ID, ask for the PRF bytes (same salt, same bytes; another salt, others), derive the wrapping key, wrap a lab KEK, encrypt a lab body, forget the keys, unlock again with the same or a second passkey, and watch what is stored where; one allow-listed storage record of public values, no network. Chromium's virtual authenticator does PRF, which answers an open question of the brief (C25). Twins keep explicit anchors as inline HTML so fragment links into them resolve. |
 | `v0.1.11` | 2026-10-06 | code mode | The navigator has two modes. Intent is the brief downwards, as before, with the claims folded by status and release and the left column foldable. Code is entered by opening a file, picking the Code view, or the switch in the top bar: the source in the middle with the selected lines marked, the file's tree on the left (packages, files, classes, methods), and on the right the graph upwards from that piece of code: what it says about itself (its own comments), why it exists (the claims whose evidence lives in it and the stories they realise), outline, imports and importers, calls and callers, tests and surfaces. The derived layers under review/graph/ (files, modules, classes, methods, tests, surfaces, and an index of counts and paths) come from review/tools/derive.py: Python through ast, JavaScript through a vendored, hashed acorn that only the build runs. Every file path a node names is a link into the source. The explanation layer (what, why, story, at a technical and a business level) is proposed in C24. |
 | `v0.1.10` | 2026-10-06 | Review in the top menu | Review is a group of the family nav, between Shipped and Docs: the project as graphs, the navigator, the claims and their evidence, the brief as sections, the README with the counts, and the corrections to the review brief. It leaves the Admin menu. release.py fetches the tags before backfilling a release's commit. |
@@ -375,7 +376,7 @@ source: /docs/design/index.md
 
 > The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
 
-*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -401,7 +402,7 @@ source: /docs/index.md
 
 > Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
 
-*Source: <https://secrets.sgit.ai/docs/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -432,7 +433,7 @@ source: /docs/ops/index.md
 
 > How a release works, what only a human can do, the DNS record and the repository protections.
 
-*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -458,7 +459,7 @@ source: /environments/index.md
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -549,7 +550,7 @@ source: /how-it-works/index.md
 
 > The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 
-*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -655,7 +656,7 @@ source: /keyring/index.md
 
 > The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
 
-*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -777,7 +778,7 @@ source: /learn/gcp/index.md
 
 > What the Google Cloud project is for and what it sees: Identity Platform and the uid, the bucket and the Security Rules, Terraform and Workload Identity Federation, the admin pages, a customer's own project; drawn from the project's point of view.
 
-*Source: <https://secrets.sgit.ai/learn/gcp/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/learn/gcp/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -900,7 +901,7 @@ source: /learn/index.md
 
 > Explanations in context: what a passkey, WebAuthn, PRF, the key hierarchy and the GCP project are from this site's point of view, with diagrams, a glossary every page links into, and a lab where you try the passkey in your own browser.
 
-*Source: <https://secrets.sgit.ai/learn/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/learn/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1035,7 +1036,7 @@ source: /learn/keys/index.md
 
 > Is there a passphrase (no). The PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM and the recovery code: every key in the keyring, where it comes from, where it goes, and what is in memory when, drawn and then run live in the lab.
 
-*Source: <https://secrets.sgit.ai/learn/keys/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/learn/keys/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1159,7 +1160,7 @@ source: /learn/passkeys/index.md
 
 > What a passkey is when it is the thing that unlocks your keyring: the two WebAuthn calls, the PRF extension, the RP ID, what your authenticator, your browser, this site and Google each store, what two passkeys mean, and a lab to try all of it in your own browser.
 
-*Source: <https://secrets.sgit.ai/learn/passkeys/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/learn/passkeys/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1354,7 +1355,7 @@ source: /mockups/account.md
 
 > A design mockup of the account screen at secrets.sgit.ai/app/account.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/account.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/account.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1400,7 +1401,7 @@ source: /mockups/admin-checklist.md
 
 > A design mockup of the admin: the setup checklist screen at secrets.sgit.ai/admin/setup-checklist.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/admin-checklist.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/admin-checklist.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1449,7 +1450,7 @@ source: /mockups/devices.md
 
 > A design mockup of the devices: passkeys and the recovery code screen at secrets.sgit.ai/app/devices.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/devices.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/devices.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1495,7 +1496,7 @@ source: /mockups/entry.md
 
 > A design mockup of the one entry: an sgit vault key screen at secrets.sgit.ai/app/entry.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/entry.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/entry.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1545,7 +1546,7 @@ source: /mockups/environment.md
 
 > A design mockup of the environment screen at secrets.sgit.ai/app/environment.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/environment.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/environment.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1592,7 +1593,7 @@ source: /mockups/index.md
 
 > What the app, admin and test screens are meant to look like, before they exist: ten mockups, each as a static picture in a mini browser frame and as ASCII art, with the intent nodes it realises. Every screen is proposed.
 
-*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1660,7 +1661,7 @@ source: /mockups/matrix.md
 
 > A design mockup of the tests: the compatibility matrix screen at secrets.sgit.ai/tests/matrix.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/matrix.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/matrix.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1707,7 +1708,7 @@ source: /mockups/prototype.md
 
 > The whole design prototype in one frame: every screen the brief describes, working on invented data this browser keeps, in three UX variants to compare. Beside it, what the screen is, the paths to it and from it, and what you have done.
 
-*Source: <https://secrets.sgit.ai/mockups/prototype.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/prototype.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1736,7 +1737,7 @@ source: /mockups/setup.md
 
 > A design mockup of the first run: create a passkey screen at secrets.sgit.ai/app/setup.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/setup.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/setup.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1787,7 +1788,7 @@ source: /mockups/sign-in.md
 
 > A design mockup of the sign in screen at secrets.sgit.ai/app/, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/sign-in.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/sign-in.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1840,7 +1841,7 @@ source: /mockups/unlock.md
 
 > A design mockup of the unlock screen at secrets.sgit.ai/app/unlock.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/unlock.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/unlock.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1890,7 +1891,7 @@ source: /mockups/vault.md
 
 > A design mockup of the the vault: the list screen at secrets.sgit.ai/app/vault.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/vault.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/vault.html> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1939,7 +1940,7 @@ source: /reader/index.md
 
 > Where the reader's column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent's vault. The only page whose policy allows a connection beyond this site and Google's sign-in hosts.
 
-*Source: <https://secrets.sgit.ai/reader/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/reader/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1956,9 +1957,17 @@ Every page has the reader's column: the log of what you marked and noted, and th
 
 Every other page keeps the brief's exact policy, which allows this site and Google's sign-in hosts and nothing else; this page's head declares the two additions, and the gate fails if any other page does ([brief-corrections C19](/docs/design/brief-corrections.md)). How the channel works end to end, and what the project lead does once to open the lane: [docs/ops/comms.md](/docs/ops/comms.md).
 
+<a id="chat"></a>
+
 ## Your key
 
-The chat uses `anthropic/claude-sonnet-5.5` through OpenRouter. Make a key with a spend limit at openrouter.ai; the column keeps it in memory for this page, or in this tab's session storage if you tick *keep for this tab*. It is never written to local storage and never sent anywhere but openrouter.ai. **Forget** drops it.
+Open the column (the **Reader** tab on the right edge, or [this link](/reader/index.md#chat)), pick **Chat**, and the key field is at the top. The chat uses `anthropic/claude-sonnet-5.5` through OpenRouter. Make a key with a spend limit at openrouter.ai; the column keeps it in memory for this page, or in this tab's session storage if you tick *keep for this tab*. It is never written to local storage and never sent anywhere but openrouter.ai. **Forget** drops it.
+
+<a id="log"></a>
+
+## The append token
+
+**Send to the agent** needs two things: the agent's lane to be open (the contact file says), and the lane's append token, which is not published. The project lead makes it once and pastes it into the column here, under **Append token** in the Log tab, for this tab or kept on this device. A browser without the token can still Copy for Claude; it cannot write to the lane. On every other page the Send button is a link to this one, and the log is the same.
 
 ## Without a key
 
@@ -1977,7 +1986,7 @@ source: /review/index.md
 
 > The review folder: this project as layered graphs. The design written top down from the brief, the code derived bottom up by parsers, the join between them, every commit read upwards, and a navigator to walk it all. What exists, what each step brings, and where to start.
 
-*Source: <https://secrets.sgit.ai/review/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/review/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -2031,7 +2040,7 @@ source: /security/index.md
 
 > The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
 
-*Source: <https://secrets.sgit.ai/security/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/security/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -2114,7 +2123,7 @@ source: /sharing/index.md
 
 > The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
 
-*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -2163,7 +2172,7 @@ source: /shipped/index.md
 
 > Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
-*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -2212,7 +2221,7 @@ exists in the repository, runs, and was exercised at the version shown.
 | site | Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin | [shipped v0.1.12](/review/ui/#node=claim.site.learn) | learn/, [data/terms.json](/review/ui/#file=data/terms.json), data/diagrams/, [admin/build/gen_terms.py](/review/ui/#file=admin/build/gen_terms.py), gen_diagrams.py | Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them. |
 | site | The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF | [shipped v0.1.12](/review/ui/#node=claim.site.passkey-lab) | components/passkey-lab/ | Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25). |
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | [shipped v0.1.6](/review/ui/#node=claim.site.themes) | [data/themes.json](/review/ui/#file=data/themes.json), [assets/themes.css](/review/ui/#file=assets/themes.css), [assets/theme.js](/review/ui/#file=assets/theme.js) | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
-| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
+| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. Since v0.1.13 dictation keeps interim results (Safari on iOS gives no final one) and says what it heard or why it stopped; the column opens on a tab from /reader/#log or #chat; the append token is held by the browser, never by the contact file. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) | components/reader-chat/, [reader/index.html](/review/ui/#file=reader/index.html), [data/search-index.json](/review/ui/#file=data/search-index.json) | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
 | site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | [shipped v0.1.5](/review/ui/#node=claim.site.mockups) | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
 | site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | [shipped v0.1.8](/review/ui/#node=claim.site.mockups-variants) | [mockups/screens.json](/review/ui/#file=mockups/screens.json), components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
@@ -2235,7 +2244,7 @@ designed in the brief, not built; described only in the future tense.
 | review | The explanation layer: per block of code, what it does (pseudo-code), why (its intent) and the story it serves, at a technical and a business level, each block hashed to the lines it explains so a diff reads as a blast radius against meaning | [proposed](/review/ui/#node=claim.review.explain) | review/explain/ | C24. The first rung exists in code mode (the code's own comments, the claims and stories that reach the file). The written levels are data by the build agent, never parser output, never a model at build time. |
 | review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | [proposed](/review/ui/#node=claim.review.changes) | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
 | review | review/self/: the same folder for the tools and the navigator, both sets green before a release | [proposed](/review/ui/#node=claim.review.self) | review/self/ | Step 2. |
-| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | [proposed](/review/ui/#node=claim.site.agent-contact) | [.well-known/sgit-agents.json](/review/ui/#file=.well-known/sgit-agents.json), tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |
+| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | [proposed](/review/ui/#node=claim.site.agent-contact) | [.well-known/sgit-agents.json](/review/ui/#file=.well-known/sgit-agents.json), tools/comms/ | The lane's append token is not published: the lead makes it with configure_lane.py --new, keeps it in SGIT_COMMS_LANE_TOKENS, and pastes the readers one into the column on the devices that should write (for the tab, or kept on the device). A browser without it can Copy for Claude and cannot write. Pending the lead's steps in docs/ops/comms.md (N8). |
 | site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | [proposed](/review/ui/#node=claim.site.repo-protections) | [docs/ops/branch-protection.md](/review/ui/#file=docs/ops/branch-protection.md) | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | [proposed](/review/ui/#node=claim.infra.bootstrap) | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
 | infra | Terraform module secrets-env and the dev environment root | [proposed](/review/ui/#node=claim.infra.terraform) | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
@@ -2290,7 +2299,7 @@ source: /team/index.md
 
 > Who does what, as one file per role with the rules it enforces and the mistake behind each, and where the board of work lives.
 
-*Source: <https://secrets.sgit.ai/team/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/team/> · site v0.1.13 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -2311,7 +2320,7 @@ source: /docs/reality.md
 
 # secrets.sgit.ai: reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.12 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.13 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
 75 claims: 42 shipped, 28 proposed, 5 absent.
 
@@ -2358,7 +2367,7 @@ source: /docs/reality.md
 | site | Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin | shipped v0.1.12 | learn/, data/terms.json, data/diagrams/, admin/build/gen_terms.py, gen_diagrams.py | Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them. |
 | site | The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF | shipped v0.1.12 | components/passkey-lab/ | Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25). |
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | shipped v0.1.6 | data/themes.json, assets/themes.css, assets/theme.js | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
-| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
+| site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. Since v0.1.13 dictation keeps interim results (Safari on iOS gives no final one) and says what it heard or why it stopped; the column opens on a tab from /reader/#log or #chat; the append token is held by the browser, never by the contact file. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | shipped v0.1.7 | components/reader-chat/, reader/index.html, data/search-index.json | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
 | site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | shipped v0.1.5 | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
 | site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | shipped v0.1.8 | mockups/screens.json, components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
@@ -2377,7 +2386,7 @@ source: /docs/reality.md
 | review | The explanation layer: per block of code, what it does (pseudo-code), why (its intent) and the story it serves, at a technical and a business level, each block hashed to the lines it explains so a diff reads as a blast radius against meaning | proposed | review/explain/ | C24. The first rung exists in code mode (the code's own comments, the claims and stories that reach the file). The written levels are data by the build agent, never parser output, never a model at build time. |
 | review | Every commit read upwards: changes/<hash>.json with layers moved and held, reach, claim versus evidence | proposed | review/tools/change.py | Step 4; the Kind: trailer carries the claim (R4). |
 | review | review/self/: the same folder for the tools and the navigator, both sets green before a release | proposed | review/self/ | Step 2. |
-| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | proposed | .well-known/sgit-agents.json, tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |
+| site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | proposed | .well-known/sgit-agents.json, tools/comms/ | The lane's append token is not published: the lead makes it with configure_lane.py --new, keeps it in SGIT_COMMS_LANE_TOKENS, and pastes the readers one into the column on the devices that should write (for the tab, or kept on the device). A browser without it can Copy for Claude and cannot write. Pending the lead's steps in docs/ops/comms.md (N8). |
 | site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | infra | Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool | proposed | infra/bootstrap/bootstrap.sh | Step 3. Run once by a human; idempotent; --dry-run. |
 | infra | Terraform module secrets-env and the dev environment root | proposed | infra/terraform/ | Step 3. Identity Platform, Firebase web app, bucket, rules release, IAM, WIF. |
@@ -2543,6 +2552,10 @@ The review also asked for an abstraction layer per block of code: the source, th
 Section 6.5 lists the content pages and section 7.4 asks that nothing be described before it ships; neither says where a reader learns what a passkey, the PRF bytes or the GCP project are in this site's terms. Dinis asked on 2026-10-06, reading the security page, for the words to link to explanations in context, with diagrams, and for a way to try the passkey in the browser he was in, bit by bit, including several passkeys. From v0.1.12 there is a `/learn/` section (passkeys, keys, GCP), a glossary in `data/terms.json` that the build links from the first use of each term on every content page and that the reader's column lists, flow diagrams drawn by the build from `data/diagrams/` (inline SVG on the theme's tokens, plus the same diagram as text), and a lab component on the passkeys page that runs the two WebAuthn calls and the key chain on the browser's own WebCrypto with a lab salt. The lab is held to the same rules as the app: RP ID `secrets.sgit.ai` or `localhost` only, one allow-listed storage key holding public values, nothing derived from a key written anywhere, no network.
 
 One open question of section 12 is answered by building it: Chromium's virtual authenticator, driven through the CDP `WebAuthn` domain with `hasPrf: true`, does PRF (Chromium 141: `prf.enabled` is true at create, `get` returns 32 bytes, the same salt gives the same bytes, another salt gives others). The end-to-end tests of step 4 can therefore run the real unlock headlessly, with no stand-in for the crypto.
+
+### C26. The lane's append token is held by the sender, not published
+
+The Agent Contact shape publishes an append token per lane, so anyone who reads the contact file can write to the lane. Dinis asked on 2026-10-06 that, for now, the comments reaching the agent be mainly his own. From v0.1.13 the contact file names the lanes and carries no token; `tools/comms/configure_lane.py --new` makes the tokens, prints them once and registers their hashes on the vault; the lead keeps them in `SGIT_COMMS_LANE_TOKENS` and pastes the readers one into the column (Log tab, **Append token**), kept for the tab or, when ticked, on the device under one allow-listed key. A browser without the token sees Send off and Copy for Claude on. The public key, the vault id and the endpoint stay public, so sealing is unchanged. Opening the lane to other readers is then a decision (hand out the token, or publish it again), not the default.
 
 ## Open questions carried from section 12 (unanswered at this version)
 
@@ -4056,7 +4069,7 @@ The column is three web components under `components/` (`reader-panel`, `reader-
 
 ## The lane into the agent's vault
 
-The agent has a comms vault on SG/Send (`https://dev.send.sgraph.ai`) and a key pair (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing). The public bundle, the vault id and the lanes are published in [`/.well-known/sgit-agents.json`](/.well-known/sgit-agents.json), the [Agent Contact v0.1](https://sgit.ai/docs/agent-contact.html) shape every sgit.ai site uses. A lane is a write-only address on the vault, gated by a public append token: a sender can write, and cannot list, fetch or read. The site's column writes `reader-message/v1`, the sgit PKI envelope made with WebCrypto (the same bytes `sgit pki encrypt` would make), to the `readers` lane. Other agents write signed `agent-message/v1` mail to the `agents` lane.
+The agent has a comms vault on SG/Send (`https://dev.send.sgraph.ai`) and a key pair (RSA-OAEP 4096 for encryption, ECDSA P-256 for signing). The public bundle, the vault id and the lanes are published in [`/.well-known/sgit-agents.json`](/.well-known/sgit-agents.json), the [Agent Contact v0.1](https://sgit.ai/docs/agent-contact.html) shape every sgit.ai site uses. A lane is a write-only address on the vault, gated by an append token: a sender who holds the token can write, and cannot list, fetch or read. The token is not published. The lead makes it once (`configure_lane.py --new` prints it), keeps it in `SGIT_COMMS_LANE_TOKENS`, and pastes the readers one into the column's **Append token** field on the devices that should write (for this tab, or kept on the device when ticked); so, for now, the comments that reach the agent are the lead's own, and opening the lane to others is a decision, not a default. The agents token goes to other agents by hand. The site's column writes `reader-message/v1`, the sgit PKI envelope made with WebCrypto (the same bytes `sgit pki encrypt` would make), to the `readers` lane. Other agents write signed `agent-message/v1` mail to the `agents` lane.
 
 The agent reads the lanes at the start of a session with `tools/comms/drain.py`: list, fetch, decrypt with its private key, keep ciphertext and plaintext under the vault's `inbox/`, print a digest it acts on, then mark-processed. What cannot be opened goes to `inbox/quarantine/` with the reason.
 
@@ -4065,11 +4078,11 @@ The agent reads the lanes at the start of a session with `tools/comms/drain.py`:
 The session that built this could create the vault and the key pair, but its permission policy stopped it short of two things: registering the lanes on the vault (an account-level change on SG/Send) and pushing the private keys into the vault. So the vault key, the read key and the key pair are where that session left them, and the lead finishes the channel:
 
 1. Take the vault key from the build session's scratchpad (`vaults/create.log`, the line *Vault key*) and the key pair from `~/.sg-send/keys/` of that session, with the passphrase in `vaults/pki-passphrase.txt`. Store the vault key as `SGIT_COMMS_VAULT_KEY` and the passphrase as `SGIT_COMMS_PKI_PASSPHRASE` in the Claude Code environment this repository runs in, so every later session can open the vault. Put the key folder in the vault (`agent/keys/`) and push it.
-2. Publish the public half: `python3 tools/comms/publish_contact.py --fingerprint sha256:6d9fe81fd718ab0b` fills the contact file with the bundle, the vault id and one fresh token per lane; commit it.
-3. Register the lanes: `python3 tools/comms/configure_lane.py` (needs `SGIT_COMMS_VAULT_KEY` and `SG_SEND_ACCESS_TOKEN`). On success it sets the contact file's status to `open`; commit it. The column's Send button enables itself on the next page load.
+2. Publish the public half: `python3 tools/comms/publish_contact.py --fingerprint sha256:6d9fe81fd718ab0b` fills the contact file with the bundle, the vault id and the lane names (no token); commit it.
+3. Register the lanes: `python3 tools/comms/configure_lane.py --new` (needs `SGIT_COMMS_VAULT_KEY` and `SG_SEND_ACCESS_TOKEN`) makes the two append tokens, prints them once, and registers their hashes on the vault. Store the printed line as `SGIT_COMMS_LANE_TOKENS` in the environment (the drainer and `send_test.py` read it there). On success it sets the contact file's status to `open`; commit it. Then open the column on `/reader/`, press **Append token**, paste the readers token, tick *keep on this device* if you want it to stay, and Send is on for that device.
 4. Prove the round trip: `python3 tools/comms/send_test.py`, then `python3 tools/comms/drain.py --vault-dir <the vault clone>`.
 
-Until step 3 the column says the lane is pending and offers **Copy for Claude**, which works today.
+Until step 3 the column says the lane is pending and offers **Copy for Claude**, which works today. Send runs only on `/reader/` (the one page whose policy allows the connection); on every other page the button becomes a link there, and the log is the same one.
 
 ## The tools
 
@@ -4158,7 +4171,7 @@ Everything on this list blocks a step of the brief and cannot be done from insid
 
 ## Blocking the comms channel (the reader's column's Send button)
 
-9. **Finish the comms vault (project lead).** The build session of 2026-10-06 created the vault (`ockml7sn` on `https://dev.send.sgraph.ai`) and the agent's key pair (`sha256:6d9fe81fd718ab0b`), and its permission policy stopped it from registering the lanes and from pushing the keys. The four steps, with the commands, are in `docs/ops/comms.md`: store `SGIT_COMMS_VAULT_KEY` and `SGIT_COMMS_PKI_PASSPHRASE` as environment secrets, push the keys into the vault, run `publish_contact.py`, run `configure_lane.py`, prove a round trip.
+9. **Finish the comms vault (project lead).** The build session of 2026-10-06 created the vault (`ockml7sn` on `https://dev.send.sgraph.ai`) and the agent's key pair (`sha256:6d9fe81fd718ab0b`), and its permission policy stopped it from registering the lanes and from pushing the keys. The four steps, with the commands, are in `docs/ops/comms.md`: store `SGIT_COMMS_VAULT_KEY` and `SGIT_COMMS_PKI_PASSPHRASE` as environment secrets, push the keys into the vault, run `publish_contact.py`, run `configure_lane.py --new` and store the tokens it prints as `SGIT_COMMS_LANE_TOKENS`, paste the readers token into the column on your devices, prove a round trip. The tokens are never published: only a browser holding one can write.
 10. **An OpenRouter key for yourself (project lead).** For the chat on `/reader/`; with a spend limit; entered in the browser, never stored in the repository or in any secret of the build.
 
 ## Not yet needed
@@ -4367,7 +4380,7 @@ source: /review/README.md
 
 What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
 
-Source tree: 141 files, hash `5f63559adf5543f1`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+Source tree: 141 files, hash `f0922ed21f703d25`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
 
 ## The project
 
@@ -4382,12 +4395,12 @@ Source tree: 141 files, hash `5f63559adf5543f1`. Derived files must carry this h
 | files | 141 |
 | modules | 64 |
 | classes | 60 |
-| methods | 639 |
+| methods | 645 |
 | surfaces | 67 |
-| tests | 102 |
+| tests | 104 |
 | claims | 75 (42 shipped, every one with evidence that resolves; strict) |
-| releases | 13 |
-| anchors | 204 (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |
+| releases | 14 |
+| anchors | 207 (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |
 | brief sections | 14 top-level, 31 subsections, as review/brief/ |
 
 Coverage (projected nodes with a derived match beneath them): not computed yet: the join runs from step 3.

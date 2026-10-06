@@ -6504,8 +6504,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.ask",
       "source": {
-        "end": 191,
-        "line": 177,
+        "end": 190,
+        "line": 176,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "c71b59c647dc873f0a7cb538e98a268e4e55b4094c2cc4bb178f8a02602052db"
       },
@@ -6515,8 +6515,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.ask",
       "source": {
-        "end": 191,
-        "line": 177,
+        "end": 190,
+        "line": 176,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "c71b59c647dc873f0a7cb538e98a268e4e55b4094c2cc4bb178f8a02602052db"
       },
@@ -6526,8 +6526,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.ask",
       "source": {
-        "end": 191,
-        "line": 177,
+        "end": 190,
+        "line": 176,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "c71b59c647dc873f0a7cb538e98a268e4e55b4094c2cc4bb178f8a02602052db"
       },
@@ -6548,8 +6548,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.index",
       "source": {
-        "end": 107,
-        "line": 101,
+        "end": 106,
+        "line": 100,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "3c965acc66cb574f711726ba1e437751055a4b4681de85956c75472c5de91ce0"
       },
@@ -6562,7 +6562,7 @@
         "end": 62,
         "line": 42,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb"
+        "sha256": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173"
       },
       "to": "method:components/reader-chat/reader-chat.js:ReaderChat.ask",
       "verb": "calls"
@@ -6573,7 +6573,7 @@
         "end": 62,
         "line": 42,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb"
+        "sha256": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173"
       },
       "to": "method:components/reader-chat/reader-chat.js:ReaderChat.forgetKey",
       "verb": "calls"
@@ -6584,7 +6584,7 @@
         "end": 62,
         "line": 42,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb"
+        "sha256": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173"
       },
       "to": "method:components/reader-chat/reader-chat.js:ReaderChat.storedKey",
       "verb": "calls"
@@ -6595,7 +6595,7 @@
         "end": 62,
         "line": 42,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb"
+        "sha256": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173"
       },
       "to": "method:components/reader-chat/reader-chat.js:ReaderChat.tier",
       "verb": "calls"
@@ -6606,7 +6606,7 @@
         "end": 62,
         "line": 42,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb"
+        "sha256": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173"
       },
       "to": "method:components/reader-chat/reader-chat.js:ReaderChat.useKey",
       "verb": "calls"
@@ -6617,7 +6617,7 @@
         "end": 62,
         "line": 42,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb"
+        "sha256": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173"
       },
       "to": "method:components/sg-base/sg-base.js:SgBase.dictate",
       "verb": "calls"
@@ -6628,7 +6628,7 @@
         "end": 62,
         "line": 42,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb"
+        "sha256": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173"
       },
       "to": "method:components/sg-base/sg-base.js:SgBase.speechRecognition",
       "verb": "calls"
@@ -6636,8 +6636,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.openPage",
       "source": {
-        "end": 145,
-        "line": 138,
+        "end": 144,
+        "line": 137,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "60f383f1aaeabe65641dfbcf1038bdeb623614fd06340d2ece68aa8b743d2324"
       },
@@ -6647,8 +6647,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.openPage",
       "source": {
-        "end": 145,
-        "line": 138,
+        "end": 144,
+        "line": 137,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "60f383f1aaeabe65641dfbcf1038bdeb623614fd06340d2ece68aa8b743d2324"
       },
@@ -6658,8 +6658,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.readNext",
       "source": {
-        "end": 152,
-        "line": 147,
+        "end": 151,
+        "line": 146,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "1a7701e88ef486d50db2e45abf81a29e6a51a5018dbffa820b980655274deadf"
       },
@@ -6669,8 +6669,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.readNext",
       "source": {
-        "end": 152,
-        "line": 147,
+        "end": 151,
+        "line": 146,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "1a7701e88ef486d50db2e45abf81a29e6a51a5018dbffa820b980655274deadf"
       },
@@ -6680,8 +6680,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.readNext",
       "source": {
-        "end": 152,
-        "line": 147,
+        "end": 151,
+        "line": 146,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "1a7701e88ef486d50db2e45abf81a29e6a51a5018dbffa820b980655274deadf"
       },
@@ -6691,8 +6691,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.render",
       "source": {
-        "end": 269,
-        "line": 259,
+        "end": 268,
+        "line": 258,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "1df0706e3101cb66097c170977618edd9dc89a61a677e1f1ce4842d0a65bd477"
       },
@@ -6702,8 +6702,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.search",
       "source": {
-        "end": 126,
-        "line": 111,
+        "end": 125,
+        "line": 110,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "30bd8cb86fde7cc8fb9ecb6f616bf3fc9cb3ac5f74452f963ffda52b0a0958f6"
       },
@@ -6713,8 +6713,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.search",
       "source": {
-        "end": 126,
-        "line": 111,
+        "end": 125,
+        "line": 110,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "30bd8cb86fde7cc8fb9ecb6f616bf3fc9cb3ac5f74452f963ffda52b0a0958f6"
       },
@@ -6724,8 +6724,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.search",
       "source": {
-        "end": 126,
-        "line": 111,
+        "end": 125,
+        "line": 110,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "30bd8cb86fde7cc8fb9ecb6f616bf3fc9cb3ac5f74452f963ffda52b0a0958f6"
       },
@@ -6735,8 +6735,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.search",
       "source": {
-        "end": 126,
-        "line": 111,
+        "end": 125,
+        "line": 110,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "30bd8cb86fde7cc8fb9ecb6f616bf3fc9cb3ac5f74452f963ffda52b0a0958f6"
       },
@@ -6746,10 +6746,10 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier",
       "source": {
-        "end": 99,
+        "end": 98,
         "line": 86,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "0ab5cd0ffd23fd42fdea735b34ff2646ebcd73e0ec3adb443eb188e750a0dde9"
+        "sha256": "a3b01d420b6a9b5281c5bcaaa80a357c05e27ad25926426e5ba897bc19ef4674"
       },
       "to": "method:components/reader-chat/reader-chat.js:ReaderChat.storedKey",
       "verb": "calls"
@@ -6757,10 +6757,10 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier",
       "source": {
-        "end": 99,
+        "end": 98,
         "line": 86,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "0ab5cd0ffd23fd42fdea735b34ff2646ebcd73e0ec3adb443eb188e750a0dde9"
+        "sha256": "a3b01d420b6a9b5281c5bcaaa80a357c05e27ad25926426e5ba897bc19ef4674"
       },
       "to": "method:components/sg-base/sg-base.js:SgBase.mayConnect",
       "verb": "calls"
@@ -6768,8 +6768,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier0",
       "source": {
-        "end": 205,
-        "line": 193,
+        "end": 204,
+        "line": 192,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fcf532143840f2952061f3c3aa6caacbdbdaac252df0ed078e7723b7c6a9c69d"
       },
@@ -6779,8 +6779,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier0",
       "source": {
-        "end": 205,
-        "line": 193,
+        "end": 204,
+        "line": 192,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fcf532143840f2952061f3c3aa6caacbdbdaac252df0ed078e7723b7c6a9c69d"
       },
@@ -6790,8 +6790,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier0",
       "source": {
-        "end": 205,
-        "line": 193,
+        "end": 204,
+        "line": 192,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fcf532143840f2952061f3c3aa6caacbdbdaac252df0ed078e7723b7c6a9c69d"
       },
@@ -6801,8 +6801,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier1",
       "source": {
-        "end": 245,
-        "line": 207,
+        "end": 244,
+        "line": 206,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fd7fa4215d78fd5e71403bfe2e284829bb8bf92076f7d877f9ad157f06f1c342"
       },
@@ -6812,8 +6812,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier1",
       "source": {
-        "end": 245,
-        "line": 207,
+        "end": 244,
+        "line": 206,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fd7fa4215d78fd5e71403bfe2e284829bb8bf92076f7d877f9ad157f06f1c342"
       },
@@ -6823,8 +6823,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier1",
       "source": {
-        "end": 245,
-        "line": 207,
+        "end": 244,
+        "line": 206,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fd7fa4215d78fd5e71403bfe2e284829bb8bf92076f7d877f9ad157f06f1c342"
       },
@@ -6834,8 +6834,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier1",
       "source": {
-        "end": 245,
-        "line": 207,
+        "end": 244,
+        "line": 206,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fd7fa4215d78fd5e71403bfe2e284829bb8bf92076f7d877f9ad157f06f1c342"
       },
@@ -6845,8 +6845,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier1",
       "source": {
-        "end": 245,
-        "line": 207,
+        "end": 244,
+        "line": 206,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fd7fa4215d78fd5e71403bfe2e284829bb8bf92076f7d877f9ad157f06f1c342"
       },
@@ -6856,8 +6856,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier1",
       "source": {
-        "end": 245,
-        "line": 207,
+        "end": 244,
+        "line": 206,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fd7fa4215d78fd5e71403bfe2e284829bb8bf92076f7d877f9ad157f06f1c342"
       },
@@ -6867,8 +6867,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tier1",
       "source": {
-        "end": 245,
-        "line": 207,
+        "end": 244,
+        "line": 206,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fd7fa4215d78fd5e71403bfe2e284829bb8bf92076f7d877f9ad157f06f1c342"
       },
@@ -6878,8 +6878,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tool",
       "source": {
-        "end": 167,
-        "line": 159,
+        "end": 166,
+        "line": 158,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "84a523ffa5e98857903cbfc0a83a575fa36164b6bafd997112a41ebb99a48259"
       },
@@ -6889,8 +6889,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tool",
       "source": {
-        "end": 167,
-        "line": 159,
+        "end": 166,
+        "line": 158,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "84a523ffa5e98857903cbfc0a83a575fa36164b6bafd997112a41ebb99a48259"
       },
@@ -6900,8 +6900,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tool",
       "source": {
-        "end": 167,
-        "line": 159,
+        "end": 166,
+        "line": 158,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "84a523ffa5e98857903cbfc0a83a575fa36164b6bafd997112a41ebb99a48259"
       },
@@ -6911,8 +6911,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tool",
       "source": {
-        "end": 167,
-        "line": 159,
+        "end": 166,
+        "line": 158,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "84a523ffa5e98857903cbfc0a83a575fa36164b6bafd997112a41ebb99a48259"
       },
@@ -6922,8 +6922,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tool",
       "source": {
-        "end": 167,
-        "line": 159,
+        "end": 166,
+        "line": 158,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "84a523ffa5e98857903cbfc0a83a575fa36164b6bafd997112a41ebb99a48259"
       },
@@ -6933,8 +6933,8 @@
     {
       "from": "method:components/reader-chat/reader-chat.js:ReaderChat.tool",
       "source": {
-        "end": 167,
-        "line": 159,
+        "end": 166,
+        "line": 158,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "84a523ffa5e98857903cbfc0a83a575fa36164b6bafd997112a41ebb99a48259"
       },
@@ -6955,8 +6955,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.addNote",
       "source": {
-        "end": 136,
-        "line": 130,
+        "end": 142,
+        "line": 136,
         "path": "components/reader-log/reader-log.js",
         "sha256": "170514c8161e5628255aba3a8e276412b539ecfc15731385d4b8dfd0eb83f9da"
       },
@@ -6966,8 +6966,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.append",
       "source": {
-        "end": 120,
-        "line": 112,
+        "end": 126,
+        "line": 118,
         "path": "components/reader-log/reader-log.js",
         "sha256": "2553ff9822702c0b98ef6e0beacfd596278ea1a364cd17fea18f1665e1dd9929"
       },
@@ -6977,8 +6977,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.append",
       "source": {
-        "end": 120,
-        "line": 112,
+        "end": 126,
+        "line": 118,
         "path": "components/reader-log/reader-log.js",
         "sha256": "2553ff9822702c0b98ef6e0beacfd596278ea1a364cd17fea18f1665e1dd9929"
       },
@@ -6988,8 +6988,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.append",
       "source": {
-        "end": 120,
-        "line": 112,
+        "end": 126,
+        "line": 118,
         "path": "components/reader-log/reader-log.js",
         "sha256": "2553ff9822702c0b98ef6e0beacfd596278ea1a364cd17fea18f1665e1dd9929"
       },
@@ -6999,8 +6999,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.append",
       "source": {
-        "end": 120,
-        "line": 112,
+        "end": 126,
+        "line": 118,
         "path": "components/reader-log/reader-log.js",
         "sha256": "2553ff9822702c0b98ef6e0beacfd596278ea1a364cd17fea18f1665e1dd9929"
       },
@@ -7010,10 +7010,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.contact",
       "source": {
-        "end": 192,
-        "line": 170,
+        "end": 229,
+        "line": 206,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "9e41748d98f851f611cce4413a9792c8f112d5e76590500131f57a96fcda85b1"
+        "sha256": "542dfcc1cd248830f4d68a77027e483fcf0041c0eb72856e999d8d9929222244"
       },
       "to": "method:admin/build/verify_live.py:Verify__Live.fetch",
       "verb": "calls"
@@ -7021,10 +7021,21 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.contact",
       "source": {
-        "end": 192,
-        "line": 170,
+        "end": 229,
+        "line": 206,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "9e41748d98f851f611cce4413a9792c8f112d5e76590500131f57a96fcda85b1"
+        "sha256": "542dfcc1cd248830f4d68a77027e483fcf0041c0eb72856e999d8d9929222244"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.heldToken",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.contact",
+      "source": {
+        "end": 229,
+        "line": 206,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "542dfcc1cd248830f4d68a77027e483fcf0041c0eb72856e999d8d9929222244"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
       "verb": "calls"
@@ -7032,10 +7043,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.contact",
       "source": {
-        "end": 192,
-        "line": 170,
+        "end": 229,
+        "line": 206,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "9e41748d98f851f611cce4413a9792c8f112d5e76590500131f57a96fcda85b1"
+        "sha256": "542dfcc1cd248830f4d68a77027e483fcf0041c0eb72856e999d8d9929222244"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
       "verb": "calls"
@@ -7043,10 +7054,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.contact",
       "source": {
-        "end": 192,
-        "line": 170,
+        "end": 229,
+        "line": 206,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "9e41748d98f851f611cce4413a9792c8f112d5e76590500131f57a96fcda85b1"
+        "sha256": "542dfcc1cd248830f4d68a77027e483fcf0041c0eb72856e999d8d9929222244"
       },
       "to": "method:components/sg-base/sg-base.js:SgBase.mayConnect",
       "verb": "calls"
@@ -7054,8 +7065,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.copy",
       "source": {
-        "end": 235,
-        "line": 223,
+        "end": 273,
+        "line": 261,
         "path": "components/reader-log/reader-log.js",
         "sha256": "51d6fb7ddd96e941f4408ea57b0d2e5a8821131bb1bf9b4415f4c96e6e42f1df"
       },
@@ -7065,8 +7076,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.copy",
       "source": {
-        "end": 235,
-        "line": 223,
+        "end": 273,
+        "line": 261,
         "path": "components/reader-log/reader-log.js",
         "sha256": "51d6fb7ddd96e941f4408ea57b0d2e5a8821131bb1bf9b4415f4c96e6e42f1df"
       },
@@ -7076,8 +7087,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.copy",
       "source": {
-        "end": 235,
-        "line": 223,
+        "end": 273,
+        "line": 261,
         "path": "components/reader-log/reader-log.js",
         "sha256": "51d6fb7ddd96e941f4408ea57b0d2e5a8821131bb1bf9b4415f4c96e6e42f1df"
       },
@@ -7087,8 +7098,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.copy",
       "source": {
-        "end": 235,
-        "line": 223,
+        "end": 273,
+        "line": 261,
         "path": "components/reader-log/reader-log.js",
         "sha256": "51d6fb7ddd96e941f4408ea57b0d2e5a8821131bb1bf9b4415f4c96e6e42f1df"
       },
@@ -7096,10 +7107,43 @@
       "verb": "calls"
     },
     {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.forgetToken",
+      "source": {
+        "end": 202,
+        "line": 197,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "f094401eb9d99d994e356ba5890a3fb3b63fa13a4f2c27acfa64c61e96f0b6e9"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.forgetToken",
+      "source": {
+        "end": 202,
+        "line": 197,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "f094401eb9d99d994e356ba5890a3fb3b63fa13a4f2c27acfa64c61e96f0b6e9"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.heldToken",
+      "source": {
+        "end": 204,
+        "line": 204,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "ee112fd2aec3d5056c5daee658bb779cd458e324008a785fb14bca526fd5e289"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.token",
+      "verb": "calls"
+    },
+    {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.mark",
       "source": {
-        "end": 128,
-        "line": 122,
+        "end": 134,
+        "line": 128,
         "path": "components/reader-log/reader-log.js",
         "sha256": "8b58bd55fee2a1cb513b3b096fdd9eaadac01fa6770f656465de4b4085a0fda2"
       },
@@ -7109,8 +7153,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.mark",
       "source": {
-        "end": 128,
-        "line": 122,
+        "end": 134,
+        "line": 128,
         "path": "components/reader-log/reader-log.js",
         "sha256": "8b58bd55fee2a1cb513b3b096fdd9eaadac01fa6770f656465de4b4085a0fda2"
       },
@@ -7120,8 +7164,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.mark",
       "source": {
-        "end": 128,
-        "line": 122,
+        "end": 134,
+        "line": 128,
         "path": "components/reader-log/reader-log.js",
         "sha256": "8b58bd55fee2a1cb513b3b096fdd9eaadac01fa6770f656465de4b4085a0fda2"
       },
@@ -7131,8 +7175,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.markdown",
       "source": {
-        "end": 221,
-        "line": 216,
+        "end": 259,
+        "line": 254,
         "path": "components/reader-log/reader-log.js",
         "sha256": "c2ce7adff54fb69fdd48bf574a13911efa9b1ab520e5bbc0d68b5fdcb07774aa"
       },
@@ -7142,8 +7186,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.merge",
       "source": {
-        "end": 255,
-        "line": 237,
+        "end": 293,
+        "line": 275,
         "path": "components/reader-log/reader-log.js",
         "sha256": "a9b69571d5bf2d2a586c7d96ecb46fe31903058c3ceabf4e23b4ff8276610595"
       },
@@ -7153,8 +7197,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.merge",
       "source": {
-        "end": 255,
-        "line": 237,
+        "end": 293,
+        "line": 275,
         "path": "components/reader-log/reader-log.js",
         "sha256": "a9b69571d5bf2d2a586c7d96ecb46fe31903058c3ceabf4e23b4ff8276610595"
       },
@@ -7164,8 +7208,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.merge",
       "source": {
-        "end": 255,
-        "line": 237,
+        "end": 293,
+        "line": 275,
         "path": "components/reader-log/reader-log.js",
         "sha256": "a9b69571d5bf2d2a586c7d96ecb46fe31903058c3ceabf4e23b4ff8276610595"
       },
@@ -7175,10 +7219,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.addNote",
       "verb": "calls"
@@ -7186,10 +7230,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.append",
       "verb": "calls"
@@ -7197,10 +7241,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.contact",
       "verb": "calls"
@@ -7208,10 +7252,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.copy",
       "verb": "calls"
@@ -7219,10 +7263,21 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.forgetToken",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
+      "source": {
+        "end": 116,
+        "line": 90,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.mark",
       "verb": "calls"
@@ -7230,10 +7285,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.merge",
       "verb": "calls"
@@ -7241,10 +7296,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
       "verb": "calls"
@@ -7252,10 +7307,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "verb": "calls"
@@ -7263,10 +7318,32 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
+      "source": {
+        "end": 116,
+        "line": 90,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.useToken",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
+      "source": {
+        "end": 116,
+        "line": 90,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/reader-log/reader-log.js:textHash",
       "verb": "calls"
@@ -7274,10 +7351,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/sg-base/sg-base.js:SgBase.dictate",
       "verb": "calls"
@@ -7285,10 +7362,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:components/sg-base/sg-base.js:SgBase.speechRecognition",
       "verb": "calls"
@@ -7296,10 +7373,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       },
       "to": "method:review/tools/brief.py:Brief.split",
       "verb": "calls"
@@ -7307,10 +7384,21 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.render",
       "source": {
-        "end": 152,
-        "line": 138,
+        "end": 161,
+        "line": 144,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "a59cf7f0048b38944b126cecc9194b02717e7a17e6190c546b90f7620029de94"
+        "sha256": "264a196f7e77cf693a3724b65976e4b80bf14f007a8cf5bbd3e68b1de12accc2"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.heldToken",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.render",
+      "source": {
+        "end": 161,
+        "line": 144,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "264a196f7e77cf693a3724b65976e4b80bf14f007a8cf5bbd3e68b1de12accc2"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.list",
       "verb": "calls"
@@ -7318,10 +7406,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.render",
       "source": {
-        "end": 152,
-        "line": 138,
+        "end": 161,
+        "line": 144,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "a59cf7f0048b38944b126cecc9194b02717e7a17e6190c546b90f7620029de94"
+        "sha256": "264a196f7e77cf693a3724b65976e4b80bf14f007a8cf5bbd3e68b1de12accc2"
       },
       "to": "method:components/reader-log/reader-log.js:pageState",
       "verb": "calls"
@@ -7329,10 +7417,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.render",
       "source": {
-        "end": 152,
-        "line": 138,
+        "end": 161,
+        "line": 144,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "a59cf7f0048b38944b126cecc9194b02717e7a17e6190c546b90f7620029de94"
+        "sha256": "264a196f7e77cf693a3724b65976e4b80bf14f007a8cf5bbd3e68b1de12accc2"
       },
       "to": "method:components/reader-log/reader-log.js:readLog",
       "verb": "calls"
@@ -7340,10 +7428,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.render",
       "source": {
-        "end": 152,
-        "line": 138,
+        "end": 161,
+        "line": 144,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "a59cf7f0048b38944b126cecc9194b02717e7a17e6190c546b90f7620029de94"
+        "sha256": "264a196f7e77cf693a3724b65976e4b80bf14f007a8cf5bbd3e68b1de12accc2"
       },
       "to": "method:components/reader-log/reader-log.js:unsentEvents",
       "verb": "calls"
@@ -7351,10 +7439,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "source": {
-        "end": 214,
-        "line": 199,
+        "end": 252,
+        "line": 236,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a"
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
       },
       "to": "method:admin/build/verify_live.py:Verify__Live.fetch",
       "verb": "calls"
@@ -7362,10 +7450,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "source": {
-        "end": 214,
-        "line": 199,
+        "end": 252,
+        "line": 236,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a"
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.append",
       "verb": "calls"
@@ -7373,10 +7461,21 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "source": {
-        "end": 214,
-        "line": 199,
+        "end": 252,
+        "line": 236,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a"
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.heldToken",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.send",
+      "source": {
+        "end": 252,
+        "line": 236,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.message",
       "verb": "calls"
@@ -7384,10 +7483,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "source": {
-        "end": 214,
-        "line": 199,
+        "end": 252,
+        "line": 236,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a"
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
       },
       "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
       "verb": "calls"
@@ -7395,10 +7494,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "source": {
-        "end": 214,
-        "line": 199,
+        "end": 252,
+        "line": 236,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a"
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
       },
       "to": "method:components/reader-log/reader-log.js:readLog",
       "verb": "calls"
@@ -7406,10 +7505,10 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "source": {
-        "end": 214,
-        "line": 199,
+        "end": 252,
+        "line": 236,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a"
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
       },
       "to": "method:components/reader-log/reader-log.js:seal",
       "verb": "calls"
@@ -7417,19 +7516,41 @@
     {
       "from": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "source": {
-        "end": 214,
-        "line": 199,
+        "end": 252,
+        "line": 236,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a"
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
       },
       "to": "method:components/reader-log/reader-log.js:unsentEvents",
       "verb": "calls"
     },
     {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.useToken",
+      "source": {
+        "end": 195,
+        "line": 183,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "42691b5d971607d0d62448b6289464f2dbf38fdea2b6d7ddde526a91fe7a6151"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
+      "verb": "calls"
+    },
+    {
+      "from": "method:components/reader-log/reader-log.js:ReaderLog.useToken",
+      "source": {
+        "end": 195,
+        "line": 183,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "42691b5d971607d0d62448b6289464f2dbf38fdea2b6d7ddde526a91fe7a6151"
+      },
+      "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
+      "verb": "calls"
+    },
+    {
       "from": "method:components/reader-log/reader-log.js:seal",
       "source": {
-        "end": 80,
-        "line": 71,
+        "end": 83,
+        "line": 74,
         "path": "components/reader-log/reader-log.js",
         "sha256": "b6df1ba14f6b037b63985ac6d5dc92ddc5dbd2dfff0bb9ec2b849b2c79425152"
       },
@@ -7439,8 +7560,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:seal",
       "source": {
-        "end": 80,
-        "line": 71,
+        "end": 83,
+        "line": 74,
         "path": "components/reader-log/reader-log.js",
         "sha256": "b6df1ba14f6b037b63985ac6d5dc92ddc5dbd2dfff0bb9ec2b849b2c79425152"
       },
@@ -7450,8 +7571,8 @@
     {
       "from": "method:components/reader-log/reader-log.js:unsentEvents",
       "source": {
-        "end": 52,
-        "line": 48,
+        "end": 55,
+        "line": 51,
         "path": "components/reader-log/reader-log.js",
         "sha256": "a688992abf29dd9565f5832b756128a9234f9e3840968b4b9fb0e2bd7ae9c429"
       },
@@ -7461,8 +7582,8 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.loadGraph",
       "source": {
-        "end": 142,
-        "line": 114,
+        "end": 144,
+        "line": 116,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "2cdd8007bf1344ca904626deec9c5dd77308082559b9b6ef0ace2ee55c24d8d8"
       },
@@ -7472,10 +7593,10 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.onReady",
       "source": {
-        "end": 42,
+        "end": 44,
         "line": 29,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "d720d9d5655654b69ac2bf540218eb8775e51b417c7ad6cd2cc31d6826bb71a6"
+        "sha256": "ed823ebafe4e81e44fdc24f4f48e14381706378cf4c463a4126ac0042335ca24"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.badge",
       "verb": "calls"
@@ -7483,10 +7604,10 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.onReady",
       "source": {
-        "end": 42,
+        "end": 44,
         "line": 29,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "d720d9d5655654b69ac2bf540218eb8775e51b417c7ad6cd2cc31d6826bb71a6"
+        "sha256": "ed823ebafe4e81e44fdc24f4f48e14381706378cf4c463a4126ac0042335ca24"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.open",
       "verb": "calls"
@@ -7494,10 +7615,10 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.onReady",
       "source": {
-        "end": 42,
+        "end": 44,
         "line": 29,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "d720d9d5655654b69ac2bf540218eb8775e51b417c7ad6cd2cc31d6826bb71a6"
+        "sha256": "ed823ebafe4e81e44fdc24f4f48e14381706378cf4c463a4126ac0042335ca24"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.readState",
       "verb": "calls"
@@ -7505,10 +7626,10 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.onReady",
       "source": {
-        "end": 42,
+        "end": 44,
         "line": 29,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "d720d9d5655654b69ac2bf540218eb8775e51b417c7ad6cd2cc31d6826bb71a6"
+        "sha256": "ed823ebafe4e81e44fdc24f4f48e14381706378cf4c463a4126ac0042335ca24"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.show",
       "verb": "calls"
@@ -7516,8 +7637,8 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.open",
       "source": {
-        "end": 62,
-        "line": 55,
+        "end": 64,
+        "line": 57,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "4378ca4eb639ee03f68bc7feb1ca2fa1d802b27c6fe9ba6b6955a1301eff49c6"
       },
@@ -7527,8 +7648,8 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.open",
       "source": {
-        "end": 62,
-        "line": 55,
+        "end": 64,
+        "line": 57,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "4378ca4eb639ee03f68bc7feb1ca2fa1d802b27c6fe9ba6b6955a1301eff49c6"
       },
@@ -7538,8 +7659,8 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.pageNodes",
       "source": {
-        "end": 112,
-        "line": 105,
+        "end": 114,
+        "line": 107,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "978a17d796d5234330a451260f702831217790bdaaa605d6e34e937a933c35f2"
       },
@@ -7549,8 +7670,8 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.pageNodes",
       "source": {
-        "end": 112,
-        "line": 105,
+        "end": 114,
+        "line": 107,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "978a17d796d5234330a451260f702831217790bdaaa605d6e34e937a933c35f2"
       },
@@ -7560,8 +7681,8 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.show",
       "source": {
-        "end": 71,
-        "line": 64,
+        "end": 73,
+        "line": 66,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "1a15a3e1d35a62f312af940c1d1146a701d8336f5c2f254a69cc0038bcfc1667"
       },
@@ -7571,8 +7692,8 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.show",
       "source": {
-        "end": 71,
-        "line": 64,
+        "end": 73,
+        "line": 66,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "1a15a3e1d35a62f312af940c1d1146a701d8336f5c2f254a69cc0038bcfc1667"
       },
@@ -7582,8 +7703,8 @@
     {
       "from": "method:components/reader-panel/reader-panel.js:ReaderPanel.show",
       "source": {
-        "end": 71,
-        "line": 64,
+        "end": 73,
+        "line": 66,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "1a15a3e1d35a62f312af940c1d1146a701d8336f5c2f254a69cc0038bcfc1667"
       },
@@ -7615,10 +7736,10 @@
     {
       "from": "method:components/sg-base/sg-base.js:SgBase.dictate",
       "source": {
-        "end": 115,
+        "end": 134,
         "line": 103,
         "path": "components/sg-base/sg-base.js",
-        "sha256": "794971e4e3d4b0d896f851866810641671c5060eb64efff1b0f2759e46d0283c"
+        "sha256": "29c0a99a28cc18c1df7f72643f3a3acd7755cf789caf87b7c6d113edca9e045e"
       },
       "to": "method:components/sg-base/sg-base.js:SgBase.speechRecognition",
       "verb": "calls"
@@ -11498,8 +11619,8 @@
     {
       "from": "method:tests/build/test_reader.py:Test__Reader.test_contact_file_shape",
       "source": {
-        "end": 109,
-        "line": 91,
+        "end": 133,
+        "line": 115,
         "path": "tests/build/test_reader.py",
         "sha256": "6cfe46d693f86b3b500089bda2c40a295a270df08985bc9cf59b7e2ce5156796"
       },
@@ -11553,8 +11674,8 @@
     {
       "from": "method:tests/build/test_reader.py:Test__Reader.test_search_index_is_fresh_and_covers_every_page",
       "source": {
-        "end": 122,
-        "line": 111,
+        "end": 146,
+        "line": 135,
         "path": "tests/build/test_reader.py",
         "sha256": "17fa90084f680e2c549131ff24cd3f8112a12d1f4662d84786ab47cfc25eae3d"
       },
@@ -11564,8 +11685,8 @@
     {
       "from": "method:tests/build/test_reader.py:Test__Reader.test_search_index_is_fresh_and_covers_every_page",
       "source": {
-        "end": 122,
-        "line": 111,
+        "end": 146,
+        "line": 135,
         "path": "tests/build/test_reader.py",
         "sha256": "17fa90084f680e2c549131ff24cd3f8112a12d1f4662d84786ab47cfc25eae3d"
       },
@@ -27297,31 +27418,31 @@
       "calls": [
         {
           "kind": "external",
-          "line": 178,
+          "line": 177,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 179,
+          "line": 178,
           "to": "box.value.trim",
           "via": "box.value"
         },
         {
           "kind": "internal",
-          "line": 182,
+          "line": 181,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.say",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 185,
+          "line": 184,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.tier1",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 186,
+          "line": 185,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.tier0",
           "via": "this"
         }
@@ -27337,8 +27458,8 @@
       "name": "ask",
       "signature": "ask()",
       "source": {
-        "end": 191,
-        "line": 177,
+        "end": 190,
+        "line": 176,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "c71b59c647dc873f0a7cb538e98a268e4e55b4094c2cc4bb178f8a02602052db"
       }
@@ -27347,7 +27468,7 @@
       "calls": [
         {
           "kind": "external",
-          "line": 155,
+          "line": 154,
           "to": "this.emit",
           "via": "this"
         }
@@ -27363,8 +27484,8 @@
       "name": "fileFeedback",
       "signature": "fileFeedback(text, page)",
       "source": {
-        "end": 157,
-        "line": 154,
+        "end": 156,
+        "line": 153,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "367bec92e9b5baa176c339147e44cf8a701eaa484b0d15352ed7541496c5a52b"
       }
@@ -27405,12 +27526,12 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 103,
+          "line": 102,
           "to": "method:admin/build/verify_live.py:Verify__Live.fetch"
         },
         {
           "kind": "external",
-          "line": 104,
+          "line": 103,
           "to": "response.json",
           "via": "response"
         }
@@ -27426,8 +27547,8 @@
       "name": "index",
       "signature": "index()",
       "source": {
-        "end": 107,
-        "line": 101,
+        "end": 106,
+        "line": 100,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "3c965acc66cb574f711726ba1e437751055a4b4681de85956c75472c5de91ce0"
       }
@@ -27455,13 +27576,13 @@
       "calls": [
         {
           "kind": "external",
-          "line": 256,
+          "line": 255,
           "to": "li.appendChild",
           "via": "li"
         },
         {
           "kind": "external",
-          "line": 256,
+          "line": 255,
           "to": "this.el",
           "via": "this"
         }
@@ -27477,8 +27598,8 @@
       "name": "note",
       "signature": "note(li, text)",
       "source": {
-        "end": 257,
-        "line": 255,
+        "end": 256,
+        "line": 254,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "47948b13c16e95b483d708a00c96459f8636aa45c383219c0aee582c8e649fc9"
       }
@@ -27561,7 +27682,7 @@
       "class": "class:components/reader-chat/reader-chat.js:ReaderChat",
       "decorators": [],
       "doc": "",
-      "fingerprint": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb",
+      "fingerprint": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173",
       "id": "method:components/reader-chat/reader-chat.js:ReaderChat.onReady",
       "kind": "method",
       "loc": 21,
@@ -27572,43 +27693,43 @@
         "end": 62,
         "line": 42,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "b0e05a551aa3e87eef5545939f89ec5a73aa83f5bd9a94de65540568b00579fb"
+        "sha256": "b8dff57157ca896a459c93aedc1a568417abae43172aa2862a3ab51f07375173"
       }
     },
     {
       "calls": [
         {
           "kind": "internal",
-          "line": 139,
+          "line": 138,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.index",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 140,
+          "line": 139,
           "to": "entries.find",
           "via": "entries"
         },
         {
           "kind": "external",
-          "line": 140,
+          "line": 139,
           "to": "path.replace",
           "via": "path"
         },
         {
           "kind": "internal",
-          "line": 142,
+          "line": 141,
           "to": "method:admin/build/verify_live.py:Verify__Live.fetch"
         },
         {
           "kind": "external",
-          "line": 143,
+          "line": 142,
           "to": "response.text",
           "via": "response"
         },
         {
           "kind": "external",
-          "line": 144,
+          "line": 143,
           "to": "text.slice",
           "via": "text"
         }
@@ -27624,8 +27745,8 @@
       "name": "openPage",
       "signature": "openPage(path)",
       "source": {
-        "end": 145,
-        "line": 138,
+        "end": 144,
+        "line": 137,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "60f383f1aaeabe65641dfbcf1038bdeb623614fd06340d2ece68aa8b743d2324"
       }
@@ -27634,18 +27755,18 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 148,
+          "line": 147,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.index",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 149,
+          "line": 148,
           "to": "method:components/reader-log/reader-log.js:readLog"
         },
         {
           "kind": "internal",
-          "line": 150,
+          "line": 149,
           "to": "method:components/reader-log/reader-log.js:pageState"
         }
       ],
@@ -27660,8 +27781,8 @@
       "name": "readNext",
       "signature": "readNext()",
       "source": {
-        "end": 152,
-        "line": 147,
+        "end": 151,
+        "line": 146,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "1a7701e88ef486d50db2e45abf81a29e6a51a5018dbffa820b980655274deadf"
       }
@@ -27670,49 +27791,49 @@
       "calls": [
         {
           "kind": "external",
-          "line": 260,
+          "line": 259,
           "to": "li.replaceChildren",
           "via": "li"
         },
         {
           "kind": "internal",
-          "line": 261,
+          "line": 260,
           "to": "method:review/tools/brief.py:Brief.split",
           "via": "text"
         },
         {
           "kind": "external",
-          "line": 262,
+          "line": 261,
           "to": "this.el",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 264,
+          "line": 263,
           "to": "p.appendChild",
           "via": "p"
         },
         {
           "kind": "external",
-          "line": 264,
+          "line": 263,
           "to": "part.replace",
           "via": "part"
         },
         {
           "kind": "external",
-          "line": 264,
+          "line": 263,
           "to": "….test",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 265,
+          "line": 264,
           "to": "document.createTextNode",
           "via": "document"
         },
         {
           "kind": "external",
-          "line": 267,
+          "line": 266,
           "to": "li.appendChild",
           "via": "li"
         }
@@ -27728,8 +27849,8 @@
       "name": "render",
       "signature": "render(li, text)",
       "source": {
-        "end": 269,
-        "line": 259,
+        "end": 268,
+        "line": 258,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "1df0706e3101cb66097c170977618edd9dc89a61a677e1f1ce4842d0a65bd477"
       }
@@ -27757,19 +27878,19 @@
       "calls": [
         {
           "kind": "external",
-          "line": 248,
+          "line": 247,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 249,
+          "line": 248,
           "to": "this.el",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 250,
+          "line": 249,
           "to": "ol.appendChild",
           "via": "ol"
         }
@@ -27785,8 +27906,8 @@
       "name": "say",
       "signature": "say(role, text)",
       "source": {
-        "end": 253,
-        "line": 247,
+        "end": 252,
+        "line": 246,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "643efc3b6cb4ba84c7f5cf8c6d214bf41f071fac0746a745ba63f7529433be78"
       }
@@ -27795,72 +27916,72 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 112,
+          "line": 111,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.index",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 113,
+          "line": 112,
           "to": "Set"
         },
         {
           "kind": "internal",
-          "line": 113,
+          "line": 112,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.tokens",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 116,
+          "line": 115,
           "to": "entry.headings.join",
           "via": "entry.headings"
         },
         {
           "kind": "internal",
-          "line": 119,
+          "line": 118,
           "to": "method:review/tools/brief.py:Brief.split",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 119,
+          "line": 118,
           "to": "text.toLowerCase",
           "via": "text"
         },
         {
           "kind": "external",
-          "line": 120,
+          "line": 119,
           "to": "Math.min",
           "via": "Math"
         },
         {
           "kind": "external",
-          "line": 122,
+          "line": 121,
           "to": "scored.push",
           "via": "scored"
         },
         {
           "kind": "external",
-          "line": 124,
+          "line": 123,
           "to": "scored.sort",
           "via": "scored"
         },
         {
           "kind": "internal",
-          "line": 125,
+          "line": 124,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.snippet",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 125,
+          "line": 124,
           "to": "scored.slice",
           "via": "scored"
         },
         {
           "kind": "external",
-          "line": 125,
+          "line": 124,
           "to": "….map",
           "via": "…"
         }
@@ -27876,8 +27997,8 @@
       "name": "search",
       "signature": "search(query)",
       "source": {
-        "end": 126,
-        "line": 111,
+        "end": 125,
+        "line": 110,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "30bd8cb86fde7cc8fb9ecb6f616bf3fc9cb3ac5f74452f963ffda52b0a0958f6"
       }
@@ -27886,37 +28007,37 @@
       "calls": [
         {
           "kind": "external",
-          "line": 130,
+          "line": 129,
           "to": "text.toLowerCase",
           "via": "text"
         },
         {
           "kind": "external",
-          "line": 132,
+          "line": 131,
           "to": "lower.indexOf",
           "via": "lower"
         },
         {
           "kind": "external",
-          "line": 133,
+          "line": 132,
           "to": "entry.description.slice",
           "via": "entry.description"
         },
         {
           "kind": "external",
-          "line": 134,
+          "line": 133,
           "to": "Math.max",
           "via": "Math"
         },
         {
           "kind": "external",
-          "line": 135,
+          "line": 134,
           "to": "text.slice",
           "via": "text"
         },
         {
           "kind": "external",
-          "line": 135,
+          "line": 134,
           "to": "….replace",
           "via": "…"
         }
@@ -27932,8 +28053,8 @@
       "name": "snippet",
       "signature": "snippet(entry, terms)",
       "source": {
-        "end": 136,
-        "line": 128,
+        "end": 135,
+        "line": 127,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "6be03ee0c0b5652698ce4665676c49c224fced328f17d8f07346515491d41e6a"
       }
@@ -27942,30 +28063,30 @@
       "calls": [
         {
           "kind": "external",
-          "line": 272,
+          "line": 271,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 273,
+          "line": 272,
           "to": "window.speechSynthesis.cancel",
           "via": "window.speechSynthesis"
         },
         {
           "kind": "external",
-          "line": 274,
+          "line": 273,
           "to": "SpeechSynthesisUtterance"
         },
         {
           "kind": "internal",
-          "line": 274,
+          "line": 273,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.speak",
           "via": "window.speechSynthesis"
         },
         {
           "kind": "external",
-          "line": 274,
+          "line": 273,
           "to": "text.slice",
           "via": "text"
         }
@@ -27981,8 +28102,8 @@
       "name": "speak",
       "signature": "speak(text)",
       "source": {
-        "end": 275,
-        "line": 271,
+        "end": 274,
+        "line": 270,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "0879061c541b20f8a6e649e8b1d683ef6cacd1c161a9efaa72ed08ba73bcb3bb"
       }
@@ -28017,13 +28138,13 @@
       "calls": [
         {
           "kind": "external",
-          "line": 170,
+          "line": 169,
           "to": "document.querySelector",
           "via": "document"
         },
         {
           "kind": "external",
-          "line": 171,
+          "line": 170,
           "to": "….join",
           "via": "…"
         }
@@ -28039,8 +28160,8 @@
       "name": "system",
       "signature": "system()",
       "source": {
-        "end": 175,
-        "line": 169,
+        "end": 174,
+        "line": 168,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "6ea6578a967d9362f4ed6bd8a9f844492908d06e448aeb44db1750d5a098a042"
       }
@@ -28085,7 +28206,7 @@
         },
         {
           "kind": "internal",
-          "line": 96,
+          "line": 95,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.storedKey",
           "via": "this"
         }
@@ -28093,61 +28214,61 @@
       "class": "class:components/reader-chat/reader-chat.js:ReaderChat",
       "decorators": [],
       "doc": "",
-      "fingerprint": "0ab5cd0ffd23fd42fdea735b34ff2646ebcd73e0ec3adb443eb188e750a0dde9",
+      "fingerprint": "a3b01d420b6a9b5281c5bcaaa80a357c05e27ad25926426e5ba897bc19ef4674",
       "id": "method:components/reader-chat/reader-chat.js:ReaderChat.tier",
       "kind": "method",
-      "loc": 14,
+      "loc": 13,
       "module": "module:components/reader-chat/reader-chat.js",
       "name": "tier",
       "signature": "tier()",
       "source": {
-        "end": 99,
+        "end": 98,
         "line": 86,
         "path": "components/reader-chat/reader-chat.js",
-        "sha256": "0ab5cd0ffd23fd42fdea735b34ff2646ebcd73e0ec3adb443eb188e750a0dde9"
+        "sha256": "a3b01d420b6a9b5281c5bcaaa80a357c05e27ad25926426e5ba897bc19ef4674"
       }
     },
     {
       "calls": [
         {
           "kind": "internal",
-          "line": 194,
+          "line": 193,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.search",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 195,
+          "line": 194,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.say",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 196,
+          "line": 195,
           "to": "this.el",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 199,
+          "line": 198,
           "to": "item.appendChild",
           "via": "item"
         },
         {
           "kind": "external",
-          "line": 201,
+          "line": 200,
           "to": "ol.appendChild",
           "via": "ol"
         },
         {
           "kind": "external",
-          "line": 203,
+          "line": 202,
           "to": "li.appendChild",
           "via": "li"
         },
         {
           "kind": "internal",
-          "line": 204,
+          "line": 203,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.speak",
           "via": "this"
         }
@@ -28163,8 +28284,8 @@
       "name": "tier0",
       "signature": "tier0(text)",
       "source": {
-        "end": 205,
-        "line": 193,
+        "end": 204,
+        "line": 192,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fcf532143840f2952061f3c3aa6caacbdbdaac252df0ed078e7723b7c6a9c69d"
       }
@@ -28173,108 +28294,108 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 208,
+          "line": 207,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.system",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 208,
+          "line": 207,
           "to": "this._messages.push",
           "via": "this._messages"
         },
         {
           "kind": "internal",
-          "line": 210,
+          "line": 209,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.say",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 212,
+          "line": 211,
           "to": "method:admin/build/verify_live.py:Verify__Live.fetch"
         },
         {
           "kind": "external",
-          "line": 215,
+          "line": 214,
           "to": "JSON.stringify",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 218,
+          "line": 217,
           "to": "response.text",
           "via": "response"
         },
         {
           "kind": "external",
-          "line": 219,
+          "line": 218,
           "to": "thinking.remove",
           "via": "thinking"
         },
         {
           "kind": "external",
-          "line": 220,
+          "line": 219,
           "to": "detail.slice",
           "via": "detail"
         },
         {
           "kind": "external",
-          "line": 221,
+          "line": 220,
           "to": "this._messages.pop",
           "via": "this._messages"
         },
         {
           "kind": "external",
-          "line": 224,
+          "line": 223,
           "to": "response.json",
           "via": "response"
         },
         {
           "kind": "external",
-          "line": 230,
+          "line": 229,
           "to": "JSON.parse",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 231,
+          "line": 230,
           "to": "Object.values",
           "via": "Object"
         },
         {
           "kind": "internal",
-          "line": 231,
+          "line": 230,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.note",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 231,
+          "line": 230,
           "to": "….join",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 231,
+          "line": 230,
           "to": "….slice",
           "via": "…"
         },
         {
           "kind": "internal",
-          "line": 232,
+          "line": 231,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.tool",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 239,
+          "line": 238,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.render",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 240,
+          "line": 239,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.speak",
           "via": "this"
         }
@@ -28290,8 +28411,8 @@
       "name": "tier1",
       "signature": "tier1(text)",
       "source": {
-        "end": 245,
-        "line": 207,
+        "end": 244,
+        "line": 206,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "fd7fa4215d78fd5e71403bfe2e284829bb8bf92076f7d877f9ad157f06f1c342"
       }
@@ -28300,19 +28421,19 @@
       "calls": [
         {
           "kind": "external",
-          "line": 109,
+          "line": 108,
           "to": "text.toLowerCase",
           "via": "text"
         },
         {
           "kind": "external",
-          "line": 109,
+          "line": 108,
           "to": "….filter",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 109,
+          "line": 108,
           "to": "….match",
           "via": "…"
         }
@@ -28328,8 +28449,8 @@
       "name": "tokens",
       "signature": "tokens(text)",
       "source": {
-        "end": 109,
-        "line": 109,
+        "end": 108,
+        "line": 108,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "63b8e3226ef51030281c88bb4dfb00f5c71af3c486ce2c6b57e6b49a39b29ec6"
       }
@@ -28338,54 +28459,54 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 160,
+          "line": 159,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.search",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 161,
+          "line": 160,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.openPage",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 162,
+          "line": 161,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.index",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 162,
+          "line": 161,
           "to": "….map",
           "via": "…"
         },
         {
           "kind": "internal",
-          "line": 163,
+          "line": 162,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.readNext",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 164,
+          "line": 163,
           "to": "method:components/reader-log/reader-log.js:readLog"
         },
         {
           "kind": "external",
-          "line": 164,
+          "line": 163,
           "to": "….events.filter",
           "via": "….events"
         },
         {
           "kind": "external",
-          "line": 164,
+          "line": 163,
           "to": "….slice",
           "via": "…"
         },
         {
           "kind": "internal",
-          "line": 165,
+          "line": 164,
           "to": "method:components/reader-chat/reader-chat.js:ReaderChat.fileFeedback",
           "via": "this"
         }
@@ -28401,8 +28522,8 @@
       "name": "tool",
       "signature": "tool(name, args)",
       "source": {
-        "end": 167,
-        "line": 159,
+        "end": 166,
+        "line": 158,
         "path": "components/reader-chat/reader-chat.js",
         "sha256": "84a523ffa5e98857903cbfc0a83a575fa36164b6bafd997112a41ebb99a48259"
       }
@@ -28461,19 +28582,19 @@
       "calls": [
         {
           "kind": "external",
-          "line": 131,
+          "line": 137,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 132,
+          "line": 138,
           "to": "note.value.trim",
           "via": "note.value"
         },
         {
           "kind": "internal",
-          "line": 134,
+          "line": 140,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.append",
           "via": "this"
         }
@@ -28489,8 +28610,8 @@
       "name": "addNote",
       "signature": "addNote()",
       "source": {
-        "end": 136,
-        "line": 130,
+        "end": 142,
+        "line": 136,
         "path": "components/reader-log/reader-log.js",
         "sha256": "170514c8161e5628255aba3a8e276412b539ecfc15731385d4b8dfd0eb83f9da"
       }
@@ -28499,71 +28620,71 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 113,
+          "line": 119,
           "to": "method:components/reader-log/reader-log.js:readLog"
         },
         {
           "kind": "external",
-          "line": 114,
+          "line": 120,
           "to": "Date"
         },
         {
           "kind": "external",
-          "line": 114,
+          "line": 120,
           "to": "Math.random",
           "via": "Math"
         },
         {
           "kind": "internal",
-          "line": 114,
+          "line": 120,
           "to": "method:components/proto-base/proto-base.js:now",
           "via": "Date"
         },
         {
           "kind": "external",
-          "line": 114,
+          "line": 120,
           "to": "….slice",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 114,
+          "line": 120,
           "to": "….toISOString",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 114,
+          "line": 120,
           "to": "….toString",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 116,
+          "line": 122,
           "to": "log.events.push",
           "via": "log.events"
         },
         {
           "kind": "external",
-          "line": 117,
+          "line": 123,
           "to": "JSON.stringify",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 117,
+          "line": 123,
           "to": "localStorage.setItem",
           "via": "localStorage"
         },
         {
           "kind": "internal",
-          "line": 117,
+          "line": 123,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 118,
+          "line": 124,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
           "via": "this"
         }
@@ -28579,8 +28700,8 @@
       "name": "append",
       "signature": "append(kind, extra)",
       "source": {
-        "end": 120,
-        "line": 112,
+        "end": 126,
+        "line": 118,
         "path": "components/reader-log/reader-log.js",
         "sha256": "2553ff9822702c0b98ef6e0beacfd596278ea1a364cd17fea18f1665e1dd9929"
       }
@@ -28589,48 +28710,54 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 172,
+          "line": 208,
           "to": "method:admin/build/verify_live.py:Verify__Live.fetch"
         },
         {
           "kind": "external",
-          "line": 173,
+          "line": 209,
           "to": "response.json",
           "via": "response"
         },
         {
           "kind": "external",
-          "line": 174,
+          "line": 210,
           "to": "Object.values",
           "via": "Object"
         },
         {
           "kind": "external",
-          "line": 176,
+          "line": 212,
           "to": "….find",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 177,
+          "line": 213,
           "to": "inbox.endpoint.replace",
           "via": "inbox.endpoint"
         },
         {
           "kind": "internal",
-          "line": 177,
+          "line": 213,
           "to": "method:components/sg-base/sg-base.js:SgBase.mayConnect",
           "via": "SgBase"
         },
         {
           "kind": "internal",
-          "line": 179,
+          "line": 216,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 191,
+          "line": 219,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.heldToken",
+          "via": "this"
+        },
+        {
+          "kind": "internal",
+          "line": 228,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
           "via": "this"
         }
@@ -28638,59 +28765,59 @@
       "class": "class:components/reader-log/reader-log.js:ReaderLog",
       "decorators": [],
       "doc": "where Send goes, read from the contact file; absent or pending means Copy instead",
-      "fingerprint": "9e41748d98f851f611cce4413a9792c8f112d5e76590500131f57a96fcda85b1",
+      "fingerprint": "542dfcc1cd248830f4d68a77027e483fcf0041c0eb72856e999d8d9929222244",
       "id": "method:components/reader-log/reader-log.js:ReaderLog.contact",
       "kind": "method",
-      "loc": 23,
+      "loc": 24,
       "module": "module:components/reader-log/reader-log.js",
       "name": "contact",
       "signature": "contact()",
       "source": {
-        "end": 192,
-        "line": 170,
+        "end": 229,
+        "line": 206,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "9e41748d98f851f611cce4413a9792c8f112d5e76590500131f57a96fcda85b1"
+        "sha256": "542dfcc1cd248830f4d68a77027e483fcf0041c0eb72856e999d8d9929222244"
       }
     },
     {
       "calls": [
         {
           "kind": "internal",
-          "line": 224,
+          "line": 262,
           "to": "method:components/reader-log/reader-log.js:readLog"
         },
         {
           "kind": "internal",
-          "line": 224,
+          "line": 262,
           "to": "method:components/reader-log/reader-log.js:unsentEvents"
         },
         {
           "kind": "internal",
-          "line": 225,
+          "line": 263,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.markdown",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 225,
+          "line": 263,
           "to": "….events.filter",
           "via": "….events"
         },
         {
           "kind": "external",
-          "line": 227,
+          "line": 265,
           "to": "navigator.clipboard.writeText",
           "via": "navigator.clipboard"
         },
         {
           "kind": "internal",
-          "line": 228,
+          "line": 266,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 230,
+          "line": 268,
           "to": "this.$",
           "via": "this"
         }
@@ -28706,10 +28833,80 @@
       "name": "copy",
       "signature": "copy()",
       "source": {
-        "end": 235,
-        "line": 223,
+        "end": 273,
+        "line": 261,
         "path": "components/reader-log/reader-log.js",
         "sha256": "51d6fb7ddd96e941f4408ea57b0d2e5a8821131bb1bf9b4415f4c96e6e42f1df"
+      }
+    },
+    {
+      "calls": [
+        {
+          "kind": "external",
+          "line": 198,
+          "to": "localStorage.removeItem",
+          "via": "localStorage"
+        },
+        {
+          "kind": "external",
+          "line": 198,
+          "to": "sessionStorage.removeItem",
+          "via": "sessionStorage"
+        },
+        {
+          "kind": "internal",
+          "line": 200,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
+          "via": "this"
+        },
+        {
+          "kind": "internal",
+          "line": 201,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
+          "via": "this"
+        }
+      ],
+      "class": "class:components/reader-log/reader-log.js:ReaderLog",
+      "decorators": [],
+      "doc": "",
+      "fingerprint": "f094401eb9d99d994e356ba5890a3fb3b63fa13a4f2c27acfa64c61e96f0b6e9",
+      "id": "method:components/reader-log/reader-log.js:ReaderLog.forgetToken",
+      "kind": "method",
+      "loc": 6,
+      "module": "module:components/reader-log/reader-log.js",
+      "name": "forgetToken",
+      "signature": "forgetToken()",
+      "source": {
+        "end": 202,
+        "line": 197,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "f094401eb9d99d994e356ba5890a3fb3b63fa13a4f2c27acfa64c61e96f0b6e9"
+      }
+    },
+    {
+      "calls": [
+        {
+          "kind": "internal",
+          "line": 204,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.token",
+          "via": "this"
+        }
+      ],
+      "class": "class:components/reader-log/reader-log.js:ReaderLog",
+      "decorators": [],
+      "doc": "",
+      "fingerprint": "ee112fd2aec3d5056c5daee658bb779cd458e324008a785fb14bca526fd5e289",
+      "id": "method:components/reader-log/reader-log.js:ReaderLog.heldToken",
+      "kind": "method",
+      "loc": 1,
+      "module": "module:components/reader-log/reader-log.js",
+      "name": "heldToken",
+      "signature": "heldToken()",
+      "source": {
+        "end": 204,
+        "line": 204,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "ee112fd2aec3d5056c5daee658bb779cd458e324008a785fb14bca526fd5e289"
       }
     },
     {
@@ -28725,8 +28922,8 @@
       "name": "jsUrl",
       "signature": "jsUrl()",
       "source": {
-        "end": 83,
-        "line": 83,
+        "end": 86,
+        "line": 86,
         "path": "components/reader-log/reader-log.js",
         "sha256": "6e26af7d3fb6655ae05b68d8e465c35313872a2ed708967f3a6c93697e60698e"
       }
@@ -28735,37 +28932,37 @@
       "calls": [
         {
           "kind": "external",
-          "line": 155,
+          "line": 164,
           "to": "ol.replaceChildren",
           "via": "ol"
         },
         {
           "kind": "external",
-          "line": 156,
+          "line": 165,
           "to": "ol.appendChild",
           "via": "ol"
         },
         {
           "kind": "external",
-          "line": 156,
+          "line": 165,
           "to": "this.el",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 159,
+          "line": 168,
           "to": "event.t.slice",
           "via": "event.t"
         },
         {
           "kind": "external",
-          "line": 159,
+          "line": 168,
           "to": "li.appendChild",
           "via": "li"
         },
         {
           "kind": "external",
-          "line": 159,
+          "line": 168,
           "to": "….replace",
           "via": "…"
         }
@@ -28781,8 +28978,8 @@
       "name": "list",
       "signature": "list(ol, events, samePage)",
       "source": {
-        "end": 166,
-        "line": 154,
+        "end": 175,
+        "line": 163,
         "path": "components/reader-log/reader-log.js",
         "sha256": "108d2e80b97fc79277e3c5900af8a16de0e08cf484f21984b70b4a25f6d033f7"
       }
@@ -28791,17 +28988,17 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 123,
+          "line": 129,
           "to": "method:components/reader-log/reader-log.js:pageState"
         },
         {
           "kind": "internal",
-          "line": 123,
+          "line": 129,
           "to": "method:components/reader-log/reader-log.js:readLog"
         },
         {
           "kind": "internal",
-          "line": 125,
+          "line": 131,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.append",
           "via": "this"
         }
@@ -28817,8 +29014,8 @@
       "name": "mark",
       "signature": "mark(name)",
       "source": {
-        "end": 128,
-        "line": 122,
+        "end": 134,
+        "line": 128,
         "path": "components/reader-log/reader-log.js",
         "sha256": "8b58bd55fee2a1cb513b3b096fdd9eaadac01fa6770f656465de4b4085a0fda2"
       }
@@ -28827,48 +29024,48 @@
       "calls": [
         {
           "kind": "external",
-          "line": 217,
+          "line": 255,
           "to": "Date"
         },
         {
           "kind": "internal",
-          "line": 217,
+          "line": 255,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.message",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 217,
+          "line": 255,
           "to": "….slice",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 217,
+          "line": 255,
           "to": "….toISOString",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 218,
+          "line": 256,
           "to": "event.t.slice",
           "via": "event.t"
         },
         {
           "kind": "external",
-          "line": 218,
+          "line": 256,
           "to": "lines.push",
           "via": "lines"
         },
         {
           "kind": "external",
-          "line": 219,
+          "line": 257,
           "to": "JSON.stringify",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 220,
+          "line": 258,
           "to": "lines.join",
           "via": "lines"
         }
@@ -28884,8 +29081,8 @@
       "name": "markdown",
       "signature": "markdown(events)",
       "source": {
-        "end": 221,
-        "line": 216,
+        "end": 259,
+        "line": 254,
         "path": "components/reader-log/reader-log.js",
         "sha256": "c2ce7adff54fb69fdd48bf574a13911efa9b1ab520e5bbc0d68b5fdcb07774aa"
       }
@@ -28894,89 +29091,89 @@
       "calls": [
         {
           "kind": "external",
-          "line": 238,
+          "line": 276,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 239,
+          "line": 277,
           "to": "raw.match",
           "via": "raw"
         },
         {
           "kind": "external",
-          "line": 241,
+          "line": 279,
           "to": "JSON.parse",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 242,
+          "line": 280,
           "to": "Array.isArray",
           "via": "Array"
         },
         {
           "kind": "internal",
-          "line": 243,
+          "line": 281,
           "to": "method:components/reader-log/reader-log.js:readLog"
         },
         {
           "kind": "external",
-          "line": 244,
+          "line": 282,
           "to": "Set"
         },
         {
           "kind": "external",
-          "line": 244,
+          "line": 282,
           "to": "log.events.map",
           "via": "log.events"
         },
         {
           "kind": "external",
-          "line": 246,
+          "line": 284,
           "to": "known.has",
           "via": "known"
         },
         {
           "kind": "external",
-          "line": 246,
+          "line": 284,
           "to": "log.events.push",
           "via": "log.events"
         },
         {
           "kind": "external",
-          "line": 247,
+          "line": 285,
           "to": "log.events.sort",
           "via": "log.events"
         },
         {
           "kind": "external",
-          "line": 247,
+          "line": 285,
           "to": "….localeCompare",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 248,
+          "line": 286,
           "to": "JSON.stringify",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 248,
+          "line": 286,
           "to": "localStorage.setItem",
           "via": "localStorage"
         },
         {
           "kind": "internal",
-          "line": 250,
+          "line": 288,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 251,
+          "line": 289,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
           "via": "this"
         }
@@ -28992,8 +29189,8 @@
       "name": "merge",
       "signature": "merge()",
       "source": {
-        "end": 255,
-        "line": 237,
+        "end": 293,
+        "line": 275,
         "path": "components/reader-log/reader-log.js",
         "sha256": "a9b69571d5bf2d2a586c7d96ecb46fe31903058c3ceabf4e23b4ff8276610595"
       }
@@ -29002,18 +29199,18 @@
       "calls": [
         {
           "kind": "external",
-          "line": 195,
+          "line": 232,
           "to": "Date"
         },
         {
           "kind": "external",
-          "line": 195,
+          "line": 232,
           "to": "….toISOString",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 196,
+          "line": 233,
           "to": "document.querySelector",
           "via": "document"
         }
@@ -29029,8 +29226,8 @@
       "name": "message",
       "signature": "message(events)",
       "source": {
-        "end": 197,
-        "line": 194,
+        "end": 234,
+        "line": 231,
         "path": "components/reader-log/reader-log.js",
         "sha256": "5808cfd27b3ae17286de994d25fa7075aa3827d79b93475c1df01e0011f21839"
       }
@@ -29039,114 +29236,138 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 89,
+          "line": 92,
           "to": "method:review/tools/brief.py:Brief.split",
           "via": "document.title"
         },
         {
           "kind": "external",
-          "line": 90,
+          "line": 93,
           "to": "document.querySelector",
           "via": "document"
         },
         {
           "kind": "internal",
-          "line": 90,
+          "line": 93,
           "to": "method:components/reader-log/reader-log.js:textHash"
         },
         {
           "kind": "external",
-          "line": 91,
+          "line": 94,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 93,
+          "line": 96,
           "to": "….addEventListener",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 94,
+          "line": 97,
           "to": "event.target.closest",
           "via": "event.target"
         },
         {
           "kind": "internal",
-          "line": 95,
+          "line": 98,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.mark",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 97,
+          "line": 100,
           "to": "event.preventDefault",
           "via": "event"
         },
         {
           "kind": "internal",
-          "line": 97,
+          "line": 100,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.addNote",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 98,
+          "line": 101,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.send",
           "via": "this"
         },
         {
+          "kind": "external",
+          "line": 102,
+          "to": "….setAttribute",
+          "via": "…"
+        },
+        {
           "kind": "internal",
-          "line": 99,
+          "line": 103,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.useToken",
+          "via": "this"
+        },
+        {
+          "kind": "internal",
+          "line": 104,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.forgetToken",
+          "via": "this"
+        },
+        {
+          "kind": "internal",
+          "line": 105,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.copy",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 101,
+          "line": 107,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.merge",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 103,
+          "line": 109,
           "to": "method:components/sg-base/sg-base.js:SgBase.speechRecognition",
           "via": "SgBase"
         },
         {
           "kind": "internal",
-          "line": 105,
+          "line": 111,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
+          "via": "this"
+        },
+        {
+          "kind": "internal",
+          "line": 111,
           "to": "method:components/sg-base/sg-base.js:SgBase.dictate",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 105,
+          "line": 111,
           "to": "mic.addEventListener",
           "via": "mic"
         },
         {
           "kind": "internal",
-          "line": 107,
+          "line": 113,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.append",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 107,
+          "line": 113,
           "to": "this.on",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 108,
+          "line": 114,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 109,
+          "line": 115,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.contact",
           "via": "this"
         }
@@ -29154,93 +29375,104 @@
       "class": "class:components/reader-log/reader-log.js:ReaderLog",
       "decorators": [],
       "doc": "",
-      "fingerprint": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9",
+      "fingerprint": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22",
       "id": "method:components/reader-log/reader-log.js:ReaderLog.onReady",
       "kind": "method",
-      "loc": 24,
+      "loc": 27,
       "module": "module:components/reader-log/reader-log.js",
       "name": "onReady",
       "signature": "onReady()",
       "source": {
-        "end": 110,
-        "line": 87,
+        "end": 116,
+        "line": 90,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "f696282610d86c630c30283caf500c66d8ade3b3e86273934e6805644c92f5a9"
+        "sha256": "3c8d434d7d1385c7b3ba8fb7d93368e9045b5cbefb032622ac255ce5e8ceeb22"
       }
     },
     {
       "calls": [
         {
           "kind": "internal",
-          "line": 139,
+          "line": 145,
           "to": "method:components/reader-log/reader-log.js:readLog"
         },
         {
           "kind": "internal",
-          "line": 140,
+          "line": 146,
           "to": "method:components/reader-log/reader-log.js:pageState"
         },
         {
           "kind": "external",
-          "line": 142,
+          "line": 148,
           "to": "button.setAttribute",
           "via": "button"
         },
         {
           "kind": "external",
-          "line": 142,
+          "line": 148,
           "to": "this.$$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 143,
+          "line": 149,
           "to": "log.events.filter",
           "via": "log.events"
         },
         {
           "kind": "internal",
-          "line": 144,
+          "line": 150,
           "to": "method:components/reader-log/reader-log.js:unsentEvents"
         },
         {
           "kind": "external",
-          "line": 145,
+          "line": 151,
           "to": "String"
         },
         {
           "kind": "external",
-          "line": 145,
+          "line": 151,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 148,
+          "line": 154,
           "to": "here.slice",
           "via": "here"
         },
         {
           "kind": "internal",
-          "line": 148,
+          "line": 154,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.list",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 148,
+          "line": 154,
           "to": "….reverse",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 149,
+          "line": 155,
           "to": "….slice",
           "via": "…"
         },
         {
+          "kind": "internal",
+          "line": 156,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.heldToken",
+          "via": "this"
+        },
+        {
           "kind": "external",
-          "line": 151,
+          "line": 157,
+          "to": "Boolean"
+        },
+        {
+          "kind": "external",
+          "line": 160,
           "to": "this.emit",
           "via": "this"
         }
@@ -29248,18 +29480,18 @@
       "class": "class:components/reader-log/reader-log.js:ReaderLog",
       "decorators": [],
       "doc": "",
-      "fingerprint": "a59cf7f0048b38944b126cecc9194b02717e7a17e6190c546b90f7620029de94",
+      "fingerprint": "264a196f7e77cf693a3724b65976e4b80bf14f007a8cf5bbd3e68b1de12accc2",
       "id": "method:components/reader-log/reader-log.js:ReaderLog.render",
       "kind": "method",
-      "loc": 15,
+      "loc": 18,
       "module": "module:components/reader-log/reader-log.js",
       "name": "render",
       "signature": "render()",
       "source": {
-        "end": 152,
-        "line": 138,
+        "end": 161,
+        "line": 144,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "a59cf7f0048b38944b126cecc9194b02717e7a17e6190c546b90f7620029de94"
+        "sha256": "264a196f7e77cf693a3724b65976e4b80bf14f007a8cf5bbd3e68b1de12accc2"
       }
     },
     {
@@ -29275,8 +29507,8 @@
       "name": "resourceName",
       "signature": "resourceName()",
       "source": {
-        "end": 85,
-        "line": 85,
+        "end": 88,
+        "line": 88,
         "path": "components/reader-log/reader-log.js",
         "sha256": "c362b3f7890bfa1e1e0467800908c7e0aee0fe81346d18c65741bf9ac0ecc32b"
       }
@@ -29285,56 +29517,62 @@
       "calls": [
         {
           "kind": "internal",
-          "line": 201,
+          "line": 237,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.heldToken",
+          "via": "this"
+        },
+        {
+          "kind": "internal",
+          "line": 239,
           "to": "method:components/reader-log/reader-log.js:readLog"
         },
         {
           "kind": "internal",
-          "line": 201,
+          "line": 239,
           "to": "method:components/reader-log/reader-log.js:unsentEvents"
         },
         {
           "kind": "internal",
-          "line": 203,
+          "line": 241,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 205,
+          "line": 243,
           "to": "JSON.stringify",
           "via": "JSON"
         },
         {
           "kind": "internal",
-          "line": 205,
+          "line": 243,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.message",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 205,
+          "line": 243,
           "to": "method:components/reader-log/reader-log.js:seal"
         },
         {
           "kind": "internal",
-          "line": 206,
+          "line": 244,
           "to": "method:admin/build/verify_live.py:Verify__Live.fetch"
         },
         {
           "kind": "external",
-          "line": 208,
+          "line": 246,
           "to": "Error"
         },
         {
           "kind": "external",
-          "line": 209,
+          "line": 247,
           "to": "events.map",
           "via": "events"
         },
         {
           "kind": "internal",
-          "line": 209,
+          "line": 247,
           "to": "method:components/reader-log/reader-log.js:ReaderLog.append",
           "via": "this"
         }
@@ -29342,25 +29580,25 @@
       "class": "class:components/reader-log/reader-log.js:ReaderLog",
       "decorators": [],
       "doc": "",
-      "fingerprint": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a",
+      "fingerprint": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059",
       "id": "method:components/reader-log/reader-log.js:ReaderLog.send",
       "kind": "method",
-      "loc": 16,
+      "loc": 17,
       "module": "module:components/reader-log/reader-log.js",
       "name": "send",
       "signature": "send()",
       "source": {
-        "end": 214,
-        "line": 199,
+        "end": 252,
+        "line": 236,
         "path": "components/reader-log/reader-log.js",
-        "sha256": "d81bc9b6bc00bc69e633de403b00beae92041aef0304a3a354a099020e83cb5a"
+        "sha256": "f7918d813c0d4830ea9a704d2e8f9514bd1938bb0e1a50f8b11500bb76f54059"
       }
     },
     {
       "calls": [
         {
           "kind": "external",
-          "line": 168,
+          "line": 177,
           "to": "this.$",
           "via": "this"
         }
@@ -29376,10 +29614,116 @@
       "name": "status",
       "signature": "status(text)",
       "source": {
-        "end": 168,
-        "line": 168,
+        "end": 177,
+        "line": 177,
         "path": "components/reader-log/reader-log.js",
         "sha256": "4b849c2cade7d58f294db750225088ee146cba7a02200a1c1d969fe3cc8b8af2"
+      }
+    },
+    {
+      "calls": [
+        {
+          "kind": "external",
+          "line": 180,
+          "to": "localStorage.getItem",
+          "via": "localStorage"
+        },
+        {
+          "kind": "external",
+          "line": 180,
+          "to": "sessionStorage.getItem",
+          "via": "sessionStorage"
+        }
+      ],
+      "class": "class:components/reader-log/reader-log.js:ReaderLog",
+      "decorators": [],
+      "doc": "the lane's append token: this tab's, else this device's, else none",
+      "fingerprint": "b4940252aafc26b5848f99bb3ee162334fc0e1b7e5ca8b7bbfd565069d8ec197",
+      "id": "method:components/reader-log/reader-log.js:ReaderLog.token",
+      "kind": "method",
+      "loc": 3,
+      "module": "module:components/reader-log/reader-log.js",
+      "name": "token",
+      "signature": "token()",
+      "source": {
+        "end": 181,
+        "line": 179,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "b4940252aafc26b5848f99bb3ee162334fc0e1b7e5ca8b7bbfd565069d8ec197"
+      }
+    },
+    {
+      "calls": [
+        {
+          "kind": "external",
+          "line": 184,
+          "to": "this.$",
+          "via": "this"
+        },
+        {
+          "kind": "external",
+          "line": 184,
+          "to": "….value.trim",
+          "via": "….value"
+        },
+        {
+          "kind": "internal",
+          "line": 186,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.status",
+          "via": "this"
+        },
+        {
+          "kind": "external",
+          "line": 186,
+          "to": "….test",
+          "via": "…"
+        },
+        {
+          "kind": "external",
+          "line": 188,
+          "to": "localStorage.setItem",
+          "via": "localStorage"
+        },
+        {
+          "kind": "external",
+          "line": 188,
+          "to": "sessionStorage.removeItem",
+          "via": "sessionStorage"
+        },
+        {
+          "kind": "external",
+          "line": 189,
+          "to": "localStorage.removeItem",
+          "via": "localStorage"
+        },
+        {
+          "kind": "external",
+          "line": 189,
+          "to": "sessionStorage.setItem",
+          "via": "sessionStorage"
+        },
+        {
+          "kind": "internal",
+          "line": 194,
+          "to": "method:components/reader-log/reader-log.js:ReaderLog.render",
+          "via": "this"
+        }
+      ],
+      "class": "class:components/reader-log/reader-log.js:ReaderLog",
+      "decorators": [],
+      "doc": "",
+      "fingerprint": "42691b5d971607d0d62448b6289464f2dbf38fdea2b6d7ddde526a91fe7a6151",
+      "id": "method:components/reader-log/reader-log.js:ReaderLog.useToken",
+      "kind": "method",
+      "loc": 13,
+      "module": "module:components/reader-log/reader-log.js",
+      "name": "useToken",
+      "signature": "useToken()",
+      "source": {
+        "end": 195,
+        "line": 183,
+        "path": "components/reader-log/reader-log.js",
+        "sha256": "42691b5d971607d0d62448b6289464f2dbf38fdea2b6d7ddde526a91fe7a6151"
       }
     },
     {
@@ -29395,8 +29739,8 @@
       "name": "pageState",
       "signature": "pageState(events, page)",
       "source": {
-        "end": 46,
-        "line": 34,
+        "end": 49,
+        "line": 37,
         "path": "components/reader-log/reader-log.js",
         "sha256": "f597a555b2843109859a5a7dfbb0ecef70d5b835983689bfd6dee0144d7da004"
       }
@@ -29405,30 +29749,30 @@
       "calls": [
         {
           "kind": "external",
-          "line": 61,
+          "line": 64,
           "to": "pem.replace",
           "via": "pem"
         },
         {
           "kind": "external",
-          "line": 61,
+          "line": 64,
           "to": "….replace",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 62,
+          "line": 65,
           "to": "Uint8Array.from",
           "via": "Uint8Array"
         },
         {
           "kind": "external",
-          "line": 62,
+          "line": 65,
           "to": "atob"
         },
         {
           "kind": "external",
-          "line": 62,
+          "line": 65,
           "to": "c.charCodeAt",
           "via": "c"
         }
@@ -29444,8 +29788,8 @@
       "name": "pemToDer",
       "signature": "pemToDer(pem)",
       "source": {
-        "end": 63,
-        "line": 60,
+        "end": 66,
+        "line": 63,
         "path": "components/reader-log/reader-log.js",
         "sha256": "43c362dc4f37dda59be142e599dff8360e86af7b7c855e47059b6c076a50833f"
       }
@@ -29454,19 +29798,19 @@
       "calls": [
         {
           "kind": "external",
-          "line": 28,
+          "line": 31,
           "to": "JSON.parse",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 28,
+          "line": 31,
           "to": "localStorage.getItem",
           "via": "localStorage"
         },
         {
           "kind": "external",
-          "line": 29,
+          "line": 32,
           "to": "Array.isArray",
           "via": "Array"
         }
@@ -29482,8 +29826,8 @@
       "name": "readLog",
       "signature": "readLog()",
       "source": {
-        "end": 32,
-        "line": 26,
+        "end": 35,
+        "line": 29,
         "path": "components/reader-log/reader-log.js",
         "sha256": "df7978971a01660db8930a6e35dc77626c4b3a2c0e17d5efc485917ce9cb49e3"
       }
@@ -29492,69 +29836,69 @@
       "calls": [
         {
           "kind": "external",
-          "line": 72,
+          "line": 75,
           "to": "crypto.subtle.importKey",
           "via": "crypto.subtle"
         },
         {
           "kind": "internal",
-          "line": 72,
+          "line": 75,
           "to": "method:components/reader-log/reader-log.js:pemToDer"
         },
         {
           "kind": "external",
-          "line": 73,
+          "line": 76,
           "to": "crypto.subtle.generateKey",
           "via": "crypto.subtle"
         },
         {
           "kind": "external",
-          "line": 74,
+          "line": 77,
           "to": "Uint8Array"
         },
         {
           "kind": "external",
-          "line": 74,
+          "line": 77,
           "to": "crypto.getRandomValues",
           "via": "crypto"
         },
         {
           "kind": "external",
-          "line": 75,
+          "line": 78,
           "to": "TextEncoder"
         },
         {
           "kind": "external",
-          "line": 75,
+          "line": 78,
           "to": "crypto.subtle.encrypt",
           "via": "crypto.subtle"
         },
         {
           "kind": "external",
-          "line": 75,
+          "line": 78,
           "to": "….encode",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 76,
+          "line": 79,
           "to": "crypto.subtle.exportKey",
           "via": "crypto.subtle"
         },
         {
           "kind": "external",
-          "line": 78,
+          "line": 81,
           "to": "JSON.stringify",
           "via": "JSON"
         },
         {
           "kind": "internal",
-          "line": 78,
+          "line": 81,
           "to": "method:components/reader-log/reader-log.js:toBase64"
         },
         {
           "kind": "external",
-          "line": 79,
+          "line": 82,
           "to": "btoa"
         }
       ],
@@ -29569,8 +29913,8 @@
       "name": "seal",
       "signature": "seal(recipientPem, plaintext)",
       "source": {
-        "end": 80,
-        "line": 71,
+        "end": 83,
+        "line": 74,
         "path": "components/reader-log/reader-log.js",
         "sha256": "b6df1ba14f6b037b63985ac6d5dc92ddc5dbd2dfff0bb9ec2b849b2c79425152"
       }
@@ -29579,65 +29923,65 @@
       "calls": [
         {
           "kind": "external",
-          "line": 55,
+          "line": 58,
           "to": "TextEncoder"
         },
         {
           "kind": "external",
-          "line": 55,
+          "line": 58,
           "to": "text.replace",
           "via": "text"
         },
         {
           "kind": "external",
-          "line": 55,
+          "line": 58,
           "to": "….encode",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 55,
+          "line": 58,
           "to": "….trim",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 56,
+          "line": 59,
           "to": "crypto.subtle.digest",
           "via": "crypto.subtle"
         },
         {
           "kind": "external",
-          "line": 57,
+          "line": 60,
           "to": "Uint8Array"
         },
         {
           "kind": "external",
-          "line": 57,
+          "line": 60,
           "to": "b.toString",
           "via": "b"
         },
         {
           "kind": "external",
-          "line": 57,
+          "line": 60,
           "to": "….join",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 57,
+          "line": 60,
           "to": "….map",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 57,
+          "line": 60,
           "to": "….padStart",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 57,
+          "line": 60,
           "to": "….slice",
           "via": "…"
         }
@@ -29653,8 +29997,8 @@
       "name": "textHash",
       "signature": "textHash(text)",
       "source": {
-        "end": 58,
-        "line": 54,
+        "end": 61,
+        "line": 57,
         "path": "components/reader-log/reader-log.js",
         "sha256": "5c78ade198ed9d68c1d8cd5456602ef622a40e8870a6ddd19cf47ca491a1bf61"
       }
@@ -29663,18 +30007,18 @@
       "calls": [
         {
           "kind": "external",
-          "line": 67,
+          "line": 70,
           "to": "String.fromCharCode",
           "via": "String"
         },
         {
           "kind": "external",
-          "line": 67,
+          "line": 70,
           "to": "Uint8Array"
         },
         {
           "kind": "external",
-          "line": 68,
+          "line": 71,
           "to": "btoa"
         }
       ],
@@ -29689,8 +30033,8 @@
       "name": "toBase64",
       "signature": "toBase64(bytes)",
       "source": {
-        "end": 69,
-        "line": 65,
+        "end": 72,
+        "line": 68,
         "path": "components/reader-log/reader-log.js",
         "sha256": "c996ff82af4dbd78cf9d89bcbe661f117e1d3f3acbd7e9f453fad9a9d2e5118f"
       }
@@ -29699,24 +30043,24 @@
       "calls": [
         {
           "kind": "external",
-          "line": 49,
+          "line": 52,
           "to": "Set"
         },
         {
           "kind": "internal",
-          "line": 50,
+          "line": 53,
           "to": "method:review/ui/components/review-base/review-base.js:ReviewStore.add",
           "via": "sent"
         },
         {
           "kind": "external",
-          "line": 51,
+          "line": 54,
           "to": "events.filter",
           "via": "events"
         },
         {
           "kind": "external",
-          "line": 51,
+          "line": 54,
           "to": "sent.has",
           "via": "sent"
         }
@@ -29732,8 +30076,8 @@
       "name": "unsentEvents",
       "signature": "unsentEvents(events)",
       "source": {
-        "end": 52,
-        "line": 48,
+        "end": 55,
+        "line": 51,
         "path": "components/reader-log/reader-log.js",
         "sha256": "a688992abf29dd9565f5832b756128a9234f9e3840968b4b9fb0e2bd7ae9c429"
       }
@@ -29742,13 +30086,13 @@
       "calls": [
         {
           "kind": "external",
-          "line": 74,
+          "line": 76,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 75,
+          "line": 77,
           "to": "String"
         }
       ],
@@ -29763,8 +30107,8 @@
       "name": "badge",
       "signature": "badge(unsent)",
       "source": {
-        "end": 76,
-        "line": 73,
+        "end": 78,
+        "line": 75,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "a8a64046c357906b983bfcd12a97b71527581a1cdb7af4e4b7f6097612b2eb18"
       }
@@ -29792,54 +30136,54 @@
       "calls": [
         {
           "kind": "external",
-          "line": 115,
+          "line": 117,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 127,
+          "line": 129,
           "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.pageNodes",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 129,
+          "line": 131,
           "to": "graph.setAttribute",
           "via": "graph"
         },
         {
           "kind": "external",
-          "line": 129,
+          "line": 131,
           "to": "nodes.join",
           "via": "nodes"
         },
         {
           "kind": "external",
-          "line": 131,
+          "line": 133,
           "to": "hint.replaceChildren",
           "via": "hint"
         },
         {
           "kind": "external",
-          "line": 133,
+          "line": 135,
           "to": "document.createTextNode",
           "via": "document"
         },
         {
           "kind": "external",
-          "line": 133,
+          "line": 135,
           "to": "hint.appendChild",
           "via": "hint"
         },
         {
           "kind": "external",
-          "line": 134,
+          "line": 136,
           "to": "encodeURIComponent"
         },
         {
           "kind": "external",
-          "line": 134,
+          "line": 136,
           "to": "this.el",
           "via": "this"
         }
@@ -29855,8 +30199,8 @@
       "name": "loadGraph",
       "signature": "loadGraph()",
       "source": {
-        "end": 142,
-        "line": 114,
+        "end": 144,
+        "line": 116,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "2cdd8007bf1344ca904626deec9c5dd77308082559b9b6ef0ace2ee55c24d8d8"
       }
@@ -29916,54 +30260,66 @@
           "line": 39,
           "to": "document.addEventListener",
           "via": "document"
+        },
+        {
+          "kind": "external",
+          "line": 42,
+          "to": "location.hash.replace",
+          "via": "location.hash"
+        },
+        {
+          "kind": "external",
+          "line": 43,
+          "to": "TABS.includes",
+          "via": "TABS"
         }
       ],
       "class": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "decorators": [],
       "doc": "",
-      "fingerprint": "d720d9d5655654b69ac2bf540218eb8775e51b417c7ad6cd2cc31d6826bb71a6",
+      "fingerprint": "ed823ebafe4e81e44fdc24f4f48e14381706378cf4c463a4126ac0042335ca24",
       "id": "method:components/reader-panel/reader-panel.js:ReaderPanel.onReady",
       "kind": "method",
-      "loc": 14,
+      "loc": 16,
       "module": "module:components/reader-panel/reader-panel.js",
       "name": "onReady",
       "signature": "onReady()",
       "source": {
-        "end": 42,
+        "end": 44,
         "line": 29,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "d720d9d5655654b69ac2bf540218eb8775e51b417c7ad6cd2cc31d6826bb71a6"
+        "sha256": "ed823ebafe4e81e44fdc24f4f48e14381706378cf4c463a4126ac0042335ca24"
       }
     },
     {
       "calls": [
         {
           "kind": "external",
-          "line": 57,
+          "line": 59,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 58,
+          "line": 60,
           "to": "….setAttribute",
           "via": "…"
         },
         {
           "kind": "external",
-          "line": 59,
+          "line": 61,
           "to": "….classList.toggle",
           "via": "….classList"
         },
         {
           "kind": "internal",
-          "line": 60,
+          "line": 62,
           "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.loadGraph",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 61,
+          "line": 63,
           "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.writeState",
           "via": "this"
         }
@@ -29979,8 +30335,8 @@
       "name": "open",
       "signature": "open(open, persist)",
       "source": {
-        "end": 62,
-        "line": 55,
+        "end": 64,
+        "line": 57,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "4378ca4eb639ee03f68bc7feb1ca2fa1d802b27c6fe9ba6b6955a1301eff49c6"
       }
@@ -29989,35 +30345,35 @@
       "calls": [
         {
           "kind": "external",
-          "line": 106,
+          "line": 108,
           "to": "Set"
         },
         {
           "kind": "external",
-          "line": 107,
+          "line": 109,
           "to": "document.querySelectorAll",
           "via": "document"
         },
         {
           "kind": "external",
-          "line": 108,
+          "line": 110,
           "to": "decodeURIComponent"
         },
         {
           "kind": "external",
-          "line": 108,
+          "line": 110,
           "to": "link.getAttribute",
           "via": "link"
         },
         {
           "kind": "internal",
-          "line": 108,
+          "line": 110,
           "to": "method:review/tools/brief.py:Brief.split",
           "via": "…"
         },
         {
           "kind": "internal",
-          "line": 109,
+          "line": 111,
           "to": "method:review/ui/components/review-base/review-base.js:ReviewStore.add",
           "via": "ids"
         }
@@ -30033,8 +30389,8 @@
       "name": "pageNodes",
       "signature": "pageNodes()",
       "source": {
-        "end": 112,
-        "line": 105,
+        "end": 114,
+        "line": 107,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "978a17d796d5234330a451260f702831217790bdaaa605d6e34e937a933c35f2"
       }
@@ -30043,24 +30399,24 @@
       "calls": [
         {
           "kind": "external",
-          "line": 46,
+          "line": 48,
           "to": "JSON.parse",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 46,
+          "line": 48,
           "to": "localStorage.getItem",
           "via": "localStorage"
         },
         {
           "kind": "external",
-          "line": 47,
+          "line": 49,
           "to": "Boolean"
         },
         {
           "kind": "external",
-          "line": 47,
+          "line": 49,
           "to": "TABS.includes",
           "via": "TABS"
         }
@@ -30076,8 +30432,8 @@
       "name": "readState",
       "signature": "readState()",
       "source": {
-        "end": 49,
-        "line": 44,
+        "end": 51,
+        "line": 46,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "cd976cd4cd6b3884744cf7acce0673a366d527f22792b2f3838eb0b8e2a055fd"
       }
@@ -30086,78 +30442,78 @@
       "calls": [
         {
           "kind": "external",
-          "line": 79,
+          "line": 81,
           "to": "this.$",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 81,
+          "line": 83,
           "to": "Map"
         },
         {
           "kind": "external",
-          "line": 82,
+          "line": 84,
           "to": "document.querySelectorAll",
           "via": "document"
         },
         {
           "kind": "external",
-          "line": 83,
+          "line": 85,
           "to": "link.getAttribute",
           "via": "link"
         },
         {
           "kind": "external",
-          "line": 84,
+          "line": 86,
           "to": "seen.has",
           "via": "seen"
         },
         {
           "kind": "external",
-          "line": 84,
+          "line": 86,
           "to": "seen.set",
           "via": "seen"
         },
         {
           "kind": "external",
-          "line": 86,
+          "line": 88,
           "to": "list.replaceChildren",
           "via": "list"
         },
         {
           "kind": "external",
-          "line": 87,
+          "line": 89,
           "to": "hint.replaceChildren",
           "via": "hint"
         },
         {
           "kind": "external",
-          "line": 89,
+          "line": 91,
           "to": "document.createTextNode",
           "via": "document"
         },
         {
           "kind": "external",
-          "line": 89,
+          "line": 91,
           "to": "hint.appendChild",
           "via": "hint"
         },
         {
           "kind": "external",
-          "line": 90,
+          "line": 92,
           "to": "this.el",
           "via": "this"
         },
         {
           "kind": "external",
-          "line": 99,
+          "line": 101,
           "to": "dt.appendChild",
           "via": "dt"
         },
         {
           "kind": "external",
-          "line": 100,
+          "line": 102,
           "to": "list.appendChild",
           "via": "list"
         }
@@ -30173,8 +30529,8 @@
       "name": "renderTerms",
       "signature": "renderTerms()",
       "source": {
-        "end": 103,
-        "line": 78,
+        "end": 105,
+        "line": 80,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "29fcb2e7c514155d1622c9a01ca1ac4e96265cd1fa882c6d0dec14c1d5421000"
       }
@@ -30202,31 +30558,31 @@
       "calls": [
         {
           "kind": "external",
-          "line": 66,
+          "line": 68,
           "to": "button.setAttribute",
           "via": "button"
         },
         {
           "kind": "external",
-          "line": 66,
+          "line": 68,
           "to": "this.$$",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 68,
+          "line": 70,
           "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.loadGraph",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 69,
+          "line": 71,
           "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.renderTerms",
           "via": "this"
         },
         {
           "kind": "internal",
-          "line": 70,
+          "line": 72,
           "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.writeState",
           "via": "this"
         }
@@ -30242,8 +30598,8 @@
       "name": "show",
       "signature": "show(tab, persist)",
       "source": {
-        "end": 71,
-        "line": 64,
+        "end": 73,
+        "line": 66,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "1a15a3e1d35a62f312af940c1d1146a701d8336f5c2f254a69cc0038bcfc1667"
       }
@@ -30252,13 +30608,13 @@
       "calls": [
         {
           "kind": "external",
-          "line": 52,
+          "line": 54,
           "to": "JSON.stringify",
           "via": "JSON"
         },
         {
           "kind": "external",
-          "line": 52,
+          "line": 54,
           "to": "localStorage.setItem",
           "via": "localStorage"
         }
@@ -30274,8 +30630,8 @@
       "name": "writeState",
       "signature": "writeState()",
       "source": {
-        "end": 53,
-        "line": 51,
+        "end": 55,
+        "line": 53,
         "path": "components/reader-panel/reader-panel.js",
         "sha256": "3ab68e68766fdcb2fb889bf03c9c6811618923b4af6fdb482be17487050ee2d8"
       }
@@ -30370,48 +30726,77 @@
         },
         {
           "kind": "external",
+          "line": 105,
+          "to": "onState"
+        },
+        {
+          "kind": "external",
           "line": 106,
+          "to": "this._recognition.stop",
+          "via": "this._recognition"
+        },
+        {
+          "kind": "external",
+          "line": 107,
           "to": "Recognition"
         },
         {
           "kind": "external",
-          "line": 110,
+          "line": 109,
+          "to": "lang.includes",
+          "via": "lang"
+        },
+        {
+          "kind": "external",
+          "line": 109,
+          "to": "navigator.language.startsWith",
+          "via": "navigator.language"
+        },
+        {
+          "kind": "external",
+          "line": 116,
           "to": "button.setAttribute",
           "via": "button"
         },
         {
           "kind": "external",
-          "line": 111,
-          "to": "onText"
-        },
-        {
-          "kind": "external",
-          "line": 111,
+          "line": 118,
           "to": "recognition.addEventListener",
           "via": "recognition"
         },
         {
           "kind": "external",
-          "line": 114,
+          "line": 121,
+          "to": "text.trim",
+          "via": "text"
+        },
+        {
+          "kind": "external",
+          "line": 131,
+          "to": "onText"
+        },
+        {
+          "kind": "external",
+          "line": 133,
           "to": "recognition.start",
           "via": "recognition"
         }
       ],
       "class": "class:components/sg-base/sg-base.js:SgBase",
       "decorators": [],
-      "doc": "one utterance into onText; the button shows the state",
-      "fingerprint": "794971e4e3d4b0d896f851866810641671c5060eb64efff1b0f2759e46d0283c",
+      "doc": "one utterance into onText(text); onState(text) says what is happening, '' when done",
+      "fingerprint": "29c0a99a28cc18c1df7f72643f3a3acd7755cf789caf87b7c6d113edca9e045e",
       "id": "method:components/sg-base/sg-base.js:SgBase.dictate",
       "kind": "method",
-      "loc": 13,
+      "loc": 32,
       "module": "module:components/sg-base/sg-base.js",
       "name": "dictate",
-      "signature": "dictate(button, onText)",
+      "signature": "dictate(button, onText, onState)",
       "source": {
-        "end": 115,
+        "end": 134,
         "line": 103,
         "path": "components/sg-base/sg-base.js",
-        "sha256": "794971e4e3d4b0d896f851866810641671c5060eb64efff1b0f2759e46d0283c"
+        "sha256": "29c0a99a28cc18c1df7f72643f3a3acd7755cf789caf87b7c6d113edca9e045e"
       }
     },
     {
@@ -43130,47 +43515,47 @@
       "calls": [
         {
           "kind": "external",
-          "line": 125,
+          "line": 149,
           "to": "ROOT / 'tools' / 'comms'.glob",
           "via": "ROOT / 'tools' / 'comms'"
         },
         {
           "kind": "external",
-          "line": 125,
+          "line": 149,
           "to": "sorted"
         },
         {
           "kind": "external",
-          "line": 126,
+          "line": 150,
           "to": "self.subTest",
           "via": "self"
         },
         {
           "kind": "external",
-          "line": 127,
+          "line": 151,
           "to": "str"
         },
         {
           "kind": "external",
-          "line": 127,
+          "line": 151,
           "to": "subprocess.run",
           "via": "subprocess"
         },
         {
           "kind": "external",
-          "line": 128,
+          "line": 152,
           "to": "self.assertEqual",
           "via": "self"
         },
         {
           "kind": "external",
-          "line": 129,
+          "line": 153,
           "to": "path.read_text",
           "via": "path"
         },
         {
           "kind": "external",
-          "line": 130,
+          "line": 154,
           "to": "self.assertNotRegex",
           "via": "self"
         }
@@ -43186,8 +43571,8 @@
       "name": "test_comms_tools_parse_and_name_no_secret",
       "signature": "test_comms_tools_parse_and_name_no_secret(self)",
       "source": {
-        "end": 130,
-        "line": 124,
+        "end": 154,
+        "line": 148,
         "path": "tests/build/test_reader.py",
         "sha256": "ecc915a39428361aa5623646796e8c4debf87b37d5d2180ce105b90049a9c9cf"
       }
@@ -43196,83 +43581,83 @@
       "calls": [
         {
           "kind": "external",
-          "line": 92,
+          "line": 116,
           "to": "CONTACT.read_text",
           "via": "CONTACT"
         },
         {
           "kind": "external",
-          "line": 92,
+          "line": 116,
           "to": "json.loads",
           "via": "json"
         },
         {
           "kind": "external",
-          "line": 93,
+          "line": 117,
           "to": "self.assertEqual",
           "via": "self"
         },
         {
           "kind": "external",
-          "line": 94,
+          "line": 118,
           "to": "Chrome"
         },
         {
           "kind": "external",
-          "line": 99,
+          "line": 123,
           "to": "self.assertIn",
           "via": "self"
         },
         {
           "kind": "external",
-          "line": 100,
+          "line": 124,
           "to": "inbox['endpoint'].startswith",
           "via": "inbox['endpoint']"
         },
         {
           "kind": "external",
-          "line": 100,
+          "line": 124,
           "to": "self.assertTrue",
           "via": "self"
         },
         {
           "kind": "external",
-          "line": 102,
+          "line": 126,
           "to": "self.assertRegex",
           "via": "self"
         },
         {
           "kind": "external",
-          "line": 105,
+          "line": 129,
           "to": "any"
         },
         {
           "kind": "external",
-          "line": 108,
+          "line": 132,
           "to": "''.join",
           "via": "''"
         },
         {
           "kind": "external",
-          "line": 108,
+          "line": 132,
           "to": "base64.b64decode",
           "via": "base64"
         },
         {
           "kind": "external",
-          "line": 108,
+          "line": 132,
           "to": "pem.splitlines",
           "via": "pem"
         },
         {
           "kind": "external",
-          "line": 109,
+          "line": 133,
           "to": "hashlib.sha256(der).hexdigest",
           "via": "hashlib.sha256(der)"
         },
         {
           "kind": "internal",
-          "line": 109,
+          "line": 133,
           "to": "method:admin/build/validate.js:sha256",
           "via": "hashlib"
         }
@@ -43288,10 +43673,54 @@
       "name": "test_contact_file_shape",
       "signature": "test_contact_file_shape(self)",
       "source": {
-        "end": 109,
-        "line": 91,
+        "end": 133,
+        "line": 115,
         "path": "tests/build/test_reader.py",
         "sha256": "6cfe46d693f86b3b500089bda2c40a295a270df08985bc9cf59b7e2ce5156796"
+      }
+    },
+    {
+      "calls": [
+        {
+          "kind": "external",
+          "line": 107,
+          "to": "COMPONENTS / 'sg-base' / 'sg-base.js'.read_text",
+          "via": "COMPONENTS / 'sg-base' / 'sg-base.js'"
+        },
+        {
+          "kind": "external",
+          "line": 108,
+          "to": "self.assertIn",
+          "via": "self"
+        },
+        {
+          "kind": "external",
+          "line": 113,
+          "to": "COMPONENTS / caller / f'{caller}.js'.read_text",
+          "via": "COMPONENTS / caller / f'{caller}.js'"
+        },
+        {
+          "kind": "external",
+          "line": 113,
+          "to": "self.assertRegex",
+          "via": "self"
+        }
+      ],
+      "class": "class:tests/build/test_reader.py:Test__Reader",
+      "decorators": [],
+      "doc": "",
+      "fingerprint": "292bcdfab83f9e08591e078721cd3f3d2770ee617581076ff9d520a4e0c7098d",
+      "id": "method:tests/build/test_reader.py:Test__Reader.test_dictation_reports_its_state",
+      "kind": "method",
+      "loc": 8,
+      "module": "module:tests/build/test_reader.py",
+      "name": "test_dictation_reports_its_state",
+      "signature": "test_dictation_reports_its_state(self)",
+      "source": {
+        "end": 113,
+        "line": 106,
+        "path": "tests/build/test_reader.py",
+        "sha256": "292bcdfab83f9e08591e078721cd3f3d2770ee617581076ff9d520a4e0c7098d"
       }
     },
     {
@@ -43449,60 +43878,60 @@
       "calls": [
         {
           "kind": "external",
-          "line": 112,
+          "line": 136,
           "to": "subprocess.run",
           "via": "subprocess"
         },
         {
           "kind": "external",
-          "line": 113,
+          "line": 137,
           "to": "self.assertEqual",
           "via": "self"
         },
         {
           "kind": "external",
-          "line": 114,
+          "line": 138,
           "to": "ROOT / 'data' / 'search-index.json'.read_text",
           "via": "ROOT / 'data' / 'search-index.json'"
         },
         {
           "kind": "external",
-          "line": 114,
+          "line": 138,
           "to": "json.loads",
           "via": "json"
         },
         {
           "kind": "external",
-          "line": 116,
+          "line": 140,
           "to": "Site__Pages"
         },
         {
           "kind": "internal",
-          "line": 117,
+          "line": 141,
           "to": "method:admin/build/pages.py:Site__Pages.html_files",
           "via": "pages"
         },
         {
           "kind": "internal",
-          "line": 118,
+          "line": 142,
           "to": "method:admin/build/pages.py:Site__Pages.meta",
           "via": "pages"
         },
         {
           "kind": "external",
-          "line": 120,
+          "line": 144,
           "to": "self.assertIn",
           "via": "self"
         },
         {
           "kind": "external",
-          "line": 122,
+          "line": 146,
           "to": "entry['twin'].endswith",
           "via": "entry['twin']"
         },
         {
           "kind": "external",
-          "line": 122,
+          "line": 146,
           "to": "self.assertTrue",
           "via": "self"
         }
@@ -43518,8 +43947,8 @@
       "name": "test_search_index_is_fresh_and_covers_every_page",
       "signature": "test_search_index_is_fresh_and_covers_every_page(self)",
       "source": {
-        "end": 122,
-        "line": 111,
+        "end": 146,
+        "line": 135,
         "path": "tests/build/test_reader.py",
         "sha256": "17fa90084f680e2c549131ff24cd3f8112a12d1f4662d84786ab47cfc25eae3d"
       }
@@ -43628,6 +44057,74 @@
         "line": 68,
         "path": "tests/build/test_reader.py",
         "sha256": "941e6d8833baa6b236547933267cd907334357beedbbc04c140e18baf3df3d76"
+      }
+    },
+    {
+      "calls": [
+        {
+          "kind": "external",
+          "line": 92,
+          "to": "ROOT / '.well-known' / 'sgit-agents.json.read_text",
+          "via": "ROOT / '.well-known' / 'sgit-agents.json"
+        },
+        {
+          "kind": "external",
+          "line": 92,
+          "to": "json.loads",
+          "via": "json"
+        },
+        {
+          "kind": "external",
+          "line": 93,
+          "to": "contact['identities'].values",
+          "via": "contact['identities']"
+        },
+        {
+          "kind": "external",
+          "line": 97,
+          "to": "ROOT / 'tools' / 'comms' / tool.read_text",
+          "via": "ROOT / 'tools' / 'comms' / tool"
+        },
+        {
+          "kind": "external",
+          "line": 99,
+          "to": "ROOT / 'tools' / 'comms' / 'comms_contac.read_text",
+          "via": "ROOT / 'tools' / 'comms' / 'comms_contac"
+        },
+        {
+          "kind": "external",
+          "line": 99,
+          "to": "self.assertIn",
+          "via": "self"
+        },
+        {
+          "kind": "external",
+          "line": 100,
+          "to": "COMPONENTS / 'reader-log' / 'reader-log..read_text",
+          "via": "COMPONENTS / 'reader-log' / 'reader-log."
+        },
+        {
+          "kind": "external",
+          "line": 101,
+          "to": "self.assertNotIn",
+          "via": "self"
+        }
+      ],
+      "class": "class:tests/build/test_reader.py:Test__Reader",
+      "decorators": [],
+      "doc": "the browser holds it; the contact file names the lane and nothing more",
+      "fingerprint": "67b45f2310ca30d22186f27471eca5d6f491640fe4ff61282bf45aea16847bf8",
+      "id": "method:tests/build/test_reader.py:Test__Reader.test_the_lane_token_is_never_published",
+      "kind": "method",
+      "loc": 14,
+      "module": "module:tests/build/test_reader.py",
+      "name": "test_the_lane_token_is_never_published",
+      "signature": "test_the_lane_token_is_never_published(self)",
+      "source": {
+        "end": 104,
+        "line": 91,
+        "path": "tests/build/test_reader.py",
+        "sha256": "67b45f2310ca30d22186f27471eca5d6f491640fe4ff61282bf45aea16847bf8"
       }
     },
     {
@@ -45490,10 +45987,10 @@
     }
   ],
   "provenance": {
-    "commit": "eb9aba5317fce111517ccdd38204619b25053082",
+    "commit": "baf16bde75c4677e91b3af7436a03f4e6fb7e17f",
     "inputs": {
       ".github/workflows/deploy-pages.yml": "049991bbdd5f2392a57743549312512869a6753e213d996cd4377afc0ad5807e",
-      "404.html": "ae024148bb8287612e82ca022734f689dd7b444904a95aa92d5d47b4190b91ae",
+      "404.html": "3a6d41a3e0e0687504d5478efaa7f22511f74099aad55b12674fe481339842b4",
       "admin/build/assemble_site.py": "560c312956e540d3e48ff13df69cc1173df5ffbed59f0cd1a7b1a1711e7be31f",
       "admin/build/chrome.py": "750e4b4ec6ca20e4c6bdc0a6f897590d91ca180513e0a3a424187c965da3a9a3",
       "admin/build/gate.py": "53bf2841ab13488839b1f999bdcd1232a549973cedb53570333f4cb7e3988841",
@@ -45513,10 +46010,10 @@
       "admin/build/tag_release.py": "158ce432c0222b9d430c01c87a3f83e63d38a7f24f435d859190bf2bc6512cb8",
       "admin/build/validate.js": "68435b5a429a25a44843f9351cbc93cbb307ef629c67b08f952f9c92d248b12e",
       "admin/build/verify_live.py": "6077890fe9995fb22f9d1cf94c8b3a28a30f840fb1309fd95ea937d53d85b6a8",
-      "admin/comms.html": "a1a37d832bafd67e9f3c6378dac2e23851d3c2519e1dc80a56546ad9e66e782e",
-      "admin/index.html": "e07115f5170a3e3f53a376091dd05fd9f3dcb25d4db2407e0797e043a66d5bf3",
-      "admin/versions.html": "4a71710645cb68f2390565bb9d0f276a3362bfbbeead8cc9fa55f484a4a84fdb",
-      "app/config/storage-keys.js": "8e146ccc473ce6e8f8d9c1ef4a1109a0f9d6f259daec2edbf77a93eba584a7fa",
+      "admin/comms.html": "a414335e8765e122810b6f6b0e185c9886a58203f8a89432e8f809e2d23ed4e4",
+      "admin/index.html": "27e38ea9d548d2fb64c55e2243ec78575189d9a2eef311ce959f175736b54244",
+      "admin/versions.html": "55c44535fc3d3d5885946aefb89270648a4be86de1e63fd0a9c1d810c542a05a",
+      "app/config/storage-keys.js": "3de53feb17ffd10028d330a6ae9ee660f984f8f8eb5845231948db4d1b59d666",
       "assets/mockups.css": "878d38eb32e9374482d3adbe376f4beef6cb221b4c1eff30f3a184f390e8078a",
       "assets/nav.js": "33e66df93332e4f1a45b14512657b0534a9d202f5538ecfcf2dc86e56ac20f6b",
       "assets/site.css": "b167bc58ee8067675d45672cb0ca3c1a6944cbd074ea26f991d676d28c22a0fb",
@@ -45534,44 +46031,44 @@
       "components/proto-column/proto-column.css": "68119e7d6cc50205084fa6149eb3cb042427390d43d76a4163b81986aa4ae7ec",
       "components/proto-column/proto-column.html": "ee27758a7187b6c909db305af31eb9f9d9918ac8b00d0b03df8b4cccbfac09c0",
       "components/proto-column/proto-column.js": "d5cf4ba9814460b9f9014a0051f3c9f95847050467d972be86b7c61cca93c0d8",
-      "components/reader-chat/reader-chat.css": "f19ee932f80a87e320df4bc395fd1be61c2321dca00ea8270d56210336d3b57b",
+      "components/reader-chat/reader-chat.css": "2a3a134fb441a321faeaccd56d03db1dfd04caef89bbf066a9b21d88478d85df",
       "components/reader-chat/reader-chat.html": "6aa521b732ea119e8790e3c636b5df1fbb316afe0dcb75c0443f834b8eafeb80",
-      "components/reader-chat/reader-chat.js": "23199872e7e675829eedd6fc66b7463288efa2aa5219d5d74b906184544c59e8",
-      "components/reader-log/reader-log.css": "f79481cdec253fb9451014d1dc6f3297dc5fc07d9e36af5ecea30ff20f73a140",
-      "components/reader-log/reader-log.html": "9f5b6680c591815d55136d90c1171c2d20d7dbf3db35fce9b50f1e8c17460978",
-      "components/reader-log/reader-log.js": "63074bfdcb23b0f0ffdcbb40ecb5fa0d9c6bdb2966584178eb517acee8467647",
+      "components/reader-chat/reader-chat.js": "4e75428811942d6c36ff2ae312de46b7a7b2362993d1cd88ede540ed88bdd459",
+      "components/reader-log/reader-log.css": "ba1b217f51b72be21ff334074daf30236367dc98b8fd12dc57999fab53f99e94",
+      "components/reader-log/reader-log.html": "b90953927a4e72901fc6a08c1643fec3c22a9e4722f1e6acf49b0109014ebe44",
+      "components/reader-log/reader-log.js": "64438f7d3962120baed51ffed9f3544fa0434c3480909325e84213053f90961a",
       "components/reader-panel/reader-panel.css": "54fe7c566502f5bd59081895890823d1664a8f0e1a72200dd11f639da2fd49ed",
       "components/reader-panel/reader-panel.html": "fc4c772924f9418d6b9278d2e9b3405016695470c2cdfdbb0b81afab3b963812",
-      "components/reader-panel/reader-panel.js": "742850ad39d471efccd919b2c82ecdc43517eb0af32ba6dfb90f964193a927cc",
+      "components/reader-panel/reader-panel.js": "c5da5f638112b130361811c1d382c9096c141e88ac1d0184ac7fa0e140960d85",
       "components/sg-base/sg-base.css": "99330398051ff7294e8e48ed01ec1ef8d58c997c95454232eba1288dd03829b7",
       "components/sg-base/sg-base.html": "6c8ec644d400f539e2b85f7002918d5a0b63278a8a229fdf8e153133a3be20bc",
-      "components/sg-base/sg-base.js": "efaef01d9ae7d6a79f5c174d6580e084a0aa78e04bd9582ea8a1b45da841e7f2",
-      "docs/design/brief-corrections.html": "ebfddef7134fa594b343c19ef25bbbb87b98a5689c0456f39474e02a378468b9",
-      "docs/design/index.html": "250a48f688f177e5fedf638965622d40b861f6a7d593eaf3c297d7e5db417e5d",
-      "docs/design/riskmandate-aws-cognito-architecture.html": "3daffc0545ee9cf36670439f31064d165a04d61c1a4bcb79306fb941821e6b7b",
-      "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html": "e548cc70131cd993c30b68f1328cade3d1c401ca97726f3c9c4ada238f7caefb",
-      "docs/design/riskmandate-user-onboarding-account-experience.html": "81d3e74283e1d526efb041454329eee7d7751317d877e7c029682a6e3117b7d0",
-      "docs/design/riskmandate-workspace-architecture-briefing.html": "d9303dd9e0059b2b791d967bc7a98f581c4bc97a80f26526a24bfeaa0601b999",
-      "docs/design/secrets-sgit-ai__mvp-build-brief.html": "4cfbd22877ae9b113212c2dac32dd276eef13f9805bf4ce80fd3b880835c9dff",
-      "docs/index.html": "45e08a6b39473ef3520eb149bfd45b5a20c5035ec934cb13f3945af673e89d40",
-      "docs/ops/bootstrap.html": "a556fff1564998964a0c2422825b4e02b60bafeb52e997df21489a2c19266f6f",
-      "docs/ops/branch-protection.html": "07d9fba6ae66f553e6e22e93903e1b43b52957e170d6fc902266f3bd73bc5371",
-      "docs/ops/comms.html": "afffd8178342e49c4896043be4a04e1309725117f8bb7a9376e4725113bf1e8c",
-      "docs/ops/dns.html": "ccd6459dc88ddc0351a16402b85d13401ad8e2202c2977ad7dc60dabf7be461a",
-      "docs/ops/index.html": "85f0f760c828906048c1a9ca56cde863bbec914f3c5ee220669e8e322cc4241b",
-      "docs/ops/needs.html": "ca19e8fe6bd6b49b1eaace38bec8704add62cc29a20859ecbf0731b1cbd89f08",
-      "docs/ops/release.html": "8d32efd3c61a934d31941caca78e9ceb7d2df72da6ac1fa79c01a3f04b2cb197",
-      "docs/reality.html": "b7dc18a48b55f539c06edd2d512700b5f3a8b661fb9fdc58ed8810428e3db950",
-      "environments/index.html": "c59a09f2f868b289781a7392f39270f00768766011caa3044e823c74570ed3b4",
-      "how-it-works/index.html": "c39fd42c20d79f9e340995c03f2a98482999d9f784add24789d977136d9d7dca",
-      "index.html": "92f82dd94a9114a3df3af56b38a48037503847a308355113f8a4c27e8039386a",
+      "components/sg-base/sg-base.js": "ed6424fa4dcb035fb677f256b7354a0b004ee1c6f21fcc47b5e3eb681a8eb640",
+      "docs/design/brief-corrections.html": "8b4cfa8c69fdf16828bf72397cee89c79f4d09d7dd38df2335252d7f1f0fd771",
+      "docs/design/index.html": "3b83ae0523e814ce17cd520b71eae1c5f57ece0534515ba48962c0be4b13fa2a",
+      "docs/design/riskmandate-aws-cognito-architecture.html": "9d42d7726ad23f3cfc6f2df57313671e43aa398ac46c4a9457dd75458395267f",
+      "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html": "be1ef7787f1125edb7bf5b51e4b883b488495a1dee8f96834ed7188e89e09010",
+      "docs/design/riskmandate-user-onboarding-account-experience.html": "e2d321a449abe8366e64c8a69a0cc2e8dd324ad5bbb56e3991bd91598086e9db",
+      "docs/design/riskmandate-workspace-architecture-briefing.html": "ddd913f42d7b996a3452ce25e4d3e123dbf56716d532f8b8ff70b2d9d2b16fe7",
+      "docs/design/secrets-sgit-ai__mvp-build-brief.html": "0bfa04ec5ab4a8ba11b179e0d02631fb12c36d189e6d5244325b57588d423b05",
+      "docs/index.html": "08f92d6511afd63274f62148eddcef35570b020c91bb882acbc7ea10abded44a",
+      "docs/ops/bootstrap.html": "652481028e237afdab12e3431c352f293ec89f908db7666491b7e43c15380c1c",
+      "docs/ops/branch-protection.html": "1d7112d29af7cedfaa1df853d173efe33878d7e85eb6cb45ab63d1012494aade",
+      "docs/ops/comms.html": "7de331bca33759cdd6c59b339483968a0b64aeceb34a26813683c755572855b5",
+      "docs/ops/dns.html": "46b814f57675d85cd4d6a1b7c7a901aa415b14bc2470bb5b6df4f84f7cc24f73",
+      "docs/ops/index.html": "e0ded66ef006c9625d63bfde88d668867bc8f574fe09d0ccf95f9de08420ec2c",
+      "docs/ops/needs.html": "f154f924d0235dc1298fba0bd9bef266d51dc828c54f13f571e518ecee95b477",
+      "docs/ops/release.html": "21c3afbebb24c3bcca8aebc06d64ddc257c714c5f41d2a417a124146c62e8e8e",
+      "docs/reality.html": "78e86be7189fa818472bbd93622e3a582c6848e06a7d00e5a0206b1d5010985c",
+      "environments/index.html": "9d276cfb36908c7d85ac37436accded0a5ff09ce1322ff80ad1bc5e25abfd890",
+      "how-it-works/index.html": "30968c4e20d64b4cbbd39345975ed27cb6771b0bbea0cdfd8d555abfa34a7d03",
+      "index.html": "bef32eb61cd0bb5101be140d0ee975314826e3849294d10ea55c87162f24490c",
       "infra/bootstrap/bootstrap.sh": "257713fea062998a8b9fc440af2a19cb376e1f1d12859cea851bc13c41840863",
       "infra/rules/storage.rules": "6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250",
-      "keyring/index.html": "0b2ebad7c2189ba2aa15ade897a22417d897c240c574cf88fe01e5a41cecab04",
-      "learn/index.html": "9b2e900b772f81a4fb6e3123d46ce2dd89b46a6c2a38f02ab12395bb3932ac8c",
-      "mockups/index.html": "129148849c93bca7d58dd5927f2fc80b9e87d6e3181e30e5b9262779d953407c",
-      "reader/index.html": "21d156f62a696c81af06ffadf64520fbbf635de09be9344c20842bdbda3f566d",
-      "review/index.html": "50f9911f1bbbd4a3fcae137964992002f80486311ff102ff16f30ff754ed7aa4",
+      "keyring/index.html": "9f7aa01a142d783155f0ff6ed1ffd3bdbe3345ae399989c5ff6199a95c8e50ec",
+      "learn/index.html": "39d8e5caebd550dd473839ffd368e90e4b797c3829eadc90148778c72e3937cd",
+      "mockups/index.html": "0d39e3da3e279e2929da0259dce0245c901b349928e5b08c95aec8c9a17aa59d",
+      "reader/index.html": "6e057ade39f7928d47d37c29d5d35e5547d71aac1928228b886af6a129c36531",
+      "review/index.html": "1d3b045e0da0170169b467289411b92ee807804e1efc1fae338620c358a5633d",
       "review/tools/brief.py": "d4ccbd69c47d946b98285fa2b1329a432a097d922eeefc3014264c1dcbd7d0ba",
       "review/tools/claims.py": "1aa4fa4be71b0ff60a115ec43371484f484f43a259ad33aa5e0a48ba41c5e425",
       "review/tools/derive.py": "30c9a92953bf535b18f1e2038c96c872481d65def1efe15c815fc04b00baa818",
@@ -45612,10 +46109,10 @@
       "review/ui/shell.css": "1486453f2f17c9531e89a1420ac1ed1b1879d91e650d5a149634a6a6686fb41d",
       "review/ui/shell.js": "919b72bfb421cf2e1bde8925650d837c5662ba70ca2c56d74edb0d569d0a5493",
       "review/ui/tokens.css": "403feedc08fa2340b995f733cc8b1b475e445c1599a55953e206ec45a7ef07d7",
-      "security/index.html": "ff80bf23c5ed3f50a93a57eff89dbb1b16b714d7cb02b987e0a08da6e0aafd06",
-      "sharing/index.html": "28546e484c5ff9c9632058a8886ce7d83c77f24ac3885dd852c419c2cc8d37c2",
-      "shipped/index.html": "fbd41663067292b69336690a21f6e0405c2dc13acfb9c6bd8305d7d60f8d337e",
-      "team/index.html": "0a7c41a30da59ace5744787abb059bb22598c3db31baad0dbf4c2b41a453ca1e",
+      "security/index.html": "874554f76fdee5e7812e56504e4ade121af6dd6530abbbcca89d783b5b6a674a",
+      "sharing/index.html": "3a0c8d8c79a96f94779c00f4f8d0b738096b05108c5e225a60e1e1b98653ea9b",
+      "shipped/index.html": "a2c588f93efad227898125d96363772acdfa0fdd7c05c99535c0fd4060311fbc",
+      "team/index.html": "f83f3cd59e6c1c150fb4a176057e3b454b83e958d83ae4074483b01492235e8e",
       "tests/build/test_chrome_in_every_page.py": "0cb959a220df8556d3d688472b6bfedfd24658998da231aba4ee9ffe39d5e8b2",
       "tests/build/test_claims.py": "ab7c3e9f3682f5206b2c913b8b77acef7fe95cc342ede6a60faa242998d3a9bc",
       "tests/build/test_derive.py": "32932d167bdca964cb3c3f42c4afeeb7e6dc1b132484a05f94fd0e4b2feb35eb",
@@ -45625,7 +46122,7 @@
       "tests/build/test_learn.py": "ed525097cb41b6934457f3225ac45e76dea97c8c2ae0c223fb857bc33cdab175",
       "tests/build/test_md_to_html.py": "10cb4bbcf8c39f5f66218c573b8ecdf16bcf34725e8b7b8366d1ce81b5dc7691",
       "tests/build/test_mockups.py": "49832c28075c1e3ff9e33c4e10aba5b47811c93286fd858deec0fdaf9e6bfefd",
-      "tests/build/test_reader.py": "172e0e98ed858cff30805eb4503a456ebc5a609b5b9901f55babaf346dd41e87",
+      "tests/build/test_reader.py": "73634fe3e8aaed8a970c91923caa9fea560990ebc69dbaa176dde9bbb0efd9ea",
       "tests/build/test_review_folder.py": "c8be271686036652974e8db1e228b0d692e4a3c9a53aade3c503aac768d68be0",
       "tests/build/test_review_ui.py": "8845f05ce8e468301dc038633d565b0402fc424fb931521bf44064c786bec1ff",
       "tests/build/test_themes.py": "7875597a323c0b2d3dbe2d7eae44a72caea9605798c82669bf40762f2482f8f2",
@@ -45636,6 +46133,6 @@
     },
     "tool": "review/tools/derive.py",
     "tool_version": "0.1",
-    "tree_sha256": "5f63559adf5543f1b5e51501f3f729fc3ea65ef2b285da49bc6382f1b58e9c32"
+    "tree_sha256": "f0922ed21f703d2564a7f8d148adfc1f1c81535b1d293b451251f2e1237c22b8"
   }
 }

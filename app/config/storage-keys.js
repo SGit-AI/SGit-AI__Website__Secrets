@@ -17,10 +17,12 @@ export const LOCAL_STORAGE_KEYS = Object.freeze({
     protoUx : 'sgit.secrets.ui.proto',                                            // which of the three prototype UX variants the reader picked (A/B testing)
     review  : 'sgit.secrets.ui.review',                                           // the navigator: which regions are collapsed, which mode was last used
     lab     : 'sgit.secrets.lab.passkeys.v1',                                   // the passkey lab on /learn/passkeys/: the lab's PRF salt (random public input, like keyring.prfSalt) and the public record of each lab passkey (credential id, algorithm, transports, created); never a PRF output, a key or anything derived from one
+    appendToken : 'sgit.secrets.ui.appendToken',                                // the readers lane's append token, pasted by the reader and kept on this device only when they tick it; a write-only capability the project lead hands out, not a key of the vault and not derived from one
     readerLog : 'sgit.secrets.reader.log.v1',                                     // the reader's log: append-only events (read, star, vote, note) keyed by page and content hash; opinions about public pages, never a secret
 })
 
 export const SESSION_STORAGE_KEYS = Object.freeze({
     adminOauthState : 'sgit.secrets.admin.oauthState',                            // the random OAuth state for the admin redirect; never the token
+    appendToken     : 'sgit.secrets.ui.appendToken',                            // the same token for this tab only, the default when the reader does not tick 'keep on this device'
     openrouterKey   : 'sgit.secrets.ui.openrouterKey',                            // the reader's own OpenRouter key, only when they tick 'keep for this tab'; this tab, this session, never localStorage
 })

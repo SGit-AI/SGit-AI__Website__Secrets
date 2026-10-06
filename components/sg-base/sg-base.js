@@ -100,18 +100,37 @@ export class SgBase extends HTMLElement {
         return window.SpeechRecognition || window.webkitSpeechRecognition || null
     }
 
-    dictate(button, onText) {                                                     // one utterance into onText; the button shows the state
+    dictate(button, onText, onState = () => {}) {                                 // one utterance into onText(text); onState(text) says what is happening, '' when done
         const Recognition = SgBase.speechRecognition()
-        if (!Recognition) return
+        if (!Recognition) { onState('This browser has no speech recognition.'); return }
+        if (this._recognition) { try { this._recognition.stop() } catch (error) { /* already stopping */ } return }
         const recognition = new Recognition()
-        recognition.lang           = document.documentElement.lang || 'en'
-        recognition.interimResults = false
+        const lang        = document.documentElement.lang || 'en'
+        recognition.lang           = lang.includes('-') ? lang : (navigator.language && navigator.language.startsWith(lang) ? navigator.language : lang)
+        recognition.interimResults = true                                         // Safari on iOS sends interim results first and may never flag one final; keep the last
+        recognition.continuous     = false
         recognition.maxAlternatives = 1
+        let heard = ''
+        let final = false
+        this._recognition = recognition
         button.setAttribute('aria-pressed', 'true')
-        recognition.addEventListener('result', (event) => onText(event.results[0][0].transcript))
-        recognition.addEventListener('end',    () => button.setAttribute('aria-pressed', 'false'))
-        recognition.addEventListener('error',  () => button.setAttribute('aria-pressed', 'false'))
-        recognition.start()
+        onState('Listening… speak, then pause; tap again to stop.')
+        recognition.addEventListener('result', (event) => {
+            let text = ''
+            for (const result of event.results) { text += result[0].transcript; if (result.isFinal) final = true }
+            heard = text.trim()
+            onState(heard ? `Heard: ${heard}` : 'Listening…')
+        })
+        recognition.addEventListener('error', (event) => {
+            const why = { 'not-allowed' : 'the microphone was not allowed; check the site permissions', 'no-speech' : 'no speech was heard', 'network' : 'the browser\'s recognition service could not be reached', 'audio-capture' : 'no microphone', 'aborted' : 'stopped' }[event.error] || event.error
+            onState(`Dictation ended: ${why}.`)
+        })
+        recognition.addEventListener('end', () => {
+            button.setAttribute('aria-pressed', 'false')
+            this._recognition = null
+            if (heard) { onText(heard); onState(final ? '' : 'Taken as heard (the browser gave no final result).') }
+        })
+        try { recognition.start() } catch (error) { onState(`Dictation could not start: ${error.message}`); button.setAttribute('aria-pressed', 'false'); this._recognition = null }
     }
 }
 

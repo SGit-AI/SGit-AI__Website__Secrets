@@ -1157,7 +1157,7 @@
       "status": "shipped",
       "since": "0.1.7",
       "where": "components/reader-panel/, reader-log/",
-      "notes": "Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret.",
+      "notes": "Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. Since v0.1.13 dictation keeps interim results (Safari on iOS gives no final one) and says what it heard or why it stopped; the column opens on a tab from /reader/#log or #chat; the append token is held by the browser, never by the contact file.",
       "evidence": [
         {
           "verb": "realises",
@@ -1230,7 +1230,7 @@
       "title": "The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it",
       "status": "proposed",
       "where": ".well-known/sgit-agents.json, tools/comms/",
-      "notes": "The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen.",
+      "notes": "The lane's append token is not published: the lead makes it with configure_lane.py --new, keeps it in SGIT_COMMS_LANE_TOKENS, and pastes the readers one into the column on the devices that should write (for the tab, or kept on the device). A browser without it can Copy for Claude and cannot write. Pending the lead's steps in docs/ops/comms.md (N8).",
       "evidence": [
         {
           "verb": "realises",

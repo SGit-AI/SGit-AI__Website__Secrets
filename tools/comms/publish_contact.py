@@ -2,15 +2,15 @@
 # secrets.sgit.ai — Publish__Contact
 # Fills .well-known/sgit-agents.json from the agent's key pair and the comms
 # vault: the public bundle (from `sgit pki export <fingerprint>`), the vault id
-# (from SGIT_COMMS_VAULT_KEY), and one fresh append token per lane named on the
-# command line. Public values only; the private keys and the vault key never
-# enter the repository. Run by the project lead, then commit the result.
+# (from SGIT_COMMS_VAULT_KEY), and the lanes named on the command line, by name
+# and use only: the append tokens are not published (configure_lane.py makes
+# them, and the lead hands the readers one to whoever should write). Public
+# values only; the private keys and the vault key never enter the repository. Run by the project lead, then commit the result.
 # Usage: SGIT_COMMS_VAULT_KEY=… python3 tools/comms/publish_contact.py --fingerprint sha256:… [--lanes readers,agents]
 # ═══════════════════════════════════════════════════════════════════════════════
 
 import json
 import os
-import secrets
 import subprocess
 import sys
 
@@ -53,12 +53,12 @@ class Publish__Contact:
         inbox.update({'vault'       : self.vault_id(),
                       'encrypt_to'  : bundle['fingerprint'],
                       'status'      : 'configuring',
-                      'status_note' : 'Bundle, vault and lane tokens published; the lanes are open once tools/comms/configure_lane.py has run and a round trip (send_test.py, drain.py) has been seen.',
-                      'lanes'       : [existing.get(name) or {'name': name, 'append_token': secrets.token_hex(32), 'use': LANE_USES.get(name, name), 'since': today}
+                      'status_note' : 'Bundle, vault and lane names published; the lanes are open once tools/comms/configure_lane.py has registered their tokens and a round trip (send_test.py, drain.py) has been seen.',
+                      'lanes'       : [existing.get(name) or {'name': name, 'use': LANE_USES.get(name, name), 'since': today, 'token': 'not published: held by the sender, registered on the vault by tools/comms/configure_lane.py'}
                                        for name in self.lanes]})
         self.contact.data['updated'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
         self.contact.write()
-        print(f'contact file written: vault {inbox["vault"]}, lanes {", ".join(self.lanes)}, encrypt to {bundle["fingerprint"]}')
+        print(f'contact file written: vault {inbox["vault"]}, lanes {", ".join(self.lanes)} (no token in the file), encrypt to {bundle["fingerprint"]}')
 
 
 if __name__ == '__main__':

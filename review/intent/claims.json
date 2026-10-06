@@ -83,6 +83,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/baf16bde75c4677e91b3af7436a03f4e6fb7e17f",
+      "id": "anchor.commit.baf16bde75c4677e91b3af7436a03f4e6fb7e17f",
+      "kind": "commit",
+      "name": "commit baf16bd",
+      "opens": "on GitHub",
+      "ref": "commit:baf16bde75c4677e91b3af7436a03f4e6fb7e17f"
+    },
+    {
+      "anchor": true,
       "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/caefd5ec992e905f00cb54ed1b77e5db6cb09c07",
       "id": "anchor.commit.caefd5ec992e905f00cb54ed1b77e5db6cb09c07",
       "kind": "commit",
@@ -1244,6 +1253,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37539346453",
+      "id": "anchor.run.37539346453",
+      "kind": "run",
+      "name": "Actions run 37539346453 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37539346453"
+    },
+    {
+      "anchor": true,
       "href": "/review/ui/#section=0",
       "id": "anchor.section.0",
       "kind": "section",
@@ -1511,6 +1529,15 @@
       "name": "tag v0.1.12",
       "opens": "on GitHub",
       "ref": "tag:v0.1.12"
+    },
+    {
+      "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.13",
+      "id": "anchor.tag.v0.1.13",
+      "kind": "tag",
+      "name": "tag v0.1.13",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.13"
     },
     {
       "anchor": true,
@@ -2375,7 +2402,7 @@
       "feature": "site.reader-column",
       "id": "claim.site.reader-column",
       "name": "The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names",
-      "notes": "Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret.",
+      "notes": "Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. Since v0.1.13 dictation keeps interim results (Safari on iOS gives no final one) and says what it heard or why it stopped; the column opens on a tab from /reader/#log or #chat; the append token is held by the browser, never by the contact file.",
       "since": "0.1.7",
       "source": {
         "doc": "data/features.json",
@@ -2403,7 +2430,7 @@
       "feature": "site.agent-contact",
       "id": "claim.site.agent-contact",
       "name": "The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it",
-      "notes": "The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen.",
+      "notes": "The lane's append token is not published: the lead makes it with configure_lane.py --new, keeps it in SGIT_COMMS_LANE_TOKENS, and pastes the readers one into the column on the devices that should write (for the tab, or kept on the device). A browser without it can Copy for Claude and cannot write. Pending the lead's steps in docs/ops/comms.md (N8).",
       "since": null,
       "source": {
         "doc": "data/features.json",
@@ -4641,9 +4668,29 @@
       "verb": "described_in"
     },
     {
+      "from": "release.0.1.13",
+      "to": "anchor.tag.v0.1.13",
+      "verb": "recorded_in"
+    },
+    {
       "from": "release.0.1.12",
       "to": "anchor.tag.v0.1.12",
       "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.12",
+      "to": "anchor.commit.baf16bde75c4677e91b3af7436a03f4e6fb7e17f",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.12",
+      "to": "anchor.run.37539346453",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.12",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
     },
     {
       "from": "release.0.1.11",
@@ -4899,12 +4946,30 @@
     {
       "commit": null,
       "date": "2026-10-06",
+      "id": "release.0.1.13",
+      "name": "v0.1.13: the column: dictation that reports, the append token held by the reader, the key's place",
+      "notes": "Three things Dinis hit on the iPad. Dictation now keeps interim results (Safari on iOS gives no final one), says what it heard or why it stopped (microphone not allowed, no speech, no network), and a second tap stops it. Send to the agent: the lane's append token is no longer published in the contact file; the lead makes the tokens with configure_lane.py --new, keeps them in SGIT_COMMS_LANE_TOKENS, and pastes the readers one into the column (Log tab, Append token), for the tab or, when ticked, on the device; a browser without it can Copy for Claude and cannot write, so for now the comments that reach the agent are the lead's own (C26). On every page but /reader/ the Send button is a link to the reader's page, which opens the column on the Log tab; the log is the same one. The chat on every other page now carries a button to the key field on /reader/#chat, and the reader's page says where the field is. The lane itself is still pending the lead's steps in docs/ops/comms.md.",
+      "run": null,
+      "tag": "v0.1.13",
+      "verified": null,
+      "version": "0.1.13"
+    },
+    {
+      "commit": "baf16bde75c4677e91b3af7436a03f4e6fb7e17f",
+      "date": "2026-10-06",
       "id": "release.0.1.12",
       "name": "v0.1.12: learn: passkeys, keys, GCP, and the passkey lab",
       "notes": "A learn section, from Dinis's reading of the security page: the words link to explanations in this site's context. Passkeys, WebAuthn and PRF (what the passkey is here and is not; the two calls drawn; what the authenticator, the browser, this site and Google each hold; the RP ID; what two passkeys mean), Keys (is there a passphrase, no; the PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM, the recovery code; what is in memory when), and GCP from this site's side (Identity Platform, the uid, the bucket, the Security Rules, Terraform, Workload Identity Federation; what Google sees and cannot). A glossary in data/terms.json, linked by the build from the first use of each term on every content page with the definition as hover text, and listed by the reader's column under a Terms tab. Flow diagrams drawn by the build from data/diagrams/ as inline SVG on the theme's tokens, with the same diagram as text. The passkey lab on the passkeys page: create lab passkeys in your own browser under this host's RP ID, ask for the PRF bytes (same salt, same bytes; another salt, others), derive the wrapping key, wrap a lab KEK, encrypt a lab body, forget the keys, unlock again with the same or a second passkey, and watch what is stored where; one allow-listed storage record of public values, no network. Chromium's virtual authenticator does PRF, which answers an open question of the brief (C25). Twins keep explicit anchors as inline HTML so fragment links into them resolve.",
-      "run": null,
+      "run": {
+        "conclusion": "success",
+        "id": 37539346453,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37539346453"
+      },
       "tag": "v0.1.12",
-      "verified": null,
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
       "version": "0.1.12"
     },
     {

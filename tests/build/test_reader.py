@@ -88,6 +88,30 @@ class Test__Reader(TestCase):
         self.assertIn('https://openrouter.ai https://dev.send.sgraph.ai', chrome.csp('https://openrouter.ai https://dev.send.sgraph.ai'))
         self.assertNotIn('openrouter', chrome.csp())
 
+    def test_the_lane_token_is_never_published(self):                          # the browser holds it; the contact file names the lane and nothing more
+        contact = json.loads((ROOT / '.well-known' / 'sgit-agents.json').read_text(encoding='utf-8'))
+        for identity in contact['identities'].values():
+            for lane in identity['inbox']['lanes']:
+                self.assertNotIn('append_token', lane, 'a lane entry carries no token')
+        for tool in ('publish_contact.py', 'comms_contact.py'):
+            text = (ROOT / 'tools' / 'comms' / tool).read_text(encoding='utf-8')
+            self.assertNotIn('token_hex', text, f'{tool} must not mint tokens into the file')
+        self.assertIn('SGIT_COMMS_LANE_TOKENS', (ROOT / 'tools' / 'comms' / 'comms_contact.py').read_text(encoding='utf-8'))
+        log = (COMPONENTS / 'reader-log' / 'reader-log.js').read_text(encoding='utf-8')
+        self.assertNotIn('lane.append_token', log)
+        self.assertIn('SESSION_STORAGE_KEYS.appendToken', log)
+        self.assertIn('LOCAL_STORAGE_KEYS.appendToken', log)
+        self.assertIn("append_token : token", log)
+
+    def test_dictation_reports_its_state(self):
+        base = (COMPONENTS / 'sg-base' / 'sg-base.js').read_text(encoding='utf-8')
+        self.assertIn('dictate(button, onText, onState', base)
+        self.assertIn('recognition.interimResults = true', base)
+        for event in ('result', 'error', 'end'):
+            self.assertIn(f"addEventListener('{event}'", base)
+        for caller in ('reader-log', 'reader-chat'):
+            self.assertRegex((COMPONENTS / caller / f'{caller}.js').read_text(encoding='utf-8'), r'this\.dictate\(mic, \(text\) => \{.*\}, \(state\) =>')
+
     def test_contact_file_shape(self):
         data     = json.loads(CONTACT.read_text(encoding='utf-8'))
         self.assertEqual(data['schema'], 'sgit-agents/v1')

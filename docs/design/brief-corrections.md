@@ -122,6 +122,10 @@ Section 6.5 lists the content pages and section 7.4 asks that nothing be describ
 
 One open question of section 12 is answered by building it: Chromium's virtual authenticator, driven through the CDP `WebAuthn` domain with `hasPrf: true`, does PRF (Chromium 141: `prf.enabled` is true at create, `get` returns 32 bytes, the same salt gives the same bytes, another salt gives others). The end-to-end tests of step 4 can therefore run the real unlock headlessly, with no stand-in for the crypto.
 
+### C26. The lane's append token is held by the sender, not published
+
+The Agent Contact shape publishes an append token per lane, so anyone who reads the contact file can write to the lane. Dinis asked on 2026-10-06 that, for now, the comments reaching the agent be mainly his own. From v0.1.13 the contact file names the lanes and carries no token; `tools/comms/configure_lane.py --new` makes the tokens, prints them once and registers their hashes on the vault; the lead keeps them in `SGIT_COMMS_LANE_TOKENS` and pastes the readers one into the column (Log tab, **Append token**), kept for the tab or, when ticked, on the device under one allow-listed key. A browser without the token sees Send off and Copy for Claude on. The public key, the vault id and the endpoint stay public, so sealing is unchanged. Opening the lane to other readers is then a decision (hand out the token, or publish it again), not the default.
+
 ## Open questions carried from section 12 (unanswered at this version)
 
 - ~~Does the Playwright virtual authenticator support PRF?~~ Yes: Chromium's, through CDP with `hasPrf`, at v0.1.12 (C25).

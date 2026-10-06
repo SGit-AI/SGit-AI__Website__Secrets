@@ -55,7 +55,7 @@ export class ReaderChat extends SgBase {
         const mic = this.$('[data-mic]')
         if (SgBase.speechRecognition()) {
             mic.hidden = false
-            mic.addEventListener('click', () => this.dictate(mic, (text) => { this.$('[data-ask]').value = text; this.ask() }))
+            mic.addEventListener('click', () => this.dictate(mic, (text) => { this.$('[data-ask]').value = text; this.ask() }, (state) => { this.$('[data-ask]').placeholder = state || 'How does unlock work? · The keyring page is missing… · What should I read next?' }))
         }
         this.$('[data-speak]').disabled = !('speechSynthesis' in window)
         this.tier()
@@ -87,9 +87,8 @@ export class ReaderChat extends SgBase {
         const label = this.$('[data-tier]')
         this._allowed = SgBase.mayConnect('https://openrouter.ai')
         if (!this._allowed) {
-            label.replaceChildren(document.createTextNode('Tier 0 here: offline search. This page\'s policy allows no connection to openrouter.ai; the conversation with tools runs on '))
-            label.appendChild(this.el('a', { href : READER_PAGE }, 'the reader\'s page'))
-            label.appendChild(document.createTextNode('.'))
+            label.replaceChildren(document.createTextNode('Tier 0 here: offline search. This page\'s policy allows no connection to openrouter.ai; the conversation with tools runs on the reader\'s page, where the key field is. '))
+            label.appendChild(this.el('a', { href : `${READER_PAGE}#chat`, class : 'there' }, 'Add your OpenRouter key there'))
             this.$('[data-key-form]').hidden = true
             return
         }

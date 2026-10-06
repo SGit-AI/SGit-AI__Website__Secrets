@@ -19,10 +19,22 @@
   <h3>Unsent <span class="count" data-count-unsent></span></h3>
   <div class="send">
     <button type="button" class="primary" data-send disabled>Send to the agent</button>
+    <a class="primary there" data-send-there href="/reader/#log" hidden>Send from the reader's page</a>
     <button type="button" data-copy>Copy for Claude</button>
     <button type="button" data-paste-toggle>Paste to merge</button>
+    <button type="button" data-token-toggle aria-expanded="false">Append token</button>
+    <button type="button" data-token-forget hidden title="Forget the append token held here">Forget token</button>
   </div>
   <p class="status" data-status aria-live="polite"></p>
+  <form class="token" data-token-form hidden>
+    <label for="token">The readers lane's append token, from the project lead</label>
+    <div class="row">
+      <input id="token" type="password" data-token autocomplete="off" spellcheck="false" placeholder="64 hex characters">
+      <button type="submit">Use</button>
+    </div>
+    <label class="keep"><input type="checkbox" data-token-keep> keep on this device (localStorage); unticked, this tab only</label>
+    <p class="hint">Without it, Send is off and Copy for Claude works. The token lets a browser write to the lane and nothing else: it cannot list or read what is there. The lead can rotate it at any time.</p>
+  </form>
   <form class="paste" data-paste-form hidden>
     <textarea data-paste rows="4" placeholder="Paste what 'Copy for Claude' produced on another device"></textarea>
     <button type="submit">Merge</button>

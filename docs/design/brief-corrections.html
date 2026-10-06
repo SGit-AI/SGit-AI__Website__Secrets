@@ -21,7 +21,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/docs/design/brief-corrections.html">
   <meta property="og:title" content="Brief corrections — secrets.sgit.ai">
   <meta property="og:description" content="What the brief got wrong or left open, found while building, dated, beside it.">
-  <meta name="sg-secrets:version" content="0.1.12">
+  <meta name="sg-secrets:version" content="0.1.13">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -33,7 +33,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.13" title="released 2026-10-06">v0.1.13</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -115,7 +115,7 @@
 <!-- sg-secrets:nav:end -->
   <main class="sg-document">
     <!-- sg-secrets:docs:start -->
-<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.12.</p>
+<p class="sg-doc-source">Rendered from <a href="/docs/design/brief-corrections.md">docs/design/brief-corrections.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.13.</p>
 <h1 id="brief-corrections">Brief corrections</h1>
 <p><em>secrets.sgit.ai · what the MVP build brief got wrong or left open, found while building, dated · beside the brief it corrects · CC BY 4.0</em></p>
 <p>The brief (<code>secrets-sgit-ai__mvp-build-brief.md</code>) is the instruction set. Where building it showed a statement to be wrong, incomplete or impossible as written, the finding is recorded here with the date and the version, and the build carried on with the correction. Sections 1 to 4 of the brief hold closed decisions; nothing here reopens one. The design documents beside this file are copied verbatim and are never edited.</p>
@@ -178,6 +178,8 @@
 <h3 id="c25-a-learn-section-the-brief-does-not-have-and-the-virtual-authenticator-does-prf">C25. A learn section the brief does not have, and the virtual authenticator does PRF</h3>
 <p>Section 6.5 lists the content pages and section 7.4 asks that nothing be described before it ships; neither says where a reader learns what a passkey, the PRF bytes or the GCP project are in this site&#x27;s terms. Dinis asked on 2026-10-06, reading the security page, for the words to link to explanations in context, with diagrams, and for a way to try the passkey in the browser he was in, bit by bit, including several passkeys. From v0.1.12 there is a <code>/learn/</code> section (passkeys, keys, GCP), a glossary in <code>data/terms.json</code> that the build links from the first use of each term on every content page and that the reader&#x27;s column lists, flow diagrams drawn by the build from <code>data/diagrams/</code> (inline SVG on the theme&#x27;s tokens, plus the same diagram as text), and a lab component on the passkeys page that runs the two WebAuthn calls and the key chain on the browser&#x27;s own WebCrypto with a lab salt. The lab is held to the same rules as the app: RP ID <code>secrets.sgit.ai</code> or <code>localhost</code> only, one allow-listed storage key holding public values, nothing derived from a key written anywhere, no network.</p>
 <p>One open question of section 12 is answered by building it: Chromium&#x27;s virtual authenticator, driven through the CDP <code>WebAuthn</code> domain with <code>hasPrf: true</code>, does PRF (Chromium 141: <code>prf.enabled</code> is true at create, <code>get</code> returns 32 bytes, the same salt gives the same bytes, another salt gives others). The end-to-end tests of step 4 can therefore run the real unlock headlessly, with no stand-in for the crypto.</p>
+<h3 id="c26-the-lanes-append-token-is-held-by-the-sender-not-published">C26. The lane&#x27;s append token is held by the sender, not published</h3>
+<p>The Agent Contact shape publishes an append token per lane, so anyone who reads the contact file can write to the lane. Dinis asked on 2026-10-06 that, for now, the comments reaching the agent be mainly his own. From v0.1.13 the contact file names the lanes and carries no token; <code>tools/comms/configure_lane.py --new</code> makes the tokens, prints them once and registers their hashes on the vault; the lead keeps them in <code>SGIT_COMMS_LANE_TOKENS</code> and pastes the readers one into the column (Log tab, <strong>Append token</strong>), kept for the tab or, when ticked, on the device under one allow-listed key. A browser without the token sees Send off and Copy for Claude on. The public key, the vault id and the endpoint stay public, so sealing is unchanged. Opening the lane to other readers is then a decision (hand out the token, or publish it again), not the default.</p>
 <h2 id="open-questions-carried-from-section-12-unanswered-at-this-version">Open questions carried from section 12 (unanswered at this version)</h2>
 <ul>
 <li>~~Does the Playwright virtual authenticator support PRF?~~ Yes: Chromium&#x27;s, through CDP with <code>hasPrf</code>, at v0.1.12 (C25).</li>
@@ -191,7 +193,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.13" title="released 2026-10-06">v0.1.13</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/design/brief-corrections.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->
