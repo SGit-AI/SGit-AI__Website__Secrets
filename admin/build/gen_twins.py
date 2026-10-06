@@ -19,8 +19,10 @@ class Gen__Twins:
         self.chrome = Chrome()
         self.pages  = Site__Pages()
 
-    def twin_exists(self, href):                                                  # a root-relative .md path that exists, or a sibling of the page
-        return (self.pages.root / href.lstrip('/')).exists() if href.startswith('/') else True
+    def twin_exists(self, href):                                                  # a twin this run writes, a markdown file on disk, or a sibling of the page
+        if not href.startswith('/'):
+            return True
+        return href in self.twins or (self.pages.root / href.lstrip('/')).exists()
 
     def render(self, page):
         canonical = self.chrome.canonical_url(page['url'])
@@ -48,8 +50,10 @@ class Gen__Twins:
                           ''                                                                                                ])
 
     def run(self):
-        changed = []
-        for path in self.pages.html_files():
+        changed    = []
+        files      = self.pages.html_files()
+        self.twins = {'/' + self.pages.twin_file(p).relative_to(self.pages.root).as_posix() for p in files if not self.pages.meta_source(p)}
+        for path in files:
             page = self.pages.meta(path)
             if page['source']:                                                    # rendered from markdown: that markdown is the twin
                 continue

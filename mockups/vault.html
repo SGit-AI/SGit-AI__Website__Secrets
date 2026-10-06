@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mockup: The vault: the list — secrets.sgit.ai</title>
+  <meta name="description" content="A design mockup of the the vault: the list screen at secrets.sgit.ai/app/vault.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/mockups/vault.html">
+  <link rel="alternate" type="text/markdown" href="/mockups/vault.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/mockups/vault.html">
+  <meta property="og:title" content="Mockup: The vault: the list — secrets.sgit.ai">
+  <meta property="og:description" content="A design mockup of the the vault: the list screen at secrets.sgit.ai/app/vault.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <meta name="sg-secrets:version" content="0.1.5">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+  <link rel="stylesheet" href="/assets/mockups.css">
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/review/ui/">Review graphs</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/mockups/">mockups</a> <span class="sep">/</span> <span aria-current="page">Mockup: The vault: the list</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Mockup 4: The vault: the list</h1>
+    <!-- sg-secrets:status:start ids="site.mockups,app.sign-in,app.prf-unlock,app.entries" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">What <code>secrets.sgit.ai/app/vault.html</code> is meant to look like, from section 6.2 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. A static picture: nothing on it works, the values are invented, and the screen itself is proposed.</p>
+    <p>The list: search, a filter by kind, add, open. Kinds are a closed list and each has its own colour, so a vault key never looks like a password. The lock state and the environment are in the header. Entries are small; the keyring soft limit is shown as a figure, not a bar that lies.</p>
+    <div class="mb" aria-label="Mockup of secrets.sgit.ai/app/vault.html">
+      <div class="mb-bar"><span class="mb-dots"><span></span><span></span><span></span></span><span class="mb-url">https://<b>secrets.sgit.ai/app/vault.html</b></span></div>
+      <div class="mb-view"><div class="app">
+<div class="app-head"><span class="brand">secrets<span>.sgit.ai</span></span><span class="env env-prod">prod</span><span class="lock lock-open">unlocked</span><div class="app-nav"><span class="here">Vault</span><span class="">Devices</span><span class="">Environment</span><span class="">Account</span></div><span class="who">dinis@example.com</span></div><div class="app-body"><div class="app-side">
+<label class="field">Search<div class="box">git</div></label>
+<p class="muted">Kinds</p>
+<p><span class="kind kind-password">password</span> 11 · <span class="kind kind-api-key">api-key</span> 6<br><span class="kind kind-sgit-vault-key">sgit-vault-key</span> 2 · <span class="kind kind-sgit-read-key">sgit-read-key</span> 3<br><span class="kind kind-pki-private-key">pki-private-key</span> 1 · <span class="kind kind-note">note</span> 0</p>
+<p class="muted">23 entries · 41 KB of 1 MB</p>
+<span class="btn btn-primary">+ Add entry</span>
+</div><div class="app-main">
+<h2>Vault</h2>
+<ul class="list">
+<li><span class="kind kind-password">password</span><span class="title">github.com (dinis)</span><span class="when">updated 2 days ago</span></li>
+<li class="active"><span class="kind kind-sgit-vault-key">sgit-vault-key</span><span class="title">sgit.ai board vault</span><span class="when">updated 2026-10-01</span></li>
+<li><span class="kind kind-sgit-read-key">sgit-read-key</span><span class="title">code review graphs (published)</span><span class="when">2026-09-30</span></li>
+<li><span class="kind kind-api-key">api-key</span><span class="title">OpenRouter, infographic-gen</span><span class="when">2026-09-21</span></li>
+<li><span class="kind kind-pki-private-key">pki-private-key</span><span class="title">sgit pki: dinis@example.com</span><span class="when">2026-09-18</span></li>
+</ul>
+</div></div>
+      </div></div>
+    </div>
+    <h2>The same screen as ASCII</h2>
+<pre class="ascii">┌─ secrets.sgit.ai/app/vault.html ─────────────────────────────────┐
+│ secrets.sgit.ai [prod] [unlocked]  Vault* Devices Env Account    │
+├──────────────┬───────────────────────────────────────────────────┤
+│ Search       │ Vault                                             │
+│ [git       ] │ (password)       github.com (dinis)    2 days ago │
+│ Kinds        │ (sgit-vault-key) sgit.ai board vault   2026-10-01 │
+│ password  11 │ (sgit-read-key)  code review graphs    2026-09-30 │
+│ api-key    6 │ (api-key)        OpenRouter            2026-09-21 │
+│ vault-key  2 │ (pki-private)    sgit pki: dinis       2026-09-18 │
+│ read-key   3 │                                                   │
+│ pki        1 │                                                   │
+│ 23 entries   │                                                   │
+│ 41 KB / 1 MB │                                                   │
+│ [+ Add entry]│                                                   │
+└──────────────┴───────────────────────────────────────────────────┘</pre>
+    <h2>Intent it realises</h2>
+    <p>Open each in the review navigator: <a href="/review/ui/#node=entries">entries</a> · <a href="/review/ui/#node=returning">returning</a>.</p>
+    <p><a href="/mockups/">All mockups</a></p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/vault.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

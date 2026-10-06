@@ -2,7 +2,7 @@
 
 > Who publishes this site, what they are building, and why that matters when reading its claims: the people who run the sgit family build the secrets manager this site describes, and the site is written while it is built.
 
-*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.4 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.5 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

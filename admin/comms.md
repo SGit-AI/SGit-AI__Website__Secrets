@@ -2,7 +2,7 @@
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.4 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.5 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

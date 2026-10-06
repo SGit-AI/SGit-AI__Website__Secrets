@@ -144,7 +144,26 @@ function resolveLink(fromRel, href, root = ROOT) {                              
     return { rel, fragment : fragment || null }
 }
 
+const NAVIGATOR_SHELL = 'review/ui/index.html'                                   // its fragments are routes (#node=<id>, #view=<name>), checked against the intent files
+
+function reviewNodeIds(root = ROOT) {
+    const ids = new Set(['view=stories', 'view=flows', 'view=components', 'view=deploy'])
+    const walk = (item) => {
+        if (Array.isArray(item)) { for (const value of item) walk(value); return }
+        if (!item || typeof item !== 'object') return
+        if (typeof item.id === 'string' && ('name' in item || 'text' in item)) ids.add(`node=${item.id}`)
+        if (Array.isArray(item.steps) && typeof item.id === 'string') for (const step of item.steps) ids.add(`node=${item.id}#${step.n}`)
+        for (const value of Object.values(item)) walk(value)
+    }
+    for (const name of ['stories', 'flows', 'components', 'deploy']) {
+        const rel = `review/intent/${name}.json`
+        if (exists(rel, root)) walk(JSON.parse(read(rel, root)))
+    }
+    return ids
+}
+
 function anchorsIn(rel, root = ROOT) {
+    if (rel === NAVIGATOR_SHELL) return reviewNodeIds(root)
     const text  = read(rel, root)
     const found = new Set()
     for (const match of text.matchAll(/\b(?:id|name)\s*=\s*["']([^"']+)["']/g)) found.add(match[1])
@@ -273,7 +292,7 @@ function checkInternalLinks(root = ROOT) {
                 continue
             }
             if (rel.endsWith('.html')) reached.add(target)
-            if (fragment && (target.endsWith('.html') || target.endsWith('.md')) && !anchorsOf(target).has(fragment)) {
+            if (fragment && (target.endsWith('.html') || target.endsWith('.md')) && !anchorsOf(target).has(decodeURIComponent(fragment))) {
                 problems.push(`${rel}:${line}: fragment '#${fragment}' not found in ${target}`)
             }
         }
@@ -450,7 +469,7 @@ function main() {
 
 module.exports = {
     ROOT, LEAK_PATTERNS, LEAK_ALLOW_FILES, RUNTIME_RE, RUNTIME_ALLOW, LINK_RELS_THAT_LOAD, CHECKS,
-    walkTree, isBinary, sha256, headingSlug, stripCode, isInternalLink, resolveLink, anchorsIn, linksIn,
+    walkTree, isBinary, sha256, headingSlug, stripCode, isInternalLink, resolveLink, anchorsIn, linksIn, reviewNodeIds,
     loadStorageKeys, storageKeyProblems, nextVersionOk,
     checkVersionAgreement, checkInternalLinks, checkCanonicalHost, checkLeakTripwire,
     checkVendorManifest, checkRulesInSync, checkReality, checkStorageKeys, checkReviewFolder, checkScriptsParse, adviseEmDashes,

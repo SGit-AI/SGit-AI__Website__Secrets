@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mockup: Tests: the compatibility matrix — secrets.sgit.ai</title>
+  <meta name="description" content="A design mockup of the tests: the compatibility matrix screen at secrets.sgit.ai/tests/matrix.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/mockups/matrix.html">
+  <link rel="alternate" type="text/markdown" href="/mockups/matrix.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/mockups/matrix.html">
+  <meta property="og:title" content="Mockup: Tests: the compatibility matrix — secrets.sgit.ai">
+  <meta property="og:description" content="A design mockup of the tests: the compatibility matrix screen at secrets.sgit.ai/tests/matrix.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <meta name="sg-secrets:version" content="0.1.5">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+  <link rel="stylesheet" href="/assets/mockups.css">
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/review/ui/">Review graphs</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/mockups/">mockups</a> <span class="sep">/</span> <span aria-current="page">Mockup: Tests: the compatibility matrix</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Mockup 10: Tests: the compatibility matrix</h1>
+    <!-- sg-secrets:status:start ids="site.mockups,app.sign-in,app.prf-unlock,app.entries" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">What <code>secrets.sgit.ai/tests/matrix.html</code> is meant to look like, from section 6.4 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. A static picture: nothing on it works, the values are invented, and the screen itself is proposed.</p>
+    <p>The probe pages run in sequence and the result is a shareable summary: browser, OS, authenticator, and one row per probe with PASS, FAIL or SKIP and the raw value behind it. A visitor pastes it into an issue; the dated rows become the support table on the keyring page.</p>
+    <div class="mb" aria-label="Mockup of secrets.sgit.ai/tests/matrix.html">
+      <div class="mb-bar"><span class="mb-dots"><span></span><span></span><span></span></span><span class="mb-url">https://<b>secrets.sgit.ai/tests/matrix.html</b></span></div>
+      <div class="mb-view"><div class="app">
+<div class="app-head"><span class="brand">secrets<span>.sgit.ai</span></span><span class="env env-prod">prod</span><div class="app-nav"><span>webauthn-prf</span><span>crypto</span><span>config</span><span>auth</span><span>storage</span><span class="here">matrix</span></div></div>
+<div class="app-body"><div class="app-main">
+<h2>Compatibility matrix</h2>
+<p class="muted">Chrome 131 · macOS 15 · authenticator: Google Password Manager · 2026-10-06 · <span class="btn btn-ghost">Copy as markdown</span></p>
+<table class="mini"><thead><tr><th>Probe</th><th>Result</th><th>Raw</th></tr></thead><tbody>
+<tr><td>WebCrypto: HKDF, AES-GCM, RSA-OAEP, ECDSA</td><td class="check check-ok">PASS</td><td class="muted">4 of 4 known answers</td></tr>
+<tr><td>Passkey create with prf</td><td class="check check-ok">PASS</td><td class="muted">prf.enabled = true</td></tr>
+<tr><td>PRF eval returns 32 bytes</td><td class="check check-ok">PASS</td><td class="muted">32 bytes; same salt twice equal; other salt differs</td></tr>
+<tr><td>Config: active environment, fields, key restricted</td><td class="check check-ok">PASS</td><td class="muted">prod from file default</td></tr>
+<tr><td>Auth: sign in, claims, sign out</td><td class="check check-skip">SKIP</td><td class="muted">not signed in</td></tr>
+<tr><td>Storage: owner write, precondition, foreign 403</td><td class="check check-skip">SKIP</td><td class="muted">not signed in</td></tr>
+<tr><td>Leak check: nothing key-like in storage</td><td class="check check-ok">PASS</td><td class="muted">0 suspicious keys</td></tr>
+</tbody></table>
+</div></div>
+      </div></div>
+    </div>
+    <h2>The same screen as ASCII</h2>
+<pre class="ascii">┌─ secrets.sgit.ai/tests/matrix.html ──────────────────────────────┐
+│ secrets.sgit.ai [prod]  webauthn-prf crypto config auth matrix*  │
+├──────────────────────────────────────────────────────────────────┤
+│ Compatibility matrix     Chrome 131 · macOS 15 · GPM · 2026-10-06│
+│ WebCrypto: HKDF, AES-GCM, RSA-OAEP, ECDSA   PASS   4 of 4 KATs   │
+│ Passkey create with prf                     PASS   prf.enabled   │
+│ PRF eval returns 32 bytes                   PASS   same/differs  │
+│ Config: environment, fields, key restricted PASS   prod, file    │
+│ Auth: sign in, claims, sign out             SKIP   not signed in │
+│ Storage: owner write, foreign 403           SKIP   not signed in │
+│ Leak check                                  PASS   0 suspicious  │
+│ [ Copy as markdown ]                                             │
+└──────────────────────────────────────────────────────────────────┘</pre>
+    <h2>Intent it realises</h2>
+    <p>Open each in the review navigator: <a href="/review/ui/#node=probes">probes</a> · <a href="/review/ui/#node=probes.pages">probes.pages</a>.</p>
+    <p><a href="/mockups/">All mockups</a></p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/matrix.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

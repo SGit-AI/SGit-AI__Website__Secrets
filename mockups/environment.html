@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mockup: Environment — secrets.sgit.ai</title>
+  <meta name="description" content="A design mockup of the environment screen at secrets.sgit.ai/app/environment.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/mockups/environment.html">
+  <link rel="alternate" type="text/markdown" href="/mockups/environment.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/mockups/environment.html">
+  <meta property="og:title" content="Mockup: Environment — secrets.sgit.ai">
+  <meta property="og:description" content="A design mockup of the environment screen at secrets.sgit.ai/app/environment.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <meta name="sg-secrets:version" content="0.1.5">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+  <link rel="stylesheet" href="/assets/mockups.css">
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/review/ui/">Review graphs</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/mockups/">mockups</a> <span class="sep">/</span> <span aria-current="page">Mockup: Environment</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Mockup 7: Environment</h1>
+    <!-- sg-secrets:status:start ids="site.mockups,app.sign-in,app.prf-unlock,app.entries" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">What <code>secrets.sgit.ai/app/environment.html</code> is meant to look like, from section 5 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. A static picture: nothing on it works, the values are invented, and the screen itself is proposed.</p>
+    <p>Pick a built-in environment, or enter a custom one with every field of config/environments.json; export it as JSON, import one, reset. Every value here is a public identifier. Changing environment signs the user out and clears every key from memory, and the page says so before the switch.</p>
+    <div class="mb" aria-label="Mockup of secrets.sgit.ai/app/environment.html">
+      <div class="mb-bar"><span class="mb-dots"><span></span><span></span><span></span></span><span class="mb-url">https://<b>secrets.sgit.ai/app/environment.html</b></span></div>
+      <div class="mb-view"><div class="app">
+<div class="app-head"><span class="brand">secrets<span>.sgit.ai</span></span><span class="env env-dev">dev</span><span class="lock lock-closed">locked</span><div class="app-nav"><span class="">Vault</span><span class="">Devices</span><span class="here">Environment</span><span class="">Account</span></div><span class="who">dinis@example.com</span></div><div class="app-body"><div class="app-main">
+<h2>Environment</h2>
+<p class="muted">One site, one GCP project per environment. Changing it signs you out and clears every key from memory.</p>
+<div class="row"><span class="btn">prod · secrets.sgit.ai (production)</span><span class="btn btn-primary">dev · development (disposable)</span><span class="btn">main · staging</span><span class="btn btn-ghost">custom…</span></div>
+<table class="mini"><tbody>
+<tr><th>projectId</th><td>sgit-secrets-dev</td><th>region</th><td>europe-west2</td></tr>
+<tr><th>authDomain</th><td>sgit-secrets-dev.firebaseapp.com</td><th>signInMethod</th><td>popup <span class="muted">(redirect as a fallback)</span></td></tr>
+<tr><th>storageBucket</th><td>sgit-secrets-dev.firebasestorage.app</td><th>tenantId</th><td class="muted">none</td></tr>
+<tr><th>apiKey</th><td>AIza… <span class="muted">(public, restricted by referrer)</span></td><th>adminOauthClientId</th><td>….apps.googleusercontent.com</td></tr>
+</tbody></table>
+<div class="row"><span class="btn">Export JSON</span><span class="btn">Import JSON</span><span class="btn btn-ghost">Reset to the site default</span></div>
+<p class="muted">Stored in localStorage as sgit.secrets.config.v1. Nothing secret is ever stored there.</p>
+</div></div>
+      </div></div>
+    </div>
+    <h2>The same screen as ASCII</h2>
+<pre class="ascii">┌─ secrets.sgit.ai/app/environment.html ───────────────────────────┐
+│ secrets.sgit.ai [dev] [locked]      Vault Devices Env* Account   │
+├──────────────────────────────────────────────────────────────────┤
+│ Environment                                                      │
+│ Changing it signs you out and clears every key from memory.      │
+│ [prod] [dev*] [main] [custom…]                                   │
+│ projectId      sgit-secrets-dev           region   europe-west2  │
+│ authDomain     sgit-secrets-dev.firebaseapp.com   signIn  popup  │
+│ storageBucket  sgit-secrets-dev.firebasestorage.app              │
+│ apiKey         AIza… (public, restricted by referrer)            │
+│ adminOauthClientId  ….apps.googleusercontent.com                 │
+│ [ Export JSON ] [ Import JSON ]  Reset to the site default       │
+└──────────────────────────────────────────────────────────────────┘</pre>
+    <h2>Intent it realises</h2>
+    <p>Open each in the review navigator: <a href="/review/ui/#node=environment">environment</a> · <a href="/review/ui/#node=flow.customer-environment">flow.customer-environment</a>.</p>
+    <p><a href="/mockups/">All mockups</a></p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/environment.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

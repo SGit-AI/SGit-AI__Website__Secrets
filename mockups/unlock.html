@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mockup: Unlock — secrets.sgit.ai</title>
+  <meta name="description" content="A design mockup of the unlock screen at secrets.sgit.ai/app/unlock.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/mockups/unlock.html">
+  <link rel="alternate" type="text/markdown" href="/mockups/unlock.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/mockups/unlock.html">
+  <meta property="og:title" content="Mockup: Unlock — secrets.sgit.ai">
+  <meta property="og:description" content="A design mockup of the unlock screen at secrets.sgit.ai/app/unlock.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <meta name="sg-secrets:version" content="0.1.5">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+  <link rel="stylesheet" href="/assets/mockups.css">
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/review/ui/">Review graphs</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/mockups/">mockups</a> <span class="sep">/</span> <span aria-current="page">Mockup: Unlock</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>Mockup 3: Unlock</h1>
+    <!-- sg-secrets:status:start ids="site.mockups,app.sign-in,app.prf-unlock,app.entries" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">What <code>secrets.sgit.ai/app/unlock.html</code> is meant to look like, from section 6.2 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. A static picture: nothing on it works, the values are invented, and the screen itself is proposed.</p>
+    <p>One gesture. The page calls navigator.credentials.get with the PRF evaluation; the authenticator returns 32 bytes bound to this origin; the browser derives the wrapping key, unwraps the KEK and decrypts the body into memory. The recovery code is the fallback. Nothing decrypted is written anywhere.</p>
+    <div class="mb" aria-label="Mockup of secrets.sgit.ai/app/unlock.html">
+      <div class="mb-bar"><span class="mb-dots"><span></span><span></span><span></span></span><span class="mb-url">https://<b>secrets.sgit.ai/app/unlock.html</b></span></div>
+      <div class="mb-view"><div class="app">
+<div class="app-head"><span class="brand">secrets<span>.sgit.ai</span></span><span class="env env-prod">prod</span><span class="lock lock-closed">locked</span><div class="app-nav"><span class="">Vault</span><span class="">Devices</span><span class="">Environment</span><span class="">Account</span></div><span class="who">dinis@example.com</span></div><div class="app-body centre"><div class="card">
+<h2>Unlock your keyring</h2>
+<p class="muted">Keyring found: rev 7, 23 entries, last written 2026-10-05 from "MacBook Chrome".</p>
+<span class="btn btn-primary">Unlock with passkey</span>
+<p class="muted">Touch your security key, or use Face ID, Touch ID, Windows Hello or your phone.</p>
+<p class="muted">No passkey on this device? <b>Use the recovery code</b></p>
+<label class="field">Recovery code<div class="box">____-____-____-____-____-____-__</div></label>
+<span class="btn">Unlock with the code</span>
+<p class="muted">After unlocking with the code you will be asked to add a passkey for this device.</p>
+</div></div>
+      </div></div>
+    </div>
+    <h2>The same screen as ASCII</h2>
+<pre class="ascii">┌─ secrets.sgit.ai/app/unlock.html ────────────────────────────────┐
+│ secrets.sgit.ai  [prod] [locked]             dinis@example.com   │
+├──────────────────────────────────────────────────────────────────┤
+│          ┌──────────────────────────────────────────┐            │
+│          │ Unlock your keyring                      │            │
+│          │ Keyring found: rev 7, 23 entries         │            │
+│          │                                          │            │
+│          │ [ Unlock with passkey ]                  │            │
+│          │ Touch your key, or Face ID / Touch ID    │            │
+│          │                                          │            │
+│          │ No passkey here? Use the recovery code   │            │
+│          │ ┌──────────────────────────────────────┐ │            │
+│          │ │ ____-____-____-____-____-____-__     │ │            │
+│          │ [ Unlock with the code ]                 │            │
+│          └──────────────────────────────────────────┘            │
+└──────────────────────────────────────────────────────────────────┘</pre>
+    <h2>Intent it realises</h2>
+    <p>Open each in the review navigator: <a href="/review/ui/#node=returning">returning</a> · <a href="/review/ui/#node=flow.returning">flow.returning</a> · <a href="/review/ui/#node=flow.new-device">flow.new-device</a>.</p>
+    <p><a href="/mockups/">All mockups</a></p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.5" title="released 2026-10-06">v0.1.5</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/unlock.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

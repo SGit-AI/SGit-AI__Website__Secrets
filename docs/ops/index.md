@@ -2,7 +2,7 @@
 
 > How a release works, what only a human can do, the DNS record and the repository protections.
 
-*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.4 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.5 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

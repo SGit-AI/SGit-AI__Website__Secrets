@@ -2,7 +2,7 @@
 
 > Who does what, as one file per role with the rules it enforces and the mistake behind each, and where the board of work lives.
 
-*Source: <https://secrets.sgit.ai/team/> · site v0.1.4 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/team/> · site v0.1.5 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

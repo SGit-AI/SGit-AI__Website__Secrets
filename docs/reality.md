@@ -1,8 +1,8 @@
 # secrets.sgit.ai: reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.4 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.5 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
-61 claims: 29 shipped, 27 proposed, 5 absent.
+62 claims: 30 shipped, 27 proposed, 5 absent.
 
 | Status | Meaning |
 |---|---|
@@ -10,7 +10,7 @@
 | proposed | designed in the brief, not built; described only in the future tense |
 | absent | deliberately not in the MVP; comes as a later version or a later site, or never |
 
-## Shipped (29)
+## Shipped (30)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -38,6 +38,7 @@
 | pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
 | site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
 | site | Participant disclosure: who publishes this site and what they are building | shipped v0.1.3 | about/participant.html | Linked from the footer. |
+| site | Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises | shipped v0.1.5 | mockups/ | Pictures of proposed screens, not screens; replaced by real screenshots as pages ship. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
