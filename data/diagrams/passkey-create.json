@@ -1,0 +1,23 @@
+{
+  "id": "passkey-create",
+  "kind": "sequence",
+  "title": "First run: creating the unlock passkey",
+  "caption": "First run, as the design has it (section 3.2 and 8.7 of the brief). Nothing secret crosses between the parties: the authenticator keeps the private key and the PRF secret, and the page keeps only public identifiers. The PRF bytes are not asked for until unlock.",
+  "lanes": [
+    { "id": "you",    "label": "You" },
+    { "id": "page",   "label": "This page, in your browser" },
+    { "id": "auth",   "label": "Your authenticator" },
+    { "id": "bucket", "label": "The bucket (GCP)" }
+  ],
+  "steps": [
+    { "from": "you",  "to": "page",   "text": "sign in; the page finds no keyring at users/{uid}/" },
+    { "note": "page", "text": "makes 32 random bytes as the user handle, and 32 more as the PRF salt" },
+    { "from": "page", "to": "auth",   "text": "navigator.credentials.create: rp.id = secrets.sgit.ai, the user handle, residentKey required, userVerification required, extensions.prf = {}" },
+    { "from": "auth", "to": "you",    "text": "asks for a gesture: touch, face, PIN or tap" },
+    { "from": "you",  "to": "auth",   "text": "the gesture" },
+    { "note": "auth", "text": "makes a key pair and a PRF secret, both bound to secrets.sgit.ai; keeps them; syncs them through your own account (Google, Apple) or not at all (a hardware key)", "style": "secret" },
+    { "from": "auth", "to": "page",   "text": "credential id, public key, prf.enabled = true" },
+    { "from": "page", "to": "bucket", "text": "meta.json: the user handle, the credential id, the public key, a device name" },
+    { "note": "page", "text": "then the keys page: KEK, key pair, recovery code, the first keyring.json; see Keys" }
+  ]
+}

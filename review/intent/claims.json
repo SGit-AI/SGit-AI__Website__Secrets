@@ -101,6 +101,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/commit/eb9aba5317fce111517ccdd38204619b25053082",
+      "id": "anchor.commit.eb9aba5317fce111517ccdd38204619b25053082",
+      "kind": "commit",
+      "name": "commit eb9aba5",
+      "opens": "on GitHub",
+      "ref": "commit:eb9aba5317fce111517ccdd38204619b25053082"
+    },
+    {
+      "anchor": true,
       "href": "/docs/design/brief-corrections.html",
       "id": "anchor.doc.docs/design/brief-corrections.md",
       "kind": "doc",
@@ -317,6 +326,15 @@
     },
     {
       "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_diagrams.py",
+      "id": "anchor.file.admin/build/gen_diagrams.py",
+      "kind": "file",
+      "name": "admin/build/gen_diagrams.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_diagrams.py"
+    },
+    {
+      "anchor": true,
       "href": "/review/ui/#file=admin/build/gen_docs.py",
       "id": "anchor.file.admin/build/gen_docs.py",
       "kind": "file",
@@ -350,6 +368,15 @@
       "name": "admin/build/gen_search.py",
       "opens": "in the navigator",
       "ref": "file:admin/build/gen_search.py"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=admin/build/gen_terms.py",
+      "id": "anchor.file.admin/build/gen_terms.py",
+      "kind": "file",
+      "name": "admin/build/gen_terms.py",
+      "opens": "in the navigator",
+      "ref": "file:admin/build/gen_terms.py"
     },
     {
       "anchor": true,
@@ -512,6 +539,15 @@
       "name": "assets/themes.css",
       "opens": "in the navigator",
       "ref": "file:assets/themes.css"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=components/passkey-lab/passkey-lab.js",
+      "id": "anchor.file.components/passkey-lab/passkey-lab.js",
+      "kind": "file",
+      "name": "components/passkey-lab/passkey-lab.js",
+      "opens": "in the navigator",
+      "ref": "file:components/passkey-lab/passkey-lab.js"
     },
     {
       "anchor": true,
@@ -710,6 +746,33 @@
       "name": "keyring/index.html",
       "opens": "in the navigator",
       "ref": "file:keyring/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=learn/gcp/index.html",
+      "id": "anchor.file.learn/gcp/index.html",
+      "kind": "file",
+      "name": "learn/gcp/index.html",
+      "opens": "in the navigator",
+      "ref": "file:learn/gcp/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=learn/keys/index.html",
+      "id": "anchor.file.learn/keys/index.html",
+      "kind": "file",
+      "name": "learn/keys/index.html",
+      "opens": "in the navigator",
+      "ref": "file:learn/keys/index.html"
+    },
+    {
+      "anchor": true,
+      "href": "/review/ui/#file=learn/passkeys/index.html",
+      "id": "anchor.file.learn/passkeys/index.html",
+      "kind": "file",
+      "name": "learn/passkeys/index.html",
+      "opens": "in the navigator",
+      "ref": "file:learn/passkeys/index.html"
     },
     {
       "anchor": true,
@@ -1172,6 +1235,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37536975841",
+      "id": "anchor.run.37536975841",
+      "kind": "run",
+      "name": "Actions run 37536975841 (success)",
+      "opens": "the run: validate, tag-release, deploy, verify-live",
+      "ref": "run:37536975841"
+    },
+    {
+      "anchor": true,
       "href": "/review/ui/#section=0",
       "id": "anchor.section.0",
       "kind": "section",
@@ -1433,6 +1505,15 @@
     },
     {
       "anchor": true,
+      "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.12",
+      "id": "anchor.tag.v0.1.12",
+      "kind": "tag",
+      "name": "tag v0.1.12",
+      "opens": "on GitHub",
+      "ref": "tag:v0.1.12"
+    },
+    {
+      "anchor": true,
       "href": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/releases/tag/v0.1.2",
       "id": "anchor.tag.v0.1.2",
       "kind": "tag",
@@ -1550,6 +1631,15 @@
     },
     {
       "anchor": true,
+      "href": "/review/ui/#file=tests/build/test_learn.py",
+      "id": "anchor.test.tests/build/test_learn.py",
+      "kind": "test",
+      "name": "tests/build/test_learn.py",
+      "opens": "in the navigator",
+      "ref": "test:tests/build/test_learn.py"
+    },
+    {
+      "anchor": true,
       "href": "/review/ui/#file=tests/build/test_md_to_html.py",
       "id": "anchor.test.tests/build/test_md_to_html.py",
       "kind": "test",
@@ -1637,6 +1727,24 @@
       "name": "secrets.sgit.ai/admin/build/version.txt",
       "opens": "the page itself",
       "ref": "url:https://secrets.sgit.ai/admin/build/version.txt"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/learn/",
+      "id": "anchor.url.https://secrets.sgit.ai/learn/",
+      "kind": "url",
+      "name": "secrets.sgit.ai/learn/",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/learn/"
+    },
+    {
+      "anchor": true,
+      "href": "https://secrets.sgit.ai/learn/passkeys/",
+      "id": "anchor.url.https://secrets.sgit.ai/learn/passkeys/",
+      "kind": "url",
+      "name": "secrets.sgit.ai/learn/passkeys/",
+      "opens": "the page itself",
+      "ref": "url:https://secrets.sgit.ai/learn/passkeys/"
     },
     {
       "anchor": true,
@@ -2219,6 +2327,34 @@
       },
       "status": "shipped",
       "where": "about/participant.html"
+    },
+    {
+      "area": "site",
+      "feature": "site.learn",
+      "id": "claim.site.learn",
+      "name": "Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin",
+      "notes": "Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them.",
+      "since": "0.1.12",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "learn/, data/terms.json, data/diagrams/, admin/build/gen_terms.py, gen_diagrams.py"
+    },
+    {
+      "area": "site",
+      "feature": "site.passkey-lab",
+      "id": "claim.site.passkey-lab",
+      "name": "The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF",
+      "notes": "Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25).",
+      "since": "0.1.12",
+      "source": {
+        "doc": "data/features.json",
+        "section": null
+      },
+      "status": "shipped",
+      "where": "components/passkey-lab/"
     },
     {
       "area": "site",
@@ -3720,6 +3856,81 @@
       "verb": "shipped_in"
     },
     {
+      "from": "claim.site.learn",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.learn",
+      "to": "anchor.file.learn/passkeys/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.learn",
+      "to": "anchor.file.learn/keys/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.learn",
+      "to": "anchor.file.learn/gcp/index.html",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.learn",
+      "to": "anchor.file.admin/build/gen_terms.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.learn",
+      "to": "anchor.file.admin/build/gen_diagrams.py",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.learn",
+      "to": "anchor.test.tests/build/test_learn.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.learn",
+      "to": "anchor.url.https://secrets.sgit.ai/learn/",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.site.learn",
+      "to": "release.0.1.12",
+      "verb": "shipped_in"
+    },
+    {
+      "from": "claim.site.passkey-lab",
+      "to": "repository",
+      "verb": "realises"
+    },
+    {
+      "from": "claim.site.passkey-lab",
+      "to": "anchor.file.components/passkey-lab/passkey-lab.js",
+      "verb": "lives_in"
+    },
+    {
+      "from": "claim.site.passkey-lab",
+      "to": "anchor.test.tests/build/test_learn.py",
+      "verb": "proven_by"
+    },
+    {
+      "from": "claim.site.passkey-lab",
+      "to": "anchor.doc.docs/design/brief-corrections.md",
+      "verb": "described_in"
+    },
+    {
+      "from": "claim.site.passkey-lab",
+      "to": "anchor.url.https://secrets.sgit.ai/learn/passkeys/",
+      "verb": "seen_at"
+    },
+    {
+      "from": "claim.site.passkey-lab",
+      "to": "release.0.1.12",
+      "verb": "shipped_in"
+    },
+    {
       "from": "claim.site.themes",
       "to": "site.chrome",
       "verb": "realises"
@@ -4430,9 +4641,29 @@
       "verb": "described_in"
     },
     {
+      "from": "release.0.1.12",
+      "to": "anchor.tag.v0.1.12",
+      "verb": "recorded_in"
+    },
+    {
       "from": "release.0.1.11",
       "to": "anchor.tag.v0.1.11",
       "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.11",
+      "to": "anchor.commit.eb9aba5317fce111517ccdd38204619b25053082",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.11",
+      "to": "anchor.run.37536975841",
+      "verb": "recorded_in"
+    },
+    {
+      "from": "release.0.1.11",
+      "to": "anchor.url.https://secrets.sgit.ai/admin/build/version.txt",
+      "verb": "proven_by"
     },
     {
       "from": "release.0.1.10",
@@ -4668,12 +4899,30 @@
     {
       "commit": null,
       "date": "2026-10-06",
+      "id": "release.0.1.12",
+      "name": "v0.1.12: learn: passkeys, keys, GCP, and the passkey lab",
+      "notes": "A learn section, from Dinis's reading of the security page: the words link to explanations in this site's context. Passkeys, WebAuthn and PRF (what the passkey is here and is not; the two calls drawn; what the authenticator, the browser, this site and Google each hold; the RP ID; what two passkeys mean), Keys (is there a passphrase, no; the PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM, the recovery code; what is in memory when), and GCP from this site's side (Identity Platform, the uid, the bucket, the Security Rules, Terraform, Workload Identity Federation; what Google sees and cannot). A glossary in data/terms.json, linked by the build from the first use of each term on every content page with the definition as hover text, and listed by the reader's column under a Terms tab. Flow diagrams drawn by the build from data/diagrams/ as inline SVG on the theme's tokens, with the same diagram as text. The passkey lab on the passkeys page: create lab passkeys in your own browser under this host's RP ID, ask for the PRF bytes (same salt, same bytes; another salt, others), derive the wrapping key, wrap a lab KEK, encrypt a lab body, forget the keys, unlock again with the same or a second passkey, and watch what is stored where; one allow-listed storage record of public values, no network. Chromium's virtual authenticator does PRF, which answers an open question of the brief (C25). Twins keep explicit anchors as inline HTML so fragment links into them resolve.",
+      "run": null,
+      "tag": "v0.1.12",
+      "verified": null,
+      "version": "0.1.12"
+    },
+    {
+      "commit": "eb9aba5317fce111517ccdd38204619b25053082",
+      "date": "2026-10-06",
       "id": "release.0.1.11",
       "name": "v0.1.11: code mode",
       "notes": "The navigator has two modes. Intent is the brief downwards, as before, with the claims folded by status and release and the left column foldable. Code is entered by opening a file, picking the Code view, or the switch in the top bar: the source in the middle with the selected lines marked, the file's tree on the left (packages, files, classes, methods), and on the right the graph upwards from that piece of code: what it says about itself (its own comments), why it exists (the claims whose evidence lives in it and the stories they realise), outline, imports and importers, calls and callers, tests and surfaces. The derived layers under review/graph/ (files, modules, classes, methods, tests, surfaces, and an index of counts and paths) come from review/tools/derive.py: Python through ast, JavaScript through a vendored, hashed acorn that only the build runs. Every file path a node names is a link into the source. The explanation layer (what, why, story, at a technical and a business level) is proposed in C24.",
-      "run": null,
+      "run": {
+        "conclusion": "success",
+        "id": 37536975841,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37536975841"
+      },
       "tag": "v0.1.11",
-      "verified": null,
+      "verified": {
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push",
+        "url": "https://secrets.sgit.ai/admin/build/version.txt"
+      },
       "version": "0.1.11"
     },
     {

@@ -2,11 +2,11 @@
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one GCP project per environment, holding Identity Platform for login and a Cloud Storage bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.
+A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one [GCP project](/learn/gcp/index.md#gcp) per environment, holding [Identity Platform](/learn/gcp/index.md#identity-platform) for login and a [Cloud Storage](/learn/gcp/index.md#bucket) bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.
 
 **What exists at this version.** The pipeline, the live site, and the content pages that describe the design. No app, no admin, no probe page is built. Every row below marked *proposed* is a design, not a thing. The design is in [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md); what is real is in [/shipped/](/shipped/index.md) and [docs/reality.md](/docs/reality.md), generated from the same data as the table on this page.
 
@@ -15,16 +15,16 @@ A zero-knowledge secrets manager that will run entirely in the browser. The site
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 1. **Sign in** with Google or an email address, against the environment shown in the header.
-2. **Touch your passkey.** The authenticator returns a secret bound to this origin; the browser derives the key that opens your keyring.
+2. **Touch your [passkey](/learn/passkeys/index.md#passkey).** The [authenticator](/learn/passkeys/index.md#authenticator) returns a secret bound to this origin; the browser derives the key that opens your [keyring](/keyring/index.md).
 3. **See your secret.** It was ciphertext in a bucket a second ago and it is plaintext only in this tab, until you lock, sign out or leave.
 
 None of the three steps is built. [How it works](/how-it-works/index.md) draws the flows; [the keyring page](/keyring/index.md) is the file format; [security](/security/index.md) is what each party gets and what the design cannot withhold.
 
 ## What it will be
 
-A password-manager-shaped app where the "passwords" can be anything small and secret: passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes. Unlocked by a passkey using the WebAuthn PRF extension, with a recovery code as the second unlock method. Stored as an encrypted keyring in a bucket the user's login can reach. Readable by no one else, including the people who run the bucket.
+A password-manager-shaped app where the "passwords" can be anything small and secret: passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes. Unlocked by a passkey using the [WebAuthn](/learn/passkeys/index.md#webauthn) [PRF extension](/learn/passkeys/index.md#prf), with a [recovery code](/learn/keys/index.md#recovery-code) as the second unlock method. Stored as an encrypted keyring in a bucket the user's login can reach. Readable by no one else, including the people who run the bucket.
 
-Three principles are not negotiable: plaintext exists only in the browser, briefly, after a passkey gesture; the login decides which paths you may touch and the passkey decides whether the bytes mean anything; and nothing in the repository is secret, so the whole configuration of every environment is public.
+Three principles are not negotiable: plaintext exists only in the browser, briefly, after a [passkey gesture](/learn/passkeys/index.md#gesture); the login decides which paths you may touch and the passkey decides whether the bytes mean anything; and nothing in the repository is secret, so the whole configuration of every environment is public.
 
 ## What a compromised party would get
 
@@ -34,7 +34,7 @@ The design's threat table, from [section 3.4 of the brief](/docs/design/secrets-
 |---|---|---|
 | GCP project or Identity Platform admin | User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone | Any plaintext: the PRF output is bound to the origin and the user's authenticator |
 | Bucket reader | Ciphertext | Plaintext |
-| Terraform pipeline | Can change rules, delete the bucket | Plaintext |
+| [Terraform](/learn/gcp/index.md#terraform) pipeline | Can change rules, delete the bucket | Plaintext |
 | This repository or the DNS | **Everything, for users who load the malicious page** | Nothing is withheld |
 
 The last row is why the repository protections in [docs/ops/branch-protection.md](/docs/ops/branch-protection.md) exist. The code served to the browser is the boundary.
@@ -80,6 +80,8 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 | pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | [shipped v0.1.3](/review/ui/#node=claim.pipeline.gate-extras) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | From section 4 of the repository guidance; the advisory never fails the build. |
 | site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | [shipped v0.1.3](/review/ui/#node=claim.site.team-roles) | team/ | Two roles fill every seat: the project lead and the build agent. |
 | site | Participant disclosure: who publishes this site and what they are building | [shipped v0.1.3](/review/ui/#node=claim.site.participant) | [about/participant.html](/review/ui/#file=about/participant.html) | Linked from the footer. |
+| site | Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin | [shipped v0.1.12](/review/ui/#node=claim.site.learn) | learn/, [data/terms.json](/review/ui/#file=data/terms.json), data/diagrams/, [admin/build/gen_terms.py](/review/ui/#file=admin/build/gen_terms.py), gen_diagrams.py | Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them. |
+| site | The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF | [shipped v0.1.12](/review/ui/#node=claim.site.passkey-lab) | components/passkey-lab/ | Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25). |
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | [shipped v0.1.6](/review/ui/#node=claim.site.themes) | [data/themes.json](/review/ui/#file=data/themes.json), [assets/themes.css](/review/ui/#file=assets/themes.css), [assets/theme.js](/review/ui/#file=assets/theme.js) | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
 | site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) | components/reader-chat/, [reader/index.html](/review/ui/#file=reader/index.html), [data/search-index.json](/review/ui/#file=data/search-index.json) | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |

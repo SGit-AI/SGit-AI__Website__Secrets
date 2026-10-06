@@ -1,0 +1,22 @@
+{
+  "id": "key-hierarchy",
+  "kind": "chain",
+  "title": "From the PRF bytes, or the recovery code, to the plaintext",
+  "caption": "Section 8.2 of the brief as a picture. Two roots, one KEK: each unlock method derives its own wrapping key and the keyring holds one wrapped copy of the KEK per method, so adding a passkey adds a wrap and never re-encrypts the body. Red is secret and never stored; blue is public and stored in the clear; grey is derived in memory and thrown away.",
+  "items": [
+    { "id": "prf",      "row": 0, "col": "left",   "kind": "secret",  "label": "PRF output, 32 bytes",            "detail": "from the authenticator, per passkey, never stored" },
+    { "id": "code",     "row": 0, "col": "right",  "kind": "secret",  "label": "Recovery code, 128 bits",          "detail": "26 base32 characters, shown once, kept by you" },
+    { "id": "salt",     "row": 0, "col": "centre", "kind": "public",  "label": "prfSalt, 32 bytes",                "detail": "in keyring.json, in the clear; the input, not a secret" },
+    { "id": "wkp",      "row": 1, "col": "left",   "kind": "derived", "label": "WK_passkey (AES-256-GCM)",         "detail": "one per passkey; in memory for the unlock" },
+    { "id": "wkr",      "row": 1, "col": "right",  "kind": "derived", "label": "WK_recovery (AES-256-GCM)",        "detail": "in memory, only during a recovery" },
+    { "id": "kek",      "row": 2, "col": "centre", "kind": "secret",  "label": "KEK, 32 random bytes",             "detail": "stored only as wraps[].ct, once per unlock method" },
+    { "id": "body",     "row": 3, "col": "centre", "kind": "secret",  "label": "The body: entries and the key pair","detail": "stored only as body.ct; plaintext in memory, briefly" }
+  ],
+  "links": [
+    { "from": "prf",  "to": "wkp", "text": "HKDF-SHA256(ikm = prf, salt = prfSalt, info = sgit-secrets/v1/wrap/<credentialId>)" },
+    { "from": "code", "to": "wkr", "text": "HKDF-SHA256(ikm = code bytes, salt = prfSalt, info = sgit-secrets/v1/wrap/recovery)" },
+    { "from": "wkp",  "to": "kek", "text": "AES-256-GCM unwrap of wraps[pk-<id>].ct, aad = keyringId|wrap.id" },
+    { "from": "wkr",  "to": "kek", "text": "AES-256-GCM unwrap of wraps[recovery-1].ct" },
+    { "from": "kek",  "to": "body","text": "AES-256-GCM decrypt of body.ct, aad = keyringId|rev" }
+  ]
+}

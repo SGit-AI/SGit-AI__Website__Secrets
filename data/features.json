@@ -1042,6 +1042,80 @@
       ]
     },
     {
+      "id": "site.learn",
+      "area": "site",
+      "title": "Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin",
+      "status": "shipped",
+      "since": "0.1.12",
+      "where": "learn/, data/terms.json, data/diagrams/, admin/build/gen_terms.py, gen_diagrams.py",
+      "notes": "Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them.",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:learn/passkeys/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:learn/keys/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:learn/gcp/index.html"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_terms.py"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:admin/build/gen_diagrams.py"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_learn.py"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/learn/"
+        }
+      ]
+    },
+    {
+      "id": "site.passkey-lab",
+      "area": "site",
+      "title": "The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF",
+      "status": "shipped",
+      "since": "0.1.12",
+      "where": "components/passkey-lab/",
+      "notes": "Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25).",
+      "evidence": [
+        {
+          "verb": "realises",
+          "to": "node:repository"
+        },
+        {
+          "verb": "lives_in",
+          "to": "file:components/passkey-lab/passkey-lab.js"
+        },
+        {
+          "verb": "proven_by",
+          "to": "test:tests/build/test_learn.py"
+        },
+        {
+          "verb": "described_in",
+          "to": "doc:docs/design/brief-corrections.md"
+        },
+        {
+          "verb": "seen_at",
+          "to": "url:https://secrets.sgit.ai/learn/passkeys/"
+        }
+      ]
+    },
+    {
       "id": "site.themes",
       "area": "site",
       "title": "Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css",

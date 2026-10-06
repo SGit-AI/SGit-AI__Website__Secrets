@@ -91,3 +91,7 @@
 .foot a { color: var(--sg-text); }
 
 @media print { :host { display: none; } }
+
+.terms dt            { color: var(--sg-text-heading); font-weight: 600; margin-top: var(--sg-sp-2); }
+.terms dt a          { color: inherit; }
+.terms dd            { color: var(--sg-text); font-size: var(--sg-fs-small); margin: 0; }

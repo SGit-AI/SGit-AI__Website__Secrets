@@ -1,14 +1,31 @@
 {
   "releases": [
     {
+      "version": "0.1.12",
+      "date": "2026-10-06",
+      "title": "learn: passkeys, keys, GCP, and the passkey lab",
+      "notes": "A learn section, from Dinis's reading of the security page: the words link to explanations in this site's context. Passkeys, WebAuthn and PRF (what the passkey is here and is not; the two calls drawn; what the authenticator, the browser, this site and Google each hold; the RP ID; what two passkeys mean), Keys (is there a passphrase, no; the PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM, the recovery code; what is in memory when), and GCP from this site's side (Identity Platform, the uid, the bucket, the Security Rules, Terraform, Workload Identity Federation; what Google sees and cannot). A glossary in data/terms.json, linked by the build from the first use of each term on every content page with the definition as hover text, and listed by the reader's column under a Terms tab. Flow diagrams drawn by the build from data/diagrams/ as inline SVG on the theme's tokens, with the same diagram as text. The passkey lab on the passkeys page: create lab passkeys in your own browser under this host's RP ID, ask for the PRF bytes (same salt, same bytes; another salt, others), derive the wrapping key, wrap a lab KEK, encrypt a lab body, forget the keys, unlock again with the same or a second passkey, and watch what is stored where; one allow-listed storage record of public values, no network. Chromium's virtual authenticator does PRF, which answers an open question of the brief (C25). Twins keep explicit anchors as inline HTML so fragment links into them resolve.",
+      "tag": "v0.1.12",
+      "commit": null,
+      "run": null,
+      "verified": null
+    },
+    {
       "version": "0.1.11",
       "date": "2026-10-06",
       "title": "code mode",
       "notes": "The navigator has two modes. Intent is the brief downwards, as before, with the claims folded by status and release and the left column foldable. Code is entered by opening a file, picking the Code view, or the switch in the top bar: the source in the middle with the selected lines marked, the file's tree on the left (packages, files, classes, methods), and on the right the graph upwards from that piece of code: what it says about itself (its own comments), why it exists (the claims whose evidence lives in it and the stories they realise), outline, imports and importers, calls and callers, tests and surfaces. The derived layers under review/graph/ (files, modules, classes, methods, tests, surfaces, and an index of counts and paths) come from review/tools/derive.py: Python through ast, JavaScript through a vendored, hashed acorn that only the build runs. Every file path a node names is a link into the source. The explanation layer (what, why, story, at a technical and a business level) is proposed in C24.",
       "tag": "v0.1.11",
-      "commit": null,
-      "run": null,
-      "verified": null
+      "commit": "eb9aba5317fce111517ccdd38204619b25053082",
+      "run": {
+        "id": 37536975841,
+        "url": "https://github.com/SGit-AI/SGit-AI__Website__Secrets/actions/runs/37536975841",
+        "conclusion": "success"
+      },
+      "verified": {
+        "url": "https://secrets.sgit.ai/admin/build/version.txt",
+        "by": "verify-live in the run above, and admin/build/verify_live.py after the push"
+      }
     },
     {
       "version": "0.1.10",

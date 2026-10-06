@@ -1,0 +1,24 @@
+{
+  "id": "passkey-unlock",
+  "kind": "sequence",
+  "title": "Returning: one gesture unlocks the keyring",
+  "caption": "The returning flow (section 3.2 and 8.2 of the brief). The dashed red arrow is the only secret that crosses a boundary, and it crosses once, into this page's memory. Google serves ciphertext and a public salt, and the PRF bytes mean nothing to anyone who holds only those.",
+  "lanes": [
+    { "id": "you",    "label": "You" },
+    { "id": "page",   "label": "This page, in your browser" },
+    { "id": "auth",   "label": "Your authenticator" },
+    { "id": "bucket", "label": "The bucket (GCP)" }
+  ],
+  "steps": [
+    { "from": "you",    "to": "page",   "text": "sign in" },
+    { "from": "page",   "to": "bucket", "text": "GET users/{uid}/keyring.json and meta.json" },
+    { "from": "bucket", "to": "page",   "text": "ciphertext, the wraps, prfSalt, the generation number; the credential ids" },
+    { "from": "page",   "to": "auth",   "text": "navigator.credentials.get: rpId, allowCredentials from meta.json, prf.eval.first = prfSalt" },
+    { "from": "auth",   "to": "you",    "text": "asks for a gesture" },
+    { "from": "you",    "to": "auth",   "text": "the gesture" },
+    { "from": "auth",   "to": "page",   "text": "32 PRF bytes, in memory only", "style": "secret" },
+    { "note": "page",   "text": "HKDF-SHA256(prf bytes, prfSalt, \"sgit-secrets/v1/wrap/<credentialId>\") = the wrapping key for this passkey", "style": "secret" },
+    { "note": "page",   "text": "AES-256-GCM: unwrap the KEK, decrypt the body; the vault list is in memory", "style": "secret" },
+    { "note": "page",   "text": "nothing is written anywhere; keys are cleared on sign-out, on an environment change, after five hidden minutes, on unload" }
+  ]
+}

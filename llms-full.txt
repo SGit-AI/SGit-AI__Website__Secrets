@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.11 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.12 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -21,11 +21,11 @@ source: /index.md
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one GCP project per environment, holding Identity Platform for login and a Cloud Storage bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.
+A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one [GCP project](/learn/gcp/index.md#gcp) per environment, holding [Identity Platform](/learn/gcp/index.md#identity-platform) for login and a [Cloud Storage](/learn/gcp/index.md#bucket) bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.
 
 **What exists at this version.** The pipeline, the live site, and the content pages that describe the design. No app, no admin, no probe page is built. Every row below marked *proposed* is a design, not a thing. The design is in [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md); what is real is in [/shipped/](/shipped/index.md) and [docs/reality.md](/docs/reality.md), generated from the same data as the table on this page.
 
@@ -34,16 +34,16 @@ A zero-knowledge secrets manager that will run entirely in the browser. The site
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
 1. **Sign in** with Google or an email address, against the environment shown in the header.
-2. **Touch your passkey.** The authenticator returns a secret bound to this origin; the browser derives the key that opens your keyring.
+2. **Touch your [passkey](/learn/passkeys/index.md#passkey).** The [authenticator](/learn/passkeys/index.md#authenticator) returns a secret bound to this origin; the browser derives the key that opens your [keyring](/keyring/index.md).
 3. **See your secret.** It was ciphertext in a bucket a second ago and it is plaintext only in this tab, until you lock, sign out or leave.
 
 None of the three steps is built. [How it works](/how-it-works/index.md) draws the flows; [the keyring page](/keyring/index.md) is the file format; [security](/security/index.md) is what each party gets and what the design cannot withhold.
 
 ## What it will be
 
-A password-manager-shaped app where the "passwords" can be anything small and secret: passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes. Unlocked by a passkey using the WebAuthn PRF extension, with a recovery code as the second unlock method. Stored as an encrypted keyring in a bucket the user's login can reach. Readable by no one else, including the people who run the bucket.
+A password-manager-shaped app where the "passwords" can be anything small and secret: passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes. Unlocked by a passkey using the [WebAuthn](/learn/passkeys/index.md#webauthn) [PRF extension](/learn/passkeys/index.md#prf), with a [recovery code](/learn/keys/index.md#recovery-code) as the second unlock method. Stored as an encrypted keyring in a bucket the user's login can reach. Readable by no one else, including the people who run the bucket.
 
-Three principles are not negotiable: plaintext exists only in the browser, briefly, after a passkey gesture; the login decides which paths you may touch and the passkey decides whether the bytes mean anything; and nothing in the repository is secret, so the whole configuration of every environment is public.
+Three principles are not negotiable: plaintext exists only in the browser, briefly, after a [passkey gesture](/learn/passkeys/index.md#gesture); the login decides which paths you may touch and the passkey decides whether the bytes mean anything; and nothing in the repository is secret, so the whole configuration of every environment is public.
 
 ## What a compromised party would get
 
@@ -53,7 +53,7 @@ The design's threat table, from [section 3.4 of the brief](/docs/design/secrets-
 |---|---|---|
 | GCP project or Identity Platform admin | User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone | Any plaintext: the PRF output is bound to the origin and the user's authenticator |
 | Bucket reader | Ciphertext | Plaintext |
-| Terraform pipeline | Can change rules, delete the bucket | Plaintext |
+| [Terraform](/learn/gcp/index.md#terraform) pipeline | Can change rules, delete the bucket | Plaintext |
 | This repository or the DNS | **Everything, for users who load the malicious page** | Nothing is withheld |
 
 The last row is why the repository protections in [docs/ops/branch-protection.md](/docs/ops/branch-protection.md) exist. The code served to the browser is the boundary.
@@ -99,6 +99,8 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 | pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | [shipped v0.1.3](/review/ui/#node=claim.pipeline.gate-extras) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | From section 4 of the repository guidance; the advisory never fails the build. |
 | site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | [shipped v0.1.3](/review/ui/#node=claim.site.team-roles) | team/ | Two roles fill every seat: the project lead and the build agent. |
 | site | Participant disclosure: who publishes this site and what they are building | [shipped v0.1.3](/review/ui/#node=claim.site.participant) | [about/participant.html](/review/ui/#file=about/participant.html) | Linked from the footer. |
+| site | Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin | [shipped v0.1.12](/review/ui/#node=claim.site.learn) | learn/, [data/terms.json](/review/ui/#file=data/terms.json), data/diagrams/, [admin/build/gen_terms.py](/review/ui/#file=admin/build/gen_terms.py), gen_diagrams.py | Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them. |
+| site | The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF | [shipped v0.1.12](/review/ui/#node=claim.site.passkey-lab) | components/passkey-lab/ | Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25). |
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | [shipped v0.1.6](/review/ui/#node=claim.site.themes) | [data/themes.json](/review/ui/#file=data/themes.json), [assets/themes.css](/review/ui/#file=assets/themes.css), [assets/theme.js](/review/ui/#file=assets/theme.js) | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
 | site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) | components/reader-chat/, [reader/index.html](/review/ui/#file=reader/index.html), [data/search-index.json](/review/ui/#file=data/search-index.json) | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
@@ -159,7 +161,7 @@ source: /about/participant.md
 
 > Who publishes this site, what they are building, and why that matters when reading its claims: the people who run the sgit family build the secrets manager this site describes, and the site is written while it is built.
 
-*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -191,7 +193,7 @@ source: /admin/comms.md
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -264,7 +266,7 @@ source: /admin/index.md
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -336,7 +338,7 @@ source: /admin/versions.md
 
 > Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
 
-*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -344,6 +346,7 @@ One row per release. The version increments on every push to `dev`: a minor bump
 
 | Version | Date | Release | What changed |
 |---|---|---|---|
+| `v0.1.12` | 2026-10-06 | learn: passkeys, keys, GCP, and the passkey lab | A learn section, from Dinis's reading of the security page: the words link to explanations in this site's context. Passkeys, WebAuthn and PRF (what the passkey is here and is not; the two calls drawn; what the authenticator, the browser, this site and Google each hold; the RP ID; what two passkeys mean), Keys (is there a passphrase, no; the PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM, the recovery code; what is in memory when), and GCP from this site's side (Identity Platform, the uid, the bucket, the Security Rules, Terraform, Workload Identity Federation; what Google sees and cannot). A glossary in data/terms.json, linked by the build from the first use of each term on every content page with the definition as hover text, and listed by the reader's column under a Terms tab. Flow diagrams drawn by the build from data/diagrams/ as inline SVG on the theme's tokens, with the same diagram as text. The passkey lab on the passkeys page: create lab passkeys in your own browser under this host's RP ID, ask for the PRF bytes (same salt, same bytes; another salt, others), derive the wrapping key, wrap a lab KEK, encrypt a lab body, forget the keys, unlock again with the same or a second passkey, and watch what is stored where; one allow-listed storage record of public values, no network. Chromium's virtual authenticator does PRF, which answers an open question of the brief (C25). Twins keep explicit anchors as inline HTML so fragment links into them resolve. |
 | `v0.1.11` | 2026-10-06 | code mode | The navigator has two modes. Intent is the brief downwards, as before, with the claims folded by status and release and the left column foldable. Code is entered by opening a file, picking the Code view, or the switch in the top bar: the source in the middle with the selected lines marked, the file's tree on the left (packages, files, classes, methods), and on the right the graph upwards from that piece of code: what it says about itself (its own comments), why it exists (the claims whose evidence lives in it and the stories they realise), outline, imports and importers, calls and callers, tests and surfaces. The derived layers under review/graph/ (files, modules, classes, methods, tests, surfaces, and an index of counts and paths) come from review/tools/derive.py: Python through ast, JavaScript through a vendored, hashed acorn that only the build runs. Every file path a node names is a link into the source. The explanation layer (what, why, story, at a technical and a business level) is proposed in C24. |
 | `v0.1.10` | 2026-10-06 | Review in the top menu | Review is a group of the family nav, between Shipped and Docs: the project as graphs, the navigator, the claims and their evidence, the brief as sections, the README with the counts, and the corrections to the review brief. It leaves the Admin menu. release.py fetches the tags before backfilling a release's commit. |
 | `v0.1.9` | 2026-10-06 | everything links to everything | Meaning through connectivity, from the fractal semantic graphs article: a claim means nothing until it is linked to its evidence, down to an anchor a person can open. Every claim in data/features.json now carries typed evidence (realises an intent node, lives_in a file, proven_by a test or a gate check, described_in a section or a document, seen_at a URL); review/tools/claims.py turns the claims, the releases (with their commit, tag and Actions run, backfilled from GitHub) and the anchors into the claims layer of the review graph, strict: a shipped claim with no anchor that resolves fails the build. Every status chip and every location on /shipped/ and in the status lines is a link into the navigator. The reader never leaves it to follow a chain: the brief is split into fourteen section files under review/brief/ by review/tools/brief.py and shown in place by review-brief, with the intent nodes written from each section; any served file is shown in place with line numbers and a marked range by review-source; sections and files are routes the gate resolves. The ladder gains the brief and the evidence rungs; the tree gains the Claims and The brief views; the crumb follows. C23, R10. |
@@ -372,7 +375,7 @@ source: /docs/design/index.md
 
 > The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
 
-*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -398,7 +401,7 @@ source: /docs/index.md
 
 > Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
 
-*Source: <https://secrets.sgit.ai/docs/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -429,7 +432,7 @@ source: /docs/ops/index.md
 
 > How a release works, what only a human can do, the DNS record and the repository protections.
 
-*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -455,13 +458,13 @@ source: /environments/index.md
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.infra.bootstrap) Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool · [proposed](/review/ui/#node=claim.infra.terraform) Terraform module secrets-env and the dev environment root · [proposed](/review/ui/#node=claim.infra.environments-config) config/environments.json with real dev values from Terraform outputs · [proposed](/review/ui/#node=claim.app.environment-page) Environment page: pick a built-in environment, enter a custom one, import, export, reset
 
-One site serves every environment. An environment is one GCP project holding an Identity Platform configuration and one bucket; the project is the unit that is created and destroyed. The browser picks the environment at runtime, with `prod` as the default on `secrets.sgit.ai`, and shows which one is active in the app header at all times, so nobody enters a real secret into `dev` by mistake.
+One site serves every environment. An environment is one [GCP project](/learn/gcp/index.md#gcp) holding an [Identity Platform](/learn/gcp/index.md#identity-platform) configuration and one [bucket](/learn/gcp/index.md#bucket); the project is the unit that is created and destroyed. The browser picks the environment at runtime, with `prod` as the default on `secrets.sgit.ai`, and shows which one is active in the app header at all times, so nobody enters a real secret into `dev` by mistake.
 
 ## The environments
 
@@ -476,7 +479,7 @@ The project ids are proposed until the bootstrap confirms they are available. No
 
 ## What a project contains
 
-Terraform in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform. The exact procedure, as commands, is [docs/ops/bootstrap.md](/docs/ops/bootstrap.md).
+[Terraform](/learn/gcp/index.md#terraform) in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the [Security Rules](/learn/gcp/index.md#rules) release; IAM for the Terraform service account and the admins group; and the [Workload Identity Federation](/learn/gcp/index.md#wif) pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform. The exact procedure, as commands, is [docs/ops/bootstrap.md](/docs/ops/bootstrap.md).
 
 ## config/environments.json
 
@@ -546,13 +549,13 @@ source: /how-it-works/index.md
 
 > The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 
-*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.keyring-v1) Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · [proposed](/review/ui/#node=claim.app.devices) Devices page: add and remove passkeys, regenerate the recovery code
 
-Two things decide what you can do. The **login** decides which paths in the bucket you may touch. The **passkey** decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.
+Two things decide what you can do. The **login** decides which paths in the [bucket](/learn/gcp/index.md#bucket) you may touch. The **[passkey](/learn/passkeys/index.md#passkey)** decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.
 
 This page describes the design in section 3 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). Every flow on it is *proposed*. The status line above is generated from `data/features.json` and changes when the code ships.
 
@@ -561,11 +564,11 @@ This page describes the design in section 3 of [the brief](/docs/design/secrets-
 | Layer | Component | Where it runs | What it is trusted with |
 |---|---|---|---|
 | Site and app | Static HTML, JS and CSS from this repository, on GitHub Pages at `secrets.sgit.ai` | Your browser | **The boundary.** Whoever controls this repository or the DNS controls the app |
-| Login | Identity Platform, through the vendored Firebase Auth SDK | Google | Can impersonate; cannot decrypt |
-| Storage | A Cloud Storage for Firebase bucket with Security Rules | Google | Holds ciphertext; can delete |
-| Unlock | A WebAuthn passkey with the PRF extension, RP ID `secrets.sgit.ai` | Your authenticator: Google Password Manager, iCloud Keychain or a hardware key | The only thing that can decrypt |
-| Admin | The same static pages, calling GCP's own REST APIs with your Google account's token | Your browser | Works only if your Google account has IAM on the project |
-| Infrastructure | Terraform in this repository, applied by GitHub Actions through Workload Identity Federation | GitHub Actions | Can reconfigure or delete; cannot read |
+| Login | [Identity Platform](/learn/gcp/index.md#identity-platform), through the vendored Firebase Auth SDK | Google | Can impersonate; cannot decrypt |
+| Storage | A Cloud Storage for Firebase bucket with [Security Rules](/learn/gcp/index.md#rules) | Google | Holds ciphertext; can delete |
+| Unlock | A [WebAuthn](/learn/passkeys/index.md#webauthn) passkey with the [PRF extension](/learn/passkeys/index.md#prf), [RP ID](/learn/passkeys/index.md#rp-id) `secrets.sgit.ai` | Your [authenticator](/learn/passkeys/index.md#authenticator): Google Password Manager, iCloud Keychain or a hardware key | The only thing that can decrypt |
+| Admin | The same static pages, calling [GCP](/learn/gcp/index.md#gcp)'s own REST APIs with your Google account's token | Your browser | Works only if your Google account has IAM on the project |
+| Infrastructure | [Terraform](/learn/gcp/index.md#terraform) in this repository, applied by GitHub Actions through [Workload Identity Federation](/learn/gcp/index.md#wif) | GitHub Actions | Can reconfigure or delete; cannot read |
 
 ## First run
 
@@ -580,7 +583,7 @@ sign in ──▶ no keyring at users/{uid}/keyring.json
 
 ```
 
-What leaves the browser: ciphertext, two wrapped copies of the KEK, a 32-byte PRF salt, and `meta.json` with the passkey's credential id and public key. What never leaves: the PRF output, the KEK, the recovery code, the private keys, any entry.
+What leaves the browser: ciphertext, two wrapped copies of the [KEK](/learn/keys/index.md#kek), a 32-byte [PRF salt](/learn/keys/index.md#prf-salt), and `meta.json` with the passkey's [credential id](/learn/passkeys/index.md#credential) and public key. What never leaves: the PRF output, the KEK, the [recovery code](/learn/keys/index.md#recovery-code), the private keys, any entry.
 
 ## Returning
 
@@ -619,7 +622,7 @@ open /admin/ ──▶ choose an environment
 
 ```
 
-There is no admin role in the app. The GCP project's IAM is the role; the pages are a client for GCP's APIs. An admin page can list users, deploy rules and change CORS. It cannot open a keyring, because a keyring is ciphertext and the admin's token unlocks nothing.
+There is no admin role in the app. The GCP project's IAM is the role; the pages are a client for GCP's APIs. An admin page can list users, deploy rules and change CORS. It cannot open a [keyring](/keyring/index.md), because a keyring is ciphertext and the admin's token unlocks nothing.
 
 ## What each party can see
 
@@ -627,7 +630,7 @@ There is no admin role in the app. The GCP project's IAM is the role; the pages 
 |---|---|---|---|---|
 | Sign in | Your email, the sign-in event, your uid | Nothing (static files) | Nothing | An ID token |
 | Fetch keyring | That uid read that object | Nothing | Nothing | Ciphertext |
-| Passkey gesture | Nothing | Nothing | The PRF secret for this credential and this origin | 32 bytes of PRF output, briefly |
+| Passkey [gesture](/learn/passkeys/index.md#gesture) | Nothing | Nothing | The PRF secret for this credential and this origin | 32 bytes of PRF output, briefly |
 | Unlock | Nothing | Nothing | Nothing | The KEK and the plaintext body, in memory |
 | Write | New ciphertext, the object's size and time | Nothing | Nothing | Everything it already had |
 
@@ -652,13 +655,13 @@ source: /keyring/index.md
 
 > The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
 
-*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.keyring-v1) Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · [proposed](/review/ui/#node=claim.app.recovery-code) Recovery code: 26 characters base32, 128 bits, shown once · [proposed](/review/ui/#node=claim.app.concurrency) Optimistic concurrency on keyring writes with a three-way merge · [proposed](/review/ui/#node=claim.app.entries) Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-The keyring is one encrypted file in the user's own prefix of a Cloud Storage bucket. Google stores it and cannot read it. This page is the file format, published as a specification so that a reader can check the code against it and so that another implementation could open the same file. It is version 1 and it is proposed: the known-answer fixtures in `tests/fixtures/keyring-v1/` and the crypto probe page will make it checkable when step 4 ships.
+The keyring is one encrypted file in the user's own prefix of a [Cloud Storage](/learn/gcp/index.md#bucket) bucket. Google stores it and cannot read it. This page is the file format, published as a specification so that a reader can check the code against it and so that another implementation could open the same file. It is version 1 and it is proposed: the known-answer fixtures in `tests/fixtures/keyring-v1/` and the crypto probe page will make it checkable when step 4 ships.
 
 ## Objects in the bucket
 
@@ -670,6 +673,8 @@ directory/{uid}.pub.json          the user's public-key bundle, signed (phase 1 
 inbox/{uid}/{shareId}.json        keys encrypted to this user (phase 2)
 
 ```
+
+<a id="key-hierarchy"></a>
 
 ## Key hierarchy
 
@@ -688,9 +693,9 @@ body (AES-256-GCM under the KEK)  { keys, entries[] }
 
 ```
 
-**The PRF salt.** `keyring.prfSalt` is 32 random bytes, fixed for the keyring's life, passed to every passkey as `prf.eval.first`. One salt serves all passkeys; the per-credential HKDF `info` keeps the wrapping keys apart. The authenticator's PRF is already per-credential, so the info string is belt and braces.
+**The [PRF](/learn/passkeys/index.md#prf) salt.** `keyring.prfSalt` is 32 random bytes, fixed for the keyring's life, passed to every [passkey](/learn/passkeys/index.md#passkey) as `prf.eval.first`. One salt serves all passkeys; the per-credential [HKDF](/learn/keys/index.md#hkdf) `info` keeps the wrapping keys apart. The [authenticator](/learn/passkeys/index.md#authenticator)'s PRF is already per-credential, so the info string is belt and braces.
 
-**The recovery code and why it is long.** HKDF alone is fast, so an attacker who holds the keyring could brute-force a weak code. A code of 128 bits of entropy makes that irrelevant, which is why it is long and machine-generated and never chosen by the user. The design deliberately does not add PBKDF2 "for safety": it would only slow a legitimate recovery.
+**The [recovery code](/learn/keys/index.md#recovery-code) and why it is long.** HKDF alone is fast, so an attacker who holds the keyring could brute-force a weak code. A code of 128 bits of entropy makes that irrelevant, which is why it is long and machine-generated and never chosen by the user. The design deliberately does not add PBKDF2 "for safety": it would only slow a legitimate recovery.
 
 ## keyring.json
 
@@ -710,7 +715,7 @@ body (AES-256-GCM under the KEK)  { keys, entries[] }
 
 ```
 
-- `wraps[].ct` is AES-256-GCM of the 32-byte KEK under the wrap's WK, with additional authenticated data `keyringId|wrap.id`.
+- `wraps[].ct` is [AES-256-GCM](/learn/keys/index.md#aes-gcm) of the 32-byte [KEK](/learn/keys/index.md#kek) under the wrap's [WK](/learn/keys/index.md#wrapping-key), with additional authenticated data `keyringId|wrap.id`.
 - `body.ct` is AES-256-GCM of the UTF-8 JSON body under the KEK, with additional authenticated data `keyringId|rev`, so a body cannot be transplanted between keyrings or revisions: a stale body fails to decrypt rather than silently winning.
 - Every `iv` is 12 random bytes, fresh per encryption.
 
@@ -742,13 +747,15 @@ Entries are small: a soft limit of 16 KB each and 1 MB for the keyring. A `docum
 
 ## Concurrency
 
-Writes carry a GCS precondition, `x-goog-if-generation-match`, against the generation read at unlock. On a mismatch the page re-fetches, re-unlocks with the KEK already in memory (no new gesture), merges entries three ways by `id` and `updatedAt`, bumps `rev`, and retries once; after that it shows a conflict page rather than guessing.
+Writes carry a GCS precondition, `x-goog-if-generation-match`, against the generation read at unlock. On a mismatch the page re-fetches, re-unlocks with the KEK already in memory (no new [gesture](/learn/passkeys/index.md#gesture)), merges entries three ways by `id` and `updatedAt`, bumps `rev`, and retries once; after that it shows a conflict page rather than guessing.
+
+<a id="passkey-parameters"></a>
 
 ## Passkey parameters
 
 | Call | Parameters |
 |---|---|
-| `create` | `rp: { id: 'secrets.sgit.ai', name: 'secrets.sgit.ai' }`; `user.id` is 32 random bytes stored in `meta.json`, not the Firebase uid; `pubKeyCredParams` ES256 then RS256; `authenticatorSelection: { residentKey: 'required', userVerification: 'required' }`; `extensions: { prf: {} }`. If `prf.enabled` comes back false, the page says this authenticator cannot unlock and offers the recovery code or another authenticator. |
+| `create` | `rp: { id: 'secrets.sgit.ai', name: 'secrets.sgit.ai' }`; `user.id` is 32 random bytes stored in `meta.json`, not the [Firebase uid](/learn/gcp/index.md#uid); `pubKeyCredParams` ES256 then RS256; `authenticatorSelection: { residentKey: 'required', userVerification: 'required' }`; `extensions: { prf: {} }`. If `prf.enabled` comes back false, the page says this authenticator cannot unlock and offers the recovery code or another authenticator. |
 | `get` | `rpId`; `allowCredentials` from `meta.json`; `userVerification: 'required'`; `extensions: { prf: { eval: { first: prfSalt } } }`; read `getClientExtensionResults().prf.results.first`. |
 
 Known support, dated 2026-10-05 and to be re-checked on the probe page: Chrome and Edge on macOS, Windows and Android with Google Password Manager; Safari 18 and later with iCloud Keychain; hardware keys with hmac-secret. The matrix page will be built before anything more is promised.
@@ -763,6 +770,583 @@ The format carries `"v": 1` at the top and in the body. A later version will be 
 
 
 ==============================================================================
+source: /learn/gcp/index.md
+==============================================================================
+
+# GCP, from this site's side
+
+> What the Google Cloud project is for and what it sees: Identity Platform and the uid, the bucket and the Security Rules, Terraform and Workload Identity Federation, the admin pages, a customer's own project; drawn from the project's point of view.
+
+*Source: <https://secrets.sgit.ai/learn/gcp/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.infra.terraform) Terraform module secrets-env and the dev environment root · [proposed](/review/ui/#node=claim.infra.rules) Storage Security Rules deployed per environment · [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.admin.setup-checklist) Setup checklist: every per-project resource as a row, with Fix where fixable client-side
+
+The site is static files on GitHub Pages. Everything that remembers anything across devices is in one Google Cloud project per environment: a login service and a bucket. This page is that project seen from the project's own side: what is in it, who set it up, what each request from a browser looks like when it arrives, and what Google can and cannot do with what it holds. All of it is *proposed*: no project exists yet, and the bootstrap needs a human ([needs.md](/docs/ops/needs.md)).
+
+<a id="gcp"></a>
+
+## What the project is for
+
+Two jobs, and a third that is only tooling. **Identity Platform** signs users in and hands the browser a token that names them. **A Cloud Storage bucket**, behind Security Rules, stores each user's encrypted [keyring](/keyring/index.md) where only that user's token can reach it. **Terraform**, run by GitHub Actions, creates both and can change or delete them. There is no Cloud Function, no proxy, no API of our own, and the design forbids adding one: a server that touched plaintext would be a party that could be compelled or compromised, and the whole point is that no such party exists.
+
+There is one project per environment (`dev`, `main`, `prod`), each with its own bucket and its own users, chosen at runtime by the browser's configuration ([Environments](/environments/index.md)). A customer can run their own project in their own organisation and billing, point the public site at it, and get the same site with their own data.
+
+<a id="diagram-gcp-view"></a>
+The same diagram as text
+
+```
+Your browser (this sit  Identity Platform       The bucket, behind Sec  GitHub Actions: Terraf
+ │                       │ Terraform: enable email and Google sign-in, authorised domains
+ │                       │ secrets.sgit.ai and localhost                 │
+ │                       │◀──────────────────────────────────────────────│
+ │                       │                       │                       │
+ │                       │                       │ Terraform: the bucket (versioned, CORS for
+ │                       │                       │ secrets.sgit.ai), and the rules release
+ │                       │                       │ from infra/rules/storage.rules
+ │                       │                       │◀──────────────────────│
+ │                       │                       │                       │
+ │ sign in, in a popup: email and password, or Google                    │
+ │──────────────────────▶│                       │                       │
+ │                       │                       │                       │
+ │ an ID token: uid, email, expiry               │                       │
+ │◀──────────────────────│                       │                       │
+ │                       │                       │                       │
+ │ GET or PUT users/{uid}/keyring.json with the token; PUT carries x-goog-if-generation-match
+ │──────────────────────────────────────────────▶│                       │
+ │                       │                       │                       │
+ │                       │                       │ ┆ rules: the caller's uid must equal {uid}
+ │                       │                       │ ┆ in the path; objects have a size limit;
+ │                       │                       │ ┆ nothing else is readable
+ │                       │                       │                       │
+ │ ciphertext and the generation number          │                       │
+ │◀──────────────────────────────────────────────│                       │
+ │                       │                       │                       │
+ │                       │ ┆ sees: who signed in, when, from where; can disable an account or
+ │                       │ ┆ sign in as anyone, and gets ciphertext for it
+ │                       │                       │                       │
+ │                       │                       │ ┆ sees: object names, sizes, times; can
+ │                       │                       │ ┆ delete or roll back; never a plaintext
+ │                       │                       │ ┆ byte                │
+ │                       │                       │                       │
+```
+
+Section 4 of the brief, from the project's side. Terraform, run by GitHub Actions through Workload Identity Federation, sets the project up; the browser talks to Identity Platform to sign in and to the bucket, directly, with the login's token; the Security Rules in front of the bucket are the whole access control. Every arrow into Google carries public identifiers or ciphertext.
+
+<a id="identity-platform"></a>
+**Identity Platform**
+: Google's login service, used from the browser through the vendored Firebase Auth SDK, in a popup. Email and password, or Google sign-in. The result is an ID token the page holds in memory and sends with every bucket request. The login decides which prefix of the bucket the browser may touch and nothing else: an administrator of Identity Platform can disable an account or sign in as anyone, and what they get for it is ciphertext. Identity Platform's own [passkey](/learn/passkeys/index.md#passkey) feature is not used; the unlock passkey is a plain [WebAuthn](/learn/passkeys/index.md#webauthn) credential registered by this page.
+
+<a id="uid"></a>
+**The uid**
+: The login's stable identifier for a user. It names the user's prefix in the bucket, `users/{uid}/`, and it appears in the rules. It is not a secret and it is not the WebAuthn [user handle](/learn/passkeys/index.md#user-handle), which is 32 random bytes of its own, so the [authenticator](/learn/passkeys/index.md#authenticator) learns nothing about the account.
+
+<a id="bucket"></a>
+**The bucket**
+: A Cloud Storage for Firebase bucket, one per environment, with uniform access, versioning on, ten noncurrent versions kept and a thirty-day soft-delete, and CORS for `https://secrets.sgit.ai` only. The browser reads and writes objects in it directly over HTTPS with the login's token; a write carries `x-goog-if-generation-match` so two devices cannot overwrite each other blindly. What it holds per user: `keyring.json` (ciphertext, a public salt, wrapped keys) and `meta.json` (public identifiers). What it sees: names, sizes, times. What it can do: delete, roll back. What it cannot do: read a plaintext byte.
+
+<a id="rules"></a>
+**The Security Rules**
+: A rules file, `infra/rules/storage.rules`, deployed in front of the bucket. A signed-in user may read and write only under their own uid; object sizes are capped; nothing else is readable by anyone through the API. The rules are the whole access control of the MVP, which is why the admin pages show the deployed rules against the file in this repository and why the probe page `storage.html` (proposed) tries to read another uid's path and expects a 403.
+
+<a id="terraform"></a>
+**Terraform**
+: The description of everything above, in `infra/terraform/`: one module, one root per environment. It enables the services, links the project to Firebase, registers the web app whose public identifiers go into `config/environments.json`, configures the login, makes the bucket, and releases the rules. GitHub Actions runs it: plan on a pull request, apply on push to `dev` for the dev environment. It can reconfigure or destroy; it has no path to a plaintext byte, because none exists in the project.
+
+<a id="wif"></a>
+**Workload Identity Federation**
+: How the pipeline becomes someone in GCP without a stored key. A pool and a provider in the project trust GitHub's own token for exactly this repository and these branches, and let it act as the Terraform service account. No service account key exists anywhere: not in the repository, not in a GitHub secret, not on a laptop. The first project and the pool themselves are made once, by a person, with the bootstrap script, because the pipeline that depends on them cannot create them.
+
+<a id="sees"></a>
+
+## What Google sees, and what it cannot
+
+| Google can | Google cannot |
+|---|---|
+| See who signed in, when, from where; the email on the account | See a plaintext entry, a key, the [recovery code](/learn/keys/index.md#recovery-code), the [PRF](/learn/passkeys/index.md#prf) bytes |
+| Sign in as any user and fetch their objects | Open those objects: the PRF secret is in the user's authenticator, bound to this origin |
+| Delete a keyring, roll it back to an older version, keep a copy | Alter it undetected: a changed byte fails authentication; a transplanted body fails on its AAD |
+| See object sizes and times, and so roughly how much a user keeps and how often it changes | See how many entries, of what kind, or their names |
+
+This is the first row of the table on the [security page](/security/index.md), from the other side. The row that matters more is the last one there: whoever serves the JavaScript can get everything, which is why that page is mostly about this repository and not about Google.
+
+<a id="admin"></a>
+
+## The admin pages
+
+There is no admin role in the app. [/admin/](/admin/index.md) signs you in to Google with your own account (OAuth, scope `cloud-platform`, token in memory only) and calls GCP's REST APIs as you: if your account has IAM on the project, the checklist shows each resource as present, enabled, configured, or not, with a Fix where one is possible from a browser. An admin page can list users, deploy rules and change CORS. It cannot open a keyring, because a keyring is ciphertext and an admin's token unlocks nothing.
+
+<a id="customer"></a>
+
+## A customer's own project
+
+You have a GCP organisation and a billing account. Run the bootstrap for one project, add your domain to the authorised domains, run Terraform, and paste the printed configuration into the site's Environment page, or into your fork's `config/environments.json`. The target is under thirty minutes with no support, and the admin checklist verifies each step. Your users then sign in to your login and store ciphertext in your bucket, from the same public site or your copy of it.
+
+## Read next
+
+[Environments](/environments/index.md): how the browser chooses a project. [Passkeys](/learn/passkeys/index.md): the thing Google never holds. [The bootstrap, as commands](/docs/ops/bootstrap.md).
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/learn/gcp/)*
+
+
+==============================================================================
+source: /learn/index.md
+==============================================================================
+
+# Learn: the parts, explained in context
+
+> Explanations in context: what a passkey, WebAuthn, PRF, the key hierarchy and the GCP project are from this site's point of view, with diagrams, a glossary every page links into, and a lab where you try the passkey in your own browser.
+
+*Source: <https://secrets.sgit.ai/learn/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): [shipped v0.1.12](/review/ui/#node=claim.site.learn) Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin · [shipped v0.1.12](/review/ui/#node=claim.site.passkey-lab) The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai
+
+The design pages say what this site does. These pages say what the words mean, here, for this site, and nowhere more general than that: what a [passkey](/learn/passkeys/index.md#passkey) is when it is the thing that unlocks your [keyring](/keyring/index.md), what the [PRF](/learn/passkeys/index.md#prf) bytes are, where each key comes from and goes, and what [Google Cloud](/learn/gcp/index.md#gcp) sees. Every term below is linked from the first place it appears on any page of the site, and the reader's column lists the terms a page uses.
+
+## The pages
+
+| Page | Answers | Try it |
+|---|---|---|
+| [Passkeys, WebAuthn and PRF](/learn/passkeys/index.md) | What a passkey is and is not here; the two [WebAuthn](/learn/passkeys/index.md#webauthn) calls, drawn; what your [authenticator](/learn/passkeys/index.md#authenticator), your browser, this site and Google each store; why one site, one [RP ID](/learn/passkeys/index.md#rp-id); what happens with two passkeys | [The passkey lab](/learn/passkeys/index.md#lab): create a lab passkey in this browser, ask it for PRF bytes, derive the [wrapping key](/learn/keys/index.md#wrapping-key), wrap and unwrap a lab [KEK](/learn/keys/index.md#kek), add a second passkey, and watch what is stored where |
+| [Keys: from PRF to plaintext](/learn/keys/index.md) | Is there a [passphrase](/learn/keys/index.md#passphrase) (no); the [PRF salt](/learn/keys/index.md#prf-salt); [HKDF](/learn/keys/index.md#hkdf); the wrapping keys; the KEK; [AES-256-GCM](/learn/keys/index.md#aes-gcm); the [recovery code](/learn/keys/index.md#recovery-code) and why it is long; what is in memory, when | The lab's steps 3 and 4 run this chain on real WebCrypto, with the bytes shown |
+| [GCP, from this site's side](/learn/gcp/index.md) | What the project is for; [Identity Platform](/learn/gcp/index.md#identity-platform) and the uid; the [bucket](/learn/gcp/index.md#bucket) and the [Security Rules](/learn/gcp/index.md#rules); [Terraform](/learn/gcp/index.md#terraform) and [Workload Identity Federation](/learn/gcp/index.md#wif); what Google sees and cannot see | The admin checklist on [/admin/](/admin/index.md), once a project exists (needs a human; see [needs.md](/docs/ops/needs.md)) |
+
+<a id="glossary"></a>
+
+## The glossary
+
+One entry per term, in this site's context. The data is `data/terms.json`; the build links the first occurrence of each term on every content page and sets the definition as the link's hover text, so a definition is written once.
+
+<a id="term-aes-gcm"></a>
+**[AES-256-GCM](/learn/keys/index.md#aes-gcm) also: AES-GCM**
+: The authenticated cipher the browser provides; every wrap and the body use it, so a wrong key or a tampered byte fails loudly instead of decrypting to garbage.
+
+<a id="term-authenticator"></a>
+**[authenticator](/learn/passkeys/index.md#authenticator) also: authenticators, platform authenticator**
+: Whatever holds the passkey's private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.
+
+<a id="term-bucket"></a>
+**[bucket](/learn/gcp/index.md#bucket) also: Cloud Storage, Cloud Storage for Firebase**
+: The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login's token.
+
+<a id="term-credential-id"></a>
+**[credential id](/learn/passkeys/index.md#credential) also: credentialId, allowCredentials**
+: The public identifier of one passkey, stored in meta.json so the page can list your devices and ask the authenticator for that passkey by name.
+
+<a id="term-uid"></a>
+**[Firebase uid](/learn/gcp/index.md#uid) also: users/{uid}**
+: The login's stable id for a user; it names the user's prefix in the bucket and appears in the rules, and it is not a secret.
+
+<a id="term-gcp"></a>
+**[GCP](/learn/gcp/index.md#gcp) also: Google Cloud, GCP project**
+: The Google Cloud project that holds the login and the bucket for one environment; it sees who signed in and stores ciphertext, and can open none of it.
+
+<a id="term-gesture"></a>
+**[gesture](/learn/passkeys/index.md#gesture) also: passkey gesture**
+: The touch, face, PIN or tap your authenticator asks for before it computes anything; one gesture per unlock, and nothing happens without it.
+
+<a id="term-hkdf"></a>
+**[HKDF](/learn/keys/index.md#hkdf) also: HKDF-SHA256**
+: The standard key-derivation function the browser provides; turns 32 PRF bytes (or the recovery code) plus a salt and a label into a wrapping key, deterministically.
+
+<a id="term-identity-platform"></a>
+**[Identity Platform](/learn/gcp/index.md#identity-platform) also: Firebase Auth**
+: Google's login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else.
+
+<a id="term-kek"></a>
+**[KEK](/learn/keys/index.md#kek) also: keyring key**
+: The keyring's one real key: 32 random bytes that encrypt the body, themselves stored only wrapped, once per unlock method.
+
+<a id="term-keyring"></a>
+**[keyring](/keyring/index.md) also: keyring.json**
+: The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.
+
+<a id="term-meta-json"></a>
+**[meta.json](/learn/passkeys/index.md#storage)**
+: The small public file next to the keyring in the bucket: the user handle, each passkey's credential id, public key and name, and the keyring revision; nothing secret.
+
+<a id="term-passkey"></a>
+**[passkey](/learn/passkeys/index.md#passkey) also: passkeys**
+: A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.
+
+<a id="term-passphrase"></a>
+**[passphrase](/learn/keys/index.md#passphrase) also: master password**
+: There is none. Nothing you type unlocks the keyring; the passkey's PRF output and the machine-made recovery code are the only unlock methods, by design.
+
+<a id="term-prf"></a>
+**[PRF](/learn/passkeys/index.md#prf) also: PRF extension, hmac-secret**
+: The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.
+
+<a id="term-prf-salt"></a>
+**[PRF salt](/learn/keys/index.md#prf-salt) also: prfSalt, prf.eval**
+: 32 random public bytes fixed for the keyring's life, given to every passkey as the PRF input; stored in keyring.json in the clear, because it is an input, not a secret.
+
+<a id="term-recovery-code"></a>
+**[recovery code](/learn/keys/index.md#recovery-code)**
+: 26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone.
+
+<a id="term-rp-id"></a>
+**[RP ID](/learn/passkeys/index.md#rp-id) also: relying-party identifier, rpId**
+: The host a passkey is scoped to; here exactly secrets.sgit.ai (localhost when testing), never sgit.ai, so no sibling site can ask for the gesture.
+
+<a id="term-security-rules"></a>
+**[Security Rules](/learn/gcp/index.md#rules) also: storage.rules**
+: The rules file Google enforces in front of the bucket: a signed-in user may read and write only their own prefix, with size limits; the whole access control of the MVP.
+
+<a id="term-terraform"></a>
+**[Terraform](/learn/gcp/index.md#terraform)**
+: The infrastructure description in infra/terraform/ that creates each environment's project, login, bucket and rules, applied by GitHub Actions; it can delete and reconfigure, and cannot read.
+
+<a id="term-user-handle"></a>
+**[user handle](/learn/passkeys/index.md#user-handle) also: user.id**
+: The 32 random bytes a passkey is registered under; not your email and not the Firebase uid, so the authenticator learns nothing about the account.
+
+<a id="term-webauthn"></a>
+**[WebAuthn](/learn/passkeys/index.md#webauthn)**
+: The browser API (navigator.credentials) that creates a passkey and later asks your authenticator to prove it still has it; the only API this site uses to talk to the authenticator.
+
+<a id="term-wif"></a>
+**[Workload Identity Federation](/learn/gcp/index.md#wif) also: WIF**
+: How GitHub Actions gets a GCP identity without a stored key: the pipeline presents its own token and GCP trusts it for this one repository and branch.
+
+<a id="term-wrapping-key"></a>
+**[wrapping key](/learn/keys/index.md#wrapping-key) also: WK, WK_passkey, WK_recovery**
+: An AES key derived from one unlock method (a passkey's PRF output, or the recovery code) whose only job is to encrypt the KEK; a different one per passkey.
+
+## How these pages are made
+
+The diagrams are drawn by the build from `data/diagrams/` into the page as inline SVG that uses the theme's colours, with the same diagram as text underneath for copying and for the markdown twin; no library, no script. The lab is a web component in the house shape, `components/passkey-lab/`, and it talks to nothing but your authenticator: no Google, no bucket, no network. What it keeps in this browser is listed on its page, and the gate checks that list on every release.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/learn/)*
+
+
+==============================================================================
+source: /learn/keys/index.md
+==============================================================================
+
+# Keys: from the PRF bytes to the plaintext
+
+> Is there a passphrase (no). The PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM and the recovery code: every key in the keyring, where it comes from, where it goes, and what is in memory when, drawn and then run live in the lab.
+
+*Source: <https://secrets.sgit.ai/learn/keys/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.keyring-v1) Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · [proposed](/review/ui/#node=claim.app.recovery-code) Recovery code: 26 characters base32, 128 bits, shown once · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [shipped v0.1.12](/review/ui/#node=claim.site.passkey-lab) The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF
+
+There are five kinds of bytes in the design, and only one of them is random on its own: the KEK. Everything else is either derived from a [passkey](/learn/passkeys/index.md#passkey) or the recovery code, or is a public input. This page walks the chain once, names each link, and says which bytes are secret, which are stored, and which exist only in memory for the length of an unlock. The format of the file they open is the [keyring page](/keyring/index.md); the design is *proposed*; the lab on the [passkeys page](/learn/passkeys/index.md#lab) runs this chain for real on your browser's WebCrypto.
+
+<a id="passphrase"></a>
+
+## Is there a passphrase?
+
+No. Nothing you type unlocks the [keyring](/keyring/index.md). The two unlock methods are a passkey's [PRF](/learn/passkeys/index.md#prf) bytes, which only your [authenticator](/learn/passkeys/index.md#authenticator) can produce, and the recovery code, which the page makes and shows you once. There is no master password to choose, forget, reuse or phish, and no password-stretching function to tune, because there is no human-chosen secret to stretch. The nearest thing to a passphrase is the recovery code, and it is long precisely so that it does not need to be treated like one.
+
+## The chain
+
+<a id="diagram-key-hierarchy"></a>
+The same diagram as text
+
+```
+┌─ prfSalt, 32 bytes ─ (public) ─┐
+│  in keyring.json, in the clear; the input, not a secret
+└───────────────────────────────┘
+┌─ PRF output, 32 bytes ─ (secret) ─┐
+│  from the authenticator, per passkey, never stored
+└──────────────────────────────────┘
+     │  HKDF-SHA256(ikm = prf, salt = prfSalt, info = sgit-secrets/v1/wrap/<credentialId>)
+     ▼  → wkp
+┌─ Recovery code, 128 bits ─ (secret) ─┐
+│  26 base32 characters, shown once, kept by you
+└─────────────────────────────────────┘
+     │  HKDF-SHA256(ikm = code bytes, salt = prfSalt, info = sgit-secrets/v1/wrap/recovery)
+     ▼  → wkr
+
+┌─ WK_passkey (AES-256-GCM) ─ (derived) ─┐
+│  one per passkey; in memory for the unlock
+└───────────────────────────────────────┘
+     │  AES-256-GCM unwrap of wraps[pk-<id>].ct, aad = keyringId|wrap.id
+     ▼  → kek
+┌─ WK_recovery (AES-256-GCM) ─ (derived) ─┐
+│  in memory, only during a recovery
+└────────────────────────────────────────┘
+     │  AES-256-GCM unwrap of wraps[recovery-1].ct
+     ▼  → kek
+
+┌─ KEK, 32 random bytes ─ (secret) ─┐
+│  stored only as wraps[].ct, once per unlock method
+└──────────────────────────────────┘
+     │  AES-256-GCM decrypt of body.ct, aad = keyringId|rev
+     ▼  → body
+
+┌─ The body: entries and the key pair ─ (secret) ─┐
+│  stored only as body.ct; plaintext in memory, briefly
+└────────────────────────────────────────────────┘
+```
+
+Section 8.2 of the brief as a picture. Two roots, one KEK: each unlock method derives its own wrapping key and the keyring holds one wrapped copy of the KEK per method, so adding a passkey adds a wrap and never re-encrypts the body. Red is secret and never stored; blue is public and stored in the clear; grey is derived in memory and thrown away.
+
+<a id="prf-salt"></a>
+**The PRF salt**
+: `keyring.prfSalt`: 32 random bytes, made once at first run, fixed for the keyring's life, stored in `keyring.json` in the clear. It is the input every passkey is given as `prf.eval.first`. One salt serves every passkey, because the authenticator's PRF is already different per passkey; the per-credential label in the next step keeps the wrapping keys apart as well, belt and braces. It is public: holding the salt gives nobody anything without the authenticator.
+
+<a id="hkdf"></a>
+**HKDF-SHA256**
+: The browser's standard key-derivation function, `crypto.subtle.deriveKey` with `HKDF`. Input keying material: the 32 PRF bytes (or the recovery code's bytes). Salt: the PRF salt. Info, the label: `sgit-secrets/v1/wrap/<credentialId>` for a passkey and `sgit-secrets/v1/wrap/recovery` for the code, so the same bytes could never produce the same key for two different purposes. Output: one AES-256-GCM key. Deterministic: same inputs, same key, every time, which is what makes an unlock repeatable without storing anything.
+
+<a id="wrapping-key"></a>
+**The wrapping keys**
+: `WK_passkey` for each passkey and `WK_recovery` for the code. Each one has exactly one job: to encrypt (wrap) and decrypt (unwrap) the KEK. A wrapping key is never stored and never used on the body. It exists in memory for the moment of an unlock and is dropped.
+
+<a id="kek"></a>
+**The KEK**
+: The keyring's one real key: 32 random bytes from `crypto.getRandomValues`, made at first run. It encrypts the body. It is stored only wrapped, once per unlock method, in `keyring.wraps[]`; adding a passkey adds a wrap, removing one removes a wrap, and the KEK itself never changes, so the body is never re-encrypted for a change of devices. During a session the KEK stays in memory so that a conflicting write can be merged and retried without a new [gesture](/learn/passkeys/index.md#gesture).
+
+<a id="aes-gcm"></a>
+**AES-256-GCM**
+: The authenticated cipher the browser provides. Every wrap and the body use it with a fresh 12-byte IV per encryption and additional authenticated data that binds the ciphertext to its place: `keyringId|wrap.id` for a wrap, `keyringId|rev` for the body. Authenticated means a wrong key or a changed byte fails to decrypt, loudly, rather than producing garbage; and the AAD means a wrap or a body cannot be transplanted into another keyring or an older revision and silently win.
+
+<a id="recovery-code"></a>
+**The recovery code**
+: 26 characters of base32, 128 random bits, machine-made at first run and shown once behind "I have written it down". It is the one unlock method that lives outside any authenticator: on paper, in another manager, in your head if you are that kind of person. HKDF alone is fast, so an attacker who holds the keyring could try codes quickly; 128 bits of entropy makes that irrelevant, which is why the code is long and never chosen by you. The design deliberately adds no PBKDF2 or Argon2 "for safety": it would only slow a legitimate recovery, and it cannot help a short code.
+
+<a id="many"></a>
+
+## Many passkeys, one KEK
+
+Two passkeys given the same salt return different PRF bytes, so they derive different wrapping keys, so the keyring holds two wraps of the same KEK. Either unlocks. The recovery code is a third wrap. Nothing in the body knows or cares how many wraps exist. This is also why a passkey can be removed without a gesture from any other device: deleting a wrap is an edit to the keyring, written with the KEK already in memory.
+
+<a id="memory"></a>
+
+## What is in memory, when
+
+| Moment | In this page's memory | Written anywhere |
+|---|---|---|
+| After sign-in, before the gesture | The ID token; the fetched `keyring.json` and `meta.json` (ciphertext and public values) | Nothing new |
+| After the gesture | The 32 PRF bytes, briefly; the wrapping key, briefly; the KEK; the plaintext body | Nothing |
+| While you work | The KEK and the body; the recovery code only in the seconds it is shown at first run | Ciphertext, on each save, with a generation precondition |
+| On sign-out, an environment change, five hidden minutes, or unload | Nothing: the page overwrites what it can and drops the rest | Nothing |
+
+The gate reads every storage key the code may write (`app/config/storage-keys.js`, check 8) and the leak tripwire reads every file on every release (check 4). Neither can see memory; the `leak-check` probe page (proposed) will scan this origin's storage from inside the browser for anything shaped like key material and expect none.
+
+<a id="worked"></a>
+
+## A worked example, live
+
+The [passkey lab](/learn/passkeys/index.md#lab) runs exactly this chain with a lab salt: it asks a lab passkey for its bytes, derives the wrapping key with the [credential id](/learn/passkeys/index.md#credential) in the label, makes a lab KEK, wraps it, encrypts a one-entry body, and then unlocks it again, with the same passkey or a second one, showing the fingerprint of every intermediate value and the JSON of the lab keyring as it grows. The values are real WebCrypto outputs; the salt is the lab's own, so they open nothing but the lab.
+
+## Read next
+
+[The keyring format](/keyring/index.md): the file, field by field. [Passkeys](/learn/passkeys/index.md): where the PRF bytes come from. [GCP](/learn/gcp/index.md): where the ciphertext lives.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/learn/keys/)*
+
+
+==============================================================================
+source: /learn/passkeys/index.md
+==============================================================================
+
+# Passkeys, WebAuthn and PRF, in this site's context
+
+> What a passkey is when it is the thing that unlocks your keyring: the two WebAuthn calls, the PRF extension, the RP ID, what your authenticator, your browser, this site and Google each store, what two passkeys mean, and a lab to try all of it in your own browser.
+
+*Source: <https://secrets.sgit.ai/learn/passkeys/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.devices) Devices page: add and remove passkeys, regenerate the recovery code · [shipped v0.1.12](/review/ui/#node=claim.site.passkey-lab) The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF · [proposed](/review/ui/#node=claim.tests.probe-pages) Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix
+
+On most sites a passkey is a login. Here it is not. The login is a separate thing, through Google, and decides which files you may fetch. The passkey decides whether those files mean anything, because it is the only thing in the world that can produce the 32 bytes the [keyring](/keyring/index.md) is locked with. This page explains that one idea from four sides: the authenticator, the browser API, this site's files, and Google. The unlock itself is *proposed*; the lab at the end is shipped and runs in your browser now.
+
+<a id="passkey"></a>
+
+## What a passkey is, here
+
+A passkey is a key pair that your authenticator made and keeps for one site. You never see the private key; the authenticator only ever uses it to answer a challenge, after you give a gesture. Passkeys sync through the account the authenticator belongs to (Google Password Manager through your Google account, iCloud Keychain through your Apple ID), or they do not sync at all (a hardware key), and no administrator of this site is on that path.
+
+This site uses one extra thing a passkey can do: with the PRF extension the authenticator will also return 32 bytes computed from a secret it made alongside the key pair, given an input of our choosing. Same passkey, same site, same input, same bytes, every time. Those bytes are the root of every key in the keyring ([Keys](/learn/keys/index.md)). So the passkey is used as a **key**, not as a proof of identity: the page never checks the signature a passkey returns, because there is no server to check it for, and because the proof that matters is simpler: a wrong authenticator produces bytes that unwrap nothing.
+
+<a id="authenticator"></a>
+
+## The four parties, and what each one holds
+
+<a id="storage"></a>
+
+| Party | Holds | Never holds |
+|---|---|---|
+| **Your authenticator**: Google Password Manager, iCloud Keychain, Windows Hello, or a hardware key | The private key and the PRF secret for this site, under the user handle; synced through your own account, or not at all | Your email, the [Firebase uid](/learn/gcp/index.md#uid), anything about the keyring; it does not know what the bytes are for |
+| **Your browser**, running this page | During an unlock, in memory: the 32 PRF bytes, the [wrapping key](/learn/keys/index.md#wrapping-key), the [KEK](/learn/keys/index.md#kek), the plaintext body. Nothing of that after sign-out, five hidden minutes, or unload | Any of it in localStorage, sessionStorage, IndexedDB, the URL or a log; the gate's check 8 reads every storage key the code may write |
+| **This site's files in the [bucket](/learn/gcp/index.md#bucket)** | `meta.json`: the user handle, each passkey's credential id, public key and name; `keyring.json`: the [PRF salt](/learn/keys/index.md#prf-salt) (public) and the KEK wrapped once per passkey | The PRF bytes, the KEK, the [recovery code](/learn/keys/index.md#recovery-code), a plaintext entry |
+| **Google**: [Identity Platform](/learn/gcp/index.md#identity-platform) and the bucket | Who signed in, when; the ciphertext and its sizes and times; the power to delete or roll back | Anything that opens the ciphertext: the PRF secret is bound to the origin and to your authenticator, so signing in as you fetches what you fetch and opens none of it |
+
+<a id="webauthn"></a>
+
+## The two WebAuthn calls
+
+WebAuthn is the browser API, `navigator.credentials`, with two calls. `create` registers a new passkey for a site; `get` asks the authenticator to use one it already has. Everything on this page is those two calls with the PRF extension turned on. The exact parameters are listed on the [keyring page](/keyring/index.md#passkey-parameters); what follows is what they mean.
+
+<a id="create"></a>
+
+### First run: `create`
+
+<a id="diagram-passkey-create"></a>
+The same diagram as text
+
+```
+You                     This page, in your bro  Your authenticator      The bucket (GCP)
+ │ sign in; the page finds no keyring at users/{uid}/                    │
+ │──────────────────────▶│                       │                       │
+ │                       │                       │                       │
+ │                       │ ┆ makes 32 random bytes as the user handle, and 32 more as the PRF
+ │                       │ ┆ salt                │                       │
+ │                       │                       │                       │
+ │                       │ navigator.credentials.create: rp.id = secrets.sgit.ai, the user
+ │                       │ handle, residentKey required, userVerification required,
+ │                       │ extensions.prf = {}   │                       │
+ │                       │──────────────────────▶│                       │
+ │                       │                       │                       │
+ │ asks for a gesture: touch, face, PIN or tap   │                       │
+ │◀──────────────────────────────────────────────│                       │
+ │                       │                       │                       │
+ │ the gesture           │                       │                       │
+ │──────────────────────────────────────────────▶│                       │
+ │                       │                       │                       │
+ │                       │                       │ ┆ makes a key pair and a PRF secret, both
+ │                       │                       │ ┆ bound to secrets.sgit.ai; keeps them;
+ │                       │                       │ ┆ syncs them through your own account
+ │                       │                       │ ┆ (Google, Apple) or not at all (a hardware
+ │                       │                       │ ┆ key)                │
+ │                       │                       │                       │
+ │                       │ credential id, public key, prf.enabled = true │
+ │                       │◀──────────────────────│                       │
+ │                       │                       │                       │
+ │                       │ meta.json: the user handle, the credential id, the public key, a
+ │                       │ device name           │                       │
+ │                       │──────────────────────────────────────────────▶│
+ │                       │                       │                       │
+ │                       │ ┆ then the keys page: KEK, key pair, recovery code, the first
+ │                       │ ┆ keyring.json; see Keys                      │
+ │                       │                       │                       │
+```
+
+First run, as the design has it (section 3.2 and 8.7 of the brief). Nothing secret crosses between the parties: the authenticator keeps the private key and the PRF secret, and the page keeps only public identifiers. The PRF bytes are not asked for until unlock.
+
+<a id="rp-id"></a>
+**The RP ID**
+: The relying-party identifier is the host the passkey is scoped to, and it is exactly `secrets.sgit.ai` (`localhost` when a developer runs the site locally). A passkey scoped to a host can be asserted only by pages on that host. It is never the apex `sgit.ai`, because a passkey scoped to the apex could be asserted by every sibling site under it, and a compromise of any one of the twenty-seven would then be able to ask for the gesture that unlocks every user's secrets here. The [security page](/security/index.md#rp-id) calls this the single most important decision in the design; the lab below refuses to run on any other host.
+
+<a id="user-handle"></a>
+**The user handle**
+: `user.id` is 32 random bytes made by the page at first run and stored in `meta.json`. It is not your email and not the Firebase uid: the authenticator and whatever syncs it learn nothing about the account. A resident key (`residentKey: 'required'`) means the authenticator stores the passkey under that handle and can list it, which is what lets a new device offer "use a passkey" with no help from us.
+
+<a id="gesture"></a>
+**The gesture**
+: `userVerification: 'required'` means the authenticator must verify you (touch, face, PIN, or the tap of a hardware key with a PIN) before it does anything. One gesture per unlock. Without it, nothing is computed and nothing is returned.
+
+<a id="credential"></a>
+**The credential id and the public key**
+: What `create` returns and what the page stores in `meta.json`: the credential id, so the page can name this passkey in `allowCredentials` later and list it on the devices page; the public key, kept for display and for nothing else, because no signature is ever verified. Both are public values.
+
+<a id="prf"></a>
+**The PRF extension**
+: `extensions: { prf: {} }` at `create` asks the authenticator whether it can do PRF (on hardware keys the underlying CTAP extension is called `hmac-secret`). The answer comes back as `prf.enabled`. If it is false, this authenticator cannot be used to unlock, and the page will say so and offer the recovery code or another authenticator. The bytes themselves are not asked for at `create`: a passkey can be registered without a gesture-bound secret ever leaving the authenticator.
+
+<a id="unlock"></a>
+
+### Returning: `get`
+
+<a id="diagram-passkey-unlock"></a>
+The same diagram as text
+
+```
+You                     This page, in your bro  Your authenticator      The bucket (GCP)
+ │ sign in               │                       │                       │
+ │──────────────────────▶│                       │                       │
+ │                       │                       │                       │
+ │                       │ GET users/{uid}/keyring.json and meta.json    │
+ │                       │──────────────────────────────────────────────▶│
+ │                       │                       │                       │
+ │                       │ ciphertext, the wraps, prfSalt, the generation number; the
+ │                       │ credential ids        │                       │
+ │                       │◀──────────────────────────────────────────────│
+ │                       │                       │                       │
+ │                       │ navigator.credentials.get: rpId, allowCredentials from meta.json,
+ │                       │ prf.eval.first = prfSalt                      │
+ │                       │──────────────────────▶│                       │
+ │                       │                       │                       │
+ │ asks for a gesture    │                       │                       │
+ │◀──────────────────────────────────────────────│                       │
+ │                       │                       │                       │
+ │ the gesture           │                       │                       │
+ │──────────────────────────────────────────────▶│                       │
+ │                       │                       │                       │
+ │                       │ 🔒 32 PRF bytes, in memory only                │
+ │                       │◀──────────────────────│                       │
+ │                       │                       │                       │
+ │                       │ ┆ HKDF-SHA256(prf bytes, prfSalt, "sgit-      │
+ │                       │ ┆ secrets/v1/wrap/<credentialId>") = the wrapping key for this
+ │                       │ ┆ passkey             │                       │
+ │                       │                       │                       │
+ │                       │ ┆ AES-256-GCM: unwrap the KEK, decrypt the body; the vault list is
+ │                       │ ┆ in memory           │                       │
+ │                       │                       │                       │
+ │                       │ ┆ nothing is written anywhere; keys are cleared on sign-out, on an
+ │                       │ ┆ environment change, after five hidden minutes, on unload
+ │                       │                       │                       │
+```
+
+The returning flow (section 3.2 and 8.2 of the brief). The dashed red arrow is the only secret that crosses a boundary, and it crosses once, into this page's memory. Google serves ciphertext and a public salt, and the PRF bytes mean nothing to anyone who holds only those.
+
+The one secret that moves is the dashed arrow: 32 PRF bytes, from the authenticator into this page's memory, after your gesture. The input that produced them, `prf.eval.first`, is the keyring's PRF salt, stored in the clear, because an input is not a secret: anyone can hold the salt, and only your authenticator can turn it into those bytes. From the bytes to the plaintext is three WebCrypto operations, drawn on the [keys page](/learn/keys/index.md).
+
+<a id="many"></a>
+
+## Two passkeys, and twenty
+
+Every passkey has its own PRF secret, so two passkeys given the same salt return different bytes. The keyring therefore holds one wrapped copy of the KEK per passkey (and one per recovery code), each under a wrapping key derived from that passkey's bytes with the credential id in the derivation label. Adding a passkey on a new device means: unlock with any method you already have, register the new passkey, wrap the same KEK once more, write the keyring. Removing one means deleting its wrap. The body is never re-encrypted for either; the entries do not know how many keys open them. The lab below lets you do this with two or more lab passkeys in the same browser and watch the keyring grow one wrap at a time.
+
+<a id="not"></a>
+
+## What the passkey is not used for
+
+- It is not the login. Identity Platform signs you in; the passkey unlocks. An administrator of the login can fake the first and never the second.
+- It is not verified. The assertion's signature is returned and ignored; there is no server to check it for, and the PRF bytes are the proof that matters.
+- It is not Identity Platform's passkey feature. The passkey is registered by this page, under this host's RP ID, and Google is not told it exists.
+- It is not a backup. Lose every passkey and the recovery code, and the data is gone; nothing that could reset it exists anywhere else, by design.
+
+<a id="test"></a>
+
+## How to test it
+
+Two ways. The probe page `/tests/webauthn-prf.html` (proposed, step 4 of the build) will register a throwaway passkey, check `prf.enabled`, ask for bytes twice with the same salt and once with another, and print a result table a visitor can paste into an issue; it is the compatibility matrix. The lab below is here now and does the same things one step at a time, showing every input and every output, and goes on to the keys: it derives the wrapping key, wraps a lab KEK, encrypts a lab body, and unlocks it again with a second gesture or a second passkey. It talks to nothing but your authenticator.
+
+In the build, the lab is driven headlessly by Playwright against Chromium's virtual authenticator with its `hasPrf` option, which answered an open question of the brief: the virtual authenticator does PRF (Chromium 141: `prf.enabled` true, 32 bytes, the same salt gives the same bytes, another salt gives others). That is how the unlock will be tested end to end without a person's finger.
+
+<a id="lab"></a>
+
+## The passkey lab
+
+**What this lab does and does not do.** It runs entirely in this page. It creates real passkeys in your authenticator, scoped to this host, named `lab`, which you can delete afterwards from your password manager (it tells you where). It keeps in this browser's localStorage exactly one record, shown live below: its own random PRF salt and the public facts of each lab passkey (credential id, algorithm, transports, when). It never stores PRF bytes, a key, or anything derived from one; those live in this page's memory and are gone when you leave. It never contacts Google, the bucket, or any network. The salt is a lab salt, so the bytes it shows unlock nothing real.
+
+## Read next
+
+[Keys: from PRF to plaintext](/learn/keys/index.md), the chain the lab's later steps run. [The keyring format](/keyring/index.md), the file those keys open. [Security](/security/index.md), what each compromised party gets.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/learn/passkeys/)*
+
+
+==============================================================================
 source: /mockups/account.md
 ==============================================================================
 
@@ -770,7 +1354,7 @@ source: /mockups/account.md
 
 > A design mockup of the account screen at secrets.sgit.ai/app/account.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/account.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/account.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -816,7 +1400,7 @@ source: /mockups/admin-checklist.md
 
 > A design mockup of the admin: the setup checklist screen at secrets.sgit.ai/admin/setup-checklist.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/admin-checklist.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/admin-checklist.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -865,7 +1449,7 @@ source: /mockups/devices.md
 
 > A design mockup of the devices: passkeys and the recovery code screen at secrets.sgit.ai/app/devices.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/devices.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/devices.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -911,7 +1495,7 @@ source: /mockups/entry.md
 
 > A design mockup of the one entry: an sgit vault key screen at secrets.sgit.ai/app/entry.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/entry.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/entry.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -961,7 +1545,7 @@ source: /mockups/environment.md
 
 > A design mockup of the environment screen at secrets.sgit.ai/app/environment.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/environment.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/environment.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1008,7 +1592,7 @@ source: /mockups/index.md
 
 > What the app, admin and test screens are meant to look like, before they exist: ten mockups, each as a static picture in a mini browser frame and as ASCII art, with the intent nodes it realises. Every screen is proposed.
 
-*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1076,7 +1660,7 @@ source: /mockups/matrix.md
 
 > A design mockup of the tests: the compatibility matrix screen at secrets.sgit.ai/tests/matrix.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/matrix.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/matrix.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1123,7 +1707,7 @@ source: /mockups/prototype.md
 
 > The whole design prototype in one frame: every screen the brief describes, working on invented data this browser keeps, in three UX variants to compare. Beside it, what the screen is, the paths to it and from it, and what you have done.
 
-*Source: <https://secrets.sgit.ai/mockups/prototype.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/prototype.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1152,7 +1736,7 @@ source: /mockups/setup.md
 
 > A design mockup of the first run: create a passkey screen at secrets.sgit.ai/app/setup.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/setup.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/setup.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1203,7 +1787,7 @@ source: /mockups/sign-in.md
 
 > A design mockup of the sign in screen at secrets.sgit.ai/app/, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/sign-in.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/sign-in.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1256,7 +1840,7 @@ source: /mockups/unlock.md
 
 > A design mockup of the unlock screen at secrets.sgit.ai/app/unlock.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/unlock.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/unlock.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1306,7 +1890,7 @@ source: /mockups/vault.md
 
 > A design mockup of the the vault: the list screen at secrets.sgit.ai/app/vault.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/vault.html> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/vault.html> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1355,7 +1939,7 @@ source: /reader/index.md
 
 > Where the reader's column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent's vault. The only page whose policy allows a connection beyond this site and Google's sign-in hosts.
 
-*Source: <https://secrets.sgit.ai/reader/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/reader/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1393,7 +1977,7 @@ source: /review/index.md
 
 > The review folder: this project as layered graphs. The design written top down from the brief, the code derived bottom up by parsers, the join between them, every commit read upwards, and a navigator to walk it all. What exists, what each step brings, and where to start.
 
-*Source: <https://secrets.sgit.ai/review/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/review/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1447,27 +2031,27 @@ source: /security/index.md
 
 > The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
 
-*Source: <https://secrets.sgit.ai/security/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/security/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.site.repo-protections) Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ · [proposed](/review/ui/#node=claim.tests.acceptance) Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai
 
-This page says what the design withholds from whom, and then says plainly what it cannot withhold. It describes a design. The acceptance test that will check it, an Owner of the GCP project being handed a uid and asked to produce one plaintext field, is listed as proposed above and its write-up will be published whatever the result.
+This page says what the design withholds from whom, and then says plainly what it cannot withhold. It describes a design. The acceptance test that will check it, an Owner of the [GCP project](/learn/gcp/index.md#gcp) being handed a uid and asked to produce one plaintext field, is listed as proposed above and its write-up will be published whatever the result.
 
 ## What a compromised party gets
 
 | Party compromised | Gets | Does not get |
 |---|---|---|
-| GCP project, or the Identity Platform admin | User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone | Any plaintext. The PRF output is bound to the origin and to the user's authenticator; logging in as the user fetches ciphertext and nothing to open it with |
+| GCP project, or the [Identity Platform](/learn/gcp/index.md#identity-platform) admin | User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone | Any plaintext. The [PRF](/learn/passkeys/index.md#prf) output is bound to the origin and to the user's [authenticator](/learn/passkeys/index.md#authenticator); logging in as the user fetches ciphertext and nothing to open it with |
 | Bucket reader | Ciphertext, object sizes and times | Plaintext |
-| Terraform pipeline | Can change the rules, delete the bucket | Plaintext |
+| [Terraform](/learn/gcp/index.md#terraform) pipeline | Can change the rules, delete the [bucket](/learn/gcp/index.md#bucket) | Plaintext |
 | Public-key directory tamperer (phase 2) | Future shares, unless fingerprints or signatures are checked | Existing keys |
 | **This repository, or the DNS for sgit.ai** | **Everything, for the users who load the malicious page while it is served** | Nothing is withheld |
 
 ## The code is the boundary
 
-Client-side cryptography is exactly as trustworthy as the code delivered to the browser. If this repository, the GitHub organisation that owns it, or the DNS zone for `sgit.ai` is compromised, the attacker can serve a page that asks for your passkey gesture and sends the plaintext wherever they like. No amount of cloud hardening changes that, and the design does not pretend otherwise.
+Client-side cryptography is exactly as trustworthy as the code delivered to the browser. If this repository, the GitHub organisation that owns it, or the DNS zone for `sgit.ai` is compromised, the attacker can serve a page that asks for your [passkey](/learn/passkeys/index.md#passkey) gesture and sends the plaintext wherever they like. No amount of cloud hardening changes that, and the design does not pretend otherwise.
 
 What it does instead is keep the site on a host that is separate from the GCP project, so that a cloud compromise does not reach the code, and put every guard it can on the repository:
 
@@ -1484,31 +2068,37 @@ What it does instead is keep the site on a host that is separate from the GCP pr
 
 Each "unconfirmed" row flips to a dated "yes" when the person who can check it has. The repository's own copy of these settings is [docs/ops/branch-protection.md](/docs/ops/branch-protection.md).
 
+<a id="rp-id"></a>
+
 ## The RP ID is secrets.sgit.ai, never sgit.ai
 
-A WebAuthn passkey is scoped to a relying-party identifier, and the PRF secret it returns is derived per credential and per RP ID. The RP ID for the unlock passkey is exactly `secrets.sgit.ai` (and `localhost` when testing locally).
+A [WebAuthn](/learn/passkeys/index.md#webauthn) passkey is scoped to a [relying-party identifier](/learn/passkeys/index.md#rp-id), and the PRF secret it returns is derived per credential and per RP ID. The RP ID for the unlock passkey is exactly `secrets.sgit.ai` (and `localhost` when testing locally).
 
-It is never the apex `sgit.ai`, and this is the single most important decision in the design. A passkey scoped to the apex can be asserted by any page on any subdomain: there are more than twenty-seven sibling sites under `sgit.ai`, each in its own repository, and a compromise of any one of them would then be able to ask for the gesture that unlocks every user's secrets here. Scoping to this host means a sibling's compromise is a sibling's problem.
+It is never the apex `sgit.ai`, and this is the single most important decision in the design. A passkey scoped to the apex can be asserted by any page on any subdomain: there are more than twenty-seven sibling sites under `sgit.ai`, each in its own repository, and a compromise of any one of them would then be able to ask for the [gesture](/learn/passkeys/index.md#gesture) that unlocks every user's secrets here. Scoping to this host means a sibling's compromise is a sibling's problem.
 
 Consumers such as riskmandate.ai will use their own passkeys, or WebAuthn Related Origin Requests, later. Neither is in the MVP.
 
+<a id="passkey-use"></a>
+
 ## What the passkey is, and is not, used for
 
-The passkey is a plain WebAuthn credential registered by this site's own page. It is **not** an Identity Platform passkey and it is not a login. The page never verifies the assertion signature, because there is no server to verify it for: the proof that matters is that the PRF output unwraps the keyring key, and a wrong authenticator produces bytes that unwrap nothing. Login is a separate step, through Identity Platform, and decides only which bucket paths the browser may read and write.
+The passkey is a plain WebAuthn credential registered by this site's own page. It is **not** an Identity Platform passkey and it is not a login. The page never verifies the assertion signature, because there is no server to verify it for: the proof that matters is that the PRF output unwraps the [keyring key](/learn/keys/index.md#kek), and a wrong authenticator produces bytes that unwrap nothing. Login is a separate step, through Identity Platform, and decides only which bucket paths the browser may read and write.
 
-The credential's id and public key are stored in `meta.json` so the page can list devices and build `allowCredentials`. The WebAuthn user handle is 32 random bytes, not the Firebase uid.
+The credential's id and public key are stored in `meta.json` so the page can list devices and build `allowCredentials`. The WebAuthn [user handle](/learn/passkeys/index.md#user-handle) is 32 random bytes, not the [Firebase uid](/learn/gcp/index.md#uid).
+
+The whole of this, from four sides and with the calls drawn, is on [Passkeys, WebAuthn and PRF](/learn/passkeys/index.md); the keys the bytes become are on [Keys](/learn/keys/index.md); and the [passkey lab](/learn/passkeys/index.md#lab) lets you run the two calls in this browser now.
 
 ## What we ask you to trust
 
 - **Your authenticator.** Google Password Manager, iCloud Keychain or a hardware key holds the PRF secret and syncs it through your personal account, which no administrator of this service can reach.
-- **Your browser's WebCrypto.** AES-256-GCM, HKDF-SHA256, RSA-OAEP and ECDSA come from the browser; the site vendors no cryptographic library.
+- **Your browser's WebCrypto.** [AES-256-GCM](/learn/keys/index.md#aes-gcm), [HKDF-SHA256](/learn/keys/index.md#hkdf), RSA-OAEP and ECDSA come from the browser; the site vendors no cryptographic library.
 - **This repository, as served.** Everything above this heading is about keeping that trust narrow and visible. You can read every line that will run, and the gate publishes what it checks.
-- **Google, for availability and metadata only.** Google can see who signed in and when, can delete or roll back ciphertext, and can refuse service. Bucket versioning and soft-delete retention are the design's answer to deletion; export of the encrypted keyring from the account page is yours.
+- **Google, for availability and metadata only.** Google can see who signed in and when, can delete or roll back ciphertext, and can refuse service. Bucket versioning and soft-delete retention are the design's answer to deletion; export of the encrypted [keyring](/keyring/index.md) from the account page is yours.
 
 ## What this page does not claim
 
 - That the system exists. See [/shipped/](/shipped/index.md).
-- That the Security Rules are correct. The rules text is in the repository and hashed; it is deployed to nothing yet, and its syntax is marked "verify first" in the brief.
+- That the [Security Rules](/learn/gcp/index.md#rules) are correct. The rules text is in the repository and hashed; it is deployed to nothing yet, and its syntax is marked "verify first" in the brief.
 - That the compatibility of PRF across authenticators is known. The matrix page (proposed) will say which browsers and authenticators returned PRF output, dated.
 
 ---
@@ -1524,13 +2114,13 @@ source: /sharing/index.md
 
 > The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
 
-*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sharing-data-model) Key pair per user generated at first run; public bundle written to directory/ · [absent](/review/ui/#node=claim.app.sharing-ui) Sharing an entry with another user through their inbox
 
-Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their passkey, because their PRF secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is **phase 2 and absent from the MVP**; the data model is phase 1, because adding it later would mean rewriting every keyring.
+Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their [passkey](/learn/passkeys/index.md#passkey), because their [PRF](/learn/passkeys/index.md#prf) secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is **phase 2 and absent from the MVP**; the data model is phase 1, because adding it later would mean rewriting every [keyring](/keyring/index.md).
 
 ## The scheme
 
@@ -1547,7 +2137,7 @@ The public key shares *keys*, not data. The server carries the package and can n
 |---|---|---|
 | Revocation | A removed member already holds the key | Rotate the key, re-encrypt, re-share to the remaining members |
 | Directory trust | A compromised admin could swap a public key and intercept the next share | Signed bundles, and fingerprints users can compare out of band before a sensitive share |
-| Group membership | Who can open what is real metadata, visible to the bucket | Membership stored per shared set; updated on add and remove; accepted as metadata exposure |
+| Group membership | Who can open what is real metadata, visible to the [bucket](/learn/gcp/index.md#bucket) | Membership stored per shared set; updated on add and remove; accepted as metadata exposure |
 | Kinds kept apart | A vault key shared by mistake opens a whole vault | An `sgit-vault-key` entry refuses to enter a shareable set without a confirmation |
 
 ## Fit with sgit
@@ -1573,7 +2163,7 @@ source: /shipped/index.md
 
 > Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
-*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1581,7 +2171,9 @@ This site publishes its argument before the thing is finished. To keep that hone
 
 A *shipped* row names the version that shipped it and where in the repository it lives. A *proposed* row points at the section of the brief that designs it. An *absent* row says why it is not in the MVP and, where there is one, what comes instead.
 
-## Shipped (40)
+<a id="shipped"></a>
+
+## Shipped (42)
 
 exists in the repository, runs, and was exercised at the version shown.
 
@@ -1617,6 +2209,8 @@ exists in the repository, runs, and was exercised at the version shown.
 | pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | [shipped v0.1.3](/review/ui/#node=claim.pipeline.gate-extras) | [admin/build/validate.js](/review/ui/#file=admin/build/validate.js) | From section 4 of the repository guidance; the advisory never fails the build. |
 | site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | [shipped v0.1.3](/review/ui/#node=claim.site.team-roles) | team/ | Two roles fill every seat: the project lead and the build agent. |
 | site | Participant disclosure: who publishes this site and what they are building | [shipped v0.1.3](/review/ui/#node=claim.site.participant) | [about/participant.html](/review/ui/#file=about/participant.html) | Linked from the footer. |
+| site | Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin | [shipped v0.1.12](/review/ui/#node=claim.site.learn) | learn/, [data/terms.json](/review/ui/#file=data/terms.json), data/diagrams/, [admin/build/gen_terms.py](/review/ui/#file=admin/build/gen_terms.py), gen_diagrams.py | Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them. |
+| site | The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF | [shipped v0.1.12](/review/ui/#node=claim.site.passkey-lab) | components/passkey-lab/ | Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25). |
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | [shipped v0.1.6](/review/ui/#node=claim.site.themes) | [data/themes.json](/review/ui/#file=data/themes.json), [assets/themes.css](/review/ui/#file=assets/themes.css), [assets/theme.js](/review/ui/#file=assets/theme.js) | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
 | site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | [shipped v0.1.7](/review/ui/#node=claim.site.reader-column) | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | [shipped v0.1.7](/review/ui/#node=claim.site.reader-chat) | components/reader-chat/, [reader/index.html](/review/ui/#file=reader/index.html), [data/search-index.json](/review/ui/#file=data/search-index.json) | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
@@ -1627,6 +2221,8 @@ exists in the repository, runs, and was exercised at the version shown.
 | admin | Release history page generated from data/versions.json | [shipped v0.1.0](/review/ui/#node=claim.admin.versions) | [admin/versions.html](/review/ui/#file=admin/versions.html) | One row per release; the newest row must equal version.txt. |
 | tests | Unit tests under node --test, real WebCrypto, no mocks | [shipped v0.1.0](/review/ui/#node=claim.tests.unit) | tests/unit/ | At this version: the gate's own checks against fake fixtures. Keyring tests come with step 4. |
 | tests | Build tests: the generators run on the real tree, chrome in every page, twins exist, features schema | [shipped v0.1.0](/review/ui/#node=claim.tests.build) | tests/build/ | pytest, TestCase classes, no mocks. |
+
+<a id="proposed"></a>
 
 ## Proposed (28)
 
@@ -1663,6 +2259,8 @@ designed in the brief, not built; described only in the future tense.
 | tests | Playwright end to end against the real dev project with a virtual authenticator | [proposed](/review/ui/#node=claim.tests.e2e) | tests/e2e/ | Whether the virtual authenticator does PRF is an open question. |
 | tests | Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field | [proposed](/review/ui/#node=claim.tests.acceptance) | docs/acceptance.md | Before 1.0. The write-up is published whatever the result. |
 
+<a id="absent"></a>
+
 ## Absent (5)
 
 deliberately not in the MVP; comes as a later version or a later site, or never.
@@ -1692,7 +2290,7 @@ source: /team/index.md
 
 > Who does what, as one file per role with the rules it enforces and the mistake behind each, and where the board of work lives.
 
-*Source: <https://secrets.sgit.ai/team/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/team/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1713,9 +2311,9 @@ source: /docs/reality.md
 
 # secrets.sgit.ai: reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.11 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.12 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
-73 claims: 40 shipped, 28 proposed, 5 absent.
+75 claims: 42 shipped, 28 proposed, 5 absent.
 
 | Status | Meaning |
 |---|---|
@@ -1723,7 +2321,7 @@ source: /docs/reality.md
 | proposed | designed in the brief, not built; described only in the future tense |
 | absent | deliberately not in the MVP; comes as a later version or a later site, or never |
 
-## Shipped (40)
+## Shipped (42)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -1757,6 +2355,8 @@ source: /docs/reality.md
 | pipeline | The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate | shipped v0.1.3 | admin/build/validate.js | From section 4 of the repository guidance; the advisory never fails the build. |
 | site | Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page | shipped v0.1.3 | team/ | Two roles fill every seat: the project lead and the build agent. |
 | site | Participant disclosure: who publishes this site and what they are building | shipped v0.1.3 | about/participant.html | Linked from the footer. |
+| site | Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site's side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin | shipped v0.1.12 | learn/, data/terms.json, data/diagrams/, admin/build/gen_terms.py, gen_diagrams.py | Explanations in context, not general. The reader's column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them. |
+| site | The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host's RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium's virtual authenticator with PRF | shipped v0.1.12 | components/passkey-lab/ | Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief's open question: yes (C25). |
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | shipped v0.1.6 | data/themes.json, assets/themes.css, assets/theme.js | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
 | site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | shipped v0.1.7 | components/reader-chat/, reader/index.html, data/search-index.json | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
@@ -1938,9 +2538,15 @@ The brief describes the review folder top down (the intent, then the code derive
 
 The review also asked for an abstraction layer per block of code: the source, then what it is doing (pseudo-code), then why (its intent), then the story it serves, at two levels, a technical one and a business one, so a later diff can be read as a blast radius against the meaning rather than against the lines. The first rung exists: the code's own leading and trailing comments are shown as "what it says about itself", and the claims and stories that reach the file as "why it exists". The written explanation (technical and business) is not derived by a parser and the brief rules out a model writing into `graph/`; the proposal is a separate layer, `review/explain/<path>.json`, written by the build agent as data, each block carrying the sha256 of the lines it explains so it goes stale, visibly, when the code moves. Proposed, not built; status `proposed` on `/shipped/`.
 
+### C25. A learn section the brief does not have, and the virtual authenticator does PRF
+
+Section 6.5 lists the content pages and section 7.4 asks that nothing be described before it ships; neither says where a reader learns what a passkey, the PRF bytes or the GCP project are in this site's terms. Dinis asked on 2026-10-06, reading the security page, for the words to link to explanations in context, with diagrams, and for a way to try the passkey in the browser he was in, bit by bit, including several passkeys. From v0.1.12 there is a `/learn/` section (passkeys, keys, GCP), a glossary in `data/terms.json` that the build links from the first use of each term on every content page and that the reader's column lists, flow diagrams drawn by the build from `data/diagrams/` (inline SVG on the theme's tokens, plus the same diagram as text), and a lab component on the passkeys page that runs the two WebAuthn calls and the key chain on the browser's own WebCrypto with a lab salt. The lab is held to the same rules as the app: RP ID `secrets.sgit.ai` or `localhost` only, one allow-listed storage key holding public values, nothing derived from a key written anywhere, no network.
+
+One open question of section 12 is answered by building it: Chromium's virtual authenticator, driven through the CDP `WebAuthn` domain with `hasPrf: true`, does PRF (Chromium 141: `prf.enabled` is true at create, `get` returns 32 bytes, the same salt gives the same bytes, another salt gives others). The end-to-end tests of step 4 can therefore run the real unlock headlessly, with no stand-in for the crypto.
+
 ## Open questions carried from section 12 (unanswered at this version)
 
-- Does the Playwright virtual authenticator support PRF? (step 4)
+- ~~Does the Playwright virtual authenticator support PRF?~~ Yes: Chromium's, through CDP with `hasPrf`, at v0.1.12 (C25).
 - Does Google still issue implicit-flow tokens for a Web client with our origins? (step 7)
 - Exact Security Rules syntax for the size and null checks; is `request.auth.token.firebase.tenant` available in Storage rules? (step 3)
 - Where does Identity Platform store user records? (step 3, for `/environments/`)
@@ -3761,7 +4367,7 @@ source: /review/README.md
 
 What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
 
-Source tree: 134 files, hash `a9aa74b74cfb4b65`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+Source tree: 141 files, hash `5f63559adf5543f1`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
 
 ## The project
 
@@ -3773,15 +4379,15 @@ Source tree: 134 files, hash `a9aa74b74cfb4b65`. Derived files must carry this h
 | flows | 6 |
 | components | 23 |
 | deploy | 5 |
-| files | 134 |
-| modules | 60 |
-| classes | 56 |
-| methods | 586 |
-| surfaces | 64 |
-| tests | 96 |
-| claims | 73 (40 shipped, every one with evidence that resolves; strict) |
-| releases | 12 |
-| anchors | 192 (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |
+| files | 141 |
+| modules | 64 |
+| classes | 60 |
+| methods | 639 |
+| surfaces | 67 |
+| tests | 102 |
+| claims | 75 (42 shipped, every one with evidence that resolves; strict) |
+| releases | 13 |
+| anchors | 204 (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |
 | brief sections | 14 top-level, 31 subsections, as review/brief/ |
 
 Coverage (projected nodes with a derived match beneath them): not computed yet: the join runs from step 3.

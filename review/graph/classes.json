@@ -48,8 +48,8 @@
       "module": "module:admin/build/chrome.py",
       "name": "Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       }
@@ -96,6 +96,32 @@
         "line": 14,
         "path": "admin/build/gen_chrome.py",
         "sha256": "a2b58b36772056405c63ee588c5ce657a79a672b3feca1a371d63ffbbccb4bb6"
+      }
+    },
+    {
+      "base_ids": [],
+      "bases": [],
+      "doc": "",
+      "fields": [],
+      "id": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
+      "kind": "class",
+      "loc": 209,
+      "methods": [
+        "method:admin/build/gen_diagrams.py:Gen__Diagrams.__init__",
+        "method:admin/build/gen_diagrams.py:Gen__Diagrams.sequence_svg",
+        "method:admin/build/gen_diagrams.py:Gen__Diagrams.sequence_text",
+        "method:admin/build/gen_diagrams.py:Gen__Diagrams.chain_svg",
+        "method:admin/build/gen_diagrams.py:Gen__Diagrams.chain_text",
+        "method:admin/build/gen_diagrams.py:Gen__Diagrams.figure",
+        "method:admin/build/gen_diagrams.py:Gen__Diagrams.run"
+      ],
+      "module": "module:admin/build/gen_diagrams.py",
+      "name": "Gen__Diagrams",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
       }
     },
     {
@@ -213,6 +239,33 @@
       "bases": [],
       "doc": "",
       "fields": [],
+      "id": "class:admin/build/gen_terms.py:Gen__Terms",
+      "kind": "class",
+      "loc": 108,
+      "methods": [
+        "method:admin/build/gen_terms.py:Gen__Terms.__init__",
+        "method:admin/build/gen_terms.py:Gen__Terms.validate",
+        "method:admin/build/gen_terms.py:Gen__Terms.pattern",
+        "method:admin/build/gen_terms.py:Gen__Terms.unwrap",
+        "method:admin/build/gen_terms.py:Gen__Terms.link",
+        "method:admin/build/gen_terms.py:Gen__Terms.apply",
+        "method:admin/build/gen_terms.py:Gen__Terms.glossary",
+        "method:admin/build/gen_terms.py:Gen__Terms.run"
+      ],
+      "module": "module:admin/build/gen_terms.py",
+      "name": "Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      }
+    },
+    {
+      "base_ids": [],
+      "bases": [],
+      "doc": "",
+      "fields": [],
       "id": "class:admin/build/gen_twins.py:Gen__Twins",
       "kind": "class",
       "loc": 49,
@@ -264,7 +317,7 @@
       "fields": [],
       "id": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "kind": "class",
-      "loc": 191,
+      "loc": 195,
       "methods": [
         "method:admin/build/html_to_md.py:Html__To__Markdown.__init__",
         "method:admin/build/html_to_md.py:Html__To__Markdown.twin_href",
@@ -280,10 +333,10 @@
       "module": "module:admin/build/html_to_md.py",
       "name": "Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       }
     },
     {
@@ -419,6 +472,57 @@
         "line": 17,
         "path": "admin/build/verify_live.py",
         "sha256": "5a32de3166ee3fe3ef95c1b5cf2365fcfb87a0ed07cc4a8a615b0cf9bd44cdea"
+      }
+    },
+    {
+      "base_ids": [
+        "class:components/sg-base/sg-base.js:SgBase"
+      ],
+      "bases": [
+        "SgBase"
+      ],
+      "doc": "",
+      "fields": [],
+      "id": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "kind": "class",
+      "loc": 383,
+      "methods": [
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.jsUrl",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.resourceName",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.onReady",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.readRecord",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.writeRecord",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.salt",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.support",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.create",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.picked",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.assert",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.getPrf",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.renderPrf",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.wrappingKey",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.build",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.unlock",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.forgetMemory",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.forgetLocal",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.renderWhere",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.renderCredentials",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.parseAuthData",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.clientData",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.flags",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.kv",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.show",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.log",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.done",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.fail",
+        "method:components/passkey-lab/passkey-lab.js:PasskeyLab.logText"
+      ],
+      "module": "module:components/passkey-lab/passkey-lab.js",
+      "name": "PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
       }
     },
     {
@@ -692,7 +796,7 @@
       "fields": [],
       "id": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "kind": "class",
-      "loc": 92,
+      "loc": 120,
       "methods": [
         "method:components/reader-panel/reader-panel.js:ReaderPanel.jsUrl",
         "method:components/reader-panel/reader-panel.js:ReaderPanel.resourceName",
@@ -702,16 +806,17 @@
         "method:components/reader-panel/reader-panel.js:ReaderPanel.open",
         "method:components/reader-panel/reader-panel.js:ReaderPanel.show",
         "method:components/reader-panel/reader-panel.js:ReaderPanel.badge",
+        "method:components/reader-panel/reader-panel.js:ReaderPanel.renderTerms",
         "method:components/reader-panel/reader-panel.js:ReaderPanel.pageNodes",
         "method:components/reader-panel/reader-panel.js:ReaderPanel.loadGraph"
       ],
       "module": "module:components/reader-panel/reader-panel.js",
       "name": "ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       }
     },
     {
@@ -1332,7 +1437,7 @@
         "end": 71,
         "line": 21,
         "path": "tests/build/test_chrome_in_every_page.py",
-        "sha256": "53a8afd9bc1a424bf343ca210c840ced1cf6217e72b617428647049e7383b7a2"
+        "sha256": "529f6269ada6eecdf6e2c1c4b70aaaaff4a56da5c495bca2f8f0b45aba4a1195"
       }
     },
     {
@@ -1484,6 +1589,34 @@
       ],
       "doc": "",
       "fields": [],
+      "id": "class:tests/build/test_learn.py:Test__Learn",
+      "kind": "class",
+      "loc": 91,
+      "methods": [
+        "method:tests/build/test_learn.py:Test__Learn.setUp",
+        "method:tests/build/test_learn.py:Test__Learn.test_every_term_resolves_to_a_page_and_an_anchor",
+        "method:tests/build/test_learn.py:Test__Learn.test_term_links_in_pages_match_the_glossary",
+        "method:tests/build/test_learn.py:Test__Learn.test_generators_are_current",
+        "method:tests/build/test_learn.py:Test__Learn.test_each_learn_page_has_its_blocks",
+        "method:tests/build/test_learn.py:Test__Learn.test_diagrams_use_tokens_only_and_every_lane_is_used",
+        "method:tests/build/test_learn.py:Test__Learn.test_the_lab_keeps_the_rules_of_the_app"
+      ],
+      "module": "module:tests/build/test_learn.py",
+      "name": "Test__Learn",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      }
+    },
+    {
+      "base_ids": [],
+      "bases": [
+        "TestCase"
+      ],
+      "doc": "",
+      "fields": [],
       "id": "class:tests/build/test_md_to_html.py:Test__Md__To__Html",
       "kind": "class",
       "loc": 54,
@@ -1562,7 +1695,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       }
     },
     {
@@ -1721,8 +1854,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1732,8 +1865,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1743,8 +1876,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1754,8 +1887,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1765,8 +1898,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1776,8 +1909,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1787,8 +1920,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1798,8 +1931,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1809,8 +1942,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1820,8 +1953,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1831,8 +1964,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1842,8 +1975,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1853,8 +1986,8 @@
     {
       "from": "class:admin/build/chrome.py:Chrome",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -1925,6 +2058,83 @@
         "sha256": "a2b58b36772056405c63ee588c5ce657a79a672b3feca1a371d63ffbbccb4bb6"
       },
       "to": "method:admin/build/gen_chrome.py:Gen__Chrome.run",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
+      },
+      "to": "method:admin/build/gen_diagrams.py:Gen__Diagrams.__init__",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
+      },
+      "to": "method:admin/build/gen_diagrams.py:Gen__Diagrams.chain_svg",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
+      },
+      "to": "method:admin/build/gen_diagrams.py:Gen__Diagrams.chain_text",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
+      },
+      "to": "method:admin/build/gen_diagrams.py:Gen__Diagrams.figure",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
+      },
+      "to": "method:admin/build/gen_diagrams.py:Gen__Diagrams.run",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
+      },
+      "to": "method:admin/build/gen_diagrams.py:Gen__Diagrams.sequence_svg",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
+      },
+      "to": "method:admin/build/gen_diagrams.py:Gen__Diagrams.sequence_text",
       "verb": "contains"
     },
     {
@@ -2302,6 +2512,94 @@
       "verb": "contains"
     },
     {
+      "from": "class:admin/build/gen_terms.py:Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "method:admin/build/gen_terms.py:Gen__Terms.__init__",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_terms.py:Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "method:admin/build/gen_terms.py:Gen__Terms.apply",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_terms.py:Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "method:admin/build/gen_terms.py:Gen__Terms.glossary",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_terms.py:Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "method:admin/build/gen_terms.py:Gen__Terms.link",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_terms.py:Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "method:admin/build/gen_terms.py:Gen__Terms.pattern",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_terms.py:Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "method:admin/build/gen_terms.py:Gen__Terms.run",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_terms.py:Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "method:admin/build/gen_terms.py:Gen__Terms.unwrap",
+      "verb": "contains"
+    },
+    {
+      "from": "class:admin/build/gen_terms.py:Gen__Terms",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "method:admin/build/gen_terms.py:Gen__Terms.validate",
+      "verb": "contains"
+    },
+    {
       "from": "class:admin/build/gen_twins.py:Gen__Twins",
       "source": {
         "end": 63,
@@ -2403,10 +2701,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.__init__",
       "verb": "contains"
@@ -2414,10 +2712,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.convert",
       "verb": "contains"
@@ -2425,10 +2723,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.emit",
       "verb": "contains"
@@ -2436,10 +2734,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.emit_table",
       "verb": "contains"
@@ -2447,10 +2745,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.handle_data",
       "verb": "contains"
@@ -2458,10 +2756,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.handle_endtag",
       "verb": "contains"
@@ -2469,10 +2767,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.handle_starttag",
       "verb": "contains"
@@ -2480,10 +2778,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.markdown",
       "verb": "contains"
@@ -2491,10 +2789,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.newline",
       "verb": "contains"
@@ -2502,10 +2800,10 @@
     {
       "from": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "method:admin/build/html_to_md.py:Html__To__Markdown.twin_href",
       "verb": "contains"
@@ -2948,6 +3246,325 @@
         "sha256": "5a32de3166ee3fe3ef95c1b5cf2365fcfb87a0ed07cc4a8a615b0cf9bd44cdea"
       },
       "to": "method:admin/build/verify_live.py:Verify__Live.run",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "class:components/sg-base/sg-base.js:SgBase",
+      "verb": "inherits"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.assert",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.build",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.clientData",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.create",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.done",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.fail",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.flags",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.forgetLocal",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.forgetMemory",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.getPrf",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.jsUrl",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.kv",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.log",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.logText",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.onReady",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.parseAuthData",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.picked",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.readRecord",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.renderCredentials",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.renderPrf",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.renderWhere",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.resourceName",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.salt",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.show",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.support",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.unlock",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.wrappingKey",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "method:components/passkey-lab/passkey-lab.js:PasskeyLab.writeRecord",
       "verb": "contains"
     },
     {
@@ -4394,10 +5011,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "class:components/sg-base/sg-base.js:SgBase",
       "verb": "inherits"
@@ -4405,10 +5022,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.badge",
       "verb": "contains"
@@ -4416,10 +5033,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.jsUrl",
       "verb": "contains"
@@ -4427,10 +5044,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.loadGraph",
       "verb": "contains"
@@ -4438,10 +5055,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.onReady",
       "verb": "contains"
@@ -4449,10 +5066,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.open",
       "verb": "contains"
@@ -4460,10 +5077,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.pageNodes",
       "verb": "contains"
@@ -4471,10 +5088,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.readState",
       "verb": "contains"
@@ -4482,10 +5099,21 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
+      },
+      "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.renderTerms",
+      "verb": "contains"
+    },
+    {
+      "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
+      "source": {
+        "end": 143,
+        "line": 24,
+        "path": "components/reader-panel/reader-panel.js",
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.resourceName",
       "verb": "contains"
@@ -4493,10 +5121,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.show",
       "verb": "contains"
@@ -4504,10 +5132,10 @@
     {
       "from": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "method:components/reader-panel/reader-panel.js:ReaderPanel.writeState",
       "verb": "contains"
@@ -6564,7 +7192,7 @@
         "end": 71,
         "line": 21,
         "path": "tests/build/test_chrome_in_every_page.py",
-        "sha256": "53a8afd9bc1a424bf343ca210c840ced1cf6217e72b617428647049e7383b7a2"
+        "sha256": "529f6269ada6eecdf6e2c1c4b70aaaaff4a56da5c495bca2f8f0b45aba4a1195"
       },
       "to": "method:tests/build/test_chrome_in_every_page.py:Test__Chrome__In__Every__Page.setUp",
       "verb": "contains"
@@ -6575,7 +7203,7 @@
         "end": 71,
         "line": 21,
         "path": "tests/build/test_chrome_in_every_page.py",
-        "sha256": "53a8afd9bc1a424bf343ca210c840ced1cf6217e72b617428647049e7383b7a2"
+        "sha256": "529f6269ada6eecdf6e2c1c4b70aaaaff4a56da5c495bca2f8f0b45aba4a1195"
       },
       "to": "method:tests/build/test_chrome_in_every_page.py:Test__Chrome__In__Every__Page.test_canonical_matches_the_page_location",
       "verb": "contains"
@@ -6586,7 +7214,7 @@
         "end": 71,
         "line": 21,
         "path": "tests/build/test_chrome_in_every_page.py",
-        "sha256": "53a8afd9bc1a424bf343ca210c840ced1cf6217e72b617428647049e7383b7a2"
+        "sha256": "529f6269ada6eecdf6e2c1c4b70aaaaff4a56da5c495bca2f8f0b45aba4a1195"
       },
       "to": "method:tests/build/test_chrome_in_every_page.py:Test__Chrome__In__Every__Page.test_every_badge_equals_version_txt",
       "verb": "contains"
@@ -6597,7 +7225,7 @@
         "end": 71,
         "line": 21,
         "path": "tests/build/test_chrome_in_every_page.py",
-        "sha256": "53a8afd9bc1a424bf343ca210c840ced1cf6217e72b617428647049e7383b7a2"
+        "sha256": "529f6269ada6eecdf6e2c1c4b70aaaaff4a56da5c495bca2f8f0b45aba4a1195"
       },
       "to": "method:tests/build/test_chrome_in_every_page.py:Test__Chrome__In__Every__Page.test_every_page_has_the_chrome",
       "verb": "contains"
@@ -6608,7 +7236,7 @@
         "end": 71,
         "line": 21,
         "path": "tests/build/test_chrome_in_every_page.py",
-        "sha256": "53a8afd9bc1a424bf343ca210c840ced1cf6217e72b617428647049e7383b7a2"
+        "sha256": "529f6269ada6eecdf6e2c1c4b70aaaaff4a56da5c495bca2f8f0b45aba4a1195"
       },
       "to": "method:tests/build/test_chrome_in_every_page.py:Test__Chrome__In__Every__Page.test_no_inline_script_or_style",
       "verb": "contains"
@@ -6619,7 +7247,7 @@
         "end": 71,
         "line": 21,
         "path": "tests/build/test_chrome_in_every_page.py",
-        "sha256": "53a8afd9bc1a424bf343ca210c840ced1cf6217e72b617428647049e7383b7a2"
+        "sha256": "529f6269ada6eecdf6e2c1c4b70aaaaff4a56da5c495bca2f8f0b45aba4a1195"
       },
       "to": "method:tests/build/test_chrome_in_every_page.py:Test__Chrome__In__Every__Page.test_there_are_pages",
       "verb": "contains"
@@ -7032,6 +7660,83 @@
       "verb": "contains"
     },
     {
+      "from": "class:tests/build/test_learn.py:Test__Learn",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      },
+      "to": "method:tests/build/test_learn.py:Test__Learn.setUp",
+      "verb": "contains"
+    },
+    {
+      "from": "class:tests/build/test_learn.py:Test__Learn",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      },
+      "to": "method:tests/build/test_learn.py:Test__Learn.test_diagrams_use_tokens_only_and_every_lane_is_used",
+      "verb": "contains"
+    },
+    {
+      "from": "class:tests/build/test_learn.py:Test__Learn",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      },
+      "to": "method:tests/build/test_learn.py:Test__Learn.test_each_learn_page_has_its_blocks",
+      "verb": "contains"
+    },
+    {
+      "from": "class:tests/build/test_learn.py:Test__Learn",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      },
+      "to": "method:tests/build/test_learn.py:Test__Learn.test_every_term_resolves_to_a_page_and_an_anchor",
+      "verb": "contains"
+    },
+    {
+      "from": "class:tests/build/test_learn.py:Test__Learn",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      },
+      "to": "method:tests/build/test_learn.py:Test__Learn.test_generators_are_current",
+      "verb": "contains"
+    },
+    {
+      "from": "class:tests/build/test_learn.py:Test__Learn",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      },
+      "to": "method:tests/build/test_learn.py:Test__Learn.test_term_links_in_pages_match_the_glossary",
+      "verb": "contains"
+    },
+    {
+      "from": "class:tests/build/test_learn.py:Test__Learn",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      },
+      "to": "method:tests/build/test_learn.py:Test__Learn.test_the_lab_keeps_the_rules_of_the_app",
+      "verb": "contains"
+    },
+    {
       "from": "class:tests/build/test_md_to_html.py:Test__Md__To__Html",
       "source": {
         "end": 73,
@@ -7213,7 +7918,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.components",
       "verb": "contains"
@@ -7224,7 +7929,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.test_comms_tools_parse_and_name_no_secret",
       "verb": "contains"
@@ -7235,7 +7940,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.test_contact_file_shape",
       "verb": "contains"
@@ -7246,7 +7951,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.test_every_page_carries_the_column",
       "verb": "contains"
@@ -7257,7 +7962,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.test_only_the_reader_page_widens_connect_src",
       "verb": "contains"
@@ -7268,7 +7973,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.test_search_index_is_fresh_and_covers_every_page",
       "verb": "contains"
@@ -7279,7 +7984,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.test_storage_keys_are_members_of_the_allow_list",
       "verb": "contains"
@@ -7290,7 +7995,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.test_the_key_never_goes_to_local_storage",
       "verb": "contains"
@@ -7301,7 +8006,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "method:tests/build/test_reader.py:Test__Reader.test_three_files_per_component_and_the_base_contract",
       "verb": "contains"
@@ -7694,8 +8399,8 @@
     {
       "from": "module:admin/build/chrome.py",
       "source": {
-        "end": 226,
-        "line": 89,
+        "end": 232,
+        "line": 95,
         "path": "admin/build/chrome.py",
         "sha256": "be008c2b095f6614b32920e768e7a10c2838de7e8a6093405bf9b02d36518431"
       },
@@ -7722,6 +8427,17 @@
         "sha256": "a2b58b36772056405c63ee588c5ce657a79a672b3feca1a371d63ffbbccb4bb6"
       },
       "to": "class:admin/build/gen_chrome.py:Gen__Chrome",
+      "verb": "contains"
+    },
+    {
+      "from": "module:admin/build/gen_diagrams.py",
+      "source": {
+        "end": 250,
+        "line": 42,
+        "path": "admin/build/gen_diagrams.py",
+        "sha256": "af7dfa2d9ef02d22baa741f226e7784f965c2b09c65dfc900638970e1a370696"
+      },
+      "to": "class:admin/build/gen_diagrams.py:Gen__Diagrams",
       "verb": "contains"
     },
     {
@@ -7769,6 +8485,17 @@
       "verb": "contains"
     },
     {
+      "from": "module:admin/build/gen_terms.py",
+      "source": {
+        "end": 139,
+        "line": 32,
+        "path": "admin/build/gen_terms.py",
+        "sha256": "00acab1b0013b2a42d84f08d0fbdf02bb2e9544e7940f3e347db4d3f904666ca"
+      },
+      "to": "class:admin/build/gen_terms.py:Gen__Terms",
+      "verb": "contains"
+    },
+    {
       "from": "module:admin/build/gen_twins.py",
       "source": {
         "end": 63,
@@ -7793,10 +8520,10 @@
     {
       "from": "module:admin/build/html_to_md.py",
       "source": {
-        "end": 210,
-        "line": 20,
+        "end": 215,
+        "line": 21,
         "path": "admin/build/html_to_md.py",
-        "sha256": "2b2ada34162e7013955508b50dfc458d4cb0a1b64f4e892a4a59630100f21339"
+        "sha256": "714bf297a2a6cac84ab3efb91d89e35936228b01ada77c3b5d9ffae2dd5cc69a"
       },
       "to": "class:admin/build/html_to_md.py:Html__To__Markdown",
       "verb": "contains"
@@ -7854,6 +8581,17 @@
         "sha256": "5a32de3166ee3fe3ef95c1b5cf2365fcfb87a0ed07cc4a8a615b0cf9bd44cdea"
       },
       "to": "class:admin/build/verify_live.py:Verify__Live",
+      "verb": "contains"
+    },
+    {
+      "from": "module:components/passkey-lab/passkey-lab.js",
+      "source": {
+        "end": 421,
+        "line": 39,
+        "path": "components/passkey-lab/passkey-lab.js",
+        "sha256": "37d6aa169095522166cac38682079307cd8253fcbd9ade66ec9355c36270f627"
+      },
+      "to": "class:components/passkey-lab/passkey-lab.js:PasskeyLab",
       "verb": "contains"
     },
     {
@@ -7925,10 +8663,10 @@
     {
       "from": "module:components/reader-panel/reader-panel.js",
       "source": {
-        "end": 113,
-        "line": 22,
+        "end": 143,
+        "line": 24,
         "path": "components/reader-panel/reader-panel.js",
-        "sha256": "0b36209c6a64f6afe41eb3157ba46cfb4dc98014ba71887d9bac97b8d976dfe2"
+        "sha256": "b0f2c7be1cdcaa29148fa4fb47347485263d96e7583d5c8b90ac37894dc0d327"
       },
       "to": "class:components/reader-panel/reader-panel.js:ReaderPanel",
       "verb": "contains"
@@ -8159,7 +8897,7 @@
         "end": 71,
         "line": 21,
         "path": "tests/build/test_chrome_in_every_page.py",
-        "sha256": "53a8afd9bc1a424bf343ca210c840ced1cf6217e72b617428647049e7383b7a2"
+        "sha256": "529f6269ada6eecdf6e2c1c4b70aaaaff4a56da5c495bca2f8f0b45aba4a1195"
       },
       "to": "class:tests/build/test_chrome_in_every_page.py:Test__Chrome__In__Every__Page",
       "verb": "contains"
@@ -8220,6 +8958,17 @@
       "verb": "contains"
     },
     {
+      "from": "module:tests/build/test_learn.py",
+      "source": {
+        "end": 114,
+        "line": 24,
+        "path": "tests/build/test_learn.py",
+        "sha256": "1d862c12c6b207849b2d9d7bfbafbe59628e6995dc26776ffa1b75536fc0ef18"
+      },
+      "to": "class:tests/build/test_learn.py:Test__Learn",
+      "verb": "contains"
+    },
+    {
       "from": "module:tests/build/test_md_to_html.py",
       "source": {
         "end": 73,
@@ -8247,7 +8996,7 @@
         "end": 130,
         "line": 34,
         "path": "tests/build/test_reader.py",
-        "sha256": "ca17c3348c2ce8d7de50c008627e041866a444c921621ff3d1a75c40697c0081"
+        "sha256": "bc83fa64f29f2d4a91f3bdb7d96eb3015eb753ce2d2f7b7d6b8081542d894a7b"
       },
       "to": "class:tests/build/test_reader.py:Test__Reader",
       "verb": "contains"
@@ -8299,36 +9048,41 @@
   ],
   "layer": "classes",
   "provenance": {
-    "commit": "8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15",
+    "commit": "eb9aba5317fce111517ccdd38204619b25053082",
     "inputs": {
       ".github/workflows/deploy-pages.yml": "049991bbdd5f2392a57743549312512869a6753e213d996cd4377afc0ad5807e",
-      "404.html": "9b46abeb57d2e297f0495934570dd8d17e0aa0e68e48954fa2f3219d4d3ae387",
+      "404.html": "ae024148bb8287612e82ca022734f689dd7b444904a95aa92d5d47b4190b91ae",
       "admin/build/assemble_site.py": "560c312956e540d3e48ff13df69cc1173df5ffbed59f0cd1a7b1a1711e7be31f",
-      "admin/build/chrome.py": "ae75a0a6a4de89374a66597a1755797b28d45fa158c41cf50b512ba3554ee8b8",
-      "admin/build/gate.py": "33a4b24abee7b6bf827ed2ff8acc3e14534ad49dbc708c5616a8af6e784bfd4c",
+      "admin/build/chrome.py": "750e4b4ec6ca20e4c6bdc0a6f897590d91ca180513e0a3a424187c965da3a9a3",
+      "admin/build/gate.py": "53bf2841ab13488839b1f999bdcd1232a549973cedb53570333f4cb7e3988841",
       "admin/build/gen_chrome.py": "702aec56f2c9d2e87b138e944e07d6c66f60b459519c545e913ef75bfa9189fe",
+      "admin/build/gen_diagrams.py": "69537df6149d2acd562ee0b2e4860d4ae8e6ca9bfe5d49cf22f059b0e2b87d8b",
       "admin/build/gen_docs.py": "698761ae15847e90ccbb88367274f78b408fa1ce549b30d9c995b494a1126984",
       "admin/build/gen_features.py": "63bc6861ed19d7b228822d7b1dd7f9225a1c7f113c5b68fcc0839f73649312f0",
       "admin/build/gen_llms.py": "9964a8d3d69c884b142ec26e5de2d4fad1dab137ae98609159cd30e7f416d930",
       "admin/build/gen_search.py": "c95b637874318ad5a0839625693482f95195299b393261dceb04564408cbf050",
+      "admin/build/gen_terms.py": "ab0f2a822249d4770c876b3a458384833a77ef78fcc9e7955e62e909c1658e8c",
       "admin/build/gen_twins.py": "970b3654f1e836ffd9a55f7446e8a001bb5f9e8502859041e135eff34067b450",
       "admin/build/gen_versions.py": "5636c992e1203d293e429799c8137badd74425e8bbdfd7e0cefc39cc4c33a311",
-      "admin/build/html_to_md.py": "5ea5f75c049c8b75981b62a598939cb478f92b2ee333244e220824b78c56ee2c",
+      "admin/build/html_to_md.py": "d35242d42aa6151783743665500eeedb0d6eb04891626d9dbfd49b9a1f30fa1e",
       "admin/build/md_to_html.py": "97841987ebdf3aec4b7cf19fc9b0ee8a66139f34a6753e361ba139dd969e1a33",
       "admin/build/pages.py": "cf7005fd5ace37c3ead23a6c8d00b5bc3bc9718a16a686e5c70a36bbca1a9591",
       "admin/build/release.py": "9ceae016e3c901ada9ce4cd8572df4b84754dee44a40a86f5d1efb48e6d79a88",
       "admin/build/tag_release.py": "158ce432c0222b9d430c01c87a3f83e63d38a7f24f435d859190bf2bc6512cb8",
       "admin/build/validate.js": "68435b5a429a25a44843f9351cbc93cbb307ef629c67b08f952f9c92d248b12e",
       "admin/build/verify_live.py": "6077890fe9995fb22f9d1cf94c8b3a28a30f840fb1309fd95ea937d53d85b6a8",
-      "admin/comms.html": "31899728bebfefcbe2d01ea7b1434036e234fd0aa6a52674c63cd4395c317853",
-      "admin/index.html": "f19fc59f0ef9e500c1bdbfc217234ceeafff2094d743f3a051f2aa2fb70bbabc",
-      "admin/versions.html": "9795651d661843c6b423ee8db9d6bf0ac33985df02785cd4b282b7b81dfbb2f1",
-      "app/config/storage-keys.js": "892c307ba6cd556386db86acfeeade7038973ee3f19434a84f3b20241577fb3d",
+      "admin/comms.html": "a1a37d832bafd67e9f3c6378dac2e23851d3c2519e1dc80a56546ad9e66e782e",
+      "admin/index.html": "e07115f5170a3e3f53a376091dd05fd9f3dcb25d4db2407e0797e043a66d5bf3",
+      "admin/versions.html": "4a71710645cb68f2390565bb9d0f276a3362bfbbeead8cc9fa55f484a4a84fdb",
+      "app/config/storage-keys.js": "8e146ccc473ce6e8f8d9c1ef4a1109a0f9d6f259daec2edbf77a93eba584a7fa",
       "assets/mockups.css": "878d38eb32e9374482d3adbe376f4beef6cb221b4c1eff30f3a184f390e8078a",
       "assets/nav.js": "33e66df93332e4f1a45b14512657b0534a9d202f5538ecfcf2dc86e56ac20f6b",
-      "assets/site.css": "2ae97f6b17fee2528f5bcaf714f98d2284c60340f5bd7c4a34960168316559d3",
+      "assets/site.css": "b167bc58ee8067675d45672cb0ca3c1a6944cbd074ea26f991d676d28c22a0fb",
       "assets/theme.js": "ef43359d66faf716e0f02d066de0333f7c0c65f6cc918d5f5a4a012767cfa640",
       "assets/themes.css": "bd626138ed6e4b759b93ac5bc1951e071989570fcc3e21201f38a9fed608e18b",
+      "components/passkey-lab/passkey-lab.css": "74c950d7d4e12f4c4a47356c6c1ba5b30340641ab378ae2fdca4762e8630769a",
+      "components/passkey-lab/passkey-lab.html": "22bf3b12220a54642ff16d02ebc338a236de427b40cb1149eddc504b16dfcf51",
+      "components/passkey-lab/passkey-lab.js": "87acf7111e34206209938100ffae1abfc6cb8895d40912d768035d9d23974c85",
       "components/proto-app/proto-app.css": "aceebf6bc7fc4b2901397bbdbf4721879f26afb0ae0e0c9ffb27e36b235583f6",
       "components/proto-app/proto-app.html": "054ada9d830fb37b7c02b33d187382f7686bc7122de7c4f86318d8778249c11a",
       "components/proto-app/proto-app.js": "c6d2e3fb31872bd11f06ca52edee74f14318e0a6625b30b21d293a7665e71e60",
@@ -8344,37 +9098,38 @@
       "components/reader-log/reader-log.css": "f79481cdec253fb9451014d1dc6f3297dc5fc07d9e36af5ecea30ff20f73a140",
       "components/reader-log/reader-log.html": "9f5b6680c591815d55136d90c1171c2d20d7dbf3db35fce9b50f1e8c17460978",
       "components/reader-log/reader-log.js": "63074bfdcb23b0f0ffdcbb40ecb5fa0d9c6bdb2966584178eb517acee8467647",
-      "components/reader-panel/reader-panel.css": "b6ed37cd79a2ba8524962471b23e85f9c27a744dbd9419bcd1fa9852a9f08a73",
-      "components/reader-panel/reader-panel.html": "1166e5b2156d639fc95086ad6e9d27334395955ffc7b9ae19bdc7e172b1ccf86",
-      "components/reader-panel/reader-panel.js": "fcdbc42218c7714e08e1aee27025d1f96478b1e12c59ab2c39cf20ac68ae71e3",
+      "components/reader-panel/reader-panel.css": "54fe7c566502f5bd59081895890823d1664a8f0e1a72200dd11f639da2fd49ed",
+      "components/reader-panel/reader-panel.html": "fc4c772924f9418d6b9278d2e9b3405016695470c2cdfdbb0b81afab3b963812",
+      "components/reader-panel/reader-panel.js": "742850ad39d471efccd919b2c82ecdc43517eb0af32ba6dfb90f964193a927cc",
       "components/sg-base/sg-base.css": "99330398051ff7294e8e48ed01ec1ef8d58c997c95454232eba1288dd03829b7",
       "components/sg-base/sg-base.html": "6c8ec644d400f539e2b85f7002918d5a0b63278a8a229fdf8e153133a3be20bc",
       "components/sg-base/sg-base.js": "efaef01d9ae7d6a79f5c174d6580e084a0aa78e04bd9582ea8a1b45da841e7f2",
-      "docs/design/brief-corrections.html": "316500c5ebb103ca8ffe7b9d9c21fa552c79cc5121c8336dccf2e5e9c68e9e26",
-      "docs/design/index.html": "2cf037d1d63f61e282ab63c65a040b4318b06ee01659325c2665d87a7bfa1376",
-      "docs/design/riskmandate-aws-cognito-architecture.html": "6fa54ac45aab13bf3359018d9e9ece2f772e6af3bff708805b5fef507746b84f",
-      "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html": "3f97bf0bc6c24061f927e28c2401b660b2c8eb01b61f7c3a4c61760701a6c282",
-      "docs/design/riskmandate-user-onboarding-account-experience.html": "61504fe88554a3e8921ed4b186297325c85bfb3e8e2c3c5392f3a46e985666b6",
-      "docs/design/riskmandate-workspace-architecture-briefing.html": "d5728432eef6a8c16c58de17b042710b1b8356f8fc215ceae57bfa6f1ba7d7f6",
-      "docs/design/secrets-sgit-ai__mvp-build-brief.html": "a34841e7e37888cedebb4896a8eb25e7868dd859d06aa20e7da6fd351e5a8f20",
-      "docs/index.html": "778611a2ce74ea873a40f5a55264992f7600b4a38f9b89e63e6e87fa3bc5035c",
-      "docs/ops/bootstrap.html": "efde351507745e68a0568234d578d278be372c51a86222bcced7066fc6be7c02",
-      "docs/ops/branch-protection.html": "c43d7d4e8ed99998c66ffc96d54b873ab6286403600ea89140ac648f2c95825b",
-      "docs/ops/comms.html": "c0a83e62cd1bc171caba85a1c011dc060f88774f965fa16b137b057eb3fca3b1",
-      "docs/ops/dns.html": "1b223544c4b7b80a50c7793040de176f462918c697794b06eba4cfe011f9c955",
-      "docs/ops/index.html": "61bb55eb37ada6f64d1116b444a79057c684a3c32f19f504f10ebf6cd0933bf8",
-      "docs/ops/needs.html": "5c4d7e3714970da30e8b4969417f9118a784af7fbf3634f9e43a79267e3156c2",
-      "docs/ops/release.html": "3b243ac04acacd5c84dc964da41a4297bc69e72c323422e99c525292b68972fe",
-      "docs/reality.html": "ec010396ef3785f5a79fe9d1a3533e2d8c7b0aa64b29beca0c2121ee99f80e90",
-      "environments/index.html": "22e620517cbd6fc6eebca8b4231b17e3217bee9efce68243ff29644e840c721e",
-      "how-it-works/index.html": "bb4016981425af891907082079de6787dbdf301b62f8597891d3b0ef30ae41c4",
-      "index.html": "4bb0c8e1595a5bb48d9bebefddb860c97ffc35d94a64cf7d2f09630061c33399",
+      "docs/design/brief-corrections.html": "ebfddef7134fa594b343c19ef25bbbb87b98a5689c0456f39474e02a378468b9",
+      "docs/design/index.html": "250a48f688f177e5fedf638965622d40b861f6a7d593eaf3c297d7e5db417e5d",
+      "docs/design/riskmandate-aws-cognito-architecture.html": "3daffc0545ee9cf36670439f31064d165a04d61c1a4bcb79306fb941821e6b7b",
+      "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html": "e548cc70131cd993c30b68f1328cade3d1c401ca97726f3c9c4ada238f7caefb",
+      "docs/design/riskmandate-user-onboarding-account-experience.html": "81d3e74283e1d526efb041454329eee7d7751317d877e7c029682a6e3117b7d0",
+      "docs/design/riskmandate-workspace-architecture-briefing.html": "d9303dd9e0059b2b791d967bc7a98f581c4bc97a80f26526a24bfeaa0601b999",
+      "docs/design/secrets-sgit-ai__mvp-build-brief.html": "4cfbd22877ae9b113212c2dac32dd276eef13f9805bf4ce80fd3b880835c9dff",
+      "docs/index.html": "45e08a6b39473ef3520eb149bfd45b5a20c5035ec934cb13f3945af673e89d40",
+      "docs/ops/bootstrap.html": "a556fff1564998964a0c2422825b4e02b60bafeb52e997df21489a2c19266f6f",
+      "docs/ops/branch-protection.html": "07d9fba6ae66f553e6e22e93903e1b43b52957e170d6fc902266f3bd73bc5371",
+      "docs/ops/comms.html": "afffd8178342e49c4896043be4a04e1309725117f8bb7a9376e4725113bf1e8c",
+      "docs/ops/dns.html": "ccd6459dc88ddc0351a16402b85d13401ad8e2202c2977ad7dc60dabf7be461a",
+      "docs/ops/index.html": "85f0f760c828906048c1a9ca56cde863bbec914f3c5ee220669e8e322cc4241b",
+      "docs/ops/needs.html": "ca19e8fe6bd6b49b1eaace38bec8704add62cc29a20859ecbf0731b1cbd89f08",
+      "docs/ops/release.html": "8d32efd3c61a934d31941caca78e9ceb7d2df72da6ac1fa79c01a3f04b2cb197",
+      "docs/reality.html": "b7dc18a48b55f539c06edd2d512700b5f3a8b661fb9fdc58ed8810428e3db950",
+      "environments/index.html": "c59a09f2f868b289781a7392f39270f00768766011caa3044e823c74570ed3b4",
+      "how-it-works/index.html": "c39fd42c20d79f9e340995c03f2a98482999d9f784add24789d977136d9d7dca",
+      "index.html": "92f82dd94a9114a3df3af56b38a48037503847a308355113f8a4c27e8039386a",
       "infra/bootstrap/bootstrap.sh": "257713fea062998a8b9fc440af2a19cb376e1f1d12859cea851bc13c41840863",
       "infra/rules/storage.rules": "6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250",
-      "keyring/index.html": "724c3255eddf40b74ff3fb5d1b3d029337742c38fc13bc57cd4fc1628938507e",
-      "mockups/index.html": "0d68a4e5b29874f0e27eedca8fd97ac8c7e02c416f8610c56db9badb4d820842",
-      "reader/index.html": "a3b15e5542e7ff26ec51ffd90e722dabacd10cd7ffad4719ea1d00f1942d460d",
-      "review/index.html": "9a5270ccad63e16c03ffa70e91fb4d287c90ee82acffa4be2cc84ce064918905",
+      "keyring/index.html": "0b2ebad7c2189ba2aa15ade897a22417d897c240c574cf88fe01e5a41cecab04",
+      "learn/index.html": "9b2e900b772f81a4fb6e3123d46ce2dd89b46a6c2a38f02ab12395bb3932ac8c",
+      "mockups/index.html": "129148849c93bca7d58dd5927f2fc80b9e87d6e3181e30e5b9262779d953407c",
+      "reader/index.html": "21d156f62a696c81af06ffadf64520fbbf635de09be9344c20842bdbda3f566d",
+      "review/index.html": "50f9911f1bbbd4a3fcae137964992002f80486311ff102ff16f30ff754ed7aa4",
       "review/tools/brief.py": "d4ccbd69c47d946b98285fa2b1329a432a097d922eeefc3014264c1dcbd7d0ba",
       "review/tools/claims.py": "1aa4fa4be71b0ff60a115ec43371484f484f43a259ad33aa5e0a48ba41c5e425",
       "review/tools/derive.py": "30c9a92953bf535b18f1e2038c96c872481d65def1efe15c815fc04b00baa818",
@@ -8415,19 +9170,20 @@
       "review/ui/shell.css": "1486453f2f17c9531e89a1420ac1ed1b1879d91e650d5a149634a6a6686fb41d",
       "review/ui/shell.js": "919b72bfb421cf2e1bde8925650d837c5662ba70ca2c56d74edb0d569d0a5493",
       "review/ui/tokens.css": "403feedc08fa2340b995f733cc8b1b475e445c1599a55953e206ec45a7ef07d7",
-      "security/index.html": "d8802c8b39aa07179ad3a3a45f944cd0ff7b99bfecdf2af19edbcd41b47e3215",
-      "sharing/index.html": "7a375ce4fb6959b526a4f26b83a4a2c6ff15001f3aadd11ab3305d01ff4834fd",
-      "shipped/index.html": "92e5c44283e4e4477f5011eb95a6b22500b6854f8536b8a8ea6e5148fb3e8735",
-      "team/index.html": "4d2954f25a2837ceefcf29aa08a1aee8e7129143130d5f0fd82682ff39da4994",
-      "tests/build/test_chrome_in_every_page.py": "9dae42da02b45fc8da10fc8c075820beab0efd97dc9397877c2ade472404d7ee",
+      "security/index.html": "ff80bf23c5ed3f50a93a57eff89dbb1b16b714d7cb02b987e0a08da6e0aafd06",
+      "sharing/index.html": "28546e484c5ff9c9632058a8886ce7d83c77f24ac3885dd852c419c2cc8d37c2",
+      "shipped/index.html": "fbd41663067292b69336690a21f6e0405c2dc13acfb9c6bd8305d7d60f8d337e",
+      "team/index.html": "0a7c41a30da59ace5744787abb059bb22598c3db31baad0dbf4c2b41a453ca1e",
+      "tests/build/test_chrome_in_every_page.py": "0cb959a220df8556d3d688472b6bfedfd24658998da231aba4ee9ffe39d5e8b2",
       "tests/build/test_claims.py": "ab7c3e9f3682f5206b2c913b8b77acef7fe95cc342ede6a60faa242998d3a9bc",
       "tests/build/test_derive.py": "32932d167bdca964cb3c3f42c4afeeb7e6dc1b132484a05f94fd0e4b2feb35eb",
       "tests/build/test_features_schema.py": "668110eb00c829c850957feb4b74e088a0db753c484caf28da0efa401baa6cf6",
       "tests/build/test_generators_check.py": "cf09bbf7e108d772126babca52cfdd82161ec03cb66252f5fd0b3372d0b48402",
       "tests/build/test_html_to_md.py": "5d1b237195888cd9b7d1cac31279b16c02fe4f29fa706fabf41cc39e71e25705",
+      "tests/build/test_learn.py": "ed525097cb41b6934457f3225ac45e76dea97c8c2ae0c223fb857bc33cdab175",
       "tests/build/test_md_to_html.py": "10cb4bbcf8c39f5f66218c573b8ecdf16bcf34725e8b7b8366d1ce81b5dc7691",
       "tests/build/test_mockups.py": "49832c28075c1e3ff9e33c4e10aba5b47811c93286fd858deec0fdaf9e6bfefd",
-      "tests/build/test_reader.py": "02c9dc40dfe5e8d836192a85b804b1f5a4ff4c212ea8cb7f152c54742cb28a43",
+      "tests/build/test_reader.py": "172e0e98ed858cff30805eb4503a456ebc5a609b5b9901f55babaf346dd41e87",
       "tests/build/test_review_folder.py": "c8be271686036652974e8db1e228b0d692e4a3c9a53aade3c503aac768d68be0",
       "tests/build/test_review_ui.py": "8845f05ce8e468301dc038633d565b0402fc424fb931521bf44064c786bec1ff",
       "tests/build/test_themes.py": "7875597a323c0b2d3dbe2d7eae44a72caea9605798c82669bf40762f2482f8f2",
@@ -8438,6 +9194,6 @@
     },
     "tool": "review/tools/derive.py",
     "tool_version": "0.1",
-    "tree_sha256": "a9aa74b74cfb4b65f96dfc16d3249621b76c5c83a5616ee1499d2fafa5f1279d"
+    "tree_sha256": "5f63559adf5543f1b5e51501f3f729fc3ea65ef2b285da49bc6382f1b58e9c32"
   }
 }

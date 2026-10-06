@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.11 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.12 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -25,6 +25,10 @@ Notes for agents:
 - [Environments — secrets.sgit.ai](/environments/index.md): One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 - [How it works — secrets.sgit.ai](/how-it-works/index.md): The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 - [Keyring format v1 — secrets.sgit.ai](/keyring/index.md): The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
+- [GCP, from this site's side — secrets.sgit.ai](/learn/gcp/index.md): What the Google Cloud project is for and what it sees: Identity Platform and the uid, the bucket and the Security Rules, Terraform and Workload Identity Federation, the admin pages, a customer's own project; drawn from the project's point of view.
+- [Learn — secrets.sgit.ai](/learn/index.md): Explanations in context: what a passkey, WebAuthn, PRF, the key hierarchy and the GCP project are from this site's point of view, with diagrams, a glossary every page links into, and a lab where you try the passkey in your own browser.
+- [Keys: from PRF to plaintext — secrets.sgit.ai](/learn/keys/index.md): Is there a passphrase (no). The PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM and the recovery code: every key in the keyring, where it comes from, where it goes, and what is in memory when, drawn and then run live in the lab.
+- [Passkeys, WebAuthn and PRF — secrets.sgit.ai](/learn/passkeys/index.md): What a passkey is when it is the thing that unlocks your keyring: the two WebAuthn calls, the PRF extension, the RP ID, what your authenticator, your browser, this site and Google each store, what two passkeys mean, and a lab to try all of it in your own browser.
 - [Mockup: Account — secrets.sgit.ai](/mockups/account.md): A design mockup of the account screen at secrets.sgit.ai/app/account.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 - [Mockup: Admin: the setup checklist — secrets.sgit.ai](/mockups/admin-checklist.md): A design mockup of the admin: the setup checklist screen at secrets.sgit.ai/admin/setup-checklist.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 - [Mockup: Devices: passkeys and the recovery code — secrets.sgit.ai](/mockups/devices.md): A design mockup of the devices: passkeys and the recovery code screen at secrets.sgit.ai/app/devices.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.

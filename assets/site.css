@@ -353,3 +353,22 @@ a.sg-status:hover   { outline: 2px solid var(--sg-accent); outline-offset: 1px; 
 .sg-document img { max-width: 100%; }
 .sg-document h1  { font-size: 1.7rem; }
 pre              { line-height: 1.4; }
+
+/* ── learn: diagrams drawn by the build, the glossary, term links ─────────── */
+
+.sg-diagram {
+    background:    var(--sg-bg-surface);
+    border:        1px solid var(--sg-border);
+    border-radius: var(--sg-radius);
+    margin:        var(--sg-sp-4) 0;
+    padding:       var(--sg-sp-3);
+}
+.sg-diagram svg            { display: block; height: auto; max-width: 100%; width: 100%; font-family: var(--sg-font-body); }
+.sg-diagram figcaption     { color: var(--sg-text-muted); font-size: var(--sg-fs-small); margin-top: var(--sg-sp-2); }
+.sg-diagram-text summary   { color: var(--sg-text-muted); cursor: pointer; font-size: var(--sg-fs-small); margin-top: var(--sg-sp-2); }
+.sg-diagram-text pre       { font-size: 0.78em; line-height: 1.25; }
+.sg-terms dt               { color: var(--sg-text-heading); font-weight: 600; margin-top: var(--sg-sp-3); }
+.sg-terms dt small         { color: var(--sg-text-muted); font-weight: 400; }
+.sg-terms dd               { margin: 0 0 0 var(--sg-sp-4); }
+a.sg-term                  { border-bottom: 1px dotted var(--sg-accent); text-decoration: none; }
+a.sg-term:hover            { border-bottom-style: solid; }

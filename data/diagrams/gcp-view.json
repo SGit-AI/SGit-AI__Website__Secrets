@@ -1,0 +1,23 @@
+{
+  "id": "gcp-view",
+  "kind": "sequence",
+  "title": "What Google Cloud sees of this site",
+  "caption": "Section 4 of the brief, from the project's side. Terraform, run by GitHub Actions through Workload Identity Federation, sets the project up; the browser talks to Identity Platform to sign in and to the bucket, directly, with the login's token; the Security Rules in front of the bucket are the whole access control. Every arrow into Google carries public identifiers or ciphertext.",
+  "lanes": [
+    { "id": "browser", "label": "Your browser (this site)" },
+    { "id": "idp",     "label": "Identity Platform" },
+    { "id": "bucket",  "label": "The bucket, behind Security Rules" },
+    { "id": "gha",     "label": "GitHub Actions: Terraform" }
+  ],
+  "steps": [
+    { "from": "gha",     "to": "idp",     "text": "Terraform: enable email and Google sign-in, authorised domains secrets.sgit.ai and localhost" },
+    { "from": "gha",     "to": "bucket",  "text": "Terraform: the bucket (versioned, CORS for secrets.sgit.ai), and the rules release from infra/rules/storage.rules" },
+    { "from": "browser", "to": "idp",     "text": "sign in, in a popup: email and password, or Google" },
+    { "from": "idp",     "to": "browser", "text": "an ID token: uid, email, expiry" },
+    { "from": "browser", "to": "bucket",  "text": "GET or PUT users/{uid}/keyring.json with the token; PUT carries x-goog-if-generation-match" },
+    { "note": "bucket",  "text": "rules: the caller's uid must equal {uid} in the path; objects have a size limit; nothing else is readable" },
+    { "from": "bucket",  "to": "browser", "text": "ciphertext and the generation number" },
+    { "note": "idp",     "text": "sees: who signed in, when, from where; can disable an account or sign in as anyone, and gets ciphertext for it" },
+    { "note": "bucket",  "text": "sees: object names, sizes, times; can delete or roll back; never a plaintext byte" }
+  ]
+}

@@ -13,6 +13,7 @@ from html.parser import HTMLParser
 BLOCK_TAGS   = {'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'table', 'pre',
                 'blockquote', 'hr', 'section', 'article', 'div', 'dl', 'dt', 'dd', 'figure', 'figcaption'}
 SKIP_TAGS    = {'script', 'style', 'template', 'svg'}
+ANCHOR_TAGS  = {'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'dt', 'table', 'figure', 'section', 'div', 'p', 'dl', 'ul', 'ol'}
 RE_SPACE     = re.compile(r'[ \t\r\n]+')
 RE_BLANKS    = re.compile(r'\n{3,}')
 
@@ -66,6 +67,10 @@ class Html__To__Markdown(HTMLParser):
         if self.skip_depth or tag in SKIP_TAGS:
             self.skip_depth += 1
             return
+        if attrs.get('id') and tag in ANCHOR_TAGS and self.cell is None and not self.in_pre:   # an explicit anchor survives as inline HTML, so a #fragment link into the twin resolves
+            self.newline(2)
+            self.emit(f'<a id="{attrs["id"]}"></a>')
+            self.newline(1)
         if tag in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6'):
             self.newline(2)
             self.emit('#' * int(tag[1]) + ' ')

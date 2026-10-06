@@ -2,13 +2,13 @@
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.infra.bootstrap) Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool · [proposed](/review/ui/#node=claim.infra.terraform) Terraform module secrets-env and the dev environment root · [proposed](/review/ui/#node=claim.infra.environments-config) config/environments.json with real dev values from Terraform outputs · [proposed](/review/ui/#node=claim.app.environment-page) Environment page: pick a built-in environment, enter a custom one, import, export, reset
 
-One site serves every environment. An environment is one GCP project holding an Identity Platform configuration and one bucket; the project is the unit that is created and destroyed. The browser picks the environment at runtime, with `prod` as the default on `secrets.sgit.ai`, and shows which one is active in the app header at all times, so nobody enters a real secret into `dev` by mistake.
+One site serves every environment. An environment is one [GCP project](/learn/gcp/index.md#gcp) holding an [Identity Platform](/learn/gcp/index.md#identity-platform) configuration and one [bucket](/learn/gcp/index.md#bucket); the project is the unit that is created and destroyed. The browser picks the environment at runtime, with `prod` as the default on `secrets.sgit.ai`, and shows which one is active in the app header at all times, so nobody enters a real secret into `dev` by mistake.
 
 ## The environments
 
@@ -23,7 +23,7 @@ The project ids are proposed until the bootstrap confirms they are available. No
 
 ## What a project contains
 
-Terraform in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform. The exact procedure, as commands, is [docs/ops/bootstrap.md](/docs/ops/bootstrap.md).
+[Terraform](/learn/gcp/index.md#terraform) in `infra/terraform/` will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains `secrets.sgit.ai` and `localhost`; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the [Security Rules](/learn/gcp/index.md#rules) release; IAM for the Terraform service account and the admins group; and the [Workload Identity Federation](/learn/gcp/index.md#wif) pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, `infra/bootstrap/bootstrap.sh`, after which everything is Terraform. The exact procedure, as commands, is [docs/ops/bootstrap.md](/docs/ops/bootstrap.md).
 
 ## config/environments.json
 

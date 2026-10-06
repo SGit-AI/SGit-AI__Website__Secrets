@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/how-it-works/">
   <meta property="og:title" content="How it works — secrets.sgit.ai">
   <meta property="og:description" content="The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.">
-  <meta name="sg-secrets:version" content="0.1.11">
+  <meta name="sg-secrets:version" content="0.1.12">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -44,6 +44,16 @@
           <a class="sl" href="/sharing/">Sharing</a>
           <a class="sl" href="/environments/">Environments</a>
           <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
           </div>
         </div>
         <div class="ni ni-has">
@@ -102,12 +112,12 @@
     <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">How it works</span></div>
   </header>
 <!-- sg-secrets:nav:end -->
-  <main>
+  <main data-terms>
     <h1>How it works</h1>
     <!-- sg-secrets:status:start ids="app.sign-in,app.prf-unlock,app.keyring-v1,app.devices" -->
   <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.sign-in" title="the claim and its evidence, in the navigator">proposed</a> Sign in and out with Google and email/password against the chosen environment · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.prf-unlock" title="the claim and its evidence, in the navigator">proposed</a> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.keyring-v1" title="the claim and its evidence, in the navigator">proposed</a> Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.devices" title="the claim and its evidence, in the navigator">proposed</a> Devices page: add and remove passkeys, regenerate the recovery code</p>
 <!-- sg-secrets:status:end -->
-    <p class="sg-lead">Two things decide what you can do. The <strong>login</strong> decides which paths in the bucket you may touch. The <strong>passkey</strong> decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.</p>
+    <p class="sg-lead">Two things decide what you can do. The <strong>login</strong> decides which paths in the <a class="sg-term" href="/learn/gcp/#bucket" title="The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.">bucket</a> you may touch. The <strong><a class="sg-term" href="/learn/passkeys/#passkey" title="A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.">passkey</a></strong> decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.</p>
 
     <div class="sg-note sg-warn"><p>This page describes the design in section 3 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. Every flow on it is <em>proposed</em>. The status line above is generated from <code>data/features.json</code> and changes when the code ships.</p></div>
 
@@ -116,11 +126,11 @@
       <thead><tr><th>Layer</th><th>Component</th><th>Where it runs</th><th>What it is trusted with</th></tr></thead>
       <tbody>
         <tr><td>Site and app</td><td>Static HTML, JS and CSS from this repository, on GitHub Pages at <code>secrets.sgit.ai</code></td><td>Your browser</td><td><strong>The boundary.</strong> Whoever controls this repository or the DNS controls the app</td></tr>
-        <tr><td>Login</td><td>Identity Platform, through the vendored Firebase Auth SDK</td><td>Google</td><td>Can impersonate; cannot decrypt</td></tr>
-        <tr><td>Storage</td><td>A Cloud Storage for Firebase bucket with Security Rules</td><td>Google</td><td>Holds ciphertext; can delete</td></tr>
-        <tr><td>Unlock</td><td>A WebAuthn passkey with the PRF extension, RP ID <code>secrets.sgit.ai</code></td><td>Your authenticator: Google Password Manager, iCloud Keychain or a hardware key</td><td>The only thing that can decrypt</td></tr>
-        <tr><td>Admin</td><td>The same static pages, calling GCP's own REST APIs with your Google account's token</td><td>Your browser</td><td>Works only if your Google account has IAM on the project</td></tr>
-        <tr><td>Infrastructure</td><td>Terraform in this repository, applied by GitHub Actions through Workload Identity Federation</td><td>GitHub Actions</td><td>Can reconfigure or delete; cannot read</td></tr>
+        <tr><td>Login</td><td><a class="sg-term" href="/learn/gcp/#identity-platform" title="Google&#x27;s login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else.">Identity Platform</a>, through the vendored Firebase Auth SDK</td><td>Google</td><td>Can impersonate; cannot decrypt</td></tr>
+        <tr><td>Storage</td><td>A Cloud Storage for Firebase bucket with <a class="sg-term" href="/learn/gcp/#rules" title="The rules file Google enforces in front of the bucket: a signed-in user may read and write only their own prefix, with size limits; the whole access control of the MVP.">Security Rules</a></td><td>Google</td><td>Holds ciphertext; can delete</td></tr>
+        <tr><td>Unlock</td><td>A <a class="sg-term" href="/learn/passkeys/#webauthn" title="The browser API (navigator.credentials) that creates a passkey and later asks your authenticator to prove it still has it; the only API this site uses to talk to the authenticator.">WebAuthn</a> passkey with the <a class="sg-term" href="/learn/passkeys/#prf" title="The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.">PRF extension</a>, <a class="sg-term" href="/learn/passkeys/#rp-id" title="The host a passkey is scoped to; here exactly secrets.sgit.ai (localhost when testing), never sgit.ai, so no sibling site can ask for the gesture.">RP ID</a> <code>secrets.sgit.ai</code></td><td>Your <a class="sg-term" href="/learn/passkeys/#authenticator" title="Whatever holds the passkey&#x27;s private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.">authenticator</a>: Google Password Manager, iCloud Keychain or a hardware key</td><td>The only thing that can decrypt</td></tr>
+        <tr><td>Admin</td><td>The same static pages, calling <a class="sg-term" href="/learn/gcp/#gcp" title="The Google Cloud project that holds the login and the bucket for one environment; it sees who signed in and stores ciphertext, and can open none of it.">GCP</a>'s own REST APIs with your Google account's token</td><td>Your browser</td><td>Works only if your Google account has IAM on the project</td></tr>
+        <tr><td>Infrastructure</td><td><a class="sg-term" href="/learn/gcp/#terraform" title="The infrastructure description in infra/terraform/ that creates each environment&#x27;s project, login, bucket and rules, applied by GitHub Actions; it can delete and reconfigure, and cannot read.">Terraform</a> in this repository, applied by GitHub Actions through <a class="sg-term" href="/learn/gcp/#wif" title="How GitHub Actions gets a GCP identity without a stored key: the pipeline presents its own token and GCP trusts it for this one repository and branch.">Workload Identity Federation</a></td><td>GitHub Actions</td><td>Can reconfigure or delete; cannot read</td></tr>
       </tbody>
     </table>
 
@@ -133,7 +143,7 @@ sign in ──▶ no keyring at users/{uid}/keyring.json
         ──▶ encrypt the body under the KEK; write keyring.json and meta.json to the bucket
         ──▶ show the recovery code once, behind "I have written it down"
 </pre>
-    <p>What leaves the browser: ciphertext, two wrapped copies of the KEK, a 32-byte PRF salt, and <code>meta.json</code> with the passkey's credential id and public key. What never leaves: the PRF output, the KEK, the recovery code, the private keys, any entry.</p>
+    <p>What leaves the browser: ciphertext, two wrapped copies of the <a class="sg-term" href="/learn/keys/#kek" title="The keyring&#x27;s one real key: 32 random bytes that encrypt the body, themselves stored only wrapped, once per unlock method.">KEK</a>, a 32-byte <a class="sg-term" href="/learn/keys/#prf-salt" title="32 random public bytes fixed for the keyring&#x27;s life, given to every passkey as the PRF input; stored in keyring.json in the clear, because it is an input, not a secret.">PRF salt</a>, and <code>meta.json</code> with the passkey's <a class="sg-term" href="/learn/passkeys/#credential" title="The public identifier of one passkey, stored in meta.json so the page can list your devices and ask the authenticator for that passkey by name.">credential id</a> and public key. What never leaves: the PRF output, the KEK, the <a class="sg-term" href="/learn/keys/#recovery-code" title="26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone.">recovery code</a>, the private keys, any entry.</p>
 
     <h2>Returning</h2>
     <pre>
@@ -160,7 +170,7 @@ open /admin/ ──▶ choose an environment
              ──▶ "Sign in with Google for admin" (OAuth, scope cloud-platform, token held in memory only)
              ──▶ each check calls a GCP API: exists / enabled / configured / Fix
 </pre>
-    <p>There is no admin role in the app. The GCP project's IAM is the role; the pages are a client for GCP's APIs. An admin page can list users, deploy rules and change CORS. It cannot open a keyring, because a keyring is ciphertext and the admin's token unlocks nothing.</p>
+    <p>There is no admin role in the app. The GCP project's IAM is the role; the pages are a client for GCP's APIs. An admin page can list users, deploy rules and change CORS. It cannot open a <a class="sg-term" href="/keyring/" title="The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.">keyring</a>, because a keyring is ciphertext and the admin's token unlocks nothing.</p>
 
     <h2>What each party can see</h2>
     <table>
@@ -168,7 +178,7 @@ open /admin/ ──▶ choose an environment
       <tbody>
         <tr><td>Sign in</td><td>Your email, the sign-in event, your uid</td><td>Nothing (static files)</td><td>Nothing</td><td>An ID token</td></tr>
         <tr><td>Fetch keyring</td><td>That uid read that object</td><td>Nothing</td><td>Nothing</td><td>Ciphertext</td></tr>
-        <tr><td>Passkey gesture</td><td>Nothing</td><td>Nothing</td><td>The PRF secret for this credential and this origin</td><td>32 bytes of PRF output, briefly</td></tr>
+        <tr><td>Passkey <a class="sg-term" href="/learn/passkeys/#gesture" title="The touch, face, PIN or tap your authenticator asks for before it computes anything; one gesture per unlock, and nothing happens without it.">gesture</a></td><td>Nothing</td><td>Nothing</td><td>The PRF secret for this credential and this origin</td><td>32 bytes of PRF output, briefly</td></tr>
         <tr><td>Unlock</td><td>Nothing</td><td>Nothing</td><td>Nothing</td><td>The KEK and the plaintext body, in memory</td></tr>
         <tr><td>Write</td><td>New ciphertext, the object's size and time</td><td>Nothing</td><td>Nothing</td><td>Everything it already had</td></tr>
       </tbody>
@@ -185,7 +195,7 @@ open /admin/ ──▶ choose an environment
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/how-it-works/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/how-it-works/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

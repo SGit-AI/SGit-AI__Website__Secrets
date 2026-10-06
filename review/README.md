@@ -4,7 +4,7 @@
 
 What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
 
-Source tree: 134 files, hash `a9aa74b74cfb4b65`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+Source tree: 141 files, hash `5f63559adf5543f1`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
 
 ## The project
 
@@ -16,15 +16,15 @@ Source tree: 134 files, hash `a9aa74b74cfb4b65`. Derived files must carry this h
 | flows | 6 |
 | components | 23 |
 | deploy | 5 |
-| files | 134 |
-| modules | 60 |
-| classes | 56 |
-| methods | 586 |
-| surfaces | 64 |
-| tests | 96 |
-| claims | 73 (40 shipped, every one with evidence that resolves; strict) |
-| releases | 12 |
-| anchors | 192 (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |
+| files | 141 |
+| modules | 64 |
+| classes | 60 |
+| methods | 639 |
+| surfaces | 67 |
+| tests | 102 |
+| claims | 75 (42 shipped, every one with evidence that resolves; strict) |
+| releases | 13 |
+| anchors | 204 (files, tests, sections, documents, URLs, commits, tags, runs: where a chain ends) |
 | brief sections | 14 top-level, 31 subsections, as review/brief/ |
 
 Coverage (projected nodes with a derived match beneath them): not computed yet: the join runs from step 3.

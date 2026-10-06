@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/">
   <meta property="og:title" content="secrets.sgit.ai — a zero-knowledge secrets manager in the browser">
   <meta property="og:description" content="A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.">
-  <meta name="sg-secrets:version" content="0.1.11">
+  <meta name="sg-secrets:version" content="0.1.12">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -44,6 +44,16 @@
           <a class="sl" href="/sharing/">Sharing</a>
           <a class="sl" href="/environments/">Environments</a>
           <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
           </div>
         </div>
         <div class="ni ni-has">
@@ -102,9 +112,9 @@
 
   </header>
 <!-- sg-secrets:nav:end -->
-  <main>
+  <main data-terms>
     <h1>secrets.sgit.ai</h1>
-    <p class="sg-lead">A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one GCP project per environment, holding Identity Platform for login and a Cloud Storage bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.</p>
+    <p class="sg-lead">A zero-knowledge secrets manager that will run entirely in the browser. The site is static on GitHub Pages. The only cloud is one <a class="sg-term" href="/learn/gcp/#gcp" title="The Google Cloud project that holds the login and the bucket for one environment; it sees who signed in and stores ciphertext, and can open none of it.">GCP project</a> per environment, holding <a class="sg-term" href="/learn/gcp/#identity-platform" title="Google&#x27;s login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else.">Identity Platform</a> for login and a <a class="sg-term" href="/learn/gcp/#bucket" title="The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.">Cloud Storage</a> bucket for ciphertext. The browser does every cryptographic operation. A full compromise of the GCP project, the Identity Platform admin or the bucket yields ciphertext and login metadata, never a secret.</p>
 
     <div class="sg-note sg-warn">
       <p><strong>What exists at this version.</strong> The pipeline, the live site, and the content pages that describe the design. No app, no admin, no probe page is built. Every row below marked <em>proposed</em> is a design, not a thing. The design is in <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>; what is real is in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>, generated from the same data as the table on this page.</p>
@@ -116,14 +126,14 @@
 <!-- sg-secrets:status:end -->
     <ol>
       <li><strong>Sign in</strong> with Google or an email address, against the environment shown in the header.</li>
-      <li><strong>Touch your passkey.</strong> The authenticator returns a secret bound to this origin; the browser derives the key that opens your keyring.</li>
+      <li><strong>Touch your <a class="sg-term" href="/learn/passkeys/#passkey" title="A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.">passkey</a>.</strong> The <a class="sg-term" href="/learn/passkeys/#authenticator" title="Whatever holds the passkey&#x27;s private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.">authenticator</a> returns a secret bound to this origin; the browser derives the key that opens your <a class="sg-term" href="/keyring/" title="The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.">keyring</a>.</li>
       <li><strong>See your secret.</strong> It was ciphertext in a bucket a second ago and it is plaintext only in this tab, until you lock, sign out or leave.</li>
     </ol>
     <p>None of the three steps is built. <a href="/how-it-works/">How it works</a> draws the flows; <a href="/keyring/">the keyring page</a> is the file format; <a href="/security/">security</a> is what each party gets and what the design cannot withhold.</p>
 
     <h2>What it will be</h2>
-    <p>A password-manager-shaped app where the "passwords" can be anything small and secret: passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes. Unlocked by a passkey using the WebAuthn PRF extension, with a recovery code as the second unlock method. Stored as an encrypted keyring in a bucket the user's login can reach. Readable by no one else, including the people who run the bucket.</p>
-    <p>Three principles are not negotiable: plaintext exists only in the browser, briefly, after a passkey gesture; the login decides which paths you may touch and the passkey decides whether the bytes mean anything; and nothing in the repository is secret, so the whole configuration of every environment is public.</p>
+    <p>A password-manager-shaped app where the "passwords" can be anything small and secret: passwords, API keys, sgit vault keys and read keys, PKI private keys, short notes. Unlocked by a passkey using the <a class="sg-term" href="/learn/passkeys/#webauthn" title="The browser API (navigator.credentials) that creates a passkey and later asks your authenticator to prove it still has it; the only API this site uses to talk to the authenticator.">WebAuthn</a> <a class="sg-term" href="/learn/passkeys/#prf" title="The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.">PRF extension</a>, with a <a class="sg-term" href="/learn/keys/#recovery-code" title="26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone.">recovery code</a> as the second unlock method. Stored as an encrypted keyring in a bucket the user's login can reach. Readable by no one else, including the people who run the bucket.</p>
+    <p>Three principles are not negotiable: plaintext exists only in the browser, briefly, after a <a class="sg-term" href="/learn/passkeys/#gesture" title="The touch, face, PIN or tap your authenticator asks for before it computes anything; one gesture per unlock, and nothing happens without it.">passkey gesture</a>; the login decides which paths you may touch and the passkey decides whether the bytes mean anything; and nothing in the repository is secret, so the whole configuration of every environment is public.</p>
 
     <h2>What a compromised party would get</h2>
     <p>The design's threat table, from <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">section 3.4 of the brief</a>, in full on <a href="/security/">the security page</a>. It describes the design, not a shipped system; the acceptance test that checks it is listed as proposed below.</p>
@@ -132,7 +142,7 @@
       <tbody>
         <tr><td>GCP project or Identity Platform admin</td><td>User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone</td><td>Any plaintext: the PRF output is bound to the origin and the user's authenticator</td></tr>
         <tr><td>Bucket reader</td><td>Ciphertext</td><td>Plaintext</td></tr>
-        <tr><td>Terraform pipeline</td><td>Can change rules, delete the bucket</td><td>Plaintext</td></tr>
+        <tr><td><a class="sg-term" href="/learn/gcp/#terraform" title="The infrastructure description in infra/terraform/ that creates each environment&#x27;s project, login, bucket and rules, applied by GitHub Actions; it can delete and reconfigure, and cannot read.">Terraform</a> pipeline</td><td>Can change rules, delete the bucket</td><td>Plaintext</td></tr>
         <tr><td>This repository or the DNS</td><td><strong>Everything, for users who load the malicious page</strong></td><td>Nothing is withheld</td></tr>
       </tbody>
     </table>
@@ -179,6 +189,8 @@
       <tr><td>pipeline</td><td>The orphan-page rule, a parse-check of every script, and an em-dash advisory in the gate</td><td><a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.pipeline.gate-extras" title="the claim and its evidence, in the navigator">shipped v0.1.3</a></td><td><a href="/review/ui/#file=admin/build/validate.js">admin/build/validate.js</a></td><td>From section 4 of the repository guidance; the advisory never fails the build.</td></tr>
       <tr><td>site</td><td>Roles as files with the rules each enforces and the mistake behind each; the board as data/steps.json and the comms page</td><td><a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.team-roles" title="the claim and its evidence, in the navigator">shipped v0.1.3</a></td><td>team/</td><td>Two roles fill every seat: the project lead and the build agent.</td></tr>
       <tr><td>site</td><td>Participant disclosure: who publishes this site and what they are building</td><td><a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.participant" title="the claim and its evidence, in the navigator">shipped v0.1.3</a></td><td><a href="/review/ui/#file=about/participant.html">about/participant.html</a></td><td>Linked from the footer.</td></tr>
+      <tr><td>site</td><td>Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site&#x27;s side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin</td><td><a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.learn" title="the claim and its evidence, in the navigator">shipped v0.1.12</a></td><td>learn/, <a href="/review/ui/#file=data/terms.json">data/terms.json</a>, data/diagrams/, <a href="/review/ui/#file=admin/build/gen_terms.py">admin/build/gen_terms.py</a>, gen_diagrams.py</td><td>Explanations in context, not general. The reader&#x27;s column lists the terms a page uses. No library draws the diagrams; nothing runs on the page for them.</td></tr>
+      <tr><td>site</td><td>The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host&#x27;s RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium&#x27;s virtual authenticator with PRF</td><td><a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.passkey-lab" title="the claim and its evidence, in the navigator">shipped v0.1.12</a></td><td>components/passkey-lab/</td><td>Talks to nothing but the authenticator. Keeps one allow-listed localStorage record (a lab salt and public facts per lab passkey); PRF bytes and keys live in memory only. Refuses any host but secrets.sgit.ai and localhost. The virtual authenticator with hasPrf answered the brief&#x27;s open question: yes (C25).</td></tr>
       <tr><td>site</td><td>Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css</td><td><a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.themes" title="the claim and its evidence, in the navigator">shipped v0.1.6</a></td><td><a href="/review/ui/#file=data/themes.json">data/themes.json</a>, <a href="/review/ui/#file=assets/themes.css">assets/themes.css</a>, <a href="/review/ui/#file=assets/theme.js">assets/theme.js</a></td><td>No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour.</td></tr>
       <tr><td>site</td><td>The reader&#x27;s column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names</td><td><a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.reader-column" title="the claim and its evidence, in the navigator">shipped v0.1.7</a></td><td>components/reader-panel/, reader-log/</td><td>Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret.</td></tr>
       <tr><td>site</td><td>A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader&#x27;s own key</td><td><a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.reader-chat" title="the claim and its evidence, in the navigator">shipped v0.1.7</a></td><td>components/reader-chat/, <a href="/review/ui/#file=reader/index.html">reader/index.html</a>, <a href="/review/ui/#file=data/search-index.json">data/search-index.json</a></td><td>The key stays in memory or this tab&#x27;s sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed.</td></tr>
@@ -233,7 +245,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

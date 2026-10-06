@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GCP, from this site's side — secrets.sgit.ai</title>
+  <meta name="description" content="What the Google Cloud project is for and what it sees: Identity Platform and the uid, the bucket and the Security Rules, Terraform and Workload Identity Federation, the admin pages, a customer's own project; drawn from the project's point of view.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/learn/gcp/">
+  <link rel="alternate" type="text/markdown" href="/learn/gcp/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/learn/gcp/">
+  <meta property="og:title" content="GCP, from this site&#x27;s side — secrets.sgit.ai">
+  <meta property="og:description" content="What the Google Cloud project is for and what it sees: Identity Platform and the uid, the bucket and the Security Rules, Terraform and Workload Identity Federation, the admin pages, a customer&#x27;s own project; drawn from the project&#x27;s point of view.">
+  <meta name="sg-secrets:version" content="0.1.12">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl here" href="/learn/gcp/" aria-current="page">GCP, from this site&#x27;s side</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/review/">Review<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/review/">The project as graphs</a>
+          <a class="sl" href="/review/ui/">The navigator</a>
+          <a class="sl" href="/review/ui/#view=claims">Claims and their evidence</a>
+          <a class="sl" href="/review/ui/#view=brief">The brief, as sections</a>
+          <a class="sl" href="/review/README.md">review/README.md, the counts</a>
+          <a class="sl" href="/review/BRIEF-CORRECTIONS.md">Corrections to the review brief</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/learn/">Learn</a> <span class="sep">/</span> <span aria-current="page">GCP, from this site&#x27;s side</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main data-terms>
+    <h1>GCP, from this site's side</h1>
+    <!-- sg-secrets:status:start ids="infra.terraform,infra.rules,app.sign-in,admin.setup-checklist" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.infra.terraform" title="the claim and its evidence, in the navigator">proposed</a> Terraform module secrets-env and the dev environment root · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.infra.rules" title="the claim and its evidence, in the navigator">proposed</a> Storage Security Rules deployed per environment · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.sign-in" title="the claim and its evidence, in the navigator">proposed</a> Sign in and out with Google and email/password against the chosen environment · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.admin.setup-checklist" title="the claim and its evidence, in the navigator">proposed</a> Setup checklist: every per-project resource as a row, with Fix where fixable client-side</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">The site is static files on GitHub Pages. Everything that remembers anything across devices is in one Google Cloud project per environment: a login service and a bucket. This page is that project seen from the project's own side: what is in it, who set it up, what each request from a browser looks like when it arrives, and what Google can and cannot do with what it holds. All of it is <em>proposed</em>: no project exists yet, and the bootstrap needs a human (<a href="/docs/ops/needs.html">needs.md</a>).</p>
+
+    <h2 id="gcp">What the project is for</h2>
+    <p>Two jobs, and a third that is only tooling. <strong>Identity Platform</strong> signs users in and hands the browser a token that names them. <strong>A Cloud Storage bucket</strong>, behind Security Rules, stores each user's encrypted <a class="sg-term" href="/keyring/" title="The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.">keyring</a> where only that user's token can reach it. <strong>Terraform</strong>, run by GitHub Actions, creates both and can change or delete them. There is no Cloud Function, no proxy, no API of our own, and the design forbids adding one: a server that touched plaintext would be a party that could be compelled or compromised, and the whole point is that no such party exists.</p>
+    <p>There is one project per environment (<code>dev</code>, <code>main</code>, <code>prod</code>), each with its own bucket and its own users, chosen at runtime by the browser's configuration (<a href="/environments/">Environments</a>). A customer can run their own project in their own organisation and billing, point the public site at it, and get the same site with their own data.</p>
+
+    <!-- sg-secrets:diagram:start id="gcp-view" -->
+  <figure class="sg-diagram" id="diagram-gcp-view" data-generated-from="data/diagrams/gcp-view.json">
+    <svg viewBox="0 0 776 646" width="776" role="img" aria-labelledby="diagram-gcp-view-title">
+      <title id="diagram-gcp-view-title">What Google Cloud sees of this site</title>
+      <defs><marker id="gcp-view-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--sg-accent)"/></marker><marker id="gcp-view-arrow-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--sg-danger)"/></marker></defs>
+      <rect x="14" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="103" y="28" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">Your browser (this site)</text>
+      <line x1="103" y1="42" x2="103" y2="642" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="204" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="293" y="28" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">Identity Platform</text>
+      <line x1="293" y1="42" x2="293" y2="642" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="394" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="483" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">The bucket, behind</text>
+      <text x="483" y="34" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">Security Rules</text>
+      <line x1="483" y1="42" x2="483" y2="642" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="584" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="673" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">GitHub Actions:</text>
+      <text x="673" y="34" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">Terraform</text>
+      <line x1="673" y1="42" x2="673" y2="642" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <text x="483" y="73" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">Terraform: enable email and Google sign-in, authorised</text>
+      <text x="483" y="86" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">domains secrets.sgit.ai and localhost</text>
+      <line x1="673" y1="94" x2="300" y2="94" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#gcp-view-arrow)"/>
+      <text x="578" y="121" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">Terraform: the bucket</text>
+      <text x="578" y="134" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">(versioned, CORS for</text>
+      <text x="578" y="147" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">secrets.sgit.ai), and the</text>
+      <text x="578" y="160" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">rules release from</text>
+      <text x="578" y="173" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">infra/rules/storage.rules</text>
+      <line x1="673" y1="181" x2="490" y2="181" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#gcp-view-arrow)"/>
+      <text x="198" y="208" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">sign in, in a popup: email</text>
+      <text x="198" y="221" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">and password, or Google</text>
+      <line x1="103" y1="229" x2="286" y2="229" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#gcp-view-arrow)"/>
+      <text x="198" y="256" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">an ID token: uid, email,</text>
+      <text x="198" y="269" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">expiry</text>
+      <line x1="293" y1="277" x2="110" y2="277" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#gcp-view-arrow)"/>
+      <text x="293" y="304" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">GET or PUT users/{uid}/keyring.json with the token; PUT</text>
+      <text x="293" y="317" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">carries x-goog-if-generation-match</text>
+      <line x1="103" y1="325" x2="476" y2="325" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#gcp-view-arrow)"/>
+      <rect x="398" y="341" width="170" height="82" rx="4" fill="var(--sg-bg-secondary)" stroke="var(--sg-border)"/>
+      <text x="483" y="355" text-anchor="middle" font-size="11" fill="var(--sg-text)">rules: the caller&#x27;s uid</text>
+      <text x="483" y="369" text-anchor="middle" font-size="11" fill="var(--sg-text)">must equal {uid} in the</text>
+      <text x="483" y="383" text-anchor="middle" font-size="11" fill="var(--sg-text)">path; objects have a size</text>
+      <text x="483" y="397" text-anchor="middle" font-size="11" fill="var(--sg-text)">limit; nothing else is</text>
+      <text x="483" y="411" text-anchor="middle" font-size="11" fill="var(--sg-text)">readable</text>
+      <text x="293" y="444" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">ciphertext and the generation number</text>
+      <line x1="483" y1="452" x2="110" y2="452" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#gcp-view-arrow)"/>
+      <rect x="208" y="468" width="170" height="82" rx="4" fill="var(--sg-bg-secondary)" stroke="var(--sg-border)"/>
+      <text x="293" y="482" text-anchor="middle" font-size="11" fill="var(--sg-text)">sees: who signed in,</text>
+      <text x="293" y="496" text-anchor="middle" font-size="11" fill="var(--sg-text)">when, from where; can</text>
+      <text x="293" y="510" text-anchor="middle" font-size="11" fill="var(--sg-text)">disable an account or</text>
+      <text x="293" y="524" text-anchor="middle" font-size="11" fill="var(--sg-text)">sign in as anyone, and</text>
+      <text x="293" y="538" text-anchor="middle" font-size="11" fill="var(--sg-text)">gets ciphertext for it</text>
+      <rect x="398" y="560" width="170" height="68" rx="4" fill="var(--sg-bg-secondary)" stroke="var(--sg-border)"/>
+      <text x="483" y="574" text-anchor="middle" font-size="11" fill="var(--sg-text)">sees: object names,</text>
+      <text x="483" y="588" text-anchor="middle" font-size="11" fill="var(--sg-text)">sizes, times; can delete</text>
+      <text x="483" y="602" text-anchor="middle" font-size="11" fill="var(--sg-text)">or roll back; never a</text>
+      <text x="483" y="616" text-anchor="middle" font-size="11" fill="var(--sg-text)">plaintext byte</text>
+    </svg>
+    <details class="sg-diagram-text"><summary>The same diagram as text</summary><pre>Your browser (this sit  Identity Platform       The bucket, behind Sec  GitHub Actions: Terraf
+ │                       │ Terraform: enable email and Google sign-in, authorised domains
+ │                       │ secrets.sgit.ai and localhost                 │
+ │                       │◀──────────────────────────────────────────────│
+ │                       │                       │                       │
+ │                       │                       │ Terraform: the bucket (versioned, CORS for
+ │                       │                       │ secrets.sgit.ai), and the rules release
+ │                       │                       │ from infra/rules/storage.rules
+ │                       │                       │◀──────────────────────│
+ │                       │                       │                       │
+ │ sign in, in a popup: email and password, or Google                    │
+ │──────────────────────▶│                       │                       │
+ │                       │                       │                       │
+ │ an ID token: uid, email, expiry               │                       │
+ │◀──────────────────────│                       │                       │
+ │                       │                       │                       │
+ │ GET or PUT users/{uid}/keyring.json with the token; PUT carries x-goog-if-generation-match
+ │──────────────────────────────────────────────▶│                       │
+ │                       │                       │                       │
+ │                       │                       │ ┆ rules: the caller&#x27;s uid must equal {uid}
+ │                       │                       │ ┆ in the path; objects have a size limit;
+ │                       │                       │ ┆ nothing else is readable
+ │                       │                       │                       │
+ │ ciphertext and the generation number          │                       │
+ │◀──────────────────────────────────────────────│                       │
+ │                       │                       │                       │
+ │                       │ ┆ sees: who signed in, when, from where; can disable an account or
+ │                       │ ┆ sign in as anyone, and gets ciphertext for it
+ │                       │                       │                       │
+ │                       │                       │ ┆ sees: object names, sizes, times; can
+ │                       │                       │ ┆ delete or roll back; never a plaintext
+ │                       │                       │ ┆ byte                │
+ │                       │                       │                       │</pre></details>
+    <figcaption>Section 4 of the brief, from the project's side. Terraform, run by GitHub Actions through Workload Identity Federation, sets the project up; the browser talks to Identity Platform to sign in and to the bucket, directly, with the login's token; the Security Rules in front of the bucket are the whole access control. Every arrow into Google carries public identifiers or ciphertext.</figcaption>
+  </figure>
+<!-- sg-secrets:diagram:end -->
+
+    <dl>
+      <dt id="identity-platform">Identity Platform</dt>
+      <dd>Google's login service, used from the browser through the vendored Firebase Auth SDK, in a popup. Email and password, or Google sign-in. The result is an ID token the page holds in memory and sends with every bucket request. The login decides which prefix of the bucket the browser may touch and nothing else: an administrator of Identity Platform can disable an account or sign in as anyone, and what they get for it is ciphertext. Identity Platform's own <a class="sg-term" href="/learn/passkeys/#passkey" title="A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.">passkey</a> feature is not used; the unlock passkey is a plain <a class="sg-term" href="/learn/passkeys/#webauthn" title="The browser API (navigator.credentials) that creates a passkey and later asks your authenticator to prove it still has it; the only API this site uses to talk to the authenticator.">WebAuthn</a> credential registered by this page.</dd>
+      <dt id="uid">The uid</dt>
+      <dd>The login's stable identifier for a user. It names the user's prefix in the bucket, <code>users/{uid}/</code>, and it appears in the rules. It is not a secret and it is not the WebAuthn <a class="sg-term" href="/learn/passkeys/#user-handle" title="The 32 random bytes a passkey is registered under; not your email and not the Firebase uid, so the authenticator learns nothing about the account.">user handle</a>, which is 32 random bytes of its own, so the <a class="sg-term" href="/learn/passkeys/#authenticator" title="Whatever holds the passkey&#x27;s private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.">authenticator</a> learns nothing about the account.</dd>
+      <dt id="bucket">The bucket</dt>
+      <dd>A Cloud Storage for Firebase bucket, one per environment, with uniform access, versioning on, ten noncurrent versions kept and a thirty-day soft-delete, and CORS for <code>https://secrets.sgit.ai</code> only. The browser reads and writes objects in it directly over HTTPS with the login's token; a write carries <code>x-goog-if-generation-match</code> so two devices cannot overwrite each other blindly. What it holds per user: <code>keyring.json</code> (ciphertext, a public salt, wrapped keys) and <code>meta.json</code> (public identifiers). What it sees: names, sizes, times. What it can do: delete, roll back. What it cannot do: read a plaintext byte.</dd>
+      <dt id="rules">The Security Rules</dt>
+      <dd>A rules file, <code>infra/rules/storage.rules</code>, deployed in front of the bucket. A signed-in user may read and write only under their own uid; object sizes are capped; nothing else is readable by anyone through the API. The rules are the whole access control of the MVP, which is why the admin pages show the deployed rules against the file in this repository and why the probe page <code>storage.html</code> (proposed) tries to read another uid's path and expects a 403.</dd>
+      <dt id="terraform">Terraform</dt>
+      <dd>The description of everything above, in <code>infra/terraform/</code>: one module, one root per environment. It enables the services, links the project to Firebase, registers the web app whose public identifiers go into <code>config/environments.json</code>, configures the login, makes the bucket, and releases the rules. GitHub Actions runs it: plan on a pull request, apply on push to <code>dev</code> for the dev environment. It can reconfigure or destroy; it has no path to a plaintext byte, because none exists in the project.</dd>
+      <dt id="wif">Workload Identity Federation</dt>
+      <dd>How the pipeline becomes someone in GCP without a stored key. A pool and a provider in the project trust GitHub's own token for exactly this repository and these branches, and let it act as the Terraform service account. No service account key exists anywhere: not in the repository, not in a GitHub secret, not on a laptop. The first project and the pool themselves are made once, by a person, with the bootstrap script, because the pipeline that depends on them cannot create them.</dd>
+    </dl>
+
+    <h2 id="sees">What Google sees, and what it cannot</h2>
+    <table>
+      <thead><tr><th>Google can</th><th>Google cannot</th></tr></thead>
+      <tbody>
+        <tr><td>See who signed in, when, from where; the email on the account</td><td>See a plaintext entry, a key, the <a class="sg-term" href="/learn/keys/#recovery-code" title="26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone.">recovery code</a>, the <a class="sg-term" href="/learn/passkeys/#prf" title="The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.">PRF</a> bytes</td></tr>
+        <tr><td>Sign in as any user and fetch their objects</td><td>Open those objects: the PRF secret is in the user's authenticator, bound to this origin</td></tr>
+        <tr><td>Delete a keyring, roll it back to an older version, keep a copy</td><td>Alter it undetected: a changed byte fails authentication; a transplanted body fails on its AAD</td></tr>
+        <tr><td>See object sizes and times, and so roughly how much a user keeps and how often it changes</td><td>See how many entries, of what kind, or their names</td></tr>
+      </tbody>
+    </table>
+    <p>This is the first row of the table on the <a href="/security/">security page</a>, from the other side. The row that matters more is the last one there: whoever serves the JavaScript can get everything, which is why that page is mostly about this repository and not about Google.</p>
+
+    <h2 id="admin">The admin pages</h2>
+    <p>There is no admin role in the app. <a href="/admin/">/admin/</a> signs you in to Google with your own account (OAuth, scope <code>cloud-platform</code>, token in memory only) and calls GCP's REST APIs as you: if your account has IAM on the project, the checklist shows each resource as present, enabled, configured, or not, with a Fix where one is possible from a browser. An admin page can list users, deploy rules and change CORS. It cannot open a keyring, because a keyring is ciphertext and an admin's token unlocks nothing.</p>
+
+    <h2 id="customer">A customer's own project</h2>
+    <p>You have a GCP organisation and a billing account. Run the bootstrap for one project, add your domain to the authorised domains, run Terraform, and paste the printed configuration into the site's Environment page, or into your fork's <code>config/environments.json</code>. The target is under thirty minutes with no support, and the admin checklist verifies each step. Your users then sign in to your login and store ciphertext in your bucket, from the same public site or your copy of it.</p>
+
+    <h2>Read next</h2>
+    <p><a href="/environments/">Environments</a>: how the browser chooses a project. <a href="/learn/passkeys/">Passkeys</a>: the thing Google never holds. <a href="/docs/ops/bootstrap.html">The bootstrap, as commands</a>.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/learn/gcp/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

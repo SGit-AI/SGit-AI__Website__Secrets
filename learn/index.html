@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learn — secrets.sgit.ai</title>
+  <meta name="description" content="Explanations in context: what a passkey, WebAuthn, PRF, the key hierarchy and the GCP project are from this site's point of view, with diagrams, a glossary every page links into, and a lab where you try the passkey in your own browser.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/learn/">
+  <link rel="alternate" type="text/markdown" href="/learn/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/learn/">
+  <meta property="og:title" content="Learn — secrets.sgit.ai">
+  <meta property="og:description" content="Explanations in context: what a passkey, WebAuthn, PRF, the key hierarchy and the GCP project are from this site&#x27;s point of view, with diagrams, a glossary every page links into, and a lab where you try the passkey in your own browser.">
+  <meta name="sg-secrets:version" content="0.1.12">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl here" href="/learn/" aria-current="page">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/review/">Review<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/review/">The project as graphs</a>
+          <a class="sl" href="/review/ui/">The navigator</a>
+          <a class="sl" href="/review/ui/#view=claims">Claims and their evidence</a>
+          <a class="sl" href="/review/ui/#view=brief">The brief, as sections</a>
+          <a class="sl" href="/review/README.md">review/README.md, the counts</a>
+          <a class="sl" href="/review/BRIEF-CORRECTIONS.md">Corrections to the review brief</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Explanations, in context</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main data-terms>
+    <h1>Learn: the parts, explained in context</h1>
+    <!-- sg-secrets:status:start ids="site.learn,site.passkey-lab,app.prf-unlock" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.learn" title="the claim and its evidence, in the navigator">shipped v0.1.12</a> Learn pages: passkeys, WebAuthn and PRF; keys from PRF to plaintext; GCP from this site&#x27;s side; each term defined once in data/terms.json and linked from its first use on every content page; flow diagrams drawn by the build as inline SVG with a text twin · <a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.passkey-lab" title="the claim and its evidence, in the navigator">shipped v0.1.12</a> The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host&#x27;s RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium&#x27;s virtual authenticator with PRF · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.prf-unlock" title="the claim and its evidence, in the navigator">proposed</a> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">The design pages say what this site does. These pages say what the words mean, here, for this site, and nowhere more general than that: what a <a class="sg-term" href="/learn/passkeys/#passkey" title="A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.">passkey</a> is when it is the thing that unlocks your <a class="sg-term" href="/keyring/" title="The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.">keyring</a>, what the <a class="sg-term" href="/learn/passkeys/#prf" title="The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.">PRF</a> bytes are, where each key comes from and goes, and what <a class="sg-term" href="/learn/gcp/#gcp" title="The Google Cloud project that holds the login and the bucket for one environment; it sees who signed in and stores ciphertext, and can open none of it.">Google Cloud</a> sees. Every term below is linked from the first place it appears on any page of the site, and the reader's column lists the terms a page uses.</p>
+
+    <h2>The pages</h2>
+    <table>
+      <thead><tr><th>Page</th><th>Answers</th><th>Try it</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a></td><td>What a passkey is and is not here; the two <a class="sg-term" href="/learn/passkeys/#webauthn" title="The browser API (navigator.credentials) that creates a passkey and later asks your authenticator to prove it still has it; the only API this site uses to talk to the authenticator.">WebAuthn</a> calls, drawn; what your <a class="sg-term" href="/learn/passkeys/#authenticator" title="Whatever holds the passkey&#x27;s private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.">authenticator</a>, your browser, this site and Google each store; why one site, one <a class="sg-term" href="/learn/passkeys/#rp-id" title="The host a passkey is scoped to; here exactly secrets.sgit.ai (localhost when testing), never sgit.ai, so no sibling site can ask for the gesture.">RP ID</a>; what happens with two passkeys</td><td><a href="/learn/passkeys/#lab">The passkey lab</a>: create a lab passkey in this browser, ask it for PRF bytes, derive the <a class="sg-term" href="/learn/keys/#wrapping-key" title="An AES key derived from one unlock method (a passkey&#x27;s PRF output, or the recovery code) whose only job is to encrypt the KEK; a different one per passkey.">wrapping key</a>, wrap and unwrap a lab <a class="sg-term" href="/learn/keys/#kek" title="The keyring&#x27;s one real key: 32 random bytes that encrypt the body, themselves stored only wrapped, once per unlock method.">KEK</a>, add a second passkey, and watch what is stored where</td></tr>
+        <tr><td><a href="/learn/keys/">Keys: from PRF to plaintext</a></td><td>Is there a <a class="sg-term" href="/learn/keys/#passphrase" title="There is none. Nothing you type unlocks the keyring; the passkey&#x27;s PRF output and the machine-made recovery code are the only unlock methods, by design.">passphrase</a> (no); the <a class="sg-term" href="/learn/keys/#prf-salt" title="32 random public bytes fixed for the keyring&#x27;s life, given to every passkey as the PRF input; stored in keyring.json in the clear, because it is an input, not a secret.">PRF salt</a>; <a class="sg-term" href="/learn/keys/#hkdf" title="The standard key-derivation function the browser provides; turns 32 PRF bytes (or the recovery code) plus a salt and a label into a wrapping key, deterministically.">HKDF</a>; the wrapping keys; the KEK; <a class="sg-term" href="/learn/keys/#aes-gcm" title="The authenticated cipher the browser provides; every wrap and the body use it, so a wrong key or a tampered byte fails loudly instead of decrypting to garbage.">AES-256-GCM</a>; the <a class="sg-term" href="/learn/keys/#recovery-code" title="26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone.">recovery code</a> and why it is long; what is in memory, when</td><td>The lab's steps 3 and 4 run this chain on real WebCrypto, with the bytes shown</td></tr>
+        <tr><td><a href="/learn/gcp/">GCP, from this site's side</a></td><td>What the project is for; <a class="sg-term" href="/learn/gcp/#identity-platform" title="Google&#x27;s login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else.">Identity Platform</a> and the uid; the <a class="sg-term" href="/learn/gcp/#bucket" title="The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.">bucket</a> and the <a class="sg-term" href="/learn/gcp/#rules" title="The rules file Google enforces in front of the bucket: a signed-in user may read and write only their own prefix, with size limits; the whole access control of the MVP.">Security Rules</a>; <a class="sg-term" href="/learn/gcp/#terraform" title="The infrastructure description in infra/terraform/ that creates each environment&#x27;s project, login, bucket and rules, applied by GitHub Actions; it can delete and reconfigure, and cannot read.">Terraform</a> and <a class="sg-term" href="/learn/gcp/#wif" title="How GitHub Actions gets a GCP identity without a stored key: the pipeline presents its own token and GCP trusts it for this one repository and branch.">Workload Identity Federation</a>; what Google sees and cannot see</td><td>The admin checklist on <a href="/admin/">/admin/</a>, once a project exists (needs a human; see <a href="/docs/ops/needs.html">needs.md</a>)</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="glossary">The glossary</h2>
+    <p>One entry per term, in this site's context. The data is <code>data/terms.json</code>; the build links the first occurrence of each term on every content page and sets the definition as the link's hover text, so a definition is written once.</p>
+    <!-- sg-secrets:terms:start -->
+  <dl class="sg-terms" data-generated-from="data/terms.json">
+    <dt id="term-aes-gcm"><a href="/learn/keys/#aes-gcm">AES-256-GCM</a> <small>also: AES-GCM</small></dt>
+    <dd>The authenticated cipher the browser provides; every wrap and the body use it, so a wrong key or a tampered byte fails loudly instead of decrypting to garbage.</dd>
+    <dt id="term-authenticator"><a href="/learn/passkeys/#authenticator">authenticator</a> <small>also: authenticators, platform authenticator</small></dt>
+    <dd>Whatever holds the passkey&#x27;s private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.</dd>
+    <dt id="term-bucket"><a href="/learn/gcp/#bucket">bucket</a> <small>also: Cloud Storage, Cloud Storage for Firebase</small></dt>
+    <dd>The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.</dd>
+    <dt id="term-credential-id"><a href="/learn/passkeys/#credential">credential id</a> <small>also: credentialId, allowCredentials</small></dt>
+    <dd>The public identifier of one passkey, stored in meta.json so the page can list your devices and ask the authenticator for that passkey by name.</dd>
+    <dt id="term-uid"><a href="/learn/gcp/#uid">Firebase uid</a> <small>also: users/{uid}</small></dt>
+    <dd>The login&#x27;s stable id for a user; it names the user&#x27;s prefix in the bucket and appears in the rules, and it is not a secret.</dd>
+    <dt id="term-gcp"><a href="/learn/gcp/#gcp">GCP</a> <small>also: Google Cloud, GCP project</small></dt>
+    <dd>The Google Cloud project that holds the login and the bucket for one environment; it sees who signed in and stores ciphertext, and can open none of it.</dd>
+    <dt id="term-gesture"><a href="/learn/passkeys/#gesture">gesture</a> <small>also: passkey gesture</small></dt>
+    <dd>The touch, face, PIN or tap your authenticator asks for before it computes anything; one gesture per unlock, and nothing happens without it.</dd>
+    <dt id="term-hkdf"><a href="/learn/keys/#hkdf">HKDF</a> <small>also: HKDF-SHA256</small></dt>
+    <dd>The standard key-derivation function the browser provides; turns 32 PRF bytes (or the recovery code) plus a salt and a label into a wrapping key, deterministically.</dd>
+    <dt id="term-identity-platform"><a href="/learn/gcp/#identity-platform">Identity Platform</a> <small>also: Firebase Auth</small></dt>
+    <dd>Google&#x27;s login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else.</dd>
+    <dt id="term-kek"><a href="/learn/keys/#kek">KEK</a> <small>also: keyring key</small></dt>
+    <dd>The keyring&#x27;s one real key: 32 random bytes that encrypt the body, themselves stored only wrapped, once per unlock method.</dd>
+    <dt id="term-keyring"><a href="/keyring/">keyring</a> <small>also: keyring.json</small></dt>
+    <dd>The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.</dd>
+    <dt id="term-meta-json"><a href="/learn/passkeys/#storage">meta.json</a></dt>
+    <dd>The small public file next to the keyring in the bucket: the user handle, each passkey&#x27;s credential id, public key and name, and the keyring revision; nothing secret.</dd>
+    <dt id="term-passkey"><a href="/learn/passkeys/#passkey">passkey</a> <small>also: passkeys</small></dt>
+    <dd>A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.</dd>
+    <dt id="term-passphrase"><a href="/learn/keys/#passphrase">passphrase</a> <small>also: master password</small></dt>
+    <dd>There is none. Nothing you type unlocks the keyring; the passkey&#x27;s PRF output and the machine-made recovery code are the only unlock methods, by design.</dd>
+    <dt id="term-prf"><a href="/learn/passkeys/#prf">PRF</a> <small>also: PRF extension, hmac-secret</small></dt>
+    <dd>The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.</dd>
+    <dt id="term-prf-salt"><a href="/learn/keys/#prf-salt">PRF salt</a> <small>also: prfSalt, prf.eval</small></dt>
+    <dd>32 random public bytes fixed for the keyring&#x27;s life, given to every passkey as the PRF input; stored in keyring.json in the clear, because it is an input, not a secret.</dd>
+    <dt id="term-recovery-code"><a href="/learn/keys/#recovery-code">recovery code</a></dt>
+    <dd>26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone.</dd>
+    <dt id="term-rp-id"><a href="/learn/passkeys/#rp-id">RP ID</a> <small>also: relying-party identifier, rpId</small></dt>
+    <dd>The host a passkey is scoped to; here exactly secrets.sgit.ai (localhost when testing), never sgit.ai, so no sibling site can ask for the gesture.</dd>
+    <dt id="term-security-rules"><a href="/learn/gcp/#rules">Security Rules</a> <small>also: storage.rules</small></dt>
+    <dd>The rules file Google enforces in front of the bucket: a signed-in user may read and write only their own prefix, with size limits; the whole access control of the MVP.</dd>
+    <dt id="term-terraform"><a href="/learn/gcp/#terraform">Terraform</a></dt>
+    <dd>The infrastructure description in infra/terraform/ that creates each environment&#x27;s project, login, bucket and rules, applied by GitHub Actions; it can delete and reconfigure, and cannot read.</dd>
+    <dt id="term-user-handle"><a href="/learn/passkeys/#user-handle">user handle</a> <small>also: user.id</small></dt>
+    <dd>The 32 random bytes a passkey is registered under; not your email and not the Firebase uid, so the authenticator learns nothing about the account.</dd>
+    <dt id="term-webauthn"><a href="/learn/passkeys/#webauthn">WebAuthn</a></dt>
+    <dd>The browser API (navigator.credentials) that creates a passkey and later asks your authenticator to prove it still has it; the only API this site uses to talk to the authenticator.</dd>
+    <dt id="term-wif"><a href="/learn/gcp/#wif">Workload Identity Federation</a> <small>also: WIF</small></dt>
+    <dd>How GitHub Actions gets a GCP identity without a stored key: the pipeline presents its own token and GCP trusts it for this one repository and branch.</dd>
+    <dt id="term-wrapping-key"><a href="/learn/keys/#wrapping-key">wrapping key</a> <small>also: WK, WK_passkey, WK_recovery</small></dt>
+    <dd>An AES key derived from one unlock method (a passkey&#x27;s PRF output, or the recovery code) whose only job is to encrypt the KEK; a different one per passkey.</dd>
+  </dl>
+<!-- sg-secrets:terms:end -->
+
+    <h2>How these pages are made</h2>
+    <p>The diagrams are drawn by the build from <code>data/diagrams/</code> into the page as inline SVG that uses the theme's colours, with the same diagram as text underneath for copying and for the markdown twin; no library, no script. The lab is a web component in the house shape, <code>components/passkey-lab/</code>, and it talks to nothing but your authenticator: no Google, no bucket, no network. What it keeps in this browser is listed on its page, and the gate checks that list on every release.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/learn/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

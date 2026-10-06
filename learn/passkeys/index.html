@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Passkeys, WebAuthn and PRF — secrets.sgit.ai</title>
+  <meta name="description" content="What a passkey is when it is the thing that unlocks your keyring: the two WebAuthn calls, the PRF extension, the RP ID, what your authenticator, your browser, this site and Google each store, what two passkeys mean, and a lab to try all of it in your own browser.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/learn/passkeys/">
+  <link rel="alternate" type="text/markdown" href="/learn/passkeys/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/learn/passkeys/">
+  <meta property="og:title" content="Passkeys, WebAuthn and PRF — secrets.sgit.ai">
+  <meta property="og:description" content="What a passkey is when it is the thing that unlocks your keyring: the two WebAuthn calls, the PRF extension, the RP ID, what your authenticator, your browser, this site and Google each store, what two passkeys mean, and a lab to try all of it in your own browser.">
+  <meta name="sg-secrets:version" content="0.1.12">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+  <script type="module" src="/components/passkey-lab/passkey-lab.js"></script>
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl here" href="/learn/passkeys/" aria-current="page">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/review/">Review<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/review/">The project as graphs</a>
+          <a class="sl" href="/review/ui/">The navigator</a>
+          <a class="sl" href="/review/ui/#view=claims">Claims and their evidence</a>
+          <a class="sl" href="/review/ui/#view=brief">The brief, as sections</a>
+          <a class="sl" href="/review/README.md">review/README.md, the counts</a>
+          <a class="sl" href="/review/BRIEF-CORRECTIONS.md">Corrections to the review brief</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/learn/">Learn</a> <span class="sep">/</span> <span aria-current="page">Passkeys, WebAuthn and PRF</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main data-terms>
+    <h1>Passkeys, WebAuthn and PRF, in this site's context</h1>
+    <!-- sg-secrets:status:start ids="app.prf-unlock,app.devices,site.passkey-lab,tests.probe-pages" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.prf-unlock" title="the claim and its evidence, in the navigator">proposed</a> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.devices" title="the claim and its evidence, in the navigator">proposed</a> Devices page: add and remove passkeys, regenerate the recovery code · <a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.passkey-lab" title="the claim and its evidence, in the navigator">shipped v0.1.12</a> The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host&#x27;s RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium&#x27;s virtual authenticator with PRF · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.tests.probe-pages" title="the claim and its evidence, in the navigator">proposed</a> Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">On most sites a passkey is a login. Here it is not. The login is a separate thing, through Google, and decides which files you may fetch. The passkey decides whether those files mean anything, because it is the only thing in the world that can produce the 32 bytes the <a class="sg-term" href="/keyring/" title="The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.">keyring</a> is locked with. This page explains that one idea from four sides: the authenticator, the browser API, this site's files, and Google. The unlock itself is <em>proposed</em>; the lab at the end is shipped and runs in your browser now.</p>
+
+    <h2 id="passkey">What a passkey is, here</h2>
+    <p>A passkey is a key pair that your authenticator made and keeps for one site. You never see the private key; the authenticator only ever uses it to answer a challenge, after you give a gesture. Passkeys sync through the account the authenticator belongs to (Google Password Manager through your Google account, iCloud Keychain through your Apple ID), or they do not sync at all (a hardware key), and no administrator of this site is on that path.</p>
+    <p>This site uses one extra thing a passkey can do: with the PRF extension the authenticator will also return 32 bytes computed from a secret it made alongside the key pair, given an input of our choosing. Same passkey, same site, same input, same bytes, every time. Those bytes are the root of every key in the keyring (<a href="/learn/keys/">Keys</a>). So the passkey is used as a <strong>key</strong>, not as a proof of identity: the page never checks the signature a passkey returns, because there is no server to check it for, and because the proof that matters is simpler: a wrong authenticator produces bytes that unwrap nothing.</p>
+
+    <h2 id="authenticator">The four parties, and what each one holds</h2>
+    <table id="storage">
+      <thead><tr><th>Party</th><th>Holds</th><th>Never holds</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Your authenticator</strong>: Google Password Manager, iCloud Keychain, Windows Hello, or a hardware key</td><td>The private key and the PRF secret for this site, under the user handle; synced through your own account, or not at all</td><td>Your email, the <a class="sg-term" href="/learn/gcp/#uid" title="The login&#x27;s stable id for a user; it names the user&#x27;s prefix in the bucket and appears in the rules, and it is not a secret.">Firebase uid</a>, anything about the keyring; it does not know what the bytes are for</td></tr>
+        <tr><td><strong>Your browser</strong>, running this page</td><td>During an unlock, in memory: the 32 PRF bytes, the <a class="sg-term" href="/learn/keys/#wrapping-key" title="An AES key derived from one unlock method (a passkey&#x27;s PRF output, or the recovery code) whose only job is to encrypt the KEK; a different one per passkey.">wrapping key</a>, the <a class="sg-term" href="/learn/keys/#kek" title="The keyring&#x27;s one real key: 32 random bytes that encrypt the body, themselves stored only wrapped, once per unlock method.">KEK</a>, the plaintext body. Nothing of that after sign-out, five hidden minutes, or unload</td><td>Any of it in localStorage, sessionStorage, IndexedDB, the URL or a log; the gate's check 8 reads every storage key the code may write</td></tr>
+        <tr><td><strong>This site's files in the <a class="sg-term" href="/learn/gcp/#bucket" title="The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.">bucket</a></strong></td><td><code>meta.json</code>: the user handle, each passkey's credential id, public key and name; <code>keyring.json</code>: the <a class="sg-term" href="/learn/keys/#prf-salt" title="32 random public bytes fixed for the keyring&#x27;s life, given to every passkey as the PRF input; stored in keyring.json in the clear, because it is an input, not a secret.">PRF salt</a> (public) and the KEK wrapped once per passkey</td><td>The PRF bytes, the KEK, the <a class="sg-term" href="/learn/keys/#recovery-code" title="26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone.">recovery code</a>, a plaintext entry</td></tr>
+        <tr><td><strong>Google</strong>: <a class="sg-term" href="/learn/gcp/#identity-platform" title="Google&#x27;s login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else.">Identity Platform</a> and the bucket</td><td>Who signed in, when; the ciphertext and its sizes and times; the power to delete or roll back</td><td>Anything that opens the ciphertext: the PRF secret is bound to the origin and to your authenticator, so signing in as you fetches what you fetch and opens none of it</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="webauthn">The two WebAuthn calls</h2>
+    <p>WebAuthn is the browser API, <code>navigator.credentials</code>, with two calls. <code>create</code> registers a new passkey for a site; <code>get</code> asks the authenticator to use one it already has. Everything on this page is those two calls with the PRF extension turned on. The exact parameters are listed on the <a href="/keyring/#passkey-parameters">keyring page</a>; what follows is what they mean.</p>
+
+    <h3 id="create">First run: <code>create</code></h3>
+    <!-- sg-secrets:diagram:start id="passkey-create" -->
+  <figure class="sg-diagram" id="diagram-passkey-create" data-generated-from="data/diagrams/passkey-create.json">
+    <svg viewBox="0 0 776 659" width="776" role="img" aria-labelledby="diagram-passkey-create-title">
+      <title id="diagram-passkey-create-title">First run: creating the unlock passkey</title>
+      <defs><marker id="passkey-create-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--sg-accent)"/></marker><marker id="passkey-create-arrow-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--sg-danger)"/></marker></defs>
+      <rect x="14" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="103" y="28" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">You</text>
+      <line x1="103" y1="42" x2="103" y2="655" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="204" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="293" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">This page, in your</text>
+      <text x="293" y="34" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">browser</text>
+      <line x1="293" y1="42" x2="293" y2="655" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="394" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="483" y="28" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">Your authenticator</text>
+      <line x1="483" y1="42" x2="483" y2="655" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="584" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="673" y="28" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">The bucket (GCP)</text>
+      <line x1="673" y1="42" x2="673" y2="655" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <text x="198" y="73" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">sign in; the page finds no</text>
+      <text x="198" y="86" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">keyring at users/{uid}/</text>
+      <line x1="103" y1="94" x2="286" y2="94" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-create-arrow)"/>
+      <rect x="208" y="110" width="170" height="54" rx="4" fill="var(--sg-bg-secondary)" stroke="var(--sg-border)"/>
+      <text x="293" y="124" text-anchor="middle" font-size="11" fill="var(--sg-text)">makes 32 random bytes as</text>
+      <text x="293" y="138" text-anchor="middle" font-size="11" fill="var(--sg-text)">the user handle, and 32</text>
+      <text x="293" y="152" text-anchor="middle" font-size="11" fill="var(--sg-text)">more as the PRF salt</text>
+      <text x="388" y="185" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">navigator.credentials.crea</text>
+      <text x="388" y="198" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">te: rp.id =</text>
+      <text x="388" y="211" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">secrets.sgit.ai, the user</text>
+      <text x="388" y="224" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">handle, residentKey</text>
+      <text x="388" y="237" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">required, userVerification</text>
+      <text x="388" y="250" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">required, extensions.prf =</text>
+      <text x="388" y="263" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">{}</text>
+      <line x1="293" y1="271" x2="476" y2="271" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-create-arrow)"/>
+      <text x="293" y="298" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">asks for a gesture: touch, face, PIN or tap</text>
+      <line x1="483" y1="306" x2="110" y2="306" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-create-arrow)"/>
+      <text x="293" y="333" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">the gesture</text>
+      <line x1="103" y1="341" x2="476" y2="341" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-create-arrow)"/>
+      <rect x="398" y="357" width="170" height="110" rx="4" fill="var(--sg-danger-subtle)" stroke="var(--sg-danger)"/>
+      <text x="483" y="371" text-anchor="middle" font-size="11" fill="var(--sg-text)">makes a key pair and a</text>
+      <text x="483" y="385" text-anchor="middle" font-size="11" fill="var(--sg-text)">PRF secret, both bound to</text>
+      <text x="483" y="399" text-anchor="middle" font-size="11" fill="var(--sg-text)">secrets.sgit.ai; keeps</text>
+      <text x="483" y="413" text-anchor="middle" font-size="11" fill="var(--sg-text)">them; syncs them through</text>
+      <text x="483" y="427" text-anchor="middle" font-size="11" fill="var(--sg-text)">your own account (Google,</text>
+      <text x="483" y="441" text-anchor="middle" font-size="11" fill="var(--sg-text)">Apple) or not at all (a</text>
+      <text x="483" y="455" text-anchor="middle" font-size="11" fill="var(--sg-text)">hardware key)</text>
+      <text x="388" y="488" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">credential id, public key,</text>
+      <text x="388" y="501" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">prf.enabled = true</text>
+      <line x1="483" y1="509" x2="300" y2="509" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-create-arrow)"/>
+      <text x="483" y="536" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">meta.json: the user handle, the credential id, the</text>
+      <text x="483" y="549" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">public key, a device name</text>
+      <line x1="293" y1="557" x2="666" y2="557" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-create-arrow)"/>
+      <rect x="208" y="573" width="170" height="68" rx="4" fill="var(--sg-bg-secondary)" stroke="var(--sg-border)"/>
+      <text x="293" y="587" text-anchor="middle" font-size="11" fill="var(--sg-text)">then the keys page: KEK,</text>
+      <text x="293" y="601" text-anchor="middle" font-size="11" fill="var(--sg-text)">key pair, recovery code,</text>
+      <text x="293" y="615" text-anchor="middle" font-size="11" fill="var(--sg-text)">the first keyring.json;</text>
+      <text x="293" y="629" text-anchor="middle" font-size="11" fill="var(--sg-text)">see Keys</text>
+    </svg>
+    <details class="sg-diagram-text"><summary>The same diagram as text</summary><pre>You                     This page, in your bro  Your authenticator      The bucket (GCP)
+ │ sign in; the page finds no keyring at users/{uid}/                    │
+ │──────────────────────▶│                       │                       │
+ │                       │                       │                       │
+ │                       │ ┆ makes 32 random bytes as the user handle, and 32 more as the PRF
+ │                       │ ┆ salt                │                       │
+ │                       │                       │                       │
+ │                       │ navigator.credentials.create: rp.id = secrets.sgit.ai, the user
+ │                       │ handle, residentKey required, userVerification required,
+ │                       │ extensions.prf = {}   │                       │
+ │                       │──────────────────────▶│                       │
+ │                       │                       │                       │
+ │ asks for a gesture: touch, face, PIN or tap   │                       │
+ │◀──────────────────────────────────────────────│                       │
+ │                       │                       │                       │
+ │ the gesture           │                       │                       │
+ │──────────────────────────────────────────────▶│                       │
+ │                       │                       │                       │
+ │                       │                       │ ┆ makes a key pair and a PRF secret, both
+ │                       │                       │ ┆ bound to secrets.sgit.ai; keeps them;
+ │                       │                       │ ┆ syncs them through your own account
+ │                       │                       │ ┆ (Google, Apple) or not at all (a hardware
+ │                       │                       │ ┆ key)                │
+ │                       │                       │                       │
+ │                       │ credential id, public key, prf.enabled = true │
+ │                       │◀──────────────────────│                       │
+ │                       │                       │                       │
+ │                       │ meta.json: the user handle, the credential id, the public key, a
+ │                       │ device name           │                       │
+ │                       │──────────────────────────────────────────────▶│
+ │                       │                       │                       │
+ │                       │ ┆ then the keys page: KEK, key pair, recovery code, the first
+ │                       │ ┆ keyring.json; see Keys                      │
+ │                       │                       │                       │</pre></details>
+    <figcaption>First run, as the design has it (section 3.2 and 8.7 of the brief). Nothing secret crosses between the parties: the authenticator keeps the private key and the PRF secret, and the page keeps only public identifiers. The PRF bytes are not asked for until unlock.</figcaption>
+  </figure>
+<!-- sg-secrets:diagram:end -->
+    <dl>
+      <dt id="rp-id">The RP ID</dt>
+      <dd>The relying-party identifier is the host the passkey is scoped to, and it is exactly <code>secrets.sgit.ai</code> (<code>localhost</code> when a developer runs the site locally). A passkey scoped to a host can be asserted only by pages on that host. It is never the apex <code>sgit.ai</code>, because a passkey scoped to the apex could be asserted by every sibling site under it, and a compromise of any one of the twenty-seven would then be able to ask for the gesture that unlocks every user's secrets here. The <a href="/security/#rp-id">security page</a> calls this the single most important decision in the design; the lab below refuses to run on any other host.</dd>
+      <dt id="user-handle">The user handle</dt>
+      <dd><code>user.id</code> is 32 random bytes made by the page at first run and stored in <code>meta.json</code>. It is not your email and not the Firebase uid: the authenticator and whatever syncs it learn nothing about the account. A resident key (<code>residentKey: 'required'</code>) means the authenticator stores the passkey under that handle and can list it, which is what lets a new device offer "use a passkey" with no help from us.</dd>
+      <dt id="gesture">The gesture</dt>
+      <dd><code>userVerification: 'required'</code> means the authenticator must verify you (touch, face, PIN, or the tap of a hardware key with a PIN) before it does anything. One gesture per unlock. Without it, nothing is computed and nothing is returned.</dd>
+      <dt id="credential">The credential id and the public key</dt>
+      <dd>What <code>create</code> returns and what the page stores in <code>meta.json</code>: the credential id, so the page can name this passkey in <code>allowCredentials</code> later and list it on the devices page; the public key, kept for display and for nothing else, because no signature is ever verified. Both are public values.</dd>
+      <dt id="prf">The PRF extension</dt>
+      <dd><code>extensions: { prf: {} }</code> at <code>create</code> asks the authenticator whether it can do PRF (on hardware keys the underlying CTAP extension is called <code>hmac-secret</code>). The answer comes back as <code>prf.enabled</code>. If it is false, this authenticator cannot be used to unlock, and the page will say so and offer the recovery code or another authenticator. The bytes themselves are not asked for at <code>create</code>: a passkey can be registered without a gesture-bound secret ever leaving the authenticator.</dd>
+    </dl>
+
+    <h3 id="unlock">Returning: <code>get</code></h3>
+    <!-- sg-secrets:diagram:start id="passkey-unlock" -->
+  <figure class="sg-diagram" id="diagram-passkey-unlock" data-generated-from="data/diagrams/passkey-unlock.json">
+    <svg viewBox="0 0 776 656" width="776" role="img" aria-labelledby="diagram-passkey-unlock-title">
+      <title id="diagram-passkey-unlock-title">Returning: one gesture unlocks the keyring</title>
+      <defs><marker id="passkey-unlock-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--sg-accent)"/></marker><marker id="passkey-unlock-arrow-s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--sg-danger)"/></marker></defs>
+      <rect x="14" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="103" y="28" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">You</text>
+      <line x1="103" y1="42" x2="103" y2="652" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="204" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="293" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">This page, in your</text>
+      <text x="293" y="34" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">browser</text>
+      <line x1="293" y1="42" x2="293" y2="652" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="394" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="483" y="28" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">Your authenticator</text>
+      <line x1="483" y1="42" x2="483" y2="652" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <rect x="584" y="6" width="178" height="36" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)"/>
+      <text x="673" y="28" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">The bucket (GCP)</text>
+      <line x1="673" y1="42" x2="673" y2="652" stroke="var(--sg-border)" stroke-dasharray="3 4"/>
+      <text x="198" y="73" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">sign in</text>
+      <line x1="103" y1="81" x2="286" y2="81" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-unlock-arrow)"/>
+      <text x="483" y="108" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">GET users/{uid}/keyring.json and meta.json</text>
+      <line x1="293" y1="116" x2="666" y2="116" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-unlock-arrow)"/>
+      <text x="483" y="143" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">ciphertext, the wraps, prfSalt, the generation number;</text>
+      <text x="483" y="156" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">the credential ids</text>
+      <line x1="673" y1="164" x2="300" y2="164" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-unlock-arrow)"/>
+      <text x="388" y="191" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">navigator.credentials.get:</text>
+      <text x="388" y="204" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">rpId, allowCredentials</text>
+      <text x="388" y="217" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">from meta.json,</text>
+      <text x="388" y="230" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">prf.eval.first = prfSalt</text>
+      <line x1="293" y1="238" x2="476" y2="238" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-unlock-arrow)"/>
+      <text x="293" y="265" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">asks for a gesture</text>
+      <line x1="483" y1="273" x2="110" y2="273" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-unlock-arrow)"/>
+      <text x="293" y="300" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">the gesture</text>
+      <line x1="103" y1="308" x2="476" y2="308" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#passkey-unlock-arrow)"/>
+      <text x="388" y="335" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">32 PRF bytes, in memory</text>
+      <text x="388" y="348" text-anchor="middle" font-size="11" fill="var(--sg-text-heading)">only</text>
+      <line x1="483" y1="356" x2="300" y2="356" stroke="var(--sg-danger)" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#passkey-unlock-arrow-s)"/>
+      <rect x="208" y="372" width="170" height="82" rx="4" fill="var(--sg-danger-subtle)" stroke="var(--sg-danger)"/>
+      <text x="293" y="386" text-anchor="middle" font-size="11" fill="var(--sg-text)">HKDF-SHA256(prf bytes,</text>
+      <text x="293" y="400" text-anchor="middle" font-size="11" fill="var(--sg-text)">prfSalt, &quot;sgit-secrets/v1</text>
+      <text x="293" y="414" text-anchor="middle" font-size="11" fill="var(--sg-text)">/wrap/&lt;credentialId&gt;&quot;) =</text>
+      <text x="293" y="428" text-anchor="middle" font-size="11" fill="var(--sg-text)">the wrapping key for this</text>
+      <text x="293" y="442" text-anchor="middle" font-size="11" fill="var(--sg-text)">passkey</text>
+      <rect x="208" y="464" width="170" height="68" rx="4" fill="var(--sg-danger-subtle)" stroke="var(--sg-danger)"/>
+      <text x="293" y="478" text-anchor="middle" font-size="11" fill="var(--sg-text)">AES-256-GCM: unwrap the</text>
+      <text x="293" y="492" text-anchor="middle" font-size="11" fill="var(--sg-text)">KEK, decrypt the body;</text>
+      <text x="293" y="506" text-anchor="middle" font-size="11" fill="var(--sg-text)">the vault list is in</text>
+      <text x="293" y="520" text-anchor="middle" font-size="11" fill="var(--sg-text)">memory</text>
+      <rect x="208" y="542" width="170" height="96" rx="4" fill="var(--sg-bg-secondary)" stroke="var(--sg-border)"/>
+      <text x="293" y="556" text-anchor="middle" font-size="11" fill="var(--sg-text)">nothing is written</text>
+      <text x="293" y="570" text-anchor="middle" font-size="11" fill="var(--sg-text)">anywhere; keys are</text>
+      <text x="293" y="584" text-anchor="middle" font-size="11" fill="var(--sg-text)">cleared on sign-out, on</text>
+      <text x="293" y="598" text-anchor="middle" font-size="11" fill="var(--sg-text)">an environment change,</text>
+      <text x="293" y="612" text-anchor="middle" font-size="11" fill="var(--sg-text)">after five hidden</text>
+      <text x="293" y="626" text-anchor="middle" font-size="11" fill="var(--sg-text)">minutes, on unload</text>
+    </svg>
+    <details class="sg-diagram-text"><summary>The same diagram as text</summary><pre>You                     This page, in your bro  Your authenticator      The bucket (GCP)
+ │ sign in               │                       │                       │
+ │──────────────────────▶│                       │                       │
+ │                       │                       │                       │
+ │                       │ GET users/{uid}/keyring.json and meta.json    │
+ │                       │──────────────────────────────────────────────▶│
+ │                       │                       │                       │
+ │                       │ ciphertext, the wraps, prfSalt, the generation number; the
+ │                       │ credential ids        │                       │
+ │                       │◀──────────────────────────────────────────────│
+ │                       │                       │                       │
+ │                       │ navigator.credentials.get: rpId, allowCredentials from meta.json,
+ │                       │ prf.eval.first = prfSalt                      │
+ │                       │──────────────────────▶│                       │
+ │                       │                       │                       │
+ │ asks for a gesture    │                       │                       │
+ │◀──────────────────────────────────────────────│                       │
+ │                       │                       │                       │
+ │ the gesture           │                       │                       │
+ │──────────────────────────────────────────────▶│                       │
+ │                       │                       │                       │
+ │                       │ 🔒 32 PRF bytes, in memory only                │
+ │                       │◀──────────────────────│                       │
+ │                       │                       │                       │
+ │                       │ ┆ HKDF-SHA256(prf bytes, prfSalt, &quot;sgit-      │
+ │                       │ ┆ secrets/v1/wrap/&lt;credentialId&gt;&quot;) = the wrapping key for this
+ │                       │ ┆ passkey             │                       │
+ │                       │                       │                       │
+ │                       │ ┆ AES-256-GCM: unwrap the KEK, decrypt the body; the vault list is
+ │                       │ ┆ in memory           │                       │
+ │                       │                       │                       │
+ │                       │ ┆ nothing is written anywhere; keys are cleared on sign-out, on an
+ │                       │ ┆ environment change, after five hidden minutes, on unload
+ │                       │                       │                       │</pre></details>
+    <figcaption>The returning flow (section 3.2 and 8.2 of the brief). The dashed red arrow is the only secret that crosses a boundary, and it crosses once, into this page's memory. Google serves ciphertext and a public salt, and the PRF bytes mean nothing to anyone who holds only those.</figcaption>
+  </figure>
+<!-- sg-secrets:diagram:end -->
+    <p>The one secret that moves is the dashed arrow: 32 PRF bytes, from the authenticator into this page's memory, after your gesture. The input that produced them, <code>prf.eval.first</code>, is the keyring's PRF salt, stored in the clear, because an input is not a secret: anyone can hold the salt, and only your authenticator can turn it into those bytes. From the bytes to the plaintext is three WebCrypto operations, drawn on the <a href="/learn/keys/">keys page</a>.</p>
+
+    <h2 id="many">Two passkeys, and twenty</h2>
+    <p>Every passkey has its own PRF secret, so two passkeys given the same salt return different bytes. The keyring therefore holds one wrapped copy of the KEK per passkey (and one per recovery code), each under a wrapping key derived from that passkey's bytes with the credential id in the derivation label. Adding a passkey on a new device means: unlock with any method you already have, register the new passkey, wrap the same KEK once more, write the keyring. Removing one means deleting its wrap. The body is never re-encrypted for either; the entries do not know how many keys open them. The lab below lets you do this with two or more lab passkeys in the same browser and watch the keyring grow one wrap at a time.</p>
+
+    <h2 id="not">What the passkey is not used for</h2>
+    <ul>
+      <li>It is not the login. Identity Platform signs you in; the passkey unlocks. An administrator of the login can fake the first and never the second.</li>
+      <li>It is not verified. The assertion's signature is returned and ignored; there is no server to check it for, and the PRF bytes are the proof that matters.</li>
+      <li>It is not Identity Platform's passkey feature. The passkey is registered by this page, under this host's RP ID, and Google is not told it exists.</li>
+      <li>It is not a backup. Lose every passkey and the recovery code, and the data is gone; nothing that could reset it exists anywhere else, by design.</li>
+    </ul>
+
+    <h2 id="test">How to test it</h2>
+    <p>Two ways. The probe page <code>/tests/webauthn-prf.html</code> (proposed, step 4 of the build) will register a throwaway passkey, check <code>prf.enabled</code>, ask for bytes twice with the same salt and once with another, and print a result table a visitor can paste into an issue; it is the compatibility matrix. The lab below is here now and does the same things one step at a time, showing every input and every output, and goes on to the keys: it derives the wrapping key, wraps a lab KEK, encrypts a lab body, and unlocks it again with a second gesture or a second passkey. It talks to nothing but your authenticator.</p>
+    <p>In the build, the lab is driven headlessly by Playwright against Chromium's virtual authenticator with its <code>hasPrf</code> option, which answered an open question of the brief: the virtual authenticator does PRF (Chromium 141: <code>prf.enabled</code> true, 32 bytes, the same salt gives the same bytes, another salt gives others). That is how the unlock will be tested end to end without a person's finger.</p>
+
+    <h2 id="lab">The passkey lab</h2>
+    <div class="sg-note sg-warn">
+      <p><strong>What this lab does and does not do.</strong> It runs entirely in this page. It creates real passkeys in your authenticator, scoped to this host, named <code>lab</code>, which you can delete afterwards from your password manager (it tells you where). It keeps in this browser's localStorage exactly one record, shown live below: its own random PRF salt and the public facts of each lab passkey (credential id, algorithm, transports, when). It never stores PRF bytes, a key, or anything derived from one; those live in this page's memory and are gone when you leave. It never contacts Google, the bucket, or any network. The salt is a lab salt, so the bytes it shows unlock nothing real.</p>
+    </div>
+    <passkey-lab></passkey-lab>
+
+    <h2>Read next</h2>
+    <p><a href="/learn/keys/">Keys: from PRF to plaintext</a>, the chain the lab's later steps run. <a href="/keyring/">The keyring format</a>, the file those keys open. <a href="/security/">Security</a>, what each compromised party gets.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/learn/passkeys/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>

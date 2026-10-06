@@ -5,7 +5,9 @@
  * it for Claude (reader-log). Chat: ask the site, offline or through the
  * reader's own OpenRouter key (reader-chat). Graph: the intent nodes this page
  * names and their neighbours, drawn by the navigator's review-graph, loaded
- * only when the tab is first opened. Open or closed and the current tab are
+ * only when the tab is first opened. Terms: the glossary entries this page
+ * links (a.sg-term, written by the build from data/terms.json), with their
+ * definitions and a way to the page that explains each. Open or closed and the current tab are
  * kept in localStorage under LOCAL_STORAGE_KEYS.reader; nothing else.
  *
  * @module reader-panel
@@ -16,7 +18,7 @@ import { LOCAL_STORAGE_KEYS }    from '../../app/config/storage-keys.js'
 import '../reader-log/reader-log.js'
 import '../reader-chat/reader-chat.js'
 
-const TABS      = Object.freeze(['log', 'chat', 'graph'])
+const TABS      = Object.freeze(['log', 'chat', 'graph', 'terms'])
 const GRAPH_URL = new URL('../../review/ui/components/review-graph/review-graph.js', import.meta.url)
 
 export class ReaderPanel extends SgBase {
@@ -64,12 +66,40 @@ export class ReaderPanel extends SgBase {
         for (const button of this.$$('[data-tab]')) button.setAttribute('aria-pressed', button.dataset.tab === tab ? 'true' : 'false')
         for (const body of this.$$('[data-body]')) body.hidden = body.dataset.body !== tab
         if (tab === 'graph' && this._state.open) this.loadGraph()
+        if (tab === 'terms') this.renderTerms()
         if (persist) this.writeState()
     }
 
     badge(unsent) {
         const toggle = this.$('[data-toggle]')
         toggle.dataset.unsent = unsent > 0 ? String(unsent) : ''
+    }
+
+    renderTerms() {                                                               // the glossary terms this page uses, from the links the build wrote
+        const list = this.$('[data-terms-list]')
+        const hint = this.$('[data-terms-hint]')
+        const seen = new Map()
+        for (const link of document.querySelectorAll('a.sg-term')) {
+            const href = link.getAttribute('href')
+            if (!seen.has(href)) seen.set(href, { text : link.textContent, definition : link.getAttribute('title') || '' })
+        }
+        list.replaceChildren()
+        hint.replaceChildren()
+        if (!seen.size) {
+            hint.appendChild(document.createTextNode('This page uses no glossary term. '))
+            hint.appendChild(this.el('a', { href : '/learn/#glossary' }, 'The glossary'))
+            hint.appendChild(document.createTextNode(' is on the learn page.'))
+            return
+        }
+        hint.appendChild(document.createTextNode(`${seen.size} term${seen.size === 1 ? '' : 's'} on this page, each defined in this site's context; the link opens the explanation. `))
+        hint.appendChild(this.el('a', { href : '/learn/#glossary' }, 'All terms'))
+        hint.appendChild(document.createTextNode('.'))
+        for (const [href, term] of seen) {
+            const dt = this.el('dt')
+            dt.appendChild(this.el('a', { href }, term.text))
+            list.appendChild(dt)
+            list.appendChild(this.el('dd', {}, term.definition))
+        }
     }
 
     pageNodes() {                                                                 // the intent nodes this page links into the navigator

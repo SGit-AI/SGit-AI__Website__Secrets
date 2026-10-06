@@ -11,12 +11,12 @@
       "summary": {}
     },
     {
-      "bytes": 7915,
+      "bytes": 8477,
       "id": "file:404.html",
       "language": "html",
-      "lines": 122,
+      "lines": 132,
       "path": "404.html",
-      "sha256": "9b46abeb57d2e297f0495934570dd8d17e0aa0e68e48954fa2f3219d4d3ae387",
+      "sha256": "ae024148bb8287612e82ca022734f689dd7b444904a95aa92d5d47b4190b91ae",
       "summary": {
         "elements": [
           "reader-panel"
@@ -39,13 +39,13 @@
       }
     },
     {
-      "bytes": 20007,
+      "bytes": 20833,
       "id": "file:admin/build/chrome.py",
       "language": "python",
-      "lines": 226,
+      "lines": 232,
       "module": "module:admin/build/chrome.py",
       "path": "admin/build/chrome.py",
-      "sha256": "ae75a0a6a4de89374a66597a1755797b28d45fa158c41cf50b512ba3554ee8b8",
+      "sha256": "750e4b4ec6ca20e4c6bdc0a6f897590d91ca180513e0a3a424187c965da3a9a3",
       "summary": {
         "classes": 1,
         "doc": "secrets.sgit.ai — Chrome\nThe one definition of the site chrome: head block, the family nav (grouped\nmenus with dropdowns, the parent link, the stage pill, the version badge,\nthe phone menu button), breadcrumbs, footer, CSP and canonical URL. Every\nHTML page gets it injected between markers by gen_chrome.py, so the chrome\ncannot drift between pages. The nav shape is the one sgit.ai, nfrs.sgit.ai\nand pki.sgit.ai run; the interaction lives in assets/nav.js. The theme picker\nin the nav is generated from data/themes.json; assets/theme.js applies the\nchoice and assets/themes.css holds every colour, ",
@@ -53,13 +53,13 @@
       }
     },
     {
-      "bytes": 3492,
+      "bytes": 3521,
       "id": "file:admin/build/gate.py",
       "language": "python",
       "lines": 55,
       "module": "module:admin/build/gate.py",
       "path": "admin/build/gate.py",
-      "sha256": "33a4b24abee7b6bf827ed2ff8acc3e14534ad49dbc708c5616a8af6e784bfd4c",
+      "sha256": "53bf2841ab13488839b1f999bdcd1232a549973cedb53570333f4cb7e3988841",
       "summary": {
         "classes": 1,
         "doc": "secrets.sgit.ai — Gate\nThe release gate, one command, identical locally and in CI. The CI validate\njob runs exactly this file, so a release that fails here fails the same way\nthere. Order matters: the generators run before the gate reads their output.\nUsage: python3 admin/build/gate.py            check everything (what CI does)\npython3 admin/build/gate.py --build    regenerate, then check everything",
@@ -78,6 +78,20 @@
         "classes": 1,
         "doc": "secrets.sgit.ai — Gen__Chrome\nInjects the chrome (head block, nav, footer) into every HTML page between the\nsg-secrets markers. `--check` fails when any page is not current.\nUsage: python3 admin/build/gen_chrome.py [--check]",
         "functions": 0
+      }
+    },
+    {
+      "bytes": 13946,
+      "id": "file:admin/build/gen_diagrams.py",
+      "language": "python",
+      "lines": 260,
+      "module": "module:admin/build/gen_diagrams.py",
+      "path": "admin/build/gen_diagrams.py",
+      "sha256": "69537df6149d2acd562ee0b2e4860d4ae8e6ca9bfe5d49cf22f059b0e2b87d8b",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Diagrams\nDraws the flow diagrams from data/diagrams/<id>.json into the pages that carry\na <!-- sg-secrets:diagram:start id=\"<id>\" --> block: an inline SVG that uses\nthe site's colour tokens (so it follows the theme), the same diagram as text\nin a <pre> (what the markdown twin and llms.txt carry; what a reader can copy),\nand a caption. Two shapes: `sequence` (lanes across, steps down, arrows\nbetween lanes, notes on a lane) and `chain` (boxes in rows and columns with\nlabelled arrows between them, for a key hierarchy). No library, no script on\nthe page, nothing fetched at r",
+        "functions": 2
       }
     },
     {
@@ -137,6 +151,20 @@
       }
     },
     {
+      "bytes": 7300,
+      "id": "file:admin/build/gen_terms.py",
+      "language": "python",
+      "lines": 149,
+      "module": "module:admin/build/gen_terms.py",
+      "path": "admin/build/gen_terms.py",
+      "sha256": "ab0f2a822249d4770c876b3a458384833a77ef78fcc9e7955e62e909c1658e8c",
+      "summary": {
+        "classes": 1,
+        "doc": "secrets.sgit.ai — Gen__Terms\nThe glossary, data/terms.json, applied to the pages. On every page whose\n<main> carries data-terms, the first occurrence of each term (or one of its\naliases) in running text becomes <a class=\"sg-term\" href=\"…\" title=\"…\">, the\ntitle being the definition, so a reader can hover or follow; text already in\na link, in code, in a heading or in a generated block is left alone, and a\npage never links to itself. On /learn/ the <!-- sg-secrets:terms:start -->\nblock becomes the glossary. Idempotent: existing term links are unwrapped\nbefore the pass. `--check` fails on drift.\nU",
+        "functions": 0
+      }
+    },
+    {
       "bytes": 4933,
       "id": "file:admin/build/gen_twins.py",
       "language": "python",
@@ -165,13 +193,13 @@
       }
     },
     {
-      "bytes": 7848,
+      "bytes": 8259,
       "id": "file:admin/build/html_to_md.py",
       "language": "python",
-      "lines": 210,
+      "lines": 215,
       "module": "module:admin/build/html_to_md.py",
       "path": "admin/build/html_to_md.py",
-      "sha256": "5ea5f75c049c8b75981b62a598939cb478f92b2ee333244e220824b78c56ee2c",
+      "sha256": "d35242d42aa6151783743665500eeedb0d6eb04891626d9dbfd49b9a1f30fa1e",
       "summary": {
         "classes": 1,
         "doc": "secrets.sgit.ai — Html__To__Markdown\nConverts the <main> of a page into its markdown twin. Handles the elements the\nsite uses (headings, paragraphs, lists, tables, links, code, emphasis) and\nrewrites internal .html links to their .md twins so an agent never parses HTML.",
@@ -263,12 +291,12 @@
       }
     },
     {
-      "bytes": 17302,
+      "bytes": 17864,
       "id": "file:admin/comms.html",
       "language": "html",
-      "lines": 177,
+      "lines": 187,
       "path": "admin/comms.html",
-      "sha256": "31899728bebfefcbe2d01ea7b1434036e234fd0aa6a52674c63cd4395c317853",
+      "sha256": "a1a37d832bafd67e9f3c6378dac2e23851d3c2519e1dc80a56546ad9e66e782e",
       "summary": {
         "elements": [
           "reader-panel"
@@ -277,12 +305,12 @@
       }
     },
     {
-      "bytes": 21128,
+      "bytes": 21690,
       "id": "file:admin/index.html",
       "language": "html",
-      "lines": 178,
+      "lines": 188,
       "path": "admin/index.html",
-      "sha256": "f19fc59f0ef9e500c1bdbfc217234ceeafff2094d743f3a051f2aa2fb70bbabc",
+      "sha256": "e07115f5170a3e3f53a376091dd05fd9f3dcb25d4db2407e0797e043a66d5bf3",
       "summary": {
         "elements": [
           "reader-panel"
@@ -291,12 +319,12 @@
       }
     },
     {
-      "bytes": 19917,
+      "bytes": 22128,
       "id": "file:admin/versions.html",
       "language": "html",
-      "lines": 137,
+      "lines": 148,
       "path": "admin/versions.html",
-      "sha256": "9795651d661843c6b423ee8db9d6bf0ac33985df02785cd4b282b7b81dfbb2f1",
+      "sha256": "4a71710645cb68f2390565bb9d0f276a3362bfbbeead8cc9fa55f484a4a84fdb",
       "summary": {
         "elements": [
           "reader-panel"
@@ -305,13 +333,13 @@
       }
     },
     {
-      "bytes": 2384,
+      "bytes": 2713,
       "id": "file:app/config/storage-keys.js",
       "language": "javascript",
-      "lines": 25,
+      "lines": 26,
       "module": "module:app/config/storage-keys.js",
       "path": "app/config/storage-keys.js",
-      "sha256": "892c307ba6cd556386db86acfeeade7038973ee3f19434a84f3b20241577fb3d",
+      "sha256": "8e146ccc473ce6e8f8d9c1ef4a1109a0f9d6f259daec2edbf77a93eba584a7fa",
       "summary": {
         "classes": 0,
         "doc": "── storage-keys.js — the only keys the app may write to browser storage ──────\n\nThe gate (admin/build/validate.js, check 8) reads this file and fails the\nbuild when any localStorage.setItem or sessionStorage.setItem call under\napp/, components/, admin/ or tests/ uses a key that is not listed here, or\nuses a key that is not a literal. Nothing derived from a key, a PRF output,\na KEK, a token or a decrypted body is ever stored: these keys hold UI\nconveniences and the chosen environment configuration, all public values.\nUpdate here only; do not duplicate locally.",
@@ -342,12 +370,12 @@
       }
     },
     {
-      "bytes": 12166,
+      "bytes": 13342,
       "id": "file:assets/site.css",
       "language": "css",
-      "lines": 355,
+      "lines": 374,
       "path": "assets/site.css",
-      "sha256": "2ae97f6b17fee2528f5bcaf714f98d2284c60340f5bd7c4a34960168316559d3",
+      "sha256": "b167bc58ee8067675d45672cb0ca3c1a6944cbd074ea26f991d676d28c22a0fb",
       "summary": {}
     },
     {
@@ -372,6 +400,41 @@
       "path": "assets/themes.css",
       "sha256": "bd626138ed6e4b759b93ac5bc1951e071989570fcc3e21201f38a9fed608e18b",
       "summary": {}
+    },
+    {
+      "bytes": 3561,
+      "id": "file:components/passkey-lab/passkey-lab.css",
+      "language": "css",
+      "lines": 51,
+      "path": "components/passkey-lab/passkey-lab.css",
+      "sha256": "74c950d7d4e12f4c4a47356c6c1ba5b30340641ab378ae2fdca4762e8630769a",
+      "summary": {}
+    },
+    {
+      "bytes": 5238,
+      "id": "file:components/passkey-lab/passkey-lab.html",
+      "language": "html",
+      "lines": 83,
+      "path": "components/passkey-lab/passkey-lab.html",
+      "sha256": "22bf3b12220a54642ff16d02ebc338a236de427b40cb1149eddc504b16dfcf51",
+      "summary": {
+        "elements": [],
+        "title": ""
+      }
+    },
+    {
+      "bytes": 28018,
+      "id": "file:components/passkey-lab/passkey-lab.js",
+      "language": "javascript",
+      "lines": 423,
+      "module": "module:components/passkey-lab/passkey-lab.js",
+      "path": "components/passkey-lab/passkey-lab.js",
+      "sha256": "87acf7111e34206209938100ffae1abfc6cb8895d40912d768035d9d23974c85",
+      "summary": {
+        "classes": 1,
+        "doc": "passkey-lab — the passkey, bit by bit, in the reader's own browser. Runs the\ntwo WebAuthn calls of the design (create with the PRF extension, get with\nprf.eval) against the reader's authenticator, then the key chain of section\n8.2 on the browser's WebCrypto (HKDF-SHA256 to a wrapping key, AES-256-GCM\nto wrap a lab KEK and encrypt a lab body), and unlocks it again with the\nsame or a second passkey. Every call is logged with its inputs and decoded\noutputs. It talks to nothing but the authenticator.\n\nThe same rules as the app: the RP ID is this host and this host must be\nsecrets.sgit.ai or localh",
+        "functions": 0
+      }
     },
     {
       "bytes": 13731,
@@ -549,21 +612,21 @@
       }
     },
     {
-      "bytes": 3021,
+      "bytes": 3255,
       "id": "file:components/reader-panel/reader-panel.css",
       "language": "css",
-      "lines": 93,
+      "lines": 97,
       "path": "components/reader-panel/reader-panel.css",
-      "sha256": "b6ed37cd79a2ba8524962471b23e85f9c27a744dbd9419bcd1fa9852a9f08a73",
+      "sha256": "54fe7c566502f5bd59081895890823d1664a8f0e1a72200dd11f639da2fd49ed",
       "summary": {}
     },
     {
-      "bytes": 1290,
+      "bytes": 1538,
       "id": "file:components/reader-panel/reader-panel.html",
       "language": "html",
-      "lines": 20,
+      "lines": 25,
       "path": "components/reader-panel/reader-panel.html",
-      "sha256": "1166e5b2156d639fc95086ad6e9d27334395955ffc7b9ae19bdc7e172b1ccf86",
+      "sha256": "fc4c772924f9418d6b9278d2e9b3405016695470c2cdfdbb0b81afab3b963812",
       "summary": {
         "elements": [
           "reader-chat",
@@ -574,16 +637,16 @@
       }
     },
     {
-      "bytes": 5504,
+      "bytes": 7223,
       "id": "file:components/reader-panel/reader-panel.js",
       "language": "javascript",
-      "lines": 115,
+      "lines": 145,
       "module": "module:components/reader-panel/reader-panel.js",
       "path": "components/reader-panel/reader-panel.js",
-      "sha256": "fcdbc42218c7714e08e1aee27025d1f96478b1e12c59ab2c39cf20ac68ae71e3",
+      "sha256": "742850ad39d471efccd919b2c82ecdc43517eb0af32ba6dfb90f964193a927cc",
       "summary": {
         "classes": 1,
-        "doc": "reader-panel — the reader's column: a tab on the right edge of every page\nthat opens a drawer with three views. Log: mark this page read, star it,\nvote, leave a note, dictate one, then send it all to the build agent or copy\nit for Claude (reader-log). Chat: ask the site, offline or through the\nreader's own OpenRouter key (reader-chat). Graph: the intent nodes this page\nnames and their neighbours, drawn by the navigator's review-graph, loaded\nonly when the tab is first opened. Open or closed and the current tab are\nkept in localStorage under LOCAL_STORAGE_KEYS.reader; nothing else.\n\n@module rea",
+        "doc": "reader-panel — the reader's column: a tab on the right edge of every page\nthat opens a drawer with three views. Log: mark this page read, star it,\nvote, leave a note, dictate one, then send it all to the build agent or copy\nit for Claude (reader-log). Chat: ask the site, offline or through the\nreader's own OpenRouter key (reader-chat). Graph: the intent nodes this page\nnames and their neighbours, drawn by the navigator's review-graph, loaded\nonly when the tab is first opened. Terms: the glossary entries this page\nlinks (a.sg-term, written by the build from data/terms.json), with their\ndefiniti",
         "functions": 0
       }
     },
@@ -623,12 +686,12 @@
       }
     },
     {
-      "bytes": 33486,
+      "bytes": 35950,
       "id": "file:docs/design/brief-corrections.html",
       "language": "html",
-      "lines": 186,
+      "lines": 199,
       "path": "docs/design/brief-corrections.html",
-      "sha256": "316500c5ebb103ca8ffe7b9d9c21fa552c79cc5121c8336dccf2e5e9c68e9e26",
+      "sha256": "ebfddef7134fa594b343c19ef25bbbb87b98a5689c0456f39474e02a378468b9",
       "summary": {
         "elements": [
           "reader-panel"
@@ -637,12 +700,12 @@
       }
     },
     {
-      "bytes": 9975,
+      "bytes": 10537,
       "id": "file:docs/design/index.html",
       "language": "html",
-      "lines": 127,
+      "lines": 137,
       "path": "docs/design/index.html",
-      "sha256": "2cf037d1d63f61e282ab63c65a040b4318b06ee01659325c2665d87a7bfa1376",
+      "sha256": "250a48f688f177e5fedf638965622d40b861f6a7d593eaf3c297d7e5db417e5d",
       "summary": {
         "elements": [
           "reader-panel"
@@ -651,12 +714,12 @@
       }
     },
     {
-      "bytes": 18886,
+      "bytes": 19448,
       "id": "file:docs/design/riskmandate-aws-cognito-architecture.html",
       "language": "html",
-      "lines": 209,
+      "lines": 219,
       "path": "docs/design/riskmandate-aws-cognito-architecture.html",
-      "sha256": "6fa54ac45aab13bf3359018d9e9ece2f772e6af3bff708805b5fef507746b84f",
+      "sha256": "3daffc0545ee9cf36670439f31064d165a04d61c1a4bcb79306fb941821e6b7b",
       "summary": {
         "elements": [
           "reader-panel"
@@ -665,12 +728,12 @@
       }
     },
     {
-      "bytes": 23255,
+      "bytes": 23817,
       "id": "file:docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html",
       "language": "html",
-      "lines": 253,
+      "lines": 263,
       "path": "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html",
-      "sha256": "3f97bf0bc6c24061f927e28c2401b660b2c8eb01b61f7c3a4c61760701a6c282",
+      "sha256": "e548cc70131cd993c30b68f1328cade3d1c401ca97726f3c9c4ada238f7caefb",
       "summary": {
         "elements": [
           "reader-panel"
@@ -679,12 +742,12 @@
       }
     },
     {
-      "bytes": 38410,
+      "bytes": 38972,
       "id": "file:docs/design/riskmandate-user-onboarding-account-experience.html",
       "language": "html",
-      "lines": 334,
+      "lines": 344,
       "path": "docs/design/riskmandate-user-onboarding-account-experience.html",
-      "sha256": "61504fe88554a3e8921ed4b186297325c85bfb3e8e2c3c5392f3a46e985666b6",
+      "sha256": "81d3e74283e1d526efb041454329eee7d7751317d877e7c029682a6e3117b7d0",
       "summary": {
         "elements": [
           "reader-panel"
@@ -693,12 +756,12 @@
       }
     },
     {
-      "bytes": 29128,
+      "bytes": 29690,
       "id": "file:docs/design/riskmandate-workspace-architecture-briefing.html",
       "language": "html",
-      "lines": 317,
+      "lines": 327,
       "path": "docs/design/riskmandate-workspace-architecture-briefing.html",
-      "sha256": "d5728432eef6a8c16c58de17b042710b1b8356f8fc215ceae57bfa6f1ba7d7f6",
+      "sha256": "d9303dd9e0059b2b791d967bc7a98f581c4bc97a80f26526a24bfeaa0601b999",
       "summary": {
         "elements": [
           "reader-panel"
@@ -707,12 +770,12 @@
       }
     },
     {
-      "bytes": 69870,
+      "bytes": 70432,
       "id": "file:docs/design/secrets-sgit-ai__mvp-build-brief.html",
       "language": "html",
-      "lines": 560,
+      "lines": 570,
       "path": "docs/design/secrets-sgit-ai__mvp-build-brief.html",
-      "sha256": "a34841e7e37888cedebb4896a8eb25e7868dd859d06aa20e7da6fd351e5a8f20",
+      "sha256": "4cfbd22877ae9b113212c2dac32dd276eef13f9805bf4ce80fd3b880835c9dff",
       "summary": {
         "elements": [
           "reader-panel"
@@ -721,12 +784,12 @@
       }
     },
     {
-      "bytes": 9701,
+      "bytes": 10263,
       "id": "file:docs/index.html",
       "language": "html",
-      "lines": 126,
+      "lines": 136,
       "path": "docs/index.html",
-      "sha256": "778611a2ce74ea873a40f5a55264992f7600b4a38f9b89e63e6e87fa3bc5035c",
+      "sha256": "45e08a6b39473ef3520eb149bfd45b5a20c5035ec934cb13f3945af673e89d40",
       "summary": {
         "elements": [
           "reader-panel"
@@ -735,12 +798,12 @@
       }
     },
     {
-      "bytes": 19478,
+      "bytes": 20040,
       "id": "file:docs/ops/bootstrap.html",
       "language": "html",
-      "lines": 208,
+      "lines": 218,
       "path": "docs/ops/bootstrap.html",
-      "sha256": "efde351507745e68a0568234d578d278be372c51a86222bcced7066fc6be7c02",
+      "sha256": "a556fff1564998964a0c2422825b4e02b60bafeb52e997df21489a2c19266f6f",
       "summary": {
         "elements": [
           "reader-panel"
@@ -749,12 +812,12 @@
       }
     },
     {
-      "bytes": 12015,
+      "bytes": 12577,
       "id": "file:docs/ops/branch-protection.html",
       "language": "html",
-      "lines": 153,
+      "lines": 163,
       "path": "docs/ops/branch-protection.html",
-      "sha256": "c43d7d4e8ed99998c66ffc96d54b873ab6286403600ea89140ac648f2c95825b",
+      "sha256": "07d9fba6ae66f553e6e22e93903e1b43b52957e170d6fc902266f3bd73bc5371",
       "summary": {
         "elements": [
           "reader-panel"
@@ -763,12 +826,12 @@
       }
     },
     {
-      "bytes": 15836,
+      "bytes": 16398,
       "id": "file:docs/ops/comms.html",
       "language": "html",
-      "lines": 156,
+      "lines": 166,
       "path": "docs/ops/comms.html",
-      "sha256": "c0a83e62cd1bc171caba85a1c011dc060f88774f965fa16b137b057eb3fca3b1",
+      "sha256": "afffd8178342e49c4896043be4a04e1309725117f8bb7a9376e4725113bf1e8c",
       "summary": {
         "elements": [
           "reader-panel"
@@ -777,12 +840,12 @@
       }
     },
     {
-      "bytes": 10603,
+      "bytes": 11165,
       "id": "file:docs/ops/dns.html",
       "language": "html",
-      "lines": 148,
+      "lines": 158,
       "path": "docs/ops/dns.html",
-      "sha256": "1b223544c4b7b80a50c7793040de176f462918c697794b06eba4cfe011f9c955",
+      "sha256": "ccd6459dc88ddc0351a16402b85d13401ad8e2202c2977ad7dc60dabf7be461a",
       "summary": {
         "elements": [
           "reader-panel"
@@ -791,12 +854,12 @@
       }
     },
     {
-      "bytes": 9142,
+      "bytes": 9704,
       "id": "file:docs/ops/index.html",
       "language": "html",
-      "lines": 127,
+      "lines": 137,
       "path": "docs/ops/index.html",
-      "sha256": "61bb55eb37ada6f64d1116b444a79057c684a3c32f19f504f10ebf6cd0933bf8",
+      "sha256": "85f0f760c828906048c1a9ca56cde863bbec914f3c5ee220669e8e322cc4241b",
       "summary": {
         "elements": [
           "reader-panel"
@@ -805,12 +868,12 @@
       }
     },
     {
-      "bytes": 12557,
+      "bytes": 13119,
       "id": "file:docs/ops/needs.html",
       "language": "html",
-      "lines": 151,
+      "lines": 161,
       "path": "docs/ops/needs.html",
-      "sha256": "5c4d7e3714970da30e8b4969417f9118a784af7fbf3634f9e43a79267e3156c2",
+      "sha256": "ca19e8fe6bd6b49b1eaace38bec8704add62cc29a20859ecbf0731b1cbd89f08",
       "summary": {
         "elements": [
           "reader-panel"
@@ -819,12 +882,12 @@
       }
     },
     {
-      "bytes": 13478,
+      "bytes": 14040,
       "id": "file:docs/ops/release.html",
       "language": "html",
-      "lines": 154,
+      "lines": 164,
       "path": "docs/ops/release.html",
-      "sha256": "3b243ac04acacd5c84dc964da41a4297bc69e72c323422e99c525292b68972fe",
+      "sha256": "8d32efd3c61a934d31941caca78e9ceb7d2df72da6ac1fa79c01a3f04b2cb197",
       "summary": {
         "elements": [
           "reader-panel"
@@ -833,12 +896,12 @@
       }
     },
     {
-      "bytes": 30501,
+      "bytes": 32389,
       "id": "file:docs/reality.html",
       "language": "html",
-      "lines": 223,
+      "lines": 235,
       "path": "docs/reality.html",
-      "sha256": "ec010396ef3785f5a79fe9d1a3533e2d8c7b0aa64b29beca0c2121ee99f80e90",
+      "sha256": "b7dc18a48b55f539c06edd2d512700b5f3a8b661fb9fdc58ed8810428e3db950",
       "summary": {
         "elements": [
           "reader-panel"
@@ -847,12 +910,12 @@
       }
     },
     {
-      "bytes": 14976,
+      "bytes": 16862,
       "id": "file:environments/index.html",
       "language": "html",
-      "lines": 186,
+      "lines": 196,
       "path": "environments/index.html",
-      "sha256": "22e620517cbd6fc6eebca8b4231b17e3217bee9efce68243ff29644e840c721e",
+      "sha256": "c59a09f2f868b289781a7392f39270f00768766011caa3044e823c74570ed3b4",
       "summary": {
         "elements": [
           "reader-panel"
@@ -861,12 +924,12 @@
       }
     },
     {
-      "bytes": 15312,
+      "bytes": 19663,
       "id": "file:how-it-works/index.html",
       "language": "html",
-      "lines": 193,
+      "lines": 203,
       "path": "how-it-works/index.html",
-      "sha256": "bb4016981425af891907082079de6787dbdf301b62f8597891d3b0ef30ae41c4",
+      "sha256": "c39fd42c20d79f9e340995c03f2a98482999d9f784add24789d977136d9d7dca",
       "summary": {
         "elements": [
           "reader-panel"
@@ -875,12 +938,12 @@
       }
     },
     {
-      "bytes": 47863,
+      "bytes": 52663,
       "id": "file:index.html",
       "language": "html",
-      "lines": 241,
+      "lines": 253,
       "path": "index.html",
-      "sha256": "4bb0c8e1595a5bb48d9bebefddb860c97ffc35d94a64cf7d2f09630061c33399",
+      "sha256": "92f82dd94a9114a3df3af56b38a48037503847a308355113f8a4c27e8039386a",
       "summary": {
         "elements": [
           "reader-panel"
@@ -907,12 +970,12 @@
       "summary": {}
     },
     {
-      "bytes": 16140,
+      "bytes": 19166,
       "id": "file:keyring/index.html",
       "language": "html",
-      "lines": 200,
+      "lines": 210,
       "path": "keyring/index.html",
-      "sha256": "724c3255eddf40b74ff3fb5d1b3d029337742c38fc13bc57cd4fc1628938507e",
+      "sha256": "0b2ebad7c2189ba2aa15ade897a22417d897c240c574cf88fe01e5a41cecab04",
       "summary": {
         "elements": [
           "reader-panel"
@@ -921,12 +984,26 @@
       }
     },
     {
-      "bytes": 14657,
+      "bytes": 23706,
+      "id": "file:learn/index.html",
+      "language": "html",
+      "lines": 198,
+      "path": "learn/index.html",
+      "sha256": "9b2e900b772f81a4fb6e3123d46ce2dd89b46a6c2a38f02ab12395bb3932ac8c",
+      "summary": {
+        "elements": [
+          "reader-panel"
+        ],
+        "title": "Learn — secrets.sgit.ai"
+      }
+    },
+    {
+      "bytes": 15219,
       "id": "file:mockups/index.html",
       "language": "html",
-      "lines": 147,
+      "lines": 157,
       "path": "mockups/index.html",
-      "sha256": "0d68a4e5b29874f0e27eedca8fd97ac8c7e02c416f8610c56db9badb4d820842",
+      "sha256": "129148849c93bca7d58dd5927f2fc80b9e87d6e3181e30e5b9262779d953407c",
       "summary": {
         "elements": [
           "reader-panel"
@@ -935,12 +1012,12 @@
       }
     },
     {
-      "bytes": 11455,
+      "bytes": 12017,
       "id": "file:reader/index.html",
       "language": "html",
-      "lines": 136,
+      "lines": 146,
       "path": "reader/index.html",
-      "sha256": "a3b15e5542e7ff26ec51ffd90e722dabacd10cd7ffad4719ea1d00f1942d460d",
+      "sha256": "21d156f62a696c81af06ffadf64520fbbf635de09be9344c20842bdbda3f566d",
       "summary": {
         "elements": [
           "reader-panel"
@@ -949,12 +1026,12 @@
       }
     },
     {
-      "bytes": 15478,
+      "bytes": 16040,
       "id": "file:review/index.html",
       "language": "html",
-      "lines": 156,
+      "lines": 166,
       "path": "review/index.html",
-      "sha256": "9a5270ccad63e16c03ffa70e91fb4d287c90ee82acffa4be2cc84ce064918905",
+      "sha256": "50f9911f1bbbd4a3fcae137964992002f80486311ff102ff16f30ff754ed7aa4",
       "summary": {
         "elements": [
           "reader-panel"
@@ -1457,12 +1534,12 @@
       "summary": {}
     },
     {
-      "bytes": 16534,
+      "bytes": 21169,
       "id": "file:security/index.html",
       "language": "html",
-      "lines": 174,
+      "lines": 185,
       "path": "security/index.html",
-      "sha256": "d8802c8b39aa07179ad3a3a45f944cd0ff7b99bfecdf2af19edbcd41b47e3215",
+      "sha256": "ff80bf23c5ed3f50a93a57eff89dbb1b16b714d7cb02b987e0a08da6e0aafd06",
       "summary": {
         "elements": [
           "reader-panel"
@@ -1471,12 +1548,12 @@
       }
     },
     {
-      "bytes": 11788,
+      "bytes": 13239,
       "id": "file:sharing/index.html",
       "language": "html",
-      "lines": 150,
+      "lines": 160,
       "path": "sharing/index.html",
-      "sha256": "7a375ce4fb6959b526a4f26b83a4a2c6ff15001f3aadd11ab3305d01ff4834fd",
+      "sha256": "28546e484c5ff9c9632058a8886ce7d83c77f24ac3885dd852c419c2cc8d37c2",
       "summary": {
         "elements": [
           "reader-panel"
@@ -1485,12 +1562,12 @@
       }
     },
     {
-      "bytes": 43979,
+      "bytes": 46255,
       "id": "file:shipped/index.html",
       "language": "html",
-      "lines": 216,
+      "lines": 228,
       "path": "shipped/index.html",
-      "sha256": "92e5c44283e4e4477f5011eb95a6b22500b6854f8536b8a8ea6e5148fb3e8735",
+      "sha256": "fbd41663067292b69336690a21f6e0405c2dc13acfb9c6bd8305d7d60f8d337e",
       "summary": {
         "elements": [
           "reader-panel"
@@ -1499,12 +1576,12 @@
       }
     },
     {
-      "bytes": 8672,
+      "bytes": 9234,
       "id": "file:team/index.html",
       "language": "html",
-      "lines": 124,
+      "lines": 134,
       "path": "team/index.html",
-      "sha256": "4d2954f25a2837ceefcf29aa08a1aee8e7129143130d5f0fd82682ff39da4994",
+      "sha256": "0a7c41a30da59ace5744787abb059bb22598c3db31baad0dbf4c2b41a453ca1e",
       "summary": {
         "elements": [
           "reader-panel"
@@ -1513,13 +1590,13 @@
       }
     },
     {
-      "bytes": 4178,
+      "bytes": 4184,
       "id": "file:tests/build/test_chrome_in_every_page.py",
       "language": "python",
       "lines": 71,
       "module": "module:tests/build/test_chrome_in_every_page.py",
       "path": "tests/build/test_chrome_in_every_page.py",
-      "sha256": "9dae42da02b45fc8da10fc8c075820beab0efd97dc9397877c2ade472404d7ee",
+      "sha256": "0cb959a220df8556d3d688472b6bfedfd24658998da231aba4ee9ffe39d5e8b2",
       "summary": {
         "classes": 1,
         "doc": "secrets.sgit.ai — Test__Chrome__In__Every__Page\nEvery HTML page on the real tree carries the generated chrome: the CSP, the\ncanonical URL on the CNAME host, the version badge equal to version.txt, the\nnav, the footer and a <main>.",
@@ -1597,6 +1674,20 @@
       }
     },
     {
+      "bytes": 6714,
+      "id": "file:tests/build/test_learn.py",
+      "language": "python",
+      "lines": 114,
+      "module": "module:tests/build/test_learn.py",
+      "path": "tests/build/test_learn.py",
+      "sha256": "ed525097cb41b6934457f3225ac45e76dea97c8c2ae0c223fb857bc33cdab175",
+      "summary": {
+        "classes": 1,
+        "doc": "── test_learn.py — the learn section: terms defined once, diagrams drawn by the build, the lab held to the app's rules ──",
+        "functions": 0
+      }
+    },
+    {
       "bytes": 4048,
       "id": "file:tests/build/test_md_to_html.py",
       "language": "python",
@@ -1625,13 +1716,13 @@
       }
     },
     {
-      "bytes": 7788,
+      "bytes": 7803,
       "id": "file:tests/build/test_reader.py",
       "language": "python",
       "lines": 130,
       "module": "module:tests/build/test_reader.py",
       "path": "tests/build/test_reader.py",
-      "sha256": "02c9dc40dfe5e8d836192a85b804b1f5a4ff4c212ea8cb7f152c54742cb28a43",
+      "sha256": "172e0e98ed858cff30805eb4503a456ebc5a609b5b9901f55babaf346dd41e87",
       "summary": {
         "classes": 1,
         "doc": "secrets.sgit.ai — Test__Reader\nThe reader's column and the comms channel: the site components follow the\ncoding.sgit.ai shape (three files, the base contract, no colour, no inline\nhandler, no semicolon line ends, no location.hash assignment); every browser\nstorage key they write is allow-listed; every page carries the column and\nits module; only /reader/ widens connect-src; the contact file has the\nAgent Contact v0.1 shape and, when a bundle is published, fingerprints that\nmatch the keys; the search index is what gen_search writes.",
@@ -1729,36 +1820,41 @@
   ],
   "layer": "files",
   "provenance": {
-    "commit": "8f1412d8f7b24e2b0c608c8acd8b84d6cafe8d15",
+    "commit": "eb9aba5317fce111517ccdd38204619b25053082",
     "inputs": {
       ".github/workflows/deploy-pages.yml": "049991bbdd5f2392a57743549312512869a6753e213d996cd4377afc0ad5807e",
-      "404.html": "9b46abeb57d2e297f0495934570dd8d17e0aa0e68e48954fa2f3219d4d3ae387",
+      "404.html": "ae024148bb8287612e82ca022734f689dd7b444904a95aa92d5d47b4190b91ae",
       "admin/build/assemble_site.py": "560c312956e540d3e48ff13df69cc1173df5ffbed59f0cd1a7b1a1711e7be31f",
-      "admin/build/chrome.py": "ae75a0a6a4de89374a66597a1755797b28d45fa158c41cf50b512ba3554ee8b8",
-      "admin/build/gate.py": "33a4b24abee7b6bf827ed2ff8acc3e14534ad49dbc708c5616a8af6e784bfd4c",
+      "admin/build/chrome.py": "750e4b4ec6ca20e4c6bdc0a6f897590d91ca180513e0a3a424187c965da3a9a3",
+      "admin/build/gate.py": "53bf2841ab13488839b1f999bdcd1232a549973cedb53570333f4cb7e3988841",
       "admin/build/gen_chrome.py": "702aec56f2c9d2e87b138e944e07d6c66f60b459519c545e913ef75bfa9189fe",
+      "admin/build/gen_diagrams.py": "69537df6149d2acd562ee0b2e4860d4ae8e6ca9bfe5d49cf22f059b0e2b87d8b",
       "admin/build/gen_docs.py": "698761ae15847e90ccbb88367274f78b408fa1ce549b30d9c995b494a1126984",
       "admin/build/gen_features.py": "63bc6861ed19d7b228822d7b1dd7f9225a1c7f113c5b68fcc0839f73649312f0",
       "admin/build/gen_llms.py": "9964a8d3d69c884b142ec26e5de2d4fad1dab137ae98609159cd30e7f416d930",
       "admin/build/gen_search.py": "c95b637874318ad5a0839625693482f95195299b393261dceb04564408cbf050",
+      "admin/build/gen_terms.py": "ab0f2a822249d4770c876b3a458384833a77ef78fcc9e7955e62e909c1658e8c",
       "admin/build/gen_twins.py": "970b3654f1e836ffd9a55f7446e8a001bb5f9e8502859041e135eff34067b450",
       "admin/build/gen_versions.py": "5636c992e1203d293e429799c8137badd74425e8bbdfd7e0cefc39cc4c33a311",
-      "admin/build/html_to_md.py": "5ea5f75c049c8b75981b62a598939cb478f92b2ee333244e220824b78c56ee2c",
+      "admin/build/html_to_md.py": "d35242d42aa6151783743665500eeedb0d6eb04891626d9dbfd49b9a1f30fa1e",
       "admin/build/md_to_html.py": "97841987ebdf3aec4b7cf19fc9b0ee8a66139f34a6753e361ba139dd969e1a33",
       "admin/build/pages.py": "cf7005fd5ace37c3ead23a6c8d00b5bc3bc9718a16a686e5c70a36bbca1a9591",
       "admin/build/release.py": "9ceae016e3c901ada9ce4cd8572df4b84754dee44a40a86f5d1efb48e6d79a88",
       "admin/build/tag_release.py": "158ce432c0222b9d430c01c87a3f83e63d38a7f24f435d859190bf2bc6512cb8",
       "admin/build/validate.js": "68435b5a429a25a44843f9351cbc93cbb307ef629c67b08f952f9c92d248b12e",
       "admin/build/verify_live.py": "6077890fe9995fb22f9d1cf94c8b3a28a30f840fb1309fd95ea937d53d85b6a8",
-      "admin/comms.html": "31899728bebfefcbe2d01ea7b1434036e234fd0aa6a52674c63cd4395c317853",
-      "admin/index.html": "f19fc59f0ef9e500c1bdbfc217234ceeafff2094d743f3a051f2aa2fb70bbabc",
-      "admin/versions.html": "9795651d661843c6b423ee8db9d6bf0ac33985df02785cd4b282b7b81dfbb2f1",
-      "app/config/storage-keys.js": "892c307ba6cd556386db86acfeeade7038973ee3f19434a84f3b20241577fb3d",
+      "admin/comms.html": "a1a37d832bafd67e9f3c6378dac2e23851d3c2519e1dc80a56546ad9e66e782e",
+      "admin/index.html": "e07115f5170a3e3f53a376091dd05fd9f3dcb25d4db2407e0797e043a66d5bf3",
+      "admin/versions.html": "4a71710645cb68f2390565bb9d0f276a3362bfbbeead8cc9fa55f484a4a84fdb",
+      "app/config/storage-keys.js": "8e146ccc473ce6e8f8d9c1ef4a1109a0f9d6f259daec2edbf77a93eba584a7fa",
       "assets/mockups.css": "878d38eb32e9374482d3adbe376f4beef6cb221b4c1eff30f3a184f390e8078a",
       "assets/nav.js": "33e66df93332e4f1a45b14512657b0534a9d202f5538ecfcf2dc86e56ac20f6b",
-      "assets/site.css": "2ae97f6b17fee2528f5bcaf714f98d2284c60340f5bd7c4a34960168316559d3",
+      "assets/site.css": "b167bc58ee8067675d45672cb0ca3c1a6944cbd074ea26f991d676d28c22a0fb",
       "assets/theme.js": "ef43359d66faf716e0f02d066de0333f7c0c65f6cc918d5f5a4a012767cfa640",
       "assets/themes.css": "bd626138ed6e4b759b93ac5bc1951e071989570fcc3e21201f38a9fed608e18b",
+      "components/passkey-lab/passkey-lab.css": "74c950d7d4e12f4c4a47356c6c1ba5b30340641ab378ae2fdca4762e8630769a",
+      "components/passkey-lab/passkey-lab.html": "22bf3b12220a54642ff16d02ebc338a236de427b40cb1149eddc504b16dfcf51",
+      "components/passkey-lab/passkey-lab.js": "87acf7111e34206209938100ffae1abfc6cb8895d40912d768035d9d23974c85",
       "components/proto-app/proto-app.css": "aceebf6bc7fc4b2901397bbdbf4721879f26afb0ae0e0c9ffb27e36b235583f6",
       "components/proto-app/proto-app.html": "054ada9d830fb37b7c02b33d187382f7686bc7122de7c4f86318d8778249c11a",
       "components/proto-app/proto-app.js": "c6d2e3fb31872bd11f06ca52edee74f14318e0a6625b30b21d293a7665e71e60",
@@ -1774,37 +1870,38 @@
       "components/reader-log/reader-log.css": "f79481cdec253fb9451014d1dc6f3297dc5fc07d9e36af5ecea30ff20f73a140",
       "components/reader-log/reader-log.html": "9f5b6680c591815d55136d90c1171c2d20d7dbf3db35fce9b50f1e8c17460978",
       "components/reader-log/reader-log.js": "63074bfdcb23b0f0ffdcbb40ecb5fa0d9c6bdb2966584178eb517acee8467647",
-      "components/reader-panel/reader-panel.css": "b6ed37cd79a2ba8524962471b23e85f9c27a744dbd9419bcd1fa9852a9f08a73",
-      "components/reader-panel/reader-panel.html": "1166e5b2156d639fc95086ad6e9d27334395955ffc7b9ae19bdc7e172b1ccf86",
-      "components/reader-panel/reader-panel.js": "fcdbc42218c7714e08e1aee27025d1f96478b1e12c59ab2c39cf20ac68ae71e3",
+      "components/reader-panel/reader-panel.css": "54fe7c566502f5bd59081895890823d1664a8f0e1a72200dd11f639da2fd49ed",
+      "components/reader-panel/reader-panel.html": "fc4c772924f9418d6b9278d2e9b3405016695470c2cdfdbb0b81afab3b963812",
+      "components/reader-panel/reader-panel.js": "742850ad39d471efccd919b2c82ecdc43517eb0af32ba6dfb90f964193a927cc",
       "components/sg-base/sg-base.css": "99330398051ff7294e8e48ed01ec1ef8d58c997c95454232eba1288dd03829b7",
       "components/sg-base/sg-base.html": "6c8ec644d400f539e2b85f7002918d5a0b63278a8a229fdf8e153133a3be20bc",
       "components/sg-base/sg-base.js": "efaef01d9ae7d6a79f5c174d6580e084a0aa78e04bd9582ea8a1b45da841e7f2",
-      "docs/design/brief-corrections.html": "316500c5ebb103ca8ffe7b9d9c21fa552c79cc5121c8336dccf2e5e9c68e9e26",
-      "docs/design/index.html": "2cf037d1d63f61e282ab63c65a040b4318b06ee01659325c2665d87a7bfa1376",
-      "docs/design/riskmandate-aws-cognito-architecture.html": "6fa54ac45aab13bf3359018d9e9ece2f772e6af3bff708805b5fef507746b84f",
-      "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html": "3f97bf0bc6c24061f927e28c2401b660b2c8eb01b61f7c3a4c61760701a6c282",
-      "docs/design/riskmandate-user-onboarding-account-experience.html": "61504fe88554a3e8921ed4b186297325c85bfb3e8e2c3c5392f3a46e985666b6",
-      "docs/design/riskmandate-workspace-architecture-briefing.html": "d5728432eef6a8c16c58de17b042710b1b8356f8fc215ceae57bfa6f1ba7d7f6",
-      "docs/design/secrets-sgit-ai__mvp-build-brief.html": "a34841e7e37888cedebb4896a8eb25e7868dd859d06aa20e7da6fd351e5a8f20",
-      "docs/index.html": "778611a2ce74ea873a40f5a55264992f7600b4a38f9b89e63e6e87fa3bc5035c",
-      "docs/ops/bootstrap.html": "efde351507745e68a0568234d578d278be372c51a86222bcced7066fc6be7c02",
-      "docs/ops/branch-protection.html": "c43d7d4e8ed99998c66ffc96d54b873ab6286403600ea89140ac648f2c95825b",
-      "docs/ops/comms.html": "c0a83e62cd1bc171caba85a1c011dc060f88774f965fa16b137b057eb3fca3b1",
-      "docs/ops/dns.html": "1b223544c4b7b80a50c7793040de176f462918c697794b06eba4cfe011f9c955",
-      "docs/ops/index.html": "61bb55eb37ada6f64d1116b444a79057c684a3c32f19f504f10ebf6cd0933bf8",
-      "docs/ops/needs.html": "5c4d7e3714970da30e8b4969417f9118a784af7fbf3634f9e43a79267e3156c2",
-      "docs/ops/release.html": "3b243ac04acacd5c84dc964da41a4297bc69e72c323422e99c525292b68972fe",
-      "docs/reality.html": "ec010396ef3785f5a79fe9d1a3533e2d8c7b0aa64b29beca0c2121ee99f80e90",
-      "environments/index.html": "22e620517cbd6fc6eebca8b4231b17e3217bee9efce68243ff29644e840c721e",
-      "how-it-works/index.html": "bb4016981425af891907082079de6787dbdf301b62f8597891d3b0ef30ae41c4",
-      "index.html": "4bb0c8e1595a5bb48d9bebefddb860c97ffc35d94a64cf7d2f09630061c33399",
+      "docs/design/brief-corrections.html": "ebfddef7134fa594b343c19ef25bbbb87b98a5689c0456f39474e02a378468b9",
+      "docs/design/index.html": "250a48f688f177e5fedf638965622d40b861f6a7d593eaf3c297d7e5db417e5d",
+      "docs/design/riskmandate-aws-cognito-architecture.html": "3daffc0545ee9cf36670439f31064d165a04d61c1a4bcb79306fb941821e6b7b",
+      "docs/design/riskmandate-gcp-key-vault-password-manager-mvp.html": "e548cc70131cd993c30b68f1328cade3d1c401ca97726f3c9c4ada238f7caefb",
+      "docs/design/riskmandate-user-onboarding-account-experience.html": "81d3e74283e1d526efb041454329eee7d7751317d877e7c029682a6e3117b7d0",
+      "docs/design/riskmandate-workspace-architecture-briefing.html": "d9303dd9e0059b2b791d967bc7a98f581c4bc97a80f26526a24bfeaa0601b999",
+      "docs/design/secrets-sgit-ai__mvp-build-brief.html": "4cfbd22877ae9b113212c2dac32dd276eef13f9805bf4ce80fd3b880835c9dff",
+      "docs/index.html": "45e08a6b39473ef3520eb149bfd45b5a20c5035ec934cb13f3945af673e89d40",
+      "docs/ops/bootstrap.html": "a556fff1564998964a0c2422825b4e02b60bafeb52e997df21489a2c19266f6f",
+      "docs/ops/branch-protection.html": "07d9fba6ae66f553e6e22e93903e1b43b52957e170d6fc902266f3bd73bc5371",
+      "docs/ops/comms.html": "afffd8178342e49c4896043be4a04e1309725117f8bb7a9376e4725113bf1e8c",
+      "docs/ops/dns.html": "ccd6459dc88ddc0351a16402b85d13401ad8e2202c2977ad7dc60dabf7be461a",
+      "docs/ops/index.html": "85f0f760c828906048c1a9ca56cde863bbec914f3c5ee220669e8e322cc4241b",
+      "docs/ops/needs.html": "ca19e8fe6bd6b49b1eaace38bec8704add62cc29a20859ecbf0731b1cbd89f08",
+      "docs/ops/release.html": "8d32efd3c61a934d31941caca78e9ceb7d2df72da6ac1fa79c01a3f04b2cb197",
+      "docs/reality.html": "b7dc18a48b55f539c06edd2d512700b5f3a8b661fb9fdc58ed8810428e3db950",
+      "environments/index.html": "c59a09f2f868b289781a7392f39270f00768766011caa3044e823c74570ed3b4",
+      "how-it-works/index.html": "c39fd42c20d79f9e340995c03f2a98482999d9f784add24789d977136d9d7dca",
+      "index.html": "92f82dd94a9114a3df3af56b38a48037503847a308355113f8a4c27e8039386a",
       "infra/bootstrap/bootstrap.sh": "257713fea062998a8b9fc440af2a19cb376e1f1d12859cea851bc13c41840863",
       "infra/rules/storage.rules": "6caa0c5280ef2a5429e832ccef6dddc5e6cae5625ec284f895a516d221dae250",
-      "keyring/index.html": "724c3255eddf40b74ff3fb5d1b3d029337742c38fc13bc57cd4fc1628938507e",
-      "mockups/index.html": "0d68a4e5b29874f0e27eedca8fd97ac8c7e02c416f8610c56db9badb4d820842",
-      "reader/index.html": "a3b15e5542e7ff26ec51ffd90e722dabacd10cd7ffad4719ea1d00f1942d460d",
-      "review/index.html": "9a5270ccad63e16c03ffa70e91fb4d287c90ee82acffa4be2cc84ce064918905",
+      "keyring/index.html": "0b2ebad7c2189ba2aa15ade897a22417d897c240c574cf88fe01e5a41cecab04",
+      "learn/index.html": "9b2e900b772f81a4fb6e3123d46ce2dd89b46a6c2a38f02ab12395bb3932ac8c",
+      "mockups/index.html": "129148849c93bca7d58dd5927f2fc80b9e87d6e3181e30e5b9262779d953407c",
+      "reader/index.html": "21d156f62a696c81af06ffadf64520fbbf635de09be9344c20842bdbda3f566d",
+      "review/index.html": "50f9911f1bbbd4a3fcae137964992002f80486311ff102ff16f30ff754ed7aa4",
       "review/tools/brief.py": "d4ccbd69c47d946b98285fa2b1329a432a097d922eeefc3014264c1dcbd7d0ba",
       "review/tools/claims.py": "1aa4fa4be71b0ff60a115ec43371484f484f43a259ad33aa5e0a48ba41c5e425",
       "review/tools/derive.py": "30c9a92953bf535b18f1e2038c96c872481d65def1efe15c815fc04b00baa818",
@@ -1845,19 +1942,20 @@
       "review/ui/shell.css": "1486453f2f17c9531e89a1420ac1ed1b1879d91e650d5a149634a6a6686fb41d",
       "review/ui/shell.js": "919b72bfb421cf2e1bde8925650d837c5662ba70ca2c56d74edb0d569d0a5493",
       "review/ui/tokens.css": "403feedc08fa2340b995f733cc8b1b475e445c1599a55953e206ec45a7ef07d7",
-      "security/index.html": "d8802c8b39aa07179ad3a3a45f944cd0ff7b99bfecdf2af19edbcd41b47e3215",
-      "sharing/index.html": "7a375ce4fb6959b526a4f26b83a4a2c6ff15001f3aadd11ab3305d01ff4834fd",
-      "shipped/index.html": "92e5c44283e4e4477f5011eb95a6b22500b6854f8536b8a8ea6e5148fb3e8735",
-      "team/index.html": "4d2954f25a2837ceefcf29aa08a1aee8e7129143130d5f0fd82682ff39da4994",
-      "tests/build/test_chrome_in_every_page.py": "9dae42da02b45fc8da10fc8c075820beab0efd97dc9397877c2ade472404d7ee",
+      "security/index.html": "ff80bf23c5ed3f50a93a57eff89dbb1b16b714d7cb02b987e0a08da6e0aafd06",
+      "sharing/index.html": "28546e484c5ff9c9632058a8886ce7d83c77f24ac3885dd852c419c2cc8d37c2",
+      "shipped/index.html": "fbd41663067292b69336690a21f6e0405c2dc13acfb9c6bd8305d7d60f8d337e",
+      "team/index.html": "0a7c41a30da59ace5744787abb059bb22598c3db31baad0dbf4c2b41a453ca1e",
+      "tests/build/test_chrome_in_every_page.py": "0cb959a220df8556d3d688472b6bfedfd24658998da231aba4ee9ffe39d5e8b2",
       "tests/build/test_claims.py": "ab7c3e9f3682f5206b2c913b8b77acef7fe95cc342ede6a60faa242998d3a9bc",
       "tests/build/test_derive.py": "32932d167bdca964cb3c3f42c4afeeb7e6dc1b132484a05f94fd0e4b2feb35eb",
       "tests/build/test_features_schema.py": "668110eb00c829c850957feb4b74e088a0db753c484caf28da0efa401baa6cf6",
       "tests/build/test_generators_check.py": "cf09bbf7e108d772126babca52cfdd82161ec03cb66252f5fd0b3372d0b48402",
       "tests/build/test_html_to_md.py": "5d1b237195888cd9b7d1cac31279b16c02fe4f29fa706fabf41cc39e71e25705",
+      "tests/build/test_learn.py": "ed525097cb41b6934457f3225ac45e76dea97c8c2ae0c223fb857bc33cdab175",
       "tests/build/test_md_to_html.py": "10cb4bbcf8c39f5f66218c573b8ecdf16bcf34725e8b7b8366d1ce81b5dc7691",
       "tests/build/test_mockups.py": "49832c28075c1e3ff9e33c4e10aba5b47811c93286fd858deec0fdaf9e6bfefd",
-      "tests/build/test_reader.py": "02c9dc40dfe5e8d836192a85b804b1f5a4ff4c212ea8cb7f152c54742cb28a43",
+      "tests/build/test_reader.py": "172e0e98ed858cff30805eb4503a456ebc5a609b5b9901f55babaf346dd41e87",
       "tests/build/test_review_folder.py": "c8be271686036652974e8db1e228b0d692e4a3c9a53aade3c503aac768d68be0",
       "tests/build/test_review_ui.py": "8845f05ce8e468301dc038633d565b0402fc424fb931521bf44064c786bec1ff",
       "tests/build/test_themes.py": "7875597a323c0b2d3dbe2d7eae44a72caea9605798c82669bf40762f2482f8f2",
@@ -1868,6 +1966,6 @@
     },
     "tool": "review/tools/derive.py",
     "tool_version": "0.1",
-    "tree_sha256": "a9aa74b74cfb4b65f96dfc16d3249621b76c5c83a5616ee1499d2fafa5f1279d"
+    "tree_sha256": "5f63559adf5543f1b5e51501f3f729fc3ea65ef2b285da49bc6382f1b58e9c32"
   }
 }

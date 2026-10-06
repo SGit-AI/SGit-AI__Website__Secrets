@@ -116,9 +116,15 @@ The brief describes the review folder top down (the intent, then the code derive
 
 The review also asked for an abstraction layer per block of code: the source, then what it is doing (pseudo-code), then why (its intent), then the story it serves, at two levels, a technical one and a business one, so a later diff can be read as a blast radius against the meaning rather than against the lines. The first rung exists: the code's own leading and trailing comments are shown as "what it says about itself", and the claims and stories that reach the file as "why it exists". The written explanation (technical and business) is not derived by a parser and the brief rules out a model writing into `graph/`; the proposal is a separate layer, `review/explain/<path>.json`, written by the build agent as data, each block carrying the sha256 of the lines it explains so it goes stale, visibly, when the code moves. Proposed, not built; status `proposed` on `/shipped/`.
 
+### C25. A learn section the brief does not have, and the virtual authenticator does PRF
+
+Section 6.5 lists the content pages and section 7.4 asks that nothing be described before it ships; neither says where a reader learns what a passkey, the PRF bytes or the GCP project are in this site's terms. Dinis asked on 2026-10-06, reading the security page, for the words to link to explanations in context, with diagrams, and for a way to try the passkey in the browser he was in, bit by bit, including several passkeys. From v0.1.12 there is a `/learn/` section (passkeys, keys, GCP), a glossary in `data/terms.json` that the build links from the first use of each term on every content page and that the reader's column lists, flow diagrams drawn by the build from `data/diagrams/` (inline SVG on the theme's tokens, plus the same diagram as text), and a lab component on the passkeys page that runs the two WebAuthn calls and the key chain on the browser's own WebCrypto with a lab salt. The lab is held to the same rules as the app: RP ID `secrets.sgit.ai` or `localhost` only, one allow-listed storage key holding public values, nothing derived from a key written anywhere, no network.
+
+One open question of section 12 is answered by building it: Chromium's virtual authenticator, driven through the CDP `WebAuthn` domain with `hasPrf: true`, does PRF (Chromium 141: `prf.enabled` is true at create, `get` returns 32 bytes, the same salt gives the same bytes, another salt gives others). The end-to-end tests of step 4 can therefore run the real unlock headlessly, with no stand-in for the crypto.
+
 ## Open questions carried from section 12 (unanswered at this version)
 
-- Does the Playwright virtual authenticator support PRF? (step 4)
+- ~~Does the Playwright virtual authenticator support PRF?~~ Yes: Chromium's, through CDP with `hasPrf`, at v0.1.12 (C25).
 - Does Google still issue implicit-flow tokens for a Web client with our origins? (step 7)
 - Exact Security Rules syntax for the size and null checks; is `request.auth.token.firebase.tenant` available in Storage rules? (step 3)
 - Where does Identity Platform store user records? (step 3, for `/environments/`)

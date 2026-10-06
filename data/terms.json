@@ -1,0 +1,222 @@
+{
+  "_comment": "The site's glossary: one entry per term, defined in this site's context, not in general. gen_terms.py links the first occurrence of a term (or an alias) on every page whose <main> carries data-terms to its href, with the definition as the link's title, and writes the glossary on /learn/. The reader's column lists the terms a page uses. Add a term here, never a definition inline.",
+  "terms": [
+    {
+      "id": "passkey",
+      "term": "passkey",
+      "aliases": [
+        "passkeys"
+      ],
+      "href": "/learn/passkeys/#passkey",
+      "definition": "A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login."
+    },
+    {
+      "id": "webauthn",
+      "term": "WebAuthn",
+      "aliases": [],
+      "href": "/learn/passkeys/#webauthn",
+      "definition": "The browser API (navigator.credentials) that creates a passkey and later asks your authenticator to prove it still has it; the only API this site uses to talk to the authenticator."
+    },
+    {
+      "id": "prf",
+      "term": "PRF",
+      "aliases": [
+        "PRF extension",
+        "hmac-secret"
+      ],
+      "href": "/learn/passkeys/#prf",
+      "definition": "The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key."
+    },
+    {
+      "id": "rp-id",
+      "term": "RP ID",
+      "aliases": [
+        "relying-party identifier",
+        "rpId"
+      ],
+      "href": "/learn/passkeys/#rp-id",
+      "definition": "The host a passkey is scoped to; here exactly secrets.sgit.ai (localhost when testing), never sgit.ai, so no sibling site can ask for the gesture."
+    },
+    {
+      "id": "authenticator",
+      "term": "authenticator",
+      "aliases": [
+        "authenticators",
+        "platform authenticator"
+      ],
+      "href": "/learn/passkeys/#authenticator",
+      "definition": "Whatever holds the passkey's private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it."
+    },
+    {
+      "id": "user-handle",
+      "term": "user handle",
+      "aliases": [
+        "user.id"
+      ],
+      "href": "/learn/passkeys/#user-handle",
+      "definition": "The 32 random bytes a passkey is registered under; not your email and not the Firebase uid, so the authenticator learns nothing about the account."
+    },
+    {
+      "id": "credential-id",
+      "term": "credential id",
+      "aliases": [
+        "credentialId",
+        "allowCredentials"
+      ],
+      "href": "/learn/passkeys/#credential",
+      "definition": "The public identifier of one passkey, stored in meta.json so the page can list your devices and ask the authenticator for that passkey by name."
+    },
+    {
+      "id": "gesture",
+      "term": "gesture",
+      "aliases": [
+        "passkey gesture"
+      ],
+      "href": "/learn/passkeys/#gesture",
+      "definition": "The touch, face, PIN or tap your authenticator asks for before it computes anything; one gesture per unlock, and nothing happens without it."
+    },
+    {
+      "id": "meta-json",
+      "term": "meta.json",
+      "aliases": [],
+      "href": "/learn/passkeys/#storage",
+      "definition": "The small public file next to the keyring in the bucket: the user handle, each passkey's credential id, public key and name, and the keyring revision; nothing secret."
+    },
+    {
+      "id": "kek",
+      "term": "KEK",
+      "aliases": [
+        "keyring key"
+      ],
+      "href": "/learn/keys/#kek",
+      "definition": "The keyring's one real key: 32 random bytes that encrypt the body, themselves stored only wrapped, once per unlock method."
+    },
+    {
+      "id": "wrapping-key",
+      "term": "wrapping key",
+      "aliases": [
+        "WK",
+        "WK_passkey",
+        "WK_recovery"
+      ],
+      "href": "/learn/keys/#wrapping-key",
+      "definition": "An AES key derived from one unlock method (a passkey's PRF output, or the recovery code) whose only job is to encrypt the KEK; a different one per passkey."
+    },
+    {
+      "id": "hkdf",
+      "term": "HKDF",
+      "aliases": [
+        "HKDF-SHA256"
+      ],
+      "href": "/learn/keys/#hkdf",
+      "definition": "The standard key-derivation function the browser provides; turns 32 PRF bytes (or the recovery code) plus a salt and a label into a wrapping key, deterministically."
+    },
+    {
+      "id": "aes-gcm",
+      "term": "AES-256-GCM",
+      "aliases": [
+        "AES-GCM"
+      ],
+      "href": "/learn/keys/#aes-gcm",
+      "definition": "The authenticated cipher the browser provides; every wrap and the body use it, so a wrong key or a tampered byte fails loudly instead of decrypting to garbage."
+    },
+    {
+      "id": "prf-salt",
+      "term": "PRF salt",
+      "aliases": [
+        "prfSalt",
+        "prf.eval"
+      ],
+      "href": "/learn/keys/#prf-salt",
+      "definition": "32 random public bytes fixed for the keyring's life, given to every passkey as the PRF input; stored in keyring.json in the clear, because it is an input, not a secret."
+    },
+    {
+      "id": "recovery-code",
+      "term": "recovery code",
+      "aliases": [],
+      "href": "/learn/keys/#recovery-code",
+      "definition": "26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone."
+    },
+    {
+      "id": "passphrase",
+      "term": "passphrase",
+      "aliases": [
+        "master password"
+      ],
+      "href": "/learn/keys/#passphrase",
+      "definition": "There is none. Nothing you type unlocks the keyring; the passkey's PRF output and the machine-made recovery code are the only unlock methods, by design."
+    },
+    {
+      "id": "keyring",
+      "term": "keyring",
+      "aliases": [
+        "keyring.json"
+      ],
+      "href": "/keyring/",
+      "definition": "The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page."
+    },
+    {
+      "id": "gcp",
+      "term": "GCP",
+      "aliases": [
+        "Google Cloud",
+        "GCP project"
+      ],
+      "href": "/learn/gcp/#gcp",
+      "definition": "The Google Cloud project that holds the login and the bucket for one environment; it sees who signed in and stores ciphertext, and can open none of it."
+    },
+    {
+      "id": "identity-platform",
+      "term": "Identity Platform",
+      "aliases": [
+        "Firebase Auth"
+      ],
+      "href": "/learn/gcp/#identity-platform",
+      "definition": "Google's login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else."
+    },
+    {
+      "id": "bucket",
+      "term": "bucket",
+      "aliases": [
+        "Cloud Storage",
+        "Cloud Storage for Firebase"
+      ],
+      "href": "/learn/gcp/#bucket",
+      "definition": "The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login's token."
+    },
+    {
+      "id": "security-rules",
+      "term": "Security Rules",
+      "aliases": [
+        "storage.rules"
+      ],
+      "href": "/learn/gcp/#rules",
+      "definition": "The rules file Google enforces in front of the bucket: a signed-in user may read and write only their own prefix, with size limits; the whole access control of the MVP."
+    },
+    {
+      "id": "terraform",
+      "term": "Terraform",
+      "aliases": [],
+      "href": "/learn/gcp/#terraform",
+      "definition": "The infrastructure description in infra/terraform/ that creates each environment's project, login, bucket and rules, applied by GitHub Actions; it can delete and reconfigure, and cannot read."
+    },
+    {
+      "id": "wif",
+      "term": "Workload Identity Federation",
+      "aliases": [
+        "WIF"
+      ],
+      "href": "/learn/gcp/#wif",
+      "definition": "How GitHub Actions gets a GCP identity without a stored key: the pipeline presents its own token and GCP trusts it for this one repository and branch."
+    },
+    {
+      "id": "uid",
+      "term": "Firebase uid",
+      "aliases": [
+        "users/{uid}"
+      ],
+      "href": "/learn/gcp/#uid",
+      "definition": "The login's stable id for a user; it names the user's prefix in the bucket and appears in the rules, and it is not a secret."
+    }
+  ]
+}

@@ -2,13 +2,13 @@
 
 > The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
 
-*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sharing-data-model) Key pair per user generated at first run; public bundle written to directory/ · [absent](/review/ui/#node=claim.app.sharing-ui) Sharing an entry with another user through their inbox
 
-Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their passkey, because their PRF secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is **phase 2 and absent from the MVP**; the data model is phase 1, because adding it later would mean rewriting every keyring.
+Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their [passkey](/learn/passkeys/index.md#passkey), because their [PRF](/learn/passkeys/index.md#prf) secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is **phase 2 and absent from the MVP**; the data model is phase 1, because adding it later would mean rewriting every [keyring](/keyring/index.md).
 
 ## The scheme
 
@@ -25,7 +25,7 @@ The public key shares *keys*, not data. The server carries the package and can n
 |---|---|---|
 | Revocation | A removed member already holds the key | Rotate the key, re-encrypt, re-share to the remaining members |
 | Directory trust | A compromised admin could swap a public key and intercept the next share | Signed bundles, and fingerprints users can compare out of band before a sensitive share |
-| Group membership | Who can open what is real metadata, visible to the bucket | Membership stored per shared set; updated on add and remove; accepted as metadata exposure |
+| Group membership | Who can open what is real metadata, visible to the [bucket](/learn/gcp/index.md#bucket) | Membership stored per shared set; updated on add and remove; accepted as metadata exposure |
 | Kinds kept apart | A vault key shared by mistake opens a whole vault | An `sgit-vault-key` entry refuses to enter a shareable set without a confirmation |
 
 ## Fit with sgit

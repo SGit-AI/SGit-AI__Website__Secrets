@@ -16,6 +16,7 @@ export const LOCAL_STORAGE_KEYS = Object.freeze({
     proto   : 'sgit.secrets.proto.v1',                                            // the design prototype's pretend state under /mockups/: invented entries, devices, a log of what was clicked; never a real secret
     protoUx : 'sgit.secrets.ui.proto',                                            // which of the three prototype UX variants the reader picked (A/B testing)
     review  : 'sgit.secrets.ui.review',                                           // the navigator: which regions are collapsed, which mode was last used
+    lab     : 'sgit.secrets.lab.passkeys.v1',                                   // the passkey lab on /learn/passkeys/: the lab's PRF salt (random public input, like keyring.prfSalt) and the public record of each lab passkey (credential id, algorithm, transports, created); never a PRF output, a key or anything derived from one
     readerLog : 'sgit.secrets.reader.log.v1',                                     // the reader's log: append-only events (read, star, vote, note) keyed by page and content hash; opinions about public pages, never a secret
 })
 

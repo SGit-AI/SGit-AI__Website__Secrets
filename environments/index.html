@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/environments/">
   <meta property="og:title" content="Environments — secrets.sgit.ai">
   <meta property="og:description" content="One site, one GCP project per environment: dev, main, prod, and a customer&#x27;s own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.">
-  <meta name="sg-secrets:version" content="0.1.11">
+  <meta name="sg-secrets:version" content="0.1.12">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -44,6 +44,16 @@
           <a class="sl" href="/sharing/">Sharing</a>
           <a class="sl here" href="/environments/" aria-current="page">Environments</a>
           <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
           </div>
         </div>
         <div class="ni ni-has">
@@ -102,12 +112,12 @@
     <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Environments</span></div>
   </header>
 <!-- sg-secrets:nav:end -->
-  <main>
+  <main data-terms>
     <h1>Environments</h1>
     <!-- sg-secrets:status:start ids="infra.bootstrap,infra.terraform,infra.environments-config,app.environment-page" -->
   <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.infra.bootstrap" title="the claim and its evidence, in the navigator">proposed</a> Bootstrap script for the tfstate project, env projects, Terraform service account and WIF pool · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.infra.terraform" title="the claim and its evidence, in the navigator">proposed</a> Terraform module secrets-env and the dev environment root · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.infra.environments-config" title="the claim and its evidence, in the navigator">proposed</a> config/environments.json with real dev values from Terraform outputs · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.environment-page" title="the claim and its evidence, in the navigator">proposed</a> Environment page: pick a built-in environment, enter a custom one, import, export, reset</p>
 <!-- sg-secrets:status:end -->
-    <p class="sg-lead">One site serves every environment. An environment is one GCP project holding an Identity Platform configuration and one bucket; the project is the unit that is created and destroyed. The browser picks the environment at runtime, with <code>prod</code> as the default on <code>secrets.sgit.ai</code>, and shows which one is active in the app header at all times, so nobody enters a real secret into <code>dev</code> by mistake.</p>
+    <p class="sg-lead">One site serves every environment. An environment is one <a class="sg-term" href="/learn/gcp/#gcp" title="The Google Cloud project that holds the login and the bucket for one environment; it sees who signed in and stores ciphertext, and can open none of it.">GCP project</a> holding an <a class="sg-term" href="/learn/gcp/#identity-platform" title="Google&#x27;s login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else.">Identity Platform</a> configuration and one <a class="sg-term" href="/learn/gcp/#bucket" title="The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.">bucket</a>; the project is the unit that is created and destroyed. The browser picks the environment at runtime, with <code>prod</code> as the default on <code>secrets.sgit.ai</code>, and shows which one is active in the app header at all times, so nobody enters a real secret into <code>dev</code> by mistake.</p>
 
     <h2>The environments</h2>
     <table>
@@ -122,7 +132,7 @@
     <p>The project ids are proposed until the bootstrap confirms they are available. None exists yet.</p>
 
     <h2>What a project contains</h2>
-    <p>Terraform in <code>infra/terraform/</code> will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains <code>secrets.sgit.ai</code> and <code>localhost</code>; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the Security Rules release; IAM for the Terraform service account and the admins group; and the Workload Identity Federation pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, <code>infra/bootstrap/bootstrap.sh</code>, after which everything is Terraform. The exact procedure, as commands, is <a href="/docs/ops/bootstrap.html">docs/ops/bootstrap.md</a>.</p>
+    <p><a class="sg-term" href="/learn/gcp/#terraform" title="The infrastructure description in infra/terraform/ that creates each environment&#x27;s project, login, bucket and rules, applied by GitHub Actions; it can delete and reconfigure, and cannot read.">Terraform</a> in <code>infra/terraform/</code> will create, per project: the services; the Firebase project link and web app registration; Identity Platform with email/password and Google sign-in, authorised domains <code>secrets.sgit.ai</code> and <code>localhost</code>; a second OAuth client for the admin pages; the bucket with uniform access, versioning, thirty days of soft-delete retention and CORS for this origin; the <a class="sg-term" href="/learn/gcp/#rules" title="The rules file Google enforces in front of the bucket: a signed-in user may read and write only their own prefix, with size limits; the whole access control of the MVP.">Security Rules</a> release; IAM for the Terraform service account and the admins group; and the <a class="sg-term" href="/learn/gcp/#wif" title="How GitHub Actions gets a GCP identity without a stored key: the pipeline presents its own token and GCP trusts it for this one repository and branch.">Workload Identity Federation</a> pool that lets GitHub Actions apply all of it without a key file. The first project and the pool are created once by a human with a short script, <code>infra/bootstrap/bootstrap.sh</code>, after which everything is Terraform. The exact procedure, as commands, is <a href="/docs/ops/bootstrap.html">docs/ops/bootstrap.md</a>.</p>
 
     <h2>config/environments.json</h2>
     <p>The site ships one file naming every built-in environment. Every value in it is a <strong>public identifier</strong>: a Firebase web API key is not a secret, it is restricted by HTTP referrer, and the project id, auth domain, bucket name, app id and admin OAuth client id are all visible to any user of the app anyway. The file is generated from Terraform outputs by the pipeline and validated by the gate; a block whose values do not match the Terraform state it came from will fail the build. The leak tripwire allows the <code>AIza…</code> shape in this file only, so a key pasted anywhere else is caught.</p>
@@ -178,7 +188,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/environments/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/environments/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

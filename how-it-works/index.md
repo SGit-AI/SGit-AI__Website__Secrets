@@ -2,13 +2,13 @@
 
 > The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 
-*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.11 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.12 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
 Status, from [/shipped/](/shipped/index.md): [proposed](/review/ui/#node=claim.app.sign-in) Sign in and out with Google and email/password against the chosen environment · [proposed](/review/ui/#node=claim.app.prf-unlock) Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · [proposed](/review/ui/#node=claim.app.keyring-v1) Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · [proposed](/review/ui/#node=claim.app.devices) Devices page: add and remove passkeys, regenerate the recovery code
 
-Two things decide what you can do. The **login** decides which paths in the bucket you may touch. The **passkey** decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.
+Two things decide what you can do. The **login** decides which paths in the [bucket](/learn/gcp/index.md#bucket) you may touch. The **[passkey](/learn/passkeys/index.md#passkey)** decides whether the bytes there mean anything. They are deliberately separate: an administrator of the login can fake the first and can never fake the second.
 
 This page describes the design in section 3 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). Every flow on it is *proposed*. The status line above is generated from `data/features.json` and changes when the code ships.
 
@@ -17,11 +17,11 @@ This page describes the design in section 3 of [the brief](/docs/design/secrets-
 | Layer | Component | Where it runs | What it is trusted with |
 |---|---|---|---|
 | Site and app | Static HTML, JS and CSS from this repository, on GitHub Pages at `secrets.sgit.ai` | Your browser | **The boundary.** Whoever controls this repository or the DNS controls the app |
-| Login | Identity Platform, through the vendored Firebase Auth SDK | Google | Can impersonate; cannot decrypt |
-| Storage | A Cloud Storage for Firebase bucket with Security Rules | Google | Holds ciphertext; can delete |
-| Unlock | A WebAuthn passkey with the PRF extension, RP ID `secrets.sgit.ai` | Your authenticator: Google Password Manager, iCloud Keychain or a hardware key | The only thing that can decrypt |
-| Admin | The same static pages, calling GCP's own REST APIs with your Google account's token | Your browser | Works only if your Google account has IAM on the project |
-| Infrastructure | Terraform in this repository, applied by GitHub Actions through Workload Identity Federation | GitHub Actions | Can reconfigure or delete; cannot read |
+| Login | [Identity Platform](/learn/gcp/index.md#identity-platform), through the vendored Firebase Auth SDK | Google | Can impersonate; cannot decrypt |
+| Storage | A Cloud Storage for Firebase bucket with [Security Rules](/learn/gcp/index.md#rules) | Google | Holds ciphertext; can delete |
+| Unlock | A [WebAuthn](/learn/passkeys/index.md#webauthn) passkey with the [PRF extension](/learn/passkeys/index.md#prf), [RP ID](/learn/passkeys/index.md#rp-id) `secrets.sgit.ai` | Your [authenticator](/learn/passkeys/index.md#authenticator): Google Password Manager, iCloud Keychain or a hardware key | The only thing that can decrypt |
+| Admin | The same static pages, calling [GCP](/learn/gcp/index.md#gcp)'s own REST APIs with your Google account's token | Your browser | Works only if your Google account has IAM on the project |
+| Infrastructure | [Terraform](/learn/gcp/index.md#terraform) in this repository, applied by GitHub Actions through [Workload Identity Federation](/learn/gcp/index.md#wif) | GitHub Actions | Can reconfigure or delete; cannot read |
 
 ## First run
 
@@ -36,7 +36,7 @@ sign in ──▶ no keyring at users/{uid}/keyring.json
 
 ```
 
-What leaves the browser: ciphertext, two wrapped copies of the KEK, a 32-byte PRF salt, and `meta.json` with the passkey's credential id and public key. What never leaves: the PRF output, the KEK, the recovery code, the private keys, any entry.
+What leaves the browser: ciphertext, two wrapped copies of the [KEK](/learn/keys/index.md#kek), a 32-byte [PRF salt](/learn/keys/index.md#prf-salt), and `meta.json` with the passkey's [credential id](/learn/passkeys/index.md#credential) and public key. What never leaves: the PRF output, the KEK, the [recovery code](/learn/keys/index.md#recovery-code), the private keys, any entry.
 
 ## Returning
 
@@ -75,7 +75,7 @@ open /admin/ ──▶ choose an environment
 
 ```
 
-There is no admin role in the app. The GCP project's IAM is the role; the pages are a client for GCP's APIs. An admin page can list users, deploy rules and change CORS. It cannot open a keyring, because a keyring is ciphertext and the admin's token unlocks nothing.
+There is no admin role in the app. The GCP project's IAM is the role; the pages are a client for GCP's APIs. An admin page can list users, deploy rules and change CORS. It cannot open a [keyring](/keyring/index.md), because a keyring is ciphertext and the admin's token unlocks nothing.
 
 ## What each party can see
 
@@ -83,7 +83,7 @@ There is no admin role in the app. The GCP project's IAM is the role; the pages 
 |---|---|---|---|---|
 | Sign in | Your email, the sign-in event, your uid | Nothing (static files) | Nothing | An ID token |
 | Fetch keyring | That uid read that object | Nothing | Nothing | Ciphertext |
-| Passkey gesture | Nothing | Nothing | The PRF secret for this credential and this origin | 32 bytes of PRF output, briefly |
+| Passkey [gesture](/learn/passkeys/index.md#gesture) | Nothing | Nothing | The PRF secret for this credential and this origin | 32 bytes of PRF output, briefly |
 | Unlock | Nothing | Nothing | Nothing | The KEK and the plaintext body, in memory |
 | Write | New ciphertext, the object's size and time | Nothing | Nothing | Everything it already had |
 

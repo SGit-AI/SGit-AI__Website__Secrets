@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/keyring/">
   <meta property="og:title" content="Keyring format v1 — secrets.sgit.ai">
   <meta property="og:description" content="The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.">
-  <meta name="sg-secrets:version" content="0.1.11">
+  <meta name="sg-secrets:version" content="0.1.12">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -44,6 +44,16 @@
           <a class="sl" href="/sharing/">Sharing</a>
           <a class="sl" href="/environments/">Environments</a>
           <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
           </div>
         </div>
         <div class="ni ni-has">
@@ -102,12 +112,12 @@
     <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Keyring format v1</span></div>
   </header>
 <!-- sg-secrets:nav:end -->
-  <main>
+  <main data-terms>
     <h1>Keyring format, version 1</h1>
     <!-- sg-secrets:status:start ids="app.keyring-v1,app.recovery-code,app.concurrency,app.entries" -->
   <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.keyring-v1" title="the claim and its evidence, in the navigator">proposed</a> Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.recovery-code" title="the claim and its evidence, in the navigator">proposed</a> Recovery code: 26 characters base32, 128 bits, shown once · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.concurrency" title="the claim and its evidence, in the navigator">proposed</a> Optimistic concurrency on keyring writes with a three-way merge · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.entries" title="the claim and its evidence, in the navigator">proposed</a> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
 <!-- sg-secrets:status:end -->
-    <p class="sg-lead">The keyring is one encrypted file in the user's own prefix of a Cloud Storage bucket. Google stores it and cannot read it. This page is the file format, published as a specification so that a reader can check the code against it and so that another implementation could open the same file. It is version 1 and it is proposed: the known-answer fixtures in <code>tests/fixtures/keyring-v1/</code> and the crypto probe page will make it checkable when step 4 ships.</p>
+    <p class="sg-lead">The keyring is one encrypted file in the user's own prefix of a <a class="sg-term" href="/learn/gcp/#bucket" title="The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.">Cloud Storage</a> bucket. Google stores it and cannot read it. This page is the file format, published as a specification so that a reader can check the code against it and so that another implementation could open the same file. It is version 1 and it is proposed: the known-answer fixtures in <code>tests/fixtures/keyring-v1/</code> and the crypto probe page will make it checkable when step 4 ships.</p>
 
     <h2>Objects in the bucket</h2>
     <pre>
@@ -117,7 +127,7 @@ directory/{uid}.pub.json          the user's public-key bundle, signed (phase 1 
 inbox/{uid}/{shareId}.json        keys encrypted to this user (phase 2)
 </pre>
 
-    <h2>Key hierarchy</h2>
+    <h2 id="key-hierarchy">Key hierarchy</h2>
     <pre>
 passkey PRF output (32 bytes, from the authenticator, never stored)
   └─ HKDF-SHA256(ikm = prf, salt = keyring.prfSalt, info = "sgit-secrets/v1/wrap/&lt;credentialId&gt;")  →  WK_passkey   (AES-256-GCM key)
@@ -130,8 +140,8 @@ KEK (32 random bytes)             wrapped once per unlock method, under a WK_*
 
 body (AES-256-GCM under the KEK)  { keys, entries[] }
 </pre>
-    <p><strong>The PRF salt.</strong> <code>keyring.prfSalt</code> is 32 random bytes, fixed for the keyring's life, passed to every passkey as <code>prf.eval.first</code>. One salt serves all passkeys; the per-credential HKDF <code>info</code> keeps the wrapping keys apart. The authenticator's PRF is already per-credential, so the info string is belt and braces.</p>
-    <p><strong>The recovery code and why it is long.</strong> HKDF alone is fast, so an attacker who holds the keyring could brute-force a weak code. A code of 128 bits of entropy makes that irrelevant, which is why it is long and machine-generated and never chosen by the user. The design deliberately does not add PBKDF2 "for safety": it would only slow a legitimate recovery.</p>
+    <p><strong>The <a class="sg-term" href="/learn/passkeys/#prf" title="The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.">PRF</a> salt.</strong> <code>keyring.prfSalt</code> is 32 random bytes, fixed for the keyring's life, passed to every <a class="sg-term" href="/learn/passkeys/#passkey" title="A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.">passkey</a> as <code>prf.eval.first</code>. One salt serves all passkeys; the per-credential <a class="sg-term" href="/learn/keys/#hkdf" title="The standard key-derivation function the browser provides; turns 32 PRF bytes (or the recovery code) plus a salt and a label into a wrapping key, deterministically.">HKDF</a> <code>info</code> keeps the wrapping keys apart. The <a class="sg-term" href="/learn/passkeys/#authenticator" title="Whatever holds the passkey&#x27;s private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.">authenticator</a>'s PRF is already per-credential, so the info string is belt and braces.</p>
+    <p><strong>The <a class="sg-term" href="/learn/keys/#recovery-code" title="26 characters of base32, 128 random bits, shown once at first run: the one unlock method that lives in your head or on paper, and the only way back in when every passkey is gone.">recovery code</a> and why it is long.</strong> HKDF alone is fast, so an attacker who holds the keyring could brute-force a weak code. A code of 128 bits of entropy makes that irrelevant, which is why it is long and machine-generated and never chosen by the user. The design deliberately does not add PBKDF2 "for safety": it would only slow a legitimate recovery.</p>
 
     <h2>keyring.json</h2>
     <pre>
@@ -148,7 +158,7 @@ body (AES-256-GCM under the KEK)  { keys, entries[] }
 }
 </pre>
     <ul>
-      <li><code>wraps[].ct</code> is AES-256-GCM of the 32-byte KEK under the wrap's WK, with additional authenticated data <code>keyringId|wrap.id</code>.</li>
+      <li><code>wraps[].ct</code> is <a class="sg-term" href="/learn/keys/#aes-gcm" title="The authenticated cipher the browser provides; every wrap and the body use it, so a wrong key or a tampered byte fails loudly instead of decrypting to garbage.">AES-256-GCM</a> of the 32-byte <a class="sg-term" href="/learn/keys/#kek" title="The keyring&#x27;s one real key: 32 random bytes that encrypt the body, themselves stored only wrapped, once per unlock method.">KEK</a> under the wrap's <a class="sg-term" href="/learn/keys/#wrapping-key" title="An AES key derived from one unlock method (a passkey&#x27;s PRF output, or the recovery code) whose only job is to encrypt the KEK; a different one per passkey.">WK</a>, with additional authenticated data <code>keyringId|wrap.id</code>.</li>
       <li><code>body.ct</code> is AES-256-GCM of the UTF-8 JSON body under the KEK, with additional authenticated data <code>keyringId|rev</code>, so a body cannot be transplanted between keyrings or revisions: a stale body fails to decrypt rather than silently winning.</li>
       <li>Every <code>iv</code> is 12 random bytes, fresh per encryption.</li>
     </ul>
@@ -174,13 +184,13 @@ body (AES-256-GCM under the KEK)  { keys, entries[] }
     <p>Entries are small: a soft limit of 16 KB each and 1 MB for the keyring. A <code>document</code> kind is <strong>absent</strong>: documents will be a pointer to an sgit vault plus that vault's key, never bytes in the keyring.</p>
 
     <h2>Concurrency</h2>
-    <p>Writes carry a GCS precondition, <code>x-goog-if-generation-match</code>, against the generation read at unlock. On a mismatch the page re-fetches, re-unlocks with the KEK already in memory (no new gesture), merges entries three ways by <code>id</code> and <code>updatedAt</code>, bumps <code>rev</code>, and retries once; after that it shows a conflict page rather than guessing.</p>
+    <p>Writes carry a GCS precondition, <code>x-goog-if-generation-match</code>, against the generation read at unlock. On a mismatch the page re-fetches, re-unlocks with the KEK already in memory (no new <a class="sg-term" href="/learn/passkeys/#gesture" title="The touch, face, PIN or tap your authenticator asks for before it computes anything; one gesture per unlock, and nothing happens without it.">gesture</a>), merges entries three ways by <code>id</code> and <code>updatedAt</code>, bumps <code>rev</code>, and retries once; after that it shows a conflict page rather than guessing.</p>
 
-    <h2>Passkey parameters</h2>
+    <h2 id="passkey-parameters">Passkey parameters</h2>
     <table>
       <thead><tr><th>Call</th><th>Parameters</th></tr></thead>
       <tbody>
-        <tr><td><code>create</code></td><td><code>rp: { id: 'secrets.sgit.ai', name: 'secrets.sgit.ai' }</code>; <code>user.id</code> is 32 random bytes stored in <code>meta.json</code>, not the Firebase uid; <code>pubKeyCredParams</code> ES256 then RS256; <code>authenticatorSelection: { residentKey: 'required', userVerification: 'required' }</code>; <code>extensions: { prf: {} }</code>. If <code>prf.enabled</code> comes back false, the page says this authenticator cannot unlock and offers the recovery code or another authenticator.</td></tr>
+        <tr><td><code>create</code></td><td><code>rp: { id: 'secrets.sgit.ai', name: 'secrets.sgit.ai' }</code>; <code>user.id</code> is 32 random bytes stored in <code>meta.json</code>, not the <a class="sg-term" href="/learn/gcp/#uid" title="The login&#x27;s stable id for a user; it names the user&#x27;s prefix in the bucket and appears in the rules, and it is not a secret.">Firebase uid</a>; <code>pubKeyCredParams</code> ES256 then RS256; <code>authenticatorSelection: { residentKey: 'required', userVerification: 'required' }</code>; <code>extensions: { prf: {} }</code>. If <code>prf.enabled</code> comes back false, the page says this authenticator cannot unlock and offers the recovery code or another authenticator.</td></tr>
         <tr><td><code>get</code></td><td><code>rpId</code>; <code>allowCredentials</code> from <code>meta.json</code>; <code>userVerification: 'required'</code>; <code>extensions: { prf: { eval: { first: prfSalt } } }</code>; read <code>getClientExtensionResults().prf.results.first</code>.</td></tr>
       </tbody>
     </table>
@@ -192,7 +202,7 @@ body (AES-256-GCM under the KEK)  { keys, entries[] }
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/keyring/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/keyring/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

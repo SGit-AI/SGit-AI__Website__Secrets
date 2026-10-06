@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/security/">
   <meta property="og:title" content="Security — secrets.sgit.ai">
   <meta property="og:description" content="The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.">
-  <meta name="sg-secrets:version" content="0.1.11">
+  <meta name="sg-secrets:version" content="0.1.12">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -44,6 +44,16 @@
           <a class="sl" href="/sharing/">Sharing</a>
           <a class="sl" href="/environments/">Environments</a>
           <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
           </div>
         </div>
         <div class="ni ni-has">
@@ -102,27 +112,27 @@
     <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Security</span></div>
   </header>
 <!-- sg-secrets:nav:end -->
-  <main>
+  <main data-terms>
     <h1>Security</h1>
     <!-- sg-secrets:status:start ids="site.repo-protections,tests.acceptance,app.prf-unlock" -->
   <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.site.repo-protections" title="the claim and its evidence, in the navigator">proposed</a> Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.tests.acceptance" title="the claim and its evidence, in the navigator">proposed</a> Acceptance: an Owner of the dev project is handed a uid and asked to produce one plaintext field · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.prf-unlock" title="the claim and its evidence, in the navigator">proposed</a> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai</p>
 <!-- sg-secrets:status:end -->
-    <p class="sg-lead">This page says what the design withholds from whom, and then says plainly what it cannot withhold. It describes a design. The acceptance test that will check it, an Owner of the GCP project being handed a uid and asked to produce one plaintext field, is listed as proposed above and its write-up will be published whatever the result.</p>
+    <p class="sg-lead">This page says what the design withholds from whom, and then says plainly what it cannot withhold. It describes a design. The acceptance test that will check it, an Owner of the <a class="sg-term" href="/learn/gcp/#gcp" title="The Google Cloud project that holds the login and the bucket for one environment; it sees who signed in and stores ciphertext, and can open none of it.">GCP project</a> being handed a uid and asked to produce one plaintext field, is listed as proposed above and its write-up will be published whatever the result.</p>
 
     <h2>What a compromised party gets</h2>
     <table>
       <thead><tr><th>Party compromised</th><th>Gets</th><th>Does not get</th></tr></thead>
       <tbody>
-        <tr><td>GCP project, or the Identity Platform admin</td><td>User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone</td><td>Any plaintext. The PRF output is bound to the origin and to the user's authenticator; logging in as the user fetches ciphertext and nothing to open it with</td></tr>
+        <tr><td>GCP project, or the <a class="sg-term" href="/learn/gcp/#identity-platform" title="Google&#x27;s login service, used through the vendored Firebase Auth SDK; the login decides which bucket paths you may touch and nothing else.">Identity Platform</a> admin</td><td>User emails, login metadata, ciphertext, the ability to delete or roll back, the ability to log in as anyone</td><td>Any plaintext. The <a class="sg-term" href="/learn/passkeys/#prf" title="The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.">PRF</a> output is bound to the origin and to the user's <a class="sg-term" href="/learn/passkeys/#authenticator" title="Whatever holds the passkey&#x27;s private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.">authenticator</a>; logging in as the user fetches ciphertext and nothing to open it with</td></tr>
         <tr><td>Bucket reader</td><td>Ciphertext, object sizes and times</td><td>Plaintext</td></tr>
-        <tr><td>Terraform pipeline</td><td>Can change the rules, delete the bucket</td><td>Plaintext</td></tr>
+        <tr><td><a class="sg-term" href="/learn/gcp/#terraform" title="The infrastructure description in infra/terraform/ that creates each environment&#x27;s project, login, bucket and rules, applied by GitHub Actions; it can delete and reconfigure, and cannot read.">Terraform</a> pipeline</td><td>Can change the rules, delete the <a class="sg-term" href="/learn/gcp/#bucket" title="The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.">bucket</a></td><td>Plaintext</td></tr>
         <tr><td>Public-key directory tamperer (phase 2)</td><td>Future shares, unless fingerprints or signatures are checked</td><td>Existing keys</td></tr>
         <tr><td><strong>This repository, or the DNS for sgit.ai</strong></td><td><strong>Everything, for the users who load the malicious page while it is served</strong></td><td>Nothing is withheld</td></tr>
       </tbody>
     </table>
 
     <h2>The code is the boundary</h2>
-    <p>Client-side cryptography is exactly as trustworthy as the code delivered to the browser. If this repository, the GitHub organisation that owns it, or the DNS zone for <code>sgit.ai</code> is compromised, the attacker can serve a page that asks for your passkey gesture and sends the plaintext wherever they like. No amount of cloud hardening changes that, and the design does not pretend otherwise.</p>
+    <p>Client-side cryptography is exactly as trustworthy as the code delivered to the browser. If this repository, the GitHub organisation that owns it, or the DNS zone for <code>sgit.ai</code> is compromised, the attacker can serve a page that asks for your <a class="sg-term" href="/learn/passkeys/#passkey" title="A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.">passkey</a> gesture and sends the plaintext wherever they like. No amount of cloud hardening changes that, and the design does not pretend otherwise.</p>
     <p>What it does instead is keep the site on a host that is separate from the GCP project, so that a cloud compromise does not reach the code, and put every guard it can on the repository:</p>
     <table>
       <thead><tr><th>Guard</th><th>What it stops</th><th>In place?</th></tr></thead>
@@ -139,34 +149,35 @@
     </table>
     <p>Each "unconfirmed" row flips to a dated "yes" when the person who can check it has. The repository's own copy of these settings is <a href="/docs/ops/branch-protection.html">docs/ops/branch-protection.md</a>.</p>
 
-    <h2>The RP ID is secrets.sgit.ai, never sgit.ai</h2>
-    <p>A WebAuthn passkey is scoped to a relying-party identifier, and the PRF secret it returns is derived per credential and per RP ID. The RP ID for the unlock passkey is exactly <code>secrets.sgit.ai</code> (and <code>localhost</code> when testing locally).</p>
-    <p>It is never the apex <code>sgit.ai</code>, and this is the single most important decision in the design. A passkey scoped to the apex can be asserted by any page on any subdomain: there are more than twenty-seven sibling sites under <code>sgit.ai</code>, each in its own repository, and a compromise of any one of them would then be able to ask for the gesture that unlocks every user's secrets here. Scoping to this host means a sibling's compromise is a sibling's problem.</p>
+    <h2 id="rp-id">The RP ID is secrets.sgit.ai, never sgit.ai</h2>
+    <p>A <a class="sg-term" href="/learn/passkeys/#webauthn" title="The browser API (navigator.credentials) that creates a passkey and later asks your authenticator to prove it still has it; the only API this site uses to talk to the authenticator.">WebAuthn</a> passkey is scoped to a <a class="sg-term" href="/learn/passkeys/#rp-id" title="The host a passkey is scoped to; here exactly secrets.sgit.ai (localhost when testing), never sgit.ai, so no sibling site can ask for the gesture.">relying-party identifier</a>, and the PRF secret it returns is derived per credential and per RP ID. The RP ID for the unlock passkey is exactly <code>secrets.sgit.ai</code> (and <code>localhost</code> when testing locally).</p>
+    <p>It is never the apex <code>sgit.ai</code>, and this is the single most important decision in the design. A passkey scoped to the apex can be asserted by any page on any subdomain: there are more than twenty-seven sibling sites under <code>sgit.ai</code>, each in its own repository, and a compromise of any one of them would then be able to ask for the <a class="sg-term" href="/learn/passkeys/#gesture" title="The touch, face, PIN or tap your authenticator asks for before it computes anything; one gesture per unlock, and nothing happens without it.">gesture</a> that unlocks every user's secrets here. Scoping to this host means a sibling's compromise is a sibling's problem.</p>
     <p>Consumers such as riskmandate.ai will use their own passkeys, or WebAuthn Related Origin Requests, later. Neither is in the MVP.</p>
 
-    <h2>What the passkey is, and is not, used for</h2>
-    <p>The passkey is a plain WebAuthn credential registered by this site's own page. It is <strong>not</strong> an Identity Platform passkey and it is not a login. The page never verifies the assertion signature, because there is no server to verify it for: the proof that matters is that the PRF output unwraps the keyring key, and a wrong authenticator produces bytes that unwrap nothing. Login is a separate step, through Identity Platform, and decides only which bucket paths the browser may read and write.</p>
-    <p>The credential's id and public key are stored in <code>meta.json</code> so the page can list devices and build <code>allowCredentials</code>. The WebAuthn user handle is 32 random bytes, not the Firebase uid.</p>
+    <h2 id="passkey-use">What the passkey is, and is not, used for</h2>
+    <p>The passkey is a plain WebAuthn credential registered by this site's own page. It is <strong>not</strong> an Identity Platform passkey and it is not a login. The page never verifies the assertion signature, because there is no server to verify it for: the proof that matters is that the PRF output unwraps the <a class="sg-term" href="/learn/keys/#kek" title="The keyring&#x27;s one real key: 32 random bytes that encrypt the body, themselves stored only wrapped, once per unlock method.">keyring key</a>, and a wrong authenticator produces bytes that unwrap nothing. Login is a separate step, through Identity Platform, and decides only which bucket paths the browser may read and write.</p>
+    <p>The credential's id and public key are stored in <code>meta.json</code> so the page can list devices and build <code>allowCredentials</code>. The WebAuthn <a class="sg-term" href="/learn/passkeys/#user-handle" title="The 32 random bytes a passkey is registered under; not your email and not the Firebase uid, so the authenticator learns nothing about the account.">user handle</a> is 32 random bytes, not the <a class="sg-term" href="/learn/gcp/#uid" title="The login&#x27;s stable id for a user; it names the user&#x27;s prefix in the bucket and appears in the rules, and it is not a secret.">Firebase uid</a>.</p>
+    <p>The whole of this, from four sides and with the calls drawn, is on <a href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>; the keys the bytes become are on <a href="/learn/keys/">Keys</a>; and the <a href="/learn/passkeys/#lab">passkey lab</a> lets you run the two calls in this browser now.</p>
 
     <h2>What we ask you to trust</h2>
     <ul>
       <li><strong>Your authenticator.</strong> Google Password Manager, iCloud Keychain or a hardware key holds the PRF secret and syncs it through your personal account, which no administrator of this service can reach.</li>
-      <li><strong>Your browser's WebCrypto.</strong> AES-256-GCM, HKDF-SHA256, RSA-OAEP and ECDSA come from the browser; the site vendors no cryptographic library.</li>
+      <li><strong>Your browser's WebCrypto.</strong> <a class="sg-term" href="/learn/keys/#aes-gcm" title="The authenticated cipher the browser provides; every wrap and the body use it, so a wrong key or a tampered byte fails loudly instead of decrypting to garbage.">AES-256-GCM</a>, <a class="sg-term" href="/learn/keys/#hkdf" title="The standard key-derivation function the browser provides; turns 32 PRF bytes (or the recovery code) plus a salt and a label into a wrapping key, deterministically.">HKDF-SHA256</a>, RSA-OAEP and ECDSA come from the browser; the site vendors no cryptographic library.</li>
       <li><strong>This repository, as served.</strong> Everything above this heading is about keeping that trust narrow and visible. You can read every line that will run, and the gate publishes what it checks.</li>
-      <li><strong>Google, for availability and metadata only.</strong> Google can see who signed in and when, can delete or roll back ciphertext, and can refuse service. Bucket versioning and soft-delete retention are the design's answer to deletion; export of the encrypted keyring from the account page is yours.</li>
+      <li><strong>Google, for availability and metadata only.</strong> Google can see who signed in and when, can delete or roll back ciphertext, and can refuse service. Bucket versioning and soft-delete retention are the design's answer to deletion; export of the encrypted <a class="sg-term" href="/keyring/" title="The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.">keyring</a> from the account page is yours.</li>
     </ul>
 
     <h2>What this page does not claim</h2>
     <ul>
       <li>That the system exists. See <a href="/shipped/">/shipped/</a>.</li>
-      <li>That the Security Rules are correct. The rules text is in the repository and hashed; it is deployed to nothing yet, and its syntax is marked "verify first" in the brief.</li>
+      <li>That the <a class="sg-term" href="/learn/gcp/#rules" title="The rules file Google enforces in front of the bucket: a signed-in user may read and write only their own prefix, with size limits; the whole access control of the MVP.">Security Rules</a> are correct. The rules text is in the repository and hashed; it is deployed to nothing yet, and its syntax is marked "verify first" in the brief.</li>
       <li>That the compatibility of PRF across authenticators is known. The matrix page (proposed) will say which browsers and authenticators returned PRF output, dated.</li>
     </ul>
   </main>
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/security/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/security/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

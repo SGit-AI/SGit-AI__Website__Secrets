@@ -20,7 +20,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/sharing/">
   <meta property="og:title" content="Sharing — secrets.sgit.ai">
   <meta property="og:description" content="The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.">
-  <meta name="sg-secrets:version" content="0.1.11">
+  <meta name="sg-secrets:version" content="0.1.12">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -32,7 +32,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -44,6 +44,16 @@
           <a class="sl here" href="/sharing/" aria-current="page">Sharing</a>
           <a class="sl" href="/environments/">Environments</a>
           <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl" href="/learn/keys/">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
           </div>
         </div>
         <div class="ni ni-has">
@@ -102,12 +112,12 @@
     <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <span aria-current="page">Sharing</span></div>
   </header>
 <!-- sg-secrets:nav:end -->
-  <main>
+  <main data-terms>
     <h1>Sharing</h1>
     <!-- sg-secrets:status:start ids="app.sharing-data-model,app.sharing-ui" -->
   <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.sharing-data-model" title="the claim and its evidence, in the navigator">proposed</a> Key pair per user generated at first run; public bundle written to directory/ · <a class="sg-status sg-status-absent" href="/review/ui/#node=claim.app.sharing-ui" title="the claim and its evidence, in the navigator">absent</a> Sharing an entry with another user through their inbox</p>
 <!-- sg-secrets:status:end -->
-    <p class="sg-lead">Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their passkey, because their PRF secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is <strong>phase 2 and absent from the MVP</strong>; the data model is phase 1, because adding it later would mean rewriting every keyring.</p>
+    <p class="sg-lead">Single-user wrapping works until a secret must be readable by a second person. You cannot wrap it with their <a class="sg-term" href="/learn/passkeys/#passkey" title="A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.">passkey</a>, because their <a class="sg-term" href="/learn/passkeys/#prf" title="The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.">PRF</a> secret never leaves their device, and you cannot send it through the server in plaintext. The answer is a key pair per user. The user interface for sharing is <strong>phase 2 and absent from the MVP</strong>; the data model is phase 1, because adding it later would mean rewriting every <a class="sg-term" href="/keyring/" title="The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.">keyring</a>.</p>
 
     <h2>The scheme</h2>
     <ol>
@@ -124,7 +134,7 @@
       <tbody>
         <tr><td>Revocation</td><td>A removed member already holds the key</td><td>Rotate the key, re-encrypt, re-share to the remaining members</td></tr>
         <tr><td>Directory trust</td><td>A compromised admin could swap a public key and intercept the next share</td><td>Signed bundles, and fingerprints users can compare out of band before a sensitive share</td></tr>
-        <tr><td>Group membership</td><td>Who can open what is real metadata, visible to the bucket</td><td>Membership stored per shared set; updated on add and remove; accepted as metadata exposure</td></tr>
+        <tr><td>Group membership</td><td>Who can open what is real metadata, visible to the <a class="sg-term" href="/learn/gcp/#bucket" title="The Cloud Storage bucket where users/{uid}/keyring.json and meta.json live, versioned, reachable from the browser directly with the login&#x27;s token.">bucket</a></td><td>Membership stored per shared set; updated on add and remove; accepted as metadata exposure</td></tr>
         <tr><td>Kinds kept apart</td><td>A vault key shared by mistake opens a whole vault</td><td>An <code>sgit-vault-key</code> entry refuses to enter a shareable set without a confirmation</td></tr>
       </tbody>
     </table>
@@ -142,7 +152,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.11" title="released 2026-10-06">v0.1.11</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/sharing/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/sharing/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

@@ -1,0 +1,83 @@
+<section class="lab" data-lab>
+  <p class="refused sg-warn" data-refused hidden></p>
+
+  <section class="step" data-step="support">
+    <h3>0 · Can this browser do it?</h3>
+    <table class="kv">
+      <tbody>
+        <tr><th>RP ID this lab will use</th><td data-rp-id>…</td></tr>
+        <tr><th>WebAuthn (<code>PublicKeyCredential</code>)</th><td data-cap="webauthn">…</td></tr>
+        <tr><th>A platform authenticator (face, touch, PIN) is available</th><td data-cap="platform">…</td></tr>
+        <tr><th>The browser says it supports the PRF extension</th><td data-cap="prf">…</td></tr>
+        <tr><th>WebCrypto: HKDF and AES-GCM</th><td data-cap="crypto">…</td></tr>
+      </tbody>
+    </table>
+    <p class="hint">The real test of PRF is step 1: the authenticator answers <code>prf.enabled</code> itself. A browser can support the extension while the authenticator it picks does not.</p>
+  </section>
+
+  <section class="step" data-step="create">
+    <h3>1 · Create a lab passkey (<code>navigator.credentials.create</code>)</h3>
+    <p>Exactly the parameters of the design: resident key required, user verification required, ES256 then RS256, <code>extensions.prf = {}</code>, a fresh 32-byte user handle. Your authenticator will ask for a gesture. Make two, or five: each one is a separate passkey with its own PRF secret.</p>
+    <form class="row" data-create-form>
+      <label>Name for this passkey <input type="text" name="name" value="lab passkey" maxlength="40" autocomplete="off"></label>
+      <button type="submit" class="primary" data-create>Create a lab passkey</button>
+    </form>
+    <div class="result" data-create-result hidden></div>
+  </section>
+
+  <section class="step" data-step="prf">
+    <h3>2 · Ask it for the PRF bytes (<code>navigator.credentials.get</code>)</h3>
+    <p>The lab's salt goes in as <code>prf.eval.first</code>; 32 bytes come out, after a gesture. Ask twice with the same salt and the bytes are the same. Ask with another salt and they differ. Ask another passkey and they differ. The bytes are shown as a fingerprint (the first 16 hex characters of their SHA-256); tick the box to see them whole.</p>
+    <div class="row">
+      <label>Passkey <select data-credential></select></label>
+      <button type="button" class="primary" data-get="same">Same salt</button>
+      <button type="button" data-get="other">Another salt</button>
+      <label class="check"><input type="checkbox" data-reveal> show the bytes, not just the fingerprint</label>
+    </div>
+    <div class="result" data-prf-result hidden></div>
+  </section>
+
+  <section class="step" data-step="keys">
+    <h3>3 · From the bytes to a lab keyring (HKDF, AES-256-GCM)</h3>
+    <p>With the bytes of the passkey picked above: HKDF-SHA256 with the lab salt and the label <code>sgit-secrets/v1/wrap/&lt;credentialId&gt;</code> gives the wrapping key; the first time, the lab also makes a KEK (32 random bytes) and encrypts a one-entry body under it. Each passkey you run this for adds one wrap of the same KEK to the same lab keyring.</p>
+    <div class="row">
+      <button type="button" class="primary" data-build>Derive, wrap, and add to the lab keyring</button>
+      <button type="button" data-forget-memory>Forget the keys in memory</button>
+    </div>
+    <div class="result" data-keys-result hidden></div>
+  </section>
+
+  <section class="step" data-step="unlock">
+    <h3>4 · Unlock it again</h3>
+    <p>One gesture with the passkey picked above: bytes, HKDF, unwrap, decrypt. With the KEK forgotten from memory this is the returning flow exactly; with it still in memory the lab checks that the unwrapped KEK is the same one. A second passkey that has a wrap unlocks the same body.</p>
+    <div class="row">
+      <button type="button" class="primary" data-unlock>Unlock with the picked passkey</button>
+    </div>
+    <div class="result" data-unlock-result hidden></div>
+  </section>
+
+  <section class="step" data-step="where">
+    <h3>What is stored where, right now</h3>
+    <table class="kv">
+      <tbody>
+        <tr><th>Your authenticator</th><td data-where="auth">no lab passkey yet</td></tr>
+        <tr><th>This browser's localStorage (<code data-storage-key></code>)</th><td><pre class="small" data-where="local">{}</pre></td></tr>
+        <tr><th>This page's memory</th><td data-where="memory">nothing</td></tr>
+        <tr><th>Google, the bucket, any network</th><td>nothing, ever: the lab makes no request</td></tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <button type="button" data-forget-local>Forget the lab record in this browser</button>
+    </div>
+    <p class="hint" data-delete-hint>To delete the lab passkeys themselves, open your password manager (Google Password Manager, iCloud Keychain under Passwords, Windows Settings under Passkeys, or your key's own tool) and remove the entries for this site named as above. The lab cannot delete them: no page can.</p>
+  </section>
+
+  <section class="step" data-step="log">
+    <h3>Every call, as it happened</h3>
+    <div class="row">
+      <button type="button" data-copy-log>Copy the log</button>
+      <button type="button" data-clear-log>Clear</button>
+    </div>
+    <ol class="log" data-log></ol>
+  </section>
+</section>

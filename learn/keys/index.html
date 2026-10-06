@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keys: from PRF to plaintext — secrets.sgit.ai</title>
+  <meta name="description" content="Is there a passphrase (no). The PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM and the recovery code: every key in the keyring, where it comes from, where it goes, and what is in memory when, drawn and then run live in the lab.">
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/learn/keys/">
+  <link rel="alternate" type="text/markdown" href="/learn/keys/index.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/learn/keys/">
+  <meta property="og:title" content="Keys: from PRF to plaintext — secrets.sgit.ai">
+  <meta property="og:description" content="Is there a passphrase (no). The PRF salt, HKDF, the wrapping keys, the KEK, AES-256-GCM and the recovery code: every key in the keyring, where it comes from, where it goes, and what is in memory when, drawn and then run live in the lab.">
+  <meta name="sg-secrets:version" content="0.1.12">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl here" href="/learn/">Learn<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/learn/">Explanations, in context</a>
+          <a class="sl" href="/learn/passkeys/">Passkeys, WebAuthn and PRF</a>
+          <a class="sl" href="/learn/passkeys/#lab">The passkey lab: try it here</a>
+          <a class="sl here" href="/learn/keys/" aria-current="page">Keys: from PRF to plaintext</a>
+          <a class="sl" href="/learn/gcp/">GCP, from this site&#x27;s side</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/review/">Review<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/review/">The project as graphs</a>
+          <a class="sl" href="/review/ui/">The navigator</a>
+          <a class="sl" href="/review/ui/#view=claims">Claims and their evidence</a>
+          <a class="sl" href="/review/ui/#view=brief">The brief, as sections</a>
+          <a class="sl" href="/review/README.md">review/README.md, the counts</a>
+          <a class="sl" href="/review/BRIEF-CORRECTIONS.md">Corrections to the review brief</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/learn/">Learn</a> <span class="sep">/</span> <span aria-current="page">Keys: from PRF to plaintext</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main data-terms>
+    <h1>Keys: from the PRF bytes to the plaintext</h1>
+    <!-- sg-secrets:status:start ids="app.keyring-v1,app.recovery-code,app.prf-unlock,site.passkey-lab" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.keyring-v1" title="the claim and its evidence, in the navigator">proposed</a> Keyring v1 format: wraps per unlock method, AES-256-GCM body, known-answer tests · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.recovery-code" title="the claim and its evidence, in the navigator">proposed</a> Recovery code: 26 characters base32, 128 bits, shown once · <a class="sg-status sg-status-proposed" href="/review/ui/#node=claim.app.prf-unlock" title="the claim and its evidence, in the navigator">proposed</a> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <a class="sg-status sg-status-shipped" href="/review/ui/#node=claim.site.passkey-lab" title="the claim and its evidence, in the navigator">shipped v0.1.12</a> The passkey lab on /learn/passkeys/: create lab passkeys in this browser under this host&#x27;s RP ID, ask for PRF bytes, derive the wrapping key, wrap a lab KEK, encrypt a lab body, unlock again with the same or a second passkey, and watch what is stored where; headless in the build against Chromium&#x27;s virtual authenticator with PRF</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">There are five kinds of bytes in the design, and only one of them is random on its own: the KEK. Everything else is either derived from a <a class="sg-term" href="/learn/passkeys/#passkey" title="A WebAuthn credential your authenticator keeps and syncs; here it is the thing that unlocks your keyring, not a login.">passkey</a> or the recovery code, or is a public input. This page walks the chain once, names each link, and says which bytes are secret, which are stored, and which exist only in memory for the length of an unlock. The format of the file they open is the <a href="/keyring/">keyring page</a>; the design is <em>proposed</em>; the lab on the <a href="/learn/passkeys/#lab">passkeys page</a> runs this chain for real on your browser's WebCrypto.</p>
+
+    <h2 id="passphrase">Is there a passphrase?</h2>
+    <p>No. Nothing you type unlocks the <a class="sg-term" href="/keyring/" title="The one encrypted file per user in the bucket: the PRF salt, the wrapped copies of the KEK, and the encrypted body with the entries; version 1 is specified on its own page.">keyring</a>. The two unlock methods are a passkey's <a class="sg-term" href="/learn/passkeys/#prf" title="The WebAuthn extension that makes the authenticator return 32 secret bytes for a given input, the same bytes every time for the same passkey, origin and input; those bytes are what derives the wrapping key.">PRF</a> bytes, which only your <a class="sg-term" href="/learn/passkeys/#authenticator" title="Whatever holds the passkey&#x27;s private key and PRF secret: Google Password Manager, iCloud Keychain, Windows Hello or a hardware key; it never hands the secret out, only results computed with it.">authenticator</a> can produce, and the recovery code, which the page makes and shows you once. There is no master password to choose, forget, reuse or phish, and no password-stretching function to tune, because there is no human-chosen secret to stretch. The nearest thing to a passphrase is the recovery code, and it is long precisely so that it does not need to be treated like one.</p>
+
+    <h2>The chain</h2>
+    <!-- sg-secrets:diagram:start id="key-hierarchy" -->
+  <figure class="sg-diagram" id="diagram-key-hierarchy" data-generated-from="data/diagrams/key-hierarchy.json">
+    <svg viewBox="0 0 898 472" width="898" role="img" aria-labelledby="diagram-key-hierarchy-title">
+      <title id="diagram-key-hierarchy-title">From the PRF bytes, or the recovery code, to the plaintext</title>
+      <defs><marker id="key-hierarchy-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--sg-accent)"/></marker></defs>
+      <rect x="8" y="8" width="270" height="60" rx="6" fill="var(--sg-danger-subtle)" stroke="var(--sg-danger)" stroke-width="1.5"/>
+      <text x="143" y="32" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">PRF output, 32 bytes</text>
+      <text x="143" y="46" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">from the authenticator, per passkey, never</text>
+      <text x="143" y="58" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">stored</text>
+      <rect x="620" y="8" width="270" height="60" rx="6" fill="var(--sg-danger-subtle)" stroke="var(--sg-danger)" stroke-width="1.5"/>
+      <text x="755" y="32" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">Recovery code, 128 bits</text>
+      <text x="755" y="46" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">26 base32 characters, shown once, kept by</text>
+      <text x="755" y="58" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">you</text>
+      <rect x="314" y="8" width="270" height="60" rx="6" fill="var(--sg-accent-subtle)" stroke="var(--sg-accent)" stroke-width="1.5"/>
+      <text x="449" y="32" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">prfSalt, 32 bytes</text>
+      <text x="449" y="46" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">in keyring.json, in the clear; the input,</text>
+      <text x="449" y="58" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">not a secret</text>
+      <rect x="8" y="140" width="270" height="60" rx="6" fill="var(--sg-bg-surface)" stroke="var(--sg-border)" stroke-width="1.5"/>
+      <text x="143" y="164" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">WK_passkey (AES-256-GCM)</text>
+      <text x="143" y="178" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">one per passkey; in memory for the unlock</text>
+      <rect x="620" y="140" width="270" height="60" rx="6" fill="var(--sg-bg-surface)" stroke="var(--sg-border)" stroke-width="1.5"/>
+      <text x="755" y="164" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">WK_recovery (AES-256-GCM)</text>
+      <text x="755" y="178" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">in memory, only during a recovery</text>
+      <rect x="314" y="272" width="270" height="60" rx="6" fill="var(--sg-danger-subtle)" stroke="var(--sg-danger)" stroke-width="1.5"/>
+      <text x="449" y="296" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">KEK, 32 random bytes</text>
+      <text x="449" y="310" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">stored only as wraps[].ct, once per unlock</text>
+      <text x="449" y="322" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">method</text>
+      <rect x="314" y="404" width="270" height="60" rx="6" fill="var(--sg-danger-subtle)" stroke="var(--sg-danger)" stroke-width="1.5"/>
+      <text x="449" y="428" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sg-text-heading)">The body: entries and the key pair</text>
+      <text x="449" y="442" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">stored only as body.ct; plaintext in memory,</text>
+      <text x="449" y="454" text-anchor="middle" font-size="10" fill="var(--sg-text-muted)">briefly</text>
+      <path d="M143,68 L143,133" fill="none" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#key-hierarchy-arrow)"/>
+      <text x="151" y="98" text-anchor="start" font-size="10.5" fill="var(--sg-text)">HKDF-SHA256(ikm = prf, salt = prfSalt,</text>
+      <text x="151" y="110" text-anchor="start" font-size="10.5" fill="var(--sg-text)">info = sgit-</text>
+      <text x="151" y="122" text-anchor="start" font-size="10.5" fill="var(--sg-text)">secrets/v1/wrap/&lt;credentialId&gt;)</text>
+      <path d="M755,68 L755,133" fill="none" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#key-hierarchy-arrow)"/>
+      <text x="747" y="98" text-anchor="end" font-size="10.5" fill="var(--sg-text)">HKDF-SHA256(ikm = code bytes, salt =</text>
+      <text x="747" y="110" text-anchor="end" font-size="10.5" fill="var(--sg-text)">prfSalt, info = sgit-</text>
+      <text x="747" y="122" text-anchor="end" font-size="10.5" fill="var(--sg-text)">secrets/v1/wrap/recovery)</text>
+      <path d="M143,200 L143,232 L449,232 L449,265" fill="none" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#key-hierarchy-arrow)"/>
+      <text x="296" y="226" text-anchor="middle" font-size="10.5" fill="var(--sg-text)">AES-256-GCM unwrap of</text>
+      <text x="296" y="238" text-anchor="middle" font-size="10.5" fill="var(--sg-text)">wraps[pk-&lt;id&gt;].ct, aad =</text>
+      <text x="296" y="250" text-anchor="middle" font-size="10.5" fill="var(--sg-text)">keyringId|wrap.id</text>
+      <path d="M755,200 L755,232 L449,232 L449,265" fill="none" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#key-hierarchy-arrow)"/>
+      <text x="602" y="226" text-anchor="middle" font-size="10.5" fill="var(--sg-text)">AES-256-GCM unwrap of</text>
+      <text x="602" y="238" text-anchor="middle" font-size="10.5" fill="var(--sg-text)">wraps[recovery-1].ct</text>
+      <path d="M449,332 L449,397" fill="none" stroke="var(--sg-accent)" stroke-width="1.5" marker-end="url(#key-hierarchy-arrow)"/>
+      <text x="457" y="362" text-anchor="start" font-size="10.5" fill="var(--sg-text)">AES-256-GCM decrypt of body.ct, aad =</text>
+      <text x="457" y="374" text-anchor="start" font-size="10.5" fill="var(--sg-text)">keyringId|rev</text>
+    </svg>
+    <details class="sg-diagram-text"><summary>The same diagram as text</summary><pre>┌─ prfSalt, 32 bytes ─ (public) ─┐
+│  in keyring.json, in the clear; the input, not a secret
+└───────────────────────────────┘
+┌─ PRF output, 32 bytes ─ (secret) ─┐
+│  from the authenticator, per passkey, never stored
+└──────────────────────────────────┘
+     │  HKDF-SHA256(ikm = prf, salt = prfSalt, info = sgit-secrets/v1/wrap/&lt;credentialId&gt;)
+     ▼  → wkp
+┌─ Recovery code, 128 bits ─ (secret) ─┐
+│  26 base32 characters, shown once, kept by you
+└─────────────────────────────────────┘
+     │  HKDF-SHA256(ikm = code bytes, salt = prfSalt, info = sgit-secrets/v1/wrap/recovery)
+     ▼  → wkr
+
+┌─ WK_passkey (AES-256-GCM) ─ (derived) ─┐
+│  one per passkey; in memory for the unlock
+└───────────────────────────────────────┘
+     │  AES-256-GCM unwrap of wraps[pk-&lt;id&gt;].ct, aad = keyringId|wrap.id
+     ▼  → kek
+┌─ WK_recovery (AES-256-GCM) ─ (derived) ─┐
+│  in memory, only during a recovery
+└────────────────────────────────────────┘
+     │  AES-256-GCM unwrap of wraps[recovery-1].ct
+     ▼  → kek
+
+┌─ KEK, 32 random bytes ─ (secret) ─┐
+│  stored only as wraps[].ct, once per unlock method
+└──────────────────────────────────┘
+     │  AES-256-GCM decrypt of body.ct, aad = keyringId|rev
+     ▼  → body
+
+┌─ The body: entries and the key pair ─ (secret) ─┐
+│  stored only as body.ct; plaintext in memory, briefly
+└────────────────────────────────────────────────┘</pre></details>
+    <figcaption>Section 8.2 of the brief as a picture. Two roots, one KEK: each unlock method derives its own wrapping key and the keyring holds one wrapped copy of the KEK per method, so adding a passkey adds a wrap and never re-encrypts the body. Red is secret and never stored; blue is public and stored in the clear; grey is derived in memory and thrown away.</figcaption>
+  </figure>
+<!-- sg-secrets:diagram:end -->
+
+    <dl>
+      <dt id="prf-salt">The PRF salt</dt>
+      <dd><code>keyring.prfSalt</code>: 32 random bytes, made once at first run, fixed for the keyring's life, stored in <code>keyring.json</code> in the clear. It is the input every passkey is given as <code>prf.eval.first</code>. One salt serves every passkey, because the authenticator's PRF is already different per passkey; the per-credential label in the next step keeps the wrapping keys apart as well, belt and braces. It is public: holding the salt gives nobody anything without the authenticator.</dd>
+      <dt id="hkdf">HKDF-SHA256</dt>
+      <dd>The browser's standard key-derivation function, <code>crypto.subtle.deriveKey</code> with <code>HKDF</code>. Input keying material: the 32 PRF bytes (or the recovery code's bytes). Salt: the PRF salt. Info, the label: <code>sgit-secrets/v1/wrap/&lt;credentialId&gt;</code> for a passkey and <code>sgit-secrets/v1/wrap/recovery</code> for the code, so the same bytes could never produce the same key for two different purposes. Output: one AES-256-GCM key. Deterministic: same inputs, same key, every time, which is what makes an unlock repeatable without storing anything.</dd>
+      <dt id="wrapping-key">The wrapping keys</dt>
+      <dd><code>WK_passkey</code> for each passkey and <code>WK_recovery</code> for the code. Each one has exactly one job: to encrypt (wrap) and decrypt (unwrap) the KEK. A wrapping key is never stored and never used on the body. It exists in memory for the moment of an unlock and is dropped.</dd>
+      <dt id="kek">The KEK</dt>
+      <dd>The keyring's one real key: 32 random bytes from <code>crypto.getRandomValues</code>, made at first run. It encrypts the body. It is stored only wrapped, once per unlock method, in <code>keyring.wraps[]</code>; adding a passkey adds a wrap, removing one removes a wrap, and the KEK itself never changes, so the body is never re-encrypted for a change of devices. During a session the KEK stays in memory so that a conflicting write can be merged and retried without a new <a class="sg-term" href="/learn/passkeys/#gesture" title="The touch, face, PIN or tap your authenticator asks for before it computes anything; one gesture per unlock, and nothing happens without it.">gesture</a>.</dd>
+      <dt id="aes-gcm">AES-256-GCM</dt>
+      <dd>The authenticated cipher the browser provides. Every wrap and the body use it with a fresh 12-byte IV per encryption and additional authenticated data that binds the ciphertext to its place: <code>keyringId|wrap.id</code> for a wrap, <code>keyringId|rev</code> for the body. Authenticated means a wrong key or a changed byte fails to decrypt, loudly, rather than producing garbage; and the AAD means a wrap or a body cannot be transplanted into another keyring or an older revision and silently win.</dd>
+      <dt id="recovery-code">The recovery code</dt>
+      <dd>26 characters of base32, 128 random bits, machine-made at first run and shown once behind "I have written it down". It is the one unlock method that lives outside any authenticator: on paper, in another manager, in your head if you are that kind of person. HKDF alone is fast, so an attacker who holds the keyring could try codes quickly; 128 bits of entropy makes that irrelevant, which is why the code is long and never chosen by you. The design deliberately adds no PBKDF2 or Argon2 "for safety": it would only slow a legitimate recovery, and it cannot help a short code.</dd>
+    </dl>
+
+    <h2 id="many">Many passkeys, one KEK</h2>
+    <p>Two passkeys given the same salt return different PRF bytes, so they derive different wrapping keys, so the keyring holds two wraps of the same KEK. Either unlocks. The recovery code is a third wrap. Nothing in the body knows or cares how many wraps exist. This is also why a passkey can be removed without a gesture from any other device: deleting a wrap is an edit to the keyring, written with the KEK already in memory.</p>
+
+    <h2 id="memory">What is in memory, when</h2>
+    <table>
+      <thead><tr><th>Moment</th><th>In this page's memory</th><th>Written anywhere</th></tr></thead>
+      <tbody>
+        <tr><td>After sign-in, before the gesture</td><td>The ID token; the fetched <code>keyring.json</code> and <code>meta.json</code> (ciphertext and public values)</td><td>Nothing new</td></tr>
+        <tr><td>After the gesture</td><td>The 32 PRF bytes, briefly; the wrapping key, briefly; the KEK; the plaintext body</td><td>Nothing</td></tr>
+        <tr><td>While you work</td><td>The KEK and the body; the recovery code only in the seconds it is shown at first run</td><td>Ciphertext, on each save, with a generation precondition</td></tr>
+        <tr><td>On sign-out, an environment change, five hidden minutes, or unload</td><td>Nothing: the page overwrites what it can and drops the rest</td><td>Nothing</td></tr>
+      </tbody>
+    </table>
+    <p>The gate reads every storage key the code may write (<code>app/config/storage-keys.js</code>, check 8) and the leak tripwire reads every file on every release (check 4). Neither can see memory; the <code>leak-check</code> probe page (proposed) will scan this origin's storage from inside the browser for anything shaped like key material and expect none.</p>
+
+    <h2 id="worked">A worked example, live</h2>
+    <p>The <a href="/learn/passkeys/#lab">passkey lab</a> runs exactly this chain with a lab salt: it asks a lab passkey for its bytes, derives the wrapping key with the <a class="sg-term" href="/learn/passkeys/#credential" title="The public identifier of one passkey, stored in meta.json so the page can list your devices and ask the authenticator for that passkey by name.">credential id</a> in the label, makes a lab KEK, wraps it, encrypts a one-entry body, and then unlocks it again, with the same passkey or a second one, showing the fingerprint of every intermediate value and the JSON of the lab keyring as it grows. The values are real WebCrypto outputs; the salt is the lab's own, so they open nothing but the lab.</p>
+
+    <h2>Read next</h2>
+    <p><a href="/keyring/">The keyring format</a>: the file, field by field. <a href="/learn/passkeys/">Passkeys</a>: where the PRF bytes come from. <a href="/learn/gcp/">GCP</a>: where the ciphertext lives.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.12" title="released 2026-10-06">v0.1.12</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/learn/keys/index.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>
