@@ -1,0 +1,3 @@
+/* proto-base has no look of its own; the frame and the column bring theirs. No colour here. */
+:host    { display: none; }
+[hidden] { display: none !important; }

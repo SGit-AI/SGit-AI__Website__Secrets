@@ -2,13 +2,13 @@
 
 > What the app, admin and test screens are meant to look like, before they exist: ten mockups, each as a static picture in a mini browser frame and as ASCII art, with the intent nodes it realises. Every screen is proposed.
 
-*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers · proposed Devices page: add and remove passkeys, regenerate the recovery code · proposed Setup checklist: every per-project resource as a row, with Fix where fixable client-side · proposed Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers · proposed Devices page: add and remove passkeys, regenerate the recovery code · proposed Setup checklist: every per-project resource as a row, with Fix where fixable client-side · proposed Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix
 
-The screens the brief describes, drawn before they are built, the way a Figma board would be: a static picture of each in a mini browser frame, the same picture as ASCII art so an agent can read it, and the intent nodes in [the review graph](/review/ui/) that each screen realises. Nothing here works; every value is invented; every screen is proposed.
+The screens the brief describes, built as a prototype before the app exists: each one works on invented data this browser keeps, in a mini browser frame, in one of three UX variants to compare; the same screen as ASCII art so an agent can read it; and the intent nodes in [the review graph](/review/ui/) that each screen realises. Beside every frame a column says what the screen is, draws the paths to it and from it, and charts what you have done. Every value is invented; every screen is proposed. [**Open the whole prototype**](/mockups/prototype.md).
 
 The order is the order a user meets them: sign in, first run, unlock, the vault, an entry, devices, environment, account; then the operator's checklist and the compatibility matrix. A mockup changes when the brief or a correction changes it, and is replaced by the real page's screenshot when the page ships.
 
@@ -43,9 +43,17 @@ section 6.3
 secrets.sgit.ai/tests/matrix.html
 section 6.4
 
+## The three UX variants, for A/B testing
+
+- **A · Desk.** The password manager's shape the brief draws: header, sidebar, list, forms. Mouse first.
+- **B · Focus.** One card per screen, big targets, a bottom bar of tabs. Phone first.
+- **C · Command.** A command bar, a dense table, an inspector. Keyboard first.
+
+Pick one in any frame's bar; it holds across every mockup. The column's vote (works, does not work) is kept with the prototype's data and filed into your reader's log, so it reaches the build agent with the rest of your feedback.
+
 ## What a mockup is here
 
-- **Static.** HTML and CSS only, under the site's Content-Security-Policy: no script, no form that submits, no inline style.
+- **Interactive, and honest about it.** Two web components (`proto-app`, `proto-column`) on a store in `localStorage`; no form submits anywhere, no inline style, no script from any other origin. The prototype routes by the app's own rules (no login, sign in; no keyring, first run; locked, unlock) and stores nothing the real app would.
 - **Honest.** The header on every screen carries the environment badge and the lock state the brief requires; the values are obviously invented and no real identifier appears.
 - **Traceable.** Each screen names the brief section it draws and links the stories, rules and flows it realises in the review navigator, so a reader can check the picture against the intent.
 

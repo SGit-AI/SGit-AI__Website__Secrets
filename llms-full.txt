@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.7 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.8 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -21,7 +21,7 @@ source: /index.md
 
 > A password-manager-shaped app for anything small and secret, unlocked by a passkey, stored as ciphertext in a GCP bucket, readable by no one else. Static site, no server. The pipeline and the content pages exist; nothing of the app is built yet.
 
-*Source: <https://secrets.sgit.ai/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -98,7 +98,8 @@ Every claim this site makes, with its status, from `data/features.json`. *shippe
 | site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | shipped v0.1.7 | components/reader-chat/, reader/index.html, data/search-index.json | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
 | site | The build agent's contact file at /.well-known/sgit-agents.json and the readers lane into its comms vault, so Send to the agent reaches it | proposed | .well-known/sgit-agents.json, tools/comms/ | The vault and the key pair exist (made 2026-10-06); the lead publishes the bundle and registers the lanes (docs/ops/comms.md, needs 9 and 10). Shipped once a round trip has been seen. |
-| site | Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises | shipped v0.1.5 | mockups/ | Pictures of proposed screens, not screens; replaced by real screenshots as pages ship. |
+| site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | shipped v0.1.5 | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
+| site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | shipped v0.1.8 | mockups/screens.json, components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
 | site | Branch protection, hardware-key 2FA, verified domain and the Actions policy in place and dated on /security/ | proposed | docs/ops/branch-protection.md | Asked for in docs/ops/needs.md. Each row on /security/ flips to a dated yes when confirmed. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
@@ -153,7 +154,7 @@ source: /about/participant.md
 
 > Who publishes this site, what they are building, and why that matters when reading its claims: the people who run the sgit family build the secrets manager this site describes, and the site is written while it is built.
 
-*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/about/participant.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -185,7 +186,7 @@ source: /admin/comms.md
 
 > The state of play on this site, kept here rather than in a chat message: the asks back to the project lead, numbered, and the nine build steps of the brief with their status and the release that delivered each.
 
-*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/comms.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -258,7 +259,7 @@ source: /admin/index.md
 
 > How the site is built and gated, and the admin pages that are proposed: a client for GCP's own APIs, working only for a Google account with IAM on the chosen project. At this version only the build pipeline exists.
 
-*Source: <https://secrets.sgit.ai/admin/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -330,7 +331,7 @@ source: /admin/versions.md
 
 > Every release of secrets.sgit.ai: version, date, what changed. Generated from data/versions.json; the newest row is the version in admin/build/version.txt and the tag CI pushed.
 
-*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/admin/versions.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -338,6 +339,7 @@ One row per release. The version increments on every push to `dev`: a minor bump
 
 | Version | Date | Release | What changed |
 |---|---|---|---|
+| `v0.1.8` | 2026-10-06 | the prototype: three UX variants and the column | The mockups are now a working prototype on invented data this browser keeps (components/proto-base, the store under sgit.secrets.proto.v1): sign in, create the keyring and the recovery code, add, open, reveal, copy, edit and delete entries, lock and unlock, devices, environment, account, the admin checklist, the probe matrix, routed by the app's own rules. Three UX variants in every frame for A/B testing (A Desk, the brief's shape; B Focus, one card per screen with a tab bar; C Command, a command bar, a dense table and an inspector), the pick kept under sgit.secrets.ui.proto. A column beside every frame (components/proto-column): what the screen is and the intent it realises, the paths to it and from it as a clickable graph, the data as charts (entries by kind, screens visited, actions over the last hour), the last actions, an A/B/C vote that is also a note in the reader's log, and the state as JSON with Seed, Reset and Copy. mockups/screens.json holds the screens, the paths and the variants; /mockups/prototype.html is the whole thing in one frame. The five categorical colours of every theme are now validated hues (C22). |
 | `v0.1.7` | 2026-10-06 | the reader's column, the comms channel and the graph view | A column on every page (components/reader-panel, reader-log, reader-chat on sg-base): mark a page read, star it, vote, leave a note or dictate one, every action an event in an append-only log in this browser keyed by page and content hash; Copy for Claude and Paste to merge; a chat over the site that searches offline on every page and, on /reader/ with the reader's own OpenRouter key, talks to Claude Sonnet with tools that read the site and file feedback; and the graph of the intent nodes the page names. Only /reader/ widens connect-src, declared in its head marker and checked by the gate (C19). The comms channel: the build agent's contact file at /.well-known/sgit-agents.json (a template until the lead publishes the bundle), tools/comms/ to publish, configure, send and drain, the sgit PKI envelope made with WebCrypto and proven to open with the agent's key; the vault and the key pair exist, the two steps the session's policy blocked are in docs/ops/comms.md (C20, needs 9 and 10). The navigator gains the ladder of layers, naming what does not exist yet with its step, and the native graph view; /review/ is now a page. data/search-index.json from gen_search.py. gate.py --build regenerates the review README after the page generators. |
 | `v0.1.6` | 2026-10-06 | four themes | Four themes a reader picks from the nav and the review navigator keeps: Night (the family palette, the default), Day, Paper and Ember, listed in data/themes.json. Every colour on the site is now a semantic token and assets/themes.css is the one file that gives them values, once per theme; site.css, mockups.css and the navigator's tokens.css name no colour, so the mockups and the review graphs follow the pick. assets/theme.js sets html[data-theme] before the first paint from the one allowed storage key, or from the reader's prefers-color-scheme when nothing is stored. tests/build/test_themes.py fails when a theme misses a token or any stylesheet or script names a colour; the gate's origin and storage-key checks now scan assets/ too. gate.py --build now regenerates the review README after the page generators, since its tree hash covers the pages. Brief-corrections C18. |
 | `v0.1.5` | 2026-10-06 | the design mockups | A new section, /mockups/: ten screens the brief describes (sign in, first run, unlock, the vault, an entry, devices, environment, account, the admin checklist, the compatibility matrix), each as a static HTML picture in a mini browser frame and as ASCII art, with the intent nodes it realises linked into the review navigator. No script, no inline style, every value invented, every screen marked proposed. |
@@ -362,7 +364,7 @@ source: /docs/design/index.md
 
 > The brief that this site is built from, what it got wrong, and the four documents that carry the reasoning. Copied in verbatim; the markdown is the source of truth and the HTML is rendered from it on every release.
 
-*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/design/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -388,7 +390,7 @@ source: /docs/index.md
 
 > Every document this site carries, readable as a rendered page with the raw markdown one click away: the brief and its corrections, the four design documents, the operations notes, and the reality document generated on each release.
 
-*Source: <https://secrets.sgit.ai/docs/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -419,7 +421,7 @@ source: /docs/ops/index.md
 
 > How a release works, what only a human can do, the DNS record and the repository protections.
 
-*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/docs/ops/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -445,7 +447,7 @@ source: /environments/index.md
 
 > One site, one GCP project per environment: dev, main, prod, and a customer's own. How the browser picks an environment, what config/environments.json holds and why none of it is secret, and the setup guide for running your own project. Proposed.
 
-*Source: <https://secrets.sgit.ai/environments/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/environments/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -536,7 +538,7 @@ source: /how-it-works/index.md
 
 > The four flows of the design, drawn: first run, returning, new device, admin. What each party can and cannot see at every step. All of it is proposed; nothing on this page is built yet.
 
-*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/how-it-works/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -642,7 +644,7 @@ source: /keyring/index.md
 
 > The specification of the encrypted keyring: objects in the bucket, the key hierarchy, keyring.json, the decrypted body, entry kinds and limits, concurrency, and the passkey parameters. Version 1, proposed, with known-answer fixtures to come.
 
-*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/keyring/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -760,36 +762,15 @@ source: /mockups/account.md
 
 > A design mockup of the account screen at secrets.sgit.ai/app/account.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/account.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/account.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/app/account.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/app/account.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 Who you are and where: email, uid, environment. Sign out and wipe memory. Export the encrypted keyring as a file (it is ciphertext; a copy is yours to keep) and import one to replace what is in the bucket, with the generation precondition shown.
-
-https://**secrets.sgit.ai/app/account.html**
-secrets.sgit.aiprodunlocked
-VaultDevicesEnvironmentAccount
-dinis@example.com
-
-## Account
-
-| Email | dinis@example.com |
-|---|---|
-| uid | Qk3…fake…uid…9z |
-| Environment | prod sgit-secrets-prod |
-| Keyring | rev 7 · generation 1696500000000000 · 23 entries · 3 passkeys + recovery |
-
-Sign outWipe memory now
-
-## Your ciphertext
-
-The keyring is ciphertext. A copy is yours to keep; nobody, including us, can open it without your passkey or code.
-
-Export encrypted keyring (keyring.json)Import and replace…
 
 ## The same screen as ASCII
 
@@ -827,35 +808,15 @@ source: /mockups/admin-checklist.md
 
 > A design mockup of the admin: the setup checklist screen at secrets.sgit.ai/admin/setup-checklist.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/admin-checklist.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/admin-checklist.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/admin/setup-checklist.html` is meant to look like, from section 6.3 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/admin/setup-checklist.html` is meant to look like, from section 6.3 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 Every section-4.2 resource as a row: exists, enabled, configured, with Fix where the page can do it client-side with the operator's own token. The token lives in memory only; every write shows the exact request before it is sent and logs the response on the page.
-
-https://**secrets.sgit.ai/admin/setup-checklist.html**
-secrets.sgit.aidev · sgit-secrets-dev
-IndexChecklistAuth configStorageRulesUsersExport
-admin as dinis@example.com (token in memory, 52 min left)
-
-## Setup checklist: dev
-
-| Resource | State |  |
-|---|---|---|
-| Services: identitytoolkit, firebase, firebasestorage, storage, firebaserules… | ✓ 8 of 8 enabled |  |
-| Firebase project link and web app | ✓ appId 1:…:web:… |  |
-| Identity Platform: email sign-in, authorised domains | ✗ localhost missing | Fix: add localhost |
-| Google provider (client id set, secret held by Google) | ✓ configured |  |
-| Bucket: uniform access, versioning, soft delete 30 d, CORS | ✗ CORS missing secrets.sgit.ai | Fix: apply canonical CORS |
-| Security Rules release matches infra/rules/storage.rules | ✓ sha256 6caa0c52… |  |
-| IAM: tf-secrets@ Editor; secrets-admins owner; no SA keys | ✓ |  |
-| Workload Identity Federation pool and provider | · not readable with this scope |  |
-
-Request preview for "add localhost": PATCH https://identitytoolkit.googleapis.com/admin/v2/projects/sgit-secrets-dev/config?updateMask=authorizedDomains · body {"authorizedDomains":["secrets.sgit.ai","localhost"]}
 
 ## The same screen as ASCII
 
@@ -896,31 +857,15 @@ source: /mockups/devices.md
 
 > A design mockup of the devices: passkeys and the recovery code screen at secrets.sgit.ai/app/devices.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/devices.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/devices.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/app/devices.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/app/devices.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 Every registered passkey with its name, when it was created and last used; add a passkey on this device; remove one, which is refused while it is the last unlock method; regenerate the recovery code, which invalidates the old one and shows the new one once. Each change is a new wrap in the keyring and a write with a precondition.
-
-https://**secrets.sgit.ai/app/devices.html**
-secrets.sgit.aiprodunlocked
-VaultDevicesEnvironmentAccount
-dinis@example.com
-
-## Devices
-
-Each passkey holds a wrapped copy of your keyring key. Removing the last one while no recovery code exists is refused.
-
-- passkeyMacBook Chrome · this devicecreated 2026-09-12 · used todayRenameRemove
-- passkeyiPhone (iCloud Keychain)created 2026-09-14 · used 2026-10-03RenameRemove
-- passkeyYubiKey 5Ccreated 2026-09-20 · never usedRenameRemove
-- recoveryRecovery codegenerated 2026-09-12Regenerate
-
-+ Add a passkey on this device
 
 ## The same screen as ASCII
 
@@ -958,39 +903,15 @@ source: /mockups/entry.md
 
 > A design mockup of the one entry: an sgit vault key screen at secrets.sgit.ai/app/entry.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/entry.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/entry.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/app/entry.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/app/entry.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 One entry, kind-specific fields, reveal on request, copy with a clipboard that clears after 30 seconds. An sgit-vault-key entry shows its prefix and carries the warning that it is write access to a vault; it will refuse to enter a shareable set (phase 2) without a confirmation. Edit and delete are here; delete asks twice.
-
-https://**secrets.sgit.ai/app/entry.html**
-secrets.sgit.aiprodunlocked
-VaultDevicesEnvironmentAccount
-dinis@example.com
-
-Vault / sgit.ai board vault
-
-## sgit-vault-key sgit.ai board vault
-
-Vault key
-sgit_private_vault_••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-RevealCopy (clears in 30 s)
-This is a vault key: write access to the vault, with no partly-public form. The read key for the same vault is a separate entry. It will not be shared without a confirmation.
-Vault id
-a3f1c2d4-5e6f-4a7b-8c9d-0e1f2a3b4c5d
-Notes
-The site's own task board. Rotate if ever pasted anywhere.
-Tags
-sgit, site
-
-Created 2026-09-12 · updated 2026-10-01 · 412 bytes of the 16 KB soft limit
-
-EditDeleteBack to the vault
 
 ## The same screen as ASCII
 
@@ -1032,36 +953,15 @@ source: /mockups/environment.md
 
 > A design mockup of the environment screen at secrets.sgit.ai/app/environment.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/environment.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/environment.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/app/environment.html` is meant to look like, from section 5 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/app/environment.html` is meant to look like, from section 5 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 Pick a built-in environment, or enter a custom one with every field of config/environments.json; export it as JSON, import one, reset. Every value here is a public identifier. Changing environment signs the user out and clears every key from memory, and the page says so before the switch.
-
-https://**secrets.sgit.ai/app/environment.html**
-secrets.sgit.aidevlocked
-VaultDevicesEnvironmentAccount
-dinis@example.com
-
-## Environment
-
-One site, one GCP project per environment. Changing it signs you out and clears every key from memory.
-
-prod · secrets.sgit.ai (production)dev · development (disposable)main · stagingcustom…
-
-| projectId | sgit-secrets-dev | region | europe-west2 |
-|---|---|---|---|
-| authDomain | sgit-secrets-dev.firebaseapp.com | signInMethod | popup (redirect as a fallback) |
-| storageBucket | sgit-secrets-dev.firebasestorage.app | tenantId | none |
-| apiKey | AIza… (public, restricted by referrer) | adminOauthClientId | ….apps.googleusercontent.com |
-
-Export JSONImport JSONReset to the site default
-
-Stored in localStorage as sgit.secrets.config.v1. Nothing secret is ever stored there.
 
 ## The same screen as ASCII
 
@@ -1100,13 +1000,13 @@ source: /mockups/index.md
 
 > What the app, admin and test screens are meant to look like, before they exist: ten mockups, each as a static picture in a mini browser frame and as ASCII art, with the intent nodes it realises. Every screen is proposed.
 
-*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers · proposed Devices page: add and remove passkeys, regenerate the recovery code · proposed Setup checklist: every per-project resource as a row, with Fix where fixable client-side · proposed Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers · proposed Devices page: add and remove passkeys, regenerate the recovery code · proposed Setup checklist: every per-project resource as a row, with Fix where fixable client-side · proposed Browser probe pages: webauthn-prf, crypto, config, auth, storage, keyring-roundtrip, offline, leak-check, matrix
 
-The screens the brief describes, drawn before they are built, the way a Figma board would be: a static picture of each in a mini browser frame, the same picture as ASCII art so an agent can read it, and the intent nodes in [the review graph](/review/ui/) that each screen realises. Nothing here works; every value is invented; every screen is proposed.
+The screens the brief describes, built as a prototype before the app exists: each one works on invented data this browser keeps, in a mini browser frame, in one of three UX variants to compare; the same screen as ASCII art so an agent can read it; and the intent nodes in [the review graph](/review/ui/) that each screen realises. Beside every frame a column says what the screen is, draws the paths to it and from it, and charts what you have done. Every value is invented; every screen is proposed. [**Open the whole prototype**](/mockups/prototype.md).
 
 The order is the order a user meets them: sign in, first run, unlock, the vault, an entry, devices, environment, account; then the operator's checklist and the compatibility matrix. A mockup changes when the brief or a correction changes it, and is replaced by the real page's screenshot when the page ships.
 
@@ -1141,9 +1041,17 @@ section 6.3
 secrets.sgit.ai/tests/matrix.html
 section 6.4
 
+## The three UX variants, for A/B testing
+
+- **A · Desk.** The password manager's shape the brief draws: header, sidebar, list, forms. Mouse first.
+- **B · Focus.** One card per screen, big targets, a bottom bar of tabs. Phone first.
+- **C · Command.** A command bar, a dense table, an inspector. Keyboard first.
+
+Pick one in any frame's bar; it holds across every mockup. The column's vote (works, does not work) is kept with the prototype's data and filed into your reader's log, so it reaches the build agent with the rest of your feedback.
+
 ## What a mockup is here
 
-- **Static.** HTML and CSS only, under the site's Content-Security-Policy: no script, no form that submits, no inline style.
+- **Interactive, and honest about it.** Two web components (`proto-app`, `proto-column`) on a store in `localStorage`; no form submits anywhere, no inline style, no script from any other origin. The prototype routes by the app's own rules (no login, sign in; no keyring, first run; locked, unlock) and stores nothing the real app would.
 - **Honest.** The header on every screen carries the environment badge and the lock state the brief requires; the values are obviously invented and no real identifier appears.
 - **Traceable.** Each screen names the brief section it draws and links the stories, rules and flows it realises in the review navigator, so a reader can check the picture against the intent.
 
@@ -1160,33 +1068,15 @@ source: /mockups/matrix.md
 
 > A design mockup of the tests: the compatibility matrix screen at secrets.sgit.ai/tests/matrix.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/matrix.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/matrix.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/tests/matrix.html` is meant to look like, from section 6.4 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/tests/matrix.html` is meant to look like, from section 6.4 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 The probe pages run in sequence and the result is a shareable summary: browser, OS, authenticator, and one row per probe with PASS, FAIL or SKIP and the raw value behind it. A visitor pastes it into an issue; the dated rows become the support table on the keyring page.
-
-https://**secrets.sgit.ai/tests/matrix.html**
-secrets.sgit.aiprod
-webauthn-prfcryptoconfigauthstoragematrix
-
-## Compatibility matrix
-
-Chrome 131 · macOS 15 · authenticator: Google Password Manager · 2026-10-06 · Copy as markdown
-
-| Probe | Result | Raw |
-|---|---|---|
-| WebCrypto: HKDF, AES-GCM, RSA-OAEP, ECDSA | PASS | 4 of 4 known answers |
-| Passkey create with prf | PASS | prf.enabled = true |
-| PRF eval returns 32 bytes | PASS | 32 bytes; same salt twice equal; other salt differs |
-| Config: active environment, fields, key restricted | PASS | prod from file default |
-| Auth: sign in, claims, sign out | SKIP | not signed in |
-| Storage: owner write, precondition, foreign 403 | SKIP | not signed in |
-| Leak check: nothing key-like in storage | PASS | 0 suspicious keys |
 
 ## The same screen as ASCII
 
@@ -1218,6 +1108,35 @@ Open each in the review navigator: [probes](/review/ui/#node=probes) · [probes.
 
 
 ==============================================================================
+source: /mockups/prototype.md
+==============================================================================
+
+# The prototype
+
+> The whole design prototype in one frame: every screen the brief describes, working on invented data this browser keeps, in three UX variants to compare. Beside it, what the screen is, the paths to it and from it, and what you have done.
+
+*Source: <https://secrets.sgit.ai/mockups/prototype.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+
+---
+
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+
+Start where the app would start you and click through: sign in, create the keyring, write the recovery code down, add entries, open one, reveal it, lock, unlock, add a device, change the environment. Everything is invented and everything is kept in this browser only (`localStorage`, `sgit.secrets.proto.v1`); **Seed** fills it, **Reset** empties it. The three buttons in the frame's bar switch the UX: the same screens, three different shapes, so you can say which works (the column's A/B/C vote lands in your reader's log).
+
+## The three UX variants
+
+- **A · Desk.** The password manager's shape the brief draws: a header with the environment and the lock, a sidebar with search and the kinds, a list, forms in cards. Mouse first, every control visible.
+- **B · Focus.** One thing per screen: a single card in the middle with a title and big targets, a bottom bar of four tabs, the step shown as "4 of 10". Phone first; the sidebar's filters fold into the card.
+- **C · Command.** Keyboard first: a command bar at the top (`add password github`, `open 2`, `lock`, `env dev`, `?`), a dense numbered table, an inspector on the right with the state, a status line at the bottom. For people who live in terminals.
+
+Each of [the ten mockups](/mockups/index.md) embeds the same prototype opened on its screen, with the ASCII twin and the intent beside it. What the prototype does on its own rules: no login, it routes to sign in; no keyring, to the first run; locked, to unlock; changing the environment signs out. The real app will do the same with real sign-in, a real passkey and a real bucket, and will store none of what this stores.
+
+---
+
+*[Site index for agents](/llms.txt) · [What is real](/docs/reality.md) · [HTML version](https://secrets.sgit.ai/mockups/prototype.html)*
+
+
+==============================================================================
 source: /mockups/setup.md
 ==============================================================================
 
@@ -1225,32 +1144,15 @@ source: /mockups/setup.md
 
 > A design mockup of the first run: create a passkey screen at secrets.sgit.ai/app/setup.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/setup.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/setup.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/app/setup.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/app/setup.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 Three steps on one page: create the passkey (the authenticator asks for a gesture), the browser generates the keyring, and the recovery code is shown once behind an "I have written it down" gate. If the authenticator cannot do PRF the page says so and offers the recovery code only, or another authenticator. The page says in plain words that losing every passkey and the code means the data is gone.
-
-https://**secrets.sgit.ai/app/setup.html**
-secrets.sgit.aidevlocked
-VaultDevicesEnvironmentAccount
-dinis@example.com
-
-## Set up your keyring
-
-1 · **Create a passkey** ✓ created on this device, PRF supported
-
-2 · **Generate the keyring** ✓ written to users/…/keyring.json
-
-3 · **Write down your recovery code**
-
-K7QM-2HXD-9PAW-LT4R-CE6N-VB3S-JY
-This code is shown once. It is the only other way to open your keyring. Lose every passkey and this code, and the data is gone; nobody can reset it.
-☐ I have written it down somewhere safe Continue to the vault
 
 ## The same screen as ASCII
 
@@ -1293,34 +1195,15 @@ source: /mockups/sign-in.md
 
 > A design mockup of the sign in screen at secrets.sgit.ai/app/, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/sign-in.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/sign-in.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/app/` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/app/` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 The first screen of the app. The environment badge is always visible; prod is neutral, anything else is coloured so nobody enters a real secret into dev by mistake. Popup sign-in is the default; redirect is a switch on the Environment page. After sign-in the page routes to setup when there is no keyring and to unlock when there is.
-
-https://**secrets.sgit.ai/app/**
-secrets.sgit.aidev
-VaultDevicesEnvironmentAccount
-
-## Sign in
-
-Environment: dev · sgit-secrets-dev · change on the Environment page
-
-Sign in with Google
-
-or with an email address
-
-Email
-dinis@example.com
-Password
-••••••••••••
-Sign in Create account
-The login decides which paths in the bucket you may touch. Your passkey, not your login, is what opens them.
 
 ## The same screen as ASCII
 
@@ -1365,36 +1248,15 @@ source: /mockups/unlock.md
 
 > A design mockup of the unlock screen at secrets.sgit.ai/app/unlock.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/unlock.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/unlock.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/app/unlock.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/app/unlock.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 One gesture. The page calls navigator.credentials.get with the PRF evaluation; the authenticator returns 32 bytes bound to this origin; the browser derives the wrapping key, unwraps the KEK and decrypts the body into memory. The recovery code is the fallback. Nothing decrypted is written anywhere.
-
-https://**secrets.sgit.ai/app/unlock.html**
-secrets.sgit.aiprodlocked
-VaultDevicesEnvironmentAccount
-dinis@example.com
-
-## Unlock your keyring
-
-Keyring found: rev 7, 23 entries, last written 2026-10-05 from "MacBook Chrome".
-
-Unlock with passkey
-
-Touch your security key, or use Face ID, Touch ID, Windows Hello or your phone.
-
-No passkey on this device? **Use the recovery code**
-
-Recovery code
-____-____-____-____-____-____-__
-Unlock with the code
-
-After unlocking with the code you will be asked to add a passkey for this device.
 
 ## The same screen as ASCII
 
@@ -1436,40 +1298,15 @@ source: /mockups/vault.md
 
 > A design mockup of the the vault: the list screen at secrets.sgit.ai/app/vault.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 
-*Source: <https://secrets.sgit.ai/mockups/vault.html> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/mockups/vault.html> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
-Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
+Status, from [/shipped/](/shipped/index.md): shipped v0.1.5 Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · shipped v0.1.8 Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log · proposed Sign in and out with Google and email/password against the chosen environment · proposed Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · proposed Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers
 
-What `secrets.sgit.ai/app/vault.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). A static picture: nothing on it works, the values are invented, and the screen itself is proposed.
+What `secrets.sgit.ai/app/vault.html` is meant to look like, from section 6.2 of [the brief](/docs/design/secrets-sgit-ai__mvp-build-brief.md). An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.
 
 The list: search, a filter by kind, add, open. Kinds are a closed list and each has its own colour, so a vault key never looks like a password. The lock state and the environment are in the header. Entries are small; the keyring soft limit is shown as a figure, not a bar that lies.
-
-https://**secrets.sgit.ai/app/vault.html**
-secrets.sgit.aiprodunlocked
-VaultDevicesEnvironmentAccount
-dinis@example.com
-Search
-git
-
-Kinds
-
-password 11 · api-key 6
-sgit-vault-key 2 · sgit-read-key 3
-pki-private-key 1 · note 0
-
-23 entries · 41 KB of 1 MB
-
-+ Add entry
-
-## Vault
-
-- passwordgithub.com (dinis)updated 2 days ago
-- sgit-vault-keysgit.ai board vaultupdated 2026-10-01
-- sgit-read-keycode review graphs (published)2026-09-30
-- api-keyOpenRouter, infographic-gen2026-09-21
-- pki-private-keysgit pki: dinis@example.com2026-09-18
 
 ## The same screen as ASCII
 
@@ -1510,7 +1347,7 @@ source: /reader/index.md
 
 > Where the reader's column talks to the outside: chat with the site through your own OpenRouter key, and send your log to the build agent's vault. The only page whose policy allows a connection beyond this site and Google's sign-in hosts.
 
-*Source: <https://secrets.sgit.ai/reader/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/reader/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1548,7 +1385,7 @@ source: /review/index.md
 
 > The review folder: this project as layered graphs. The design written top down from the brief, the code derived bottom up by parsers, the join between them, every commit read upwards, and a navigator to walk it all. What exists, what each step brings, and where to start.
 
-*Source: <https://secrets.sgit.ai/review/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/review/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1602,7 +1439,7 @@ source: /security/index.md
 
 > The threat model: what each compromised party gets and does not get. Why the passkey RP ID is exactly secrets.sgit.ai and never sgit.ai. Why the code served to your browser is the boundary, and what we ask you to trust.
 
-*Source: <https://secrets.sgit.ai/security/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/security/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1679,7 +1516,7 @@ source: /sharing/index.md
 
 > The sharing scheme: a key pair per user, a public-key directory, an inbox of keys encrypted to the recipient. Phase 2 for the user interface; the data model ships in phase 1 so it is never rewritten. Proposed.
 
-*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/sharing/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1728,7 +1565,7 @@ source: /shipped/index.md
 
 > Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
-*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1736,7 +1573,7 @@ This site publishes its argument before the thing is finished. To keep that hone
 
 A *shipped* row names the version that shipped it and where in the repository it lives. A *proposed* row points at the section of the brief that designs it. An *absent* row says why it is not in the MVP and, where there is one, what comes instead.
 
-## Shipped (34)
+## Shipped (35)
 
 exists in the repository, runs, and was exercised at the version shown.
 
@@ -1770,7 +1607,8 @@ exists in the repository, runs, and was exercised at the version shown.
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | shipped v0.1.6 | data/themes.json, assets/themes.css, assets/theme.js | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
 | site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | shipped v0.1.7 | components/reader-chat/, reader/index.html, data/search-index.json | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
-| site | Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises | shipped v0.1.5 | mockups/ | Pictures of proposed screens, not screens; replaced by real screenshots as pages ship. |
+| site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | shipped v0.1.5 | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
+| site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | shipped v0.1.8 | mockups/screens.json, components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
@@ -1841,7 +1679,7 @@ source: /team/index.md
 
 > Who does what, as one file per role with the rules it enforces and the mistake behind each, and where the board of work lives.
 
-*Source: <https://secrets.sgit.ai/team/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/team/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -1862,9 +1700,9 @@ source: /docs/reality.md
 
 # secrets.sgit.ai: reality
 
-*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.7 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
+*Generated from `data/features.json` by `admin/build/gen_features.py` at site v0.1.8 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.*
 
-67 claims: 34 shipped, 28 proposed, 5 absent.
+68 claims: 35 shipped, 28 proposed, 5 absent.
 
 | Status | Meaning |
 |---|---|
@@ -1872,7 +1710,7 @@ source: /docs/reality.md
 | proposed | designed in the brief, not built; described only in the future tense |
 | absent | deliberately not in the MVP; comes as a later version or a later site, or never |
 
-## Shipped (34)
+## Shipped (35)
 
 | Area | Feature | Status | Where | Notes |
 |---|---|---|---|---|
@@ -1904,7 +1742,8 @@ source: /docs/reality.md
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | shipped v0.1.6 | data/themes.json, assets/themes.css, assets/theme.js | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
 | site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | shipped v0.1.7 | components/reader-chat/, reader/index.html, data/search-index.json | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
-| site | Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises | shipped v0.1.5 | mockups/ | Pictures of proposed screens, not screens; replaced by real screenshots as pages ship. |
+| site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | shipped v0.1.5 | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
+| site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | shipped v0.1.8 | mockups/screens.json, components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |
@@ -2062,6 +1901,12 @@ The brief has no channel from a reader to the build agent; the newsroom brief on
 ### C21. The reader's key, and where it may live
 
 Section 5 says nothing secret is ever stored in localStorage, and section 9.5 says plaintext exists only in the browser. The chat's OpenRouter key is the reader's own secret, not the site's: it is held in memory, or in `sessionStorage` under `sgit.secrets.ui.openrouterKey` only when the reader ticks *keep for this tab*, and is sent to `openrouter.ai` and nowhere else. Tier 2 of the newsroom brief (a vault-held key, no key in the browser at all) is proposed and not built.
+
+## v0.1.8 (2026-10-06): the prototype
+
+### C22. The mockups are a prototype, in three UX variants, with a column
+
+Section 6.2 draws the screens in prose and the mockups of v0.1.5 drew them as pictures. Dinis asked on 2026-10-06 for the mockups to be interactive, with a column beside each that shows the screen's details and a graph of the paths to and from it, with the data captured in `localStorage` and visualised, and with two more complete UX variants beside the brief's own for A/B testing. So `mockups/screens.json` holds the screens, the paths and the three variants; `components/proto-base` is the pretend app's store (user, environment, keyring, entries, devices, a log, visits, votes) under `sgit.secrets.proto.v1`; `components/proto-app` renders the ten screens in the frame in the picked variant (Desk, Focus, Command); `components/proto-column` shows the details, the paths graph, the charts, the vote and the state. The real app will store none of this, and the prototype says so on every page. One more correction came out of it: the five categorical colours of each theme failed the dataviz validator (two adjacent pairs indistinguishable under colour-vision deficiency), so they are now five validated hues per surface, with `--sg-on-cat` as the text on them; the kinds of entry and the layers of the review graph use them.
 
 ## Open questions carried from section 12 (unanswered at this version)
 
@@ -3878,7 +3723,7 @@ source: /review/README.md
 
 What is here: `intent/` is the design written top down from the MVP brief (by an agent, accepted by a person, each node carrying its section); `graph/` is the code derived bottom up from the syntax tree by parsers, never by a model; `join/` is the match between the two with a coverage figure; `changes/` reads one commit upwards per file; `streams/` is the code on one path; `checks/` is the house rules as queries over the graph; `ui/` is the navigator, web components in the coding.sgit.ai shape; `self/` is the same folder for the tools and the navigator themselves. Nothing under `graph/`, `join/`, `changes/`, `streams/` or `checks/results.json` is edited by hand.
 
-Source tree: 105 files, hash `f2215d9d1ab1a88f`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
+Source tree: 115 files, hash `a11a471f279e1e46`. Derived files must carry this hash in their provenance or the gate fails (`tools/freshness.py`).
 
 ## The project
 

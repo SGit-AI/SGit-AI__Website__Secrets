@@ -2,7 +2,7 @@
 
 > A zero-knowledge secrets manager that runs entirely in the browser: passkey unlock, ciphertext in a GCP bucket, readable by no one else.
 
-Site version: v0.1.7 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
+Site version: v0.1.8 (2026-10-06). Content CC BY 4.0, code Apache-2.0. Source: https://github.com/SGit-AI/SGit-AI__Website__Secrets
 
 Every HTML page has a markdown twin at the same path with the extension swapped; links inside the markdown point at markdown, so an agent never has to parse HTML. What is shipped, proposed or absent is in /docs/reality.md, generated from data/features.json on every release: if it is not listed there, it does not exist. Nothing on this site is described in the present tense before that file says shipped.
 
@@ -32,6 +32,7 @@ Notes for agents:
 - [Mockup: Environment — secrets.sgit.ai](/mockups/environment.md): A design mockup of the environment screen at secrets.sgit.ai/app/environment.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 - [Design mockups — secrets.sgit.ai](/mockups/index.md): What the app, admin and test screens are meant to look like, before they exist: ten mockups, each as a static picture in a mini browser frame and as ASCII art, with the intent nodes it realises. Every screen is proposed.
 - [Mockup: Tests: the compatibility matrix — secrets.sgit.ai](/mockups/matrix.md): A design mockup of the tests: the compatibility matrix screen at secrets.sgit.ai/tests/matrix.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
+- [The prototype — secrets.sgit.ai](/mockups/prototype.md): The whole design prototype in one frame: every screen the brief describes, working on invented data this browser keeps, in three UX variants to compare. Beside it, what the screen is, the paths to it and from it, and what you have done.
 - [Mockup: First run: create a passkey — secrets.sgit.ai](/mockups/setup.md): A design mockup of the first run: create a passkey screen at secrets.sgit.ai/app/setup.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 - [Mockup: Sign in — secrets.sgit.ai](/mockups/sign-in.md): A design mockup of the sign in screen at secrets.sgit.ai/app/, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.
 - [Mockup: Unlock — secrets.sgit.ai](/mockups/unlock.md): A design mockup of the unlock screen at secrets.sgit.ai/app/unlock.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.

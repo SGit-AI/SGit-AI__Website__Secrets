@@ -1,166 +1,21 @@
-/* ── mockups.css — the mini browser and the mocked app chrome for /mockups/ ────
-   Static pictures of screens that do not exist yet: no script, no form posts
-   (form-action 'none'), no colour written: every one a token whose value per
-   theme is in assets/themes.css, so the mockups follow the picked theme. The mock app
-   chrome inside the frame is deliberately plainer than the site chrome. */
+/* ── mockups.css — the layout of the design prototype pages under /mockups/ ────
+   The prototype itself is the proto-app component (the mini browser frame, the
+   three UX variants, the screens) and the proto-column component (the details,
+   the paths, the data). This file only places them beside each other, keeps the
+   ASCII twin readable and lays out the gallery. No colour written. */
 
-.mb {
-    background:    var(--sg-bg-secondary);
-    border:        1px solid var(--sg-border);
-    border-radius: 10px;
-    box-shadow:    var(--sg-shadow);
-    margin:        var(--sg-sp-4) 0 var(--sg-sp-6);
-    overflow:      hidden;
+.proto-layout {
+    display:               grid;
+    gap:                   var(--sg-sp-4);
+    grid-template-columns: minmax(0, 1fr);
+    margin:                var(--sg-sp-4) 0 var(--sg-sp-6);
 }
-.mb-bar {
-    align-items:   center;
-    background:    var(--sg-bg);
-    border-bottom: 1px solid var(--sg-border);
-    display:       flex;
-    gap:           var(--sg-sp-2);
-    padding:       var(--sg-sp-2) var(--sg-sp-3);
+@media (min-width: 1100px) {
+    .proto-layout { grid-template-columns: minmax(0, 3fr) minmax(20rem, 2fr); align-items: start; }
+    .proto-layout proto-column { position: sticky; top: 4.5rem; }
 }
-.mb-dots            { display: flex; gap: 6px; }
-.mb-dots span {
-    background:    var(--sg-text-muted);
-    border-radius: 50%;
-    display:       inline-block;
-    height:        10px;
-    opacity:       0.6;
-    width:         10px;
-}
-.mb-url {
-    background:    var(--sg-bg-surface);
-    border-radius: var(--sg-radius-pill);
-    color:         var(--sg-text-muted);
-    flex:          1;
-    font-family:   var(--sg-font-mono);
-    font-size:     var(--sg-fs-xs);
-    padding:       3px var(--sg-sp-3);
-}
-.mb-url b           { color: var(--sg-text); font-weight: 500; }
-.mb-view            { min-height: 22rem; padding: 0; }
-
-/* the mocked app chrome */
-.app {
-    display:        flex;
-    flex-direction: column;
-    min-height:     22rem;
-}
-.app-head {
-    align-items:   center;
-    border-bottom: 1px solid var(--sg-border);
-    display:       flex;
-    flex-wrap:     wrap;
-    gap:           var(--sg-sp-3);
-    padding:       var(--sg-sp-2) var(--sg-sp-4);
-}
-.app-head .brand    { color: var(--sg-text-heading); font-weight: 700; }
-.app-head .brand span { color: var(--sg-accent); }
-.app-nav            { display: flex; gap: var(--sg-sp-3); font-size: var(--sg-fs-small); }
-.app-nav span       { color: var(--sg-text-muted); }
-.app-nav .here      { color: var(--sg-accent); }
-.app-head .who      { color: var(--sg-text-muted); font-size: var(--sg-fs-xs); margin-left: auto; }
-.env {
-    border-radius: var(--sg-radius-pill);
-    font-family:   var(--sg-font-mono);
-    font-size:     var(--sg-fs-xs);
-    padding:       1px var(--sg-sp-2);
-}
-.env-prod           { border: 1px solid var(--sg-border); color: var(--sg-text-muted); }
-.env-dev            { background: var(--sg-status-proposed); color: var(--sg-on-status); }
-.lock {
-    border-radius: var(--sg-radius-pill);
-    font-size:     var(--sg-fs-xs);
-    padding:       1px var(--sg-sp-2);
-}
-.lock-open          { background: var(--sg-accent-subtle); color: var(--sg-accent); }
-.lock-closed        { background: var(--sg-bg-surface); color: var(--sg-text-muted); }
-.app-body           { display: flex; flex: 1; gap: var(--sg-sp-4); padding: var(--sg-sp-4); }
-.app-body.centre    { align-items: center; justify-content: center; }
-.app-side           { flex: 0 0 15rem; }
-.app-main           { flex: 1; min-width: 0; }
-
-.card {
-    background:    var(--sg-bg-surface);
-    border:        1px solid var(--sg-border);
-    border-radius: var(--sg-radius);
-    max-width:     28rem;
-    padding:       var(--sg-sp-4);
-    width:         100%;
-}
-.card h2, .app-main h2 { font-size: 1.1rem; margin: 0 0 var(--sg-sp-2); }
-.card p, .app-main p   { font-size: var(--sg-fs-small); margin: 0 0 var(--sg-sp-3); }
-.muted              { color: var(--sg-text-muted); }
-.field              { display: block; font-size: var(--sg-fs-xs); margin: var(--sg-sp-2) 0; }
-.field .box {
-    background:    var(--sg-bg);
-    border:        1px solid var(--sg-border);
-    border-radius: var(--sg-radius);
-    color:         var(--sg-text);
-    font-family:   var(--sg-font-mono);
-    font-size:     var(--sg-fs-small);
-    margin-top:    2px;
-    padding:       var(--sg-sp-2) var(--sg-sp-3);
-}
-.field .box.masked  { letter-spacing: 0.15em; }
-.btn {
-    border:        1px solid var(--sg-border);
-    border-radius: var(--sg-radius);
-    color:         var(--sg-text);
-    display:       inline-block;
-    font-size:     var(--sg-fs-small);
-    margin:        var(--sg-sp-1) var(--sg-sp-1) 0 0;
-    padding:       var(--sg-sp-1) var(--sg-sp-3);
-}
-.btn-primary        { background: var(--sg-accent); border-color: var(--sg-accent); color: var(--sg-on-accent); }
-.btn-danger         { border-color: var(--sg-danger); color: var(--sg-danger); }
-.btn-ghost          { color: var(--sg-text-muted); }
-.row                { align-items: center; display: flex; flex-wrap: wrap; gap: var(--sg-sp-2); }
-.list               { list-style: none; margin: 0; padding: 0; }
-.list li {
-    align-items:   center;
-    border-bottom: 1px solid var(--sg-border);
-    display:       flex;
-    gap:           var(--sg-sp-3);
-    padding:       var(--sg-sp-2) 0;
-}
-.list li.active     { background: var(--sg-accent-subtle); }
-.kind {
-    border-radius: var(--sg-radius-pill);
-    font-family:   var(--sg-font-mono);
-    font-size:     var(--sg-fs-xs);
-    padding:       0 var(--sg-sp-2);
-}
-.kind-password      { background: var(--sg-cat-1); color: var(--sg-on-accent); }
-.kind-api-key       { background: var(--sg-cat-2); color: var(--sg-on-accent); }
-.kind-sgit-vault-key { background: var(--sg-danger); color: var(--sg-on-accent); }
-.kind-sgit-read-key { background: var(--sg-cat-4); color: var(--sg-on-accent); }
-.kind-pki-private-key { background: var(--sg-cat-5); color: var(--sg-on-accent); }
-.kind-note          { background: var(--sg-bg-surface); color: var(--sg-text); }
-.title              { flex: 1; }
-.when               { color: var(--sg-text-muted); font-size: var(--sg-fs-xs); }
-.warn-box {
-    background:    var(--sg-status-proposed-subtle);
-    border-left:   3px solid var(--sg-status-proposed);
-    border-radius: var(--sg-radius);
-    font-size:     var(--sg-fs-small);
-    margin:        var(--sg-sp-3) 0;
-    padding:       var(--sg-sp-2) var(--sg-sp-3);
-}
-.code-big {
-    font-family:    var(--sg-font-mono);
-    font-size:      1.2rem;
-    letter-spacing: 0.08em;
-    margin:         var(--sg-sp-3) 0;
-    text-align:     center;
-}
-.check              { font-family: var(--sg-font-mono); }
-.check-ok           { color: var(--sg-accent); }
-.check-bad          { color: var(--sg-danger); }
-.check-skip         { color: var(--sg-text-muted); }
-table.mini          { font-size: var(--sg-fs-xs); margin: 0; }
-table.mini th, table.mini td { padding: var(--sg-sp-1) var(--sg-sp-2); }
+.proto-layout.full { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1100px) { .proto-layout.full { grid-template-columns: minmax(0, 7fr) minmax(22rem, 3fr); } }
 
 /* the ASCII twin of each mockup */
 .ascii {
@@ -184,3 +39,7 @@ table.mini th, table.mini td { padding: var(--sg-sp-1) var(--sg-sp-2); }
     padding:       var(--sg-sp-3);
 }
 .gallery .mono      { font-family: var(--sg-font-mono); font-size: var(--sg-fs-xs); }
+.muted              { color: var(--sg-text-muted); }
+.variants           { display: grid; gap: var(--sg-sp-3); grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); list-style: none; margin: var(--sg-sp-3) 0; padding: 0; }
+.variants li        { border: 1px solid var(--sg-border); border-left: 4px solid var(--sg-accent); border-radius: var(--sg-radius); padding: var(--sg-sp-3); }
+.variants b         { color: var(--sg-text-heading); }

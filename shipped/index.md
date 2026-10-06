@@ -2,7 +2,7 @@
 
 > Every claim this site makes, by status: shipped (exists and runs, with the version), proposed (designed, not built), absent (deliberately not in the MVP). Generated from data/features.json on every release; the same data produces docs/reality.md.
 
-*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/shipped/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 
@@ -10,7 +10,7 @@ This site publishes its argument before the thing is finished. To keep that hone
 
 A *shipped* row names the version that shipped it and where in the repository it lives. A *proposed* row points at the section of the brief that designs it. An *absent* row says why it is not in the MVP and, where there is one, what comes instead.
 
-## Shipped (34)
+## Shipped (35)
 
 exists in the repository, runs, and was exercised at the version shown.
 
@@ -44,7 +44,8 @@ exists in the repository, runs, and was exercised at the version shown.
 | site | Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css | shipped v0.1.6 | data/themes.json, assets/themes.css, assets/theme.js | No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour. |
 | site | The reader's column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names | shipped v0.1.7 | components/reader-panel/, reader-log/ | Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret. |
 | site | A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader's own key | shipped v0.1.7 | components/reader-chat/, reader/index.html, data/search-index.json | The key stays in memory or this tab's sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed. |
-| site | Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises | shipped v0.1.5 | mockups/ | Pictures of proposed screens, not screens; replaced by real screenshots as pages ship. |
+| site | Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises | shipped v0.1.5 | mockups/, components/proto-app/, proto-base/ | Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app's own rules. Replaced by real screens as they ship. |
+| site | Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader's log | shipped v0.1.8 | mockups/screens.json, components/proto-column/ | The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator. |
 | site | brief-corrections.md: what the brief got wrong, dated, beside it | shipped v0.1.0 | docs/design/brief-corrections.md | Appended to as the build finds out. |
 | site | docs/ops/needs.md: exactly what only a human can do | shipped v0.1.0 | docs/ops/needs.md | DNS, Pages, branch protection, GCP bootstrap, OAuth client secret. |
 | admin | Release history page generated from data/versions.json | shipped v0.1.0 | admin/versions.html | One row per release; the newest row must equal version.txt. |

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mockup: Account — secrets.sgit.ai</title>
   <meta name="description" content="A design mockup of the account screen at secrets.sgit.ai/app/account.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <script type="module" src="/components/proto-app/proto-app.js"></script>
+  <script type="module" src="/components/proto-column/proto-column.js"></script>
   <!-- sg-secrets:head:start -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <link rel="canonical" href="https://secrets.sgit.ai/mockups/account.html">
@@ -20,7 +22,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/mockups/account.html">
   <meta property="og:title" content="Mockup: Account — secrets.sgit.ai">
   <meta property="og:description" content="A design mockup of the account screen at secrets.sgit.ai/app/account.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
-  <meta name="sg-secrets:version" content="0.1.7">
+  <meta name="sg-secrets:version" content="0.1.8">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
   <link rel="stylesheet" href="/assets/mockups.css">
@@ -33,7 +35,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -95,28 +97,14 @@
 <!-- sg-secrets:nav:end -->
   <main>
     <h1>Mockup 8: Account</h1>
-    <!-- sg-secrets:status:start ids="site.mockups,app.sign-in,app.prf-unlock,app.entries" -->
-  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+    <!-- sg-secrets:status:start ids="site.mockups,site.mockups-variants,app.sign-in,app.prf-unlock,app.entries" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · <span class="sg-status sg-status-shipped">shipped v0.1.8</span> Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader&#x27;s log · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
 <!-- sg-secrets:status:end -->
-    <p class="sg-lead">What <code>secrets.sgit.ai/app/account.html</code> is meant to look like, from section 6.2 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. A static picture: nothing on it works, the values are invented, and the screen itself is proposed.</p>
+    <p class="sg-lead">What <code>secrets.sgit.ai/app/account.html</code> is meant to look like, from section 6.2 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.</p>
     <p>Who you are and where: email, uid, environment. Sign out and wipe memory. Export the encrypted keyring as a file (it is ciphertext; a copy is yours to keep) and import one to replace what is in the bucket, with the generation precondition shown.</p>
-    <div class="mb" aria-label="Mockup of secrets.sgit.ai/app/account.html">
-      <div class="mb-bar"><span class="mb-dots"><span></span><span></span><span></span></span><span class="mb-url">https://<b>secrets.sgit.ai/app/account.html</b></span></div>
-      <div class="mb-view"><div class="app">
-<div class="app-head"><span class="brand">secrets<span>.sgit.ai</span></span><span class="env env-prod">prod</span><span class="lock lock-open">unlocked</span><div class="app-nav"><span class="">Vault</span><span class="">Devices</span><span class="">Environment</span><span class="here">Account</span></div><span class="who">dinis@example.com</span></div><div class="app-body"><div class="app-main">
-<h2>Account</h2>
-<table class="mini"><tbody>
-<tr><th>Email</th><td>dinis@example.com</td></tr>
-<tr><th>uid</th><td class="muted">Qk3…fake…uid…9z</td></tr>
-<tr><th>Environment</th><td><span class="env env-prod">prod</span> sgit-secrets-prod</td></tr>
-<tr><th>Keyring</th><td>rev 7 · generation 1696500000000000 · 23 entries · 3 passkeys + recovery</td></tr>
-</tbody></table>
-<div class="row"><span class="btn">Sign out</span><span class="btn">Wipe memory now</span></div>
-<h2>Your ciphertext</h2>
-<p class="muted">The keyring is ciphertext. A copy is yours to keep; nobody, including us, can open it without your passkey or code.</p>
-<div class="row"><span class="btn btn-primary">Export encrypted keyring (keyring.json)</span><span class="btn">Import and replace…</span></div>
-</div></div>
-      </div></div>
+    <div class="proto-layout">
+      <proto-app screen="account"></proto-app>
+      <proto-column></proto-column>
     </div>
     <h2>The same screen as ASCII</h2>
 <pre class="ascii">┌─ secrets.sgit.ai/app/account.html ───────────────────────────────┐
@@ -138,7 +126,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/account.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/account.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

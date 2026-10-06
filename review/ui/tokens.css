@@ -26,7 +26,7 @@
     --rv-moved-subtle:    var(--sg-danger-subtle,          rgba(233, 69, 96, 0.14));
     --rv-held:            var(--sg-status-absent,          #8892A0);
     --rv-selected:        var(--sg-selected,               rgba(78, 205, 196, 0.22));
-    --rv-on-layer:        var(--sg-on-accent,              #1A1A2E);
+    --rv-on-layer:        var(--sg-on-cat,                 #FFFFFF);
 
     --rv-font:            'DM Sans', system-ui, -apple-system, sans-serif;
     --rv-mono:            'JetBrains Mono', ui-monospace, monospace;
@@ -44,11 +44,11 @@
     --rv-radius-pill:     9999px;
     --rv-fast:            150ms ease;
 
-    --rv-layer-stories:    var(--sg-cat-1, #4ECDC4);
-    --rv-layer-rules:      var(--sg-cat-1, #4ECDC4);
-    --rv-layer-examples:   var(--sg-cat-1, #4ECDC4);
-    --rv-layer-flows:      var(--sg-cat-3, #9B8CFF);
-    --rv-layer-components: var(--sg-cat-2, #7FB3FF);
-    --rv-layer-deploy:     var(--sg-cat-4, #B0C4DE);
-    --rv-layer-derived:    var(--sg-cat-5, #C9A96E);
+    --rv-layer-stories:    var(--sg-cat-1, #1E9486);
+    --rv-layer-rules:      var(--sg-cat-1, #1E9486);
+    --rv-layer-examples:   var(--sg-cat-1, #1E9486);
+    --rv-layer-flows:      var(--sg-cat-3, #3F7EE0);
+    --rv-layer-components: var(--sg-cat-2, #D06A32);
+    --rv-layer-deploy:     var(--sg-cat-4, #A98A1E);
+    --rv-layer-derived:    var(--sg-cat-5, #9D5CD1);
 }

@@ -2,7 +2,7 @@
 
 > The review folder: this project as layered graphs. The design written top down from the brief, the code derived bottom up by parsers, the join between them, every commit read upwards, and a navigator to walk it all. What exists, what each step brings, and where to start.
 
-*Source: <https://secrets.sgit.ai/review/> · site v0.1.7 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
+*Source: <https://secrets.sgit.ai/review/> · site v0.1.8 (2026-10-06) · this file is generated from the same content as the page, so the two cannot drift. Every page on this site has a `.md` twin; internal links below point at them.*
 
 ---
 

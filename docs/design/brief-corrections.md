@@ -98,6 +98,12 @@ The brief has no channel from a reader to the build agent; the newsroom brief on
 
 Section 5 says nothing secret is ever stored in localStorage, and section 9.5 says plaintext exists only in the browser. The chat's OpenRouter key is the reader's own secret, not the site's: it is held in memory, or in `sessionStorage` under `sgit.secrets.ui.openrouterKey` only when the reader ticks *keep for this tab*, and is sent to `openrouter.ai` and nowhere else. Tier 2 of the newsroom brief (a vault-held key, no key in the browser at all) is proposed and not built.
 
+## v0.1.8 (2026-10-06): the prototype
+
+### C22. The mockups are a prototype, in three UX variants, with a column
+
+Section 6.2 draws the screens in prose and the mockups of v0.1.5 drew them as pictures. Dinis asked on 2026-10-06 for the mockups to be interactive, with a column beside each that shows the screen's details and a graph of the paths to and from it, with the data captured in `localStorage` and visualised, and with two more complete UX variants beside the brief's own for A/B testing. So `mockups/screens.json` holds the screens, the paths and the three variants; `components/proto-base` is the pretend app's store (user, environment, keyring, entries, devices, a log, visits, votes) under `sgit.secrets.proto.v1`; `components/proto-app` renders the ten screens in the frame in the picked variant (Desk, Focus, Command); `components/proto-column` shows the details, the paths graph, the charts, the vote and the state. The real app will store none of this, and the prototype says so on every page. One more correction came out of it: the five categorical colours of each theme failed the dataviz validator (two adjacent pairs indistinguishable under colour-vision deficiency), so they are now five validated hues per surface, with `--sg-on-cat` as the text on them; the kinds of entry and the layers of the review graph use them.
+
 ## Open questions carried from section 12 (unanswered at this version)
 
 - Does the Playwright virtual authenticator support PRF? (step 4)

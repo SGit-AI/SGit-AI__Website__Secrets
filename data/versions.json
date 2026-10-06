@@ -1,6 +1,12 @@
 {
   "releases": [
     {
+      "version": "0.1.8",
+      "date": "2026-10-06",
+      "title": "the prototype: three UX variants and the column",
+      "notes": "The mockups are now a working prototype on invented data this browser keeps (components/proto-base, the store under sgit.secrets.proto.v1): sign in, create the keyring and the recovery code, add, open, reveal, copy, edit and delete entries, lock and unlock, devices, environment, account, the admin checklist, the probe matrix, routed by the app's own rules. Three UX variants in every frame for A/B testing (A Desk, the brief's shape; B Focus, one card per screen with a tab bar; C Command, a command bar, a dense table and an inspector), the pick kept under sgit.secrets.ui.proto. A column beside every frame (components/proto-column): what the screen is and the intent it realises, the paths to it and from it as a clickable graph, the data as charts (entries by kind, screens visited, actions over the last hour), the last actions, an A/B/C vote that is also a note in the reader's log, and the state as JSON with Seed, Reset and Copy. mockups/screens.json holds the screens, the paths and the variants; /mockups/prototype.html is the whole thing in one frame. The five categorical colours of every theme are now validated hues (C22)."
+    },
+    {
       "version": "0.1.7",
       "date": "2026-10-06",
       "title": "the reader's column, the comms channel and the graph view",

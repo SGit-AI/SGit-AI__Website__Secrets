@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>secrets.sgit.ai: reality — secrets.sgit.ai</title>
-  <meta name="description" content="67 claims: 34 shipped, 28 proposed, 5 absent.">
+  <meta name="description" content="68 claims: 35 shipped, 28 proposed, 5 absent.">
   <meta name="sg-secrets:source" content="/docs/reality.md">
   <!-- sg-secrets:head:start -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
@@ -20,8 +20,8 @@
   <meta property="og:site_name" content="secrets.sgit.ai">
   <meta property="og:url" content="https://secrets.sgit.ai/docs/reality.html">
   <meta property="og:title" content="secrets.sgit.ai: reality — secrets.sgit.ai">
-  <meta property="og:description" content="67 claims: 34 shipped, 28 proposed, 5 absent.">
-  <meta name="sg-secrets:version" content="0.1.7">
+  <meta property="og:description" content="68 claims: 35 shipped, 28 proposed, 5 absent.">
+  <meta name="sg-secrets:version" content="0.1.8">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
 </head>
@@ -33,7 +33,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -95,10 +95,10 @@
 <!-- sg-secrets:nav:end -->
   <main class="sg-document">
     <!-- sg-secrets:docs:start -->
-<p class="sg-doc-source">Rendered from <a href="/docs/reality.md">docs/reality.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.7.</p>
+<p class="sg-doc-source">Rendered from <a href="/docs/reality.md">docs/reality.md</a>, which is the source of truth and the markdown twin of this page. Rendered at site v0.1.8.</p>
 <h1 id="secretssgitai-reality">secrets.sgit.ai: reality</h1>
-<p><em>Generated from <code>data/features.json</code> by <code>admin/build/gen_features.py</code> at site v0.1.7 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.</em></p>
-<p>67 claims: 34 shipped, 28 proposed, 5 absent.</p>
+<p><em>Generated from <code>data/features.json</code> by <code>admin/build/gen_features.py</code> at site v0.1.8 (2026-10-06). If the reality document does not list it, it does not exist. Briefs are aspirations; this file is the fact.</em></p>
+<p>68 claims: 35 shipped, 28 proposed, 5 absent.</p>
 <table>
 <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
 <tbody>
@@ -107,7 +107,7 @@
 <tr><td>absent</td><td>deliberately not in the MVP; comes as a later version or a later site, or never</td></tr>
 </tbody>
 </table>
-<h2 id="shipped-34">Shipped (34)</h2>
+<h2 id="shipped-35">Shipped (35)</h2>
 <table>
 <thead><tr><th>Area</th><th>Feature</th><th>Status</th><th>Where</th><th>Notes</th></tr></thead>
 <tbody>
@@ -139,7 +139,8 @@
 <tr><td>site</td><td>Four themes (Night, Day, Paper, Ember) picked from the nav, kept in this browser only; every colour a token valued in assets/themes.css</td><td>shipped v0.1.6</td><td>data/themes.json, assets/themes.css, assets/theme.js</td><td>No colour is written anywhere else on the site; the review navigator and the mockups follow the pick. A build test fails when a theme misses a token or a stylesheet names a colour.</td></tr>
 <tr><td>site</td><td>The reader&#x27;s column on every page: mark read, star, vote, note (typed or dictated), an append-only log in this browser keyed by page and content hash, Copy for Claude and Paste to merge, the graph of what the page names</td><td>shipped v0.1.7</td><td>components/reader-panel/, reader-log/</td><td>Nothing leaves the page without a click; the log is localStorage under sgit.secrets.reader.log.v1, opinions about public pages, never a secret.</td></tr>
 <tr><td>site</td><td>A chat over the site: offline search on every page; Claude Sonnet through OpenRouter with tools that read the site and file feedback, on /reader/ with the reader&#x27;s own key</td><td>shipped v0.1.7</td><td>components/reader-chat/, reader/index.html, data/search-index.json</td><td>The key stays in memory or this tab&#x27;s sessionStorage, never localStorage; only /reader/ may connect to openrouter.ai (C19). Tier 2, a vault-held key, is proposed.</td></tr>
-<tr><td>site</td><td>Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises</td><td>shipped v0.1.5</td><td>mockups/</td><td>Pictures of proposed screens, not screens; replaced by real screenshots as pages ship.</td></tr>
+<tr><td>site</td><td>Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises</td><td>shipped v0.1.5</td><td>mockups/, components/proto-app/, proto-base/</td><td>Static pictures at v0.1.5; a working prototype since v0.1.8 (sign in, keyring, entries, devices, environment, checklist, probes), routing by the app&#x27;s own rules. Replaced by real screens as they ship.</td></tr>
+<tr><td>site</td><td>Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader&#x27;s log</td><td>shipped v0.1.8</td><td>mockups/screens.json, components/proto-column/</td><td>The variant is kept under sgit.secrets.ui.proto; the categorical colours of every theme now pass the dataviz validator.</td></tr>
 <tr><td>site</td><td>brief-corrections.md: what the brief got wrong, dated, beside it</td><td>shipped v0.1.0</td><td>docs/design/brief-corrections.md</td><td>Appended to as the build finds out.</td></tr>
 <tr><td>site</td><td>docs/ops/needs.md: exactly what only a human can do</td><td>shipped v0.1.0</td><td>docs/ops/needs.md</td><td>DNS, Pages, branch protection, GCP bootstrap, OAuth client secret.</td></tr>
 <tr><td>admin</td><td>Release history page generated from data/versions.json</td><td>shipped v0.1.0</td><td>admin/versions.html</td><td>One row per release; the newest row must equal version.txt.</td></tr>
@@ -199,7 +200,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/reality.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/docs/reality.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

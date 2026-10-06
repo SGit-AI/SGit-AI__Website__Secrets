@@ -1,0 +1,39 @@
+<aside class="column" aria-label="About this screen and your data">
+  <section class="block">
+    <h3 class="h">This screen</h3>
+    <p class="title" data-title></p>
+    <p class="path" data-path></p>
+    <p class="purpose" data-purpose></p>
+    <p class="meta" data-meta></p>
+    <p class="meta" data-intent></p>
+    <p class="meta" data-page></p>
+  </section>
+  <section class="block">
+    <h3 class="h">Paths to and from here</h3>
+    <svg data-paths viewBox="0 0 360 80" role="img" aria-label="The screens that lead here and the screens this one leads to"></svg>
+    <p class="hint" data-paths-caption></p>
+  </section>
+  <section class="block">
+    <h3 class="h">Your data, kept in this browser</h3>
+    <figure><figcaption>Entries by kind</figcaption><svg data-kinds viewBox="0 0 360 112" role="img" aria-label="Entries by kind"></svg></figure>
+    <figure><figcaption>Screens visited</figcaption><svg data-visits viewBox="0 0 360 184" role="img" aria-label="Visits per screen"></svg></figure>
+    <figure><figcaption>Actions, the last hour</figcaption><svg data-actions viewBox="0 0 360 56" role="img" aria-label="Actions per five minutes over the last hour"></svg><p class="hint" data-actions-caption></p></figure>
+    <ol class="log" data-log aria-label="The last ten actions"></ol>
+  </section>
+  <section class="block">
+    <h3 class="h">Which UX works? A, B or C</h3>
+    <div class="votes" data-votes></div>
+  </section>
+  <section class="block">
+    <details>
+      <summary>The state as JSON</summary>
+      <pre class="json" data-json></pre>
+    </details>
+    <div class="row">
+      <button type="button" data-seed>Seed</button>
+      <button type="button" data-reset>Reset</button>
+      <button type="button" data-copy>Copy JSON</button>
+      <span class="hint" data-copied></span>
+    </div>
+  </section>
+</aside>

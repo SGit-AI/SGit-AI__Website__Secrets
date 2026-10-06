@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mockup: Admin: the setup checklist — secrets.sgit.ai</title>
   <meta name="description" content="A design mockup of the admin: the setup checklist screen at secrets.sgit.ai/admin/setup-checklist.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
+  <script type="module" src="/components/proto-app/proto-app.js"></script>
+  <script type="module" src="/components/proto-column/proto-column.js"></script>
   <!-- sg-secrets:head:start -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <link rel="canonical" href="https://secrets.sgit.ai/mockups/admin-checklist.html">
@@ -20,7 +22,7 @@
   <meta property="og:url" content="https://secrets.sgit.ai/mockups/admin-checklist.html">
   <meta property="og:title" content="Mockup: Admin: the setup checklist — secrets.sgit.ai">
   <meta property="og:description" content="A design mockup of the admin: the setup checklist screen at secrets.sgit.ai/admin/setup-checklist.html, as a static picture in a mini browser and as ASCII art, with the intent nodes it realises. The screen does not exist yet.">
-  <meta name="sg-secrets:version" content="0.1.7">
+  <meta name="sg-secrets:version" content="0.1.8">
   <meta name="sg-secrets:released" content="2026-10-06">
 <!-- sg-secrets:head:end -->
   <link rel="stylesheet" href="/assets/mockups.css">
@@ -33,7 +35,7 @@
         <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
         <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
         <span class="stage-pill">mvp, being built</span>
-        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
         <div class="nav-items">
         <div class="ni ni-has">
@@ -95,30 +97,14 @@
 <!-- sg-secrets:nav:end -->
   <main>
     <h1>Mockup 9: Admin: the setup checklist</h1>
-    <!-- sg-secrets:status:start ids="site.mockups,app.sign-in,app.prf-unlock,app.entries" -->
-  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: ten screens as static pictures in a mini browser frame and as ASCII art, each linked to the intent it realises · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+    <!-- sg-secrets:status:start ids="site.mockups,site.mockups-variants,app.sign-in,app.prf-unlock,app.entries" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · <span class="sg-status sg-status-shipped">shipped v0.1.8</span> Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader&#x27;s log · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
 <!-- sg-secrets:status:end -->
-    <p class="sg-lead">What <code>secrets.sgit.ai/admin/setup-checklist.html</code> is meant to look like, from section 6.3 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. A static picture: nothing on it works, the values are invented, and the screen itself is proposed.</p>
+    <p class="sg-lead">What <code>secrets.sgit.ai/admin/setup-checklist.html</code> is meant to look like, from section 6.3 of <a href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">the brief</a>. An interactive prototype: click through it on invented data this browser keeps, in one of three UX variants (A Desk, B Focus, C Command) from the frame's bar; the column beside it says what the screen is, the paths to it and from it, and what you have done. The screen itself is proposed.</p>
     <p>Every section-4.2 resource as a row: exists, enabled, configured, with Fix where the page can do it client-side with the operator&#x27;s own token. The token lives in memory only; every write shows the exact request before it is sent and logs the response on the page.</p>
-    <div class="mb" aria-label="Mockup of secrets.sgit.ai/admin/setup-checklist.html">
-      <div class="mb-bar"><span class="mb-dots"><span></span><span></span><span></span></span><span class="mb-url">https://<b>secrets.sgit.ai/admin/setup-checklist.html</b></span></div>
-      <div class="mb-view"><div class="app">
-<div class="app-head"><span class="brand">secrets<span>.sgit.ai</span></span><span class="env env-dev">dev · sgit-secrets-dev</span><div class="app-nav"><span>Index</span><span class="here">Checklist</span><span>Auth config</span><span>Storage</span><span>Rules</span><span>Users</span><span>Export</span></div><span class="who">admin as dinis@example.com (token in memory, 52 min left)</span></div>
-<div class="app-body"><div class="app-main">
-<h2>Setup checklist: dev</h2>
-<table class="mini"><thead><tr><th>Resource</th><th>State</th><th></th></tr></thead><tbody>
-<tr><td>Services: identitytoolkit, firebase, firebasestorage, storage, firebaserules…</td><td class="check check-ok">✓ 8 of 8 enabled</td><td></td></tr>
-<tr><td>Firebase project link and web app</td><td class="check check-ok">✓ appId 1:…:web:…</td><td></td></tr>
-<tr><td>Identity Platform: email sign-in, authorised domains</td><td class="check check-bad">✗ localhost missing</td><td><span class="btn">Fix: add localhost</span></td></tr>
-<tr><td>Google provider (client id set, secret held by Google)</td><td class="check check-ok">✓ configured</td><td></td></tr>
-<tr><td>Bucket: uniform access, versioning, soft delete 30 d, CORS</td><td class="check check-bad">✗ CORS missing secrets.sgit.ai</td><td><span class="btn">Fix: apply canonical CORS</span></td></tr>
-<tr><td>Security Rules release matches infra/rules/storage.rules</td><td class="check check-ok">✓ sha256 6caa0c52…</td><td></td></tr>
-<tr><td>IAM: tf-secrets@ Editor; secrets-admins owner; no SA keys</td><td class="check check-ok">✓</td><td></td></tr>
-<tr><td>Workload Identity Federation pool and provider</td><td class="check check-skip">· not readable with this scope</td><td></td></tr>
-</tbody></table>
-<p class="muted">Request preview for "add localhost": PATCH https://identitytoolkit.googleapis.com/admin/v2/projects/sgit-secrets-dev/config?updateMask=authorizedDomains · body {"authorizedDomains":["secrets.sgit.ai","localhost"]}</p>
-</div></div>
-      </div></div>
+    <div class="proto-layout">
+      <proto-app screen="admin-checklist"></proto-app>
+      <proto-column></proto-column>
     </div>
     <h2>The same screen as ASCII</h2>
 <pre class="ascii">┌─ secrets.sgit.ai/admin/setup-checklist.html ─────────────────────┐
@@ -143,7 +129,7 @@
   <!-- sg-secrets:footer:start -->
   <reader-panel></reader-panel>
   <footer class="sg-footer">
-    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.7" title="released 2026-10-06">v0.1.7</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/admin-checklist.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/admin-checklist.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
     <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
   </footer>
 <!-- sg-secrets:footer:end -->

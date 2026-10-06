@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "_comment": "The screens of the design prototype under /mockups/, the paths between them, the intent each realises, and the three UX variants. Read at runtime by components/proto-base; checked by tests/build/test_mockups.py (every edge names a screen, every intent id exists in review/intent/).",
+  "variants": [
+    { "id": "desk",    "name": "Desk",    "tag": "A", "description": "The password manager's shape the brief draws: a header with the environment and the lock, a sidebar, a list, forms. Mouse first." },
+    { "id": "focus",   "name": "Focus",   "tag": "B", "description": "One thing per screen: a single card in the middle, big targets, a bottom bar of four tabs, every step explained in a line. Phone first." },
+    { "id": "command", "name": "Command", "tag": "C", "description": "Keyboard first: a command bar at the top (type add, open 2, lock, env dev), a dense table, an inspector on the right, a status line. Terminal people." }
+  ],
+  "screens": [
+    { "id": "sign-in",         "n": 1,  "title": "Sign in",                               "path": "/app/",                        "page": "/mockups/sign-in.html",         "section": "6.2", "intent": ["sign-in", "flow.first-run", "flow.returning"],
+      "purpose": "The first screen. The environment badge is always visible; prod is neutral, anything else coloured. After sign-in the app routes to setup when there is no keyring and to unlock when there is." },
+    { "id": "setup",           "n": 2,  "title": "First run: create a passkey",           "path": "/app/setup.html",              "page": "/mockups/setup.html",           "section": "6.2", "intent": ["first-run", "flow.first-run"],
+      "purpose": "One passkey, one keyring, one recovery code shown once. Nothing decrypted is ever written to storage." },
+    { "id": "unlock",          "n": 3,  "title": "Unlock",                                "path": "/app/unlock.html",             "page": "/mockups/unlock.html",          "section": "6.2", "intent": ["returning", "flow.returning", "flow.new-device"],
+      "purpose": "Touch the passkey; the PRF output derives the wrapping key; the keyring opens in memory. The recovery code is the other way in." },
+    { "id": "vault",           "n": 4,  "title": "The vault: the list",                   "path": "/app/vault.html",              "page": "/mockups/vault.html",           "section": "6.2", "intent": ["entries", "returning"],
+      "purpose": "Search, filter by kind, add, open. Kinds are a closed list and each has its own colour, so a vault key never looks like a password." },
+    { "id": "entry",           "n": 5,  "title": "One entry",                             "path": "/app/entry.html",              "page": "/mockups/entry.html",           "section": "6.2", "intent": ["entries", "entries.limits", "entries.vault-key-guard"],
+      "purpose": "Reveal, copy, edit, delete. A vault key is guarded: it says what it opens and asks before it leaves." },
+    { "id": "devices",         "n": 6,  "title": "Devices: passkeys and the recovery code", "path": "/app/devices.html",          "page": "/mockups/devices.html",         "section": "6.2", "intent": ["new-device", "new-device.devices-page"],
+      "purpose": "Every passkey that can open the keyring, with its last use; add one from this device; regenerate the recovery code." },
+    { "id": "environment",     "n": 7,  "title": "Environment",                           "path": "/app/environment.html",        "page": "/mockups/environment.html",     "section": "5",   "intent": ["environment", "flow.customer-environment"],
+      "purpose": "Pick a built-in environment or enter a custom one, export it, import it, reset. Changing it signs you out." },
+    { "id": "account",         "n": 8,  "title": "Account",                               "path": "/app/account.html",            "page": "/mockups/account.html",         "section": "6.2", "intent": ["account"],
+      "purpose": "Who you are, how you signed in, the keyring's size against its soft limit, sign out, delete the account." },
+    { "id": "admin-checklist", "n": 9,  "title": "Admin: the setup checklist",            "path": "/admin/setup-checklist.html",  "page": "/mockups/admin-checklist.html", "section": "6.3", "intent": ["admin", "admin.checklist", "flow.admin"],
+      "purpose": "Every per-project resource as a row with a check and, where it can be fixed from the browser, a Fix button." },
+    { "id": "matrix",          "n": 10, "title": "Tests: the compatibility matrix",       "path": "/tests/matrix.html",           "page": "/mockups/matrix.html",          "section": "6.4", "intent": ["probes", "probes.pages"],
+      "purpose": "Every probe page run in this browser, one row each: WebAuthn PRF, crypto, config, auth, storage, keyring round trip, offline, leak check." }
+  ],
+  "edges": [
+    { "from": "sign-in",     "to": "setup",           "label": "signed in, no keyring yet" },
+    { "from": "sign-in",     "to": "unlock",          "label": "signed in, keyring exists" },
+    { "from": "sign-in",     "to": "admin-checklist", "label": "an admin opens the checklist" },
+    { "from": "setup",       "to": "vault",           "label": "keyring created, recovery code written down" },
+    { "from": "unlock",      "to": "vault",           "label": "passkey touched, or recovery code" },
+    { "from": "vault",       "to": "entry",           "label": "open an entry" },
+    { "from": "entry",       "to": "vault",           "label": "back, or deleted" },
+    { "from": "vault",       "to": "devices",         "label": "Devices" },
+    { "from": "vault",       "to": "environment",     "label": "Environment" },
+    { "from": "vault",       "to": "account",         "label": "Account" },
+    { "from": "devices",     "to": "vault",           "label": "back" },
+    { "from": "devices",     "to": "unlock",          "label": "a new device unlocks the other way" },
+    { "from": "environment", "to": "sign-in",         "label": "changing the environment signs out" },
+    { "from": "account",     "to": "sign-in",         "label": "sign out" },
+    { "from": "account",     "to": "vault",           "label": "back" },
+    { "from": "vault",       "to": "unlock",          "label": "lock, or the timer" },
+    { "from": "matrix",      "to": "sign-in",         "label": "every probe green: try the app" }
+  ]
+}

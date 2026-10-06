@@ -13,6 +13,8 @@ export const LOCAL_STORAGE_KEYS = Object.freeze({
     theme   : 'sgit.secrets.ui.theme',                                            // the picked theme, one id from data/themes.json (assets/theme.js)
     lastEnv : 'sgit.secrets.ui.lastEnv',                                          // the last built-in environment picked, for the badge
     reader  : 'sgit.secrets.ui.reader',                                           // the reader's column: open or closed, which tab
+    proto   : 'sgit.secrets.proto.v1',                                            // the design prototype's pretend state under /mockups/: invented entries, devices, a log of what was clicked; never a real secret
+    protoUx : 'sgit.secrets.ui.proto',                                            // which of the three prototype UX variants the reader picked (A/B testing)
     readerLog : 'sgit.secrets.reader.log.v1',                                     // the reader's log: append-only events (read, star, vote, note) keyed by page and content hash; opinions about public pages, never a secret
 })
 

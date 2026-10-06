@@ -38,7 +38,7 @@ class Test__Reader(TestCase):
 
     def test_three_files_per_component_and_the_base_contract(self):
         names = [p.name for p in self.components()]
-        self.assertEqual(names, ['reader-chat', 'reader-log', 'reader-panel', 'sg-base'])
+        self.assertEqual(names, ['proto-app', 'proto-base', 'proto-column', 'reader-chat', 'reader-log', 'reader-panel', 'sg-base'])
         for folder in self.components():
             with self.subTest(component=folder.name):
                 self.assertEqual(sorted(p.name for p in folder.iterdir()), [f'{folder.name}.css', f'{folder.name}.html', f'{folder.name}.js'])

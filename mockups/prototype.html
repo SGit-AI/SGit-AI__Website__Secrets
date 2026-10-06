@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The prototype — secrets.sgit.ai</title>
+  <meta name="description" content="The whole design prototype in one frame: every screen the brief describes, working on invented data this browser keeps, in three UX variants to compare. Beside it, what the screen is, the paths to it and from it, and what you have done.">
+  <script type="module" src="/components/proto-app/proto-app.js"></script>
+  <script type="module" src="/components/proto-column/proto-column.js"></script>
+  <!-- sg-secrets:head:start -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://*.googleapis.com https://*.firebaseapp.com https://accounts.google.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com; frame-src https://*.firebaseapp.com https://accounts.google.com; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://secrets.sgit.ai/mockups/prototype.html">
+  <link rel="alternate" type="text/markdown" href="/mockups/prototype.md">
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/themes.css">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/nav.js" defer></script>
+  <script type="module" src="/components/reader-panel/reader-panel.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="secrets.sgit.ai">
+  <meta property="og:url" content="https://secrets.sgit.ai/mockups/prototype.html">
+  <meta property="og:title" content="The prototype — secrets.sgit.ai">
+  <meta property="og:description" content="The whole design prototype in one frame: every screen the brief describes, working on invented data this browser keeps, in three UX variants to compare. Beside it, what the screen is, the paths to it and from it, and what you have done.">
+  <meta name="sg-secrets:version" content="0.1.8">
+  <meta name="sg-secrets:released" content="2026-10-06">
+<!-- sg-secrets:head:end -->
+  <link rel="stylesheet" href="/assets/mockups.css">
+</head>
+<body>
+  <!-- sg-secrets:nav:start -->
+  <header class="sg-header">
+    <nav class="site" aria-label="Site">
+      <div class="row">
+        <a class="brand" href="/">secrets<span>.sgit.ai</span></a>
+        <a class="parent" href="https://sgit.ai" title="sgit.ai: the parent project, the vault layer this secrets manager holds keys for">&#8599; part of <b>sgit.ai</b></a>
+        <span class="stage-pill">mvp, being built</span>
+        <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Menu">Menu</button>
+        <div class="nav-items">
+        <div class="ni ni-has">
+          <a class="nl" href="/how-it-works/">The design<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/how-it-works/">How it works</a>
+          <a class="sl" href="/security/">Security</a>
+          <a class="sl" href="/keyring/">Keyring format v1</a>
+          <a class="sl" href="/sharing/">Sharing</a>
+          <a class="sl" href="/environments/">Environments</a>
+          <a class="sl" href="/mockups/">Design mockups</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/shipped/">Shipped<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/shipped/">Shipped, proposed, absent</a>
+          <a class="sl" href="/docs/reality.html">Reality: docs/reality.md</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/docs/">Docs<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/docs/">All documents</a>
+          <a class="sl" href="/docs/design/">Design documents</a>
+          <a class="sl" href="/docs/design/secrets-sgit-ai__mvp-build-brief.html">The MVP build brief</a>
+          <a class="sl" href="/docs/design/brief-corrections.html">Brief corrections</a>
+          <a class="sl" href="/docs/ops/">Operations</a>
+          <a class="sl" href="/team/">The team</a>
+          </div>
+        </div>
+        <div class="ni ni-has">
+          <a class="nl" href="/admin/">Admin<span class="caret">&#9662;</span></a>
+          <div class="sub">
+          <a class="sl" href="/admin/">How the site is built</a>
+          <a class="sl" href="/admin/versions.html">Release history</a>
+          <a class="sl" href="/admin/comms.html">Comms: asks and steps</a>
+          <a class="sl" href="/review/">Review graphs</a>
+          <a class="sl" href="/docs/ops/needs.html">What needs a human</a>
+          <a class="sl" href="/docs/ops/bootstrap.html">GCP bootstrap, as commands</a>
+          <a class="sl" href="/llms.txt">llms.txt, for agents</a>
+          </div>
+        </div>
+        <div class="ni ni-has ni-theme">
+          <button class="nl" type="button" aria-haspopup="true">Theme<span class="caret">&#9662;</span></button>
+          <div class="sub" role="group" aria-label="Theme">
+          <button class="sl" type="button" data-theme-pick="night" aria-pressed="false"><b>Night</b><small>Dark, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="day" aria-pressed="false"><b>Day</b><small>Light, teal</small></button>
+          <button class="sl" type="button" data-theme-pick="paper" aria-pressed="false"><b>Paper</b><small>Warm off-white, terracotta</small></button>
+          <button class="sl" type="button" data-theme-pick="ember" aria-pressed="false"><b>Ember</b><small>Dark, amber</small></button>
+          <small class="sub-note">Kept in this browser only, as <code>sgit.secrets.ui.theme</code>; nothing else is stored.</small>
+          </div>
+        </div>
+        </div>
+      </div>
+    </nav>
+    <div class="sg-crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/mockups/">mockups</a> <span class="sep">/</span> <span aria-current="page">The prototype</span></div>
+  </header>
+<!-- sg-secrets:nav:end -->
+  <main>
+    <h1>The prototype</h1>
+    <!-- sg-secrets:status:start ids="site.mockups,site.mockups-variants,app.sign-in,app.prf-unlock,app.entries" -->
+  <p class="sg-status-line" data-generated-from="data/features.json">Status, from <a href="/shipped/">/shipped/</a>: <span class="sg-status sg-status-shipped">shipped v0.1.5</span> Design mockups: the ten screens as an interactive prototype on invented data kept in this browser, in a mini browser frame, with the ASCII twin and the intent each realises · <span class="sg-status sg-status-shipped">shipped v0.1.8</span> Three UX variants of the prototype to compare (A Desk, B Focus, C Command), the column beside each frame (what the screen is, the paths to and from it as a graph, the data as charts), and an A/B/C vote filed into the reader&#x27;s log · <span class="sg-status sg-status-proposed">proposed</span> Sign in and out with Google and email/password against the chosen environment · <span class="sg-status sg-status-proposed">proposed</span> Passkey with WebAuthn PRF derives the keyring wrapping key; RP ID secrets.sgit.ai · <span class="sg-status sg-status-proposed">proposed</span> Entries: six kinds kept apart, vault list, entry page, copy and reveal, lock timers</p>
+<!-- sg-secrets:status:end -->
+    <p class="sg-lead">Start where the app would start you and click through: sign in, create the keyring, write the recovery code down, add entries, open one, reveal it, lock, unlock, add a device, change the environment. Everything is invented and everything is kept in this browser only (<code>localStorage</code>, <code>sgit.secrets.proto.v1</code>); <strong>Seed</strong> fills it, <strong>Reset</strong> empties it. The three buttons in the frame's bar switch the UX: the same screens, three different shapes, so you can say which works (the column's A/B/C vote lands in your reader's log).</p>
+    <div class="proto-layout full">
+      <proto-app></proto-app>
+      <proto-column></proto-column>
+    </div>
+    <h2>The three UX variants</h2>
+    <ul class="variants">
+      <li><b>A · Desk.</b> The password manager's shape the brief draws: a header with the environment and the lock, a sidebar with search and the kinds, a list, forms in cards. Mouse first, every control visible.</li>
+      <li><b>B · Focus.</b> One thing per screen: a single card in the middle with a title and big targets, a bottom bar of four tabs, the step shown as "4 of 10". Phone first; the sidebar's filters fold into the card.</li>
+      <li><b>C · Command.</b> Keyboard first: a command bar at the top (<code>add password github</code>, <code>open 2</code>, <code>lock</code>, <code>env dev</code>, <code>?</code>), a dense numbered table, an inspector on the right with the state, a status line at the bottom. For people who live in terminals.</li>
+    </ul>
+    <p>Each of <a href="/mockups/">the ten mockups</a> embeds the same prototype opened on its screen, with the ASCII twin and the intent beside it. What the prototype does on its own rules: no login, it routes to sign in; no keyring, to the first run; locked, to unlock; changing the environment signs out. The real app will do the same with real sign-in, a real passkey and a real bucket, and will store none of what this stores.</p>
+  </main>
+  <!-- sg-secrets:footer:start -->
+  <reader-panel></reader-panel>
+  <footer class="sg-footer">
+    <p>secrets.sgit.ai · site <a class="sg-badge sg-badge-version ver" href="/admin/versions.html" data-version="0.1.8" title="released 2026-10-06">v0.1.8</a> · released 2026-10-06 · <a href="/admin/versions.html">releases</a> · <a href="/mockups/prototype.md">markdown twin of this page</a> · <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/SGit-AI/SGit-AI__Website__Secrets">source</a> · <a href="https://sgit.ai">part of sgit.ai</a> · <a href="/about/participant.html">who publishes this</a></p>
+    <p>Everything in the repository is public; nothing in it is secret. Content <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code Apache-2.0. What is shipped, proposed or absent is listed in <a href="/shipped/">/shipped/</a> and <a href="/docs/reality.html">docs/reality.md</a>; if it is not listed there, it does not exist.</p>
+  </footer>
+<!-- sg-secrets:footer:end -->
+</body>
+</html>
